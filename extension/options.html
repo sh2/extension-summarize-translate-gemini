@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Options - Summarize and Translate with Gemini</title>
+  <link rel="stylesheet" href="css/new.min.css">
+</head>
+
+<body>
+  <header>
+    <h1 style="font-size: 1.5rem;">
+      <img src="img/icon-128.png" alt="" width="64" height="64" style="vertical-align: middle;">
+      Options - Summarize and Translate with Gemini
+    </h1>
+  </header>
+
+  <p>
+    <label for="apiKey">API Key</label>
+    <br>
+    <input type="password" id="apiKey" size="39">
+  </p>
+
+  <p>
+    <label for="languageCode">Summarize in / Translate to</label>
+    <br>
+    <select id="languageCode">
+      <option value="en">English</option>
+      <option value="de">Deutsch</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <option value="it">Italiano</option>
+      <option value="pt_br">Português - Brasil</option>
+      <option value="ru">Русский</option>
+      <option value="zh_cn">中文 - 简体</option>
+      <option value="zh_tw">中文 - 繁體</option>
+      <option value="ja">日本語</option>
+      <option value="ko">한국어</option>
+    </select>
+  </p>
+
+  <p>
+    <button id="save">Save options</button>
+    <span id="status"></span>
+  </p>
+
+  <script src="options.js"></script>
+</body>
+
+</html>

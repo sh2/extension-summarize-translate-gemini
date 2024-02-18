@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Summarize and Translate with Gemini",
+  "version": "0.9.0",
+  "description": "Summarize and translate the web page. Uses Gemini as the backend.",
+  "icons": {
+    "128": "img/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "author": "sh2@pop01.odn.ne.jp",
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "js": [
+        "lib/Readability.min.js",
+        "content-script.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "storage"
+  ]
+}
