@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Summarize and Translate with Gemini",
   "version": "0.9.0",
-  "description": "Summarize and translate the web page. Uses Gemini as the backend.",
+  "description": "Summarize and translate web pages. Uses Gemini as the backend.",
   "icons": {
     "128": "img/icon-128.png"
   },
