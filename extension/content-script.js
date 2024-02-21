@@ -7,10 +7,10 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     const documentClone = document.cloneNode(true);
     const article = new Readability(documentClone).parse();
 
-    if (article.textContent) {
+    if (article) {
       sendResponse(article.textContent);
     } else {
-      console.log("Article is empty, so fallback to send document.body.innerText.")
+      console.log("Failed to parse the article. Using document.body.innerText instead.");
       sendResponse(document.body.innerText);
     }
   }
