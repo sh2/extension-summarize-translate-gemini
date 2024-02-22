@@ -10,14 +10,14 @@ const displayLoadingMessage = (loadingMessage) => {
   const status = document.getElementById("status");
 
   switch (status.textContent) {
-    case `${loadingMessage}…`:
-      status.textContent = `${loadingMessage}……`;
+    case `${loadingMessage}.`:
+      status.textContent = `${loadingMessage}..`;
       break;
-    case `${loadingMessage}……`:
-      status.textContent = `${loadingMessage}………`;
+    case `${loadingMessage}..`:
+      status.textContent = `${loadingMessage}...`;
       break;
     default:
-      status.textContent = `${loadingMessage}…`;
+      status.textContent = `${loadingMessage}.`;
   }
 };
 
