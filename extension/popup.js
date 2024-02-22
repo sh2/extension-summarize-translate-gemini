@@ -101,7 +101,7 @@ const main = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", main);
-document.getElementById("run").addEventListener("click", main)
+document.getElementById("run").addEventListener("click", main);
 document.getElementById("options").addEventListener("click", () => {
   chrome.runtime.openOptionsPage();
 });
