@@ -1,59 +1,89 @@
-const displayLoadingMessage = (message) => {
-  const content = document.getElementById("content");
+// Disable links when converting from Markdown to HTML
+marked.use({ renderer: { link: (_href, _title, text) => text } });
 
-  switch (content.textContent) {
-    case `${message}.`:
-      content.textContent = `${message}..`;
+const loadingMessage = {
+  summarize: "Summarizing",
+  translate: "Translating"
+};
+
+const displayLoadingMessage = (loadingMessage) => {
+  const status = document.getElementById("status");
+
+  switch (status.textContent) {
+    case `${loadingMessage}…`:
+      status.textContent = `${loadingMessage}……`;
       break;
-    case `${message}..`:
-      content.textContent = `${message}...`;
+    case `${loadingMessage}……`:
+      status.textContent = `${loadingMessage}………`;
       break;
     default:
-      content.textContent = `${message}.`;
+      status.textContent = `${loadingMessage}…`;
   }
-}
+};
 
 const main = async () => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  let displayIntervalId = null;
+  let displayIntervalId = 0;
   let content = "";
 
   try {
-    document.getElementById("run").disabled = true;
     let userPrompt = "";
-    let response = {};
+    let userPromptChunks = [];
+    let task = "";
 
+    document.getElementById("content").textContent = "";
+    document.getElementById("status").textContent = "";
+    document.getElementById("run").disabled = true;
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    // Get the selected text
     if (userPrompt = await chrome.tabs.sendMessage(tab.id, { message: "getSelectedText" })) {
-      // Translate the selected text
-      displayIntervalId = setInterval(displayLoadingMessage, 500, "Translating");
-      response = await chrome.runtime.sendMessage({ message: "translate", userPrompt: userPrompt });
+      task = "translate";
     } else {
-      // Summarize the whole text
+      // If no text is selected, get the whole text of the page
+      task = "summarize";
       userPrompt = await chrome.tabs.sendMessage(tab.id, { message: "getWholeText" });
-      displayIntervalId = setInterval(displayLoadingMessage, 500, "Summarizing");
-      response = await chrome.runtime.sendMessage({ message: "summarize", userPrompt: userPrompt });
     }
 
-    if (response.ok) {
-      if (response.body.promptFeedback.blockReason) {
-        // The prompt was blocked.
-        content = `The prompt was blocked. Reason: ${response.body.promptFeedback.blockReason}`;
-      } else if (response.body.candidates && response.body.candidates[0].finishReason !== "STOP") {
-        // The response was blocked.
-        content = `The response was blocked. Reason: ${response.body.candidates[0].finishReason}`;
-      } else if (response.body.candidates[0].content) {
-        // A normal response was returned.
-        content = response.body.candidates[0].content.parts[0].text;
+    displayIntervalId = setInterval(displayLoadingMessage, 500, loadingMessage[task]);
+
+    // Split the user prompt
+    userPromptChunks = await chrome.runtime.sendMessage({ message: "chunk", task: task, userPrompt: userPrompt });
+    console.log(userPromptChunks);
+
+    for (const userPromptChunk of userPromptChunks) {
+      // Generate content
+      const response = await chrome.runtime.sendMessage({ message: "generate", task: task, userPrompt: userPromptChunk });
+      console.log(response);
+
+      if (response.ok) {
+        if (response.body.promptFeedback.blockReason) {
+          // The prompt was blocked
+          content = `The prompt was blocked. Reason: ${response.body.promptFeedback.blockReason}`;
+          break;
+        } else if (response.body.candidates && response.body.candidates[0].finishReason !== "STOP") {
+          // The response was blocked
+          content = `The response was blocked. Reason: ${response.body.candidates[0].finishReason}`;
+          break;
+        } else if (response.body.candidates[0].content) {
+          // A normal response was returned
+          content += `${response.body.candidates[0].content.parts[0].text}\n\n`;
+          const div = document.createElement("div");
+          div.textContent = content;
+          document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
+
+          // Scroll to the bottom of the page
+          window.scrollTo(0, document.body.scrollHeight);
+        } else {
+          // The expected response was not returned
+          content = "An unknown error occurred. Please check the console log.";
+          break;
+        }
       } else {
-        // The expected response was not returned.
-        content = "An unknown error occurred. Please check the console log.";
+        // An error occurred
+        content = `Error: ${response.status}\n\n${response.body.error.message}`;
+        break;
       }
-    } else {
-      // An error occurred.
-      content = `Error: ${response.status}\n\n${response.body.error.message}`;
     }
-
-    console.log(`${response.status}\n${JSON.stringify(response.body, null, 2)}`);
   } catch (error) {
     content = "This page cannot be summarized or translated.";
     console.log(error);
@@ -62,15 +92,12 @@ const main = async () => {
       clearInterval(displayIntervalId);
     }
 
+    document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = false;
+    const div = document.createElement("div");
+    div.textContent = content;
+    document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
   }
-
-  // When converting from Markdown, disable links
-  marked.use({ renderer: { link: (_href, _title, text) => text } });
-
-  const div = document.createElement("div");
-  div.textContent = content;
-  document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
 }
 
 document.addEventListener("DOMContentLoaded", main);
