@@ -1,6 +1,6 @@
 const modelId = "gemini-1.0-pro";
 
-const getSystemPrompt = (message, languageCode) => {
+const getSystemPrompt = (task, languageCode) => {
   const languageName = {
     en: "English",
     de: "German",
@@ -15,9 +15,9 @@ const getSystemPrompt = (message, languageCode) => {
     ko: "Korean"
   };
 
-  if (message === "summarize") {
+  if (task === "summarize") {
     return `Summarize the entire text as bullet points of important information. Your response must be in ${languageName[languageCode]}.`;
-  } else if (message === "translate") {
+  } else if (task === "translate") {
     return `Translate the entire text into ${languageName[languageCode]} and reply only with the translated result.`;
   } else {
     return "";
