@@ -22,7 +22,7 @@ const getSystemPrompt = (message, languageCode) => {
   } else {
     return "";
   }
-}
+};
 
 const getCharacterLimit = (modelId, task) => {
   // Limit on the number of characters handled at one time
@@ -38,7 +38,7 @@ const getCharacterLimit = (modelId, task) => {
   };
 
   return characterLimits[modelId][task];
-}
+};
 
 const chunkText = (text, chunkSize) => {
   const chunks = [];
@@ -69,7 +69,7 @@ const chunkText = (text, chunkSize) => {
 
   chunks.push(remainingText);
   return chunks;
-}
+};
 
 const tryJsonParse = (text) => {
   try {
@@ -77,7 +77,7 @@ const tryJsonParse = (text) => {
   } catch {
     return { error: { message: text } };
   }
-}
+};
 
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
@@ -87,7 +87,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       sendResponse(userPromptChunks);
     } else if (request.message === "generate") {
       // Generate content
-      const { apiKey, languageCode } = await chrome.storage.local.get({ apiKey: "", languageCode: "en" })
+      const { apiKey, languageCode } = await chrome.storage.local.get({ apiKey: "", languageCode: "en" });
       const systemPrompt = getSystemPrompt(request.task, languageCode);
       const userPrompt = request.userPrompt;
 

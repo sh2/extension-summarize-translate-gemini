@@ -98,7 +98,7 @@ const main = async () => {
     div.textContent = content;
     document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
   }
-}
+};
 
 document.addEventListener("DOMContentLoaded", main);
 document.getElementById("run").addEventListener("click", main)
