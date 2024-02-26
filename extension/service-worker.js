@@ -19,7 +19,7 @@ const getSystemPrompt = (task, languageCode) => {
     return "Summarize the entire text as Markdown numbered lists. " +
       "Do not add headings to the summary. " +
       `Your response must be in ${languageName[languageCode]}.\n` +
-      "Format:\n1. First point\n2. Second point\n3. Third point\n...";
+      "Format:\n1. First point\n2. Second point\n3. Third point";
   } else if (task === "translate") {
     return `Translate the entire text into ${languageName[languageCode]} ` +
       "and reply only with the translated result.";
@@ -32,7 +32,7 @@ const getCharacterLimit = (modelId, task) => {
   // Limit on the number of characters handled at one time
   // so as not to exceed the maximum number of tokens sent and received by the API.
   // In Gemini, the calculation is performed in the following way
-  // Summarize: Four times the number of characters of the maximum number of input tokens in the model
+  // Summarize: Four times the number of characters of the maximum number of output tokens in the model
   // Translate: Number of characters equal to the maximum number of output tokens in the model
   const characterLimits = {
     "gemini-1.0-pro": {
