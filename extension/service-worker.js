@@ -18,6 +18,7 @@ const getSystemPrompt = (task, languageCode) => {
   if (task === "summarize") {
     return "Summarize the entire text as Markdown numbered lists. " +
       "Do not add headings to the summary. " +
+      "Do not use nested lists. " +
       `Your response must be in ${languageName[languageCode]}.\n` +
       "Format:\n1. First point\n2. Second point\n3. Third point";
   } else if (task === "translate") {
