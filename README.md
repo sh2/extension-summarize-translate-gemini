@@ -9,7 +9,7 @@ Chrome extension to summarize and translate web pages. Uses Gemini as the backen
 3. Click 'Load unpacked' and select `extension` directory.
 4. Open 'Options' page and register the Gemini API Key, then select the language.
 
-You can get the Gemini API Key from [Google AI for Developers](https://ai.google.dev/).
+You can obtain a Gemini API Key from [Google AI for Developers](https://ai.google.dev/).
 This extension currently uses Gemini 1.0 Pro.
 
 ## Usage
