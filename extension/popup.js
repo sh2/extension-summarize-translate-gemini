@@ -1,11 +1,3 @@
-// Disable links when converting from Markdown to HTML
-marked.use({ renderer: { link: (_href, _title, text) => text } });
-
-const loadingMessage = {
-  summarize: "Summarizing",
-  translate: "Translating"
-};
-
 const displayLoadingMessage = (loadingMessage) => {
   const status = document.getElementById("status");
 
@@ -29,6 +21,7 @@ const main = async () => {
     let userPrompt = "";
     let userPromptChunks = [];
     let task = "";
+    let loadingMessage = "";
 
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
@@ -38,13 +31,15 @@ const main = async () => {
     // Get the selected text
     if (userPrompt = await chrome.tabs.sendMessage(tab.id, { message: "getSelectedText" })) {
       task = "translate";
+      loadingMessage = chrome.i18n.getMessage("popup_translating");
     } else {
       // If no text is selected, get the whole text of the page
       task = "summarize";
+      loadingMessage = chrome.i18n.getMessage("popup_summarizing");
       userPrompt = await chrome.tabs.sendMessage(tab.id, { message: "getWholeText" });
     }
 
-    displayIntervalId = setInterval(displayLoadingMessage, 500, loadingMessage[task]);
+    displayIntervalId = setInterval(displayLoadingMessage, 500, loadingMessage);
 
     // Split the user prompt
     userPromptChunks = await chrome.runtime.sendMessage({ message: "chunk", task: task, userPrompt: userPrompt });
@@ -100,7 +95,19 @@ const main = async () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", main);
+const initialize = () => {
+  // Disable links when converting from Markdown to HTML
+  marked.use({ renderer: { link: (_href, _title, text) => text } });
+
+  // Set the text of elements with the data-i18n attribute
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
+  });
+
+  main();
+}
+
+document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("run").addEventListener("click", main);
 document.getElementById("options").addEventListener("click", () => {
   chrome.runtime.openOptionsPage();

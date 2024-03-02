@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Options - Summarize and Translate with Gemini</title>
+  <title data-i18n="options_title">Options - Summarize and Translate with Gemini</title>
   <link rel="stylesheet" href="css/new.min.css">
 </head>
 
@@ -12,20 +12,23 @@
   <header>
     <h1 style="font-size: 1.5rem;">
       <img src="img/icon-128.png" alt="" width="64" height="64" style="vertical-align: middle;">
-      Options - Summarize and Translate with Gemini
+      <span data-i18n="options_title">Options - Summarize and Translate with Gemini</span>
     </h1>
   </header>
 
   <p>
-    <label for="apiKey">API Key</label>
+    <label for="apiKey" data-i18n="options_apikey">API Key</label>
     <br>
     <input type="password" id="apiKey" size="39">
     <br>
-    <small>You can get the Gemini API Key from <a href="https://ai.google.dev" target="_blank">Google AI</a>.</small>
+    <small>
+      <span data-i18n="options_apikey_hint">You can obtain a Gemini API Key at the following page.</span>
+      <a href="https://ai.google.dev" target="_blank">Google AI for Developers</a>
+    </small>
   </p>
 
   <p>
-    <label for="languageCode">Summarize in / Translate to</label>
+    <label for="languageCode" data-i18n="options_choose_language">Summarize in / Translate to</label>
     <br>
     <select id="languageCode">
       <option value="en">English</option>
@@ -43,7 +46,7 @@
   </p>
 
   <p>
-    <button id="save">Save options</button>
+    <button id="save" data-i18n="options_button_save">Save options</button>
     <span id="status"></span>
   </p>
 

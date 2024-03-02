@@ -1,0 +1,38 @@
+{
+    "extension_name": {
+        "message": "Summarize and Translate with Gemini"
+    },
+    "extension_description": {
+        "message": "Summarize and translate web pages. Uses Gemini as the backend."
+    },
+    "popup_button_run": {
+        "message": "Run it again"
+    },
+    "popup_button_options": {
+        "message": "Open options page"
+    },
+    "popup_summarizing": {
+        "message": "Summarizing"
+    },
+    "popup_translating": {
+        "message": "Translating"
+    },
+    "options_title": {
+        "message": "Options - Summarize and Translate with Gemini"
+    },
+    "options_apikey": {
+        "message": "Gemini API Key"
+    },
+    "options_apikey_hint": {
+        "message": "You can obtain a Gemini API Key at the following page."
+    },
+    "options_choose_language": {
+        "message": "Summarize in / Translate to"
+    },
+    "options_button_save": {
+        "message": "Save options"
+    },
+    "options_saved": {
+        "message": "Saved."
+    }
+}

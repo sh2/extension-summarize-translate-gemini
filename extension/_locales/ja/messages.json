@@ -1,0 +1,38 @@
+{
+    "extension_name": {
+        "message": "Geminiによる要約と翻訳"
+    },
+    "extension_description": {
+        "message": "ウェブページを要約、翻訳します。バックエンドにGeminiを使用しています。"
+    },
+    "popup_button_run": {
+        "message": "もう一度実行する"
+    },
+    "popup_button_options": {
+        "message": "オプションページを開く"
+    },
+    "popup_summarizing": {
+        "message": "要約しています"
+    },
+    "popup_translating": {
+        "message": "翻訳しています"
+    },
+    "options_title": {
+        "message": "オプション - Geminiによる要約と翻訳"
+    },
+    "options_apikey": {
+        "message": "Gemini APIキー"
+    },
+    "options_apikey_hint": {
+        "message": "Gemini APIキーは、以下のページから取得できます。"
+    },
+    "options_choose_language": {
+        "message": "以下の言語で要約/翻訳する"
+    },
+    "options_button_save": {
+        "message": "オプションを保存する"
+    },
+    "options_saved": {
+        "message": "保存しました。"
+    }
+}
