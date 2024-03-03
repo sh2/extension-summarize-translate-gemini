@@ -7,27 +7,17 @@
   "icons": {
     "128": "img/icon-128.png"
   },
+  "author": "sh2@pop01.odn.ne.jp",
   "action": {
     "default_popup": "popup.html"
   },
-  "author": "sh2@pop01.odn.ne.jp",
   "background": {
     "service_worker": "service-worker.js"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "all_frames": false,
-      "js": [
-        "lib/Readability.min.js",
-        "content-script.js"
-      ]
-    }
-  ],
   "options_page": "options.html",
   "permissions": [
+    "activeTab",
+    "scripting",
     "storage"
   ]
 }

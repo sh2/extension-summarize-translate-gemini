@@ -1,3 +1,21 @@
+const getSelectedText = () => {
+  // Return the selected text
+  return window.getSelection().toString();
+}
+
+const getWholeText = () => {
+  // Return the whole text
+  const documentClone = document.cloneNode(true);
+  const article = new Readability(documentClone).parse();
+
+  if (article) {
+    return article.textContent;
+  } else {
+    console.log("Failed to parse the article. Using document.body.innerText instead.");
+    return document.body.innerText;
+  }
+}
+
 const displayLoadingMessage = (loadingMessage) => {
   const status = document.getElementById("status");
 
@@ -29,14 +47,15 @@ const main = async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     // Get the selected text
-    if (userPrompt = await chrome.tabs.sendMessage(tab.id, { message: "getSelectedText" })) {
+    if (userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getSelectedText }))[0].result) {
       task = "translate";
       loadingMessage = chrome.i18n.getMessage("popup_translating");
     } else {
       // If no text is selected, get the whole text of the page
       task = "summarize";
       loadingMessage = chrome.i18n.getMessage("popup_summarizing");
-      userPrompt = await chrome.tabs.sendMessage(tab.id, { message: "getWholeText" });
+      await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["lib/Readability.min.js"] });
+      userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getWholeText }))[0].result;
     }
 
     displayIntervalId = setInterval(displayLoadingMessage, 500, loadingMessage);
