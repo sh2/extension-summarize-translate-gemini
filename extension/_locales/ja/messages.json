@@ -17,6 +17,18 @@
     "popup_translating": {
         "message": "翻訳しています"
     },
+    "popup_prompt_blocked": {
+        "message": "プロンプトがブロックされました。"
+    },
+    "popup_response_blocked": {
+        "message": "レスポンスがブロックされました。"
+    },
+    "popup_unexpected_response": {
+        "message": "不明なエラーが発生しました。コンソールログを確認してください。"
+    },
+    "popup_miscellaneous_error": {
+        "message": "このページは要約や翻訳ができません。"
+    },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
     },

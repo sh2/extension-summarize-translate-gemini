@@ -72,11 +72,11 @@ const main = async () => {
       if (response.ok) {
         if (response.body.promptFeedback.blockReason) {
           // The prompt was blocked
-          content = `The prompt was blocked. Reason: ${response.body.promptFeedback.blockReason}`;
+          content = `${chrome.i18n.getMessage("popup_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
           break;
         } else if (response.body.candidates && response.body.candidates[0].finishReason !== "STOP") {
           // The response was blocked
-          content = `The response was blocked. Reason: ${response.body.candidates[0].finishReason}`;
+          content = `${chrome.i18n.getMessage("popup_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
           break;
         } else if (response.body.candidates[0].content) {
           // A normal response was returned
@@ -89,17 +89,17 @@ const main = async () => {
           window.scrollTo(0, document.body.scrollHeight);
         } else {
           // The expected response was not returned
-          content = "An unknown error occurred. Please check the console log.";
+          content = chrome.i18n.getMessage("popup_unexpected_response");
           break;
         }
       } else {
-        // An error occurred
+        // A response error occurred
         content = `Error: ${response.status}\n\n${response.body.error.message}`;
         break;
       }
     }
   } catch (error) {
-    content = "This page cannot be summarized or translated.";
+    content = chrome.i18n.getMessage("popup_miscellaneous_error");
     console.log(error);
   } finally {
     if (displayIntervalId) {

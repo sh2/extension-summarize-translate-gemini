@@ -17,6 +17,18 @@
     "popup_translating": {
         "message": "Translating"
     },
+    "popup_prompt_blocked": {
+        "message": "The prompt was blocked."
+    },
+    "popup_response_blocked": {
+        "message": "The response was blocked."
+    },
+    "popup_unexpected_response": {
+        "message": "An unknown error occurred. Please check the console log."
+    },
+    "popup_miscellaneous_error": {
+        "message": "This page cannot be summarized or translated."
+    },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"
     },
