@@ -1,6 +1,6 @@
 const modelId = "gemini-1.0-pro";
 
-const getSystemPrompt = (task, languageCode) => {
+const getSystemPrompt = (task, languageCode, userPromptLength) => {
   const languageName = {
     en: "English",
     de: "German",
@@ -15,12 +15,12 @@ const getSystemPrompt = (task, languageCode) => {
     ko: "Korean"
   };
 
+  const numItems = Math.min(10, 3 + Math.floor(userPromptLength / 2000));
+
   if (task === "summarize") {
-    return "Summarize the entire text as Markdown numbered lists. " +
-      "Do not add headings to the summary. " +
-      "Do not use nested lists. " +
-      `Your response must be in ${languageName[languageCode]}.\n` +
-      "Format:\n1. First point\n2. Second point\n3. Third point";
+    return `Summarize the entire text as up to ${numItems}-item Markdown numbered list ` +
+      `in ${languageName[languageCode]} and reply only with the list.\n` +
+      "Format:\n1. First point.\n2. Second point.\n3. Third point.";
   } else if (task === "translate") {
     return `Translate the entire text into ${languageName[languageCode]} ` +
       "and reply only with the translated result.";
@@ -33,11 +33,12 @@ const getCharacterLimit = (modelId, task) => {
   // Limit on the number of characters handled at one time
   // so as not to exceed the maximum number of tokens sent and received by the API.
   // In Gemini, the calculation is performed in the following way
-  // Summarize: Four times the number of characters of the maximum number of output tokens in the model
+  // Summarize: The number of characters is the same as the maximum number of output tokens in the model,
+  //            but is reduced because an Internal Server Error occurs.
   // Translate: Number of characters equal to the maximum number of output tokens in the model
   const characterLimits = {
     "gemini-1.0-pro": {
-      summarize: 8192,
+      summarize: 25600,
       translate: 2048
     }
   };
@@ -93,8 +94,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     } else if (request.message === "generate") {
       // Generate content
       const { apiKey, languageCode } = await chrome.storage.local.get({ apiKey: "", languageCode: "en" });
-      const systemPrompt = getSystemPrompt(request.task, languageCode);
       const userPrompt = request.userPrompt;
+      const systemPrompt = getSystemPrompt(request.task, languageCode, userPrompt.length);
 
       try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${modelId}:generateContent`, {
