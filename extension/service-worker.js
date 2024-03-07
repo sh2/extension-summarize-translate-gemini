@@ -33,7 +33,7 @@ const getCharacterLimit = (modelId, task) => {
   // Limit on the number of characters handled at one time
   // so as not to exceed the maximum number of tokens sent and received by the API.
   // In Gemini, the calculation is performed in the following way
-  // Summarize: The number of characters is the same as the maximum number of output tokens in the model,
+  // Summarize: The number of characters is the same as the maximum number of input tokens in the model,
   //            but is reduced because an Internal Server Error occurs.
   // Translate: Number of characters equal to the maximum number of output tokens in the model
   const characterLimits = {
