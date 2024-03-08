@@ -8,6 +8,9 @@
     "popup_button_run": {
         "message": "Run it again"
     },
+    "popup_button_results": {
+        "message": "Open results in a new tab"
+    },
     "popup_button_options": {
         "message": "Open options page"
     },
@@ -28,6 +31,9 @@
     },
     "popup_miscellaneous_error": {
         "message": "This page cannot be summarized or translated."
+    },
+    "results_title": {
+        "message": "Results - Summarize and Translate with Gemini"
     },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"

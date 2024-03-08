@@ -8,6 +8,9 @@
     "popup_button_run": {
         "message": "もう一度実行する"
     },
+    "popup_button_results": {
+        "message": "結果を新しいタブで開く"
+    },
     "popup_button_options": {
         "message": "オプションページを開く"
     },
@@ -28,6 +31,9 @@
     },
     "popup_miscellaneous_error": {
         "message": "このページは要約や翻訳ができません。"
+    },
+    "results_title": {
+        "message": "結果 - Geminiによる要約と翻訳"
     },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"

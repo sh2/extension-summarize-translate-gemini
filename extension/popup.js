@@ -1,3 +1,5 @@
+let contentIndex = 0;
+
 const getSelectedText = () => {
   // Return the selected text
   return window.getSelection().toString();
@@ -34,6 +36,9 @@ const displayLoadingMessage = (loadingMessage) => {
 const main = async () => {
   let displayIntervalId = 0;
   let content = "";
+  contentIndex = (await chrome.storage.session.get({ contentIndex: -1 })).contentIndex;
+  contentIndex = (contentIndex + 1) % 10;
+  await chrome.storage.session.set({ contentIndex: contentIndex });
 
   try {
     let userPrompt = "";
@@ -44,6 +49,8 @@ const main = async () => {
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = true;
+    document.getElementById("results").disabled = true;
+    
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     // Get the selected text
@@ -108,9 +115,15 @@ const main = async () => {
 
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = false;
+    document.getElementById("results").disabled = false;
+
+    // Convert the content from Markdown to HTML
     const div = document.createElement("div");
     div.textContent = content;
     document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
+
+    // Save the content to the session storage
+    await chrome.storage.session.set({ [`c_${contentIndex}`]: content });
   }
 };
 
@@ -128,6 +141,11 @@ const initialize = () => {
 
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("run").addEventListener("click", main);
+
+document.getElementById("results").addEventListener("click", async () => {
+  await chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${contentIndex}`) });
+});
+
 document.getElementById("options").addEventListener("click", () => {
   chrome.runtime.openOptionsPage();
 });
