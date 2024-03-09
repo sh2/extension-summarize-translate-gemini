@@ -17,6 +17,9 @@
     "popup_summarizing": {
         "message": "要約しています"
     },
+    "popup_summarizing_captions": {
+        "message": "字幕を要約しています"
+    },
     "popup_translating": {
         "message": "翻訳しています"
     },

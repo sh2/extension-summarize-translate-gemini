@@ -18,6 +18,64 @@ const getWholeText = () => {
   }
 }
 
+const getCaptions = async (videoUrl, languageCode) => {
+  // Return the captions of the YouTube video
+  const languageCodeForCaptions = {
+    en: "en",
+    de: "de",
+    es: "es",
+    fr: "fr",
+    it: "it",
+    pt_br: "pt-BR",
+    ru: "ru",
+    zh_cn: "zh-CN",
+    zh_tw: "zh-TW",
+    ja: "ja",
+    ko: "ko"
+  };
+
+  const preferredLanguages = [languageCodeForCaptions[languageCode], "en"];
+  const videoResponse = await fetch(videoUrl);
+  const videoBody = await videoResponse.text();
+  const captionsConfigJson = videoBody.match(/"captions":(.*?),"videoDetails":/s);
+  let captions = "";
+
+  if (captionsConfigJson) {
+    const captionsConfig = JSON.parse(captionsConfigJson[1]);
+
+    if (captionsConfig?.playerCaptionsTracklistRenderer?.captionTracks) {
+      const captionTracks = captionsConfig.playerCaptionsTracklistRenderer.captionTracks;
+
+      const calculateValue = (a) => {
+        let value = preferredLanguages.indexOf(a.languageCode);
+        value = value === -1 ? 9999 : value;
+        value += a.kind === "asr" ? 0.5 : 0;
+        return value;
+      }
+
+      // Sort the caption tracks by the preferred languages and the kind
+      captionTracks.sort((a, b) => {
+        const valueA = calculateValue(a);
+        const valueB = calculateValue(b);
+        return valueA - valueB;
+      });
+
+      const captionsUrl = captionTracks[0].baseUrl;
+      const captionsResponse = await fetch(captionsUrl);
+      const captionsXml = await captionsResponse.text();
+      const xmlDocument = new DOMParser().parseFromString(captionsXml, "application/xml");
+      const textElements = xmlDocument.getElementsByTagName("text");
+      captions = Array.from(textElements).map(element => element.textContent).join("\n");
+    } else {
+      console.log("No captionTracks found.");
+    }
+  } else {
+    console.log("No captions found.");
+  }
+
+  return captions;
+}
+
 const displayLoadingMessage = (loadingMessage) => {
   const status = document.getElementById("status");
 
@@ -50,7 +108,7 @@ const main = async () => {
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = true;
     document.getElementById("results").disabled = true;
-    
+
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     // Get the selected text
@@ -60,9 +118,19 @@ const main = async () => {
     } else {
       // If no text is selected, get the whole text of the page
       task = "summarize";
-      loadingMessage = chrome.i18n.getMessage("popup_summarizing");
-      await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["lib/Readability.min.js"] });
-      userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getWholeText }))[0].result;
+
+      if (tab.url.startsWith("https://www.youtube.com/watch?v=")) {
+        // If the page is a YouTube video, get the captions instead of the whole text
+        loadingMessage = chrome.i18n.getMessage("popup_summarizing_captions");
+        const { languageCode } = (await chrome.storage.local.get({ languageCode: "en" }));
+        userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getCaptions, args: [tab.url, languageCode] }))[0].result;
+      }
+
+      if (!userPrompt) {
+        loadingMessage = chrome.i18n.getMessage("popup_summarizing");
+        await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["lib/Readability.min.js"] });
+        userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getWholeText }))[0].result;
+      }
     }
 
     displayIntervalId = setInterval(displayLoadingMessage, 500, loadingMessage);

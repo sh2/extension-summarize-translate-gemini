@@ -21,6 +21,7 @@ This extension currently uses Gemini 1.0 Pro.
 
 Open a web page and simply click on the extension icon.
 This will display a summary of the page in a popup window.
+If the YouTube video has captions, summarize the captions.
 
 ![Summarize](img/screenshot_summarize.png)
 
