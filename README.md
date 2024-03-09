@@ -4,6 +4,9 @@ Chrome extension to summarize and translate web pages. Uses Gemini as the backen
 
 ## Setup
 
+This extension can be installed from [Chrome Web Store](https://chromewebstore.google.com/detail/hmdcbbbdmfapkpdaganadiihfmdnpngi).
+The following are instructions for manual installation, for development purposes.
+
 1. Open 'Manage Extensions' page in Google Chrome browser.
 2. Enable 'Developer mode'.
 3. Click 'Load unpacked' and select `extension` directory.
