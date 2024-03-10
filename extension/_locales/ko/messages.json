@@ -1,0 +1,59 @@
+{
+    "extension_name": {
+        "message": "제미니와 함께 요약 및 번역"
+    },
+    "extension_description": {
+        "message": "웹 페이지 요약 및 번역. 백엔드로 제미니를 사용합니다."
+    },
+    "popup_button_run": {
+        "message": "다시 실행"
+    },
+    "popup_button_results": {
+        "message": "새 탭에서 결과 열기"
+    },
+    "popup_button_options": {
+        "message": "옵션 페이지 열기"
+    },
+    "popup_summarizing": {
+        "message": "요약 중"
+    },
+    "popup_summarizing_captions": {
+        "message": "캡션 요약 중"
+    },
+    "popup_translating": {
+        "message": "번역 중"
+    },
+    "popup_prompt_blocked": {
+        "message": "프롬프트가 차단되었습니다."
+    },
+    "popup_response_blocked": {
+        "message": "응답이 차단되었습니다."
+    },
+    "popup_unexpected_response": {
+        "message": "알 수 없는 오류가 발생했습니다. 콘솔 로그를 확인하세요."
+    },
+    "popup_miscellaneous_error": {
+        "message": "이 페이지는 요약하거나 번역할 수 없습니다."
+    },
+    "results_title": {
+        "message": "결과 - 제미니와 함께 요약 및 번역"
+    },
+    "options_title": {
+        "message": "옵션 - 제미니와 함께 요약 및 번역"
+    },
+    "options_apikey": {
+        "message": "제미니 API 키"
+    },
+    "options_apikey_hint": {
+        "message": "다음 페이지에서 제미니 API 키를 얻을 수 있습니다."
+    },
+    "options_choose_language": {
+        "message": "다음 언어로 요약/번역"
+    },
+    "options_button_save": {
+        "message": "옵션 저장"
+    },
+    "options_saved": {
+        "message": "저장되었습니다."
+    }
+}

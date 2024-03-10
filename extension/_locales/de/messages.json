@@ -1,0 +1,59 @@
+{
+    "extension_name": {
+        "message": "Zusammenfassen und Übersetzen mit Gemini"
+    },
+    "extension_description": {
+        "message": "Webseiten zusammenfassen und übersetzen. Verwendet Gemini als Backend."
+    },
+    "popup_button_run": {
+        "message": "Erneut ausführen"
+    },
+    "popup_button_results": {
+        "message": "Ergebnisse in neuem Tab öffnen"
+    },
+    "popup_button_options": {
+        "message": "Optionsseite öffnen"
+    },
+    "popup_summarizing": {
+        "message": "Zusammenfassen"
+    },
+    "popup_summarizing_captions": {
+        "message": "Untertitel zusammenfassen"
+    },
+    "popup_translating": {
+        "message": "Übersetzen"
+    },
+    "popup_prompt_blocked": {
+        "message": "Die Eingabeaufforderung wurde blockiert."
+    },
+    "popup_response_blocked": {
+        "message": "Die Antwort wurde blockiert."
+    },
+    "popup_unexpected_response": {
+        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
+    },
+    "popup_miscellaneous_error": {
+        "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
+    },
+    "results_title": {
+        "message": "Ergebnisse - Zusammenfassen und Übersetzen mit Gemini"
+    },
+    "options_title": {
+        "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
+    },
+    "options_apikey": {
+        "message": "Gemini API-Schlüssel"
+    },
+    "options_apikey_hint": {
+        "message": "Sie können einen Gemini API-Schlüssel auf der folgenden Seite erhalten."
+    },
+    "options_choose_language": {
+        "message": "Zusammenfassen in / Übersetzen in"
+    },
+    "options_button_save": {
+        "message": "Optionen speichern"
+    },
+    "options_saved": {
+        "message": "Gespeichert."
+    }
+}

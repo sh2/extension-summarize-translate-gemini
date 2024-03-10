@@ -1,0 +1,59 @@
+{
+    "extension_name": {
+        "message": "Обобщение и перевод с помощью Gemini"
+    },
+    "extension_description": {
+        "message": "Обобщайте и переводите веб-страницы. Использует Gemini в качестве бэкенда."
+    },
+    "popup_button_run": {
+        "message": "Запустить снова"
+    },
+    "popup_button_results": {
+        "message": "Открыть результаты в новой вкладке"
+    },
+    "popup_button_options": {
+        "message": "Открыть страницу настроек"
+    },
+    "popup_summarizing": {
+        "message": "Обобщение"
+    },
+    "popup_summarizing_captions": {
+        "message": "Обобщение субтитров"
+    },
+    "popup_translating": {
+        "message": "Перевод"
+    },
+    "popup_prompt_blocked": {
+        "message": "Запрос был заблокирован."
+    },
+    "popup_response_blocked": {
+        "message": "Ответ был заблокирован."
+    },
+    "popup_unexpected_response": {
+        "message": "Произошла неизвестная ошибка. Пожалуйста, проверьте журнал консоли."
+    },
+    "popup_miscellaneous_error": {
+        "message": "Эта страница не может быть обобщена или переведена."
+    },
+    "results_title": {
+        "message": "Результаты - Обобщение и перевод с помощью Gemini"
+    },
+    "options_title": {
+        "message": "Настройки - Обобщение и перевод с помощью Gemini"
+    },
+    "options_apikey": {
+        "message": "API-ключ Gemini"
+    },
+    "options_apikey_hint": {
+        "message": "Вы можете получить API-ключ Gemini на следующей странице."
+    },
+    "options_choose_language": {
+        "message": "Обобщать на / Переводить на"
+    },
+    "options_button_save": {
+        "message": "Сохранить настройки"
+    },
+    "options_saved": {
+        "message": "Сохранено."
+    }
+}
