@@ -1,7 +1,7 @@
 const modelId = "gemini-1.0-pro";
 
 const getSystemPrompt = (task, languageCode, userPromptLength) => {
-  const languageName = {
+  const languageNames = {
     en: "English",
     de: "German",
     es: "Spanish",
@@ -19,10 +19,10 @@ const getSystemPrompt = (task, languageCode, userPromptLength) => {
 
   if (task === "summarize") {
     return `Summarize the entire text as up to ${numItems}-item Markdown numbered list ` +
-      `in ${languageName[languageCode]} and reply only with the list.\n` +
+      `in ${languageNames[languageCode]} and reply only with the list.\n` +
       "Format:\n1. First point.\n2. Second point.\n3. Third point.";
   } else if (task === "translate") {
-    return `Translate the entire text into ${languageName[languageCode]} ` +
+    return `Translate the entire text into ${languageNames[languageCode]} ` +
       "and reply only with the translated result.";
   } else {
     return "";
