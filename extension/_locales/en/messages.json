@@ -20,6 +20,9 @@
     "popup_summarizing_captions": {
         "message": "Summarizing the captions"
     },
+    "popup_summarizing_image": {
+        "message": "Summarizing the image"
+    },
     "popup_translating": {
         "message": "Translating"
     },
