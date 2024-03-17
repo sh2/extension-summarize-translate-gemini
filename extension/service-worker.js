@@ -94,9 +94,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     } else if (request.message === "generate") {
       // Generate content
       const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
-      const languageCode = request.languageCode;
       const userPrompt = request.userPrompt;
-      const systemPrompt = getSystemPrompt(request.task, languageCode, userPrompt.length);
+      const systemPrompt = getSystemPrompt(request.task, request.languageCode, userPrompt.length);
 
       try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${modelId}:generateContent`, {
