@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resumir e traduzir páginas web. Usa Gemini como backend."
+        "message": "Resuma e traduza páginas da web. Usa Gemini como back-end."
     },
     "popup_button_run": {
         "message": "Executar novamente"
@@ -20,6 +20,9 @@
     "popup_summarizing_captions": {
         "message": "Resumindo as legendas"
     },
+    "popup_summarizing_image": {
+        "message": "Resumindo a imagem"
+    },
     "popup_translating": {
         "message": "Traduzindo"
     },
@@ -30,7 +33,7 @@
         "message": "A resposta foi bloqueada."
     },
     "popup_unexpected_response": {
-        "message": "Ocorreu um erro desconhecido. Por favor, verifique o registro do console."
+        "message": "Ocorreu um erro desconhecido. Verifique o log do console."
     },
     "popup_miscellaneous_error": {
         "message": "Esta página não pode ser resumida ou traduzida."

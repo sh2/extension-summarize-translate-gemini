@@ -3,7 +3,7 @@
         "message": "Resumir y traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resumir y traducir páginas web. Utiliza Gemini como backend."
+        "message": "Resuma y traduzca páginas web. Utiliza Gemini como backend."
     },
     "popup_button_run": {
         "message": "Ejecutarlo de nuevo"
@@ -20,17 +20,20 @@
     "popup_summarizing_captions": {
         "message": "Resumiendo los subtítulos"
     },
+    "popup_summarizing_image": {
+        "message": "Resumiendo la imagen"
+    },
     "popup_translating": {
         "message": "Traduciendo"
     },
     "popup_prompt_blocked": {
-        "message": "La solicitud fue bloqueada."
+        "message": "El mensaje fue bloqueado."
     },
     "popup_response_blocked": {
         "message": "La respuesta fue bloqueada."
     },
     "popup_unexpected_response": {
-        "message": "Ha ocurrido un error desconocido. Por favor, revisa el registro de la consola."
+        "message": "Ocurrió un error desconocido. Por favor revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
         "message": "Esta página no se puede resumir ni traducir."
@@ -39,13 +42,13 @@
         "message": "Resultados - Resumir y traducir con Gemini"
     },
     "options_title": {
-        "message": "Opciones - Resumir y traducir con Gemini"
+        "message": "Opciones - Resumir y traducir con Gemini" 
     },
     "options_apikey": {
         "message": "Clave API de Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puedes obtener una clave API de Gemini en la siguiente página."
+        "message": "Puede obtener una clave API de Gemini en la siguiente página."
     },
     "options_choose_language": {
         "message": "Resumir en / Traducir a"

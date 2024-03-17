@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "제미니와 함께 요약 및 번역"
+        "message": "Gemini를 사용하여 요약 및 번역"
     },
     "extension_description": {
-        "message": "웹 페이지 요약 및 번역. 백엔드로 제미니를 사용합니다."
+        "message": "웹 페이지를 요약하고 번역합니다. 백엔드로 Gemini를 사용합니다."
     },
     "popup_button_run": {
         "message": "다시 실행"
@@ -18,7 +18,10 @@
         "message": "요약 중"
     },
     "popup_summarizing_captions": {
-        "message": "캡션 요약 중"
+        "message": "자막 요약 중"
+    },
+    "popup_summarizing_image": {
+        "message": "이미지 요약 중"
     },
     "popup_translating": {
         "message": "번역 중"
@@ -36,19 +39,19 @@
         "message": "이 페이지는 요약하거나 번역할 수 없습니다."
     },
     "results_title": {
-        "message": "결과 - 제미니와 함께 요약 및 번역"
+        "message": "결과 - Gemini를 사용하여 요약 및 번역"
     },
     "options_title": {
-        "message": "옵션 - 제미니와 함께 요약 및 번역"
+        "message": "옵션 - Gemini를 사용하여 요약 및 번역"
     },
     "options_apikey": {
-        "message": "제미니 API 키"
+        "message": "Gemini API 키"
     },
     "options_apikey_hint": {
-        "message": "다음 페이지에서 제미니 API 키를 얻을 수 있습니다."
+        "message": "다음 페이지에서 Gemini API 키를 얻을 수 있습니다."
     },
     "options_choose_language": {
-        "message": "다음 언어로 요약/번역"
+        "message": "요약 언어 / 번역 언어"
     },
     "options_button_save": {
         "message": "옵션 저장"

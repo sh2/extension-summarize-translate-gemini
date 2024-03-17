@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用Gemini摘要和翻譯"
+        "message": "使用 Gemini 摘要與翻譯"
     },
     "extension_description": {
-        "message": "摘要並翻譯網頁。使用Gemini作為後端。"
+        "message": "摘要與翻譯網頁。使用 Gemini 作為後端。"
     },
     "popup_button_run": {
         "message": "再次執行"
@@ -20,40 +20,43 @@
     "popup_summarizing_captions": {
         "message": "正在摘要字幕"
     },
+    "popup_summarizing_image": {
+        "message": "正在摘要圖像"
+    },
     "popup_translating": {
         "message": "正在翻譯"
     },
     "popup_prompt_blocked": {
-        "message": "提示已被阻擋。"
+        "message": "提示被阻擋。"
     },
     "popup_response_blocked": {
-        "message": "回應已被阻擋。"
+        "message": "回應被阻擋。"
     },
     "popup_unexpected_response": {
-        "message": "發生未知錯誤。請檢查控制台日誌。"
+        "message": "發生未知錯誤。請檢查主控台記錄。"
     },
     "popup_miscellaneous_error": {
-        "message": "此頁面無法摘要或翻譯。"
+        "message": "無法摘要或翻譯此頁面。"
     },
     "results_title": {
-        "message": "結果 - 使用Gemini摘要和翻譯"
+        "message": "結果 - 使用 Gemini 摘要與翻譯"
     },
     "options_title": {
-        "message": "選項 - 使用Gemini摘要和翻譯"
+        "message": "選項 - 使用 Gemini 摘要與翻譯"
     },
     "options_apikey": {
-        "message": "Gemini API金鑰"
+        "message": "Gemini API 金鑰"
     },
     "options_apikey_hint": {
-        "message": "您可以在以下頁面獲取Gemini API金鑰。"
+        "message": "您可以在以下頁面取得 Gemini API 金鑰。"
     },
     "options_choose_language": {
-        "message": "摘要/翻譯成"
+        "message": "摘要語言 / 翻譯至"
     },
     "options_button_save": {
         "message": "儲存選項"
     },
     "options_saved": {
-        "message": "已儲存。" 
+        "message": "已儲存。"
     }
 }

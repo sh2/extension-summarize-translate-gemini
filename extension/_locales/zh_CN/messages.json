@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 总结和翻译"
+        "message": "使用 Gemini 总结并翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页。使用 Gemini 作为后端。"
+        "message": "总结并翻译网页。使用 Gemini 作为后端。"
     },
     "popup_button_run": {
         "message": "再次运行"
@@ -20,26 +20,29 @@
     "popup_summarizing_captions": {
         "message": "正在总结字幕"
     },
+    "popup_summarizing_image": {
+        "message": "正在总结图像"
+    },
     "popup_translating": {
         "message": "正在翻译"
     },
     "popup_prompt_blocked": {
-        "message": "提示被阻止。"
+        "message": "提示已被阻止。"
     },
     "popup_response_blocked": {
-        "message": "回复被阻止。"
+        "message": "响应已被阻止。"
     },
     "popup_unexpected_response": {
-        "message": "发生未知错误。请检查控制台日志。"
+        "message": "出现未知错误。请检查控制台日志。"
     },
     "popup_miscellaneous_error": {
-        "message": "此页面无法总结或翻译。"
+        "message": "此页面无法被总结或翻译。"
     },
     "results_title": {
-        "message": "结果 - 使用 Gemini 总结和翻译"
+        "message": "结果 - 使用 Gemini 总结并翻译"
     },
     "options_title": {
-        "message": "选项 - 使用 Gemini 总结和翻译"
+        "message": "选项 - 使用 Gemini 总结并翻译"
     },
     "options_apikey": {
         "message": "Gemini API 密钥"
