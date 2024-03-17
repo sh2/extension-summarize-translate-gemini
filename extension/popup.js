@@ -99,6 +99,7 @@ const main = async () => {
   await chrome.storage.session.set({ contentIndex: contentIndex });
 
   try {
+    const languageCode = document.getElementById("languageCode").value;
     let userPrompt = "";
     let userPromptChunks = [];
     let task = "";
@@ -107,6 +108,7 @@ const main = async () => {
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = true;
+    document.getElementById("languageCode").disabled = true;
     document.getElementById("results").disabled = true;
 
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -122,7 +124,6 @@ const main = async () => {
       if (tab.url.startsWith("https://www.youtube.com/watch?v=")) {
         // If the page is a YouTube video, get the captions instead of the whole text
         loadingMessage = chrome.i18n.getMessage("popup_summarizing_captions");
-        const { languageCode } = (await chrome.storage.local.get({ languageCode: "en" }));
         userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getCaptions, args: [tab.url, languageCode] }))[0].result;
       }
 
@@ -141,7 +142,7 @@ const main = async () => {
 
     for (const userPromptChunk of userPromptChunks) {
       // Generate content
-      const response = await chrome.runtime.sendMessage({ message: "generate", task: task, userPrompt: userPromptChunk });
+      const response = await chrome.runtime.sendMessage({ message: "generate", task: task, userPrompt: userPromptChunk, languageCode: languageCode });
       console.log(response);
 
       if (response.ok) {
@@ -183,6 +184,7 @@ const main = async () => {
 
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = false;
+    document.getElementById("languageCode").disabled = false;
     document.getElementById("results").disabled = false;
 
     // Convert the content from Markdown to HTML
@@ -195,7 +197,7 @@ const main = async () => {
   }
 };
 
-const initialize = () => {
+const initialize = async () => {
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: (_href, _title, text) => text } });
 
@@ -203,6 +205,10 @@ const initialize = () => {
   document.querySelectorAll("[data-i18n]").forEach(element => {
     element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
   });
+
+  // Restore the language code from the local storage
+  const { languageCode } = await chrome.storage.local.get({ languageCode: "en" });
+  document.getElementById("languageCode").value = languageCode;
 
   main();
 }

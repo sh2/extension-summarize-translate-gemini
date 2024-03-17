@@ -93,7 +93,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       sendResponse(userPromptChunks);
     } else if (request.message === "generate") {
       // Generate content
-      const { apiKey, languageCode } = await chrome.storage.local.get({ apiKey: "", languageCode: "en" });
+      const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
+      const languageCode = request.languageCode;
       const userPrompt = request.userPrompt;
       const systemPrompt = getSystemPrompt(request.task, languageCode, userPrompt.length);
 
