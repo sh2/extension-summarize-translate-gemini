@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resuma e traduza páginas da web. Usa Gemini como back-end."
+        "message": "Resuma e traduza páginas da web. Usa Gemini como backend."
     },
     "popup_button_run": {
         "message": "Executar novamente"
@@ -26,6 +26,15 @@
     "popup_translating": {
         "message": "Traduzindo"
     },
+    "popup_translating_captions": {
+        "message": "Traduzindo as legendas"
+    },
+    "popup_translating_image": {
+        "message": "Traduzindo a imagem"
+    },
+    "popup_processing": {
+        "message": "Processando"
+    },
     "popup_prompt_blocked": {
         "message": "O prompt foi bloqueado."
     },
@@ -33,7 +42,7 @@
         "message": "A resposta foi bloqueada."
     },
     "popup_unexpected_response": {
-        "message": "Ocorreu um erro desconhecido. Verifique o log do console."
+        "message": "Ocorreu um erro desconhecido. Por favor, verifique o log do console."
     },
     "popup_miscellaneous_error": {
         "message": "Esta página não pode ser resumida ou traduzida."
@@ -50,8 +59,35 @@
     "options_apikey_hint": {
         "message": "Você pode obter uma Chave de API do Gemini na seguinte página."
     },
-    "options_choose_language": {
+    "options_language": {
         "message": "Resumir em / Traduzir para"
+    },
+    "options_language_notes": {
+        "message": "A configuração de idioma é desconsiderada em ações personalizadas."
+    },
+    "options_no_text_action": {
+        "message": "Quando nenhum texto for selecionado, faça a seguinte ação"
+    },
+    "options_no_text_summarize": {
+        "message": "Resumir (padrão)"
+    },
+    "options_no_text_translate": {
+        "message": "Traduzir"
+    },
+    "options_no_text_custom": {
+        "message": "Ação personalizada"
+    },
+    "options_text_action": {
+        "message": "Quando o texto for selecionado, faça a seguinte ação"
+    },
+    "options_text_summarize": {
+        "message": "Resumir"
+    },
+    "options_text_translate": {
+        "message": "Traduzir (padrão)"
+    },
+    "options_text_custom": {
+        "message": "Ação personalizada"
     },
     "options_button_save": {
         "message": "Salvar opções"

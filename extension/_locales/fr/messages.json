@@ -6,7 +6,7 @@
         "message": "Résumez et traduisez des pages web. Utilise Gemini comme backend."
     },
     "popup_button_run": {
-        "message": "Relancer"
+        "message": "Exécuter à nouveau"
     },
     "popup_button_results": {
         "message": "Ouvrir les résultats dans un nouvel onglet"
@@ -25,6 +25,15 @@
     },
     "popup_translating": {
         "message": "Traduction en cours"
+    },
+    "popup_translating_captions": {
+        "message": "Traduction des sous-titres en cours"
+    },
+    "popup_translating_image": {
+        "message": "Traduction de l'image en cours"
+    },
+    "popup_processing": {
+        "message": "Traitement en cours"
     },
     "popup_prompt_blocked": {
         "message": "L'invite a été bloquée."
@@ -50,8 +59,35 @@
     "options_apikey_hint": {
         "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
-    "options_choose_language": {
+    "options_language": {
         "message": "Résumer en / Traduire vers"
+    },
+    "options_language_notes": {
+        "message": "Le paramètre de langue est ignoré dans les actions personnalisées."
+    },
+    "options_no_text_action": {
+        "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
+    },
+    "options_no_text_summarize": {
+        "message": "Résumer (par défaut)"
+    },
+    "options_no_text_translate": {
+        "message": "Traduire"
+    },
+    "options_no_text_custom": {
+        "message": "Action personnalisée"
+    },
+    "options_text_action": {
+        "message": "Lorsque du texte est sélectionné, effectuer l'action suivante"
+    },
+    "options_text_summarize": {
+        "message": "Résumer"
+    },
+    "options_text_translate": {
+        "message": "Traduire (par défaut)"
+    },
+    "options_text_custom": {
+        "message": "Action personnalisée"
     },
     "options_button_save": {
         "message": "Enregistrer les options"

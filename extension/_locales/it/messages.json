@@ -3,10 +3,10 @@
         "message": "Riassumi e traduci con Gemini"
     },
     "extension_description": {
-        "message": "Riassumi e traduci le pagine web. Utilizza Gemini come backend."
+        "message": "Riassumi e traduci pagine web. Utilizza Gemini come backend."
     },
     "popup_button_run": {
-        "message": "Riesegui"
+        "message": "Esegui di nuovo"
     },
     "popup_button_results": {
         "message": "Apri i risultati in una nuova scheda"
@@ -25,6 +25,15 @@
     },
     "popup_translating": {
         "message": "Traducendo"
+    },
+    "popup_translating_captions": {
+        "message": "Traducendo i sottotitoli"
+    },
+    "popup_translating_image": {
+        "message": "Traducendo l'immagine"
+    },
+    "popup_processing": {
+        "message": "Elaborazione"
     },
     "popup_prompt_blocked": {
         "message": "Il prompt è stato bloccato."
@@ -45,13 +54,40 @@
         "message": "Opzioni - Riassumi e traduci con Gemini"
     },
     "options_apikey": {
-        "message": "Chiave API di Gemini"
+        "message": "Chiave API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puoi ottenere una chiave API di Gemini alla seguente pagina."
+        "message": "Puoi ottenere una chiave API Gemini alla seguente pagina."
     },
-    "options_choose_language": {
+    "options_language": {
         "message": "Riassumi in / Traduci in"
+    },
+    "options_language_notes": {
+        "message": "L'impostazione della lingua viene ignorata nelle azioni personalizzate."
+    },
+    "options_no_text_action": {
+        "message": "Quando nessun testo è selezionato, esegui la seguente azione"
+    },
+    "options_no_text_summarize": {
+        "message": "Riassumi (predefinito)"
+    },
+    "options_no_text_translate": {
+        "message": "Traduci"
+    },
+    "options_no_text_custom": {
+        "message": "Azione personalizzata"
+    },
+    "options_text_action": {
+        "message": "Quando il testo è selezionato, esegui la seguente azione"
+    },
+    "options_text_summarize": {
+        "message": "Riassumi"
+    },
+    "options_text_translate": {
+        "message": "Traduci (predefinito)"
+    },
+    "options_text_custom": {
+        "message": "Azione personalizzata"
     },
     "options_button_save": {
         "message": "Salva opzioni"

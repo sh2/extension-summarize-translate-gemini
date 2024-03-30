@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 总结并翻译"
+        "message": "使用 Gemini 总结和翻译"
     },
     "extension_description": {
-        "message": "总结并翻译网页。使用 Gemini 作为后端。"
+        "message": "总结和翻译网页。使用 Gemini 作为后端。"
     },
     "popup_button_run": {
         "message": "再次运行"
@@ -26,23 +26,32 @@
     "popup_translating": {
         "message": "正在翻译"
     },
+    "popup_translating_captions": {
+        "message": "正在翻译字幕"
+    },
+    "popup_translating_image": {
+        "message": "正在翻译图像"
+    },
+    "popup_processing": {
+        "message": "正在处理"
+    },
     "popup_prompt_blocked": {
-        "message": "提示已被阻止。"
+        "message": "提示被阻止。"
     },
     "popup_response_blocked": {
-        "message": "响应已被阻止。"
+        "message": "响应被阻止。"
     },
     "popup_unexpected_response": {
-        "message": "出现未知错误。请检查控制台日志。"
+        "message": "发生未知错误。请检查控制台日志。"
     },
     "popup_miscellaneous_error": {
-        "message": "此页面无法被总结或翻译。"
+        "message": "无法总结或翻译此页面。"
     },
     "results_title": {
-        "message": "结果 - 使用 Gemini 总结并翻译"
+        "message": "结果 - 使用 Gemini 总结和翻译"
     },
     "options_title": {
-        "message": "选项 - 使用 Gemini 总结并翻译"
+        "message": "选项 - 使用 Gemini 总结和翻译"
     },
     "options_apikey": {
         "message": "Gemini API 密钥"
@@ -50,8 +59,35 @@
     "options_apikey_hint": {
         "message": "您可以在以下页面获取 Gemini API 密钥。"
     },
-    "options_choose_language": {
+    "options_language": {
         "message": "总结/翻译为"
+    },
+    "options_language_notes": {
+        "message": "在自定义操作中忽略语言设置。"
+    },
+    "options_no_text_action": {
+        "message": "未选择文本时，执行以下操作"
+    },
+    "options_no_text_summarize": {
+        "message": "总结（默认）"
+    },
+    "options_no_text_translate": {
+        "message": "翻译"
+    },
+    "options_no_text_custom": {
+        "message": "自定义操作"
+    },
+    "options_text_action": {
+        "message": "选择文本时，执行以下操作"
+    },
+    "options_text_summarize": {
+        "message": "总结"
+    },
+    "options_text_translate": {
+        "message": "翻译（默认）"
+    },
+    "options_text_custom": {
+        "message": "自定义操作"
     },
     "options_button_save": {
         "message": "保存选项"

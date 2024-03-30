@@ -3,7 +3,7 @@
         "message": "Обобщение и перевод с помощью Gemini"
     },
     "extension_description": {
-        "message": "Обобщайте и переводите веб-страницы. Использует Gemini в качестве бэкенда."
+        "message": "Обобщение и перевод веб-страниц. Использует Gemini в качестве бэкенда."
     },
     "popup_button_run": {
         "message": "Запустить снова"
@@ -18,13 +18,22 @@
         "message": "Обобщение"
     },
     "popup_summarizing_captions": {
-        "message": "Обобщение субтитров"
+        "message": "Обобщение подписей"
     },
     "popup_summarizing_image": {
         "message": "Обобщение изображения"
     },
     "popup_translating": {
         "message": "Перевод"
+    },
+    "popup_translating_captions": {
+        "message": "Перевод подписей"
+    },
+    "popup_translating_image": {
+        "message": "Перевод изображения"
+    },
+    "popup_processing": {
+        "message": "Обработка"
     },
     "popup_prompt_blocked": {
         "message": "Запрос был заблокирован."
@@ -42,16 +51,43 @@
         "message": "Результаты - Обобщение и перевод с помощью Gemini"
     },
     "options_title": {
-        "message": "Настройки - Обобщение и перевод с помощью Gemini" 
+        "message": "Настройки - Обобщение и перевод с помощью Gemini"
     },
     "options_apikey": {
-        "message": "Ключ API Gemini"
+        "message": "API-ключ Gemini"
     },
     "options_apikey_hint": {
-        "message": "Вы можете получить ключ API Gemini на следующей странице."
+        "message": "Вы можете получить API-ключ Gemini на следующей странице."
     },
-    "options_choose_language": {
-        "message": "Обобщать на / Перевести на"
+    "options_language": {
+        "message": "Обобщать на / Переводить на"
+    },
+    "options_language_notes": {
+        "message": "Настройка языка игнорируется в пользовательских действиях."
+    },
+    "options_no_text_action": {
+        "message": "Когда текст не выделен, выполнить следующее действие"
+    },
+    "options_no_text_summarize": {
+        "message": "Обобщить (по умолчанию)"
+    },
+    "options_no_text_translate": {
+        "message": "Перевести"
+    },
+    "options_no_text_custom": {
+        "message": "Пользовательское действие"
+    },
+    "options_text_action": {
+        "message": "Когда текст выделен, выполнить следующее действие"
+    },
+    "options_text_summarize": {
+        "message": "Обобщить"
+    },
+    "options_text_translate": {
+        "message": "Перевести (по умолчанию)"
+    },
+    "options_text_custom": {
+        "message": "Пользовательское действие"
     },
     "options_button_save": {
         "message": "Сохранить настройки"

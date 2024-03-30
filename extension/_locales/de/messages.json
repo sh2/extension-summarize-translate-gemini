@@ -1,6 +1,6 @@
 {
     "extension_name": {
-        "message": "Mit Gemini zusammenfassen und übersetzen"
+        "message": "Zusammenfassen und Übersetzen mit Gemini"
     },
     "extension_description": {
         "message": "Webseiten zusammenfassen und übersetzen. Verwendet Gemini als Backend."
@@ -12,7 +12,7 @@
         "message": "Ergebnisse in neuem Tab öffnen"
     },
     "popup_button_options": {
-        "message": "Optionen öffnen"
+        "message": "Optionsseite öffnen"
     },
     "popup_summarizing": {
         "message": "Zusammenfassung wird erstellt"
@@ -25,6 +25,15 @@
     },
     "popup_translating": {
         "message": "Übersetzung läuft"
+    },
+    "popup_translating_captions": {
+        "message": "Untertitel werden übersetzt"
+    },
+    "popup_translating_image": {
+        "message": "Bild wird übersetzt"
+    },
+    "popup_processing": {
+        "message": "Verarbeitung"
     },
     "popup_prompt_blocked": {
         "message": "Die Eingabeaufforderung wurde blockiert."
@@ -39,10 +48,10 @@
         "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
     },
     "results_title": {
-        "message": "Ergebnisse - Mit Gemini zusammenfassen und übersetzen"
+        "message": "Ergebnisse - Zusammenfassen und Übersetzen mit Gemini"
     },
     "options_title": {
-        "message": "Optionen - Mit Gemini zusammenfassen und übersetzen"
+        "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
     },
     "options_apikey": {
         "message": "Gemini API-Schlüssel"
@@ -50,8 +59,35 @@
     "options_apikey_hint": {
         "message": "Sie können einen Gemini API-Schlüssel auf der folgenden Seite erhalten."
     },
-    "options_choose_language": {
+    "options_language": {
         "message": "Zusammenfassen in / Übersetzen nach"
+    },
+    "options_language_notes": {
+        "message": "Die Spracheinstellung wird bei benutzerdefinierten Aktionen nicht berücksichtigt."
+    },
+    "options_no_text_action": {
+        "message": "Wenn kein Text ausgewählt ist, führen Sie folgende Aktion aus"
+    },
+    "options_no_text_summarize": {
+        "message": "Zusammenfassen (Standard)"
+    },
+    "options_no_text_translate": {
+        "message": "Übersetzen"
+    },
+    "options_no_text_custom": {
+        "message": "Benutzerdefinierte Aktion"
+    },
+    "options_text_action": {
+        "message": "Wenn Text ausgewählt ist, führen Sie folgende Aktion aus"
+    },
+    "options_text_summarize": {
+        "message": "Zusammenfassen"
+    },
+    "options_text_translate": {
+        "message": "Übersetzen (Standard)"
+    },
+    "options_text_custom": {
+        "message": "Benutzerdefinierte Aktion"
     },
     "options_button_save": {
         "message": "Optionen speichern"
