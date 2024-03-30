@@ -6,7 +6,7 @@ const getModelId = (taskOption) => {
   }
 };
 
-const getSystemPrompt = (task, taskOption, languageCode, userPromptLength, noTextPrompt, textPrompt) => {
+const getSystemPrompt = async (task, taskOption, languageCode, userPromptLength) => {
   const languageNames = {
     en: "English",
     de: "German",
@@ -22,31 +22,32 @@ const getSystemPrompt = (task, taskOption, languageCode, userPromptLength, noTex
   };
 
   const numItems = Math.min(10, 3 + Math.floor(userPromptLength / 2000));
+  let systemPrompt = "";
 
   if (task === "summarize") {
     if (taskOption === "image") {
-      return `Summarize the image as Markdown numbered list in ${languageNames[languageCode]}.\n` +
+      systemPrompt = `Summarize the image as Markdown numbered list in ${languageNames[languageCode]}.\n` +
         "Format:\n1. First point.\n2. Second point.\n3. Third point.";
     } else {
-      return `Summarize the entire text as up to ${numItems}-item Markdown numbered list ` +
+      systemPrompt = `Summarize the entire text as up to ${numItems}-item Markdown numbered list ` +
         `in ${languageNames[languageCode]} and reply only with the list.\n` +
         "Format:\n1. First point.\n2. Second point.\n3. Third point.";
     }
   } else if (task === "translate") {
     if (taskOption === "image") {
-      return `Translate the image into ${languageNames[languageCode]} ` +
+      systemPrompt = `Translate the image into ${languageNames[languageCode]} ` +
         "and reply only with the translated result.";
     } else {
-      return `Translate the entire text into ${languageNames[languageCode]} ` +
+      systemPrompt = `Translate the entire text into ${languageNames[languageCode]} ` +
         "and reply only with the translated result.";
     }
   } else if (task === "noTextCustom") {
-    return noTextPrompt;
+    systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt: "" })).noTextCustomPrompt;
   } else if (task === "textCustom") {
-    return textPrompt;
-  } else {
-    return "";
+    systemPrompt = (await chrome.storage.local.get({ textCustomPrompt: "" })).textCustomPrompt;
   }
+
+  return systemPrompt;
 };
 
 const getCharacterLimit = (modelId, task) => {
@@ -118,22 +119,15 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       sendResponse(userPromptChunks);
     } else if (request.message === "generate") {
       // Generate content
-      const { apiKey, noTextPrompt, textPrompt } = await chrome.storage.local.get({
-        apiKey: "",
-        noTextPrompt: "",
-        textPrompt: ""
-      });
-
+      const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
       const modelId = getModelId(request.taskOption);
       const userPrompt = request.userPrompt;
 
-      const systemPrompt = getSystemPrompt(
+      const systemPrompt = await getSystemPrompt(
         request.task,
         request.taskOption,
         request.languageCode,
-        userPrompt.length,
-        noTextPrompt,
-        textPrompt
+        userPrompt.length
       );
 
       let contents = [];

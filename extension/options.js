@@ -3,17 +3,17 @@ const restoreOptions = async () => {
     apiKey: "",
     languageCode: "en",
     noTextAction: "summarize",
-    noTextPrompt: "",
+    noTextCustomPrompt: "",
     textAction: "translate",
-    textPrompt: ""
+    textCustomPrompt: ""
   });
 
   document.getElementById("apiKey").value = options.apiKey;
   document.getElementById("languageCode").value = options.languageCode;
   document.querySelector(`input[name="noTextAction"][value="${options.noTextAction}"]`).checked = true;
-  document.getElementById("noTextPrompt").value = options.noTextPrompt;
+  document.getElementById("noTextCustomPrompt").value = options.noTextCustomPrompt;
   document.querySelector(`input[name="textAction"][value="${options.textAction}"]`).checked = true;
-  document.getElementById("textPrompt").value = options.textPrompt;
+  document.getElementById("textCustomPrompt").value = options.textCustomPrompt;
 };
 
 const saveOptions = async () => {
@@ -21,9 +21,9 @@ const saveOptions = async () => {
     apiKey: document.getElementById("apiKey").value,
     languageCode: document.getElementById("languageCode").value,
     noTextAction: document.querySelector('input[name="noTextAction"]:checked').value,
-    noTextPrompt: document.getElementById("noTextPrompt").value,
+    noTextCustomPrompt: document.getElementById("noTextCustomPrompt").value,
     textAction: document.querySelector('input[name="textAction"]:checked').value,
-    textPrompt: document.getElementById("textPrompt").value
+    textCustomPrompt: document.getElementById("textCustomPrompt").value
   };
 
   await chrome.storage.local.set(options);
