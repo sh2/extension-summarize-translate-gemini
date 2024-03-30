@@ -192,7 +192,7 @@ const main = async () => {
     }
     else {
       userPromptChunks = await chrome.runtime.sendMessage({
-        message: "chunk", taskOption: taskOption, userPrompt: userPrompt
+        message: "chunk", task: task, taskOption: taskOption, userPrompt: userPrompt
       });
 
       console.log(userPromptChunks);
