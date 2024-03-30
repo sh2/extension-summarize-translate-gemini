@@ -162,19 +162,19 @@ const main = async () => {
       const response = await chrome.runtime.sendMessage({
         message: "generate", task: task, userPrompt: userPromptChunk, languageCode: languageCode
       });
-      
+
       console.log(response);
 
       if (response.ok) {
-        if (response.body.promptFeedback.blockReason) {
+        if (response.body.promptFeedback?.blockReason) {
           // The prompt was blocked
           content = `${chrome.i18n.getMessage("popup_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
           break;
-        } else if (response.body.candidates && response.body.candidates[0].finishReason !== "STOP") {
+        } else if (response.body.candidates?.[0].finishReason !== "STOP") {
           // The response was blocked
           content = `${chrome.i18n.getMessage("popup_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
           break;
-        } else if (response.body.candidates[0].content) {
+        } else if (response.body.candidates?.[0].content) {
           // A normal response was returned
           content += `${response.body.candidates[0].content.parts[0].text}\n\n`;
           const div = document.createElement("div");
