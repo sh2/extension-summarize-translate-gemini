@@ -16,6 +16,6 @@ const initialize = async () => {
     const div = document.createElement("div");
     div.textContent = content;
     document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
-}
+};
 
 document.addEventListener("DOMContentLoaded", initialize);

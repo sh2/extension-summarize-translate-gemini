@@ -28,7 +28,7 @@
   </p>
 
   <p>
-    <label for="languageCode" data-i18n="options_choose_language">Summarize in / Translate to</label>
+    <label for="languageCode" data-i18n="options_language">Summarize in / Translate to</label>
     <br>
     <select id="languageCode">
       <option value="en">English</option>
@@ -43,6 +43,42 @@
       <option value="ja">日本語</option>
       <option value="ko">한국어</option>
     </select>
+    <br>
+    <small>
+      <span data-i18n="options_language_notes">The language setting is disregarded in custom actions.</span>
+    </small>
+  </p>
+
+  <p>
+    <span data-i18n="options_no_text_action">When no text is selected, do the following action</span>
+    <br>
+    <input id="noTextSummarize" type="radio" name="noTextAction" value="summarize" checked>
+    <label for="noTextSummarize" data-i18n="options_no_text_summarize">Summarize (default)</label>
+    <br>
+    <input id="noTextTranslate" type="radio" name="noTextAction" value="translate">
+    <label for="noTextTranslate" data-i18n="options_no_text_translate">Translate</label>
+    <br>
+    <input id="noTextCustom" type="radio" name="noTextAction" value="noTextCustom">
+    <label for="noTextCustom" data-i18n="options_no_text_custom">Custom action</label>
+    <br>
+    <textarea id="noTextPrompt" rows="8" cols="80"
+      placeholder="(Example)&#10;Summarize the entire text as up to 3-item Markdown numbered list in English and reply only with the list.&#10;Format:&#10;1. First point.&#10;2. Second point.&#10;3. Third point."></textarea>
+  </p>
+
+  <p>
+    <span data-i18n="options_text_action">When text is selected, do the following action</span>
+    <br>
+    <input id="textSummarize" type="radio" name="textAction" value="summarize">
+    <label for="textSummarize" data-i18n="options_text_summarize">Summarize</label>
+    <br>
+    <input id="textTranslate" type="radio" name="textAction" value="translate" checked>
+    <label for="textTranslate" data-i18n="options_text_translate">Translate (default)</label>
+    <br>
+    <input id="textCustom" type="radio" name="textAction" value="textCustom">
+    <label for="textCustom" data-i18n="options_text_custom">Custom action</label>
+    <br>
+    <textarea id="textPrompt" rows="8" cols="80"
+      placeholder="(Example)&#10;Translate the entire text into English and reply only with the translated result."></textarea>
   </p>
 
   <p>

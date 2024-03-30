@@ -26,6 +26,15 @@
     "popup_translating": {
         "message": "翻訳しています"
     },
+    "popup_translating_captions": {
+        "message": "字幕を翻訳しています"
+    },
+    "popup_translating_image": {
+        "message": "画像を翻訳しています"
+    },
+    "popup_processing": {
+        "message": "処理しています"
+    },
     "popup_prompt_blocked": {
         "message": "プロンプトがブロックされました。"
     },
@@ -50,8 +59,35 @@
     "options_apikey_hint": {
         "message": "Gemini APIキーは、以下のページから取得できます。"
     },
-    "options_choose_language": {
+    "options_language": {
         "message": "以下の言語で要約/翻訳する"
+    },
+    "options_language_notes": {
+        "message": "カスタムアクションでは、言語設定は無視されます。"
+    },
+    "options_no_text_action": {
+        "message": "テキストが選択されなかったときは、以下のアクションを実行する"
+    },
+    "options_no_text_summarize": {
+        "message": "要約 (デフォルト)"
+    },
+    "options_no_text_translate": {
+        "message": "翻訳"
+    },
+    "options_no_text_custom": {
+        "message": "カスタムアクション"
+    },
+    "options_text_action": {
+        "message": "テキストが選択されたときは、以下のアクションを実行する"
+    },
+    "options_text_summarize": {
+        "message": "要約"
+    },
+    "options_text_translate": {
+        "message": "翻訳 (デフォルト)"
+    },
+    "options_text_custom": {
+        "message": "カスタムアクション"
     },
     "options_button_save": {
         "message": "オプションを保存する"

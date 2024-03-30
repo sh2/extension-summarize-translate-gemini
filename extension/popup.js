@@ -3,7 +3,7 @@ let contentIndex = 0;
 const getSelectedText = () => {
   // Return the selected text
   return window.getSelection().toString();
-}
+};
 
 const getWholeText = () => {
   // Return the whole text
@@ -16,7 +16,7 @@ const getWholeText = () => {
     console.log("Failed to parse the article. Using document.body.innerText instead.");
     return document.body.innerText;
   }
-}
+};
 
 const getCaptions = async (videoUrl, languageCode) => {
   // Return the captions of the YouTube video
@@ -74,7 +74,33 @@ const getCaptions = async (videoUrl, languageCode) => {
   }
 
   return captions;
-}
+};
+
+const getLoadingMessage = (task, taskOption) => {
+  let loadingMessage = "";
+
+  if (task === "summarize") {
+    if (taskOption === "captions") {
+      loadingMessage = chrome.i18n.getMessage("popup_summarizing_captions");
+    } else if (taskOption === "image") {
+      loadingMessage = chrome.i18n.getMessage("popup_summarizing_image");
+    } else {
+      loadingMessage = chrome.i18n.getMessage("popup_summarizing");
+    }
+  } else if (task === "translate") {
+    if (taskOption === "captions") {
+      loadingMessage = chrome.i18n.getMessage("popup_translating_captions");
+    } else if (taskOption === "image") {
+      loadingMessage = chrome.i18n.getMessage("popup_translating_image");
+    } else {
+      loadingMessage = chrome.i18n.getMessage("popup_translating");
+    }
+  } else {
+    loadingMessage = chrome.i18n.getMessage("popup_processing");
+  }
+
+  return loadingMessage;
+};
 
 const displayLoadingMessage = (loadingMessage) => {
   const status = document.getElementById("status");
@@ -103,7 +129,7 @@ const main = async () => {
     let userPrompt = "";
     let userPromptChunks = [];
     let task = "";
-    let loadingMessage = "";
+    let taskOption = "";
 
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
@@ -114,44 +140,59 @@ const main = async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     // Get the selected text
-    if (userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getSelectedText }))[0].result) {
-      task = "translate";
-      loadingMessage = chrome.i18n.getMessage("popup_translating");
+    if (userPrompt = (await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: getSelectedText
+    }))[0].result) {
+      task = (await chrome.storage.local.get({ textAction: "translate" })).textAction;
+      taskOption = "";
     } else {
       // If no text is selected, get the whole text of the page
-      task = "summarize";
+      task = (await chrome.storage.local.get({ noTextAction: "summarize" })).noTextAction;
 
       if (tab.url.startsWith("https://www.youtube.com/watch?v=")) {
         // If the page is a YouTube video, get the captions instead of the whole text
-        loadingMessage = chrome.i18n.getMessage("popup_summarizing_captions");
-        userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getCaptions, args: [tab.url, languageCode] }))[0].result;
+        taskOption = "captions";
+
+        userPrompt = (await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: getCaptions,
+          args: [tab.url, languageCode]
+        }))[0].result;
       }
 
       if (!userPrompt) {
         // Get the main text of the page using Readability.js
-        loadingMessage = chrome.i18n.getMessage("popup_summarizing");
-        await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ["lib/Readability.min.js"] });
-        userPrompt = (await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: getWholeText }))[0].result;
+        taskOption = "";
+
+        await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ["lib/Readability.min.js"]
+        });
+
+        userPrompt = (await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: getWholeText
+        }))[0].result;
       }
 
       if (!userPrompt) {
         // If the whole text is empty, get the visible tab as an image
-        task = "summarize_image";
-        loadingMessage = chrome.i18n.getMessage("popup_summarizing_image");
+        taskOption = "image";
         userPrompt = await (chrome.tabs.captureVisibleTab(tab.windowId, { format: "jpeg" }));
       }
     }
 
-    displayIntervalId = setInterval(displayLoadingMessage, 500, loadingMessage);
+    displayIntervalId = setInterval(displayLoadingMessage, 500, getLoadingMessage(task, taskOption));
 
     // Split the user prompt
-    if (task === "summarize_image") {
+    if (taskOption === "image") {
       // If the user prompt is an image, do not split it
       userPromptChunks = [userPrompt];
     }
     else {
       userPromptChunks = await chrome.runtime.sendMessage({
-        message: "chunk", task: task, userPrompt: userPrompt
+        message: "chunk", taskOption: taskOption, userPrompt: userPrompt
       });
 
       console.log(userPromptChunks);
@@ -160,7 +201,11 @@ const main = async () => {
     for (const userPromptChunk of userPromptChunks) {
       // Generate content
       const response = await chrome.runtime.sendMessage({
-        message: "generate", task: task, userPrompt: userPromptChunk, languageCode: languageCode
+        message: "generate",
+        task: task,
+        taskOption: taskOption,
+        userPrompt: userPromptChunk,
+        languageCode: languageCode
       });
 
       console.log(response);
@@ -168,11 +213,13 @@ const main = async () => {
       if (response.ok) {
         if (response.body.promptFeedback?.blockReason) {
           // The prompt was blocked
-          content = `${chrome.i18n.getMessage("popup_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
+          content = `${chrome.i18n.getMessage("popup_prompt_blocked")} ` +
+            `Reason: ${response.body.promptFeedback.blockReason}`;
           break;
         } else if (response.body.candidates?.[0].finishReason !== "STOP") {
           // The response was blocked
-          content = `${chrome.i18n.getMessage("popup_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
+          content = `${chrome.i18n.getMessage("popup_response_blocked")} ` +
+            `Reason: ${response.body.candidates[0].finishReason}`;
           break;
         } else if (response.body.candidates?.[0].content) {
           // A normal response was returned
@@ -231,7 +278,7 @@ const initialize = async () => {
   document.getElementById("languageCode").value = languageCode;
 
   main();
-}
+};
 
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("run").addEventListener("click", main);

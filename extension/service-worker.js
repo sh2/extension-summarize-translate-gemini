@@ -1,14 +1,12 @@
-const getModelId = (task) => {
-  const modelIds = {
-    summarize: "gemini-1.0-pro",
-    summarize_image: "gemini-pro-vision",
-    translate: "gemini-1.0-pro",
-  };
+const getModelId = (taskOption) => {
+  if (taskOption === "image") {
+    return "gemini-pro-vision";
+  } else {
+    return "gemini-1.0-pro";
+  }
+};
 
-  return modelIds[task];
-}
-
-const getSystemPrompt = (task, languageCode, userPromptLength) => {
+const getSystemPrompt = (task, taskOption, languageCode, userPromptLength, noTextPrompt, textPrompt) => {
   const languageNames = {
     en: "English",
     de: "German",
@@ -26,15 +24,26 @@ const getSystemPrompt = (task, languageCode, userPromptLength) => {
   const numItems = Math.min(10, 3 + Math.floor(userPromptLength / 2000));
 
   if (task === "summarize") {
-    return `Summarize the entire text as up to ${numItems}-item Markdown numbered list ` +
-      `in ${languageNames[languageCode]} and reply only with the list.\n` +
-      "Format:\n1. First point.\n2. Second point.\n3. Third point.";
-  } else if (task === "summarize_image") {
-    return `Summarize the image as Markdown numbered list in ${languageNames[languageCode]}.\n` +
-      "Format:\n1. First point.\n2. Second point.\n3. Third point.";
+    if (taskOption === "image") {
+      return `Summarize the image as Markdown numbered list in ${languageNames[languageCode]}.\n` +
+        "Format:\n1. First point.\n2. Second point.\n3. Third point.";
+    } else {
+      return `Summarize the entire text as up to ${numItems}-item Markdown numbered list ` +
+        `in ${languageNames[languageCode]} and reply only with the list.\n` +
+        "Format:\n1. First point.\n2. Second point.\n3. Third point.";
+    }
   } else if (task === "translate") {
-    return `Translate the entire text into ${languageNames[languageCode]} ` +
-      "and reply only with the translated result.";
+    if (taskOption === "image") {
+      return `Translate the image into ${languageNames[languageCode]} ` +
+        "and reply only with the translated result.";
+    } else {
+      return `Translate the entire text into ${languageNames[languageCode]} ` +
+        "and reply only with the translated result.";
+    }
+  } else if (task === "noTextCustom") {
+    return noTextPrompt;
+  } else if (task === "textCustom") {
+    return textPrompt;
   } else {
     return "";
   }
@@ -100,18 +109,32 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
     if (request.message === "chunk") {
       // Split the user prompt
-      const modelId = getModelId(request.task);
+      const modelId = getModelId(request.taskOption);
       const userPromptChunks = chunkText(request.userPrompt, getCharacterLimit(modelId, request.task));
       sendResponse(userPromptChunks);
     } else if (request.message === "generate") {
       // Generate content
-      const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
-      const modelId = getModelId(request.task);
+      const { apiKey, noTextPrompt, textPrompt } = await chrome.storage.local.get({
+        apiKey: "",
+        noTextPrompt: "",
+        textPrompt: ""
+      });
+
+      const modelId = getModelId(request.taskOption);
       const userPrompt = request.userPrompt;
-      const systemPrompt = getSystemPrompt(request.task, request.languageCode, userPrompt.length);
+
+      const systemPrompt = getSystemPrompt(
+        request.task,
+        request.taskOption,
+        request.languageCode,
+        userPrompt.length,
+        noTextPrompt,
+        textPrompt
+      );
+
       let contents = [];
 
-      if (request.task === "summarize_image") {
+      if (request.taskOption === "image") {
         const [mediaInfo, mediaData] = userPrompt.split(',');
         const mediaType = mediaInfo.split(':')[1].split(';')[0];
 

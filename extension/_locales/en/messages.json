@@ -26,6 +26,15 @@
     "popup_translating": {
         "message": "Translating"
     },
+    "popup_translating_captions": {
+        "message": "Translating the captions"
+    },
+    "popup_translating_image": {
+        "message": "Translating the image"
+    },
+    "popup_processing": {
+        "message": "Processing"
+    },
     "popup_prompt_blocked": {
         "message": "The prompt was blocked."
     },
@@ -50,8 +59,35 @@
     "options_apikey_hint": {
         "message": "You can obtain a Gemini API Key at the following page."
     },
-    "options_choose_language": {
+    "options_language": {
         "message": "Summarize in / Translate to"
+    },
+    "options_language_notes": {
+        "message": "The language setting is disregarded in custom actions."
+    },
+    "options_no_text_action": {
+        "message": "When no text is selected, do the following action"
+    },
+    "options_no_text_summarize": {
+        "message": "Summarize (default)"
+    },
+    "options_no_text_translate": {
+        "message": "Translate"
+    },
+    "options_no_text_custom": {
+        "message": "Custom action"
+    },
+    "options_text_action": {
+        "message": "When text is selected, do the following action"
+    },
+    "options_text_summarize": {
+        "message": "Summarize"
+    },
+    "options_text_translate": {
+        "message": "Translate (default)"
+    },
+    "options_text_custom": {
+        "message": "Custom action"
     },
     "options_button_save": {
         "message": "Save options"
