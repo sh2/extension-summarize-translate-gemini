@@ -26,7 +26,8 @@ const getSystemPrompt = async (task, taskOption, languageCode, userPromptLength)
 
   if (task === "summarize") {
     if (taskOption === "image") {
-      systemPrompt = `Summarize the image as Markdown numbered list in ${languageNames[languageCode]}.\n` +
+      systemPrompt = `Summarize the image as Markdown numbered list ` +
+        `in ${languageNames[languageCode]} and reply only with the list.\n` +
         "Format:\n1. First point.\n2. Second point.\n3. Third point.";
     } else {
       systemPrompt = `Summarize the entire text as up to ${numItems}-item Markdown numbered list ` +
