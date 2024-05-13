@@ -50,6 +50,12 @@
     "results_title": {
         "message": "結果 - Geminiによる要約と翻訳"
     },
+    "results_button_copy": {
+        "message": "コピーする"
+    },
+    "results_copied": {
+        "message": "コピーしました。"
+    },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
     },

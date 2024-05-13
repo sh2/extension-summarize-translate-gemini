@@ -1,3 +1,13 @@
+const copyContent = async () => {
+    const content = document.getElementById("content").textContent;
+    const status = document.getElementById("status");
+
+    // Copy the content to the clipboard
+    await navigator.clipboard.writeText(content);
+    status.textContent = chrome.i18n.getMessage("results_copied");
+    setTimeout(() => status.textContent = "", 1000);
+};
+
 const initialize = async () => {
     // Disable links when converting from Markdown to HTML
     marked.use({ renderer: { link: (_href, _title, text) => text } });
@@ -19,3 +29,4 @@ const initialize = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", initialize);
+document.getElementById("copy").addEventListener("click", copyContent);
