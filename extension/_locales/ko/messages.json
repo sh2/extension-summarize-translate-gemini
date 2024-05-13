@@ -18,7 +18,7 @@
         "message": "요약 중"
     },
     "popup_summarizing_captions": {
-        "message": "자막 요약 중"
+        "message": "캡션 요약 중"
     },
     "popup_summarizing_image": {
         "message": "이미지 요약 중"
@@ -27,7 +27,7 @@
         "message": "번역 중"
     },
     "popup_translating_captions": {
-        "message": "자막 번역 중"
+        "message": "캡션 번역 중"
     },
     "popup_translating_image": {
         "message": "이미지 번역 중"
@@ -50,6 +50,12 @@
     "results_title": {
         "message": "결과 - Gemini를 사용하여 요약 및 번역"
     },
+    "results_button_copy": {
+        "message": "복사"
+    },
+    "results_copied": {
+        "message": "복사되었습니다."
+    },
     "options_title": {
         "message": "옵션 - Gemini를 사용하여 요약 및 번역"
     },
@@ -69,7 +75,7 @@
         "message": "텍스트가 선택되지 않은 경우 다음 작업 수행"
     },
     "options_no_text_summarize": {
-        "message": "요약(기본값)"
+        "message": "요약 (기본값)"
     },
     "options_no_text_translate": {
         "message": "번역"
@@ -84,7 +90,7 @@
         "message": "요약"
     },
     "options_text_translate": {
-        "message": "번역(기본값)"
+        "message": "번역 (기본값)"
     },
     "options_text_custom": {
         "message": "사용자 지정 작업"

@@ -24,7 +24,7 @@
         "message": "Bild wird zusammengefasst"
     },
     "popup_translating": {
-        "message": "Übersetzung läuft"
+        "message": "Wird übersetzt"
     },
     "popup_translating_captions": {
         "message": "Untertitel werden übersetzt"
@@ -33,7 +33,7 @@
         "message": "Bild wird übersetzt"
     },
     "popup_processing": {
-        "message": "Verarbeitung"
+        "message": "Wird verarbeitet"
     },
     "popup_prompt_blocked": {
         "message": "Die Eingabeaufforderung wurde blockiert."
@@ -49,6 +49,12 @@
     },
     "results_title": {
         "message": "Ergebnisse - Zusammenfassen und Übersetzen mit Gemini"
+    },
+    "results_button_copy": {
+        "message": "Kopieren"
+    },
+    "results_copied": {
+        "message": "Kopiert."
     },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"

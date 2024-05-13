@@ -42,13 +42,19 @@
         "message": "La respuesta fue bloqueada."
     },
     "popup_unexpected_response": {
-        "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
+        "message": "Ocurrió un error desconocido. Por favor revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
         "message": "Esta página no se puede resumir ni traducir."
     },
     "results_title": {
         "message": "Resultados - Resumir y traducir con Gemini"
+    },
+    "results_button_copy": {
+        "message": "Copiar"
+    },
+    "results_copied": {
+        "message": "Copiado."
     },
     "options_title": {
         "message": "Opciones - Resumir y traducir con Gemini"

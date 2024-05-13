@@ -50,6 +50,12 @@
     "results_title": {
         "message": "Résultats - Résumer et traduire avec Gemini"
     },
+    "results_button_copy": {
+        "message": "Copier"
+    },
+    "results_copied": {
+        "message": "Copié."
+    },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"
     },
@@ -66,7 +72,7 @@
         "message": "Le paramètre de langue est ignoré dans les actions personnalisées."
     },
     "options_no_text_action": {
-        "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
+        "message": "Lorsqu'aucun texte n'est sélectionné, effectuez l'action suivante"
     },
     "options_no_text_summarize": {
         "message": "Résumer (par défaut)"
@@ -78,7 +84,7 @@
         "message": "Action personnalisée"
     },
     "options_text_action": {
-        "message": "Lorsque du texte est sélectionné, effectuer l'action suivante"
+        "message": "Lorsque du texte est sélectionné, effectuez l'action suivante"
     },
     "options_text_summarize": {
         "message": "Résumer"

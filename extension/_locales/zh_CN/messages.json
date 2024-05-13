@@ -50,6 +50,12 @@
     "results_title": {
         "message": "结果 - 使用 Gemini 总结和翻译"
     },
+    "results_button_copy": {
+        "message": "复制"
+    },
+    "results_copied": {
+        "message": "已复制。"
+    },
     "options_title": {
         "message": "选项 - 使用 Gemini 总结和翻译"
     },
@@ -63,7 +69,7 @@
         "message": "总结/翻译为"
     },
     "options_language_notes": {
-        "message": "在自定义操作中忽略语言设置。"
+        "message": "在自定义操作中会忽略语言设置。"
     },
     "options_no_text_action": {
         "message": "未选择文本时，执行以下操作"

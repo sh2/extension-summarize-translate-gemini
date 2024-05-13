@@ -50,6 +50,12 @@
     "results_title": {
         "message": "Результаты - Обобщение и перевод с помощью Gemini"
     },
+    "results_button_copy": {
+        "message": "Копировать"
+    },
+    "results_copied": {
+        "message": "Скопировано."
+    },
     "options_title": {
         "message": "Настройки - Обобщение и перевод с помощью Gemini"
     },
@@ -60,7 +66,7 @@
         "message": "Вы можете получить API-ключ Gemini на следующей странице."
     },
     "options_language": {
-        "message": "Обобщать на / Переводить на"
+        "message": "Обобщить на / Перевести на"
     },
     "options_language_notes": {
         "message": "Настройка языка игнорируется в пользовательских действиях."

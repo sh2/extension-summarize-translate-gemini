@@ -50,6 +50,12 @@
     "results_title": {
         "message": "Resultados - Resumir e Traduzir com Gemini"
     },
+    "results_button_copy": {
+        "message": "Copiar"
+    },
+    "results_copied": {
+        "message": "Copiado."
+    },
     "options_title": {
         "message": "Opções - Resumir e Traduzir com Gemini"
     },

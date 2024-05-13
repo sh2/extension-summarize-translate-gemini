@@ -33,7 +33,7 @@
         "message": "Traducendo l'immagine"
     },
     "popup_processing": {
-        "message": "Elaborazione"
+        "message": "Elaborando"
     },
     "popup_prompt_blocked": {
         "message": "Il prompt è stato bloccato."
@@ -50,14 +50,20 @@
     "results_title": {
         "message": "Risultati - Riassumi e traduci con Gemini"
     },
+    "results_button_copy": {
+        "message": "Copia"
+    },
+    "results_copied": {
+        "message": "Copiato."
+    },
     "options_title": {
         "message": "Opzioni - Riassumi e traduci con Gemini"
     },
     "options_apikey": {
-        "message": "Chiave API Gemini"
+        "message": "Chiave API di Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puoi ottenere una chiave API Gemini alla seguente pagina."
+        "message": "Puoi ottenere una chiave API di Gemini alla seguente pagina."
     },
     "options_language": {
         "message": "Riassumi in / Traduci in"
