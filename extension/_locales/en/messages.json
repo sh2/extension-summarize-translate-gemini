@@ -65,6 +65,9 @@
     "options_apikey_hint": {
         "message": "You can obtain a Gemini API Key at the following page."
     },
+    "options_model": {
+        "message": "Language Model"
+    },
     "options_language": {
         "message": "Summarize in / Translate to"
     },

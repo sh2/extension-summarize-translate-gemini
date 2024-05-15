@@ -1,6 +1,7 @@
 const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
     apiKey: "",
+    languageModel: "1.0-pro",
     languageCode: "en",
     noTextAction: "summarize",
     noTextCustomPrompt: "",
@@ -9,6 +10,7 @@ const restoreOptions = async () => {
   });
 
   document.getElementById("apiKey").value = options.apiKey;
+  document.getElementById("languageModel").value = options.languageModel;
   document.getElementById("languageCode").value = options.languageCode;
   document.querySelector(`input[name="noTextAction"][value="${options.noTextAction}"]`).checked = true;
   document.getElementById("noTextCustomPrompt").value = options.noTextCustomPrompt;
@@ -19,6 +21,7 @@ const restoreOptions = async () => {
 const saveOptions = async () => {
   const options = {
     apiKey: document.getElementById("apiKey").value,
+    languageModel: document.getElementById("languageModel").value,
     languageCode: document.getElementById("languageCode").value,
     noTextAction: document.querySelector('input[name="noTextAction"]:checked').value,
     noTextCustomPrompt: document.getElementById("noTextCustomPrompt").value,

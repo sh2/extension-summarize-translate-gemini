@@ -1,5 +1,7 @@
-const getModelId = (taskOption) => {
-  if (taskOption === "image") {
+const getModelId = (languageModel, taskOption) => {
+  if (languageModel === "1.5-flash") {
+    return "gemini-1.5-flash-latest";
+  } else if (taskOption === "image") {
     return "gemini-pro-vision";
   } else {
     return "gemini-1.0-pro";
@@ -61,6 +63,12 @@ const getCharacterLimit = (modelId, task) => {
   // noTextCustom: The same as Summarize
   // textCustom: The same as Summarize
   const characterLimits = {
+    "gemini-1.5-flash-latest": {
+      summarize: 786432,
+      translate: 8192,
+      noTextCustom: 786432,
+      textCustom: 786432
+    },
     "gemini-1.0-pro": {
       summarize: 25600,
       translate: 2048,
@@ -115,13 +123,13 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
     if (request.message === "chunk") {
       // Split the user prompt
-      const modelId = getModelId(request.taskOption);
+      const modelId = getModelId(request.languageModel, request.taskOption);
       const userPromptChunks = chunkText(request.userPrompt, getCharacterLimit(modelId, request.task));
       sendResponse(userPromptChunks);
     } else if (request.message === "generate") {
       // Generate content
       const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
-      const modelId = getModelId(request.taskOption);
+      const modelId = getModelId(request.languageModel, request.taskOption);
       const userPrompt = request.userPrompt;
 
       const systemPrompt = await getSystemPrompt(
@@ -156,7 +164,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       }
 
       try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${modelId}:generateContent`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

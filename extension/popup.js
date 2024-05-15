@@ -125,6 +125,7 @@ const main = async () => {
   await chrome.storage.session.set({ contentIndex: contentIndex });
 
   try {
+    const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
     let userPrompt = "";
     let userPromptChunks = [];
@@ -134,6 +135,7 @@ const main = async () => {
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = true;
+    document.getElementById("languageModel").disabled = true;
     document.getElementById("languageCode").disabled = true;
     document.getElementById("results").disabled = true;
 
@@ -192,7 +194,7 @@ const main = async () => {
     }
     else {
       userPromptChunks = await chrome.runtime.sendMessage({
-        message: "chunk", task: task, taskOption: taskOption, userPrompt: userPrompt
+        message: "chunk", task: task, taskOption: taskOption, userPrompt: userPrompt, languageModel: languageModel
       });
 
       console.log(userPromptChunks);
@@ -205,6 +207,7 @@ const main = async () => {
         task: task,
         taskOption: taskOption,
         userPrompt: userPromptChunk,
+        languageModel: languageModel,
         languageCode: languageCode
       });
 
@@ -251,6 +254,7 @@ const main = async () => {
 
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = false;
+    document.getElementById("languageModel").disabled = false;
     document.getElementById("languageCode").disabled = false;
     document.getElementById("results").disabled = false;
 
@@ -274,7 +278,8 @@ const initialize = async () => {
   });
 
   // Restore the language code from the local storage
-  const { languageCode } = await chrome.storage.local.get({ languageCode: "en" });
+  const { languageModel, languageCode } = await chrome.storage.local.get({ languageModel: "1.0-pro", languageCode: "en" });
+  document.getElementById("languageModel").value = languageModel;
   document.getElementById("languageCode").value = languageCode;
 
   main();

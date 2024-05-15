@@ -65,6 +65,9 @@
     "options_apikey_hint": {
         "message": "Gemini APIキーは、以下のページから取得できます。"
     },
+    "options_model": {
+        "message": "言語モデル"
+    },
     "options_language": {
         "message": "以下の言語で要約/翻訳する"
     },
