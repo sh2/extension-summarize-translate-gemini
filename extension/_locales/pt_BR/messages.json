@@ -65,6 +65,9 @@
     "options_apikey_hint": {
         "message": "Você pode obter uma Chave de API do Gemini na seguinte página."
     },
+    "options_model": {
+        "message": "Modelo de Linguagem"
+    },
     "options_language": {
         "message": "Resumir em / Traduzir para"
     },

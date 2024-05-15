@@ -65,6 +65,9 @@
     "options_apikey_hint": {
         "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
+    "options_model": {
+        "message": "Modèle de langue"
+    },
     "options_language": {
         "message": "Résumer en / Traduire vers"
     },
@@ -72,7 +75,7 @@
         "message": "Le paramètre de langue est ignoré dans les actions personnalisées."
     },
     "options_no_text_action": {
-        "message": "Lorsqu'aucun texte n'est sélectionné, effectuez l'action suivante"
+        "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
     },
     "options_no_text_summarize": {
         "message": "Résumer (par défaut)"
@@ -84,7 +87,7 @@
         "message": "Action personnalisée"
     },
     "options_text_action": {
-        "message": "Lorsque du texte est sélectionné, effectuez l'action suivante"
+        "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
     },
     "options_text_summarize": {
         "message": "Résumer"

@@ -65,11 +65,14 @@
     "options_apikey_hint": {
         "message": "您可以在以下页面获取 Gemini API 密钥。"
     },
+    "options_model": {
+        "message": "语言模型"
+    },
     "options_language": {
         "message": "总结/翻译为"
     },
     "options_language_notes": {
-        "message": "在自定义操作中会忽略语言设置。"
+        "message": "在自定义操作中，语言设置将被忽略。"
     },
     "options_no_text_action": {
         "message": "未选择文本时，执行以下操作"

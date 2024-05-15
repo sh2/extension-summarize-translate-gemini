@@ -3,7 +3,7 @@
         "message": "Обобщение и перевод с помощью Gemini"
     },
     "extension_description": {
-        "message": "Обобщение и перевод веб-страниц. Использует Gemini в качестве бэкенда."
+        "message": "Обобщайте и переводите веб-страницы. Использует Gemini в качестве бэкенда."
     },
     "popup_button_run": {
         "message": "Запустить снова"
@@ -18,7 +18,7 @@
         "message": "Обобщение"
     },
     "popup_summarizing_captions": {
-        "message": "Обобщение подписей"
+        "message": "Обобщение субтитров"
     },
     "popup_summarizing_image": {
         "message": "Обобщение изображения"
@@ -27,7 +27,7 @@
         "message": "Перевод"
     },
     "popup_translating_captions": {
-        "message": "Перевод подписей"
+        "message": "Перевод субтитров"
     },
     "popup_translating_image": {
         "message": "Перевод изображения"
@@ -60,10 +60,13 @@
         "message": "Настройки - Обобщение и перевод с помощью Gemini"
     },
     "options_apikey": {
-        "message": "API-ключ Gemini"
+        "message": "Ключ API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Вы можете получить API-ключ Gemini на следующей странице."
+        "message": "Вы можете получить ключ API Gemini на следующей странице."
+    },
+    "options_model": {
+        "message": "Языковая модель"
     },
     "options_language": {
         "message": "Обобщить на / Перевести на"
@@ -72,7 +75,7 @@
         "message": "Настройка языка игнорируется в пользовательских действиях."
     },
     "options_no_text_action": {
-        "message": "Когда текст не выделен, выполнить следующее действие"
+        "message": "Когда текст не выбран, выполнить следующее действие"
     },
     "options_no_text_summarize": {
         "message": "Обобщить (по умолчанию)"
@@ -84,7 +87,7 @@
         "message": "Пользовательское действие"
     },
     "options_text_action": {
-        "message": "Когда текст выделен, выполнить следующее действие"
+        "message": "Когда текст выбран, выполнить следующее действие"
     },
     "options_text_summarize": {
         "message": "Обобщить"

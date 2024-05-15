@@ -36,10 +36,10 @@
         "message": "處理中"
     },
     "popup_prompt_blocked": {
-        "message": "提示被阻擋。"
+        "message": "提示已被阻止。"
     },
     "popup_response_blocked": {
-        "message": "回應被阻擋。"
+        "message": "回應已被阻止。"
     },
     "popup_unexpected_response": {
         "message": "發生未知錯誤。請檢查控制台日誌。"
@@ -65,14 +65,17 @@
     "options_apikey_hint": {
         "message": "您可以在以下頁面獲取 Gemini API 金鑰。"
     },
+    "options_model": {
+        "message": "語言模型"
+    },
     "options_language": {
         "message": "總結/翻譯為"
     },
     "options_language_notes": {
-        "message": "在自訂動作中會忽略語言設定。"
+        "message": "在自訂操作中會忽略語言設定。"
     },
     "options_no_text_action": {
-        "message": "未選取文字時，執行以下動作"
+        "message": "未選取文字時，執行以下操作"
     },
     "options_no_text_summarize": {
         "message": "總結（預設）"
@@ -81,10 +84,10 @@
         "message": "翻譯"
     },
     "options_no_text_custom": {
-        "message": "自訂動作"
+        "message": "自訂操作"
     },
     "options_text_action": {
-        "message": "選取文字時，執行以下動作"
+        "message": "選取文字時，執行以下操作"
     },
     "options_text_summarize": {
         "message": "總結"
@@ -93,7 +96,7 @@
         "message": "翻譯（預設）"
     },
     "options_text_custom": {
-        "message": "自訂動作"
+        "message": "自訂操作"
     },
     "options_button_save": {
         "message": "儲存選項"

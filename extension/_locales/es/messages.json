@@ -42,7 +42,7 @@
         "message": "La respuesta fue bloqueada."
     },
     "popup_unexpected_response": {
-        "message": "Ocurrió un error desconocido. Por favor revise el registro de la consola."
+        "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
         "message": "Esta página no se puede resumir ni traducir."
@@ -64,6 +64,9 @@
     },
     "options_apikey_hint": {
         "message": "Puede obtener una clave API de Gemini en la siguiente página."
+    },
+    "options_model": {
+        "message": "Modelo de lenguaje"
     },
     "options_language": {
         "message": "Resumir en / Traducir a"
