@@ -13,7 +13,10 @@ The following are instructions for manual installation, for development purposes
 4. Open 'Options' page and register the Gemini API Key, then select the language.
 
 You can obtain a Gemini API Key from [Google AI for Developers](https://ai.google.dev/).
-This extension currently uses Gemini 1.0 Pro and Gemini Pro Vision.
+This extension currently uses following models:
+
+- Gemini 1.5 Flash (Preview) for Text and Images
+- Gemini 1.0 Pro for Text and Gemini Pro Vision for Images
 
 ## Usage
 
