@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 總結和翻譯"
+        "message": "使用 Gemini 摘要和翻譯"
     },
     "extension_description": {
-        "message": "總結和翻譯網頁。使用 Gemini 作為後端。"
+        "message": "摘要和翻譯網頁。使用 Gemini 作為後端。"
     },
     "popup_button_run": {
         "message": "再次執行"
@@ -15,13 +15,13 @@
         "message": "開啟選項頁面"
     },
     "popup_summarizing": {
-        "message": "正在總結"
+        "message": "正在摘要"
     },
     "popup_summarizing_captions": {
-        "message": "正在總結字幕"
+        "message": "正在摘要字幕"
     },
     "popup_summarizing_image": {
-        "message": "正在總結圖片"
+        "message": "正在摘要圖片"
     },
     "popup_translating": {
         "message": "正在翻譯"
@@ -36,19 +36,19 @@
         "message": "處理中"
     },
     "popup_prompt_blocked": {
-        "message": "提示已被阻止。"
+        "message": "提示被封鎖。"
     },
     "popup_response_blocked": {
-        "message": "回應已被阻止。"
+        "message": "回應被封鎖。"
     },
     "popup_unexpected_response": {
-        "message": "發生未知錯誤。請檢查控制台日誌。"
+        "message": "發生未知錯誤。請檢查主控台日誌。"
     },
     "popup_miscellaneous_error": {
-        "message": "無法總結或翻譯此頁面。"
+        "message": "無法摘要或翻譯此頁面。"
     },
     "results_title": {
-        "message": "結果 - 使用 Gemini 總結和翻譯"
+        "message": "結果 - 使用 Gemini 摘要和翻譯"
     },
     "results_button_copy": {
         "message": "複製"
@@ -57,46 +57,46 @@
         "message": "已複製。"
     },
     "options_title": {
-        "message": "選項 - 使用 Gemini 總結和翻譯"
+        "message": "選項 - 使用 Gemini 摘要和翻譯"
     },
     "options_apikey": {
         "message": "Gemini API 金鑰"
     },
     "options_apikey_hint": {
-        "message": "您可以在以下頁面獲取 Gemini API 金鑰。"
+        "message": "您可以在以下頁面取得 Gemini API 金鑰。"
     },
     "options_model": {
         "message": "語言模型"
     },
     "options_language": {
-        "message": "總結/翻譯為"
+        "message": "摘要語言 / 翻譯語言"
     },
     "options_language_notes": {
-        "message": "在自訂操作中會忽略語言設定。"
+        "message": "自訂動作會忽略語言設定。"
     },
     "options_no_text_action": {
-        "message": "未選取文字時，執行以下操作"
+        "message": "當未選取文字時，執行以下動作"
     },
     "options_no_text_summarize": {
-        "message": "總結（預設）"
+        "message": "摘要（預設）"
     },
     "options_no_text_translate": {
         "message": "翻譯"
     },
     "options_no_text_custom": {
-        "message": "自訂操作"
+        "message": "自訂動作"
     },
     "options_text_action": {
-        "message": "選取文字時，執行以下操作"
+        "message": "當選取文字時，執行以下動作"
     },
     "options_text_summarize": {
-        "message": "總結"
+        "message": "摘要"
     },
     "options_text_translate": {
         "message": "翻譯（預設）"
     },
     "options_text_custom": {
-        "message": "自訂操作"
+        "message": "自訂動作"
     },
     "options_button_save": {
         "message": "儲存選項"

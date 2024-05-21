@@ -18,7 +18,7 @@
         "message": "요약 중"
     },
     "popup_summarizing_captions": {
-        "message": "캡션 요약 중"
+        "message": "자막 요약 중"
     },
     "popup_summarizing_image": {
         "message": "이미지 요약 중"
@@ -27,7 +27,7 @@
         "message": "번역 중"
     },
     "popup_translating_captions": {
-        "message": "캡션 번역 중"
+        "message": "자막 번역 중"
     },
     "popup_translating_image": {
         "message": "이미지 번역 중"
@@ -42,7 +42,7 @@
         "message": "응답이 차단되었습니다."
     },
     "popup_unexpected_response": {
-        "message": "알 수 없는 오류가 발생했습니다. 콘솔 로그를 확인하세요."
+        "message": "알 수 없는 오류가 발생했습니다. 콘솔 로그를 확인하십시오."
     },
     "popup_miscellaneous_error": {
         "message": "이 페이지는 요약하거나 번역할 수 없습니다."
@@ -75,10 +75,10 @@
         "message": "사용자 지정 작업에서는 언어 설정이 무시됩니다."
     },
     "options_no_text_action": {
-        "message": "텍스트가 선택되지 않은 경우 다음 작업 수행"
+        "message": "텍스트가 선택되지 않은 경우 다음 작업을 수행합니다."
     },
     "options_no_text_summarize": {
-        "message": "요약(기본값)"
+        "message": "요약 (기본값)"
     },
     "options_no_text_translate": {
         "message": "번역"
@@ -87,13 +87,13 @@
         "message": "사용자 지정 작업"
     },
     "options_text_action": {
-        "message": "텍스트가 선택된 경우 다음 작업 수행"
+        "message": "텍스트가 선택된 경우 다음 작업을 수행합니다."
     },
     "options_text_summarize": {
         "message": "요약"
     },
     "options_text_translate": {
-        "message": "번역(기본값)"
+        "message": "번역 (기본값)"
     },
     "options_text_custom": {
         "message": "사용자 지정 작업"

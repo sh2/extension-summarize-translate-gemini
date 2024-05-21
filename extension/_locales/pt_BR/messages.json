@@ -3,13 +3,13 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resuma e traduza páginas da web. Usa Gemini como backend."
+        "message": "Resuma e traduza páginas da web. Utiliza Gemini como backend."
     },
     "popup_button_run": {
         "message": "Executar novamente"
     },
     "popup_button_results": {
-        "message": "Abrir resultados em uma nova aba"
+        "message": "Abrir resultados em uma nova guia"
     },
     "popup_button_options": {
         "message": "Abrir página de opções"
@@ -42,7 +42,7 @@
         "message": "A resposta foi bloqueada."
     },
     "popup_unexpected_response": {
-        "message": "Ocorreu um erro desconhecido. Por favor, verifique o log do console."
+        "message": "Ocorreu um erro desconhecido. Verifique o log do console."
     },
     "popup_miscellaneous_error": {
         "message": "Esta página não pode ser resumida ou traduzida."
@@ -60,10 +60,10 @@
         "message": "Opções - Resumir e Traduzir com Gemini"
     },
     "options_apikey": {
-        "message": "Chave de API do Gemini"
+        "message": "Chave da API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Você pode obter uma Chave de API do Gemini na seguinte página."
+        "message": "Você pode obter uma chave da API Gemini na seguinte página."
     },
     "options_model": {
         "message": "Modelo de Linguagem"
@@ -72,10 +72,10 @@
         "message": "Resumir em / Traduzir para"
     },
     "options_language_notes": {
-        "message": "A configuração de idioma é desconsiderada em ações personalizadas."
+        "message": "A configuração de idioma é ignorada em ações personalizadas."
     },
     "options_no_text_action": {
-        "message": "Quando nenhum texto for selecionado, faça a seguinte ação"
+        "message": "Quando nenhum texto é selecionado, execute a seguinte ação"
     },
     "options_no_text_summarize": {
         "message": "Resumir (padrão)"
@@ -87,7 +87,7 @@
         "message": "Ação personalizada"
     },
     "options_text_action": {
-        "message": "Quando o texto for selecionado, faça a seguinte ação"
+        "message": "Quando o texto é selecionado, execute a seguinte ação"
     },
     "options_text_summarize": {
         "message": "Resumir"

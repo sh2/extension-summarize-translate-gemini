@@ -1,12 +1,12 @@
 {
     "extension_name": {
-        "message": "Resumir y traducir con Gemini"
+        "message": "Resumir y Traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resuma y traduzca páginas web. Utiliza Gemini como backend."
+        "message": "Resumir y traducir páginas web. Utiliza Gemini como backend."
     },
     "popup_button_run": {
-        "message": "Ejecutar de nuevo"
+        "message": "Ejecutarlo de nuevo"
     },
     "popup_button_results": {
         "message": "Abrir resultados en una nueva pestaña"
@@ -36,19 +36,19 @@
         "message": "Procesando"
     },
     "popup_prompt_blocked": {
-        "message": "El prompt fue bloqueado."
+        "message": "La solicitud fue bloqueada."
     },
     "popup_response_blocked": {
         "message": "La respuesta fue bloqueada."
     },
     "popup_unexpected_response": {
-        "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
+        "message": "Se produjo un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
-        "message": "Esta página no se puede resumir ni traducir."
+        "message": "Esta página no se puede resumir o traducir."
     },
     "results_title": {
-        "message": "Resultados - Resumir y traducir con Gemini"
+        "message": "Resultados - Resumir y Traducir con Gemini"
     },
     "results_button_copy": {
         "message": "Copiar"
@@ -57,13 +57,13 @@
         "message": "Copiado."
     },
     "options_title": {
-        "message": "Opciones - Resumir y traducir con Gemini"
+        "message": "Opciones - Resumir y Traducir con Gemini"
     },
     "options_apikey": {
-        "message": "Clave API de Gemini"
+        "message": "Clave de API de Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puede obtener una clave API de Gemini en la siguiente página."
+        "message": "Puede obtener una clave de API de Gemini en la siguiente página."
     },
     "options_model": {
         "message": "Modelo de lenguaje"
@@ -72,10 +72,10 @@
         "message": "Resumir en / Traducir a"
     },
     "options_language_notes": {
-        "message": "La configuración de idioma se ignora en acciones personalizadas."
+        "message": "La configuración del idioma se ignora en las acciones personalizadas."
     },
     "options_no_text_action": {
-        "message": "Cuando no se selecciona texto, realizar la siguiente acción"
+        "message": "Cuando no se selecciona ningún texto, realice la siguiente acción"
     },
     "options_no_text_summarize": {
         "message": "Resumir (predeterminado)"
@@ -87,7 +87,7 @@
         "message": "Acción personalizada"
     },
     "options_text_action": {
-        "message": "Cuando se selecciona texto, realizar la siguiente acción"
+        "message": "Cuando se selecciona texto, realice la siguiente acción"
     },
     "options_text_summarize": {
         "message": "Resumir"

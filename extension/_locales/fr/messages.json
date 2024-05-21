@@ -3,37 +3,37 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résumez et traduisez des pages web. Utilise Gemini comme backend."
+        "message": "Résumer et traduire des pages Web. Utilise Gemini comme backend."
     },
     "popup_button_run": {
-        "message": "Exécuter à nouveau"
+        "message": "Relancer"
     },
     "popup_button_results": {
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
-        "message": "Ouvrir la page d'options"
+        "message": "Ouvrir la page des options"
     },
     "popup_summarizing": {
-        "message": "Résumé en cours"
+        "message": "Résumer"
     },
     "popup_summarizing_captions": {
-        "message": "Résumé des sous-titres en cours"
+        "message": "Résumer les légendes"
     },
     "popup_summarizing_image": {
-        "message": "Résumé de l'image en cours"
+        "message": "Résumer l'image"
     },
     "popup_translating": {
-        "message": "Traduction en cours"
+        "message": "Traduire"
     },
     "popup_translating_captions": {
-        "message": "Traduction des sous-titres en cours"
+        "message": "Traduire les légendes"
     },
     "popup_translating_image": {
-        "message": "Traduction de l'image en cours"
+        "message": "Traduire l'image"
     },
     "popup_processing": {
-        "message": "Traitement en cours"
+        "message": "Traitement"
     },
     "popup_prompt_blocked": {
         "message": "L'invite a été bloquée."
@@ -42,7 +42,7 @@
         "message": "La réponse a été bloquée."
     },
     "popup_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
+        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
     },
     "popup_miscellaneous_error": {
         "message": "Cette page ne peut pas être résumée ou traduite."
@@ -63,10 +63,10 @@
         "message": "Clé API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
+        "message": "Vous pouvez obtenir une clé API Gemini à la page suivante."
     },
     "options_model": {
-        "message": "Modèle de langue"
+        "message": "Modèle de langage"
     },
     "options_language": {
         "message": "Résumer en / Traduire vers"
@@ -75,7 +75,7 @@
         "message": "Le paramètre de langue est ignoré dans les actions personnalisées."
     },
     "options_no_text_action": {
-        "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
+        "message": "Lorsque aucun texte n'est sélectionné, effectuer l'action suivante"
     },
     "options_no_text_summarize": {
         "message": "Résumer (par défaut)"
@@ -87,7 +87,7 @@
         "message": "Action personnalisée"
     },
     "options_text_action": {
-        "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
+        "message": "Lorsque du texte est sélectionné, effectuer l'action suivante"
     },
     "options_text_summarize": {
         "message": "Résumer"

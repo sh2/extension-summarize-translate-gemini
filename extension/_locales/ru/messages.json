@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "Обобщение и перевод с помощью Gemini"
+        "message": "Резюме и перевод с помощью Gemini"
     },
     "extension_description": {
-        "message": "Обобщайте и переводите веб-страницы. Использует Gemini в качестве бэкенда."
+        "message": "Резюмируйте и переводите веб-страницы. Использует Gemini в качестве бэкэнда."
     },
     "popup_button_run": {
         "message": "Запустить снова"
@@ -15,13 +15,13 @@
         "message": "Открыть страницу настроек"
     },
     "popup_summarizing": {
-        "message": "Обобщение"
+        "message": "Резюмирование"
     },
     "popup_summarizing_captions": {
-        "message": "Обобщение субтитров"
+        "message": "Резюмирование субтитров"
     },
     "popup_summarizing_image": {
-        "message": "Обобщение изображения"
+        "message": "Резюмирование изображения"
     },
     "popup_translating": {
         "message": "Перевод"
@@ -42,13 +42,13 @@
         "message": "Ответ был заблокирован."
     },
     "popup_unexpected_response": {
-        "message": "Произошла неизвестная ошибка. Пожалуйста, проверьте журнал консоли."
+        "message": "Произошла неизвестная ошибка. Проверьте журнал консоли."
     },
     "popup_miscellaneous_error": {
-        "message": "Эта страница не может быть обобщена или переведена."
+        "message": "Эта страница не может быть резюмирована или переведена."
     },
     "results_title": {
-        "message": "Результаты - Обобщение и перевод с помощью Gemini"
+        "message": "Результаты - Резюме и перевод с помощью Gemini"
     },
     "results_button_copy": {
         "message": "Копировать"
@@ -57,7 +57,7 @@
         "message": "Скопировано."
     },
     "options_title": {
-        "message": "Настройки - Обобщение и перевод с помощью Gemini"
+        "message": "Настройки - Резюме и перевод с помощью Gemini"
     },
     "options_apikey": {
         "message": "Ключ API Gemini"
@@ -69,16 +69,16 @@
         "message": "Языковая модель"
     },
     "options_language": {
-        "message": "Обобщить на / Перевести на"
+        "message": "Резюмировать на / Перевести на"
     },
     "options_language_notes": {
         "message": "Настройка языка игнорируется в пользовательских действиях."
     },
     "options_no_text_action": {
-        "message": "Когда текст не выбран, выполнить следующее действие"
+        "message": "Когда текст не выбран, выполните следующее действие"
     },
     "options_no_text_summarize": {
-        "message": "Обобщить (по умолчанию)"
+        "message": "Резюмировать (по умолчанию)"
     },
     "options_no_text_translate": {
         "message": "Перевести"
@@ -87,10 +87,10 @@
         "message": "Пользовательское действие"
     },
     "options_text_action": {
-        "message": "Когда текст выбран, выполнить следующее действие"
+        "message": "Когда текст выбран, выполните следующее действие"
     },
     "options_text_summarize": {
-        "message": "Обобщить"
+        "message": "Резюмировать"
     },
     "options_text_translate": {
         "message": "Перевести (по умолчанию)"

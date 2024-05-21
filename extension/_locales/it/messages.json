@@ -15,25 +15,25 @@
         "message": "Apri la pagina delle opzioni"
     },
     "popup_summarizing": {
-        "message": "Riassumendo"
+        "message": "Riassunto in corso"
     },
     "popup_summarizing_captions": {
-        "message": "Riassumendo i sottotitoli"
+        "message": "Riassunto delle didascalie"
     },
     "popup_summarizing_image": {
-        "message": "Riassumendo l'immagine"
+        "message": "Riassunto dell'immagine"
     },
     "popup_translating": {
-        "message": "Traducendo"
+        "message": "Traduzione in corso"
     },
     "popup_translating_captions": {
-        "message": "Traducendo i sottotitoli"
+        "message": "Traduzione delle didascalie"
     },
     "popup_translating_image": {
-        "message": "Traducendo l'immagine"
+        "message": "Traduzione dell'immagine"
     },
     "popup_processing": {
-        "message": "Elaborando"
+        "message": "Elaborazione"
     },
     "popup_prompt_blocked": {
         "message": "Il prompt è stato bloccato."
@@ -42,7 +42,7 @@
         "message": "La risposta è stata bloccata."
     },
     "popup_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Controlla il log della console."
+        "message": "Si è verificato un errore sconosciuto. Controllare il registro della console."
     },
     "popup_miscellaneous_error": {
         "message": "Questa pagina non può essere riassunta o tradotta."
@@ -60,13 +60,13 @@
         "message": "Opzioni - Riassumi e Traduci con Gemini"
     },
     "options_apikey": {
-        "message": "Chiave API di Gemini"
+        "message": "Chiave API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puoi ottenere una chiave API di Gemini alla seguente pagina."
+        "message": "È possibile ottenere una chiave API Gemini alla seguente pagina."
     },
     "options_model": {
-        "message": "Modello di Linguaggio"
+        "message": "Modello linguistico"
     },
     "options_language": {
         "message": "Riassumi in / Traduci in"
@@ -75,7 +75,7 @@
         "message": "L'impostazione della lingua viene ignorata nelle azioni personalizzate."
     },
     "options_no_text_action": {
-        "message": "Quando nessun testo è selezionato, esegui la seguente azione"
+        "message": "Quando non è selezionato alcun testo, esegui la seguente azione"
     },
     "options_no_text_summarize": {
         "message": "Riassumi (predefinito)"
@@ -87,7 +87,7 @@
         "message": "Azione personalizzata"
     },
     "options_text_action": {
-        "message": "Quando il testo è selezionato, esegui la seguente azione"
+        "message": "Quando è selezionato del testo, esegui la seguente azione"
     },
     "options_text_summarize": {
         "message": "Riassumi"
