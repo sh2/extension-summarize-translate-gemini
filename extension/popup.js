@@ -28,6 +28,7 @@ const getCaptions = async (videoUrl, languageCode) => {
     it: "it",
     pt_br: "pt-BR",
     ru: "ru",
+    vi: "vi",
     zh_cn: "zh-CN",
     zh_tw: "zh-TW",
     ja: "ja",

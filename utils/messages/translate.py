@@ -11,6 +11,7 @@ def main():
         "it": "Italian",
         "pt_BR": "Brazilian Portuguese",
         "ru": "Russian",
+        "vi": "Vietnamese",
         "zh_CN": "Simplified Chinese",
         "zh_TW": "Traditional Chinese",
         "ko": "Korean"

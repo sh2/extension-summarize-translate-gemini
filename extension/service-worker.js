@@ -17,6 +17,7 @@ const getSystemPrompt = async (task, taskOption, languageCode, userPromptLength)
     it: "Italian",
     pt_br: "Brazilian Portuguese",
     ru: "Russian",
+    vi: "Vietnamese",
     zh_cn: "Simplified Chinese",
     zh_tw: "Traditional Chinese",
     ja: "Japanese",
