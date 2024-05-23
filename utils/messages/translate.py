@@ -10,8 +10,8 @@ def main():
         "fr": "French",
         "it": "Italian",
         "pt_BR": "Brazilian Portuguese",
-        "ru": "Russian",
         "vi": "Vietnamese",
+        "ru": "Russian",
         "zh_CN": "Simplified Chinese",
         "zh_TW": "Traditional Chinese",
         "ko": "Korean"
