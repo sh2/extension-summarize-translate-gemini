@@ -1,3 +1,5 @@
+/* global marked */
+
 const copyContent = async () => {
     const content = document.getElementById("content").textContent;
     const status = document.getElementById("status");

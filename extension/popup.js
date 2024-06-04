@@ -1,3 +1,5 @@
+/* globals Readability, marked */
+
 let contentIndex = 0;
 
 const getSelectedText = () => {
@@ -52,7 +54,7 @@ const getCaptions = async (videoUrl, languageCode) => {
         value = value === -1 ? 9999 : value;
         value += a.kind === "asr" ? 0.5 : 0;
         return value;
-      }
+      };
 
       // Sort the caption tracks by the preferred languages and the kind
       captionTracks.sort((a, b) => {
@@ -143,10 +145,12 @@ const main = async () => {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     // Get the selected text
-    if (userPrompt = (await chrome.scripting.executeScript({
+    userPrompt = (await chrome.scripting.executeScript({
       target: { tabId: tab.id },
       func: getSelectedText
-    }))[0].result) {
+    }))[0].result;
+
+    if (userPrompt) {
       task = (await chrome.storage.local.get({ textAction: "translate" })).textAction;
       taskOption = "";
     } else {
