@@ -1,6 +1,6 @@
 const getModelId = (languageModel, taskOption) => {
   if (languageModel === "1.5-flash") {
-    return "gemini-1.5-flash-latest";
+    return "gemini-1.5-flash";
   } else if (taskOption === "image") {
     return "gemini-pro-vision";
   } else {
@@ -64,7 +64,7 @@ const getCharacterLimit = (modelId, task) => {
   // noTextCustom: The same as Summarize
   // textCustom: The same as Summarize
   const characterLimits = {
-    "gemini-1.5-flash-latest": {
+    "gemini-1.5-flash": {
       summarize: 786432,
       translate: 8192,
       noTextCustom: 786432,

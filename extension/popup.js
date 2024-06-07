@@ -283,7 +283,7 @@ const initialize = async () => {
   });
 
   // Restore the language code from the local storage
-  const { languageModel, languageCode } = await chrome.storage.local.get({ languageModel: "1.0-pro", languageCode: "en" });
+  const { languageModel, languageCode } = await chrome.storage.local.get({ languageModel: "1.5-flash", languageCode: "en" });
   document.getElementById("languageModel").value = languageModel;
   document.getElementById("languageCode").value = languageCode;
 

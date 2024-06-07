@@ -1,7 +1,7 @@
 const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
     apiKey: "",
-    languageModel: "1.0-pro",
+    languageModel: "1.5-flash",
     languageCode: "en",
     noTextAction: "summarize",
     noTextCustomPrompt: "",
