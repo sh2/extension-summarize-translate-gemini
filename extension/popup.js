@@ -79,21 +79,77 @@ const getCaptions = async (videoUrl, languageCode) => {
   return captions;
 };
 
-const getLoadingMessage = (task, taskOption) => {
+const extractTaskInformation = async (languageCode) => {
+  let actionType = "";
+  let mediaType = "";
+  let taskInput = "";
+
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  // Get the selected text
+  taskInput = (await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: getSelectedText
+  }))[0].result;
+
+  if (taskInput) {
+    actionType = (await chrome.storage.local.get({ textAction: "translate" })).textAction;
+    mediaType = "text";
+  } else {
+    // If no text is selected, get the whole text of the page
+    actionType = (await chrome.storage.local.get({ noTextAction: "summarize" })).noTextAction;
+
+    if (tab.url.startsWith("https://www.youtube.com/watch?v=")) {
+      // If the page is a YouTube video, get the captions instead of the whole text
+      mediaType = "captions";
+
+      taskInput = (await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: getCaptions,
+        args: [tab.url, languageCode]
+      }))[0].result;
+    }
+
+    if (!taskInput) {
+      // Get the main text of the page using Readability.js
+      mediaType = "text";
+
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ["lib/Readability.min.js"]
+      });
+
+      taskInput = (await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: getWholeText
+      }))[0].result;
+    }
+
+    if (!taskInput) {
+      // If the whole text is empty, get the visible tab as an image
+      mediaType = "image";
+      taskInput = await (chrome.tabs.captureVisibleTab(tab.windowId, { format: "jpeg" }));
+    }
+  }
+
+  return { actionType, mediaType, taskInput };
+};
+
+const getLoadingMessage = (actionType, mediaType) => {
   let loadingMessage = "";
 
-  if (task === "summarize") {
-    if (taskOption === "captions") {
+  if (actionType === "summarize") {
+    if (mediaType === "captions") {
       loadingMessage = chrome.i18n.getMessage("popup_summarizing_captions");
-    } else if (taskOption === "image") {
+    } else if (mediaType === "image") {
       loadingMessage = chrome.i18n.getMessage("popup_summarizing_image");
     } else {
       loadingMessage = chrome.i18n.getMessage("popup_summarizing");
     }
-  } else if (task === "translate") {
-    if (taskOption === "captions") {
+  } else if (actionType === "translate") {
+    if (mediaType === "captions") {
       loadingMessage = chrome.i18n.getMessage("popup_translating_captions");
-    } else if (taskOption === "image") {
+    } else if (mediaType === "image") {
       loadingMessage = chrome.i18n.getMessage("popup_translating_image");
     } else {
       loadingMessage = chrome.i18n.getMessage("popup_translating");
@@ -130,10 +186,7 @@ const main = async () => {
   try {
     const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
-    let userPrompt = "";
-    let userPromptChunks = [];
-    let task = "";
-    let taskOption = "";
+    let taskInputChunks = [];
 
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
@@ -142,76 +195,32 @@ const main = async () => {
     document.getElementById("languageCode").disabled = true;
     document.getElementById("results").disabled = true;
 
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const { actionType, mediaType, taskInput } = await extractTaskInformation(languageCode);
+    displayIntervalId = setInterval(displayLoadingMessage, 500, getLoadingMessage(actionType, mediaType));
 
-    // Get the selected text
-    userPrompt = (await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: getSelectedText
-    }))[0].result;
-
-    if (userPrompt) {
-      task = (await chrome.storage.local.get({ textAction: "translate" })).textAction;
-      taskOption = "";
+    // Split the task input
+    if (mediaType === "image") {
+      // If the task input is an image, do not split it
+      taskInputChunks = [taskInput];
     } else {
-      // If no text is selected, get the whole text of the page
-      task = (await chrome.storage.local.get({ noTextAction: "summarize" })).noTextAction;
-
-      if (tab.url.startsWith("https://www.youtube.com/watch?v=")) {
-        // If the page is a YouTube video, get the captions instead of the whole text
-        taskOption = "captions";
-
-        userPrompt = (await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: getCaptions,
-          args: [tab.url, languageCode]
-        }))[0].result;
-      }
-
-      if (!userPrompt) {
-        // Get the main text of the page using Readability.js
-        taskOption = "";
-
-        await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          files: ["lib/Readability.min.js"]
-        });
-
-        userPrompt = (await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: getWholeText
-        }))[0].result;
-      }
-
-      if (!userPrompt) {
-        // If the whole text is empty, get the visible tab as an image
-        taskOption = "image";
-        userPrompt = await (chrome.tabs.captureVisibleTab(tab.windowId, { format: "jpeg" }));
-      }
-    }
-
-    displayIntervalId = setInterval(displayLoadingMessage, 500, getLoadingMessage(task, taskOption));
-
-    // Split the user prompt
-    if (taskOption === "image") {
-      // If the user prompt is an image, do not split it
-      userPromptChunks = [userPrompt];
-    }
-    else {
-      userPromptChunks = await chrome.runtime.sendMessage({
-        message: "chunk", task: task, taskOption: taskOption, userPrompt: userPrompt, languageModel: languageModel
+      taskInputChunks = await chrome.runtime.sendMessage({
+        message: "chunk",
+        actionType: actionType,
+        mediaType: mediaType,
+        taskInput: taskInput,
+        languageModel: languageModel
       });
 
-      console.log(userPromptChunks);
+      console.log(taskInputChunks);
     }
 
-    for (const userPromptChunk of userPromptChunks) {
+    for (const taskInputChunk of taskInputChunks) {
       // Generate content
       const response = await chrome.runtime.sendMessage({
         message: "generate",
-        task: task,
-        taskOption: taskOption,
-        userPrompt: userPromptChunk,
+        actionType: actionType,
+        mediaType: mediaType,
+        taskInput: taskInputChunk,
         languageModel: languageModel,
         languageCode: languageCode
       });

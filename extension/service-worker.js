@@ -1,14 +1,14 @@
-const getModelId = (languageModel, taskOption) => {
+const getModelId = (languageModel, mediaType) => {
   if (languageModel === "1.5-flash") {
     return "gemini-1.5-flash";
-  } else if (taskOption === "image") {
+  } else if (mediaType === "image") {
     return "gemini-pro-vision";
   } else {
     return "gemini-1.0-pro";
   }
 };
 
-const getSystemPrompt = async (task, taskOption, languageCode, userPromptLength) => {
+const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLength) => {
   const languageNames = {
     en: "English",
     de: "German",
@@ -24,11 +24,11 @@ const getSystemPrompt = async (task, taskOption, languageCode, userPromptLength)
     ko: "Korean"
   };
 
-  const numItems = Math.min(10, 3 + Math.floor(userPromptLength / 2000));
+  const numItems = Math.min(10, 3 + Math.floor(taskInputLength / 2000));
   let systemPrompt = "";
 
-  if (task === "summarize") {
-    if (taskOption === "image") {
+  if (actionType === "summarize") {
+    if (mediaType === "image") {
       systemPrompt = "Summarize the image as Markdown numbered list " +
         `in ${languageNames[languageCode]} and reply only with the list.\n` +
         "Format:\n1. First point.\n2. Second point.\n3. Third point.";
@@ -37,24 +37,24 @@ const getSystemPrompt = async (task, taskOption, languageCode, userPromptLength)
         `in ${languageNames[languageCode]} and reply only with the list.\n` +
         "Format:\n1. First point.\n2. Second point.\n3. Third point.";
     }
-  } else if (task === "translate") {
-    if (taskOption === "image") {
+  } else if (actionType === "translate") {
+    if (mediaType === "image") {
       systemPrompt = `Translate the image into ${languageNames[languageCode]} ` +
         "and reply only with the translated result.";
     } else {
       systemPrompt = `Translate the entire text into ${languageNames[languageCode]} ` +
         "and reply only with the translated result.";
     }
-  } else if (task === "noTextCustom") {
+  } else if (actionType === "noTextCustom") {
     systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt: "" })).noTextCustomPrompt;
-  } else if (task === "textCustom") {
+  } else if (actionType === "textCustom") {
     systemPrompt = (await chrome.storage.local.get({ textCustomPrompt: "" })).textCustomPrompt;
   }
 
   return systemPrompt;
 };
 
-const getCharacterLimit = (modelId, task) => {
+const getCharacterLimit = (modelId, actionType) => {
   // Limit on the number of characters handled at one time
   // so as not to exceed the maximum number of tokens sent and received by the API.
   // In Gemini, the calculation is performed in the following way
@@ -78,7 +78,7 @@ const getCharacterLimit = (modelId, task) => {
     }
   };
 
-  return characterLimits[modelId][task];
+  return characterLimits[modelId][actionType];
 };
 
 const chunkText = (text, chunkSize) => {
@@ -123,27 +123,28 @@ const tryJsonParse = (text) => {
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
     if (request.message === "chunk") {
-      // Split the user prompt
-      const modelId = getModelId(request.languageModel, request.taskOption);
-      const userPromptChunks = chunkText(request.userPrompt, getCharacterLimit(modelId, request.task));
-      sendResponse(userPromptChunks);
+      // Split the task input
+      const modelId = getModelId(request.languageModel, request.mediaType);
+      const chunkSize = getCharacterLimit(modelId, request.actionType);
+      const taskInputChunks = chunkText(request.taskInput, chunkSize);
+      sendResponse(taskInputChunks);
     } else if (request.message === "generate") {
       // Generate content
       const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
-      const modelId = getModelId(request.languageModel, request.taskOption);
-      const userPrompt = request.userPrompt;
+      const modelId = getModelId(request.languageModel, request.mediaType);
+      const taskInput = request.taskInput;
 
       const systemPrompt = await getSystemPrompt(
-        request.task,
-        request.taskOption,
+        request.actionType,
+        request.mediaType,
         request.languageCode,
-        userPrompt.length
+        taskInput.length
       );
 
       let contents = [];
 
-      if (request.taskOption === "image") {
-        const [mediaInfo, mediaData] = userPrompt.split(",");
+      if (request.mediaType === "image") {
+        const [mediaInfo, mediaData] = taskInput.split(",");
         const mediaType = mediaInfo.split(":")[1].split(";")[0];
 
         contents.push({
@@ -160,7 +161,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       } else {
         contents.push({
           role: "user",
-          parts: [{ text: systemPrompt + "\nText:\n" + userPrompt }]
+          parts: [{ text: systemPrompt + "\nText:\n" + taskInput }]
         });
       }
 
