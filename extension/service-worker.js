@@ -131,6 +131,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       sendResponse(taskInputChunks);
     } else if (request.message === "generate") {
       // Generate content
+      await chrome.storage.session.set({ taskCache: "", responseCache: {} });
       const { actionType, mediaType, taskInput, languageModel, languageCode } = request;
       const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
       const modelId = getModelId(languageModel, mediaType);
