@@ -302,8 +302,8 @@ const initialize = async () => {
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("run").addEventListener("click", main);
 
-document.getElementById("results").addEventListener("click", async () => {
-  await chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${contentIndex}`) });
+document.getElementById("results").addEventListener("click", () => {
+  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${contentIndex}`) });
 });
 
 document.getElementById("options").addEventListener("click", () => {
