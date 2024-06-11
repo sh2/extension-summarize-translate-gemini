@@ -176,7 +176,7 @@ const displayLoadingMessage = (loadingMessage) => {
   }
 };
 
-const main = async () => {
+const main = async (useCache) => {
   let displayIntervalId = 0;
   let content = "";
   contentIndex = (await chrome.storage.session.get({ contentIndex: -1 })).contentIndex;
@@ -215,15 +215,29 @@ const main = async () => {
     }
 
     for (const taskInputChunk of taskInputChunks) {
-      // Generate content
-      const response = await chrome.runtime.sendMessage({
-        message: "generate",
-        actionType: actionType,
-        mediaType: mediaType,
+      const taskCache = (await chrome.storage.session.get({ taskCache: "" })).taskCache;
+      let response = {};
+
+      if (useCache && taskCache === JSON.stringify({
+        actionType,
+        mediaType,
         taskInput: taskInputChunk,
-        languageModel: languageModel,
-        languageCode: languageCode
-      });
+        languageModel,
+        languageCode
+      })) {
+        // Use the cached response
+        response = (await chrome.storage.session.get({ responseCache: {} })).responseCache;
+      } else {
+        // Generate content
+        response = await chrome.runtime.sendMessage({
+          message: "generate",
+          actionType: actionType,
+          mediaType: mediaType,
+          taskInput: taskInputChunk,
+          languageModel: languageModel,
+          languageCode: languageCode
+        });
+      }
 
       console.log(response);
 
@@ -296,11 +310,14 @@ const initialize = async () => {
   document.getElementById("languageModel").value = languageModel;
   document.getElementById("languageCode").value = languageCode;
 
-  main();
+  main(true);
 };
 
 document.addEventListener("DOMContentLoaded", initialize);
-document.getElementById("run").addEventListener("click", main);
+
+document.getElementById("run").addEventListener("click", () => {
+  main(false);
+});
 
 document.getElementById("results").addEventListener("click", () => {
   chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${contentIndex}`) });
