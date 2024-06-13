@@ -31,6 +31,7 @@ const getCaptions = async (videoUrl, languageCode) => {
     pt_br: "pt-BR",
     vi: "vi",
     ru: "ru",
+    ar: "ar",
     zh_cn: "zh-CN",
     zh_tw: "zh-TW",
     ja: "ja",
@@ -299,6 +300,9 @@ const main = async (useCache) => {
 const initialize = async () => {
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: (_href, _title, text) => text } });
+
+  // Set the text direction of the body
+  document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
 
   // Set the text of elements with the data-i18n attribute
   document.querySelectorAll("[data-i18n]").forEach(element => {

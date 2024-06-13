@@ -37,6 +37,9 @@ const saveOptions = async () => {
 };
 
 const initialize = () => {
+  // Set the text direction of the body
+  document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
+
   // Set the text of elements with the data-i18n attribute
   document.querySelectorAll("[data-i18n]").forEach(element => {
     element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));

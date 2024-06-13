@@ -12,6 +12,7 @@ def main():
         "pt_BR": "Brazilian Portuguese",
         "vi": "Vietnamese",
         "ru": "Russian",
+        "ar": "Arabic",
         "zh_CN": "Simplified Chinese",
         "zh_TW": "Traditional Chinese",
         "ko": "Korean"

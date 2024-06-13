@@ -18,6 +18,7 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
     pt_br: "Brazilian Portuguese",
     vi: "Vietnamese",
     ru: "Russian",
+    ar: "Arabic",
     zh_cn: "Simplified Chinese",
     zh_tw: "Traditional Chinese",
     ja: "Japanese",

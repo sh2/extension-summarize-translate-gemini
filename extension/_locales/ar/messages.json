@@ -1,0 +1,107 @@
+{
+    "extension_name": {
+        "message": "تلخيص وترجمة باستخدام Gemini"
+    },
+    "extension_description": {
+        "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كخلفية."
+    },
+    "popup_button_run": {
+        "message": "تشغيله مرة أخرى"
+    },
+    "popup_button_results": {
+        "message": "فتح النتائج في علامة تبويب جديدة"
+    },
+    "popup_button_options": {
+        "message": "فتح صفحة الخيارات"
+    },
+    "popup_summarizing": {
+        "message": "التلخيص"
+    },
+    "popup_summarizing_captions": {
+        "message": "تلخيص التسميات التوضيحية"
+    },
+    "popup_summarizing_image": {
+        "message": "تلخيص الصورة"
+    },
+    "popup_translating": {
+        "message": "الترجمة"
+    },
+    "popup_translating_captions": {
+        "message": "ترجمة التسميات التوضيحية"
+    },
+    "popup_translating_image": {
+        "message": "ترجمة الصورة"
+    },
+    "popup_processing": {
+        "message": "معالجة"
+    },
+    "popup_prompt_blocked": {
+        "message": "تم حظر المطالبة."
+    },
+    "popup_response_blocked": {
+        "message": "تم حظر الاستجابة."
+    },
+    "popup_unexpected_response": {
+        "message": "حدث خطأ غير معروف. يرجى التحقق من سجل وحدة التحكم."
+    },
+    "popup_miscellaneous_error": {
+        "message": "لا يمكن تلخيص أو ترجمة هذه الصفحة."
+    },
+    "results_title": {
+        "message": "النتائج - تلخيص وترجمة باستخدام Gemini"
+    },
+    "results_button_copy": {
+        "message": "نسخ"
+    },
+    "results_copied": {
+        "message": "تم النسخ."
+    },
+    "options_title": {
+        "message": "الخيارات - تلخيص وترجمة باستخدام Gemini"
+    },
+    "options_apikey": {
+        "message": "مفتاح API لـ Gemini"
+    },
+    "options_apikey_hint": {
+        "message": "يمكنك الحصول على مفتاح API لـ Gemini من الصفحة التالية."
+    },
+    "options_model": {
+        "message": "نموذج اللغة"
+    },
+    "options_language": {
+        "message": "تلخيص في / ترجمة إلى"
+    },
+    "options_language_notes": {
+        "message": "يتم تجاهل إعداد اللغة في الإجراءات المخصصة."
+    },
+    "options_no_text_action": {
+        "message": "عندما لا يتم تحديد أي نص ، قم بإجراء الإجراء التالي"
+    },
+    "options_no_text_summarize": {
+        "message": "تلخيص (افتراضي)"
+    },
+    "options_no_text_translate": {
+        "message": "ترجمة"
+    },
+    "options_no_text_custom": {
+        "message": "إجراء مخصص"
+    },
+    "options_text_action": {
+        "message": "عندما يتم تحديد نص ، قم بإجراء الإجراء التالي"
+    },
+    "options_text_summarize": {
+        "message": "تلخيص"
+    },
+    "options_text_translate": {
+        "message": "ترجمة (افتراضي)"
+    },
+    "options_text_custom": {
+        "message": "إجراء مخصص"
+    },
+    "options_button_save": {
+        "message": "حفظ الخيارات"
+    },
+    "options_saved": {
+        "message": "تم الحفظ."
+    }
+}
