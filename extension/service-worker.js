@@ -2,7 +2,7 @@ const getModelId = (languageModel, mediaType) => {
   if (languageModel === "1.5-flash") {
     return "gemini-1.5-flash";
   } else if (mediaType === "image") {
-    return "gemini-pro-vision";
+    return "gemini-1.5-flash";
   } else {
     return "gemini-1.0-pro";
   }
