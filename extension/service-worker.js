@@ -19,6 +19,8 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
     vi: "Vietnamese",
     ru: "Russian",
     ar: "Arabic",
+    hi: "Hindi",
+    bn: "Bengali",
     zh_cn: "Simplified Chinese",
     zh_tw: "Traditional Chinese",
     ja: "Japanese",
@@ -84,7 +86,8 @@ const getCharacterLimit = (modelId, actionType) => {
 
 const chunkText = (text, chunkSize) => {
   const chunks = [];
-  const sentenceBreaks = ["\n\n", "。", "．", ".", "\n", " "];
+  // ।: U+0964 Devanagari Danda
+  const sentenceBreaks = ["\n\n", "।", "。", "．", ".", "\n", " "];
   let remainingText = text.replace(/\r\n?/g, "\n");
 
   while (remainingText.length > chunkSize) {

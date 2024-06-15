@@ -1,0 +1,107 @@
+{
+    "extension_name": {
+        "message": "Gemini ব্যবহার করে সংক্ষিপ্তসার এবং অনুবাদ করুন"
+    },
+    "extension_description": {
+        "message": "ওয়েব পেজ সংক্ষিপ্তসার এবং অনুবাদ করুন। ব্যাকএন্ড হিসেবে Gemini ব্যবহার করে।"
+    },
+    "popup_button_run": {
+        "message": "আবার চালান"
+    },
+    "popup_button_results": {
+        "message": "নতুন ট্যাবে ফলাফল খুলুন"
+    },
+    "popup_button_options": {
+        "message": "বিকল্প পৃষ্ঠা খুলুন"
+    },
+    "popup_summarizing": {
+        "message": "সংক্ষিপ্তসার করছি"
+    },
+    "popup_summarizing_captions": {
+        "message": "ক্যাপশন সংক্ষিপ্তসার করছি"
+    },
+    "popup_summarizing_image": {
+        "message": "ছবি সংক্ষিপ্তসার করছি"
+    },
+    "popup_translating": {
+        "message": "অনুবাদ করছি"
+    },
+    "popup_translating_captions": {
+        "message": "ক্যাপশন অনুবাদ করছি"
+    },
+    "popup_translating_image": {
+        "message": "ছবি অনুবাদ করছি"
+    },
+    "popup_processing": {
+        "message": "প্রক্রিয়া করছি"
+    },
+    "popup_prompt_blocked": {
+        "message": "প্রম্পট ব্লক করা হয়েছে।"
+    },
+    "popup_response_blocked": {
+        "message": "প্রতিক্রিয়া ব্লক করা হয়েছে।"
+    },
+    "popup_unexpected_response": {
+        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগ চেক করুন।"
+    },
+    "popup_miscellaneous_error": {
+        "message": "এই পৃষ্ঠাটি সংক্ষিপ্তসার বা অনুবাদ করা যাবে না।"
+    },
+    "results_title": {
+        "message": "ফলাফল - Gemini ব্যবহার করে সংক্ষিপ্তসার এবং অনুবাদ করুন"
+    },
+    "results_button_copy": {
+        "message": "কপি করুন"
+    },
+    "results_copied": {
+        "message": "কপি করা হয়েছে।"
+    },
+    "options_title": {
+        "message": "বিকল্প - Gemini ব্যবহার করে সংক্ষিপ্তসার এবং অনুবাদ করুন"
+    },
+    "options_apikey": {
+        "message": "Gemini API কী"
+    },
+    "options_apikey_hint": {
+        "message": "আপনি নিম্নলিখিত পৃষ্ঠায় একটি Gemini API কী পেতে পারেন।"
+    },
+    "options_model": {
+        "message": "ভাষা মডেল"
+    },
+    "options_language": {
+        "message": "সংক্ষিপ্তসার করুন / অনুবাদ করুন"
+    },
+    "options_language_notes": {
+        "message": "কাস্টম অ্যাকশনে ভাষা সেটিং উপেক্ষা করা হয়।"
+    },
+    "options_no_text_action": {
+        "message": "যখন কোনও টেক্সট নির্বাচিত হয় না, তখন নিম্নলিখিত অ্যাকশন করুন"
+    },
+    "options_no_text_summarize": {
+        "message": "সংক্ষিপ্তসার করুন (ডিফল্ট)"
+    },
+    "options_no_text_translate": {
+        "message": "অনুবাদ করুন"
+    },
+    "options_no_text_custom": {
+        "message": "কাস্টম অ্যাকশন"
+    },
+    "options_text_action": {
+        "message": "যখন টেক্সট নির্বাচিত হয়, তখন নিম্নলিখিত অ্যাকশন করুন"
+    },
+    "options_text_summarize": {
+        "message": "সংক্ষিপ্তসার করুন"
+    },
+    "options_text_translate": {
+        "message": "অনুবাদ করুন (ডিফল্ট)"
+    },
+    "options_text_custom": {
+        "message": "কাস্টম অ্যাকশন"
+    },
+    "options_button_save": {
+        "message": "বিকল্প সংরক্ষণ করুন"
+    },
+    "options_saved": {
+        "message": "সংরক্ষণ করা হয়েছে।"
+    }
+}

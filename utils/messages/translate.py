@@ -13,6 +13,8 @@ def main():
         "vi": "Vietnamese",
         "ru": "Russian",
         "ar": "Arabic",
+        "hi": "Hindi",
+        "bn": "Bengali",
         "zh_CN": "Simplified Chinese",
         "zh_TW": "Traditional Chinese",
         "ko": "Korean"

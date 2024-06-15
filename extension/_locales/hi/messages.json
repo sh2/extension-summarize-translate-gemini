@@ -1,0 +1,107 @@
+{
+    "extension_name": {
+        "message": "Gemini के साथ सारांशित करें और अनुवाद करें"
+    },
+    "extension_description": {
+        "message": "वेब पेजों को सारांशित और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
+    },
+    "popup_button_run": {
+        "message": "इसे फिर से चलाएँ"
+    },
+    "popup_button_results": {
+        "message": "नए टैब में परिणाम खोलें"
+    },
+    "popup_button_options": {
+        "message": "विकल्प पृष्ठ खोलें"
+    },
+    "popup_summarizing": {
+        "message": "सारांशित कर रहा है"
+    },
+    "popup_summarizing_captions": {
+        "message": "कैप्शन को सारांशित कर रहा है"
+    },
+    "popup_summarizing_image": {
+        "message": "छवि को सारांशित कर रहा है"
+    },
+    "popup_translating": {
+        "message": "अनुवाद कर रहा है"
+    },
+    "popup_translating_captions": {
+        "message": "कैप्शन का अनुवाद कर रहा है"
+    },
+    "popup_translating_image": {
+        "message": "छवि का अनुवाद कर रहा है"
+    },
+    "popup_processing": {
+        "message": "प्रक्रिया कर रहा है"
+    },
+    "popup_prompt_blocked": {
+        "message": "प्रॉम्प्ट को ब्लॉक कर दिया गया था।"
+    },
+    "popup_response_blocked": {
+        "message": "प्रतिक्रिया को ब्लॉक कर दिया गया था।"
+    },
+    "popup_unexpected_response": {
+        "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग जांचें।"
+    },
+    "popup_miscellaneous_error": {
+        "message": "इस पृष्ठ को सारांशित या अनुवाद नहीं किया जा सकता है।"
+    },
+    "results_title": {
+        "message": "परिणाम - Gemini के साथ सारांशित करें और अनुवाद करें"
+    },
+    "results_button_copy": {
+        "message": "कॉपी करें"
+    },
+    "results_copied": {
+        "message": "कॉपी किया गया।"
+    },
+    "options_title": {
+        "message": "विकल्प - Gemini के साथ सारांशित करें और अनुवाद करें"
+    },
+    "options_apikey": {
+        "message": "Gemini API कुंजी"
+    },
+    "options_apikey_hint": {
+        "message": "आप निम्नलिखित पृष्ठ पर Gemini API कुंजी प्राप्त कर सकते हैं।"
+    },
+    "options_model": {
+        "message": "भाषा मॉडल"
+    },
+    "options_language": {
+        "message": "में सारांशित करें / में अनुवाद करें"
+    },
+    "options_language_notes": {
+        "message": "कस्टम क्रियाओं में भाषा सेटिंग को अनदेखा किया जाता है।"
+    },
+    "options_no_text_action": {
+        "message": "जब कोई पाठ चयनित नहीं होता है, तो निम्न क्रिया करें"
+    },
+    "options_no_text_summarize": {
+        "message": "सारांशित करें (डिफ़ॉल्ट)"
+    },
+    "options_no_text_translate": {
+        "message": "अनुवाद करें"
+    },
+    "options_no_text_custom": {
+        "message": "कस्टम क्रिया"
+    },
+    "options_text_action": {
+        "message": "जब पाठ चयनित होता है, तो निम्न क्रिया करें"
+    },
+    "options_text_summarize": {
+        "message": "सारांशित करें"
+    },
+    "options_text_translate": {
+        "message": "अनुवाद करें (डिफ़ॉल्ट)"
+    },
+    "options_text_custom": {
+        "message": "कस्टम क्रिया"
+    },
+    "options_button_save": {
+        "message": "विकल्प सहेजें"
+    },
+    "options_saved": {
+        "message": "सहेजा गया।"
+    }
+}
