@@ -15,6 +15,7 @@ The following are instructions for manual installation, for development purposes
 You can obtain a Gemini API Key from [Google AI for Developers](https://ai.google.dev/).
 This extension currently uses following models:
 
+- Gemini 1.5 Pro Experimental 0801: Gemini 1.5 Pro Experimental 0801 for text and images
 - Gemini 1.5 Pro: Gemini 1.5 Pro for text and images
 - Gemini 1.5 Flash: Gemini 1.5 Flash for text and images
 - Gemini 1.0 Pro: Gemini 1.0 Pro for text and Gemini 1.5 Flash for images

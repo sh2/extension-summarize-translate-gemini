@@ -1,5 +1,7 @@
 const getModelId = (languageModel, mediaType) => {
-  if (languageModel === "1.5-pro") {
+  if (languageModel === "1.5-pro-exp-0801") {
+    return "gemini-1.5-pro-exp-0801";
+  } else if (languageModel === "1.5-pro") {
     return "gemini-1.5-pro";
   } else if (languageModel === "1.5-flash") {
     return "gemini-1.5-flash";
@@ -69,11 +71,17 @@ const getCharacterLimit = (modelId, actionType) => {
   // noTextCustom: The same as Summarize
   // textCustom: The same as Summarize
   const characterLimits = {
-    "gemini-1.5-pro": {
-      summarize: 786432,
+    "gemini-1.5-pro-exp-0801": {
+      summarize: 1572864,
       translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
+      noTextCustom: 1572864,
+      textCustom: 1572864
+    },
+    "gemini-1.5-pro": {
+      summarize: 1572864,
+      translate: 8192,
+      noTextCustom: 1572864,
+      textCustom: 1572864
     },
     "gemini-1.5-flash": {
       summarize: 786432,
