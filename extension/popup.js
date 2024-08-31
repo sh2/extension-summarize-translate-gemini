@@ -316,6 +316,11 @@ const initialize = async () => {
   document.getElementById("languageModel").value = languageModel;
   document.getElementById("languageCode").value = languageCode;
 
+  // Set the default language model if the language model is not set
+  if (!document.getElementById("languageModel").value) {
+    document.getElementById("languageModel").value = "1.5-flash";
+  }
+
   main(true);
 };
 

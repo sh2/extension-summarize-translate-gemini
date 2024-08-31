@@ -23,10 +23,16 @@
     <button id="run" data-i18n="popup_button_run">Run it again</button>
 
     <select id="languageModel">
-      <option value="1.5-pro-exp-0801">Gemini 1.5 Pro Experimental 0801</option>
-      <option value="1.5-pro">Gemini 1.5 Pro</option>
-      <option value="1.5-flash">Gemini 1.5 Flash</option>
-      <option value="1.0-pro">Gemini 1.0 Pro</option>
+      <optgroup label="Stable">
+        <option value="1.5-pro">Gemini 1.5 Pro</option>
+        <option value="1.5-flash">Gemini 1.5 Flash</option>
+        <option value="1.0-pro">Gemini 1.0 Pro</option>
+      </optgroup>
+      <optgroup label="Experimental">
+        <option value="1.5-pro-exp-0827">Gemini 1.5 Pro Exp-0827</option>
+        <option value="1.5-flash-exp-0827">Gemini 1.5 Flash Exp-0827</option>
+        <option value="1.5-flash-8b-exp-0827">Gemini 1.5 Flash-8B Exp-0827</option>
+      </optgroup>
     </select>
 
     <select id="languageCode">

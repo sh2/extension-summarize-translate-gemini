@@ -16,6 +16,11 @@ const restoreOptions = async () => {
   document.getElementById("noTextCustomPrompt").value = options.noTextCustomPrompt;
   document.querySelector(`input[name="textAction"][value="${options.textAction}"]`).checked = true;
   document.getElementById("textCustomPrompt").value = options.textCustomPrompt;
+
+  // Set the default language model if the language model is not set
+  if (!document.getElementById("languageModel").value) {
+    document.getElementById("languageModel").value = "1.5-flash";
+  }
 };
 
 const saveOptions = async () => {
