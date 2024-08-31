@@ -277,7 +277,7 @@ const main = async (useCache) => {
     }
   } catch (error) {
     content = chrome.i18n.getMessage("popup_miscellaneous_error");
-    console.log(error);
+    console.error(error);
   } finally {
     if (displayIntervalId) {
       clearInterval(displayIntervalId);
