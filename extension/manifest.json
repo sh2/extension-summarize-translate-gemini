@@ -19,5 +19,12 @@
     "activeTab",
     "scripting",
     "storage"
-  ]
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+G"
+      }
+    }
+  }
 }
