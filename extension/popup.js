@@ -1,4 +1,4 @@
-/* globals Readability, marked */
+/* globals DOMPurify, Readability, marked */
 
 let contentIndex = 0;
 
@@ -260,7 +260,7 @@ const main = async (useCache) => {
           content += `${response.body.candidates[0].content.parts[0].text}\n\n`;
           const div = document.createElement("div");
           div.textContent = content;
-          document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
+          document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 
           // Scroll to the bottom of the page
           window.scrollTo(0, document.body.scrollHeight);
@@ -292,7 +292,7 @@ const main = async (useCache) => {
     // Convert the content from Markdown to HTML
     const div = document.createElement("div");
     div.textContent = content;
-    document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
+    document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 
     // Save the content to the session storage
     await chrome.storage.session.set({ [`c_${contentIndex}`]: content });
@@ -301,7 +301,7 @@ const main = async (useCache) => {
 
 const initialize = async () => {
   // Disable links when converting from Markdown to HTML
-  marked.use({ renderer: { link: (_href, _title, text) => text } });
+  marked.use({ renderer: { link: ({ text }) => text } });
 
   // Set the text direction of the body
   document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));

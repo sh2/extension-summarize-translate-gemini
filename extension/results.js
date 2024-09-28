@@ -1,4 +1,4 @@
-/* global marked */
+/* global DOMPurify, marked */
 
 const copyContent = async () => {
   const content = document.getElementById("content").textContent;
@@ -12,7 +12,7 @@ const copyContent = async () => {
 
 const initialize = async () => {
   // Disable links when converting from Markdown to HTML
-  marked.use({ renderer: { link: (_href, _title, text) => text } });
+  marked.use({ renderer: { link: ({ text }) => text } });
 
   // Set the text direction of the body
   document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
@@ -30,7 +30,7 @@ const initialize = async () => {
   // Convert the content from Markdown to HTML
   const div = document.createElement("div");
   div.textContent = content;
-  document.getElementById("content").innerHTML = marked.parse(div.innerHTML);
+  document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 };
 
 document.addEventListener("DOMContentLoaded", initialize);
