@@ -6,8 +6,10 @@ const getModelId = (languageModel, mediaType) => {
     "1.5-flash-8b-exp-0924": "gemini-1.5-flash-8b-exp-0924",
     "1.5-pro-latest": "gemini-1.5-pro-latest",
     "1.5-flash-latest": "gemini-1.5-flash-latest",
+    "1.5-flash-8b-latest": "gemini-1.5-flash-8b-latest",
     "1.5-pro": "gemini-1.5-pro",
-    "1.5-flash": "gemini-1.5-flash"
+    "1.5-flash": "gemini-1.5-flash",
+    "1.5-flash-8b": "gemini-1.5-flash-8b"
   };
 
   if (languageModel in modelMappings) {
@@ -114,6 +116,12 @@ const getCharacterLimit = (modelId, actionType) => {
       noTextCustom: 786432,
       textCustom: 786432
     },
+    "gemini-1.5-flash-8b-latest": {
+      summarize: 786432,
+      translate: 8192,
+      noTextCustom: 786432,
+      textCustom: 786432
+    },
     "gemini-1.5-pro": {
       summarize: 1572864,
       translate: 8192,
@@ -121,6 +129,12 @@ const getCharacterLimit = (modelId, actionType) => {
       textCustom: 1572864
     },
     "gemini-1.5-flash": {
+      summarize: 786432,
+      translate: 8192,
+      noTextCustom: 786432,
+      textCustom: 786432
+    },
+    "gemini-1.5-flash-8b": {
       summarize: 786432,
       translate: 8192,
       noTextCustom: 786432,
