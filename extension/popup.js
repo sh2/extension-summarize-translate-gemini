@@ -2,6 +2,15 @@
 
 let contentIndex = 0;
 
+const checkNarrowScreen = () => {
+  // Add the narrow class if the screen width is narrow
+  if (document.getElementById("header").clientWidth < 640) {
+    document.body.classList.add("narrow");
+  } else {
+    document.body.classList.remove("narrow");
+  }
+};
+
 const getSelectedText = () => {
   // Return the selected text
   return window.getSelection().toString();
@@ -300,6 +309,9 @@ const main = async (useCache) => {
 };
 
 const initialize = async () => {
+  // Check if the screen is narrow
+  checkNarrowScreen();
+
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: ({ text }) => text } });
 
@@ -331,9 +343,15 @@ document.getElementById("run").addEventListener("click", () => {
 });
 
 document.getElementById("results").addEventListener("click", () => {
-  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${contentIndex}`) });
+  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${contentIndex}`) }, () => {
+    window.close();
+  });
 });
 
 document.getElementById("options").addEventListener("click", () => {
-  chrome.runtime.openOptionsPage();
+  chrome.runtime.openOptionsPage(() => {
+    window.close();
+  });
 });
+
+window.addEventListener("resize", checkNarrowScreen);

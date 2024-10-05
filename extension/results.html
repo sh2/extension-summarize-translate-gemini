@@ -6,20 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="results_title">Results - Summarize and Translate with Gemini</title>
   <link rel="stylesheet" href="css/new.min.css">
+  <style>
+    body {
+      width: 640px;
+    }
+
+    button {
+      margin-bottom: .5rem;
+    }
+
+    body.narrow {
+      width: 84%;
+    }
+  </style>
 </head>
 
-<body style="width: 640px;">
+<body>
   <header style="padding-top: 1rem; padding-bottom: 0rem;">
-    <h1 style="font-size: 1.2rem;">
-      <img src="img/icon-128.png" alt="" width="48" height="48" style="vertical-align: middle;">
-      <span data-i18n="results_title">Results - Summarize and Translate with Gemini</span>
+    <h1 id="header" style="display: flex; align-items: center; font-size: 1.2rem;">
+      <img src="img/icon-128.png" alt="" width="48" height="48" style="margin-right: .5rem;">
+      <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" data-i18n="results_title">
+        Results - Summarize and Translate with Gemini
+      </span>
     </h1>
   </header>
 
-  <p>
+  <div>
     <button id="copy" data-i18n="results_button_copy">Copy</button>
     <span id="status"></span>
-  </p>
+  </div>
 
   <p id="content" dir="auto"></p>
 

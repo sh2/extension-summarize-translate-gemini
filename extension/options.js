@@ -1,3 +1,12 @@
+const checkNarrowScreen = () => {
+  // Add the narrow class if the screen width is narrow
+  if (document.getElementById("header").clientWidth < 640) {
+    document.body.classList.add("narrow");
+  } else {
+    document.body.classList.remove("narrow");
+  }
+};
+
 const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
     apiKey: "",
@@ -42,6 +51,9 @@ const saveOptions = async () => {
 };
 
 const initialize = () => {
+  // Check if the screen is narrow  
+  checkNarrowScreen();
+
   // Set the text direction of the body
   document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
 
@@ -55,3 +67,4 @@ const initialize = () => {
 
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("save").addEventListener("click", saveOptions);
+window.addEventListener("resize", checkNarrowScreen);

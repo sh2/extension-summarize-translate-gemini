@@ -1,5 +1,14 @@
 /* global DOMPurify, marked */
 
+const checkNarrowScreen = () => {
+  // Add the narrow class if the screen width is narrow
+  if (document.getElementById("header").clientWidth < 640) {
+    document.body.classList.add("narrow");
+  } else {
+    document.body.classList.remove("narrow");
+  }
+};
+
 const copyContent = async () => {
   const content = document.getElementById("content").textContent;
   const status = document.getElementById("status");
@@ -11,6 +20,9 @@ const copyContent = async () => {
 };
 
 const initialize = async () => {
+  // Check if the screen is narrow  
+  checkNarrowScreen();
+
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: ({ text }) => text } });
 
@@ -35,3 +47,4 @@ const initialize = async () => {
 
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("copy").addEventListener("click", copyContent);
+window.addEventListener("resize", checkNarrowScreen);
