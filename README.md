@@ -17,6 +17,7 @@ The extension currently uses the following models, plus several experimental mod
 
 - Gemini 1.5 Pro: Gemini 1.5 Pro for text and images
 - Gemini 1.5 Flash: Gemini 1.5 Flash for text and images
+- Gemini 1.5 Flash-8B: Gemini 1.5 Flash-8B for text and images
 - Gemini 1.0 Pro: Gemini 1.0 Pro for text and Gemini 1.5 Flash for images
 
 ## Usage
