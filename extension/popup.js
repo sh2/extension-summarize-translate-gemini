@@ -111,7 +111,7 @@ const extractTaskInformation = async (languageCode) => {
     // If no text is selected, get the whole text of the page
     actionType = (await chrome.storage.local.get({ noTextAction: "summarize" })).noTextAction;
 
-    if (tab.url.startsWith("https://www.youtube.com/watch?v=")) {
+    if (tab.url.startsWith("https://www.youtube.com/watch?v=") || tab.url.startsWith("https://m.youtube.com/watch?v=")) {
       // If the page is a YouTube video, get the captions instead of the whole text
       mediaType = "captions";
 
