@@ -1,5 +1,6 @@
-const getModelId = (languageModel, mediaType) => {
+const getModelId = (languageModel) => {
   const modelMappings = {
+    "exp-1114": "gemini-exp-1114",
     "1.5-pro-exp-0827": "gemini-1.5-pro-exp-0827",
     "1.5-flash-exp-0827": "gemini-1.5-flash-exp-0827",
     "1.5-flash-8b-exp-0827": "gemini-1.5-flash-8b-exp-0827",
@@ -12,13 +13,7 @@ const getModelId = (languageModel, mediaType) => {
     "1.5-flash-8b": "gemini-1.5-flash-8b"
   };
 
-  if (languageModel in modelMappings) {
-    return modelMappings[languageModel];
-  } else if (mediaType === "image") {
-    return "gemini-1.5-flash";
-  } else {
-    return "gemini-1.0-pro";
-  }
+  return modelMappings[languageModel];
 };
 
 const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLength) => {
@@ -139,12 +134,6 @@ const getCharacterLimit = (modelId, actionType) => {
       translate: 8192,
       noTextCustom: 786432,
       textCustom: 786432
-    },
-    "gemini-1.0-pro": {
-      summarize: 25600,
-      translate: 2048,
-      noTextCustom: 25600,
-      textCustom: 25600
     }
   };
 
@@ -195,8 +184,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
     if (request.message === "chunk") {
       // Split the task input
-      const { actionType, mediaType, taskInput, languageModel } = request;
-      const modelId = getModelId(languageModel, mediaType);
+      const { actionType, taskInput, languageModel } = request;
+      const modelId = getModelId(languageModel);
       const chunkSize = getCharacterLimit(modelId, actionType);
       const taskInputChunks = chunkText(taskInput, chunkSize);
       sendResponse(taskInputChunks);
@@ -205,7 +194,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       await chrome.storage.session.set({ taskCache: "", responseCache: {} });
       const { actionType, mediaType, taskInput, languageModel, languageCode } = request;
       const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
-      const modelId = getModelId(languageModel, mediaType);
+      const modelId = getModelId(languageModel);
 
       const systemPrompt = await getSystemPrompt(
         actionType,
