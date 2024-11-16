@@ -75,6 +75,12 @@ const getCharacterLimit = (modelId, actionType) => {
   // noTextCustom: The same as Summarize
   // textCustom: The same as Summarize
   const characterLimits = {
+    "gemini-exp-1114": {
+      summarize: 24576,
+      translate: 8192,
+      noTextCustom: 24576,
+      textCustom: 24576
+    },
     "gemini-1.5-pro-exp-0827": {
       summarize: 1572864,
       translate: 8192,
