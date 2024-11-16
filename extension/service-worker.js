@@ -237,7 +237,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
           body: JSON.stringify({
             contents: contents,
             safetySettings: [{
-              category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+              category: "HARM_CATEGORY_HARASSMENT",
               threshold: "BLOCK_NONE"
             },
             {
@@ -245,11 +245,15 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
               threshold: "BLOCK_NONE"
             },
             {
-              category: "HARM_CATEGORY_HARASSMENT",
+              category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
               threshold: "BLOCK_NONE"
             },
             {
               category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+              threshold: "BLOCK_NONE"
+            },
+            {
+              category: "HARM_CATEGORY_CIVIC_INTEGRITY",
               threshold: "BLOCK_NONE"
             }]
           })
