@@ -1,6 +1,7 @@
 const getModelId = (languageModel) => {
   const modelMappings = {
     "exp-1114": "gemini-exp-1114",
+    "exp-1121": "gemini-exp-1121",
     "1.5-pro-exp-0827": "gemini-1.5-pro-exp-0827",
     "1.5-flash-exp-0827": "gemini-1.5-flash-exp-0827",
     "1.5-flash-8b-exp-0827": "gemini-1.5-flash-8b-exp-0827",
@@ -76,6 +77,12 @@ const getCharacterLimit = (modelId, actionType) => {
   // textCustom: The same as Summarize
   const characterLimits = {
     "gemini-exp-1114": {
+      summarize: 24576,
+      translate: 8192,
+      noTextCustom: 24576,
+      textCustom: 24576
+    },
+    "gemini-exp-1121": {
       summarize: 24576,
       translate: 8192,
       noTextCustom: 24576,
