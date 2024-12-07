@@ -1,11 +1,7 @@
 const getModelId = (languageModel) => {
   const modelMappings = {
-    "exp-1114": "gemini-exp-1114",
     "exp-1121": "gemini-exp-1121",
-    "1.5-pro-exp-0827": "gemini-1.5-pro-exp-0827",
-    "1.5-flash-exp-0827": "gemini-1.5-flash-exp-0827",
-    "1.5-flash-8b-exp-0827": "gemini-1.5-flash-8b-exp-0827",
-    "1.5-flash-8b-exp-0924": "gemini-1.5-flash-8b-exp-0924",
+    "exp-1206": "gemini-exp-1206",
     "1.5-pro-latest": "gemini-1.5-pro-latest",
     "1.5-flash-latest": "gemini-1.5-flash-latest",
     "1.5-flash-8b-latest": "gemini-1.5-flash-8b-latest",
@@ -76,77 +72,53 @@ const getCharacterLimit = (modelId, actionType) => {
   // noTextCustom: The same as Summarize
   // textCustom: The same as Summarize
   const characterLimits = {
-    "gemini-exp-1114": {
-      summarize: 24576,
-      translate: 8192,
-      noTextCustom: 24576,
-      textCustom: 24576
-    },
     "gemini-exp-1121": {
       summarize: 24576,
       translate: 8192,
       noTextCustom: 24576,
       textCustom: 24576
     },
-    "gemini-1.5-pro-exp-0827": {
+    "gemini-exp-1206": {
       summarize: 1572864,
       translate: 8192,
       noTextCustom: 1572864,
       textCustom: 1572864
-    },
-    "gemini-1.5-flash-exp-0827": {
-      summarize: 786432,
-      translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
-    "gemini-1.5-flash-8b-exp-0827": {
-      summarize: 786432,
-      translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
-    "gemini-1.5-flash-8b-exp-0924": {
-      summarize: 786432,
-      translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
     },
     "gemini-1.5-pro-latest": {
-      summarize: 1572864,
+      summarize: 1500000,
       translate: 8192,
-      noTextCustom: 1572864,
-      textCustom: 1572864
+      noTextCustom: 1500000,
+      textCustom: 1500000
     },
     "gemini-1.5-flash-latest": {
-      summarize: 786432,
+      summarize: 750000,
       translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
+      noTextCustom: 750000,
+      textCustom: 750000
     },
     "gemini-1.5-flash-8b-latest": {
-      summarize: 786432,
+      summarize: 750000,
       translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
+      noTextCustom: 750000,
+      textCustom: 750000
     },
     "gemini-1.5-pro": {
-      summarize: 1572864,
+      summarize: 1500000,
       translate: 8192,
-      noTextCustom: 1572864,
-      textCustom: 1572864
+      noTextCustom: 1500000,
+      textCustom: 1500000
     },
     "gemini-1.5-flash": {
-      summarize: 786432,
+      summarize: 750000,
       translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
+      noTextCustom: 750000,
+      textCustom: 750000
     },
     "gemini-1.5-flash-8b": {
-      summarize: 786432,
+      summarize: 750000,
       translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
+      noTextCustom: 750000,
+      textCustom: 750000
     }
   };
 
