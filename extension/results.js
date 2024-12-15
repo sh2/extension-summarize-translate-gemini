@@ -109,6 +109,9 @@ const askQuestion = async () => {
   // Create a new div element with the formatted text
   const formattedQuestionDiv = document.createElement("div");
   formattedQuestionDiv.style.backgroundColor = "var(--nc-bg-3)";
+  formattedQuestionDiv.style.borderRadius = "1rem";
+  formattedQuestionDiv.style.margin = "1.5rem";
+  formattedQuestionDiv.style.padding = "1rem 1rem .1rem";
   formattedQuestionDiv.innerHTML = DOMPurify.sanitize(marked.parse(questionDiv.innerHTML, { breaks: true }));
 
   // Append the formatted text to the conversation
