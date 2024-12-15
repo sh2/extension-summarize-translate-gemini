@@ -195,13 +195,14 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         taskInput.length
       );
 
-      let contents = [];
+      let userRequest = {};
 
       if (mediaType === "image") {
         const [mediaInfo, mediaData] = taskInput.split(",");
         const mediaType = mediaInfo.split(":")[1].split(";")[0];
 
-        contents.push({
+        userRequest = {
+          role: "user",
           parts: [
             { text: systemPrompt },
             {
@@ -211,13 +212,15 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
               }
             }
           ]
-        });
+        };
       } else {
-        contents.push({
+        userRequest = {
           role: "user",
           parts: [{ text: systemPrompt + "\nText:\n" + taskInput }]
-        });
+        };
       }
+
+      const contents = [userRequest];
 
       try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`, {
@@ -254,6 +257,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         const responseData = {
           ok: response.ok,
           status: response.status,
+          request: userRequest,
           body: tryJsonParse(await response.text())
         };
 
@@ -267,6 +271,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         sendResponse({
           ok: false,
           status: 1000,
+          request: userRequest,
           body: { error: { message: error.stack } }
         });
       }

@@ -1,6 +1,6 @@
 /* globals DOMPurify, Readability, marked */
 
-let contentIndex = 0;
+let resultIndex = 0;
 
 const checkNarrowScreen = () => {
   // Add the narrow class if the screen width is narrow
@@ -191,9 +191,11 @@ const displayLoadingMessage = (loadingMessage) => {
 const main = async (useCache) => {
   let displayIntervalId = 0;
   let content = "";
-  contentIndex = (await chrome.storage.session.get({ contentIndex: -1 })).contentIndex;
-  contentIndex = (contentIndex + 1) % 10;
-  await chrome.storage.session.set({ contentIndex: contentIndex });
+  let response = {};
+
+  resultIndex = (await chrome.storage.session.get({ resultIndex: -1 })).resultIndex;
+  resultIndex = (resultIndex + 1) % 10;
+  await chrome.storage.session.set({ resultIndex: resultIndex });
 
   try {
     const languageModel = document.getElementById("languageModel").value;
@@ -227,7 +229,6 @@ const main = async (useCache) => {
 
     for (const taskInputChunk of taskInputChunks) {
       const taskCache = (await chrome.storage.session.get({ taskCache: "" })).taskCache;
-      let response = {};
 
       if (useCache && taskCache === JSON.stringify({
         actionType,
@@ -303,7 +304,7 @@ const main = async (useCache) => {
     document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 
     // Save the content to the session storage
-    await chrome.storage.session.set({ [`c_${contentIndex}`]: content });
+    await chrome.storage.session.set({ [`r_${resultIndex}`]: { request: response.request, content: content } });
   }
 };
 
@@ -342,7 +343,7 @@ document.getElementById("run").addEventListener("click", () => {
 });
 
 document.getElementById("results").addEventListener("click", () => {
-  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${contentIndex}`) }, () => {
+  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${resultIndex}`) }, () => {
     window.close();
   });
 });
