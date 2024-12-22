@@ -42,10 +42,10 @@
         "message": "Phản hồi đã bị chặn."
     },
     "popup_unexpected_response": {
-        "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký bảng điều khiển."
+        "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký console."
     },
     "popup_miscellaneous_error": {
-        "message": "Trang này không thể được tóm tắt hoặc dịch."
+        "message": "Không thể tóm tắt hoặc dịch trang này."
     },
     "results_title": {
         "message": "Kết quả - Tóm tắt và Dịch với Gemini"
@@ -55,6 +55,9 @@
     },
     "results_copied": {
         "message": "Đã sao chép."
+    },
+    "results_button_send": {
+        "message": "Gửi"
     },
     "options_title": {
         "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
@@ -66,16 +69,16 @@
         "message": "Bạn có thể lấy Khóa API Gemini tại trang sau."
     },
     "options_model": {
-        "message": "Mô hình Ngôn ngữ"
+        "message": "Mô hình ngôn ngữ"
     },
     "options_language": {
-        "message": "Tóm tắt bằng / Dịch sang"
+        "message": "Tóm tắt thành / Dịch sang"
     },
     "options_language_notes": {
-        "message": "Cài đặt ngôn ngữ bị bỏ qua trong các hành động tùy chỉnh."
+        "message": "Cài đặt ngôn ngữ không được tính đến trong các hành động tùy chỉnh."
     },
     "options_no_text_action": {
-        "message": "Khi không có văn bản nào được chọn, hãy thực hiện hành động sau"
+        "message": "Khi không có văn bản nào được chọn, thực hiện hành động sau"
     },
     "options_no_text_summarize": {
         "message": "Tóm tắt (mặc định)"
@@ -87,7 +90,7 @@
         "message": "Hành động tùy chỉnh"
     },
     "options_text_action": {
-        "message": "Khi văn bản được chọn, hãy thực hiện hành động sau"
+        "message": "Khi văn bản được chọn, thực hiện hành động sau"
     },
     "options_text_summarize": {
         "message": "Tóm tắt"

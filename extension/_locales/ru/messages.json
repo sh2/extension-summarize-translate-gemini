@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "Резюме и перевод с помощью Gemini"
+        "message": "Суммировать и переводить с помощью Gemini"
     },
     "extension_description": {
-        "message": "Резюмируйте и переводите веб-страницы. Использует Gemini в качестве бэкэнда."
+        "message": "Суммирует и переводит веб-страницы. Использует Gemini в качестве бэкэнда."
     },
     "popup_button_run": {
         "message": "Запустить снова"
@@ -15,19 +15,19 @@
         "message": "Открыть страницу настроек"
     },
     "popup_summarizing": {
-        "message": "Резюмирование"
+        "message": "Суммирование"
     },
     "popup_summarizing_captions": {
-        "message": "Резюмирование субтитров"
+        "message": "Суммирование подписей"
     },
     "popup_summarizing_image": {
-        "message": "Резюмирование изображения"
+        "message": "Суммирование изображения"
     },
     "popup_translating": {
         "message": "Перевод"
     },
     "popup_translating_captions": {
-        "message": "Перевод субтитров"
+        "message": "Перевод подписей"
     },
     "popup_translating_image": {
         "message": "Перевод изображения"
@@ -42,13 +42,13 @@
         "message": "Ответ был заблокирован."
     },
     "popup_unexpected_response": {
-        "message": "Произошла неизвестная ошибка. Проверьте журнал консоли."
+        "message": "Произошла неизвестная ошибка. Пожалуйста, проверьте журнал консоли."
     },
     "popup_miscellaneous_error": {
-        "message": "Эта страница не может быть резюмирована или переведена."
+        "message": "Эта страница не может быть суммирована или переведена."
     },
     "results_title": {
-        "message": "Результаты - Резюме и перевод с помощью Gemini"
+        "message": "Результаты - Суммировать и переводить с помощью Gemini"
     },
     "results_button_copy": {
         "message": "Копировать"
@@ -56,29 +56,32 @@
     "results_copied": {
         "message": "Скопировано."
     },
+    "results_button_send": {
+        "message": "Отправить"
+    },
     "options_title": {
-        "message": "Настройки - Резюме и перевод с помощью Gemini"
+        "message": "Настройки - Суммировать и переводить с помощью Gemini"
     },
     "options_apikey": {
-        "message": "Ключ API Gemini"
+        "message": "Gemini API Key"
     },
     "options_apikey_hint": {
-        "message": "Вы можете получить ключ API Gemini на следующей странице."
+        "message": "Вы можете получить Gemini API Key на следующей странице."
     },
     "options_model": {
         "message": "Языковая модель"
     },
     "options_language": {
-        "message": "Резюмировать на / Перевести на"
+        "message": "Суммировать на / Перевести на"
     },
     "options_language_notes": {
         "message": "Настройка языка игнорируется в пользовательских действиях."
     },
     "options_no_text_action": {
-        "message": "Когда текст не выбран, выполните следующее действие"
+        "message": "Когда текст не выбран, выполнить следующее действие"
     },
     "options_no_text_summarize": {
-        "message": "Резюмировать (по умолчанию)"
+        "message": "Суммировать (по умолчанию)"
     },
     "options_no_text_translate": {
         "message": "Перевести"
@@ -87,10 +90,10 @@
         "message": "Пользовательское действие"
     },
     "options_text_action": {
-        "message": "Когда текст выбран, выполните следующее действие"
+        "message": "Когда текст выбран, выполнить следующее действие"
     },
     "options_text_summarize": {
-        "message": "Резюмировать"
+        "message": "Суммировать"
     },
     "options_text_translate": {
         "message": "Перевести (по умолчанию)"

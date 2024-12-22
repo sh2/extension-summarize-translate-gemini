@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "Gemini를 사용하여 요약 및 번역"
+        "message": "Gemini로 요약 및 번역"
     },
     "extension_description": {
-        "message": "웹 페이지를 요약하고 번역합니다. 백엔드로 Gemini를 사용합니다."
+        "message": "웹 페이지를 요약하고 번역합니다. Gemini를 백엔드로 사용합니다."
     },
     "popup_button_run": {
         "message": "다시 실행"
@@ -18,7 +18,7 @@
         "message": "요약 중"
     },
     "popup_summarizing_captions": {
-        "message": "자막 요약 중"
+        "message": "캡션 요약 중"
     },
     "popup_summarizing_image": {
         "message": "이미지 요약 중"
@@ -27,7 +27,7 @@
         "message": "번역 중"
     },
     "popup_translating_captions": {
-        "message": "자막 번역 중"
+        "message": "캡션 번역 중"
     },
     "popup_translating_image": {
         "message": "이미지 번역 중"
@@ -48,7 +48,7 @@
         "message": "이 페이지는 요약하거나 번역할 수 없습니다."
     },
     "results_title": {
-        "message": "결과 - Gemini를 사용하여 요약 및 번역"
+        "message": "결과 - Gemini로 요약 및 번역"
     },
     "results_button_copy": {
         "message": "복사"
@@ -56,8 +56,11 @@
     "results_copied": {
         "message": "복사되었습니다."
     },
+    "results_button_send": {
+        "message": "보내기"
+    },
     "options_title": {
-        "message": "옵션 - Gemini를 사용하여 요약 및 번역"
+        "message": "옵션 - Gemini로 요약 및 번역"
     },
     "options_apikey": {
         "message": "Gemini API 키"
@@ -69,13 +72,13 @@
         "message": "언어 모델"
     },
     "options_language": {
-        "message": "요약 언어 / 번역 언어"
+        "message": "요약/번역할 언어"
     },
     "options_language_notes": {
-        "message": "사용자 지정 작업에서는 언어 설정이 무시됩니다."
+        "message": "사용자 정의 작업에서는 언어 설정이 무시됩니다."
     },
     "options_no_text_action": {
-        "message": "텍스트가 선택되지 않은 경우 다음 작업을 수행합니다."
+        "message": "텍스트가 선택되지 않은 경우 다음 작업 수행"
     },
     "options_no_text_summarize": {
         "message": "요약 (기본값)"
@@ -84,10 +87,10 @@
         "message": "번역"
     },
     "options_no_text_custom": {
-        "message": "사용자 지정 작업"
+        "message": "사용자 정의 작업"
     },
     "options_text_action": {
-        "message": "텍스트가 선택된 경우 다음 작업을 수행합니다."
+        "message": "텍스트가 선택된 경우 다음 작업 수행"
     },
     "options_text_summarize": {
         "message": "요약"
@@ -96,7 +99,7 @@
         "message": "번역 (기본값)"
     },
     "options_text_custom": {
-        "message": "사용자 지정 작업"
+        "message": "사용자 정의 작업"
     },
     "options_button_save": {
         "message": "옵션 저장"

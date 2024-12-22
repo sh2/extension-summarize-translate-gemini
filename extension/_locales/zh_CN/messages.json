@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 摘要和翻译"
+        "message": "使用Gemini进行总结和翻译"
     },
     "extension_description": {
-        "message": "摘要和翻译网页。使用 Gemini 作为后端。"
+        "message": "总结和翻译网页。使用Gemini作为后端。"
     },
     "popup_button_run": {
         "message": "再次运行"
@@ -15,13 +15,13 @@
         "message": "打开选项页面"
     },
     "popup_summarizing": {
-        "message": "正在摘要"
+        "message": "正在总结"
     },
     "popup_summarizing_captions": {
-        "message": "正在摘要字幕"
+        "message": "正在总结字幕"
     },
     "popup_summarizing_image": {
-        "message": "正在摘要图像"
+        "message": "正在总结图像"
     },
     "popup_translating": {
         "message": "正在翻译"
@@ -45,10 +45,10 @@
         "message": "发生未知错误。请检查控制台日志。"
     },
     "popup_miscellaneous_error": {
-        "message": "无法摘要或翻译此页面。"
+        "message": "此页面无法总结或翻译。"
     },
     "results_title": {
-        "message": "结果 - 使用 Gemini 摘要和翻译"
+        "message": "结果 - 使用Gemini进行总结和翻译"
     },
     "results_button_copy": {
         "message": "复制"
@@ -56,29 +56,32 @@
     "results_copied": {
         "message": "已复制。"
     },
+    "results_button_send": {
+        "message": "发送"
+    },
     "options_title": {
-        "message": "选项 - 使用 Gemini 摘要和翻译"
+        "message": "选项 - 使用Gemini进行总结和翻译"
     },
     "options_apikey": {
         "message": "Gemini API 密钥"
     },
     "options_apikey_hint": {
-        "message": "您可以在以下页面获取 Gemini API 密钥。"
+        "message": "您可以在以下页面获取Gemini API密钥。"
     },
     "options_model": {
         "message": "语言模型"
     },
     "options_language": {
-        "message": "摘要语言 / 翻译语言"
+        "message": "总结为/翻译为"
     },
     "options_language_notes": {
-        "message": "自定义操作中忽略语言设置。"
+        "message": "自定义操作中会忽略语言设置。"
     },
     "options_no_text_action": {
         "message": "当未选择文本时，执行以下操作"
     },
     "options_no_text_summarize": {
-        "message": "摘要（默认）"
+        "message": "总结（默认）"
     },
     "options_no_text_translate": {
         "message": "翻译"
@@ -90,7 +93,7 @@
         "message": "当选择文本时，执行以下操作"
     },
     "options_text_summarize": {
-        "message": "摘要"
+        "message": "总结"
     },
     "options_text_translate": {
         "message": "翻译（默认）"
