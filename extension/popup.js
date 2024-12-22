@@ -1,15 +1,8 @@
 /* globals DOMPurify, Readability, marked */
 
-let resultIndex = 0;
+import { adjustLayoutForScreenSize } from "./utils.js";
 
-const checkNarrowScreen = () => {
-  // Add the narrow class if the screen width is narrow
-  if (document.getElementById("header").clientWidth < 640) {
-    document.body.classList.add("narrow");
-  } else {
-    document.body.classList.remove("narrow");
-  }
-};
+let resultIndex = 0;
 
 const getSelectedText = () => {
   // Return the selected text
@@ -228,9 +221,9 @@ const main = async (useCache) => {
     }
 
     for (const taskInputChunk of taskInputChunks) {
-      const taskCache = (await chrome.storage.session.get({ taskCache: "" })).taskCache;
+      const responseCacheKey = (await chrome.storage.session.get({ responseCacheKey: "" })).responseCacheKey;
 
-      if (useCache && taskCache === JSON.stringify({
+      if (useCache && responseCacheKey === JSON.stringify({
         actionType,
         mediaType,
         taskInput: taskInputChunk,
@@ -304,13 +297,13 @@ const main = async (useCache) => {
     document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 
     // Save the content to the session storage
-    await chrome.storage.session.set({ [`r_${resultIndex}`]: { request: response.request, content: content } });
+    await chrome.storage.session.set({ [`r_${resultIndex}`]: { requestApiContent: response.requestApiContent, responseContent: content } });
   }
 };
 
 const initialize = async () => {
   // Check if the screen is narrow
-  checkNarrowScreen();
+  adjustLayoutForScreenSize();
 
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: ({ text }) => text } });
@@ -354,4 +347,4 @@ document.getElementById("options").addEventListener("click", () => {
   });
 });
 
-window.addEventListener("resize", checkNarrowScreen);
+window.addEventListener("resize", adjustLayoutForScreenSize);

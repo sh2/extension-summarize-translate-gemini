@@ -1,15 +1,9 @@
 /* global DOMPurify, marked */
 
-let result = {};
+import { adjustLayoutForScreenSize, generateContent } from "./utils.js";
 
-const checkNarrowScreen = () => {
-  // Add the narrow class if the screen width is narrow
-  if (document.getElementById("header").clientWidth < 640) {
-    document.body.classList.add("narrow");
-  } else {
-    document.body.classList.remove("narrow");
-  }
-};
+const conversation = [];
+let result = {};
 
 const copyContent = async () => {
   // TODO: answer should be copied as well
@@ -22,76 +16,8 @@ const copyContent = async () => {
   setTimeout(() => status.textContent = "", 1000);
 };
 
-const tryJsonParse = (text) => {
-  try {
-    return JSON.parse(text);
-  } catch {
-    return { error: { message: text } };
-  }
-};
-
-const generateAnswer = async (question) => {
-  // TODO: modelId should be retrieved from the user settings
-  // TODO: multi-turn conversation should be implemented
-  const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
-  let contents = [];
-
-  contents.push(result.request);
-  contents.push({ role: "model", parts: [{ text: result.content }] });
-  contents.push({ role: "user", parts: [{ text: question }] });
-
-  console.log(contents);
-
-  try {
-    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-key": apiKey,
-      },
-      body: JSON.stringify({
-        contents: contents,
-        safetySettings: [{
-          category: "HARM_CATEGORY_HARASSMENT",
-          threshold: "BLOCK_NONE"
-        },
-        {
-          category: "HARM_CATEGORY_HATE_SPEECH",
-          threshold: "BLOCK_NONE"
-        },
-        {
-          category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-          threshold: "BLOCK_NONE"
-        },
-        {
-          category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-          threshold: "BLOCK_NONE"
-        },
-        {
-          category: "HARM_CATEGORY_CIVIC_INTEGRITY",
-          threshold: "BLOCK_NONE"
-        }]
-      })
-    });
-
-    const responseData = {
-      ok: response.ok,
-      status: response.status,
-      body: tryJsonParse(await response.text())
-    };
-
-    return responseData.body.candidates[0].content.parts[0].text;
-  } catch (error) {
-    // TODO: error handling
-    return ({
-      ok: false,
-      status: 1000,
-      body: { error: { message: error.stack } }
-    });
-  }
-};
-
 const askQuestion = async () => {
+  // TODO: modelId should be retrieved from the user settings
   // TODO: disable the button while waiting for the answer
   // TODO: display waiting message while waiting for the answer
   // TODO: scroll to the bottom of the conversation
@@ -119,7 +45,20 @@ const askQuestion = async () => {
   document.getElementById("question-text").value = "";
 
   // Generate an answer to the question
-  const answer = await generateAnswer(question);
+  const apiContents = [];
+  apiContents.push(result.requestApiContent);
+  apiContents.push({ role: "model", parts: [{ text: result.responseContent }] });
+
+  // conversationの中身をapiContentsに追加
+  conversation.forEach((item) => {
+    apiContents.push({ role: "user", parts: [{ text: item.question }] });
+    apiContents.push({ role: "model", parts: [{ text: item.answer }] });
+  });
+
+  apiContents.push({ role: "user", parts: [{ text: question }] });
+  const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
+  const response = await generateContent("gemini-2.0-flash-exp", apiKey, apiContents);
+  const answer = response.body.candidates[0].content.parts[0].text;
 
   // Create a new div element with the answer
   const answerDiv = document.createElement("div");
@@ -131,11 +70,13 @@ const askQuestion = async () => {
 
   // Append the formatted text to the conversation
   document.getElementById("conversation").appendChild(formattedAnswerDiv);
+
+  conversation.push({ question: question, answer: answer });
 };
 
 const initialize = async () => {
-  // Check if the screen is narrow  
-  checkNarrowScreen();
+  // Check if the screen is narrow
+  adjustLayoutForScreenSize();
 
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: ({ text }) => text } });
@@ -155,11 +96,11 @@ const initialize = async () => {
 
   // Convert the content from Markdown to HTML
   const div = document.createElement("div");
-  div.textContent = result.content;
+  div.textContent = result.responseContent;
   document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 };
 
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("copy").addEventListener("click", copyContent);
 document.getElementById("question-send").addEventListener("click", askQuestion);
-window.addEventListener("resize", checkNarrowScreen);
+window.addEventListener("resize", adjustLayoutForScreenSize);

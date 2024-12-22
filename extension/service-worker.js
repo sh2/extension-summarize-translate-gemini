@@ -1,3 +1,5 @@
+import { generateContent } from "./utils.js";
+
 const getModelId = (languageModel) => {
   const modelMappings = {
     "exp-1121": "gemini-exp-1121",
@@ -164,14 +166,6 @@ const chunkText = (text, chunkSize) => {
   return chunks;
 };
 
-const tryJsonParse = (text) => {
-  try {
-    return JSON.parse(text);
-  } catch {
-    return { error: { message: text } };
-  }
-};
-
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
     if (request.message === "chunk") {
@@ -195,13 +189,13 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         taskInput.length
       );
 
-      let userRequest = {};
+      let apiContent = {};
 
       if (mediaType === "image") {
         const [mediaInfo, mediaData] = taskInput.split(",");
         const mediaType = mediaInfo.split(":")[1].split(";")[0];
 
-        userRequest = {
+        apiContent = {
           role: "user",
           parts: [
             { text: systemPrompt },
@@ -214,67 +208,23 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
           ]
         };
       } else {
-        userRequest = {
+        apiContent = {
           role: "user",
           parts: [{ text: systemPrompt + "\nText:\n" + taskInput }]
         };
       }
 
-      const contents = [userRequest];
+      const response = await generateContent(modelId, apiKey, [apiContent]);
 
-      try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-goog-api-key": apiKey,
-          },
-          body: JSON.stringify({
-            contents: contents,
-            safetySettings: [{
-              category: "HARM_CATEGORY_HARASSMENT",
-              threshold: "BLOCK_NONE"
-            },
-            {
-              category: "HARM_CATEGORY_HATE_SPEECH",
-              threshold: "BLOCK_NONE"
-            },
-            {
-              category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-              threshold: "BLOCK_NONE"
-            },
-            {
-              category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-              threshold: "BLOCK_NONE"
-            },
-            {
-              category: "HARM_CATEGORY_CIVIC_INTEGRITY",
-              threshold: "BLOCK_NONE"
-            }]
-          })
-        });
-
-        const responseData = {
-          ok: response.ok,
-          status: response.status,
-          request: userRequest,
-          body: tryJsonParse(await response.text())
-        };
-
-        if (response.ok) {
-          const taskData = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
-          await chrome.storage.session.set({ taskCache: taskData, responseCache: responseData });
-        }
-
-        sendResponse(responseData);
-      } catch (error) {
-        sendResponse({
-          ok: false,
-          status: 1000,
-          request: userRequest,
-          body: { error: { message: error.stack } }
-        });
+      if (response.ok) {
+        const responseCacheKey = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
+        await chrome.storage.session.set({ responseCacheKey: responseCacheKey, responseCache: response });
       }
+
+      // Add the system prompt and the user input to the response
+      response.requestApiContent = apiContent;
+
+      sendResponse(response);
     }
   })();
 

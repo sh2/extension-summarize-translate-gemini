@@ -19,7 +19,8 @@
   "background": {
     "scripts": [
       "service-worker.js"
-    ]
+    ],
+    "type": "module"
   },
   "options_page": "options.html",
   "permissions": [
