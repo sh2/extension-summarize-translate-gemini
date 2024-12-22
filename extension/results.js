@@ -31,6 +31,7 @@ const askQuestion = async () => {
     return;
   }
 
+  document.getElementById("copy").disabled = true;
   document.getElementById("text").disabled = true;
   document.getElementById("languageModel").disabled = true;
   document.getElementById("send").disabled = true;
@@ -58,6 +59,7 @@ const askQuestion = async () => {
   }
 
   document.getElementById("send-status").textContent = "";
+  document.getElementById("copy").disabled = false;
   document.getElementById("text").disabled = false;
   document.getElementById("languageModel").disabled = false;
   document.getElementById("send").disabled = false;

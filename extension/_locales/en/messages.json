@@ -56,6 +56,9 @@
     "results_copied": {
         "message": "Copied."
     },
+    "results_button_send": {
+        "message": "Send"
+    },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"
     },
