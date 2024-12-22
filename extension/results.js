@@ -36,7 +36,7 @@ const askQuestion = async () => {
   document.getElementById("languageModel").disabled = true;
   document.getElementById("send").disabled = true;
 
-  let displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", "Waiting for AI's response");
+  let displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_response"));
 
   // Generate an answer to the question
   const apiContents = [];

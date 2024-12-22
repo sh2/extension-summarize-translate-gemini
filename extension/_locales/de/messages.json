@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "Senden"
     },
+    "results_waiting_response": {
+        "message": "Warten auf eine Antwort"
+    },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
     },

@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "Send"
     },
+    "results_waiting_response": {
+        "message": "Waiting for a response"
+    },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"
     },

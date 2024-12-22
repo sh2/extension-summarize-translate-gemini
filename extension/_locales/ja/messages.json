@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "送信する"
     },
+    "results_waiting_response": {
+        "message": "応答を待っています"
+    },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
     },

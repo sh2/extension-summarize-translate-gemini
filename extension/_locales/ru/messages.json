@@ -45,7 +45,7 @@
         "message": "Произошла неизвестная ошибка. Пожалуйста, проверьте журнал консоли."
     },
     "popup_miscellaneous_error": {
-        "message": "Эта страница не может быть суммирована или переведена."
+        "message": "Эту страницу невозможно суммировать или перевести."
     },
     "results_title": {
         "message": "Результаты - Суммировать и переводить с помощью Gemini"
@@ -59,14 +59,17 @@
     "results_button_send": {
         "message": "Отправить"
     },
+    "results_waiting_response": {
+        "message": "Ожидание ответа"
+    },
     "options_title": {
         "message": "Настройки - Суммировать и переводить с помощью Gemini"
     },
     "options_apikey": {
-        "message": "Gemini API Key"
+        "message": "Ключ API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Вы можете получить Gemini API Key на следующей странице."
+        "message": "Вы можете получить ключ API Gemini на следующей странице."
     },
     "options_model": {
         "message": "Языковая модель"
@@ -78,7 +81,7 @@
         "message": "Настройка языка игнорируется в пользовательских действиях."
     },
     "options_no_text_action": {
-        "message": "Когда текст не выбран, выполнить следующее действие"
+        "message": "Когда текст не выделен, выполнить следующее действие"
     },
     "options_no_text_summarize": {
         "message": "Суммировать (по умолчанию)"
@@ -90,7 +93,7 @@
         "message": "Пользовательское действие"
     },
     "options_text_action": {
-        "message": "Когда текст выбран, выполнить следующее действие"
+        "message": "Когда текст выделен, выполнить следующее действие"
     },
     "options_text_summarize": {
         "message": "Суммировать"

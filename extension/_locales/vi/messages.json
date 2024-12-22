@@ -36,7 +36,7 @@
         "message": "Đang xử lý"
     },
     "popup_prompt_blocked": {
-        "message": "Yêu cầu đã bị chặn."
+        "message": "Lời nhắc đã bị chặn."
     },
     "popup_response_blocked": {
         "message": "Phản hồi đã bị chặn."
@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "Gửi"
     },
+    "results_waiting_response": {
+        "message": "Đang chờ phản hồi"
+    },
     "options_title": {
         "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
     },
@@ -78,7 +81,7 @@
         "message": "Cài đặt ngôn ngữ không được tính đến trong các hành động tùy chỉnh."
     },
     "options_no_text_action": {
-        "message": "Khi không có văn bản nào được chọn, thực hiện hành động sau"
+        "message": "Khi không có văn bản nào được chọn, hãy thực hiện hành động sau"
     },
     "options_no_text_summarize": {
         "message": "Tóm tắt (mặc định)"
@@ -90,7 +93,7 @@
         "message": "Hành động tùy chỉnh"
     },
     "options_text_action": {
-        "message": "Khi văn bản được chọn, thực hiện hành động sau"
+        "message": "Khi văn bản được chọn, hãy thực hiện hành động sau"
     },
     "options_text_summarize": {
         "message": "Tóm tắt"

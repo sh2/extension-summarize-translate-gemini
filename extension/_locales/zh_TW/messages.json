@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "傳送"
     },
+    "results_waiting_response": {
+        "message": "等待回應"
+    },
     "options_title": {
         "message": "選項 - 使用 Gemini 總結與翻譯"
     },
@@ -75,10 +78,10 @@
         "message": "總結為 / 翻譯為"
     },
     "options_language_notes": {
-        "message": "語言設定在自訂動作中會被忽略。"
+        "message": "自訂動作中會忽略語言設定。"
     },
     "options_no_text_action": {
-        "message": "當未選取文字時，執行以下動作"
+        "message": "未選取文字時，執行以下動作"
     },
     "options_no_text_summarize": {
         "message": "總結 (預設)"
@@ -90,7 +93,7 @@
         "message": "自訂動作"
     },
     "options_text_action": {
-        "message": "當選取文字時，執行以下動作"
+        "message": "選取文字時，執行以下動作"
     },
     "options_text_summarize": {
         "message": "總結"

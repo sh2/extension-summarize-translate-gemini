@@ -42,10 +42,10 @@
         "message": "উত্তরটি ব্লক করা হয়েছে।"
     },
     "popup_unexpected_response": {
-        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগ চেক করুন।"
+        "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। কনসোল লগ পরীক্ষা করুন।"
     },
     "popup_miscellaneous_error": {
-        "message": "এই পেজটির সারসংক্ষেপ বা অনুবাদ করা সম্ভব নয়।"
+        "message": "এই পৃষ্ঠাটির সারসংক্ষেপ বা অনুবাদ করা যাবে না।"
     },
     "results_title": {
         "message": "ফলাফল - Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "প্রেরণ করুন"
     },
+    "results_waiting_response": {
+        "message": "উত্তরের জন্য অপেক্ষা করা হচ্ছে"
+    },
     "options_title": {
         "message": "অপশন - Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
@@ -66,7 +69,7 @@
         "message": "Gemini API কী"
     },
     "options_apikey_hint": {
-        "message": "আপনি নিচের পেজে Gemini API কী পেতে পারেন।"
+        "message": "আপনি নিম্নলিখিত পৃষ্ঠায় একটি Gemini API কী পেতে পারেন।"
     },
     "options_model": {
         "message": "ভাষা মডেল"
@@ -75,10 +78,10 @@
         "message": "সারসংক্ষেপ করুন / অনুবাদ করুন"
     },
     "options_language_notes": {
-        "message": "কাস্টম অ্যাকশনগুলিতে ভাষার সেটিংস উপেক্ষা করা হয়।"
+        "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিংস উপেক্ষা করা হয়।"
     },
     "options_no_text_action": {
-        "message": "যখন কোনো টেক্সট সিলেক্ট করা না থাকে, তখন নিচের কাজটি করুন"
+        "message": "যখন কোনো টেক্সট নির্বাচন করা না হয়, তখন নিম্নলিখিত কাজটি করুন"
     },
     "options_no_text_summarize": {
         "message": "সারসংক্ষেপ করুন (ডিফল্ট)"
@@ -90,7 +93,7 @@
         "message": "কাস্টম অ্যাকশন"
     },
     "options_text_action": {
-        "message": "যখন টেক্সট সিলেক্ট করা থাকে, তখন নিচের কাজটি করুন"
+        "message": "যখন টেক্সট নির্বাচন করা হয়, তখন নিম্নলিখিত কাজটি করুন"
     },
     "options_text_summarize": {
         "message": "সারসংক্ষেপ করুন"
@@ -102,9 +105,9 @@
         "message": "কাস্টম অ্যাকশন"
     },
     "options_button_save": {
-        "message": "অপশনগুলি সেভ করুন"
+        "message": "অপশনগুলি সংরক্ষণ করুন"
     },
     "options_saved": {
-        "message": "সেভ করা হয়েছে।"
+        "message": "সংরক্ষিত হয়েছে।"
     }
 }

@@ -9,7 +9,7 @@
         "message": "इसे फिर से चलाएँ"
     },
     "popup_button_results": {
-        "message": "परिणाम एक नए टैब में खोलें"
+        "message": "परिणामों को एक नए टैब में खोलें"
     },
     "popup_button_options": {
         "message": "विकल्प पृष्ठ खोलें"
@@ -58,6 +58,9 @@
     },
     "results_button_send": {
         "message": "भेजें"
+    },
+    "results_waiting_response": {
+        "message": "प्रतिक्रिया की प्रतीक्षा की जा रही है"
     },
     "options_title": {
         "message": "विकल्प - Gemini के साथ संक्षेप और अनुवाद करें"

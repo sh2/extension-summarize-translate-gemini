@@ -6,7 +6,7 @@
         "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كخادم خلفي."
     },
     "popup_button_run": {
-        "message": "تشغيل مرة أخرى"
+        "message": "إعادة التشغيل"
     },
     "popup_button_results": {
         "message": "فتح النتائج في علامة تبويب جديدة"
@@ -58,6 +58,9 @@
     },
     "results_button_send": {
         "message": "إرسال"
+    },
+    "results_waiting_response": {
+        "message": "في انتظار الرد"
     },
     "options_title": {
         "message": "خيارات - تلخيص وترجمة باستخدام Gemini"

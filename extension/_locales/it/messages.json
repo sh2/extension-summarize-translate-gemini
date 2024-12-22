@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "Invia"
     },
+    "results_waiting_response": {
+        "message": "In attesa di una risposta"
+    },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
     },
@@ -66,10 +69,10 @@
         "message": "Chiave API Gemini"
     },
     "options_apikey_hint": {
-        "message": "È possibile ottenere una chiave API Gemini nella seguente pagina."
+        "message": "È possibile ottenere una chiave API Gemini alla seguente pagina."
     },
     "options_model": {
-        "message": "Modello linguistico"
+        "message": "Modello Linguistico"
     },
     "options_language": {
         "message": "Riassumi in / Traduci in"

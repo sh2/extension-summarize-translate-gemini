@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "Enviar"
     },
+    "results_waiting_response": {
+        "message": "Aguardando uma resposta"
+    },
     "options_title": {
         "message": "Opções - Resumir e Traduzir com Gemini"
     },

@@ -59,6 +59,9 @@
     "results_button_send": {
         "message": "发送"
     },
+    "results_waiting_response": {
+        "message": "等待响应"
+    },
     "options_title": {
         "message": "选项 - 使用Gemini进行总结和翻译"
     },
