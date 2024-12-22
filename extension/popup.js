@@ -1,6 +1,6 @@
 /* globals DOMPurify, Readability, marked */
 
-import { adjustLayoutForScreenSize } from "./utils.js";
+import { adjustLayoutForScreenSize, displayLoadingMessage } from "./utils.js";
 
 let resultIndex = 0;
 
@@ -166,21 +166,6 @@ const getLoadingMessage = (actionType, mediaType) => {
   return loadingMessage;
 };
 
-const displayLoadingMessage = (loadingMessage) => {
-  const status = document.getElementById("status");
-
-  switch (status.textContent) {
-    case `${loadingMessage}.`:
-      status.textContent = `${loadingMessage}..`;
-      break;
-    case `${loadingMessage}..`:
-      status.textContent = `${loadingMessage}...`;
-      break;
-    default:
-      status.textContent = `${loadingMessage}.`;
-  }
-};
-
 const main = async (useCache) => {
   let displayIntervalId = 0;
   let content = "";
@@ -203,7 +188,7 @@ const main = async (useCache) => {
     document.getElementById("results").disabled = true;
 
     const { actionType, mediaType, taskInput } = await extractTaskInformation(languageCode);
-    displayIntervalId = setInterval(displayLoadingMessage, 500, getLoadingMessage(actionType, mediaType));
+    displayIntervalId = setInterval(displayLoadingMessage, 500, "status", getLoadingMessage(actionType, mediaType));
 
     // Split the task input
     if (mediaType === "image") {

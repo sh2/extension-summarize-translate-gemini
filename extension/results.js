@@ -1,32 +1,66 @@
 /* global DOMPurify, marked */
 
-import { adjustLayoutForScreenSize, generateContent } from "./utils.js";
+import { adjustLayoutForScreenSize, displayLoadingMessage, getModelId, generateContent } from "./utils.js";
 
 const conversation = [];
 let result = {};
 
 const copyContent = async () => {
-  // TODO: answer should be copied as well
-  const content = document.getElementById("content").textContent;
-  const status = document.getElementById("status");
+  let content = result.responseContent.replace(/\n+$/, "") + "\n\n";
+
+  conversation.forEach((item) => {
+    content += item.question.replace(/\n+$/, "") + "\n\n";
+    content += item.answer.replace(/\n+$/, "") + "\n\n";
+  });
+
+  const copyStatus = document.getElementById("copy-status");
 
   // Copy the content to the clipboard
   await navigator.clipboard.writeText(content);
-  status.textContent = chrome.i18n.getMessage("results_copied");
-  setTimeout(() => status.textContent = "", 1000);
+  copyStatus.textContent = chrome.i18n.getMessage("results_copied");
+  setTimeout(() => copyStatus.textContent = "", 1000);
 };
 
 const askQuestion = async () => {
-  // TODO: modelId should be retrieved from the user settings
-  // TODO: disable the button while waiting for the answer
-  // TODO: display waiting message while waiting for the answer
-  // TODO: scroll to the bottom of the conversation
   // TODO: error handling
-  const question = document.getElementById("question-text").value.trim();
+  const languageModel = document.getElementById("languageModel").value;
+  const modelId = getModelId(languageModel);
+  const question = document.getElementById("text").value.trim();
 
   if (!question) {
     return;
   }
+
+  document.getElementById("text").disabled = true;
+  document.getElementById("languageModel").disabled = true;
+  document.getElementById("send").disabled = true;
+
+  let displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", "Waiting for AI's response");
+
+  // Generate an answer to the question
+  const apiContents = [];
+  apiContents.push(result.requestApiContent);
+  apiContents.push({ role: "model", parts: [{ text: result.responseContent }] });
+
+  // Add the previous questions and answers to the conversation
+  conversation.forEach((item) => {
+    apiContents.push({ role: "user", parts: [{ text: item.question }] });
+    apiContents.push({ role: "model", parts: [{ text: item.answer }] });
+  });
+
+  apiContents.push({ role: "user", parts: [{ text: question }] });
+  const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
+  const response = await generateContent(modelId, apiKey, apiContents);
+  const answer = response.body.candidates[0].content.parts[0].text;
+
+  if (displayIntervalId) {
+    clearInterval(displayIntervalId);
+  }
+
+  document.getElementById("send-status").textContent = "";
+  document.getElementById("text").disabled = false;
+  document.getElementById("languageModel").disabled = false;
+  document.getElementById("send").disabled = false;
 
   // Create a new div element with the question
   const questionDiv = document.createElement("div");
@@ -42,23 +76,7 @@ const askQuestion = async () => {
 
   // Append the formatted text to the conversation
   document.getElementById("conversation").appendChild(formattedQuestionDiv);
-  document.getElementById("question-text").value = "";
-
-  // Generate an answer to the question
-  const apiContents = [];
-  apiContents.push(result.requestApiContent);
-  apiContents.push({ role: "model", parts: [{ text: result.responseContent }] });
-
-  // conversationの中身をapiContentsに追加
-  conversation.forEach((item) => {
-    apiContents.push({ role: "user", parts: [{ text: item.question }] });
-    apiContents.push({ role: "model", parts: [{ text: item.answer }] });
-  });
-
-  apiContents.push({ role: "user", parts: [{ text: question }] });
-  const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
-  const response = await generateContent("gemini-2.0-flash-exp", apiKey, apiContents);
-  const answer = response.body.candidates[0].content.parts[0].text;
+  document.getElementById("text").value = "";
 
   // Create a new div element with the answer
   const answerDiv = document.createElement("div");
@@ -70,6 +88,9 @@ const askQuestion = async () => {
 
   // Append the formatted text to the conversation
   document.getElementById("conversation").appendChild(formattedAnswerDiv);
+
+  // Scroll to the bottom of the page
+  window.scrollTo(0, document.body.scrollHeight);
 
   conversation.push({ question: question, answer: answer });
 };
@@ -89,6 +110,15 @@ const initialize = async () => {
     element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
   });
 
+  // Restore the language code from the local storage
+  const { languageModel } = await chrome.storage.local.get({ languageModel: "1.5-flash" });
+  document.getElementById("languageModel").value = languageModel;
+
+  // Set the default language model if the language model is not set
+  if (!document.getElementById("languageModel").value) {
+    document.getElementById("languageModel").value = "1.5-flash";
+  }
+
   // Restore the content from the session storage
   const urlParams = new URLSearchParams(window.location.search);
   const resultIndex = urlParams.get("i");
@@ -102,5 +132,5 @@ const initialize = async () => {
 
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("copy").addEventListener("click", copyContent);
-document.getElementById("question-send").addEventListener("click", askQuestion);
+document.getElementById("send").addEventListener("click", askQuestion);
 window.addEventListener("resize", adjustLayoutForScreenSize);
