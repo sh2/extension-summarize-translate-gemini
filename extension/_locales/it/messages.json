@@ -15,34 +15,34 @@
         "message": "Apri la pagina delle opzioni"
     },
     "popup_summarizing": {
-        "message": "Riassunto in corso"
+        "message": "Riassumendo"
     },
     "popup_summarizing_captions": {
-        "message": "Riassunto delle didascalie"
+        "message": "Riassumendo le didascalie"
     },
     "popup_summarizing_image": {
-        "message": "Riassunto dell'immagine"
+        "message": "Riassumendo l'immagine"
     },
     "popup_translating": {
-        "message": "Traduzione in corso"
+        "message": "Traduco"
     },
     "popup_translating_captions": {
-        "message": "Traduzione delle didascalie"
+        "message": "Traduco le didascalie"
     },
     "popup_translating_image": {
-        "message": "Traduzione dell'immagine"
+        "message": "Traduco l'immagine"
     },
     "popup_processing": {
-        "message": "Elaborazione"
+        "message": "Elaborazione in corso"
     },
     "popup_prompt_blocked": {
-        "message": "Il prompt è stato bloccato."
+        "message": "La richiesta è stata bloccata."
     },
     "popup_response_blocked": {
         "message": "La risposta è stata bloccata."
     },
     "popup_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Controllare il registro della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
     },
     "popup_miscellaneous_error": {
         "message": "Questa pagina non può essere riassunta o tradotta."
@@ -50,11 +50,29 @@
     "results_title": {
         "message": "Risultati - Riassumi e Traduci con Gemini"
     },
+    "results_button_clear": {
+        "message": "Cancella conversazione"
+    },
     "results_button_copy": {
         "message": "Copia"
     },
     "results_copied": {
         "message": "Copiato."
+    },
+    "results_button_send": {
+        "message": "Invia"
+    },
+    "results_waiting_response": {
+        "message": "In attesa di una risposta"
+    },
+    "results_prompt_blocked": {
+        "message": "La richiesta è stata bloccata."
+    },
+    "results_response_blocked": {
+        "message": "La risposta è stata bloccata."
+    },
+    "results_unexpected_response": {
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
     },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"

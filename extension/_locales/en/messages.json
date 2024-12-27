@@ -50,11 +50,29 @@
     "results_title": {
         "message": "Results - Summarize and Translate with Gemini"
     },
+    "results_button_clear": {
+        "message": "Clear conversation"
+    },
     "results_button_copy": {
         "message": "Copy"
     },
     "results_copied": {
         "message": "Copied."
+    },
+    "results_button_send": {
+        "message": "Send"
+    },
+    "results_waiting_response": {
+        "message": "Waiting for a response"
+    },
+    "results_prompt_blocked": {
+        "message": "The prompt was blocked."
+    },
+    "results_response_blocked": {
+        "message": "The response was blocked."
+    },
+    "results_unexpected_response": {
+        "message": "An unknown error occurred. Please check the console log."
     },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"

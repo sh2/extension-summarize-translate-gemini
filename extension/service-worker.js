@@ -1,18 +1,4 @@
-const getModelId = (languageModel) => {
-  const modelMappings = {
-    "exp-1121": "gemini-exp-1121",
-    "exp-1206": "gemini-exp-1206",
-    "2.0-flash-exp": "gemini-2.0-flash-exp",
-    "1.5-pro-latest": "gemini-1.5-pro-latest",
-    "1.5-flash-latest": "gemini-1.5-flash-latest",
-    "1.5-flash-8b-latest": "gemini-1.5-flash-8b-latest",
-    "1.5-pro": "gemini-1.5-pro",
-    "1.5-flash": "gemini-1.5-flash",
-    "1.5-flash-8b": "gemini-1.5-flash-8b"
-  };
-
-  return modelMappings[languageModel];
-};
+import { getModelId, generateContent } from "./utils.js";
 
 const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLength) => {
   const languageNames = {
@@ -73,23 +59,23 @@ const getCharacterLimit = (modelId, actionType) => {
   // noTextCustom: The same as Summarize
   // textCustom: The same as Summarize
   const characterLimits = {
-    "gemini-exp-1121": {
-      summarize: 24576,
+    "gemini-1.5-pro": {
+      summarize: 1500000,
       translate: 8192,
-      noTextCustom: 24576,
-      textCustom: 24576
+      noTextCustom: 1500000,
+      textCustom: 1500000
     },
-    "gemini-exp-1206": {
-      summarize: 1572864,
+    "gemini-1.5-flash": {
+      summarize: 750000,
       translate: 8192,
-      noTextCustom: 1572864,
-      textCustom: 1572864
+      noTextCustom: 750000,
+      textCustom: 750000
     },
-    "gemini-2.0-flash-exp": {
-      summarize: 786432,
+    "gemini-1.5-flash-8b": {
+      summarize: 750000,
       translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
+      noTextCustom: 750000,
+      textCustom: 750000
     },
     "gemini-1.5-pro-latest": {
       summarize: 1500000,
@@ -109,23 +95,17 @@ const getCharacterLimit = (modelId, actionType) => {
       noTextCustom: 750000,
       textCustom: 750000
     },
-    "gemini-1.5-pro": {
-      summarize: 1500000,
+    "gemini-exp-1206": {
+      summarize: 1572864,
       translate: 8192,
-      noTextCustom: 1500000,
-      textCustom: 1500000
+      noTextCustom: 1572864,
+      textCustom: 1572864
     },
-    "gemini-1.5-flash": {
-      summarize: 750000,
+    "gemini-2.0-flash-exp": {
+      summarize: 786432,
       translate: 8192,
-      noTextCustom: 750000,
-      textCustom: 750000
-    },
-    "gemini-1.5-flash-8b": {
-      summarize: 750000,
-      translate: 8192,
-      noTextCustom: 750000,
-      textCustom: 750000
+      noTextCustom: 786432,
+      textCustom: 786432
     }
   };
 
@@ -164,14 +144,6 @@ const chunkText = (text, chunkSize) => {
   return chunks;
 };
 
-const tryJsonParse = (text) => {
-  try {
-    return JSON.parse(text);
-  } catch {
-    return { error: { message: text } };
-  }
-};
-
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
     if (request.message === "chunk") {
@@ -195,13 +167,14 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         taskInput.length
       );
 
-      let contents = [];
+      let apiContent = {};
 
       if (mediaType === "image") {
         const [mediaInfo, mediaData] = taskInput.split(",");
         const mediaType = mediaInfo.split(":")[1].split(";")[0];
 
-        contents.push({
+        apiContent = {
+          role: "user",
           parts: [
             { text: systemPrompt },
             {
@@ -211,65 +184,25 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
               }
             }
           ]
-        });
+        };
       } else {
-        contents.push({
+        apiContent = {
           role: "user",
           parts: [{ text: systemPrompt + "\nText:\n" + taskInput }]
-        });
-      }
-
-      try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-goog-api-key": apiKey,
-          },
-          body: JSON.stringify({
-            contents: contents,
-            safetySettings: [{
-              category: "HARM_CATEGORY_HARASSMENT",
-              threshold: "BLOCK_NONE"
-            },
-            {
-              category: "HARM_CATEGORY_HATE_SPEECH",
-              threshold: "BLOCK_NONE"
-            },
-            {
-              category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-              threshold: "BLOCK_NONE"
-            },
-            {
-              category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-              threshold: "BLOCK_NONE"
-            },
-            {
-              category: "HARM_CATEGORY_CIVIC_INTEGRITY",
-              threshold: "BLOCK_NONE"
-            }]
-          })
-        });
-
-        const responseData = {
-          ok: response.ok,
-          status: response.status,
-          body: tryJsonParse(await response.text())
         };
-
-        if (response.ok) {
-          const taskData = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
-          await chrome.storage.session.set({ taskCache: taskData, responseCache: responseData });
-        }
-
-        sendResponse(responseData);
-      } catch (error) {
-        sendResponse({
-          ok: false,
-          status: 1000,
-          body: { error: { message: error.stack } }
-        });
       }
+
+      const response = await generateContent(modelId, apiKey, [apiContent]);
+
+      if (response.ok) {
+        const responseCacheKey = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
+        await chrome.storage.session.set({ responseCacheKey: responseCacheKey, responseCache: response });
+      }
+
+      // Add the system prompt and the user input to the response
+      response.requestApiContent = apiContent;
+
+      sendResponse(response);
     }
   })();
 

@@ -36,25 +36,43 @@
         "message": "Đang xử lý"
     },
     "popup_prompt_blocked": {
-        "message": "Yêu cầu đã bị chặn."
+        "message": "Lời nhắc đã bị chặn."
     },
     "popup_response_blocked": {
         "message": "Phản hồi đã bị chặn."
     },
     "popup_unexpected_response": {
-        "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký bảng điều khiển."
+        "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký console."
     },
     "popup_miscellaneous_error": {
-        "message": "Trang này không thể được tóm tắt hoặc dịch."
+        "message": "Không thể tóm tắt hoặc dịch trang này."
     },
     "results_title": {
         "message": "Kết quả - Tóm tắt và Dịch với Gemini"
+    },
+    "results_button_clear": {
+        "message": "Xóa hội thoại"
     },
     "results_button_copy": {
         "message": "Sao chép"
     },
     "results_copied": {
         "message": "Đã sao chép."
+    },
+    "results_button_send": {
+        "message": "Gửi"
+    },
+    "results_waiting_response": {
+        "message": "Đang chờ phản hồi"
+    },
+    "results_prompt_blocked": {
+        "message": "Lời nhắc đã bị chặn."
+    },
+    "results_response_blocked": {
+        "message": "Phản hồi đã bị chặn."
+    },
+    "results_unexpected_response": {
+        "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký console."
     },
     "options_title": {
         "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
@@ -66,13 +84,13 @@
         "message": "Bạn có thể lấy Khóa API Gemini tại trang sau."
     },
     "options_model": {
-        "message": "Mô hình Ngôn ngữ"
+        "message": "Mô hình ngôn ngữ"
     },
     "options_language": {
         "message": "Tóm tắt bằng / Dịch sang"
     },
     "options_language_notes": {
-        "message": "Cài đặt ngôn ngữ bị bỏ qua trong các hành động tùy chỉnh."
+        "message": "Cài đặt ngôn ngữ không được tính đến trong các hành động tùy chỉnh."
     },
     "options_no_text_action": {
         "message": "Khi không có văn bản nào được chọn, hãy thực hiện hành động sau"

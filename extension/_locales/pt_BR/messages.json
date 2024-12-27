@@ -3,13 +3,13 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resuma e traduza páginas da web. Utiliza Gemini como backend."
+        "message": "Resuma e traduza páginas da web. Usa Gemini como backend."
     },
     "popup_button_run": {
         "message": "Executar novamente"
     },
     "popup_button_results": {
-        "message": "Abrir resultados em uma nova guia"
+        "message": "Abrir resultados em uma nova aba"
     },
     "popup_button_options": {
         "message": "Abrir página de opções"
@@ -50,11 +50,29 @@
     "results_title": {
         "message": "Resultados - Resumir e Traduzir com Gemini"
     },
+    "results_button_clear": {
+        "message": "Limpar conversa"
+    },
     "results_button_copy": {
         "message": "Copiar"
     },
     "results_copied": {
         "message": "Copiado."
+    },
+    "results_button_send": {
+        "message": "Enviar"
+    },
+    "results_waiting_response": {
+        "message": "Aguardando uma resposta"
+    },
+    "results_prompt_blocked": {
+        "message": "O prompt foi bloqueado."
+    },
+    "results_response_blocked": {
+        "message": "A resposta foi bloqueada."
+    },
+    "results_unexpected_response": {
+        "message": "Ocorreu um erro desconhecido. Verifique o log do console."
     },
     "options_title": {
         "message": "Opções - Resumir e Traduzir com Gemini"
@@ -63,7 +81,7 @@
         "message": "Chave da API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Você pode obter uma chave da API Gemini na seguinte página."
+        "message": "Você pode obter uma chave da API Gemini na página a seguir."
     },
     "options_model": {
         "message": "Modelo de Linguagem"
@@ -72,10 +90,10 @@
         "message": "Resumir em / Traduzir para"
     },
     "options_language_notes": {
-        "message": "A configuração de idioma é ignorada em ações personalizadas."
+        "message": "A configuração de idioma é desconsiderada em ações personalizadas."
     },
     "options_no_text_action": {
-        "message": "Quando nenhum texto é selecionado, execute a seguinte ação"
+        "message": "Quando nenhum texto é selecionado, faça a seguinte ação"
     },
     "options_no_text_summarize": {
         "message": "Resumir (padrão)"
@@ -87,7 +105,7 @@
         "message": "Ação personalizada"
     },
     "options_text_action": {
-        "message": "Quando o texto é selecionado, execute a seguinte ação"
+        "message": "Quando o texto é selecionado, faça a seguinte ação"
     },
     "options_text_summarize": {
         "message": "Resumir"

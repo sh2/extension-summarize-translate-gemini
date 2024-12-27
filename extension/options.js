@@ -1,11 +1,4 @@
-const checkNarrowScreen = () => {
-  // Add the narrow class if the screen width is narrow
-  if (document.getElementById("header").clientWidth < 640) {
-    document.body.classList.add("narrow");
-  } else {
-    document.body.classList.remove("narrow");
-  }
-};
+import { adjustLayoutForScreenSize, loadTemplate } from "./utils.js";
 
 const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
@@ -50,9 +43,17 @@ const saveOptions = async () => {
   setTimeout(() => status.textContent = "", 1000);
 };
 
-const initialize = () => {
+const initialize = async () => {
   // Check if the screen is narrow  
-  checkNarrowScreen();
+  adjustLayoutForScreenSize();
+
+  // Load the language model template
+  const languageModelTemplate = await loadTemplate("languageModelTemplate");
+  document.getElementById("languageModelContainer").appendChild(languageModelTemplate);
+
+  // Load the language code template
+  const languageCodeTemplate = await loadTemplate("languageCodeTemplate");
+  document.getElementById("languageCodeContainer").appendChild(languageCodeTemplate);
 
   // Set the text direction of the body
   document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
@@ -67,4 +68,4 @@ const initialize = () => {
 
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("save").addEventListener("click", saveOptions);
-window.addEventListener("resize", checkNarrowScreen);
+window.addEventListener("resize", adjustLayoutForScreenSize);

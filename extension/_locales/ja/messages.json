@@ -50,11 +50,29 @@
     "results_title": {
         "message": "結果 - Geminiによる要約と翻訳"
     },
+    "results_button_clear": {
+        "message": "会話をクリアする"
+    },
     "results_button_copy": {
         "message": "コピーする"
     },
     "results_copied": {
         "message": "コピーしました。"
+    },
+    "results_button_send": {
+        "message": "送信する"
+    },
+    "results_waiting_response": {
+        "message": "応答を待っています"
+    },
+    "results_prompt_blocked": {
+        "message": "プロンプトがブロックされました。"
+    },
+    "results_response_blocked": {
+        "message": "レスポンスがブロックされました。"
+    },
+    "results_unexpected_response": {
+        "message": "不明なエラーが発生しました。コンソールログを確認してください。"
     },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"

@@ -18,6 +18,11 @@
     body.narrow {
       width: 84%;
     }
+
+    body.narrow select,
+    body.narrow #clear {
+      display: block;
+    }
   </style>
 </head>
 
@@ -31,16 +36,26 @@
     </h1>
   </header>
 
+  <p id="content" dir="auto"></p>
+  <div id="conversation"></div>
+
   <div>
+    <button id="clear" data-i18n="results_button_clear">Clear conversation</button>
     <button id="copy" data-i18n="results_button_copy">Copy</button>
-    <span id="status"></span>
+    <span id="copy-status" style="color: gray;"></span>
   </div>
 
-  <p id="content" dir="auto"></p>
+  <div>
+    <textarea id="text" rows="4" placeholder="Ask a follow-up question" style="width: 100%;"></textarea>
+    <br>
+    <span id="languageModelContainer"></span>
+    <button id="send" data-i18n="results_button_send">Send</button>
+    <span id="send-status" style="color: gray;"></span>
+  </div>
 
   <script src="lib/marked.umd.min.js"></script>
   <script src="lib/purify.min.js"></script>
-  <script src="results.js"></script>
+  <script type="module" src="results.js"></script>
 </body>
 
 </html>

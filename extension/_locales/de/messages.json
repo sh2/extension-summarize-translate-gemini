@@ -3,40 +3,40 @@
         "message": "Zusammenfassen und Übersetzen mit Gemini"
     },
     "extension_description": {
-        "message": "Zusammenfassen und Übersetzen von Webseiten. Verwendet Gemini als Backend."
+        "message": "Webseiten zusammenfassen und übersetzen. Verwendet Gemini als Backend."
     },
     "popup_button_run": {
-        "message": "Nochmal ausführen"
+        "message": "Erneut ausführen"
     },
     "popup_button_results": {
         "message": "Ergebnisse in einem neuen Tab öffnen"
     },
     "popup_button_options": {
-        "message": "Optionen-Seite öffnen"
+        "message": "Optionsseite öffnen"
     },
     "popup_summarizing": {
         "message": "Zusammenfassen"
     },
     "popup_summarizing_captions": {
-        "message": "Zusammenfassen der Untertitel"
+        "message": "Die Bildunterschriften werden zusammengefasst"
     },
     "popup_summarizing_image": {
-        "message": "Zusammenfassen des Bildes"
+        "message": "Das Bild wird zusammengefasst"
     },
     "popup_translating": {
         "message": "Übersetzen"
     },
     "popup_translating_captions": {
-        "message": "Übersetzen der Untertitel"
+        "message": "Die Bildunterschriften werden übersetzt"
     },
     "popup_translating_image": {
-        "message": "Übersetzen des Bildes"
+        "message": "Das Bild wird übersetzt"
     },
     "popup_processing": {
         "message": "Verarbeiten"
     },
     "popup_prompt_blocked": {
-        "message": "Die Aufforderung wurde blockiert."
+        "message": "Die Eingabeaufforderung wurde blockiert."
     },
     "popup_response_blocked": {
         "message": "Die Antwort wurde blockiert."
@@ -50,11 +50,29 @@
     "results_title": {
         "message": "Ergebnisse - Zusammenfassen und Übersetzen mit Gemini"
     },
+    "results_button_clear": {
+        "message": "Konversation löschen"
+    },
     "results_button_copy": {
         "message": "Kopieren"
     },
     "results_copied": {
         "message": "Kopiert."
+    },
+    "results_button_send": {
+        "message": "Senden"
+    },
+    "results_waiting_response": {
+        "message": "Warten auf eine Antwort"
+    },
+    "results_prompt_blocked": {
+        "message": "Die Eingabeaufforderung wurde blockiert."
+    },
+    "results_response_blocked": {
+        "message": "Die Antwort wurde blockiert."
+    },
+    "results_unexpected_response": {
+        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
     },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
@@ -69,13 +87,13 @@
         "message": "Sprachmodell"
     },
     "options_language": {
-        "message": "Zusammenfassen in / Übersetzen in"
+        "message": "Zusammenfassen in / Übersetzen nach"
     },
     "options_language_notes": {
-        "message": "Die Spracheinstellung wird bei benutzerdefinierten Aktionen ignoriert."
+        "message": "Die Spracheinstellung wird bei benutzerdefinierten Aktionen nicht berücksichtigt."
     },
     "options_no_text_action": {
-        "message": "Wenn kein Text ausgewählt ist, führe die folgende Aktion aus"
+        "message": "Wenn kein Text ausgewählt ist, führe folgende Aktion aus"
     },
     "options_no_text_summarize": {
         "message": "Zusammenfassen (Standard)"
@@ -87,7 +105,7 @@
         "message": "Benutzerdefinierte Aktion"
     },
     "options_text_action": {
-        "message": "Wenn Text ausgewählt ist, führe die folgende Aktion aus"
+        "message": "Wenn Text ausgewählt ist, führe folgende Aktion aus"
     },
     "options_text_summarize": {
         "message": "Zusammenfassen"

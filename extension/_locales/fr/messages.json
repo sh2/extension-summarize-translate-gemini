@@ -3,10 +3,10 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résumer et traduire des pages Web. Utilise Gemini comme backend."
+        "message": "Résumez et traduisez des pages Web. Utilise Gemini comme backend."
     },
     "popup_button_run": {
-        "message": "Relancer"
+        "message": "Exécuter à nouveau"
     },
     "popup_button_results": {
         "message": "Ouvrir les résultats dans un nouvel onglet"
@@ -15,25 +15,25 @@
         "message": "Ouvrir la page des options"
     },
     "popup_summarizing": {
-        "message": "Résumer"
+        "message": "Résumé en cours"
     },
     "popup_summarizing_captions": {
-        "message": "Résumer les légendes"
+        "message": "Résumé des légendes en cours"
     },
     "popup_summarizing_image": {
-        "message": "Résumer l'image"
+        "message": "Résumé de l'image en cours"
     },
     "popup_translating": {
-        "message": "Traduire"
+        "message": "Traduction en cours"
     },
     "popup_translating_captions": {
-        "message": "Traduire les légendes"
+        "message": "Traduction des légendes en cours"
     },
     "popup_translating_image": {
-        "message": "Traduire l'image"
+        "message": "Traduction de l'image en cours"
     },
     "popup_processing": {
-        "message": "Traitement"
+        "message": "Traitement en cours"
     },
     "popup_prompt_blocked": {
         "message": "L'invite a été bloquée."
@@ -42,7 +42,7 @@
         "message": "La réponse a été bloquée."
     },
     "popup_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
+        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
     },
     "popup_miscellaneous_error": {
         "message": "Cette page ne peut pas être résumée ou traduite."
@@ -50,11 +50,29 @@
     "results_title": {
         "message": "Résultats - Résumer et traduire avec Gemini"
     },
+    "results_button_clear": {
+        "message": "Effacer la conversation"
+    },
     "results_button_copy": {
         "message": "Copier"
     },
     "results_copied": {
         "message": "Copié."
+    },
+    "results_button_send": {
+        "message": "Envoyer"
+    },
+    "results_waiting_response": {
+        "message": "En attente d'une réponse"
+    },
+    "results_prompt_blocked": {
+        "message": "L'invite a été bloquée."
+    },
+    "results_response_blocked": {
+        "message": "La réponse a été bloquée."
+    },
+    "results_unexpected_response": {
+        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
     },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"
@@ -63,19 +81,19 @@
         "message": "Clé API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Vous pouvez obtenir une clé API Gemini à la page suivante."
+        "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
     "options_model": {
-        "message": "Modèle de langage"
+        "message": "Modèle de langue"
     },
     "options_language": {
         "message": "Résumer en / Traduire vers"
     },
     "options_language_notes": {
-        "message": "Le paramètre de langue est ignoré dans les actions personnalisées."
+        "message": "Le paramètre de langue n'est pas pris en compte dans les actions personnalisées."
     },
     "options_no_text_action": {
-        "message": "Lorsque aucun texte n'est sélectionné, effectuer l'action suivante"
+        "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
     },
     "options_no_text_summarize": {
         "message": "Résumer (par défaut)"
@@ -87,7 +105,7 @@
         "message": "Action personnalisée"
     },
     "options_text_action": {
-        "message": "Lorsque du texte est sélectionné, effectuer l'action suivante"
+        "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
     },
     "options_text_summarize": {
         "message": "Résumer"

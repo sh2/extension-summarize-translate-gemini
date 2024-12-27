@@ -1,15 +1,8 @@
 /* globals DOMPurify, Readability, marked */
 
-let contentIndex = 0;
+import { adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage } from "./utils.js";
 
-const checkNarrowScreen = () => {
-  // Add the narrow class if the screen width is narrow
-  if (document.getElementById("header").clientWidth < 640) {
-    document.body.classList.add("narrow");
-  } else {
-    document.body.classList.remove("narrow");
-  }
-};
+let resultIndex = 0;
 
 const getSelectedText = () => {
   // Return the selected text
@@ -173,33 +166,21 @@ const getLoadingMessage = (actionType, mediaType) => {
   return loadingMessage;
 };
 
-const displayLoadingMessage = (loadingMessage) => {
-  const status = document.getElementById("status");
-
-  switch (status.textContent) {
-    case `${loadingMessage}.`:
-      status.textContent = `${loadingMessage}..`;
-      break;
-    case `${loadingMessage}..`:
-      status.textContent = `${loadingMessage}...`;
-      break;
-    default:
-      status.textContent = `${loadingMessage}.`;
-  }
-};
-
 const main = async (useCache) => {
   let displayIntervalId = 0;
   let content = "";
-  contentIndex = (await chrome.storage.session.get({ contentIndex: -1 })).contentIndex;
-  contentIndex = (contentIndex + 1) % 10;
-  await chrome.storage.session.set({ contentIndex: contentIndex });
+  let response = {};
+
+  resultIndex = (await chrome.storage.session.get({ resultIndex: -1 })).resultIndex;
+  resultIndex = (resultIndex + 1) % 10;
+  await chrome.storage.session.set({ resultIndex: resultIndex });
 
   try {
     const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
     let taskInputChunks = [];
 
+    // Disable the buttons and input fields
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = true;
@@ -207,8 +188,11 @@ const main = async (useCache) => {
     document.getElementById("languageCode").disabled = true;
     document.getElementById("results").disabled = true;
 
+    // Extract the task information
     const { actionType, mediaType, taskInput } = await extractTaskInformation(languageCode);
-    displayIntervalId = setInterval(displayLoadingMessage, 500, getLoadingMessage(actionType, mediaType));
+
+    // Display a loading message
+    displayIntervalId = setInterval(displayLoadingMessage, 500, "status", getLoadingMessage(actionType, mediaType));
 
     // Split the task input
     if (mediaType === "image") {
@@ -226,10 +210,9 @@ const main = async (useCache) => {
     }
 
     for (const taskInputChunk of taskInputChunks) {
-      const taskCache = (await chrome.storage.session.get({ taskCache: "" })).taskCache;
-      let response = {};
+      const responseCacheKey = (await chrome.storage.session.get({ responseCacheKey: "" })).responseCacheKey;
 
-      if (useCache && taskCache === JSON.stringify({
+      if (useCache && responseCacheKey === JSON.stringify({
         actionType,
         mediaType,
         taskInput: taskInputChunk,
@@ -287,10 +270,12 @@ const main = async (useCache) => {
     content = chrome.i18n.getMessage("popup_miscellaneous_error");
     console.error(error);
   } finally {
+    // Clear the loading message
     if (displayIntervalId) {
       clearInterval(displayIntervalId);
     }
 
+    // Enable the buttons and input fields
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = false;
     document.getElementById("languageModel").disabled = false;
@@ -303,16 +288,24 @@ const main = async (useCache) => {
     document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 
     // Save the content to the session storage
-    await chrome.storage.session.set({ [`c_${contentIndex}`]: content });
+    await chrome.storage.session.set({ [`r_${resultIndex}`]: { requestApiContent: response.requestApiContent, responseContent: content } });
   }
 };
 
 const initialize = async () => {
-  // Check if the screen is narrow
-  checkNarrowScreen();
-
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: ({ text }) => text } });
+
+  // Check if the screen is narrow
+  adjustLayoutForScreenSize();
+
+  // Load the language model template
+  const languageModelTemplate = await loadTemplate("languageModelTemplate");
+  document.getElementById("languageModelContainer").appendChild(languageModelTemplate);
+
+  // Load the language code template
+  const languageCodeTemplate = await loadTemplate("languageCodeTemplate");
+  document.getElementById("languageCodeContainer").appendChild(languageCodeTemplate);
 
   // Set the text direction of the body
   document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
@@ -322,7 +315,7 @@ const initialize = async () => {
     element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
   });
 
-  // Restore the language code from the local storage
+  // Restore the language model and language code from the local storage
   const { languageModel, languageCode } = await chrome.storage.local.get({ languageModel: "1.5-flash", languageCode: "en" });
   document.getElementById("languageModel").value = languageModel;
   document.getElementById("languageCode").value = languageCode;
@@ -342,7 +335,7 @@ document.getElementById("run").addEventListener("click", () => {
 });
 
 document.getElementById("results").addEventListener("click", () => {
-  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${contentIndex}`) }, () => {
+  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${resultIndex}`) }, () => {
     window.close();
   });
 });
@@ -353,4 +346,4 @@ document.getElementById("options").addEventListener("click", () => {
   });
 });
 
-window.addEventListener("resize", checkNarrowScreen);
+window.addEventListener("resize", adjustLayoutForScreenSize);

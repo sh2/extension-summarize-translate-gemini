@@ -3,10 +3,10 @@
         "message": "تلخيص وترجمة باستخدام Gemini"
     },
     "extension_description": {
-        "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كخلفية."
+        "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كخادم خلفي."
     },
     "popup_button_run": {
-        "message": "تشغيله مرة أخرى"
+        "message": "تشغيل مرة أخرى"
     },
     "popup_button_results": {
         "message": "فتح النتائج في علامة تبويب جديدة"
@@ -15,40 +15,43 @@
         "message": "فتح صفحة الخيارات"
     },
     "popup_summarizing": {
-        "message": "التلخيص"
+        "message": "جارٍ التلخيص"
     },
     "popup_summarizing_captions": {
-        "message": "تلخيص التسميات التوضيحية"
+        "message": "جارٍ تلخيص التسميات التوضيحية"
     },
     "popup_summarizing_image": {
-        "message": "تلخيص الصورة"
+        "message": "جارٍ تلخيص الصورة"
     },
     "popup_translating": {
-        "message": "الترجمة"
+        "message": "جارٍ الترجمة"
     },
     "popup_translating_captions": {
-        "message": "ترجمة التسميات التوضيحية"
+        "message": "جارٍ ترجمة التسميات التوضيحية"
     },
     "popup_translating_image": {
-        "message": "ترجمة الصورة"
+        "message": "جارٍ ترجمة الصورة"
     },
     "popup_processing": {
-        "message": "معالجة"
+        "message": "جارٍ المعالجة"
     },
     "popup_prompt_blocked": {
-        "message": "تم حظر المطالبة."
+        "message": "تم حظر الطلب."
     },
     "popup_response_blocked": {
         "message": "تم حظر الاستجابة."
     },
     "popup_unexpected_response": {
-        "message": "حدث خطأ غير معروف. يرجى التحقق من سجل وحدة التحكم."
+        "message": "حدث خطأ غير متوقع. يرجى التحقق من سجل وحدة التحكم."
     },
     "popup_miscellaneous_error": {
-        "message": "لا يمكن تلخيص أو ترجمة هذه الصفحة."
+        "message": "لا يمكن تلخيص هذه الصفحة أو ترجمتها."
     },
     "results_title": {
         "message": "النتائج - تلخيص وترجمة باستخدام Gemini"
+    },
+    "results_button_clear": {
+        "message": "مسح المحادثة"
     },
     "results_button_copy": {
         "message": "نسخ"
@@ -56,26 +59,41 @@
     "results_copied": {
         "message": "تم النسخ."
     },
+    "results_button_send": {
+        "message": "إرسال"
+    },
+    "results_waiting_response": {
+        "message": "في انتظار الرد"
+    },
+    "results_prompt_blocked": {
+        "message": "تم حظر الطلب."
+    },
+    "results_response_blocked": {
+        "message": "تم حظر الاستجابة."
+    },
+    "results_unexpected_response": {
+        "message": "حدث خطأ غير متوقع. يرجى التحقق من سجل وحدة التحكم."
+    },
     "options_title": {
-        "message": "الخيارات - تلخيص وترجمة باستخدام Gemini"
+        "message": "خيارات - تلخيص وترجمة باستخدام Gemini"
     },
     "options_apikey": {
-        "message": "مفتاح API لـ Gemini"
+        "message": "مفتاح واجهة برمجة تطبيقات Gemini"
     },
     "options_apikey_hint": {
-        "message": "يمكنك الحصول على مفتاح API لـ Gemini من الصفحة التالية."
+        "message": "يمكنك الحصول على مفتاح واجهة برمجة تطبيقات Gemini في الصفحة التالية."
     },
     "options_model": {
         "message": "نموذج اللغة"
     },
     "options_language": {
-        "message": "تلخيص في / ترجمة إلى"
+        "message": "تلخيص إلى / ترجمة إلى"
     },
     "options_language_notes": {
         "message": "يتم تجاهل إعداد اللغة في الإجراءات المخصصة."
     },
     "options_no_text_action": {
-        "message": "عندما لا يتم تحديد أي نص ، قم بإجراء الإجراء التالي"
+        "message": "عند عدم تحديد أي نص، قم بالإجراء التالي"
     },
     "options_no_text_summarize": {
         "message": "تلخيص (افتراضي)"
@@ -87,7 +105,7 @@
         "message": "إجراء مخصص"
     },
     "options_text_action": {
-        "message": "عندما يتم تحديد نص ، قم بإجراء الإجراء التالي"
+        "message": "عند تحديد نص، قم بالإجراء التالي"
     },
     "options_text_summarize": {
         "message": "تلخيص"
