@@ -22,42 +22,71 @@ const copyContent = async () => {
 };
 
 const askQuestion = async () => {
-  // TODO: error handling
   const languageModel = document.getElementById("languageModel").value;
   const modelId = getModelId(languageModel);
   const question = document.getElementById("text").value.trim();
+  let answer = "";
 
   if (!question) {
     return;
   }
 
+  // Disable the buttons and input fields
   document.getElementById("copy").disabled = true;
   document.getElementById("text").disabled = true;
   document.getElementById("languageModel").disabled = true;
   document.getElementById("send").disabled = true;
 
+  // Display a loading message
   let displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_response"));
 
-  // Generate an answer to the question
+  // Prepare the first question and answer
   const apiContents = [];
   apiContents.push(result.requestApiContent);
   apiContents.push({ role: "model", parts: [{ text: result.responseContent }] });
 
   // Add the previous questions and answers to the conversation
-  conversation.forEach((item) => {
-    apiContents.push({ role: "user", parts: [{ text: item.question }] });
-    apiContents.push({ role: "model", parts: [{ text: item.answer }] });
+  conversation.forEach((message) => {
+    apiContents.push({ role: "user", parts: [{ text: message.question }] });
+    apiContents.push({ role: "model", parts: [{ text: message.answer }] });
   });
 
+  // Add the new question to the conversation
   apiContents.push({ role: "user", parts: [{ text: question }] });
+  console.log(apiContents);
+
+  // Generate the response
   const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
   const response = await generateContent(modelId, apiKey, apiContents);
-  const answer = response.body.candidates[0].content.parts[0].text;
+  console.log(response);
 
+  if (response.ok) {
+    if (response.body.promptFeedback?.blockReason) {
+      // The prompt was blocked
+      answer = `${chrome.i18n.getMessage("results_prompt_blocked")} ` +
+        `Reason: ${response.body.promptFeedback.blockReason}`;
+    } else if (response.body.candidates?.[0].finishReason !== "STOP") {
+      // The response was blocked
+      answer = `${chrome.i18n.getMessage("results_response_blocked")} ` +
+        `Reason: ${response.body.candidates[0].finishReason}`;
+    } else if (response.body.candidates?.[0].content) {
+      // A normal response was returned
+      answer = response.body.candidates[0].content.parts[0].text;
+    } else {
+      // The expected response was not returned
+      answer = chrome.i18n.getMessage("results_unexpected_response");
+    }
+  } else {
+    // A respose error occurred
+    answer = `Error: ${response.status}\n\n${response.body.error.message}`;
+  }
+
+  // Clear the loading message
   if (displayIntervalId) {
     clearInterval(displayIntervalId);
   }
 
+  // Enable the buttons and input fields
   document.getElementById("send-status").textContent = "";
   document.getElementById("copy").disabled = false;
   document.getElementById("text").disabled = false;
@@ -94,6 +123,7 @@ const askQuestion = async () => {
   // Scroll to the bottom of the page
   window.scrollTo(0, document.body.scrollHeight);
 
+  // Add the question and answer to the conversation
   conversation.push({ question: question, answer: answer });
 };
 
