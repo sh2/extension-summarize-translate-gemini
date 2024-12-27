@@ -180,6 +180,7 @@ const main = async (useCache) => {
     const languageCode = document.getElementById("languageCode").value;
     let taskInputChunks = [];
 
+    // Disable the buttons and input fields
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = true;
@@ -187,7 +188,10 @@ const main = async (useCache) => {
     document.getElementById("languageCode").disabled = true;
     document.getElementById("results").disabled = true;
 
+    // Extract the task information
     const { actionType, mediaType, taskInput } = await extractTaskInformation(languageCode);
+
+    // Display a loading message
     displayIntervalId = setInterval(displayLoadingMessage, 500, "status", getLoadingMessage(actionType, mediaType));
 
     // Split the task input
@@ -266,10 +270,12 @@ const main = async (useCache) => {
     content = chrome.i18n.getMessage("popup_miscellaneous_error");
     console.error(error);
   } finally {
+    // Clear the loading message
     if (displayIntervalId) {
       clearInterval(displayIntervalId);
     }
 
+    // Enable the buttons and input fields
     document.getElementById("status").textContent = "";
     document.getElementById("run").disabled = false;
     document.getElementById("languageModel").disabled = false;
