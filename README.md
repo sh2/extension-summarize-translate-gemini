@@ -37,6 +37,12 @@ Select the text you want to translate and click on the extension icon.
 
 ![Translate](img/screenshot_translate.png)
 
+### Results
+
+Follow-up questions can be asked on the results page.
+
+![Results](img/screenshot_results.png)
+
 ## License
 
 MIT License  
