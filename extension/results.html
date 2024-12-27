@@ -46,27 +46,10 @@
   <div>
     <textarea id="text" rows="4" placeholder="Ask a follow-up question" style="width: 100%;"></textarea>
     <br>
-    <select id="languageModel">
-      <optgroup label="Stable">
-        <option value="1.5-pro">Gemini 1.5 Pro</option>
-        <option value="1.5-flash">Gemini 1.5 Flash</option>
-        <option value="1.5-flash-8b">Gemini 1.5 Flash-8B</option>
-      </optgroup>
-      <optgroup label="Latest">
-        <option value="1.5-pro-latest">Gemini 1.5 Pro Latest</option>
-        <option value="1.5-flash-latest">Gemini 1.5 Flash Latest</option>
-        <option value="1.5-flash-8b-latest">Gemini 1.5 Flash-8B Latest</option>
-      </optgroup>
-      <optgroup label="Experimental">
-        <option value="exp-1121">Gemini Experimental 1121</option>
-        <option value="exp-1206">Gemini Experimental 1206</option>
-        <option value="2.0-flash-exp">Gemini 2.0 Flash Experimental</option>
-      </optgroup>
-    </select>
+    <span id="languageModelContainer"></span>
     <button id="send" data-i18n="results_button_send">Send</button>
     <span id="send-status" style="color: gray;"></span>
   </div>
-
 
   <script src="lib/marked.umd.min.js"></script>
   <script src="lib/purify.min.js"></script>

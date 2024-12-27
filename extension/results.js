@@ -1,6 +1,6 @@
 /* global DOMPurify, marked */
 
-import { adjustLayoutForScreenSize, displayLoadingMessage, getModelId, generateContent } from "./utils.js";
+import { adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage, getModelId, generateContent } from "./utils.js";
 
 const conversation = [];
 let result = {};
@@ -98,11 +98,15 @@ const askQuestion = async () => {
 };
 
 const initialize = async () => {
+  // Disable links when converting from Markdown to HTML
+  marked.use({ renderer: { link: ({ text }) => text } });
+
   // Check if the screen is narrow
   adjustLayoutForScreenSize();
 
-  // Disable links when converting from Markdown to HTML
-  marked.use({ renderer: { link: ({ text }) => text } });
+  // Load the language model template
+  const languageModelTemplate = await loadTemplate("languageModelTemplate");
+  document.getElementById("languageModelContainer").appendChild(languageModelTemplate);
 
   // Set the text direction of the body
   document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
@@ -112,7 +116,7 @@ const initialize = async () => {
     element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
   });
 
-  // Restore the language code from the local storage
+  // Restore the language model from the local storage
   const { languageModel } = await chrome.storage.local.get({ languageModel: "1.5-flash" });
   document.getElementById("languageModel").value = languageModel;
 

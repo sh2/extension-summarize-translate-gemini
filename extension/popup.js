@@ -1,6 +1,6 @@
 /* globals DOMPurify, Readability, marked */
 
-import { adjustLayoutForScreenSize, displayLoadingMessage } from "./utils.js";
+import { adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage } from "./utils.js";
 
 let resultIndex = 0;
 
@@ -287,11 +287,19 @@ const main = async (useCache) => {
 };
 
 const initialize = async () => {
+  // Disable links when converting from Markdown to HTML
+  marked.use({ renderer: { link: ({ text }) => text } });
+
   // Check if the screen is narrow
   adjustLayoutForScreenSize();
 
-  // Disable links when converting from Markdown to HTML
-  marked.use({ renderer: { link: ({ text }) => text } });
+  // Load the language model template
+  const languageModelTemplate = await loadTemplate("languageModelTemplate");
+  document.getElementById("languageModelContainer").appendChild(languageModelTemplate);
+
+  // Load the language code template
+  const languageCodeTemplate = await loadTemplate("languageCodeTemplate");
+  document.getElementById("languageCodeContainer").appendChild(languageCodeTemplate);
 
   // Set the text direction of the body
   document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
@@ -301,7 +309,7 @@ const initialize = async () => {
     element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
   });
 
-  // Restore the language code from the local storage
+  // Restore the language model and language code from the local storage
   const { languageModel, languageCode } = await chrome.storage.local.get({ languageModel: "1.5-flash", languageCode: "en" });
   document.getElementById("languageModel").value = languageModel;
   document.getElementById("languageCode").value = languageCode;
