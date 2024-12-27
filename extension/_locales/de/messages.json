@@ -62,6 +62,15 @@
     "results_waiting_response": {
         "message": "Warten auf eine Antwort"
     },
+    "results_prompt_blocked": {
+        "message": "Die Eingabeaufforderung wurde blockiert."
+    },
+    "results_response_blocked": {
+        "message": "Die Antwort wurde blockiert."
+    },
+    "results_unexpected_response": {
+        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
+    },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
     },

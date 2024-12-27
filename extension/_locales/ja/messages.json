@@ -62,6 +62,15 @@
     "results_waiting_response": {
         "message": "応答を待っています"
     },
+    "results_prompt_blocked": {
+        "message": "プロンプトがブロックされました。"
+    },
+    "results_response_blocked": {
+        "message": "レスポンスがブロックされました。"
+    },
+    "results_unexpected_response": {
+        "message": "不明なエラーが発生しました。コンソールログを確認してください。"
+    },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
     },

@@ -62,6 +62,15 @@
     "results_waiting_response": {
         "message": "प्रतिक्रिया की प्रतीक्षा की जा रही है"
     },
+    "results_prompt_blocked": {
+        "message": "प्रॉम्प्ट को ब्लॉक कर दिया गया था।"
+    },
+    "results_response_blocked": {
+        "message": "प्रतिक्रिया को ब्लॉक कर दिया गया था।"
+    },
+    "results_unexpected_response": {
+        "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग की जाँच करें।"
+    },
     "options_title": {
         "message": "विकल्प - Gemini के साथ संक्षेप और अनुवाद करें"
     },

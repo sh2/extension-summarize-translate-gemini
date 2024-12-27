@@ -62,6 +62,15 @@
     "results_waiting_response": {
         "message": "等待响应"
     },
+    "results_prompt_blocked": {
+        "message": "提示被阻止。"
+    },
+    "results_response_blocked": {
+        "message": "响应被阻止。"
+    },
+    "results_unexpected_response": {
+        "message": "发生未知错误。请检查控制台日志。"
+    },
     "options_title": {
         "message": "选项 - 使用Gemini进行总结和翻译"
     },
@@ -78,7 +87,7 @@
         "message": "总结为/翻译为"
     },
     "options_language_notes": {
-        "message": "自定义操作中会忽略语言设置。"
+        "message": "在自定义操作中，语言设置将被忽略。"
     },
     "options_no_text_action": {
         "message": "当未选择文本时，执行以下操作"

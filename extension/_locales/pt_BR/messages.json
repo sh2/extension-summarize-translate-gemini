@@ -62,6 +62,15 @@
     "results_waiting_response": {
         "message": "Aguardando uma resposta"
     },
+    "results_prompt_blocked": {
+        "message": "O prompt foi bloqueado."
+    },
+    "results_response_blocked": {
+        "message": "A resposta foi bloqueada."
+    },
+    "results_unexpected_response": {
+        "message": "Ocorreu um erro desconhecido. Verifique o log do console."
+    },
     "options_title": {
         "message": "Opções - Resumir e Traduzir com Gemini"
     },
@@ -69,7 +78,7 @@
         "message": "Chave da API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Você pode obter uma chave da API Gemini na página seguinte."
+        "message": "Você pode obter uma chave da API Gemini na página a seguir."
     },
     "options_model": {
         "message": "Modelo de Linguagem"

@@ -6,7 +6,7 @@
         "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كخادم خلفي."
     },
     "popup_button_run": {
-        "message": "إعادة التشغيل"
+        "message": "تشغيل مرة أخرى"
     },
     "popup_button_results": {
         "message": "فتح النتائج في علامة تبويب جديدة"
@@ -62,6 +62,15 @@
     "results_waiting_response": {
         "message": "في انتظار الرد"
     },
+    "results_prompt_blocked": {
+        "message": "تم حظر الطلب."
+    },
+    "results_response_blocked": {
+        "message": "تم حظر الاستجابة."
+    },
+    "results_unexpected_response": {
+        "message": "حدث خطأ غير متوقع. يرجى التحقق من سجل وحدة التحكم."
+    },
     "options_title": {
         "message": "خيارات - تلخيص وترجمة باستخدام Gemini"
     },
@@ -75,7 +84,7 @@
         "message": "نموذج اللغة"
     },
     "options_language": {
-        "message": "التلخيص بـ / الترجمة إلى"
+        "message": "تلخيص إلى / ترجمة إلى"
     },
     "options_language_notes": {
         "message": "يتم تجاهل إعداد اللغة في الإجراءات المخصصة."

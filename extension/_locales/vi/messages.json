@@ -62,6 +62,15 @@
     "results_waiting_response": {
         "message": "Đang chờ phản hồi"
     },
+    "results_prompt_blocked": {
+        "message": "Lời nhắc đã bị chặn."
+    },
+    "results_response_blocked": {
+        "message": "Phản hồi đã bị chặn."
+    },
+    "results_unexpected_response": {
+        "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký console."
+    },
     "options_title": {
         "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
     },
@@ -75,7 +84,7 @@
         "message": "Mô hình ngôn ngữ"
     },
     "options_language": {
-        "message": "Tóm tắt thành / Dịch sang"
+        "message": "Tóm tắt bằng / Dịch sang"
     },
     "options_language_notes": {
         "message": "Cài đặt ngôn ngữ không được tính đến trong các hành động tùy chỉnh."

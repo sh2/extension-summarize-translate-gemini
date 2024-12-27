@@ -62,6 +62,15 @@
     "results_waiting_response": {
         "message": "In attesa di una risposta"
     },
+    "results_prompt_blocked": {
+        "message": "La richiesta è stata bloccata."
+    },
+    "results_response_blocked": {
+        "message": "La risposta è stata bloccata."
+    },
+    "results_unexpected_response": {
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
+    },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
     },
@@ -72,7 +81,7 @@
         "message": "È possibile ottenere una chiave API Gemini alla seguente pagina."
     },
     "options_model": {
-        "message": "Modello Linguistico"
+        "message": "Modello linguistico"
     },
     "options_language": {
         "message": "Riassumi in / Traduci in"
