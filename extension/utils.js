@@ -58,15 +58,14 @@ export const displayLoadingMessage = (elementId, loadingMessage) => {
 
 export const getModelId = (languageModel) => {
   const modelMappings = {
-    "exp-1121": "gemini-exp-1121",
-    "exp-1206": "gemini-exp-1206",
-    "2.0-flash-exp": "gemini-2.0-flash-exp",
+    "1.5-pro": "gemini-1.5-pro",
+    "1.5-flash": "gemini-1.5-flash",
+    "1.5-flash-8b": "gemini-1.5-flash-8b",
     "1.5-pro-latest": "gemini-1.5-pro-latest",
     "1.5-flash-latest": "gemini-1.5-flash-latest",
     "1.5-flash-8b-latest": "gemini-1.5-flash-8b-latest",
-    "1.5-pro": "gemini-1.5-pro",
-    "1.5-flash": "gemini-1.5-flash",
-    "1.5-flash-8b": "gemini-1.5-flash-8b"
+    "exp-1206": "gemini-exp-1206",
+    "2.0-flash-exp": "gemini-2.0-flash-exp"
   };
 
   return modelMappings[languageModel];
