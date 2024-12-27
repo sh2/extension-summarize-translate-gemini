@@ -19,7 +19,8 @@
       width: 84%;
     }
 
-    body.narrow select {
+    body.narrow select,
+    body.narrow #clear {
       display: block;
     }
   </style>
@@ -39,6 +40,7 @@
   <div id="conversation"></div>
 
   <div>
+    <button id="clear" data-i18n="results_button_clear">Clear conversation</button>
     <button id="copy" data-i18n="results_button_copy">Copy</button>
     <span id="copy-status" style="color: gray;"></span>
   </div>

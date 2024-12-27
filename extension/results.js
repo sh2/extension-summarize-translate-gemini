@@ -5,6 +5,12 @@ import { adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage, getMode
 const conversation = [];
 let result = {};
 
+const clearConversation = () => {
+  // Clear the conversation
+  document.getElementById("conversation").replaceChildren();
+  conversation.length = 0;
+};
+
 const copyContent = async () => {
   let content = result.responseContent.replace(/\n+$/, "") + "\n\n";
 
@@ -32,6 +38,7 @@ const askQuestion = async () => {
   }
 
   // Disable the buttons and input fields
+  document.getElementById("clear").disabled = true;
   document.getElementById("copy").disabled = true;
   document.getElementById("text").disabled = true;
   document.getElementById("languageModel").disabled = true;
@@ -88,6 +95,7 @@ const askQuestion = async () => {
 
   // Enable the buttons and input fields
   document.getElementById("send-status").textContent = "";
+  document.getElementById("clear").disabled = false;
   document.getElementById("copy").disabled = false;
   document.getElementById("text").disabled = false;
   document.getElementById("languageModel").disabled = false;
@@ -167,6 +175,7 @@ const initialize = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", initialize);
+document.getElementById("clear").addEventListener("click", clearConversation);
 document.getElementById("copy").addEventListener("click", copyContent);
 document.getElementById("send").addEventListener("click", askQuestion);
 window.addEventListener("resize", adjustLayoutForScreenSize);

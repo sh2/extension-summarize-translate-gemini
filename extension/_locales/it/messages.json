@@ -24,16 +24,16 @@
         "message": "Riassumendo l'immagine"
     },
     "popup_translating": {
-        "message": "Traducendo"
+        "message": "Traduco"
     },
     "popup_translating_captions": {
-        "message": "Traducendo le didascalie"
+        "message": "Traduco le didascalie"
     },
     "popup_translating_image": {
-        "message": "Traducendo l'immagine"
+        "message": "Traduco l'immagine"
     },
     "popup_processing": {
-        "message": "Elaborando"
+        "message": "Elaborazione in corso"
     },
     "popup_prompt_blocked": {
         "message": "La richiesta è stata bloccata."
@@ -49,6 +49,9 @@
     },
     "results_title": {
         "message": "Risultati - Riassumi e Traduci con Gemini"
+    },
+    "results_button_clear": {
+        "message": "Cancella conversazione"
     },
     "results_button_copy": {
         "message": "Copia"

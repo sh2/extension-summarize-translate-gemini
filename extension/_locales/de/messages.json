@@ -50,6 +50,9 @@
     "results_title": {
         "message": "Ergebnisse - Zusammenfassen und Übersetzen mit Gemini"
     },
+    "results_button_clear": {
+        "message": "Konversation löschen"
+    },
     "results_button_copy": {
         "message": "Kopieren"
     },

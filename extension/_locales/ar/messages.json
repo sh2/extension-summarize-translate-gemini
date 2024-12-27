@@ -50,6 +50,9 @@
     "results_title": {
         "message": "النتائج - تلخيص وترجمة باستخدام Gemini"
     },
+    "results_button_clear": {
+        "message": "مسح المحادثة"
+    },
     "results_button_copy": {
         "message": "نسخ"
     },

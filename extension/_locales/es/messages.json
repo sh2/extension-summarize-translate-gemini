@@ -50,6 +50,9 @@
     "results_title": {
         "message": "Resultados - Resumir y Traducir con Gemini"
     },
+    "results_button_clear": {
+        "message": "Limpiar conversación"
+    },
     "results_button_copy": {
         "message": "Copiar"
     },
@@ -75,10 +78,10 @@
         "message": "Opciones - Resumir y Traducir con Gemini"
     },
     "options_apikey": {
-        "message": "Clave API de Gemini"
+        "message": "Clave de API de Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puede obtener una clave API de Gemini en la siguiente página."
+        "message": "Puede obtener una clave de API de Gemini en la siguiente página."
     },
     "options_model": {
         "message": "Modelo de Lenguaje"
@@ -87,7 +90,7 @@
         "message": "Resumir en / Traducir a"
     },
     "options_language_notes": {
-        "message": "La configuración de idioma se ignora en acciones personalizadas."
+        "message": "La configuración de idioma se ignora en las acciones personalizadas."
     },
     "options_no_text_action": {
         "message": "Cuando no se selecciona texto, realizar la siguiente acción"

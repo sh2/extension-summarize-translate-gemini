@@ -50,6 +50,9 @@
     "results_title": {
         "message": "结果 - 使用Gemini进行总结和翻译"
     },
+    "results_button_clear": {
+        "message": "清除对话"
+    },
     "results_button_copy": {
         "message": "复制"
     },

@@ -15,25 +15,25 @@
         "message": "開啟選項頁面"
     },
     "popup_summarizing": {
-        "message": "正在總結"
+        "message": "總結中"
     },
     "popup_summarizing_captions": {
-        "message": "正在總結字幕"
+        "message": "總結字幕中"
     },
     "popup_summarizing_image": {
-        "message": "正在總結圖片"
+        "message": "總結圖片中"
     },
     "popup_translating": {
-        "message": "正在翻譯"
+        "message": "翻譯中"
     },
     "popup_translating_captions": {
-        "message": "正在翻譯字幕"
+        "message": "翻譯字幕中"
     },
     "popup_translating_image": {
-        "message": "正在翻譯圖片"
+        "message": "翻譯圖片中"
     },
     "popup_processing": {
-        "message": "正在處理"
+        "message": "處理中"
     },
     "popup_prompt_blocked": {
         "message": "提示已遭封鎖。"
@@ -50,6 +50,9 @@
     "results_title": {
         "message": "結果 - 使用 Gemini 總結和翻譯"
     },
+    "results_button_clear": {
+        "message": "清除對話"
+    },
     "results_button_copy": {
         "message": "複製"
     },
@@ -60,7 +63,7 @@
         "message": "傳送"
     },
     "results_waiting_response": {
-        "message": "正在等待回應"
+        "message": "等待回應"
     },
     "results_prompt_blocked": {
         "message": "提示已遭封鎖。"
@@ -87,10 +90,10 @@
         "message": "總結為 / 翻譯為"
     },
     "options_language_notes": {
-        "message": "在自訂動作中，語言設定會被忽略。"
+        "message": "自訂動作中會忽略語言設定。"
     },
     "options_no_text_action": {
-        "message": "當未選取文字時，執行以下動作"
+        "message": "未選取文字時，執行以下動作"
     },
     "options_no_text_summarize": {
         "message": "總結 (預設)"
@@ -102,7 +105,7 @@
         "message": "自訂動作"
     },
     "options_text_action": {
-        "message": "當選取文字時，執行以下動作"
+        "message": "選取文字時，執行以下動作"
     },
     "options_text_summarize": {
         "message": "總結"

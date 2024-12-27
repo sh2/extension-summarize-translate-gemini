@@ -50,6 +50,9 @@
     "results_title": {
         "message": "Results - Summarize and Translate with Gemini"
     },
+    "results_button_clear": {
+        "message": "Clear conversation"
+    },
     "results_button_copy": {
         "message": "Copy"
     },

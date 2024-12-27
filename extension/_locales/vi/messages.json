@@ -50,6 +50,9 @@
     "results_title": {
         "message": "Kết quả - Tóm tắt và Dịch với Gemini"
     },
+    "results_button_clear": {
+        "message": "Xóa hội thoại"
+    },
     "results_button_copy": {
         "message": "Sao chép"
     },
