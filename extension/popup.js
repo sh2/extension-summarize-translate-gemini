@@ -288,7 +288,12 @@ const main = async (useCache) => {
     document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 
     // Save the content to the session storage
-    await chrome.storage.session.set({ [`r_${resultIndex}`]: { requestApiContent: response.requestApiContent, responseContent: content } });
+    await chrome.storage.session.set({
+      [`r_${resultIndex}`]: {
+        requestApiContent: response.requestApiContent,
+        responseContent: content
+      }
+    });
   }
 };
 
