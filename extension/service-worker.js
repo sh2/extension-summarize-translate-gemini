@@ -194,13 +194,13 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 
       const response = await generateContent(modelId, apiKey, [apiContent]);
 
+      // Add the system prompt and the user input to the response
+      response.requestApiContent = apiContent;
+
       if (response.ok) {
         const responseCacheKey = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
         await chrome.storage.session.set({ responseCacheKey: responseCacheKey, responseCache: response });
       }
-
-      // Add the system prompt and the user input to the response
-      response.requestApiContent = apiContent;
 
       sendResponse(response);
     }
