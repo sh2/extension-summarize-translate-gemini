@@ -32,8 +32,8 @@ def main():
         print(languageCode, languageName)
         time.sleep(5)
 
-        system_instruction = f"Translate the following JSON content to {languageName}" \
-            " in a formal tone. The word \"Gemini\" must be left in English."
+        system_instruction = f"Translate the following JSON content to {languageName} in a formal tone. " \
+            "The word \"Gemini\" must be left in English."
 
         model = google.generativeai.GenerativeModel(
             model_name="gemini-2.0-flash-exp",

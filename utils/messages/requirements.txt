@@ -1,7 +1,7 @@
 annotated-types==0.7.0
 cachetools==5.5.0
 certifi==2024.12.14
-charset-normalizer==3.4.0
+charset-normalizer==3.4.1
 google-ai-generativelanguage==0.6.10
 google-api-core==2.24.0
 google-api-python-client==2.156.0
