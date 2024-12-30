@@ -28,8 +28,6 @@ const copyContent = async () => {
 };
 
 const askQuestion = async () => {
-  const languageModel = document.getElementById("languageModel").value;
-  const modelId = getModelId(languageModel);
   const question = document.getElementById("text").value.trim();
   let answer = "";
 
@@ -64,7 +62,9 @@ const askQuestion = async () => {
 
   // Generate the response
   const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
-  const response = await generateContent(modelId, apiKey, apiContents);
+  const languageModel = document.getElementById("languageModel").value;
+  const modelId = getModelId(languageModel);
+  const response = await generateContent(apiKey, modelId, apiContents);
   console.log(response);
 
   if (response.ok) {
@@ -84,7 +84,7 @@ const askQuestion = async () => {
       answer = chrome.i18n.getMessage("results_unexpected_response");
     }
   } else {
-    // A respose error occurred
+    // A response error occurred
     answer = `Error: ${response.status}\n\n${response.body.error.message}`;
   }
 

@@ -71,7 +71,7 @@ export const getModelId = (languageModel) => {
   return modelMappings[languageModel];
 };
 
-export const generateContent = async (modelId, apiKey, apiContents) => {
+export const generateContent = async (apiKey, modelId, apiContents) => {
   try {
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`, {
       method: "POST",

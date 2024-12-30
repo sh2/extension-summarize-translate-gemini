@@ -192,7 +192,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         };
       }
 
-      const response = await generateContent(modelId, apiKey, [apiContent]);
+      const response = await generateContent(apiKey, modelId, [apiContent]);
 
       // Add the system prompt and the user input to the response
       response.requestApiContent = apiContent;
