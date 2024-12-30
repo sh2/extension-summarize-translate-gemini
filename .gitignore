@@ -1,3 +1,5 @@
 node_modules/
+utils/description/.venv/
+utils/description/output/
 utils/messages/.venv/
 utils/messages/output/
