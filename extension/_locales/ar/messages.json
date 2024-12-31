@@ -89,6 +89,9 @@
     "options_language": {
         "message": "تلخيص إلى / ترجمة إلى"
     },
+    "options_language_user": {
+        "message": "اللغة التي يحددها المستخدم"
+    },
     "options_language_notes": {
         "message": "يتم تجاهل إعداد اللغة في الإجراءات المخصصة."
     },

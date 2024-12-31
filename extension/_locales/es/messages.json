@@ -51,7 +51,7 @@
         "message": "Resultados - Resumir y Traducir con Gemini"
     },
     "results_button_clear": {
-        "message": "Limpiar conversación"
+        "message": "Borrar conversación"
     },
     "results_button_copy": {
         "message": "Copiar"
@@ -89,8 +89,11 @@
     "options_language": {
         "message": "Resumir en / Traducir a"
     },
+    "options_language_user": {
+        "message": "Idioma especificado por el usuario"
+    },
     "options_language_notes": {
-        "message": "La configuración de idioma se ignora en las acciones personalizadas."
+        "message": "La configuración de idioma se ignora en acciones personalizadas."
     },
     "options_no_text_action": {
         "message": "Cuando no se selecciona texto, realizar la siguiente acción"

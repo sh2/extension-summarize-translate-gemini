@@ -89,6 +89,9 @@
     "options_language": {
         "message": "में संक्षेप करें / में अनुवाद करें"
     },
+    "options_language_user": {
+        "message": "उपयोगकर्ता-निर्दिष्ट भाषा"
+    },
     "options_language_notes": {
         "message": "कस्टम क्रियाओं में भाषा सेटिंग को अनदेखा किया जाता है।"
     },

@@ -42,10 +42,10 @@
         "message": "উত্তরটি ব্লক করা হয়েছে।"
     },
     "popup_unexpected_response": {
-        "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। কনসোল লগ চেক করুন।"
+        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগ চেক করুন।"
     },
     "popup_miscellaneous_error": {
-        "message": "এই পেজটির সারসংক্ষেপ বা অনুবাদ করা সম্ভব নয়।"
+        "message": "এই পেজটির সারসংক্ষেপ বা অনুবাদ করা যাবে না।"
     },
     "results_title": {
         "message": "ফলাফল - Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
@@ -72,7 +72,7 @@
         "message": "উত্তরটি ব্লক করা হয়েছে।"
     },
     "results_unexpected_response": {
-        "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। কনসোল লগ চেক করুন।"
+        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগ চেক করুন।"
     },
     "options_title": {
         "message": "অপশন - Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
@@ -81,7 +81,7 @@
         "message": "Gemini API কী"
     },
     "options_apikey_hint": {
-        "message": "আপনি নিম্নলিখিত পেজে একটি Gemini API কী পেতে পারেন।"
+        "message": "আপনি নিচের পেজে Gemini API কী পেতে পারেন।"
     },
     "options_model": {
         "message": "ভাষা মডেল"
@@ -89,11 +89,14 @@
     "options_language": {
         "message": "এই ভাষায় সারসংক্ষেপ করুন / অনুবাদ করুন"
     },
+    "options_language_user": {
+        "message": "ব্যবহারকারী-নির্দিষ্ট ভাষা"
+    },
     "options_language_notes": {
         "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিং উপেক্ষা করা হয়।"
     },
     "options_no_text_action": {
-        "message": "যখন কোনো টেক্সট সিলেক্ট করা না থাকে, তখন নিম্নলিখিত অ্যাকশনটি করুন"
+        "message": "যখন কোনো টেক্সট সিলেক্ট করা না থাকে, তখন নিচের কাজটি করুন"
     },
     "options_no_text_summarize": {
         "message": "সারসংক্ষেপ করুন (ডিফল্ট)"
@@ -105,7 +108,7 @@
         "message": "কাস্টম অ্যাকশন"
     },
     "options_text_action": {
-        "message": "যখন টেক্সট সিলেক্ট করা থাকে, তখন নিম্নলিখিত অ্যাকশনটি করুন"
+        "message": "যখন টেক্সট সিলেক্ট করা থাকে, তখন নিচের কাজটি করুন"
     },
     "options_text_summarize": {
         "message": "সারসংক্ষেপ করুন"

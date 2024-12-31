@@ -3,7 +3,7 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résumez et traduisez des pages Web. Utilise Gemini comme backend."
+        "message": "Résumez et traduisez des pages web. Utilise Gemini comme backend."
     },
     "popup_button_run": {
         "message": "Exécuter à nouveau"
@@ -42,7 +42,7 @@
         "message": "La réponse a été bloquée."
     },
     "popup_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
+        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
     },
     "popup_miscellaneous_error": {
         "message": "Cette page ne peut pas être résumée ou traduite."
@@ -72,7 +72,7 @@
         "message": "La réponse a été bloquée."
     },
     "results_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
+        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
     },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"
@@ -88,6 +88,9 @@
     },
     "options_language": {
         "message": "Résumer en / Traduire vers"
+    },
+    "options_language_user": {
+        "message": "Langue spécifiée par l'utilisateur"
     },
     "options_language_notes": {
         "message": "Le paramètre de langue n'est pas pris en compte dans les actions personnalisées."

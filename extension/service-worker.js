@@ -19,6 +19,9 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
     ko: "Korean"
   };
 
+  // Set the user-specified language
+  languageNames["zz"] = (await chrome.storage.local.get({ userLanguage: "Turkish" })).userLanguage;
+
   const numItems = Math.min(10, 3 + Math.floor(taskInputLength / 2000));
   let systemPrompt = "";
 

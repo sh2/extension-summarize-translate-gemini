@@ -89,6 +89,9 @@
     "options_language": {
         "message": "以下の言語で要約/翻訳する"
     },
+    "options_language_user": {
+        "message": "ユーザー指定言語"
+    },
     "options_language_notes": {
         "message": "カスタムアクションでは、言語設定は無視されます。"
     },

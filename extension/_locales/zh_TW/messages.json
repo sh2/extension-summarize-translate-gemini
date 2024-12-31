@@ -89,8 +89,11 @@
     "options_language": {
         "message": "總結為 / 翻譯為"
     },
+    "options_language_user": {
+        "message": "使用者指定的語言"
+    },
     "options_language_notes": {
-        "message": "自訂動作中會忽略語言設定。"
+        "message": "自訂動作會忽略語言設定。"
     },
     "options_no_text_action": {
         "message": "未選取文字時，執行以下動作"

@@ -3,7 +3,7 @@
         "message": "Gemini로 요약 및 번역"
     },
     "extension_description": {
-        "message": "웹 페이지를 요약하고 번역합니다. Gemini를 백엔드로 사용합니다."
+        "message": "웹 페이지를 요약하고 번역합니다. 백엔드로 Gemini를 사용합니다."
     },
     "popup_button_run": {
         "message": "다시 실행"
@@ -88,6 +88,9 @@
     },
     "options_language": {
         "message": "요약/번역할 언어"
+    },
+    "options_language_user": {
+        "message": "사용자 지정 언어"
     },
     "options_language_notes": {
         "message": "사용자 지정 작업에서는 언어 설정이 무시됩니다."

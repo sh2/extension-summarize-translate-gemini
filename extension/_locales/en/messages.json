@@ -89,6 +89,9 @@
     "options_language": {
         "message": "Summarize in / Translate to"
     },
+    "options_language_user": {
+        "message": "User-specified Language"
+    },
     "options_language_notes": {
         "message": "The language setting is disregarded in custom actions."
     },

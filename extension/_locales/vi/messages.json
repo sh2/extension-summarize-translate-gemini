@@ -87,7 +87,10 @@
         "message": "Mô hình ngôn ngữ"
     },
     "options_language": {
-        "message": "Tóm tắt bằng / Dịch sang"
+        "message": "Tóm tắt thành / Dịch sang"
+    },
+    "options_language_user": {
+        "message": "Ngôn ngữ do người dùng chỉ định"
     },
     "options_language_notes": {
         "message": "Cài đặt ngôn ngữ không được tính đến trong các hành động tùy chỉnh."

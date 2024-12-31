@@ -89,6 +89,9 @@
     "options_language": {
         "message": "Zusammenfassen in / Übersetzen nach"
     },
+    "options_language_user": {
+        "message": "Benutzerdefinierte Sprache"
+    },
     "options_language_notes": {
         "message": "Die Spracheinstellung wird bei benutzerdefinierten Aktionen nicht berücksichtigt."
     },

@@ -89,6 +89,9 @@
     "options_language": {
         "message": "Суммировать на / Перевести на"
     },
+    "options_language_user": {
+        "message": "Язык, указанный пользователем"
+    },
     "options_language_notes": {
         "message": "Настройка языка игнорируется в пользовательских действиях."
     },

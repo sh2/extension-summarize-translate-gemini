@@ -89,6 +89,9 @@
     "options_language": {
         "message": "总结为/翻译为"
     },
+    "options_language_user": {
+        "message": "用户指定的语言"
+    },
     "options_language_notes": {
         "message": "在自定义操作中，语言设置将被忽略。"
     },

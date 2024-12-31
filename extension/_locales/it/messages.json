@@ -24,16 +24,16 @@
         "message": "Riassumendo l'immagine"
     },
     "popup_translating": {
-        "message": "Traduco"
+        "message": "Traducendo"
     },
     "popup_translating_captions": {
-        "message": "Traduco le didascalie"
+        "message": "Traducendo le didascalie"
     },
     "popup_translating_image": {
-        "message": "Traduco l'immagine"
+        "message": "Traducendo l'immagine"
     },
     "popup_processing": {
-        "message": "Elaborazione in corso"
+        "message": "Elaborando"
     },
     "popup_prompt_blocked": {
         "message": "La richiesta è stata bloccata."
@@ -88,6 +88,9 @@
     },
     "options_language": {
         "message": "Riassumi in / Traduci in"
+    },
+    "options_language_user": {
+        "message": "Lingua specificata dall'utente"
     },
     "options_language_notes": {
         "message": "L'impostazione della lingua viene ignorata nelle azioni personalizzate."
