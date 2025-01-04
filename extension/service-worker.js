@@ -158,7 +158,6 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       sendResponse(taskInputChunks);
     } else if (request.message === "generate") {
       // Generate content
-      await chrome.storage.session.set({ responseCacheKey: "", responseCache: {} });
       const { actionType, mediaType, taskInput, languageModel, languageCode } = request;
       const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
       const modelId = getModelId(languageModel);
@@ -201,8 +200,16 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       response.requestApiContent = apiContent;
 
       if (response.ok) {
+        // Update the cache
+        const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
         const responseCacheKey = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
-        await chrome.storage.session.set({ responseCacheKey: responseCacheKey, responseCache: response });
+
+        const updatedQueue = responseCacheQueue
+          .filter(item => item.key !== responseCacheKey)
+          .concat({ key: responseCacheKey, value: response })
+          .slice(-10);
+
+        await chrome.storage.session.set({ responseCacheQueue: updatedQueue });
       }
 
       sendResponse(response);

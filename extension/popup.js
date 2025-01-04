@@ -210,17 +210,13 @@ const main = async (useCache) => {
     }
 
     for (const taskInputChunk of taskInputChunks) {
-      const { responseCacheKey } = await chrome.storage.session.get({ responseCacheKey: "" });
+      const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
+      const cacheIdentifier = JSON.stringify({ actionType, mediaType, taskInput: taskInputChunk, languageModel, languageCode });
+      const responseCache = responseCacheQueue.find(item => item.key === cacheIdentifier);
 
-      if (useCache && responseCacheKey === JSON.stringify({
-        actionType,
-        mediaType,
-        taskInput: taskInputChunk,
-        languageModel,
-        languageCode
-      })) {
+      if (useCache && responseCache) {
         // Use the cached response
-        response = (await chrome.storage.session.get({ responseCache: {} })).responseCache;
+        response = responseCache.value;
       } else {
         // Generate content
         response = await chrome.runtime.sendMessage({

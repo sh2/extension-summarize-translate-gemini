@@ -40,7 +40,7 @@ const saveOptions = async () => {
   };
 
   await chrome.storage.local.set(options);
-  await chrome.storage.session.set({ responseCacheKey: "", responseCache: {} });
+  await chrome.storage.session.set({ responseCacheQueue: [] });
   const status = document.getElementById("status");
   status.textContent = chrome.i18n.getMessage("options_saved");
   setTimeout(() => status.textContent = "", 1000);
