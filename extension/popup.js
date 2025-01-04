@@ -39,7 +39,8 @@ const getCaptions = async (videoUrl, languageCode) => {
     zh_cn: "zh-CN",
     zh_tw: "zh-TW",
     ja: "ja",
-    ko: "ko"
+    ko: "ko",
+    zz: "en"
   };
 
   const preferredLanguages = [languageCodeForCaptions[languageCode], "en"];
