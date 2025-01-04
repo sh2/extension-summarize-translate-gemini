@@ -210,7 +210,7 @@ const main = async (useCache) => {
     }
 
     for (const taskInputChunk of taskInputChunks) {
-      const responseCacheKey = (await chrome.storage.session.get({ responseCacheKey: "" })).responseCacheKey;
+      const { responseCacheKey } = await chrome.storage.session.get({ responseCacheKey: "" });
 
       if (useCache && responseCacheKey === JSON.stringify({
         actionType,
