@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
+        "message": "জেমিনি দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
     "extension_description": {
-        "message": "ওয়েব পেজগুলির সারসংক্ষেপ করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসাবে Gemini ব্যবহার করে।"
+        "message": "ওয়েব পেজগুলির সারসংক্ষেপ করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসাবে জেমিনি ব্যবহার করে।"
     },
     "popup_button_run": {
         "message": "আবার চালান"
@@ -36,19 +36,19 @@
         "message": "প্রক্রিয়াকরণ করা হচ্ছে"
     },
     "popup_prompt_blocked": {
-        "message": "প্রম্পটটি ব্লক করা হয়েছে।"
+        "message": "প্রম্পটটি ব্লক করা হয়েছে।"
     },
     "popup_response_blocked": {
-        "message": "উত্তরটি ব্লক করা হয়েছে।"
+        "message": "উত্তরটি ব্লক করা হয়েছে।"
     },
     "popup_unexpected_response": {
-        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগ চেক করুন।"
+        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগটি পরীক্ষা করুন।"
     },
     "popup_miscellaneous_error": {
-        "message": "এই পেজটির সারসংক্ষেপ বা অনুবাদ করা যাবে না।"
+        "message": "এই পৃষ্ঠাটির সারসংক্ষেপ বা অনুবাদ করা যাবে না।"
     },
     "results_title": {
-        "message": "ফলাফল - Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
+        "message": "ফলাফল - জেমিনি দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
     "results_button_clear": {
         "message": "কথোপকথন পরিষ্কার করুন"
@@ -57,7 +57,7 @@
         "message": "কপি করুন"
     },
     "results_copied": {
-        "message": "কপি করা হয়েছে।"
+        "message": "কপি করা হয়েছে।"
     },
     "results_button_send": {
         "message": "প্রেরণ করুন"
@@ -66,28 +66,28 @@
         "message": "উত্তরের জন্য অপেক্ষা করা হচ্ছে"
     },
     "results_prompt_blocked": {
-        "message": "প্রম্পটটি ব্লক করা হয়েছে।"
+        "message": "প্রম্পটটি ব্লক করা হয়েছে।"
     },
     "results_response_blocked": {
-        "message": "উত্তরটি ব্লক করা হয়েছে।"
+        "message": "উত্তরটি ব্লক করা হয়েছে।"
     },
     "results_unexpected_response": {
-        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগ চেক করুন।"
+        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগটি পরীক্ষা করুন।"
     },
     "options_title": {
-        "message": "অপশন - Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
+        "message": "অপশন - জেমিনি দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
     "options_apikey": {
-        "message": "Gemini API কী"
+        "message": "জেমিনি এপিআই কী"
     },
     "options_apikey_hint": {
-        "message": "আপনি নিচের পেজে Gemini API কী পেতে পারেন।"
+        "message": "আপনি নিম্নলিখিত পৃষ্ঠায় একটি জেমিনি এপিআই কী পেতে পারেন।"
     },
     "options_model": {
         "message": "ভাষা মডেল"
     },
     "options_language": {
-        "message": "এই ভাষায় সারসংক্ষেপ করুন / অনুবাদ করুন"
+        "message": "সারসংক্ষেপ করুন / অনুবাদ করুন"
     },
     "options_language_user": {
         "message": "ব্যবহারকারী-নির্দিষ্ট ভাষা"
@@ -96,7 +96,7 @@
         "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিং উপেক্ষা করা হয়।"
     },
     "options_no_text_action": {
-        "message": "যখন কোনো টেক্সট সিলেক্ট করা না থাকে, তখন নিচের কাজটি করুন"
+        "message": "যখন কোনো টেক্সট নির্বাচন করা না থাকে, তখন নিম্নলিখিত কাজটি করুন"
     },
     "options_no_text_summarize": {
         "message": "সারসংক্ষেপ করুন (ডিফল্ট)"
@@ -108,7 +108,7 @@
         "message": "কাস্টম অ্যাকশন"
     },
     "options_text_action": {
-        "message": "যখন টেক্সট সিলেক্ট করা থাকে, তখন নিচের কাজটি করুন"
+        "message": "যখন টেক্সট নির্বাচন করা থাকে, তখন নিম্নলিখিত কাজটি করুন"
     },
     "options_text_summarize": {
         "message": "সারসংক্ষেপ করুন"
@@ -119,10 +119,13 @@
     "options_text_custom": {
         "message": "কাস্টম অ্যাকশন"
     },
+    "options_theme": {
+        "message": "থিম"
+    },
     "options_button_save": {
-        "message": "অপশনগুলি সেভ করুন"
+        "message": "অপশনগুলি সংরক্ষণ করুন"
     },
     "options_saved": {
-        "message": "সেভ করা হয়েছে।"
+        "message": "সংরক্ষিত হয়েছে।"
     }
 }

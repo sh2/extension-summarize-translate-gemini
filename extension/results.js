@@ -1,6 +1,6 @@
 /* global DOMPurify, marked */
 
-import { adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage, getModelId, generateContent } from "./utils.js";
+import { applyTheme, adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage, getModelId, generateContent } from "./utils.js";
 
 const conversation = [];
 let result = {};
@@ -138,6 +138,9 @@ const askQuestion = async () => {
 const initialize = async () => {
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: ({ text }) => text } });
+
+  // Apply the theme
+  applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
 
   // Check if the screen is narrow
   adjustLayoutForScreenSize();

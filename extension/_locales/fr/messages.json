@@ -42,7 +42,7 @@
         "message": "La réponse a été bloquée."
     },
     "popup_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
+        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
     },
     "popup_miscellaneous_error": {
         "message": "Cette page ne peut pas être résumée ou traduite."
@@ -72,7 +72,7 @@
         "message": "La réponse a été bloquée."
     },
     "results_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
+        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
     },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"
@@ -93,7 +93,7 @@
         "message": "Langue spécifiée par l'utilisateur"
     },
     "options_language_notes": {
-        "message": "Le paramètre de langue n'est pas pris en compte dans les actions personnalisées."
+        "message": "Le paramètre de langue est ignoré dans les actions personnalisées."
     },
     "options_no_text_action": {
         "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "Action personnalisée"
+    },
+    "options_theme": {
+        "message": "Thème"
     },
     "options_button_save": {
         "message": "Enregistrer les options"

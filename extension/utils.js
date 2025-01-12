@@ -6,6 +6,16 @@ const tryParseJson = (text) => {
   }
 };
 
+export const applyTheme = (theme) => {
+  if (theme === "light") {
+    document.body.setAttribute("data-theme", "light");
+  } else if (theme === "dark") {
+    document.body.setAttribute("data-theme", "dark");
+  } else {
+    document.body.removeAttribute("data-theme");
+  }
+};
+
 export const adjustLayoutForScreenSize = () => {
   // Add the narrow class if the screen width is narrow
   if (document.getElementById("header").clientWidth < 640) {

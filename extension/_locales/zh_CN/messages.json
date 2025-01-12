@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "自定义操作"
     },
+    "options_theme": {
+        "message": "主题"
+    },
     "options_button_save": {
         "message": "保存选项"
     },

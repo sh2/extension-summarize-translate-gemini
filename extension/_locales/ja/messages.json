@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "カスタムアクション"
     },
+    "options_theme": {
+        "message": "テーマ"
+    },
     "options_button_save": {
         "message": "オプションを保存する"
     },

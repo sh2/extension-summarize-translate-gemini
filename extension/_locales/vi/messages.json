@@ -87,7 +87,7 @@
         "message": "Mô hình ngôn ngữ"
     },
     "options_language": {
-        "message": "Tóm tắt thành / Dịch sang"
+        "message": "Tóm tắt bằng / Dịch sang"
     },
     "options_language_user": {
         "message": "Ngôn ngữ do người dùng chỉ định"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "Hành động tùy chỉnh"
+    },
+    "options_theme": {
+        "message": "Chủ đề"
     },
     "options_button_save": {
         "message": "Lưu tùy chọn"

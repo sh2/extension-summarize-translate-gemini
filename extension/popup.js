@@ -1,6 +1,6 @@
 /* globals DOMPurify, Readability, marked */
 
-import { adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage } from "./utils.js";
+import { applyTheme, adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage } from "./utils.js";
 
 let resultIndex = 0;
 
@@ -297,6 +297,9 @@ const main = async (useCache) => {
 const initialize = async () => {
   // Disable links when converting from Markdown to HTML
   marked.use({ renderer: { link: ({ text }) => text } });
+
+  // Apply the theme
+  applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
 
   // Check if the screen is narrow
   adjustLayoutForScreenSize();

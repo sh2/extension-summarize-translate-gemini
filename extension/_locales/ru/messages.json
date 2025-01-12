@@ -3,7 +3,7 @@
         "message": "Суммировать и переводить с помощью Gemini"
     },
     "extension_description": {
-        "message": "Суммируйте и переводите веб-страницы. Использует Gemini в качестве бэкэнда."
+        "message": "Суммирует и переводит веб-страницы. Использует Gemini в качестве бэкэнда."
     },
     "popup_button_run": {
         "message": "Запустить снова"
@@ -78,10 +78,10 @@
         "message": "Настройки - Суммировать и переводить с помощью Gemini"
     },
     "options_apikey": {
-        "message": "Gemini API Key"
+        "message": "Ключ API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Вы можете получить Gemini API Key на следующей странице."
+        "message": "Вы можете получить ключ API Gemini на следующей странице."
     },
     "options_model": {
         "message": "Языковая модель"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "Пользовательское действие"
+    },
+    "options_theme": {
+        "message": "Тема"
     },
     "options_button_save": {
         "message": "Сохранить настройки"

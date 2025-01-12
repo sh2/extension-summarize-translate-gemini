@@ -90,7 +90,7 @@
         "message": "تلخيص إلى / ترجمة إلى"
     },
     "options_language_user": {
-        "message": "اللغة التي يحددها المستخدم"
+        "message": "اللغة المحددة من قبل المستخدم"
     },
     "options_language_notes": {
         "message": "يتم تجاهل إعداد اللغة في الإجراءات المخصصة."
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "إجراء مخصص"
+    },
+    "options_theme": {
+        "message": "السمة"
     },
     "options_button_save": {
         "message": "حفظ الخيارات"

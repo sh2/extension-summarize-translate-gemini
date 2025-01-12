@@ -1,4 +1,4 @@
-import { adjustLayoutForScreenSize, loadTemplate } from "./utils.js";
+import { applyTheme, adjustLayoutForScreenSize, loadTemplate } from "./utils.js";
 
 const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
@@ -9,7 +9,8 @@ const restoreOptions = async () => {
     noTextAction: "summarize",
     noTextCustomPrompt: "",
     textAction: "translate",
-    textCustomPrompt: ""
+    textCustomPrompt: "",
+    theme: "system"
   });
 
   document.getElementById("apiKey").value = options.apiKey;
@@ -20,6 +21,7 @@ const restoreOptions = async () => {
   document.getElementById("noTextCustomPrompt").value = options.noTextCustomPrompt;
   document.querySelector(`input[name="textAction"][value="${options.textAction}"]`).checked = true;
   document.getElementById("textCustomPrompt").value = options.textCustomPrompt;
+  document.getElementById("theme").value = options.theme;
 
   // Set the default language model if the language model is not set
   if (!document.getElementById("languageModel").value) {
@@ -36,7 +38,8 @@ const saveOptions = async () => {
     noTextAction: document.querySelector('input[name="noTextAction"]:checked').value,
     noTextCustomPrompt: document.getElementById("noTextCustomPrompt").value,
     textAction: document.querySelector('input[name="textAction"]:checked').value,
-    textCustomPrompt: document.getElementById("textCustomPrompt").value
+    textCustomPrompt: document.getElementById("textCustomPrompt").value,
+    theme: document.getElementById("theme").value
   };
 
   await chrome.storage.local.set(options);
@@ -44,9 +47,13 @@ const saveOptions = async () => {
   const status = document.getElementById("status");
   status.textContent = chrome.i18n.getMessage("options_saved");
   setTimeout(() => status.textContent = "", 1000);
+  applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
 };
 
 const initialize = async () => {
+  // Apply the theme
+  applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
+
   // Check if the screen is narrow  
   adjustLayoutForScreenSize();
 

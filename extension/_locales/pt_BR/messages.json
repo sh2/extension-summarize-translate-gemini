@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "Ação personalizada"
     },
+    "options_theme": {
+        "message": "Tema"
+    },
     "options_button_save": {
         "message": "Salvar opções"
     },

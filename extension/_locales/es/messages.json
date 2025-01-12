@@ -45,13 +45,13 @@
         "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
-        "message": "Esta página no puede ser resumida o traducida."
+        "message": "Esta página no puede ser resumida ni traducida."
     },
     "results_title": {
         "message": "Resultados - Resumir y Traducir con Gemini"
     },
     "results_button_clear": {
-        "message": "Borrar conversación"
+        "message": "Limpiar conversación"
     },
     "results_button_copy": {
         "message": "Copiar"
@@ -78,10 +78,10 @@
         "message": "Opciones - Resumir y Traducir con Gemini"
     },
     "options_apikey": {
-        "message": "Clave de API de Gemini"
+        "message": "Clave API de Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puede obtener una clave de API de Gemini en la siguiente página."
+        "message": "Puede obtener una clave API de Gemini en la siguiente página."
     },
     "options_model": {
         "message": "Modelo de Lenguaje"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "Acción personalizada"
+    },
+    "options_theme": {
+        "message": "Tema"
     },
     "options_button_save": {
         "message": "Guardar opciones"

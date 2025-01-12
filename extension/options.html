@@ -6,19 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="options_title">Options - Summarize and Translate with Gemini</title>
   <link rel="stylesheet" href="css/new.min.css">
-  <style>
-    body {
-      width: 640px;
-    }
-
-    button {
-      margin-bottom: .5rem;
-    }
-
-    body.narrow {
-      width: 84%;
-    }
-  </style>
+  <link rel="stylesheet" href="css/common.css">
 </head>
 
 <body>
@@ -92,6 +80,16 @@
     <br>
     <textarea id="textCustomPrompt" rows="8" cols="80"
       placeholder="(Example)&#10;Translate the entire text into English and reply only with the translated result."></textarea>
+  </p>
+
+  <p>
+    <span data-i18n="options_theme">Theme</span>
+    <br>
+    <select id="theme">
+      <option value="system">System</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
   </p>
 
   <p>

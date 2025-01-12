@@ -93,7 +93,7 @@
         "message": "Benutzerdefinierte Sprache"
     },
     "options_language_notes": {
-        "message": "Die Spracheinstellung wird bei benutzerdefinierten Aktionen nicht berücksichtigt."
+        "message": "Die Spracheinstellung wird bei benutzerdefinierten Aktionen ignoriert."
     },
     "options_no_text_action": {
         "message": "Wenn kein Text ausgewählt ist, führe folgende Aktion aus"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "Benutzerdefinierte Aktion"
+    },
+    "options_theme": {
+        "message": "Thema"
     },
     "options_button_save": {
         "message": "Optionen speichern"

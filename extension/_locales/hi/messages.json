@@ -51,7 +51,7 @@
         "message": "परिणाम - Gemini के साथ संक्षेप और अनुवाद करें"
     },
     "results_button_clear": {
-        "message": "वार्तालाप साफ़ करें"
+        "message": "बातचीत साफ़ करें"
     },
     "results_button_copy": {
         "message": "कॉपी करें"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "कस्टम क्रिया"
+    },
+    "options_theme": {
+        "message": "थीम"
     },
     "options_button_save": {
         "message": "विकल्प सहेजें"
