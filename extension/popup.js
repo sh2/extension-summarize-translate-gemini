@@ -93,10 +93,14 @@ const extractTaskInformation = async (languageCode) => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   // Get the selected text
-  taskInput = (await chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: getSelectedText
-  }))[0].result;
+  try {
+    taskInput = (await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: getSelectedText
+    }))[0].result;
+  } catch (error) {
+    console.error(error);
+  }
 
   if (taskInput) {
     actionType = (await chrome.storage.local.get({ textAction: "translate" })).textAction;
@@ -109,26 +113,34 @@ const extractTaskInformation = async (languageCode) => {
       // If the page is a YouTube video, get the captions instead of the whole text
       mediaType = "captions";
 
-      taskInput = (await chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: getCaptions,
-        args: [tab.url, languageCode]
-      }))[0].result;
+      try {
+        taskInput = (await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: getCaptions,
+          args: [tab.url, languageCode]
+        }))[0].result;
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     if (!taskInput) {
       // Get the main text of the page using Readability.js
       mediaType = "text";
 
-      await chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        files: ["lib/Readability.min.js"]
-      });
+      try {
+        await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ["lib/Readability.min.js"]
+        });
 
-      taskInput = (await chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        func: getWholeText
-      }))[0].result;
+        taskInput = (await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: getWholeText
+        }))[0].result;
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     if (!taskInput) {
