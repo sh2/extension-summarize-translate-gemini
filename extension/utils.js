@@ -1,3 +1,24 @@
+const safetySettings = [{
+  category: "HARM_CATEGORY_HARASSMENT",
+  threshold: "BLOCK_NONE"
+},
+{
+  category: "HARM_CATEGORY_HATE_SPEECH",
+  threshold: "BLOCK_NONE"
+},
+{
+  category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+  threshold: "BLOCK_NONE"
+},
+{
+  category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+  threshold: "BLOCK_NONE"
+},
+{
+  category: "HARM_CATEGORY_CIVIC_INTEGRITY",
+  threshold: "BLOCK_NONE"
+}];
+
 const tryParseJson = (text) => {
   try {
     return JSON.parse(text);
@@ -91,26 +112,7 @@ export const generateContent = async (apiKey, modelId, apiContents) => {
       },
       body: JSON.stringify({
         contents: apiContents,
-        safetySettings: [{
-          category: "HARM_CATEGORY_HARASSMENT",
-          threshold: "BLOCK_NONE"
-        },
-        {
-          category: "HARM_CATEGORY_HATE_SPEECH",
-          threshold: "BLOCK_NONE"
-        },
-        {
-          category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-          threshold: "BLOCK_NONE"
-        },
-        {
-          category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-          threshold: "BLOCK_NONE"
-        },
-        {
-          category: "HARM_CATEGORY_CIVIC_INTEGRITY",
-          threshold: "BLOCK_NONE"
-        }]
+        safetySettings: safetySettings
       })
     });
 
@@ -118,6 +120,65 @@ export const generateContent = async (apiKey, modelId, apiContents) => {
       ok: response.ok,
       status: response.status,
       body: tryParseJson(await response.text())
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      status: 1000,
+      body: { error: { message: error.stack } }
+    };
+  }
+};
+
+export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
+  try {
+    await chrome.storage.session.remove("streamContent");
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:streamGenerateContent`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": apiKey,
+      },
+      body: JSON.stringify({
+        contents: apiContents,
+        safetySettings: safetySettings
+      })
+    });
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let buffer = "";
+    let content = "";
+    let finish = false;
+
+    while (!finish) {
+      const { value, done } = await reader.read();
+      finish = done;
+
+      if (value) {
+        const chunk = decoder.decode(value, { stream: true });
+        buffer += chunk;
+
+        try {
+          // To receive an array of candidates, temporarily terminate the array
+          const json = JSON.parse(buffer + "]");
+          content += json.at(-1).candidates[0].content.parts[0].text;
+          // console.log(content);
+          await chrome.storage.session.set({ streamContent: content });
+        } catch {
+          // If it cannot be parsed as JSON, wait for the next chunk
+        }
+      }
+    }
+
+    const json = JSON.parse(buffer);
+    json.at(-1).candidates[0].content.parts[0].text = content;
+
+    return {
+      ok: response.ok,
+      status: response.status,
+      body: json.at(-1)
     };
   } catch (error) {
     return {

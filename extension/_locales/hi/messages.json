@@ -9,7 +9,7 @@
         "message": "इसे फिर से चलाएँ"
     },
     "popup_button_results": {
-        "message": "परिणाम एक नए टैब में खोलें"
+        "message": "परिणामों को एक नए टैब में खोलें"
     },
     "popup_button_options": {
         "message": "विकल्प पृष्ठ खोलें"
@@ -33,13 +33,13 @@
         "message": "छवि का अनुवाद किया जा रहा है"
     },
     "popup_processing": {
-        "message": "प्रसंस्करण"
+        "message": "प्रसंस्करण किया जा रहा है"
     },
     "popup_prompt_blocked": {
-        "message": "प्रॉम्प्ट ब्लॉक कर दिया गया था।"
+        "message": "प्रॉम्प्ट को ब्लॉक कर दिया गया था।"
     },
     "popup_response_blocked": {
-        "message": "प्रतिक्रिया ब्लॉक कर दी गई थी।"
+        "message": "प्रतिक्रिया को ब्लॉक कर दिया गया था।"
     },
     "popup_unexpected_response": {
         "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग की जाँच करें।"
@@ -66,10 +66,10 @@
         "message": "प्रतिक्रिया की प्रतीक्षा की जा रही है"
     },
     "results_prompt_blocked": {
-        "message": "प्रॉम्प्ट ब्लॉक कर दिया गया था।"
+        "message": "प्रॉम्प्ट को ब्लॉक कर दिया गया था।"
     },
     "results_response_blocked": {
-        "message": "प्रतिक्रिया ब्लॉक कर दी गई थी।"
+        "message": "प्रतिक्रिया को ब्लॉक कर दिया गया था।"
     },
     "results_unexpected_response": {
         "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग की जाँच करें।"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "कस्टम क्रिया"
+    },
+    "options_streaming": {
+        "message": "भाषा मॉडल से स्ट्रीमिंग आउटपुट"
     },
     "options_theme": {
         "message": "थीम"

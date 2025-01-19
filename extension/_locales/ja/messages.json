@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "カスタムアクション"
     },
+    "options_streaming": {
+        "message": "言語モデルからの出力をストリーミングする"
+    },
     "options_theme": {
         "message": "テーマ"
     },

@@ -10,6 +10,7 @@ const restoreOptions = async () => {
     noTextCustomPrompt: "",
     textAction: "translate",
     textCustomPrompt: "",
+    streaming: false,
     theme: "system"
   });
 
@@ -21,6 +22,7 @@ const restoreOptions = async () => {
   document.getElementById("noTextCustomPrompt").value = options.noTextCustomPrompt;
   document.querySelector(`input[name="textAction"][value="${options.textAction}"]`).checked = true;
   document.getElementById("textCustomPrompt").value = options.textCustomPrompt;
+  document.getElementById("streaming").checked = options.streaming;
   document.getElementById("theme").value = options.theme;
 
   // Set the default language model if the language model is not set
@@ -39,6 +41,7 @@ const saveOptions = async () => {
     noTextCustomPrompt: document.getElementById("noTextCustomPrompt").value,
     textAction: document.querySelector('input[name="textAction"]:checked').value,
     textCustomPrompt: document.getElementById("textCustomPrompt").value,
+    streaming: document.getElementById("streaming").checked,
     theme: document.getElementById("theme").value
   };
 

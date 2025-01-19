@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "Custom action"
     },
+    "options_streaming": {
+        "message": "Streaming output from the language model"
+    },
     "options_theme": {
         "message": "Theme"
     },

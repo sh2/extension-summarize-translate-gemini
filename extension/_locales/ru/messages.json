@@ -78,10 +78,10 @@
         "message": "Настройки - Суммировать и переводить с помощью Gemini"
     },
     "options_apikey": {
-        "message": "Ключ API Gemini"
+        "message": "API-ключ Gemini"
     },
     "options_apikey_hint": {
-        "message": "Вы можете получить ключ API Gemini на следующей странице."
+        "message": "Вы можете получить API-ключ Gemini на следующей странице."
     },
     "options_model": {
         "message": "Языковая модель"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "Пользовательское действие"
+    },
+    "options_streaming": {
+        "message": "Потоковый вывод от языковой модели"
     },
     "options_theme": {
         "message": "Тема"

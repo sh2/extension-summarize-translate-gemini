@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 總結和翻譯"
+        "message": "使用Gemini總結和翻譯"
     },
     "extension_description": {
-        "message": "總結和翻譯網頁。使用 Gemini 作為後端。"
+        "message": "總結和翻譯網頁。使用Gemini作為後端。"
     },
     "popup_button_run": {
         "message": "再次執行"
@@ -48,7 +48,7 @@
         "message": "此頁面無法總結或翻譯。"
     },
     "results_title": {
-        "message": "結果 - 使用 Gemini 總結和翻譯"
+        "message": "結果 - 使用Gemini總結和翻譯"
     },
     "results_button_clear": {
         "message": "清除對話"
@@ -75,7 +75,7 @@
         "message": "發生未知錯誤。請檢查控制台日誌。"
     },
     "options_title": {
-        "message": "選項 - 使用 Gemini 總結和翻譯"
+        "message": "選項 - 使用Gemini總結和翻譯"
     },
     "options_apikey": {
         "message": "Gemini API 金鑰"
@@ -93,7 +93,7 @@
         "message": "使用者指定的語言"
     },
     "options_language_notes": {
-        "message": "自訂動作中會忽略語言設定。"
+        "message": "在自訂動作中，語言設定將被忽略。"
     },
     "options_no_text_action": {
         "message": "當未選取文字時，執行以下動作"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "自訂動作"
+    },
+    "options_streaming": {
+        "message": "從語言模型串流輸出"
     },
     "options_theme": {
         "message": "主題"

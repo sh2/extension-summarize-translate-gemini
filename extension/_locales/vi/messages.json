@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "Hành động tùy chỉnh"
     },
+    "options_streaming": {
+        "message": "Truyền trực tuyến đầu ra từ mô hình ngôn ngữ"
+    },
     "options_theme": {
         "message": "Chủ đề"
     },

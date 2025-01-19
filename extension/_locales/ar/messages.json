@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "إجراء مخصص"
     },
+    "options_streaming": {
+        "message": "تدفق الإخراج من نموذج اللغة"
+    },
     "options_theme": {
         "message": "السمة"
     },

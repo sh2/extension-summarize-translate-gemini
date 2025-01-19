@@ -84,7 +84,7 @@
         "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
     "options_model": {
-        "message": "Modèle de langue"
+        "message": "Modèle de langage"
     },
     "options_language": {
         "message": "Résumer en / Traduire vers"
@@ -118,6 +118,9 @@
     },
     "options_text_custom": {
         "message": "Action personnalisée"
+    },
+    "options_streaming": {
+        "message": "Sortie en flux continu du modèle de langage"
     },
     "options_theme": {
         "message": "Thème"

@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "Benutzerdefinierte Aktion"
     },
+    "options_streaming": {
+        "message": "Streaming-Ausgabe vom Sprachmodell"
+    },
     "options_theme": {
         "message": "Thema"
     },

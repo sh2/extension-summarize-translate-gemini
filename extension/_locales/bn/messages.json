@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "জেমিনি দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
+        "message": "Gemini দিয়ে সংক্ষিপ্তসার করুন এবং অনুবাদ করুন"
     },
     "extension_description": {
-        "message": "ওয়েব পেজগুলির সারসংক্ষেপ করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসাবে জেমিনি ব্যবহার করে।"
+        "message": "ওয়েব পেজগুলির সংক্ষিপ্তসার করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসাবে Gemini ব্যবহার করে।"
     },
     "popup_button_run": {
         "message": "আবার চালান"
@@ -15,13 +15,13 @@
         "message": "অপশন পেজ খুলুন"
     },
     "popup_summarizing": {
-        "message": "সারসংক্ষেপ করা হচ্ছে"
+        "message": "সংক্ষিপ্তসার করা হচ্ছে"
     },
     "popup_summarizing_captions": {
-        "message": "ক্যাপশনগুলির সারসংক্ষেপ করা হচ্ছে"
+        "message": "ক্যাপশনগুলির সংক্ষিপ্তসার করা হচ্ছে"
     },
     "popup_summarizing_image": {
-        "message": "ছবিটির সারসংক্ষেপ করা হচ্ছে"
+        "message": "ছবিটির সংক্ষিপ্তসার করা হচ্ছে"
     },
     "popup_translating": {
         "message": "অনুবাদ করা হচ্ছে"
@@ -42,13 +42,13 @@
         "message": "উত্তরটি ব্লক করা হয়েছে।"
     },
     "popup_unexpected_response": {
-        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগটি পরীক্ষা করুন।"
+        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগ পরীক্ষা করুন।"
     },
     "popup_miscellaneous_error": {
-        "message": "এই পৃষ্ঠাটির সারসংক্ষেপ বা অনুবাদ করা যাবে না।"
+        "message": "এই পৃষ্ঠাটির সংক্ষিপ্তসার বা অনুবাদ করা সম্ভব নয়।"
     },
     "results_title": {
-        "message": "ফলাফল - জেমিনি দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
+        "message": "ফলাফল - Gemini দিয়ে সংক্ষিপ্তসার করুন এবং অনুবাদ করুন"
     },
     "results_button_clear": {
         "message": "কথোপকথন পরিষ্কার করুন"
@@ -72,34 +72,34 @@
         "message": "উত্তরটি ব্লক করা হয়েছে।"
     },
     "results_unexpected_response": {
-        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগটি পরীক্ষা করুন।"
+        "message": "একটি অজানা ত্রুটি ঘটেছে। কনসোল লগ পরীক্ষা করুন।"
     },
     "options_title": {
-        "message": "অপশন - জেমিনি দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
+        "message": "অপশন - Gemini দিয়ে সংক্ষিপ্তসার করুন এবং অনুবাদ করুন"
     },
     "options_apikey": {
-        "message": "জেমিনি এপিআই কী"
+        "message": "Gemini API কী"
     },
     "options_apikey_hint": {
-        "message": "আপনি নিম্নলিখিত পৃষ্ঠায় একটি জেমিনি এপিআই কী পেতে পারেন।"
+        "message": "আপনি নিম্নলিখিত পৃষ্ঠায় একটি Gemini API কী পেতে পারেন।"
     },
     "options_model": {
         "message": "ভাষা মডেল"
     },
     "options_language": {
-        "message": "সারসংক্ষেপ করুন / অনুবাদ করুন"
+        "message": "সংক্ষিপ্তসার করুন / অনুবাদ করুন"
     },
     "options_language_user": {
         "message": "ব্যবহারকারী-নির্দিষ্ট ভাষা"
     },
     "options_language_notes": {
-        "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিং উপেক্ষা করা হয়।"
+        "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিংস উপেক্ষা করা হয়।"
     },
     "options_no_text_action": {
         "message": "যখন কোনো টেক্সট নির্বাচন করা না থাকে, তখন নিম্নলিখিত কাজটি করুন"
     },
     "options_no_text_summarize": {
-        "message": "সারসংক্ষেপ করুন (ডিফল্ট)"
+        "message": "সংক্ষিপ্তসার করুন (ডিফল্ট)"
     },
     "options_no_text_translate": {
         "message": "অনুবাদ করুন"
@@ -111,13 +111,16 @@
         "message": "যখন টেক্সট নির্বাচন করা থাকে, তখন নিম্নলিখিত কাজটি করুন"
     },
     "options_text_summarize": {
-        "message": "সারসংক্ষেপ করুন"
+        "message": "সংক্ষিপ্তসার করুন"
     },
     "options_text_translate": {
         "message": "অনুবাদ করুন (ডিফল্ট)"
     },
     "options_text_custom": {
         "message": "কাস্টম অ্যাকশন"
+    },
+    "options_streaming": {
+        "message": "ভাষা মডেল থেকে স্ট্রিমিং আউটপুট"
     },
     "options_theme": {
         "message": "থিম"

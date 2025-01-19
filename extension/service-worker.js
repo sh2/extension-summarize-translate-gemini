@@ -1,4 +1,4 @@
-import { getModelId, generateContent } from "./utils.js";
+import { getModelId, generateContent, streamGenerateContent } from "./utils.js";
 
 const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLength) => {
   const languageNames = {
@@ -159,7 +159,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     } else if (request.message === "generate") {
       // Generate content
       const { actionType, mediaType, taskInput, languageModel, languageCode } = request;
-      const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
+      const { apiKey, streaming } = await chrome.storage.local.get({ apiKey: "", streaming: false });
       const modelId = getModelId(languageModel);
 
       const systemPrompt = await getSystemPrompt(
@@ -170,6 +170,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       );
 
       let apiContent = {};
+      let response = null;
 
       if (mediaType === "image") {
         const [mediaInfo, mediaData] = taskInput.split(",");
@@ -194,7 +195,11 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         };
       }
 
-      const response = await generateContent(apiKey, modelId, [apiContent]);
+      if (streaming) {
+        response = await streamGenerateContent(apiKey, modelId, [apiContent]);
+      } else {
+        response = await generateContent(apiKey, modelId, [apiContent]);
+      }
 
       // Add the system prompt and the user input to the response
       response.requestApiContent = apiContent;

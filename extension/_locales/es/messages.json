@@ -119,6 +119,9 @@
     "options_text_custom": {
         "message": "Acción personalizada"
     },
+    "options_streaming": {
+        "message": "Salida de transmisión del modelo de lenguaje"
+    },
     "options_theme": {
         "message": "Tema"
     },

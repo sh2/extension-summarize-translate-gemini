@@ -99,7 +99,7 @@ const extractTaskInformation = async (languageCode) => {
       func: getSelectedText
     }))[0].result;
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 
   if (taskInput) {
@@ -120,7 +120,7 @@ const extractTaskInformation = async (languageCode) => {
           args: [tab.url, languageCode]
         }))[0].result;
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     }
 
@@ -139,7 +139,7 @@ const extractTaskInformation = async (languageCode) => {
           func: getWholeText
         }))[0].result;
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     }
 
@@ -232,7 +232,7 @@ const main = async (useCache) => {
         response = responseCache.value;
       } else {
         // Generate content
-        response = await chrome.runtime.sendMessage({
+        const responsePromise = chrome.runtime.sendMessage({
           message: "generate",
           actionType: actionType,
           mediaType: mediaType,
@@ -240,6 +240,32 @@ const main = async (useCache) => {
           languageModel: languageModel,
           languageCode: languageCode
         });
+
+        const { streaming } = await chrome.storage.local.get({ streaming: false });
+        let streamIntervalId = 0;
+
+        if (streaming) {
+          // Stream the content
+          streamIntervalId = setInterval(async () => {
+            const { streamContent } = await chrome.storage.session.get("streamContent");
+
+            if (streamContent) {
+              const div = document.createElement("div");
+              div.textContent = `${content}\n\n${streamContent}\n\n`;
+              document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
+
+              // Scroll to the bottom of the page
+              window.scrollTo(0, document.body.scrollHeight);
+            }
+          }, 1000);
+        }
+
+        // Wait for responsePromise
+        response = await responsePromise;
+
+        if (streamIntervalId) {
+          clearInterval(streamIntervalId);
+        }
       }
 
       console.log(response);

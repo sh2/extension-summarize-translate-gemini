@@ -1,6 +1,6 @@
 /* global DOMPurify, marked */
 
-import { applyTheme, adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage, getModelId, generateContent } from "./utils.js";
+import { applyTheme, adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage, getModelId, generateContent, streamGenerateContent } from "./utils.js";
 
 const conversation = [];
 let result = {};
@@ -60,11 +60,62 @@ const askQuestion = async () => {
   apiContents.push({ role: "user", parts: [{ text: question }] });
   console.log(apiContents);
 
+  // Create a new div element with the question
+  const questionDiv = document.createElement("div");
+  questionDiv.textContent = question;
+
+  // Create a new div element with the formatted question
+  const formattedQuestionDiv = document.createElement("div");
+  formattedQuestionDiv.style.backgroundColor = "var(--nc-bg-3)";
+  formattedQuestionDiv.style.borderRadius = "1rem";
+  formattedQuestionDiv.style.margin = "1.5rem";
+  formattedQuestionDiv.style.padding = "1rem 1rem .1rem";
+  formattedQuestionDiv.innerHTML = DOMPurify.sanitize(marked.parse(questionDiv.innerHTML, { breaks: true }));
+
+  // Append the formatted question to the conversation
+  document.getElementById("conversation").appendChild(formattedQuestionDiv);
+  document.getElementById("text").value = "";
+
+  // Append the formatted answer to the conversation
+  const formattedAnswerDiv = document.createElement("div");
+  document.getElementById("conversation").appendChild(formattedAnswerDiv);
+
+  // Scroll to the bottom of the page
+  window.scrollTo(0, document.body.scrollHeight);
+
   // Generate the response
-  const { apiKey } = await chrome.storage.local.get({ apiKey: "" });
+  const { apiKey, streaming } = await chrome.storage.local.get({ apiKey: "", streaming: false });
   const languageModel = document.getElementById("languageModel").value;
   const modelId = getModelId(languageModel);
-  const response = await generateContent(apiKey, modelId, apiContents);
+  let response = null;
+
+  if (streaming) {
+    const responsePromise = streamGenerateContent(apiKey, modelId, apiContents);
+
+    // Stream the content
+    const streamIntervalId = setInterval(async () => {
+      const { streamContent } = (await chrome.storage.session.get("streamContent"));
+
+      if (streamContent) {
+        const streamDiv = document.createElement("div");
+        streamDiv.textContent = `${streamContent}\n\n`;
+        formattedAnswerDiv.innerHTML = DOMPurify.sanitize(marked.parse(streamDiv.innerHTML));
+
+        // Scroll to the bottom of the page
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+    }, 1000);
+
+    // Wait for responsePromise
+    response = await responsePromise;
+
+    if (streamIntervalId) {
+      clearInterval(streamIntervalId);
+    }
+  } else {
+    response = await generateContent(apiKey, modelId, apiContents);
+  }
+
   console.log(response);
 
   if (response.ok) {
@@ -101,32 +152,12 @@ const askQuestion = async () => {
   document.getElementById("languageModel").disabled = false;
   document.getElementById("send").disabled = false;
 
-  // Create a new div element with the question
-  const questionDiv = document.createElement("div");
-  questionDiv.textContent = question;
-
-  // Create a new div element with the formatted text
-  const formattedQuestionDiv = document.createElement("div");
-  formattedQuestionDiv.style.backgroundColor = "var(--nc-bg-3)";
-  formattedQuestionDiv.style.borderRadius = "1rem";
-  formattedQuestionDiv.style.margin = "1.5rem";
-  formattedQuestionDiv.style.padding = "1rem 1rem .1rem";
-  formattedQuestionDiv.innerHTML = DOMPurify.sanitize(marked.parse(questionDiv.innerHTML, { breaks: true }));
-
-  // Append the formatted text to the conversation
-  document.getElementById("conversation").appendChild(formattedQuestionDiv);
-  document.getElementById("text").value = "";
-
   // Create a new div element with the answer
   const answerDiv = document.createElement("div");
   answerDiv.textContent = answer;
 
-  // Create a new div element with the formatted text
-  const formattedAnswerDiv = document.createElement("div");
+  // Update the formatted answer in the conversation
   formattedAnswerDiv.innerHTML = DOMPurify.sanitize(marked.parse(answerDiv.innerHTML));
-
-  // Append the formatted text to the conversation
-  document.getElementById("conversation").appendChild(formattedAnswerDiv);
 
   // Scroll to the bottom of the page
   window.scrollTo(0, document.body.scrollHeight);
