@@ -189,6 +189,7 @@ const main = async (useCache) => {
   await chrome.storage.session.set({ resultIndex: resultIndex });
 
   try {
+    const { streaming } = await chrome.storage.local.get({ streaming: false });
     const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
     let taskInputChunks = [];
@@ -241,7 +242,6 @@ const main = async (useCache) => {
           languageCode: languageCode
         });
 
-        const { streaming } = await chrome.storage.local.get({ streaming: false });
         let streamIntervalId = 0;
 
         if (streaming) {
@@ -253,9 +253,6 @@ const main = async (useCache) => {
               const div = document.createElement("div");
               div.textContent = `${content}\n\n${streamContent}\n\n`;
               document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
-
-              // Scroll to the bottom of the page
-              window.scrollTo(0, document.body.scrollHeight);
             }
           }, 1000);
         }
@@ -289,7 +286,9 @@ const main = async (useCache) => {
           document.getElementById("content").innerHTML = DOMPurify.sanitize(marked.parse(div.innerHTML));
 
           // Scroll to the bottom of the page
-          window.scrollTo(0, document.body.scrollHeight);
+          if (!streaming) {
+            window.scrollTo(0, document.body.scrollHeight);
+          }
         } else {
           // The expected response was not returned
           content = chrome.i18n.getMessage("popup_unexpected_response");

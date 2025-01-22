@@ -100,9 +100,6 @@ const askQuestion = async () => {
         const streamDiv = document.createElement("div");
         streamDiv.textContent = `${streamContent}\n\n`;
         formattedAnswerDiv.innerHTML = DOMPurify.sanitize(marked.parse(streamDiv.innerHTML));
-
-        // Scroll to the bottom of the page
-        window.scrollTo(0, document.body.scrollHeight);
       }
     }, 1000);
 
@@ -160,7 +157,9 @@ const askQuestion = async () => {
   formattedAnswerDiv.innerHTML = DOMPurify.sanitize(marked.parse(answerDiv.innerHTML));
 
   // Scroll to the bottom of the page
-  window.scrollTo(0, document.body.scrollHeight);
+  if (!streaming) {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
 
   // Add the question and answer to the conversation
   conversation.push({ question: question, answer: answer });
