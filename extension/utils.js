@@ -150,11 +150,13 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
     const decoder = new TextDecoder("utf-8");
     let buffer = "";
     let content = "";
-    let finish = false;
 
-    while (!finish) {
+    while (true) {
       const { value, done } = await reader.read();
-      finish = done;
+
+      if (done) {
+        break;
+      }
 
       if (value) {
         const chunk = decoder.decode(value, { stream: true });
@@ -164,7 +166,6 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
           // To receive an array of candidates, temporarily terminate the array
           const json = JSON.parse(buffer + "]");
           content += json.at(-1).candidates[0].content.parts[0].text;
-          // console.log(content);
           await chrome.storage.session.set({ streamContent: content });
         } catch {
           // If it cannot be parsed as JSON, wait for the next chunk
