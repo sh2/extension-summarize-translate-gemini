@@ -150,13 +150,10 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
     const decoder = new TextDecoder("utf-8");
     let buffer = "";
     let content = "";
+    let processed = -1;
 
     while (true) {
       const { value, done } = await reader.read();
-
-      if (done) {
-        break;
-      }
 
       if (value) {
         const chunk = decoder.decode(value, { stream: true });
@@ -164,16 +161,36 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
 
         try {
           // To receive an array of candidates, temporarily terminate the array
+          // and parse the buffer as JSON
           const json = JSON.parse(buffer + "]");
-          content += json.at(-1).candidates[0].content.parts[0].text;
+
+          // Concatenate the candidates
+          for (let index = processed + 1; index < json.length; index++) {
+            content += json[index].candidates[0].content.parts[0].text;
+            processed = index;
+          }
+
+          // Set the concatenated content to the session storage
           await chrome.storage.session.set({ streamContent: content });
         } catch {
           // If it cannot be parsed as JSON, wait for the next chunk
         }
       }
+
+      if (done) {
+        break;
+      }
     }
 
+    // To receive the last candidate, re-parse the buffer
     const json = JSON.parse(buffer);
+
+    // Concatenate the remaining candidates
+    for (let index = processed + 1; index < json.length; index++) {
+      content += json[index].candidates[0].content.parts[0].text;
+    }
+
+    // Update the last candidate with the concatenated content
     json.at(-1).candidates[0].content.parts[0].text = content;
 
     return {
