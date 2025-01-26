@@ -12,17 +12,18 @@ const clearConversation = () => {
 };
 
 const copyContent = async () => {
-  let content = result.responseContent.replace(/\n+$/, "") + "\n\n";
+  const copyStatus = document.getElementById("copy-status");
+  let clipboardContent = result.responseContent.replace(/\n+$/, "") + "\n\n";
 
   conversation.forEach((item) => {
-    content += item.question.replace(/\n+$/, "") + "\n\n";
-    content += item.answer.replace(/\n+$/, "") + "\n\n";
+    clipboardContent += item.question.replace(/\n+$/, "") + "\n\n";
+    clipboardContent += item.answer.replace(/\n+$/, "") + "\n\n";
   });
 
-  const copyStatus = document.getElementById("copy-status");
-
   // Copy the content to the clipboard
-  await navigator.clipboard.writeText(content);
+  await navigator.clipboard.writeText(clipboardContent);
+
+  // Display a message indicating that the content was copied
   copyStatus.textContent = chrome.i18n.getMessage("results_copied");
   setTimeout(() => copyStatus.textContent = "", 1000);
 };

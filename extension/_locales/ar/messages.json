@@ -5,8 +5,14 @@
     "extension_description": {
         "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كخادم خلفي."
     },
+    "popup_button_copy": {
+        "message": "نسخ"
+    },
+    "popup_copied": {
+        "message": "تم النسخ."
+    },
     "popup_button_run": {
-        "message": "تشغيل مرة أخرى"
+        "message": "إعادة التشغيل"
     },
     "popup_button_results": {
         "message": "فتح النتائج في علامة تبويب جديدة"

@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "Webseiten zusammenfassen und übersetzen. Verwendet Gemini als Backend."
     },
+    "popup_button_copy": {
+        "message": "Kopieren"
+    },
+    "popup_copied": {
+        "message": "Kopiert."
+    },
     "popup_button_run": {
         "message": "Erneut ausführen"
     },

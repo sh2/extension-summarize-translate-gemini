@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "Summarize and translate web pages. Uses Gemini as the backend."
     },
+    "popup_button_copy": {
+        "message": "Copy"
+    },
+    "popup_copied": {
+        "message": "Copied."
+    },
     "popup_button_run": {
         "message": "Run it again"
     },

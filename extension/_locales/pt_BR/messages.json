@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "Resuma e traduza páginas da web. Usa Gemini como backend."
     },
+    "popup_button_copy": {
+        "message": "Copiar"
+    },
+    "popup_copied": {
+        "message": "Copiado."
+    },
     "popup_button_run": {
         "message": "Executar novamente"
     },
@@ -96,7 +102,7 @@
         "message": "A configuração de idioma é desconsiderada em ações personalizadas."
     },
     "options_no_text_action": {
-        "message": "Quando nenhum texto é selecionado, faça a seguinte ação"
+        "message": "Quando nenhum texto é selecionado, execute a seguinte ação"
     },
     "options_no_text_summarize": {
         "message": "Resumir (padrão)"
@@ -108,7 +114,7 @@
         "message": "Ação personalizada"
     },
     "options_text_action": {
-        "message": "Quando o texto é selecionado, faça a seguinte ação"
+        "message": "Quando o texto é selecionado, execute a seguinte ação"
     },
     "options_text_summarize": {
         "message": "Resumir"

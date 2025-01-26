@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "वेब पृष्ठों का संक्षेप और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
     },
+    "popup_button_copy": {
+        "message": "कॉपी करें"
+    },
+    "popup_copied": {
+        "message": "कॉपी किया गया।"
+    },
     "popup_button_run": {
         "message": "इसे फिर से चलाएँ"
     },
@@ -33,7 +39,7 @@
         "message": "छवि का अनुवाद किया जा रहा है"
     },
     "popup_processing": {
-        "message": "प्रसंस्करण किया जा रहा है"
+        "message": "प्रसंस्करण"
     },
     "popup_prompt_blocked": {
         "message": "प्रॉम्प्ट को ब्लॉक कर दिया गया था।"

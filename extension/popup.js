@@ -3,6 +3,19 @@
 import { applyTheme, adjustLayoutForScreenSize, loadTemplate, displayLoadingMessage } from "./utils.js";
 
 let resultIndex = 0;
+let content = "";
+
+const copyContent = async () => {
+  const copyStatus = document.getElementById("copy-status");
+  let clipboardContent = content.replace(/\n+$/, "") + "\n\n";
+
+  // Copy the content to the clipboard
+  await navigator.clipboard.writeText(clipboardContent);
+  
+  // Display a message indicating that the content was copied
+  copyStatus.textContent = chrome.i18n.getMessage("popup_copied");
+  setTimeout(() => copyStatus.textContent = "", 1000);
+};
 
 const getSelectedText = () => {
   // Return the selected text
@@ -181,9 +194,12 @@ const getLoadingMessage = (actionType, mediaType) => {
 
 const main = async (useCache) => {
   let displayIntervalId = 0;
-  let content = "";
   let response = {};
 
+  // Clear the content
+  content = "";
+
+  // Increment the result index
   resultIndex = (await chrome.storage.session.get({ resultIndex: -1 })).resultIndex;
   resultIndex = (resultIndex + 1) % 10;
   await chrome.storage.session.set({ resultIndex: resultIndex });
@@ -200,6 +216,7 @@ const main = async (useCache) => {
     document.getElementById("run").disabled = true;
     document.getElementById("languageModel").disabled = true;
     document.getElementById("languageCode").disabled = true;
+    document.getElementById("copy").disabled = true;
     document.getElementById("results").disabled = true;
 
     // Extract the task information
@@ -314,6 +331,7 @@ const main = async (useCache) => {
     document.getElementById("run").disabled = false;
     document.getElementById("languageModel").disabled = false;
     document.getElementById("languageCode").disabled = false;
+    document.getElementById("copy").disabled = false;
     document.getElementById("results").disabled = false;
 
     // Convert the content from Markdown to HTML
@@ -375,6 +393,8 @@ document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("run").addEventListener("click", () => {
   main(false);
 });
+
+document.getElementById("copy").addEventListener("click", copyContent);
 
 document.getElementById("results").addEventListener("click", () => {
   chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${resultIndex}`) }, () => {

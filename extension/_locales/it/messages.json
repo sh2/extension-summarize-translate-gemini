@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "Riassumi e traduci pagine web. Utilizza Gemini come backend."
     },
+    "popup_button_copy": {
+        "message": "Copia"
+    },
+    "popup_copied": {
+        "message": "Copiato."
+    },
     "popup_button_run": {
         "message": "Esegui di nuovo"
     },
@@ -84,7 +90,7 @@
         "message": "È possibile ottenere una chiave API Gemini alla seguente pagina."
     },
     "options_model": {
-        "message": "Modello Linguistico"
+        "message": "Modello linguistico"
     },
     "options_language": {
         "message": "Riassumi in / Traduci in"

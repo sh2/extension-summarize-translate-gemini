@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "Resume y traduce páginas web. Utiliza Gemini como backend."
     },
+    "popup_button_copy": {
+        "message": "Copiar"
+    },
+    "popup_copied": {
+        "message": "Copiado."
+    },
     "popup_button_run": {
         "message": "Ejecutar de nuevo"
     },
@@ -45,7 +51,7 @@
         "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
-        "message": "Esta página no puede ser resumida ni traducida."
+        "message": "Esta página no puede ser resumida o traducida."
     },
     "results_title": {
         "message": "Resultados - Resumir y Traducir con Gemini"

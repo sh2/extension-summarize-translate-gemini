@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "Tóm tắt và dịch các trang web. Sử dụng Gemini làm backend."
     },
+    "popup_button_copy": {
+        "message": "Sao chép"
+    },
+    "popup_copied": {
+        "message": "Đã sao chép."
+    },
     "popup_button_run": {
         "message": "Chạy lại"
     },
@@ -36,7 +42,7 @@
         "message": "Đang xử lý"
     },
     "popup_prompt_blocked": {
-        "message": "Lời nhắc đã bị chặn."
+        "message": "Yêu cầu đã bị chặn."
     },
     "popup_response_blocked": {
         "message": "Phản hồi đã bị chặn."
@@ -66,7 +72,7 @@
         "message": "Đang chờ phản hồi"
     },
     "results_prompt_blocked": {
-        "message": "Lời nhắc đã bị chặn."
+        "message": "Yêu cầu đã bị chặn."
     },
     "results_response_blocked": {
         "message": "Phản hồi đã bị chặn."
@@ -87,7 +93,7 @@
         "message": "Mô hình ngôn ngữ"
     },
     "options_language": {
-        "message": "Tóm tắt bằng / Dịch sang"
+        "message": "Tóm tắt thành / Dịch sang"
     },
     "options_language_user": {
         "message": "Ngôn ngữ do người dùng chỉ định"

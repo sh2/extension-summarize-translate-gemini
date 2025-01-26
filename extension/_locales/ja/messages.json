@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "ウェブページを要約、翻訳します。バックエンドにGeminiを使用しています。"
     },
+    "popup_button_copy": {
+        "message": "コピーする"
+    },
+    "popup_copied": {
+        "message": "コピーしました。"
+    },
     "popup_button_run": {
         "message": "もう一度実行する"
     },

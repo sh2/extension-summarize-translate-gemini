@@ -3,7 +3,13 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résumez et traduisez des pages web. Utilise Gemini comme backend."
+        "message": "Résumez et traduisez des pages Web. Utilise Gemini comme backend."
+    },
+    "popup_button_copy": {
+        "message": "Copier"
+    },
+    "popup_copied": {
+        "message": "Copié."
     },
     "popup_button_run": {
         "message": "Exécuter à nouveau"
@@ -84,7 +90,7 @@
         "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
     "options_model": {
-        "message": "Modèle de langage"
+        "message": "Modèle de langue"
     },
     "options_language": {
         "message": "Résumer en / Traduire vers"
@@ -120,7 +126,7 @@
         "message": "Action personnalisée"
     },
     "options_streaming": {
-        "message": "Sortie en flux continu du modèle de langage"
+        "message": "Sortie en flux continu du modèle de langue"
     },
     "options_theme": {
         "message": "Thème"

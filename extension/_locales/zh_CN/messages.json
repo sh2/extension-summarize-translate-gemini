@@ -5,6 +5,12 @@
     "extension_description": {
         "message": "总结和翻译网页。使用Gemini作为后端。"
     },
+    "popup_button_copy": {
+        "message": "复制"
+    },
+    "popup_copied": {
+        "message": "已复制。"
+    },
     "popup_button_run": {
         "message": "再次运行"
     },
@@ -93,7 +99,7 @@
         "message": "用户指定的语言"
     },
     "options_language_notes": {
-        "message": "自定义操作中会忽略语言设置。"
+        "message": "在自定义操作中，语言设置将被忽略。"
     },
     "options_no_text_action": {
         "message": "当未选择文本时，执行以下操作"
