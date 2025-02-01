@@ -185,13 +185,15 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
     // To receive the last candidate, re-parse the buffer
     const json = JSON.parse(buffer);
 
-    // Concatenate the remaining candidates
-    for (let index = processed + 1; index < json.length; index++) {
-      content += json[index].candidates[0].content.parts[0].text;
-    }
+    if (response.ok) {
+      // Concatenate the remaining candidates
+      for (let index = processed + 1; index < json.length; index++) {
+        content += json[index].candidates[0].content.parts[0].text;
+      }
 
-    // Update the last candidate with the concatenated content
-    json.at(-1).candidates[0].content.parts[0].text = content;
+      // Update the last candidate with the concatenated content
+      json.at(-1).candidates[0].content.parts[0].text = content;
+    }
 
     return {
       ok: response.ok,
