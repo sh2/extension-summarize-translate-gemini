@@ -3,7 +3,7 @@ import { applyTheme, adjustLayoutForScreenSize, loadTemplate } from "./utils.js"
 const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
     apiKey: "",
-    languageModel: "1.5-flash",
+    languageModel: "2.0-flash",
     languageCode: "en",
     userLanguage: "Turkish",
     noTextAction: "summarize",
@@ -27,7 +27,7 @@ const restoreOptions = async () => {
 
   // Set the default language model if the language model is not set
   if (!document.getElementById("languageModel").value) {
-    document.getElementById("languageModel").value = "1.5-flash";
+    document.getElementById("languageModel").value = "2.0-flash";
   }
 };
 

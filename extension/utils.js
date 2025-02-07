@@ -89,13 +89,12 @@ export const displayLoadingMessage = (elementId, loadingMessage) => {
 
 export const getModelId = (languageModel) => {
   const modelMappings = {
+    "2.0-flash": "gemini-2.0-flash",
     "1.5-pro": "gemini-1.5-pro",
     "1.5-flash": "gemini-1.5-flash",
     "1.5-flash-8b": "gemini-1.5-flash-8b",
-    "1.5-pro-latest": "gemini-1.5-pro-latest",
-    "1.5-flash-latest": "gemini-1.5-flash-latest",
-    "1.5-flash-8b-latest": "gemini-1.5-flash-8b-latest",
-    "exp-1206": "gemini-exp-1206",
+    "2.0-flash-lite-preview-02-05": "gemini-2.0-flash-lite-preview-02-05",
+    "2.0-pro-exp-02-05": "gemini-2.0-pro-exp-02-05",
     "2.0-flash-exp": "gemini-2.0-flash-exp"
   };
 
@@ -166,7 +165,7 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
 
           // Concatenate the candidates
           for (let index = processed + 1; index < json.length; index++) {
-            content += json[index].candidates[0].content.parts[0].text;
+            content += json[index]?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
             processed = index;
           }
 
@@ -188,11 +187,11 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
     if (response.ok) {
       // Concatenate the remaining candidates
       for (let index = processed + 1; index < json.length; index++) {
-        content += json[index].candidates[0].content.parts[0].text;
+        content += json[index]?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
       }
 
       // Update the last candidate with the concatenated content
-      json.at(-1).candidates[0].content.parts[0].text = content;
+      json.at(-1).candidates[0].content.parts = [{ text: content }];
     }
 
     return {

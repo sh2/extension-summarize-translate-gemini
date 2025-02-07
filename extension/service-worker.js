@@ -62,6 +62,12 @@ const getCharacterLimit = (modelId, actionType) => {
   // noTextCustom: The same as Summarize
   // textCustom: The same as Summarize
   const characterLimits = {
+    "gemini-2.0-flash": {
+      summarize: 786432,
+      translate: 8192,
+      noTextCustom: 786432,
+      textCustom: 786432
+    },
     "gemini-1.5-pro": {
       summarize: 1500000,
       translate: 8192,
@@ -80,25 +86,13 @@ const getCharacterLimit = (modelId, actionType) => {
       noTextCustom: 750000,
       textCustom: 750000
     },
-    "gemini-1.5-pro-latest": {
-      summarize: 1500000,
+    "gemini-2.0-flash-lite-preview-02-05": {
+      summarize: 786432,
       translate: 8192,
-      noTextCustom: 1500000,
-      textCustom: 1500000
+      noTextCustom: 786432,
+      textCustom: 786432
     },
-    "gemini-1.5-flash-latest": {
-      summarize: 750000,
-      translate: 8192,
-      noTextCustom: 750000,
-      textCustom: 750000
-    },
-    "gemini-1.5-flash-8b-latest": {
-      summarize: 750000,
-      translate: 8192,
-      noTextCustom: 750000,
-      textCustom: 750000
-    },
-    "gemini-exp-1206": {
+    "gemini-2.0-pro-exp-02-05": {
       summarize: 1572864,
       translate: 8192,
       noTextCustom: 1572864,
