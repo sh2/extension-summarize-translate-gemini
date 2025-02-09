@@ -111,7 +111,7 @@ export const generateContent = async (apiKey, modelId, apiContents) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-goog-api-key": apiKey,
+        "x-goog-api-key": apiKey
       },
       body: JSON.stringify({
         contents: apiContents,
@@ -141,7 +141,7 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-goog-api-key": apiKey,
+        "x-goog-api-key": apiKey
       },
       body: JSON.stringify({
         contents: apiContents,
