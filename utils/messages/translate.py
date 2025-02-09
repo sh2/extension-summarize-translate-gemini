@@ -36,7 +36,7 @@ def main():
             "The word \"Gemini\" must be left in English."
 
         model = google.generativeai.GenerativeModel(
-            model_name="gemini-2.0-flash-exp",
+            model_name="gemini-2.0-flash",
             system_instruction=system_instruction,
             generation_config={
                 "response_mime_type": "application/json",
