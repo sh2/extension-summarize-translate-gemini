@@ -1,6 +1,6 @@
 {
     "extension_name": {
-        "message": "Gemini के साथ संक्षेप और अनुवाद करें"
+        "message": "Gemini के साथ संक्षेप करें और अनुवाद करें"
     },
     "extension_description": {
         "message": "वेब पृष्ठों का संक्षेप और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
@@ -54,10 +54,10 @@
         "message": "इस पृष्ठ का संक्षेप या अनुवाद नहीं किया जा सकता है।"
     },
     "results_title": {
-        "message": "परिणाम - Gemini के साथ संक्षेप और अनुवाद करें"
+        "message": "परिणाम - Gemini के साथ संक्षेप करें और अनुवाद करें"
     },
     "results_button_clear": {
-        "message": "बातचीत साफ़ करें"
+        "message": "वार्तालाप साफ़ करें"
     },
     "results_button_copy": {
         "message": "कॉपी करें"
@@ -81,7 +81,7 @@
         "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग की जाँच करें।"
     },
     "options_title": {
-        "message": "विकल्प - Gemini के साथ संक्षेप और अनुवाद करें"
+        "message": "विकल्प - Gemini के साथ संक्षेप करें और अनुवाद करें"
     },
     "options_apikey": {
         "message": "Gemini API कुंजी"
@@ -92,11 +92,14 @@
     "options_model": {
         "message": "भाषा मॉडल"
     },
+    "options_model_user": {
+        "message": "उपयोगकर्ता द्वारा निर्दिष्ट मॉडल"
+    },
     "options_language": {
-        "message": "में संक्षेप करें / में अनुवाद करें"
+        "message": "इसमें संक्षेप करें / इसमें अनुवाद करें"
     },
     "options_language_user": {
-        "message": "उपयोगकर्ता-निर्दिष्ट भाषा"
+        "message": "उपयोगकर्ता द्वारा निर्दिष्ट भाषा"
     },
     "options_language_notes": {
         "message": "कस्टम क्रियाओं में भाषा सेटिंग को अनदेखा किया जाता है।"

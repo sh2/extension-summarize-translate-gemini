@@ -92,6 +92,9 @@
     "options_model": {
         "message": "言語モデル"
     },
+    "options_model_user": {
+        "message": "ユーザー指定モデル"
+    },
     "options_language": {
         "message": "以下の言語で要約/翻訳する"
     },

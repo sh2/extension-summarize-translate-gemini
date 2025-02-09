@@ -87,7 +87,7 @@ export const displayLoadingMessage = (elementId, loadingMessage) => {
   }
 };
 
-export const getModelId = (languageModel) => {
+export const getModelId = (languageModel, userModelId) => {
   const modelMappings = {
     "2.0-flash": "gemini-2.0-flash",
     "1.5-pro": "gemini-1.5-pro",
@@ -98,7 +98,11 @@ export const getModelId = (languageModel) => {
     "2.0-flash-exp": "gemini-2.0-flash-exp"
   };
 
-  return modelMappings[languageModel];
+  if (languageModel === "zz") {
+    return userModelId;
+  } else {
+    return modelMappings[languageModel];
+  }
 };
 
 export const generateContent = async (apiKey, modelId, apiContents) => {

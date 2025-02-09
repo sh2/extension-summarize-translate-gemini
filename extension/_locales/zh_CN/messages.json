@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用Gemini进行总结和翻译"
+        "message": "使用 Gemini 总结和翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页。使用Gemini作为后端。"
+        "message": "总结和翻译网页。使用 Gemini 作为后端。"
     },
     "popup_button_copy": {
         "message": "复制"
@@ -51,10 +51,10 @@
         "message": "发生未知错误。请检查控制台日志。"
     },
     "popup_miscellaneous_error": {
-        "message": "此页面无法总结或翻译。"
+        "message": "此页面无法被总结或翻译。"
     },
     "results_title": {
-        "message": "结果 - 使用Gemini进行总结和翻译"
+        "message": "结果 - 使用 Gemini 总结和翻译"
     },
     "results_button_clear": {
         "message": "清除对话"
@@ -81,16 +81,19 @@
         "message": "发生未知错误。请检查控制台日志。"
     },
     "options_title": {
-        "message": "选项 - 使用Gemini进行总结和翻译"
+        "message": "选项 - 使用 Gemini 总结和翻译"
     },
     "options_apikey": {
         "message": "Gemini API 密钥"
     },
     "options_apikey_hint": {
-        "message": "您可以在以下页面获取Gemini API密钥。"
+        "message": "您可以在以下页面获取 Gemini API 密钥。"
     },
     "options_model": {
         "message": "语言模型"
+    },
+    "options_model_user": {
+        "message": "用户指定的模型"
     },
     "options_language": {
         "message": "总结为/翻译为"
@@ -102,7 +105,7 @@
         "message": "在自定义操作中，语言设置将被忽略。"
     },
     "options_no_text_action": {
-        "message": "当未选择文本时，执行以下操作"
+        "message": "未选择文本时，执行以下操作"
     },
     "options_no_text_summarize": {
         "message": "总结（默认）"
@@ -114,7 +117,7 @@
         "message": "自定义操作"
     },
     "options_text_action": {
-        "message": "当选择文本时，执行以下操作"
+        "message": "选择文本时，执行以下操作"
     },
     "options_text_summarize": {
         "message": "总结"
@@ -126,7 +129,7 @@
         "message": "自定义操作"
     },
     "options_streaming": {
-        "message": "来自语言模型的流式输出"
+        "message": "从语言模型流式输出"
     },
     "options_theme": {
         "message": "主题"

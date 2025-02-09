@@ -52,7 +52,7 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
   return systemPrompt;
 };
 
-const getCharacterLimit = (modelId, actionType) => {
+const getCharacterLimit = async (apiKey, modelId, actionType) => {
   // Limit on the number of characters handled at one time
   // so as not to exceed the maximum number of tokens sent and received by the API.
   // In Gemini, the calculation is performed in the following way
@@ -106,7 +106,41 @@ const getCharacterLimit = (modelId, actionType) => {
     }
   };
 
-  return characterLimits[modelId][actionType];
+  if (!characterLimits[modelId]) {
+    // Get the character limits from the API
+    const characterLimitsFromAPI = {
+      summarize: 8192,
+      translate: 8192,
+      noTextCustom: 8192,
+      textCustom: 8192
+    };
+
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}`, {
+        method: "GET",
+        headers: {
+          "x-goog-api-key": apiKey
+        }
+      });
+
+      if (response.ok) {
+        const json = await response.json();
+
+        characterLimitsFromAPI.summarize = json.inputTokenLimit * 3 / 4;
+        characterLimitsFromAPI.translate = json.outputTokenLimit;
+        characterLimitsFromAPI.noTextCustom = json.inputTokenLimit * 3 / 4;
+        characterLimitsFromAPI.textCustom = json.inputTokenLimit * 3 / 4;
+      } else {
+        console.log(await response.text());
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    return characterLimitsFromAPI[actionType];
+  } else {
+    return characterLimits[modelId][actionType];
+  }
 };
 
 const chunkText = (text, chunkSize) => {
@@ -146,15 +180,17 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     if (request.message === "chunk") {
       // Split the task input
       const { actionType, taskInput, languageModel } = request;
-      const modelId = getModelId(languageModel);
-      const chunkSize = getCharacterLimit(modelId, actionType);
+      const { apiKey, userModelId } = await chrome.storage.local.get({ apiKey: "", userModelId: "gemini-2.0-flash-001" });
+      const modelId = getModelId(languageModel, userModelId);
+      const chunkSize = await getCharacterLimit(apiKey, modelId, actionType);
+      console.log(`Chunk size: ${chunkSize}`);
       const taskInputChunks = chunkText(taskInput, chunkSize);
       sendResponse(taskInputChunks);
     } else if (request.message === "generate") {
       // Generate content
       const { actionType, mediaType, taskInput, languageModel, languageCode } = request;
-      const { apiKey, streaming } = await chrome.storage.local.get({ apiKey: "", streaming: false });
-      const modelId = getModelId(languageModel);
+      const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.0-flash-001" });
+      const modelId = getModelId(languageModel, userModelId);
 
       const systemPrompt = await getSystemPrompt(
         actionType,

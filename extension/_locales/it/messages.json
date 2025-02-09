@@ -30,25 +30,25 @@
         "message": "Riassumendo l'immagine"
     },
     "popup_translating": {
-        "message": "Traducendo"
+        "message": "Traduco"
     },
     "popup_translating_captions": {
-        "message": "Traducendo le didascalie"
+        "message": "Traduco le didascalie"
     },
     "popup_translating_image": {
-        "message": "Traducendo l'immagine"
+        "message": "Traduco l'immagine"
     },
     "popup_processing": {
-        "message": "Elaborando"
+        "message": "Elaborazione in corso"
     },
     "popup_prompt_blocked": {
-        "message": "La richiesta è stata bloccata."
+        "message": "Il prompt è stato bloccato."
     },
     "popup_response_blocked": {
         "message": "La risposta è stata bloccata."
     },
     "popup_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
     },
     "popup_miscellaneous_error": {
         "message": "Questa pagina non può essere riassunta o tradotta."
@@ -72,13 +72,13 @@
         "message": "In attesa di una risposta"
     },
     "results_prompt_blocked": {
-        "message": "La richiesta è stata bloccata."
+        "message": "Il prompt è stato bloccato."
     },
     "results_response_blocked": {
         "message": "La risposta è stata bloccata."
     },
     "results_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
     },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
@@ -87,10 +87,13 @@
         "message": "Chiave API Gemini"
     },
     "options_apikey_hint": {
-        "message": "È possibile ottenere una chiave API Gemini alla seguente pagina."
+        "message": "È possibile ottenere una chiave API Gemini alla pagina seguente."
     },
     "options_model": {
         "message": "Modello linguistico"
+    },
+    "options_model_user": {
+        "message": "Modello specificato dall'utente"
     },
     "options_language": {
         "message": "Riassumi in / Traduci in"

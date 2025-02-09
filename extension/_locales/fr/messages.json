@@ -3,7 +3,7 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résumez et traduisez des pages Web. Utilise Gemini comme backend."
+        "message": "Résume et traduit les pages web. Utilise Gemini comme backend."
     },
     "popup_button_copy": {
         "message": "Copier"
@@ -21,13 +21,13 @@
         "message": "Ouvrir la page des options"
     },
     "popup_summarizing": {
-        "message": "Résumé en cours"
+        "message": "Résumisation en cours"
     },
     "popup_summarizing_captions": {
-        "message": "Résumé des légendes en cours"
+        "message": "Résumisation des légendes en cours"
     },
     "popup_summarizing_image": {
-        "message": "Résumé de l'image en cours"
+        "message": "Résumisation de l'image en cours"
     },
     "popup_translating": {
         "message": "Traduction en cours"
@@ -48,7 +48,7 @@
         "message": "La réponse a été bloquée."
     },
     "popup_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
+        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
     },
     "popup_miscellaneous_error": {
         "message": "Cette page ne peut pas être résumée ou traduite."
@@ -78,7 +78,7 @@
         "message": "La réponse a été bloquée."
     },
     "results_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez vérifier le journal de la console."
+        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
     },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"
@@ -90,7 +90,10 @@
         "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
     "options_model": {
-        "message": "Modèle de langue"
+        "message": "Modèle de langage"
+    },
+    "options_model_user": {
+        "message": "Modèle spécifié par l'utilisateur"
     },
     "options_language": {
         "message": "Résumer en / Traduire vers"
@@ -126,7 +129,7 @@
         "message": "Action personnalisée"
     },
     "options_streaming": {
-        "message": "Sortie en flux continu du modèle de langue"
+        "message": "Sortie en continu du modèle de langage"
     },
     "options_theme": {
         "message": "Thème"

@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 總結和翻譯"
+        "message": "使用 Gemini 進行摘要和翻譯"
     },
     "extension_description": {
-        "message": "總結和翻譯網頁。使用 Gemini 作為後端。"
+        "message": "摘要和翻譯網頁。使用 Gemini 作為後端。"
     },
     "popup_button_copy": {
         "message": "複製"
@@ -21,25 +21,25 @@
         "message": "開啟選項頁面"
     },
     "popup_summarizing": {
-        "message": "正在總結"
+        "message": "摘要中"
     },
     "popup_summarizing_captions": {
-        "message": "正在總結字幕"
+        "message": "摘要字幕中"
     },
     "popup_summarizing_image": {
-        "message": "正在總結圖片"
+        "message": "摘要圖片中"
     },
     "popup_translating": {
-        "message": "正在翻譯"
+        "message": "翻譯中"
     },
     "popup_translating_captions": {
-        "message": "正在翻譯字幕"
+        "message": "翻譯字幕中"
     },
     "popup_translating_image": {
-        "message": "正在翻譯圖片"
+        "message": "翻譯圖片中"
     },
     "popup_processing": {
-        "message": "正在處理"
+        "message": "處理中"
     },
     "popup_prompt_blocked": {
         "message": "提示已遭封鎖。"
@@ -51,10 +51,10 @@
         "message": "發生不明錯誤。請檢查主控台記錄。"
     },
     "popup_miscellaneous_error": {
-        "message": "此頁面無法總結或翻譯。"
+        "message": "無法摘要或翻譯此頁面。"
     },
     "results_title": {
-        "message": "結果 - 使用 Gemini 總結和翻譯"
+        "message": "結果 - 使用 Gemini 進行摘要和翻譯"
     },
     "results_button_clear": {
         "message": "清除對話"
@@ -69,7 +69,7 @@
         "message": "傳送"
     },
     "results_waiting_response": {
-        "message": "正在等待回應"
+        "message": "等待回應"
     },
     "results_prompt_blocked": {
         "message": "提示已遭封鎖。"
@@ -81,7 +81,7 @@
         "message": "發生不明錯誤。請檢查主控台記錄。"
     },
     "options_title": {
-        "message": "選項 - 使用 Gemini 總結和翻譯"
+        "message": "選項 - 使用 Gemini 進行摘要和翻譯"
     },
     "options_apikey": {
         "message": "Gemini API 金鑰"
@@ -92,20 +92,23 @@
     "options_model": {
         "message": "語言模型"
     },
+    "options_model_user": {
+        "message": "使用者指定的模型"
+    },
     "options_language": {
-        "message": "總結為 / 翻譯為"
+        "message": "摘要為 / 翻譯為"
     },
     "options_language_user": {
         "message": "使用者指定的語言"
     },
     "options_language_notes": {
-        "message": "自訂動作會忽略語言設定。"
+        "message": "在自訂動作中，語言設定會被忽略。"
     },
     "options_no_text_action": {
         "message": "未選取文字時，執行以下動作"
     },
     "options_no_text_summarize": {
-        "message": "總結 (預設)"
+        "message": "摘要 (預設)"
     },
     "options_no_text_translate": {
         "message": "翻譯"
@@ -117,7 +120,7 @@
         "message": "選取文字時，執行以下動作"
     },
     "options_text_summarize": {
-        "message": "總結"
+        "message": "摘要"
     },
     "options_text_translate": {
         "message": "翻譯 (預設)"

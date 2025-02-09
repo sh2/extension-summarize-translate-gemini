@@ -69,7 +69,7 @@
         "message": "إرسال"
     },
     "results_waiting_response": {
-        "message": "في انتظار الرد"
+        "message": "في انتظار رد"
     },
     "results_prompt_blocked": {
         "message": "تم حظر الطلب."
@@ -92,11 +92,14 @@
     "options_model": {
         "message": "نموذج اللغة"
     },
+    "options_model_user": {
+        "message": "نموذج محدد من قبل المستخدم"
+    },
     "options_language": {
-        "message": "تلخيص إلى / ترجمة إلى"
+        "message": "التلخيص بـ / الترجمة إلى"
     },
     "options_language_user": {
-        "message": "اللغة المحددة من قبل المستخدم"
+        "message": "لغة محددة من قبل المستخدم"
     },
     "options_language_notes": {
         "message": "يتم تجاهل إعداد اللغة في الإجراءات المخصصة."

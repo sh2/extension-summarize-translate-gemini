@@ -85,9 +85,9 @@ const askQuestion = async () => {
   window.scrollTo(0, document.body.scrollHeight);
 
   // Generate the response
-  const { apiKey, streaming } = await chrome.storage.local.get({ apiKey: "", streaming: false });
+  const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.0-flash-001" });
   const languageModel = document.getElementById("languageModel").value;
-  const modelId = getModelId(languageModel);
+  const modelId = getModelId(languageModel, userModelId);
   let response = null;
 
   if (streaming) {

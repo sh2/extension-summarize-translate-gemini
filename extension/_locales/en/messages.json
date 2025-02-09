@@ -92,6 +92,9 @@
     "options_model": {
         "message": "Language Model"
     },
+    "options_model_user": {
+        "message": "User-specified Model"
+    },
     "options_language": {
         "message": "Summarize in / Translate to"
     },

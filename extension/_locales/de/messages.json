@@ -39,7 +39,7 @@
         "message": "Das Bild wird übersetzt"
     },
     "popup_processing": {
-        "message": "Verarbeiten"
+        "message": "Verarbeitung"
     },
     "popup_prompt_blocked": {
         "message": "Die Eingabeaufforderung wurde blockiert."
@@ -91,6 +91,9 @@
     },
     "options_model": {
         "message": "Sprachmodell"
+    },
+    "options_model_user": {
+        "message": "Benutzerdefiniertes Modell"
     },
     "options_language": {
         "message": "Zusammenfassen in / Übersetzen nach"

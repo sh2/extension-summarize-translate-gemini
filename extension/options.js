@@ -4,6 +4,7 @@ const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
     apiKey: "",
     languageModel: "2.0-flash",
+    userModelId: "gemini-2.0-flash-001",
     languageCode: "en",
     userLanguage: "Turkish",
     noTextAction: "summarize",
@@ -16,6 +17,7 @@ const restoreOptions = async () => {
 
   document.getElementById("apiKey").value = options.apiKey;
   document.getElementById("languageModel").value = options.languageModel;
+  document.getElementById("userModelId").value = options.userModelId;
   document.getElementById("languageCode").value = options.languageCode;
   document.getElementById("userLanguage").value = options.userLanguage;
   document.querySelector(`input[name="noTextAction"][value="${options.noTextAction}"]`).checked = true;
@@ -35,6 +37,7 @@ const saveOptions = async () => {
   const options = {
     apiKey: document.getElementById("apiKey").value,
     languageModel: document.getElementById("languageModel").value,
+    userModelId: document.getElementById("userModelId").value,
     languageCode: document.getElementById("languageCode").value,
     userLanguage: document.getElementById("userLanguage").value,
     noTextAction: document.querySelector('input[name="noTextAction"]:checked').value,
