@@ -48,10 +48,10 @@
         "message": "La risposta è stata bloccata."
     },
     "popup_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Controllare il registro della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
     },
     "popup_miscellaneous_error": {
-        "message": "Impossibile riassumere o tradurre questa pagina."
+        "message": "Questa pagina non può essere riassunta o tradotta."
     },
     "results_title": {
         "message": "Risultati - Riassumi e Traduci con Gemini"
@@ -78,7 +78,7 @@
         "message": "La risposta è stata bloccata."
     },
     "results_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Controllare il registro della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
     },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
@@ -123,7 +123,7 @@
         "message": "Azione personalizzata 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Le azioni personalizzate possono essere richiamate anche dal menu contestuale."
+        "message": "Le azioni personalizzate possono essere invocate anche dal menu contestuale (solo desktop)."
     },
     "options_text_action": {
         "message": "Quando è selezionato del testo, esegui la seguente azione"
@@ -144,7 +144,7 @@
         "message": "Azione personalizzata 3"
     },
     "options_text_custom_notes": {
-        "message": "Le azioni personalizzate possono essere richiamate anche dal menu contestuale."
+        "message": "Le azioni personalizzate possono essere invocate anche dal menu contestuale (solo desktop)."
     },
     "options_streaming": {
         "message": "Output in streaming dal modello linguistico"

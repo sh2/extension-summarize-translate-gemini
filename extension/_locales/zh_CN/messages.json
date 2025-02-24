@@ -123,7 +123,7 @@
         "message": "自定义操作 3"
     },
     "options_no_text_custom_notes": {
-        "message": "也可以从上下文菜单调用自定义操作。"
+        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
     },
     "options_text_action": {
         "message": "选择文本时，执行以下操作"
@@ -144,7 +144,7 @@
         "message": "自定义操作 3"
     },
     "options_text_custom_notes": {
-        "message": "也可以从上下文菜单调用自定义操作。"
+        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
     },
     "options_streaming": {
         "message": "从语言模型流式输出"

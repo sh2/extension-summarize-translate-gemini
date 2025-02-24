@@ -1,6 +1,6 @@
 {
     "extension_name": {
-        "message": "Tóm tắt và Dịch với Gemini"
+        "message": "Tóm tắt và Dịch thuật với Gemini"
     },
     "extension_description": {
         "message": "Tóm tắt và dịch các trang web. Sử dụng Gemini làm backend."
@@ -54,7 +54,7 @@
         "message": "Không thể tóm tắt hoặc dịch trang này."
     },
     "results_title": {
-        "message": "Kết quả - Tóm tắt và Dịch với Gemini"
+        "message": "Kết quả - Tóm tắt và Dịch thuật với Gemini"
     },
     "results_button_clear": {
         "message": "Xóa hội thoại"
@@ -81,7 +81,7 @@
         "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký console."
     },
     "options_title": {
-        "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
+        "message": "Tùy chọn - Tóm tắt và Dịch thuật với Gemini"
     },
     "options_apikey": {
         "message": "Khóa API Gemini"
@@ -123,7 +123,7 @@
         "message": "Hành động tùy chỉnh 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Các hành động tùy chỉnh cũng có thể được gọi từ menu ngữ cảnh."
+        "message": "Các hành động tùy chỉnh cũng có thể được gọi từ menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
     },
     "options_text_action": {
         "message": "Khi văn bản được chọn, hãy thực hiện hành động sau"
@@ -144,7 +144,7 @@
         "message": "Hành động tùy chỉnh 3"
     },
     "options_text_custom_notes": {
-        "message": "Các hành động tùy chỉnh cũng có thể được gọi từ menu ngữ cảnh."
+        "message": "Các hành động tùy chỉnh cũng có thể được gọi từ menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
     },
     "options_streaming": {
         "message": "Truyền trực tuyến đầu ra từ mô hình ngôn ngữ"

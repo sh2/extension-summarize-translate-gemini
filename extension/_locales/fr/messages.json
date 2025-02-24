@@ -3,7 +3,7 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résumez et traduisez des pages web. Utilise Gemini comme backend."
+        "message": "Résume et traduit les pages web. Utilise Gemini comme backend."
     },
     "popup_button_copy": {
         "message": "Copier"
@@ -123,7 +123,7 @@
         "message": "Action personnalisée 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Les actions personnalisées peuvent également être invoquées à partir du menu contextuel."
+        "message": "Les actions personnalisées peuvent également être invoquées depuis le menu contextuel (bureau uniquement)."
     },
     "options_text_action": {
         "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
@@ -144,7 +144,7 @@
         "message": "Action personnalisée 3"
     },
     "options_text_custom_notes": {
-        "message": "Les actions personnalisées peuvent également être invoquées à partir du menu contextuel."
+        "message": "Les actions personnalisées peuvent également être invoquées depuis le menu contextuel (bureau uniquement)."
     },
     "options_streaming": {
         "message": "Sortie en continu du modèle de langage"

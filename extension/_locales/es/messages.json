@@ -51,7 +51,7 @@
         "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
-        "message": "Esta página no se puede resumir ni traducir."
+        "message": "Esta página no puede ser resumida ni traducida."
     },
     "results_title": {
         "message": "Resultados - Resumir y Traducir con Gemini"
@@ -123,7 +123,7 @@
         "message": "Acción personalizada 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual."
+        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo en el escritorio)."
     },
     "options_text_action": {
         "message": "Cuando se selecciona texto, realizar la siguiente acción"
@@ -144,7 +144,7 @@
         "message": "Acción personalizada 3"
     },
     "options_text_custom_notes": {
-        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual."
+        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo en el escritorio)."
     },
     "options_streaming": {
         "message": "Salida de transmisión desde el modelo de lenguaje"

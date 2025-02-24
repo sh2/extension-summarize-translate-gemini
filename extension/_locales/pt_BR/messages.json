@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resuma e traduza páginas da web. Utiliza Gemini como backend."
+        "message": "Resume e traduz páginas da web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -105,7 +105,7 @@
         "message": "A configuração de idioma é desconsiderada em ações personalizadas."
     },
     "options_no_text_action": {
-        "message": "Quando nenhum texto é selecionado, realize a seguinte ação"
+        "message": "Quando nenhum texto é selecionado, execute a seguinte ação"
     },
     "options_no_text_summarize": {
         "message": "Resumir (padrão)"
@@ -123,10 +123,10 @@
         "message": "Ação personalizada 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Ações personalizadas também podem ser invocadas a partir do menu de contexto."
+        "message": "Ações personalizadas também podem ser invocadas a partir do menu de contexto (somente desktop)."
     },
     "options_text_action": {
-        "message": "Quando o texto é selecionado, realize a seguinte ação"
+        "message": "Quando o texto é selecionado, execute a seguinte ação"
     },
     "options_text_summarize": {
         "message": "Resumir"
@@ -144,7 +144,7 @@
         "message": "Ação personalizada 3"
     },
     "options_text_custom_notes": {
-        "message": "Ações personalizadas também podem ser invocadas a partir do menu de contexto."
+        "message": "Ações personalizadas também podem ser invocadas a partir do menu de contexto (somente desktop)."
     },
     "options_streaming": {
         "message": "Saída de streaming do modelo de linguagem"

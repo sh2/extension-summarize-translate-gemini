@@ -123,7 +123,7 @@
         "message": "自訂動作 3"
     },
     "options_no_text_custom_notes": {
-        "message": "也可以從內容選單叫用自訂動作。"
+        "message": "自訂動作也可以從內容選單中叫用 (僅限桌面版)。"
     },
     "options_text_action": {
         "message": "選取文字時，執行以下動作"
@@ -144,7 +144,7 @@
         "message": "自訂動作 3"
     },
     "options_text_custom_notes": {
-        "message": "也可以從內容選單叫用自訂動作。"
+        "message": "自訂動作也可以從內容選單中叫用 (僅限桌面版)。"
     },
     "options_streaming": {
         "message": "從語言模型串流輸出"
