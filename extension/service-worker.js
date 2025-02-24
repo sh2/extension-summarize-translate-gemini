@@ -293,7 +293,9 @@ chrome.contextMenus.onClicked.addListener((info) => {
   })();
 });
 
-chrome.runtime.onInstalled.addListener(() => {
+const createContextMenus = async () => {
+  await chrome.contextMenus.removeAll();
+
   chrome.contextMenus.create({
     id: "standard-action",
     title: chrome.i18n.getMessage("context_standard_action"),
@@ -317,4 +319,7 @@ chrome.runtime.onInstalled.addListener(() => {
     title: chrome.i18n.getMessage("context_custom_action_3"),
     contexts: ["page", "selection", "action"]
   });
-});
+};
+
+chrome.runtime.onStartup.addListener(createContextMenus);
+chrome.runtime.onInstalled.addListener(createContextMenus);
