@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "翻譯"
     },
-    "options_no_text_custom": {
-        "message": "自訂動作"
+    "options_no_text_custom_1": {
+        "message": "自訂動作 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "自訂動作 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "自訂動作 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "自訂動作也可以從內容選單中叫用 (僅限桌面版)。"
     },
     "options_text_action": {
         "message": "選取文字時，執行以下動作"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "翻譯 (預設)"
     },
-    "options_text_custom": {
-        "message": "自訂動作"
+    "options_text_custom_1": {
+        "message": "自訂動作 1"
+    },
+    "options_text_custom_2": {
+        "message": "自訂動作 2"
+    },
+    "options_text_custom_3": {
+        "message": "自訂動作 3"
+    },
+    "options_text_custom_notes": {
+        "message": "自訂動作也可以從內容選單中叫用 (僅限桌面版)。"
     },
     "options_streaming": {
         "message": "從語言模型串流輸出"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "已儲存。"
+    },
+    "context_standard_action": {
+        "message": "標準動作"
+    },
+    "context_custom_action_1": {
+        "message": "自訂動作 1"
+    },
+    "context_custom_action_2": {
+        "message": "自訂動作 2"
+    },
+    "context_custom_action_3": {
+        "message": "自訂動作 3"
     }
 }

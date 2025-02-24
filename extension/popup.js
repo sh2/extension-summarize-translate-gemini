@@ -11,7 +11,7 @@ const copyContent = async () => {
 
   // Copy the content to the clipboard
   await navigator.clipboard.writeText(clipboardContent);
-  
+
   // Display a message indicating that the content was copied
   copyStatus.textContent = chrome.i18n.getMessage("popup_copied");
   setTimeout(() => copyStatus.textContent = "", 1000);
@@ -98,7 +98,7 @@ const getCaptions = async (videoUrl, languageCode) => {
   return captions;
 };
 
-const extractTaskInformation = async (languageCode) => {
+const extractTaskInformation = async (languageCode, triggerAction) => {
   let actionType = "";
   let mediaType = "";
   let taskInput = "";
@@ -117,10 +117,35 @@ const extractTaskInformation = async (languageCode) => {
 
   if (taskInput) {
     actionType = (await chrome.storage.local.get({ textAction: "translate" })).textAction;
+
+    switch (triggerAction) {
+      case "custom-action-1":
+        actionType = "textCustom1";
+        break;
+      case "custom-action-2":
+        actionType = "textCustom2";
+        break;
+      case "custom-action-3":
+        actionType = "textCustom3";
+        break;
+    }
+
     mediaType = "text";
   } else {
     // If no text is selected, get the whole text of the page
     actionType = (await chrome.storage.local.get({ noTextAction: "summarize" })).noTextAction;
+
+    switch (triggerAction) {
+      case "custom-action-1":
+        actionType = "noTextCustom1";
+        break;
+      case "custom-action-2":
+        actionType = "noTextCustom2";
+        break;
+      case "custom-action-3":
+        actionType = "noTextCustom3";
+        break;
+    }
 
     if (tab.url.startsWith("https://www.youtube.com/watch?v=") || tab.url.startsWith("https://m.youtube.com/watch?v=")) {
       // If the page is a YouTube video, get the captions instead of the whole text
@@ -208,6 +233,7 @@ const main = async (useCache) => {
     const { streaming } = await chrome.storage.local.get({ streaming: false });
     const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
+    const triggerAction = document.getElementById("triggerAction").value;
     let taskInputChunks = [];
 
     // Disable the buttons and input fields
@@ -220,7 +246,7 @@ const main = async (useCache) => {
     document.getElementById("results").disabled = true;
 
     // Extract the task information
-    const { actionType, mediaType, taskInput } = await extractTaskInformation(languageCode);
+    const { actionType, mediaType, taskInput } = await extractTaskInformation(languageCode, triggerAction);
 
     // Display a loading message
     displayIntervalId = setInterval(displayLoadingMessage, 500, "status", getLoadingMessage(actionType, mediaType));
@@ -264,7 +290,7 @@ const main = async (useCache) => {
         if (streaming) {
           // Stream the content
           streamIntervalId = setInterval(async () => {
-            const { streamContent } = await chrome.storage.session.get("streamContent");
+            const { streamContent } = await chrome.storage.session.get({ streamContent: "" });
 
             if (streamContent) {
               const div = document.createElement("div");
@@ -384,6 +410,11 @@ const initialize = async () => {
   if (!document.getElementById("languageModel").value) {
     document.getElementById("languageModel").value = "2.0-flash";
   }
+
+  // Restore the trigger action from the session storage
+  const { triggerAction } = await chrome.storage.session.get({ triggerAction: "" });
+  document.getElementById("triggerAction").value = triggerAction;
+  await chrome.storage.session.remove("triggerAction");
 
   main(true);
 };

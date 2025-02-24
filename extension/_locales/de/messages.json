@@ -102,10 +102,10 @@
         "message": "Benutzerdefinierte Sprache"
     },
     "options_language_notes": {
-        "message": "Die Spracheinstellung wird bei benutzerdefinierten Aktionen ignoriert."
+        "message": "Die Spracheinstellung wird in benutzerdefinierten Aktionen ignoriert."
     },
     "options_no_text_action": {
-        "message": "Wenn kein Text ausgewählt ist, führe folgende Aktion aus"
+        "message": "Wenn kein Text ausgewählt ist, führe die folgende Aktion aus"
     },
     "options_no_text_summarize": {
         "message": "Zusammenfassen (Standard)"
@@ -113,11 +113,20 @@
     "options_no_text_translate": {
         "message": "Übersetzen"
     },
-    "options_no_text_custom": {
-        "message": "Benutzerdefinierte Aktion"
+    "options_no_text_custom_1": {
+        "message": "Benutzerdefinierte Aktion 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "Benutzerdefinierte Aktion 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "Benutzerdefinierte Aktion 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "Benutzerdefinierte Aktionen können auch über das Kontextmenü aufgerufen werden (nur Desktop)."
     },
     "options_text_action": {
-        "message": "Wenn Text ausgewählt ist, führe folgende Aktion aus"
+        "message": "Wenn Text ausgewählt ist, führe die folgende Aktion aus"
     },
     "options_text_summarize": {
         "message": "Zusammenfassen"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "Übersetzen (Standard)"
     },
-    "options_text_custom": {
-        "message": "Benutzerdefinierte Aktion"
+    "options_text_custom_1": {
+        "message": "Benutzerdefinierte Aktion 1"
+    },
+    "options_text_custom_2": {
+        "message": "Benutzerdefinierte Aktion 2"
+    },
+    "options_text_custom_3": {
+        "message": "Benutzerdefinierte Aktion 3"
+    },
+    "options_text_custom_notes": {
+        "message": "Benutzerdefinierte Aktionen können auch über das Kontextmenü aufgerufen werden (nur Desktop)."
     },
     "options_streaming": {
         "message": "Streaming-Ausgabe vom Sprachmodell"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "Gespeichert."
+    },
+    "context_standard_action": {
+        "message": "Standardaktion"
+    },
+    "context_custom_action_1": {
+        "message": "Benutzerdefinierte Aktion 1"
+    },
+    "context_custom_action_2": {
+        "message": "Benutzerdefinierte Aktion 2"
+    },
+    "context_custom_action_3": {
+        "message": "Benutzerdefinierte Aktion 3"
     }
 }

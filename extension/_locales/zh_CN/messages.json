@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "翻译"
     },
-    "options_no_text_custom": {
-        "message": "自定义操作"
+    "options_no_text_custom_1": {
+        "message": "自定义操作 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "自定义操作 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "自定义操作 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
     },
     "options_text_action": {
         "message": "选择文本时，执行以下操作"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "翻译（默认）"
     },
-    "options_text_custom": {
-        "message": "自定义操作"
+    "options_text_custom_1": {
+        "message": "自定义操作 1"
+    },
+    "options_text_custom_2": {
+        "message": "自定义操作 2"
+    },
+    "options_text_custom_3": {
+        "message": "自定义操作 3"
+    },
+    "options_text_custom_notes": {
+        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
     },
     "options_streaming": {
         "message": "从语言模型流式输出"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "已保存。"
+    },
+    "context_standard_action": {
+        "message": "标准操作"
+    },
+    "context_custom_action_1": {
+        "message": "自定义操作 1"
+    },
+    "context_custom_action_2": {
+        "message": "自定义操作 2"
+    },
+    "context_custom_action_3": {
+        "message": "自定义操作 3"
     }
 }

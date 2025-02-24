@@ -43,10 +43,23 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
       systemPrompt = `Translate the entire text into ${languageNames[languageCode]} ` +
         "and reply only with the translated result.";
     }
-  } else if (actionType === "noTextCustom") {
-    systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt: "" })).noTextCustomPrompt;
-  } else if (actionType === "textCustom") {
-    systemPrompt = (await chrome.storage.local.get({ textCustomPrompt: "" })).textCustomPrompt;
+  } else if (actionType === "noTextCustom1") {
+    systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt1: "" })).noTextCustomPrompt1;
+  } else if (actionType === "noTextCustom2") {
+    systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt2: "" })).noTextCustomPrompt2;
+  } else if (actionType === "noTextCustom3") {
+    systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt3: "" })).noTextCustomPrompt3;
+  } else if (actionType === "textCustom1") {
+    systemPrompt = (await chrome.storage.local.get({ textCustomPrompt1: "" })).textCustomPrompt1;
+  } else if (actionType === "textCustom2") {
+    systemPrompt = (await chrome.storage.local.get({ textCustomPrompt2: "" })).textCustomPrompt2;
+  } else if (actionType === "textCustom3") {
+    systemPrompt = (await chrome.storage.local.get({ textCustomPrompt3: "" })).textCustomPrompt3;
+  }
+
+  if (!systemPrompt) {
+    systemPrompt = `Respond to the user in ${languageNames[languageCode]} that no custom action is set. ` +
+      "Do not process any data after this.";
   }
 
   return systemPrompt;
@@ -183,7 +196,6 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       const { apiKey, userModelId } = await chrome.storage.local.get({ apiKey: "", userModelId: "gemini-2.0-flash-001" });
       const modelId = getModelId(languageModel, userModelId);
       const chunkSize = await getCharacterLimit(apiKey, modelId, actionType);
-      console.log(`Chunk size: ${chunkSize}`);
       const taskInputChunks = chunkText(taskInput, chunkSize);
       sendResponse(taskInputChunks);
     } else if (request.message === "generate") {
@@ -253,3 +265,63 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 
   return true;
 });
+
+chrome.commands.onCommand.addListener((command) => {
+  (async () => {
+    const currentWindow = await chrome.windows.getCurrent({});
+
+    if (currentWindow.focused) {
+      try {
+        await chrome.storage.session.set({ triggerAction: command });
+        await chrome.action.openPopup();
+      } catch (error) {
+        await chrome.storage.session.remove("triggerAction");
+        console.log(error);
+        console.log("If you're using Firefox, open \"about:config\" and set \"extensions.openPopupWithoutUserGesture.enabled\" to true.");
+      }
+    }
+  })();
+});
+
+chrome.contextMenus.onClicked.addListener((info) => {
+  (async () => {
+    try {
+      await chrome.storage.session.set({ triggerAction: info.menuItemId });
+      await chrome.action.openPopup();
+    } catch (error) {
+      await chrome.storage.session.remove("triggerAction");
+      console.log(error);
+    }
+  })();
+});
+
+const createContextMenus = async () => {
+  await chrome.contextMenus.removeAll();
+
+  chrome.contextMenus.create({
+    id: "standard-action",
+    title: chrome.i18n.getMessage("context_standard_action"),
+    contexts: ["page", "selection", "action"]
+  });
+
+  chrome.contextMenus.create({
+    id: "custom-action-1",
+    title: chrome.i18n.getMessage("context_custom_action_1"),
+    contexts: ["page", "selection", "action"]
+  });
+
+  chrome.contextMenus.create({
+    id: "custom-action-2",
+    title: chrome.i18n.getMessage("context_custom_action_2"),
+    contexts: ["page", "selection", "action"]
+  });
+
+  chrome.contextMenus.create({
+    id: "custom-action-3",
+    title: chrome.i18n.getMessage("context_custom_action_3"),
+    contexts: ["page", "selection", "action"]
+  });
+};
+
+chrome.runtime.onStartup.addListener(createContextMenus);
+chrome.runtime.onInstalled.addListener(createContextMenus);

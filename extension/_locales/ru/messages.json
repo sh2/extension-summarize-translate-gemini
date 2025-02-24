@@ -1,6 +1,6 @@
 {
     "extension_name": {
-        "message": "Суммируйте и переводите с помощью Gemini"
+        "message": "Суммировать и переводить с помощью Gemini"
     },
     "extension_description": {
         "message": "Суммирует и переводит веб-страницы. Использует Gemini в качестве серверной части."
@@ -54,7 +54,7 @@
         "message": "Эту страницу невозможно суммировать или перевести."
     },
     "results_title": {
-        "message": "Результаты - Суммируйте и переводите с помощью Gemini"
+        "message": "Результаты - Суммировать и переводить с помощью Gemini"
     },
     "results_button_clear": {
         "message": "Очистить разговор"
@@ -81,7 +81,7 @@
         "message": "Произошла неизвестная ошибка. Пожалуйста, проверьте журнал консоли."
     },
     "options_title": {
-        "message": "Настройки - Суммируйте и переводите с помощью Gemini"
+        "message": "Настройки - Суммировать и переводить с помощью Gemini"
     },
     "options_apikey": {
         "message": "Ключ API Gemini"
@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "Перевести"
     },
-    "options_no_text_custom": {
-        "message": "Пользовательское действие"
+    "options_no_text_custom_1": {
+        "message": "Пользовательское действие 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "Пользовательское действие 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "Пользовательское действие 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "Пользовательские действия также можно вызвать из контекстного меню (только для настольных компьютеров)."
     },
     "options_text_action": {
         "message": "Когда текст выбран, выполнить следующее действие"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "Перевести (по умолчанию)"
     },
-    "options_text_custom": {
-        "message": "Пользовательское действие"
+    "options_text_custom_1": {
+        "message": "Пользовательское действие 1"
+    },
+    "options_text_custom_2": {
+        "message": "Пользовательское действие 2"
+    },
+    "options_text_custom_3": {
+        "message": "Пользовательское действие 3"
+    },
+    "options_text_custom_notes": {
+        "message": "Пользовательские действия также можно вызвать из контекстного меню (только для настольных компьютеров)."
     },
     "options_streaming": {
         "message": "Потоковый вывод из языковой модели"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "Сохранено."
+    },
+    "context_standard_action": {
+        "message": "Стандартное действие"
+    },
+    "context_custom_action_1": {
+        "message": "Пользовательское действие 1"
+    },
+    "context_custom_action_2": {
+        "message": "Пользовательское действие 2"
+    },
+    "context_custom_action_3": {
+        "message": "Пользовательское действие 3"
     }
 }

@@ -102,7 +102,7 @@
         "message": "Ngôn ngữ do người dùng chỉ định"
     },
     "options_language_notes": {
-        "message": "Cài đặt ngôn ngữ bị bỏ qua trong các hành động tùy chỉnh."
+        "message": "Cài đặt ngôn ngữ không được tính đến trong các hành động tùy chỉnh."
     },
     "options_no_text_action": {
         "message": "Khi không có văn bản nào được chọn, hãy thực hiện hành động sau"
@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "Dịch"
     },
-    "options_no_text_custom": {
-        "message": "Hành động tùy chỉnh"
+    "options_no_text_custom_1": {
+        "message": "Hành động tùy chỉnh 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "Hành động tùy chỉnh 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "Hành động tùy chỉnh 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "Các hành động tùy chỉnh cũng có thể được gọi từ menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
     },
     "options_text_action": {
         "message": "Khi văn bản được chọn, hãy thực hiện hành động sau"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "Dịch (mặc định)"
     },
-    "options_text_custom": {
-        "message": "Hành động tùy chỉnh"
+    "options_text_custom_1": {
+        "message": "Hành động tùy chỉnh 1"
+    },
+    "options_text_custom_2": {
+        "message": "Hành động tùy chỉnh 2"
+    },
+    "options_text_custom_3": {
+        "message": "Hành động tùy chỉnh 3"
+    },
+    "options_text_custom_notes": {
+        "message": "Các hành động tùy chỉnh cũng có thể được gọi từ menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
     },
     "options_streaming": {
         "message": "Truyền trực tuyến đầu ra từ mô hình ngôn ngữ"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "Đã lưu."
+    },
+    "context_standard_action": {
+        "message": "Hành động tiêu chuẩn"
+    },
+    "context_custom_action_1": {
+        "message": "Hành động tùy chỉnh 1"
+    },
+    "context_custom_action_2": {
+        "message": "Hành động tùy chỉnh 2"
+    },
+    "context_custom_action_3": {
+        "message": "Hành động tùy chỉnh 3"
     }
 }

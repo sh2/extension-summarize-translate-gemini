@@ -12,7 +12,7 @@
         "message": "تم النسخ."
     },
     "popup_button_run": {
-        "message": "إعادة التشغيل"
+        "message": "تشغيل مرة أخرى"
     },
     "popup_button_results": {
         "message": "فتح النتائج في علامة تبويب جديدة"
@@ -81,7 +81,7 @@
         "message": "حدث خطأ غير متوقع. يرجى التحقق من سجل وحدة التحكم."
     },
     "options_title": {
-        "message": "خيارات - تلخيص وترجمة باستخدام Gemini"
+        "message": "الخيارات - تلخيص وترجمة باستخدام Gemini"
     },
     "options_apikey": {
         "message": "مفتاح واجهة برمجة تطبيقات Gemini"
@@ -96,7 +96,7 @@
         "message": "نموذج محدد من قبل المستخدم"
     },
     "options_language": {
-        "message": "التلخيص بـ / الترجمة إلى"
+        "message": "تلخيص في / ترجمة إلى"
     },
     "options_language_user": {
         "message": "لغة محددة من قبل المستخدم"
@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "ترجمة"
     },
-    "options_no_text_custom": {
-        "message": "إجراء مخصص"
+    "options_no_text_custom_1": {
+        "message": "إجراء مخصص 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "إجراء مخصص 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "إجراء مخصص 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "يمكن أيضًا استدعاء الإجراءات المخصصة من قائمة السياق (سطح المكتب فقط)."
     },
     "options_text_action": {
         "message": "عند تحديد نص، قم بالإجراء التالي"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "ترجمة (افتراضي)"
     },
-    "options_text_custom": {
-        "message": "إجراء مخصص"
+    "options_text_custom_1": {
+        "message": "إجراء مخصص 1"
+    },
+    "options_text_custom_2": {
+        "message": "إجراء مخصص 2"
+    },
+    "options_text_custom_3": {
+        "message": "إجراء مخصص 3"
+    },
+    "options_text_custom_notes": {
+        "message": "يمكن أيضًا استدعاء الإجراءات المخصصة من قائمة السياق (سطح المكتب فقط)."
     },
     "options_streaming": {
         "message": "تدفق الإخراج من نموذج اللغة"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "تم الحفظ."
+    },
+    "context_standard_action": {
+        "message": "إجراء قياسي"
+    },
+    "context_custom_action_1": {
+        "message": "إجراء مخصص 1"
+    },
+    "context_custom_action_2": {
+        "message": "إجراء مخصص 2"
+    },
+    "context_custom_action_3": {
+        "message": "إجراء مخصص 3"
     }
 }

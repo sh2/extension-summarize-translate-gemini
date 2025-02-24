@@ -8,9 +8,13 @@ const restoreOptions = async () => {
     languageCode: "en",
     userLanguage: "Turkish",
     noTextAction: "summarize",
-    noTextCustomPrompt: "",
+    noTextCustomPrompt1: "",
+    noTextCustomPrompt2: "",
+    noTextCustomPrompt3: "",
     textAction: "translate",
-    textCustomPrompt: "",
+    textCustomPrompt1: "",
+    textCustomPrompt2: "",
+    textCustomPrompt3: "",
     streaming: false,
     theme: "system"
   });
@@ -21,9 +25,13 @@ const restoreOptions = async () => {
   document.getElementById("languageCode").value = options.languageCode;
   document.getElementById("userLanguage").value = options.userLanguage;
   document.querySelector(`input[name="noTextAction"][value="${options.noTextAction}"]`).checked = true;
-  document.getElementById("noTextCustomPrompt").value = options.noTextCustomPrompt;
+  document.getElementById("noTextCustomPrompt1").value = options.noTextCustomPrompt1;
+  document.getElementById("noTextCustomPrompt2").value = options.noTextCustomPrompt2;
+  document.getElementById("noTextCustomPrompt3").value = options.noTextCustomPrompt3;
   document.querySelector(`input[name="textAction"][value="${options.textAction}"]`).checked = true;
-  document.getElementById("textCustomPrompt").value = options.textCustomPrompt;
+  document.getElementById("textCustomPrompt1").value = options.textCustomPrompt1;
+  document.getElementById("textCustomPrompt2").value = options.textCustomPrompt2;
+  document.getElementById("textCustomPrompt3").value = options.textCustomPrompt3;
   document.getElementById("streaming").checked = options.streaming;
   document.getElementById("theme").value = options.theme;
 
@@ -41,9 +49,13 @@ const saveOptions = async () => {
     languageCode: document.getElementById("languageCode").value,
     userLanguage: document.getElementById("userLanguage").value,
     noTextAction: document.querySelector('input[name="noTextAction"]:checked').value,
-    noTextCustomPrompt: document.getElementById("noTextCustomPrompt").value,
+    noTextCustomPrompt1: document.getElementById("noTextCustomPrompt1").value,
+    noTextCustomPrompt2: document.getElementById("noTextCustomPrompt2").value,
+    noTextCustomPrompt3: document.getElementById("noTextCustomPrompt3").value,
     textAction: document.querySelector('input[name="textAction"]:checked').value,
-    textCustomPrompt: document.getElementById("textCustomPrompt").value,
+    textCustomPrompt1: document.getElementById("textCustomPrompt1").value,
+    textCustomPrompt2: document.getElementById("textCustomPrompt2").value,
+    textCustomPrompt3: document.getElementById("textCustomPrompt3").value,
     streaming: document.getElementById("streaming").checked,
     theme: document.getElementById("theme").value
   };

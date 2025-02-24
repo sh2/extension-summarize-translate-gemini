@@ -25,6 +25,7 @@
   "options_page": "options.html",
   "permissions": [
     "activeTab",
+    "contextMenus",
     "scripting",
     "storage"
   ],
@@ -33,6 +34,24 @@
       "suggested_key": {
         "default": "Alt+G"
       }
+    },
+    "custom-action-1": {
+      "suggested_key": {
+        "default": "Alt+1"
+      },
+      "description": "__MSG_context_custom_action_1__"
+    },
+    "custom-action-2": {
+      "suggested_key": {
+        "default": "Alt+2"
+      },
+      "description": "__MSG_context_custom_action_2__"
+    },
+    "custom-action-3": {
+      "suggested_key": {
+        "default": "Alt+3"
+      },
+      "description": "__MSG_context_custom_action_3__"
     }
   }
 }
