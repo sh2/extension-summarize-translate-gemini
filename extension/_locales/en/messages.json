@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "Translate"
     },
-    "options_no_text_custom": {
-        "message": "Custom action"
+    "options_no_text_custom_1": {
+        "message": "Custom action 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "Custom action 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "Custom action 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "Custom actions can also be invoked from the context menu."
     },
     "options_text_action": {
         "message": "When text is selected, do the following action"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "Translate (default)"
     },
-    "options_text_custom": {
-        "message": "Custom action"
+    "options_text_custom_1": {
+        "message": "Custom action 1"
+    },
+    "options_text_custom_2": {
+        "message": "Custom action 2"
+    },
+    "options_text_custom_3": {
+        "message": "Custom action 3"
+    },
+    "options_text_custom_notes": {
+        "message": "Custom actions can also be invoked from the context menu."
     },
     "options_streaming": {
         "message": "Streaming output from the language model"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "Saved."
+    },
+    "context_standard_action": {
+        "message": "Standard action"
+    },
+    "context_custom_action_1": {
+        "message": "Custom action 1"
+    },
+    "context_custom_action_2": {
+        "message": "Custom action 2"
+    },
+    "context_custom_action_3": {
+        "message": "Custom action 3"
     }
 }

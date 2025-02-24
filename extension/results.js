@@ -95,7 +95,7 @@ const askQuestion = async () => {
 
     // Stream the content
     const streamIntervalId = setInterval(async () => {
-      const { streamContent } = (await chrome.storage.session.get("streamContent"));
+      const { streamContent } = await chrome.storage.session.get({ streamContent: "" });
 
       if (streamContent) {
         const streamDiv = document.createElement("div");
