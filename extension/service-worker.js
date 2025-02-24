@@ -272,9 +272,10 @@ chrome.commands.onCommand.addListener((command) => {
 
     if (currentWindow.focused) {
       try {
-        await chrome.action.openPopup();
         await chrome.storage.session.set({ triggerAction: command });
+        await chrome.action.openPopup();
       } catch (error) {
+        await chrome.storage.session.remove("triggerAction");
         console.log(error);
         console.log("If you're using Firefox, open \"about:config\" and set \"extensions.openPopupWithoutUserGesture.enabled\" to true.");
       }
@@ -285,9 +286,10 @@ chrome.commands.onCommand.addListener((command) => {
 chrome.contextMenus.onClicked.addListener((info) => {
   (async () => {
     try {
-      await chrome.action.openPopup();
       await chrome.storage.session.set({ triggerAction: info.menuItemId });
+      await chrome.action.openPopup();
     } catch (error) {
+      await chrome.storage.session.remove("triggerAction");
       console.log(error);
     }
   })();
