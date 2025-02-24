@@ -3,7 +3,7 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résume et traduit les pages web. Utilise Gemini comme backend."
+        "message": "Résumez et traduisez des pages web. Utilise Gemini comme backend."
     },
     "popup_button_copy": {
         "message": "Copier"
@@ -21,13 +21,13 @@
         "message": "Ouvrir la page des options"
     },
     "popup_summarizing": {
-        "message": "Résumisation en cours"
+        "message": "Résumé en cours"
     },
     "popup_summarizing_captions": {
-        "message": "Résumisation des légendes en cours"
+        "message": "Résumé des légendes en cours"
     },
     "popup_summarizing_image": {
-        "message": "Résumisation de l'image en cours"
+        "message": "Résumé de l'image en cours"
     },
     "popup_translating": {
         "message": "Traduction en cours"
@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "Traduire"
     },
-    "options_no_text_custom": {
-        "message": "Action personnalisée"
+    "options_no_text_custom_1": {
+        "message": "Action personnalisée 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "Action personnalisée 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "Action personnalisée 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "Les actions personnalisées peuvent également être invoquées à partir du menu contextuel."
     },
     "options_text_action": {
         "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "Traduire (par défaut)"
     },
-    "options_text_custom": {
-        "message": "Action personnalisée"
+    "options_text_custom_1": {
+        "message": "Action personnalisée 1"
+    },
+    "options_text_custom_2": {
+        "message": "Action personnalisée 2"
+    },
+    "options_text_custom_3": {
+        "message": "Action personnalisée 3"
+    },
+    "options_text_custom_notes": {
+        "message": "Les actions personnalisées peuvent également être invoquées à partir du menu contextuel."
     },
     "options_streaming": {
         "message": "Sortie en continu du modèle de langage"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "Enregistré."
+    },
+    "context_standard_action": {
+        "message": "Action standard"
+    },
+    "context_custom_action_1": {
+        "message": "Action personnalisée 1"
+    },
+    "context_custom_action_2": {
+        "message": "Action personnalisée 2"
+    },
+    "context_custom_action_3": {
+        "message": "Action personnalisée 3"
     }
 }

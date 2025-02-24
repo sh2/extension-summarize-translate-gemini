@@ -93,19 +93,19 @@
         "message": "भाषा मॉडल"
     },
     "options_model_user": {
-        "message": "उपयोगकर्ता द्वारा निर्दिष्ट मॉडल"
+        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल"
     },
     "options_language": {
         "message": "इसमें संक्षेप करें / इसमें अनुवाद करें"
     },
     "options_language_user": {
-        "message": "उपयोगकर्ता द्वारा निर्दिष्ट भाषा"
+        "message": "उपयोगकर्ता-निर्दिष्ट भाषा"
     },
     "options_language_notes": {
         "message": "कस्टम क्रियाओं में भाषा सेटिंग को अनदेखा किया जाता है।"
     },
     "options_no_text_action": {
-        "message": "जब कोई टेक्स्ट चयनित नहीं है, तो निम्नलिखित क्रिया करें"
+        "message": "जब कोई पाठ चयनित नहीं है, तो निम्नलिखित क्रिया करें"
     },
     "options_no_text_summarize": {
         "message": "संक्षेप करें (डिफ़ॉल्ट)"
@@ -113,11 +113,20 @@
     "options_no_text_translate": {
         "message": "अनुवाद करें"
     },
-    "options_no_text_custom": {
-        "message": "कस्टम क्रिया"
+    "options_no_text_custom_1": {
+        "message": "कस्टम क्रिया 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "कस्टम क्रिया 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "कस्टम क्रिया 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "कस्टम क्रियाओं को संदर्भ मेनू से भी लागू किया जा सकता है।"
     },
     "options_text_action": {
-        "message": "जब टेक्स्ट चयनित है, तो निम्नलिखित क्रिया करें"
+        "message": "जब पाठ चयनित है, तो निम्नलिखित क्रिया करें"
     },
     "options_text_summarize": {
         "message": "संक्षेप करें"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "अनुवाद करें (डिफ़ॉल्ट)"
     },
-    "options_text_custom": {
-        "message": "कस्टम क्रिया"
+    "options_text_custom_1": {
+        "message": "कस्टम क्रिया 1"
+    },
+    "options_text_custom_2": {
+        "message": "कस्टम क्रिया 2"
+    },
+    "options_text_custom_3": {
+        "message": "कस्टम क्रिया 3"
+    },
+    "options_text_custom_notes": {
+        "message": "कस्टम क्रियाओं को संदर्भ मेनू से भी लागू किया जा सकता है।"
     },
     "options_streaming": {
         "message": "भाषा मॉडल से स्ट्रीमिंग आउटपुट"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "सहेजा गया।"
+    },
+    "context_standard_action": {
+        "message": "मानक क्रिया"
+    },
+    "context_custom_action_1": {
+        "message": "कस्टम क्रिया 1"
+    },
+    "context_custom_action_2": {
+        "message": "कस्टम क्रिया 2"
+    },
+    "context_custom_action_3": {
+        "message": "कस्टम क्रिया 3"
     }
 }

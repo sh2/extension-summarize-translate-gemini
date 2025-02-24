@@ -3,7 +3,7 @@
         "message": "Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
     "extension_description": {
-        "message": "ওয়েব পেজগুলোর সারসংক্ষেপ করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসাবে Gemini ব্যবহার করে।"
+        "message": "ওয়েব পেজগুলোর সারসংক্ষেপ করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসেবে Gemini ব্যবহৃত হয়।"
     },
     "popup_button_copy": {
         "message": "কপি করুন"
@@ -96,13 +96,13 @@
         "message": "ব্যবহারকারী-নির্দিষ্ট মডেল"
     },
     "options_language": {
-        "message": "যে ভাষায় সারসংক্ষেপ করতে/অনুবাদ করতে চান"
+        "message": "সারসংক্ষেপ করুন / অনুবাদ করুন"
     },
     "options_language_user": {
         "message": "ব্যবহারকারী-নির্দিষ্ট ভাষা"
     },
     "options_language_notes": {
-        "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিংস উপেক্ষা করা হয়।"
+        "message": "কাস্টম অ্যাকশনগুলোতে ভাষার সেটিং অগ্রাহ্য করা হয়।"
     },
     "options_no_text_action": {
         "message": "যখন কোনো টেক্সট নির্বাচন করা না হয়, তখন নিম্নলিখিত অ্যাকশনটি করুন"
@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "অনুবাদ করুন"
     },
-    "options_no_text_custom": {
-        "message": "কাস্টম অ্যাকশন"
+    "options_no_text_custom_1": {
+        "message": "কাস্টম অ্যাকশন ১"
+    },
+    "options_no_text_custom_2": {
+        "message": "কাস্টম অ্যাকশন ২"
+    },
+    "options_no_text_custom_3": {
+        "message": "কাস্টম অ্যাকশন ৩"
+    },
+    "options_no_text_custom_notes": {
+        "message": "কাস্টম অ্যাকশনগুলো কনটেক্সট মেনু থেকেও আহ্বান করা যেতে পারে।"
     },
     "options_text_action": {
         "message": "যখন টেক্সট নির্বাচন করা হয়, তখন নিম্নলিখিত অ্যাকশনটি করুন"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "অনুবাদ করুন (ডিফল্ট)"
     },
-    "options_text_custom": {
-        "message": "কাস্টম অ্যাকশন"
+    "options_text_custom_1": {
+        "message": "কাস্টম অ্যাকশন ১"
+    },
+    "options_text_custom_2": {
+        "message": "কাস্টম অ্যাকশন ২"
+    },
+    "options_text_custom_3": {
+        "message": "কাস্টম অ্যাকশন ৩"
+    },
+    "options_text_custom_notes": {
+        "message": "কাস্টম অ্যাকশনগুলো কনটেক্সট মেনু থেকেও আহ্বান করা যেতে পারে।"
     },
     "options_streaming": {
         "message": "ভাষা মডেল থেকে স্ট্রিমিং আউটপুট"
@@ -135,9 +153,21 @@
         "message": "থিম"
     },
     "options_button_save": {
-        "message": "অপশনগুলো সেভ করুন"
+        "message": "অপশনগুলো সংরক্ষণ করুন"
     },
     "options_saved": {
-        "message": "সেভ করা হয়েছে।"
+        "message": "সংরক্ষিত হয়েছে।"
+    },
+    "context_standard_action": {
+        "message": "স্ট্যান্ডার্ড অ্যাকশন"
+    },
+    "context_custom_action_1": {
+        "message": "কাস্টম অ্যাকশন ১"
+    },
+    "context_custom_action_2": {
+        "message": "কাস্টম অ্যাকশন ২"
+    },
+    "context_custom_action_3": {
+        "message": "কাস্টম অ্যাকশন ৩"
     }
 }

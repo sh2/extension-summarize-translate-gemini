@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "Traduzir"
     },
-    "options_no_text_custom": {
-        "message": "Ação personalizada"
+    "options_no_text_custom_1": {
+        "message": "Ação personalizada 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "Ação personalizada 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "Ação personalizada 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "Ações personalizadas também podem ser invocadas a partir do menu de contexto."
     },
     "options_text_action": {
         "message": "Quando o texto é selecionado, realize a seguinte ação"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "Traduzir (padrão)"
     },
-    "options_text_custom": {
-        "message": "Ação personalizada"
+    "options_text_custom_1": {
+        "message": "Ação personalizada 1"
+    },
+    "options_text_custom_2": {
+        "message": "Ação personalizada 2"
+    },
+    "options_text_custom_3": {
+        "message": "Ação personalizada 3"
+    },
+    "options_text_custom_notes": {
+        "message": "Ações personalizadas também podem ser invocadas a partir do menu de contexto."
     },
     "options_streaming": {
         "message": "Saída de streaming do modelo de linguagem"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "Salvo."
+    },
+    "context_standard_action": {
+        "message": "Ação padrão"
+    },
+    "context_custom_action_1": {
+        "message": "Ação personalizada 1"
+    },
+    "context_custom_action_2": {
+        "message": "Ação personalizada 2"
+    },
+    "context_custom_action_3": {
+        "message": "Ação personalizada 3"
     }
 }

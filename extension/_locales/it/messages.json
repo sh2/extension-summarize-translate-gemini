@@ -48,10 +48,10 @@
         "message": "La risposta è stata bloccata."
     },
     "popup_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
+        "message": "Si è verificato un errore sconosciuto. Controllare il registro della console."
     },
     "popup_miscellaneous_error": {
-        "message": "Questa pagina non può essere riassunta o tradotta."
+        "message": "Impossibile riassumere o tradurre questa pagina."
     },
     "results_title": {
         "message": "Risultati - Riassumi e Traduci con Gemini"
@@ -78,7 +78,7 @@
         "message": "La risposta è stata bloccata."
     },
     "results_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
+        "message": "Si è verificato un errore sconosciuto. Controllare il registro della console."
     },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
@@ -113,8 +113,17 @@
     "options_no_text_translate": {
         "message": "Traduci"
     },
-    "options_no_text_custom": {
-        "message": "Azione personalizzata"
+    "options_no_text_custom_1": {
+        "message": "Azione personalizzata 1"
+    },
+    "options_no_text_custom_2": {
+        "message": "Azione personalizzata 2"
+    },
+    "options_no_text_custom_3": {
+        "message": "Azione personalizzata 3"
+    },
+    "options_no_text_custom_notes": {
+        "message": "Le azioni personalizzate possono essere richiamate anche dal menu contestuale."
     },
     "options_text_action": {
         "message": "Quando è selezionato del testo, esegui la seguente azione"
@@ -125,8 +134,17 @@
     "options_text_translate": {
         "message": "Traduci (predefinito)"
     },
-    "options_text_custom": {
-        "message": "Azione personalizzata"
+    "options_text_custom_1": {
+        "message": "Azione personalizzata 1"
+    },
+    "options_text_custom_2": {
+        "message": "Azione personalizzata 2"
+    },
+    "options_text_custom_3": {
+        "message": "Azione personalizzata 3"
+    },
+    "options_text_custom_notes": {
+        "message": "Le azioni personalizzate possono essere richiamate anche dal menu contestuale."
     },
     "options_streaming": {
         "message": "Output in streaming dal modello linguistico"
@@ -139,5 +157,17 @@
     },
     "options_saved": {
         "message": "Salvato."
+    },
+    "context_standard_action": {
+        "message": "Azione standard"
+    },
+    "context_custom_action_1": {
+        "message": "Azione personalizzata 1"
+    },
+    "context_custom_action_2": {
+        "message": "Azione personalizzata 2"
+    },
+    "context_custom_action_3": {
+        "message": "Azione personalizzata 3"
     }
 }
