@@ -91,6 +91,12 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
       noTextCustom: 786432,
       textCustom: 786432
     },
+    "gemini-2.0-flash-lite": {
+      summarize: 786432,
+      translate: 8192,
+      noTextCustom: 786432,
+      textCustom: 786432
+    },
     "gemini-1.5-pro": {
       summarize: 1500000,
       translate: 8192,
@@ -109,23 +115,11 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
       noTextCustom: 750000,
       textCustom: 750000
     },
-    "gemini-2.0-flash-lite-preview-02-05": {
-      summarize: 786432,
-      translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
     "gemini-2.0-pro-exp-02-05": {
       summarize: 1572864,
       translate: 8192,
       noTextCustom: 1572864,
       textCustom: 1572864
-    },
-    "gemini-2.0-flash-exp": {
-      summarize: 786432,
-      translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
     }
   };
 

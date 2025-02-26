@@ -90,12 +90,11 @@ export const displayLoadingMessage = (elementId, loadingMessage) => {
 export const getModelId = (languageModel, userModelId) => {
   const modelMappings = {
     "2.0-flash": "gemini-2.0-flash",
+    "2.0-flash-lite": "gemini-2.0-flash-lite",
     "1.5-pro": "gemini-1.5-pro",
     "1.5-flash": "gemini-1.5-flash",
     "1.5-flash-8b": "gemini-1.5-flash-8b",
-    "2.0-flash-lite-preview-02-05": "gemini-2.0-flash-lite-preview-02-05",
-    "2.0-pro-exp-02-05": "gemini-2.0-pro-exp-02-05",
-    "2.0-flash-exp": "gemini-2.0-flash-exp"
+    "2.0-pro-exp-02-05": "gemini-2.0-pro-exp-02-05"
   };
 
   if (languageModel === "zz") {
