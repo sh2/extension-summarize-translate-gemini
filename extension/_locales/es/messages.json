@@ -51,7 +51,7 @@
         "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
-        "message": "Esta página no puede ser resumida ni traducida."
+        "message": "Esta página no se puede resumir ni traducir."
     },
     "results_title": {
         "message": "Resultados - Resumir y Traducir con Gemini"
@@ -84,13 +84,13 @@
         "message": "Opciones - Resumir y Traducir con Gemini"
     },
     "options_apikey": {
-        "message": "Clave API de Gemini"
+        "message": "Clave de API de Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puede obtener una clave API de Gemini en la siguiente página."
+        "message": "Puede obtener una clave de API de Gemini en la siguiente página."
     },
     "options_model": {
-        "message": "Modelo de Lenguaje"
+        "message": "Modelo de lenguaje"
     },
     "options_model_user": {
         "message": "Modelo especificado por el usuario"
@@ -145,6 +145,9 @@
     },
     "options_text_custom_notes": {
         "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo en el escritorio)."
+    },
+    "options_contextmenus": {
+        "message": "Registrar en el menú contextual"
     },
     "options_streaming": {
         "message": "Salida de transmisión desde el modelo de lenguaje"

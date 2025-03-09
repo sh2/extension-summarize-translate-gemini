@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resume e traduz páginas da web. Utiliza Gemini como backend."
+        "message": "Resuma e traduza páginas da web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -87,7 +87,7 @@
         "message": "Chave da API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Você pode obter uma chave da API Gemini na seguinte página."
+        "message": "Você pode obter uma Chave da API Gemini na seguinte página."
     },
     "options_model": {
         "message": "Modelo de Linguagem"
@@ -145,6 +145,9 @@
     },
     "options_text_custom_notes": {
         "message": "Ações personalizadas também podem ser invocadas a partir do menu de contexto (somente desktop)."
+    },
+    "options_contextmenus": {
+        "message": "Registrar no menu de contexto"
     },
     "options_streaming": {
         "message": "Saída de streaming do modelo de linguagem"

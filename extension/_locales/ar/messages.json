@@ -12,7 +12,7 @@
         "message": "تم النسخ."
     },
     "popup_button_run": {
-        "message": "تشغيل مرة أخرى"
+        "message": "إعادة التشغيل"
     },
     "popup_button_results": {
         "message": "فتح النتائج في علامة تبويب جديدة"
@@ -81,7 +81,7 @@
         "message": "حدث خطأ غير متوقع. يرجى التحقق من سجل وحدة التحكم."
     },
     "options_title": {
-        "message": "الخيارات - تلخيص وترجمة باستخدام Gemini"
+        "message": "خيارات - تلخيص وترجمة باستخدام Gemini"
     },
     "options_apikey": {
         "message": "مفتاح واجهة برمجة تطبيقات Gemini"
@@ -145,6 +145,9 @@
     },
     "options_text_custom_notes": {
         "message": "يمكن أيضًا استدعاء الإجراءات المخصصة من قائمة السياق (سطح المكتب فقط)."
+    },
+    "options_contextmenus": {
+        "message": "تسجيل في قائمة السياق"
     },
     "options_streaming": {
         "message": "تدفق الإخراج من نموذج اللغة"

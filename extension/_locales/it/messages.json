@@ -146,6 +146,9 @@
     "options_text_custom_notes": {
         "message": "Le azioni personalizzate possono essere invocate anche dal menu contestuale (solo desktop)."
     },
+    "options_contextmenus": {
+        "message": "Registra nel menu contestuale"
+    },
     "options_streaming": {
         "message": "Output in streaming dal modello linguistico"
     },

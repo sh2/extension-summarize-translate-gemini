@@ -18,7 +18,7 @@
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
-        "message": "Ouvrir la page des options"
+        "message": "Ouvrir la page d'options"
     },
     "popup_summarizing": {
         "message": "Résumé en cours"
@@ -145,6 +145,9 @@
     },
     "options_text_custom_notes": {
         "message": "Les actions personnalisées peuvent également être invoquées depuis le menu contextuel (bureau uniquement)."
+    },
+    "options_contextmenus": {
+        "message": "Enregistrer dans le menu contextuel"
     },
     "options_streaming": {
         "message": "Sortie en continu du modèle de langage"

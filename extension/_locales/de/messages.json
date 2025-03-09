@@ -24,7 +24,7 @@
         "message": "Zusammenfassen"
     },
     "popup_summarizing_captions": {
-        "message": "Die Bildunterschriften werden zusammengefasst"
+        "message": "Die Beschriftungen werden zusammengefasst"
     },
     "popup_summarizing_image": {
         "message": "Das Bild wird zusammengefasst"
@@ -33,7 +33,7 @@
         "message": "Übersetzen"
     },
     "popup_translating_captions": {
-        "message": "Die Bildunterschriften werden übersetzt"
+        "message": "Die Beschriftungen werden übersetzt"
     },
     "popup_translating_image": {
         "message": "Das Bild wird übersetzt"
@@ -105,7 +105,7 @@
         "message": "Die Spracheinstellung wird in benutzerdefinierten Aktionen ignoriert."
     },
     "options_no_text_action": {
-        "message": "Wenn kein Text ausgewählt ist, führe die folgende Aktion aus"
+        "message": "Wenn kein Text ausgewählt ist, führe folgende Aktion aus"
     },
     "options_no_text_summarize": {
         "message": "Zusammenfassen (Standard)"
@@ -126,7 +126,7 @@
         "message": "Benutzerdefinierte Aktionen können auch über das Kontextmenü aufgerufen werden (nur Desktop)."
     },
     "options_text_action": {
-        "message": "Wenn Text ausgewählt ist, führe die folgende Aktion aus"
+        "message": "Wenn Text ausgewählt ist, führe folgende Aktion aus"
     },
     "options_text_summarize": {
         "message": "Zusammenfassen"
@@ -145,6 +145,9 @@
     },
     "options_text_custom_notes": {
         "message": "Benutzerdefinierte Aktionen können auch über das Kontextmenü aufgerufen werden (nur Desktop)."
+    },
+    "options_contextmenus": {
+        "message": "Im Kontextmenü registrieren"
     },
     "options_streaming": {
         "message": "Streaming-Ausgabe vom Sprachmodell"
