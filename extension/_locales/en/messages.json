@@ -146,6 +146,9 @@
     "options_text_custom_notes": {
         "message": "Custom actions can also be invoked from the context menu (desktop only)."
     },
+    "options_contextmenus": {
+        "message": "Register in the context menu"
+    },
     "options_streaming": {
         "message": "Streaming output from the language model"
     },

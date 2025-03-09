@@ -1,4 +1,4 @@
-import { applyTheme, adjustLayoutForScreenSize, loadTemplate } from "./utils.js";
+import { applyTheme, adjustLayoutForScreenSize, loadTemplate, createContextMenus } from "./utils.js";
 
 const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
@@ -17,6 +17,7 @@ const restoreOptions = async () => {
     textCustomPrompt1: "",
     textCustomPrompt2: "",
     textCustomPrompt3: "",
+    contextMenus: true,
     streaming: false,
     theme: "system"
   });
@@ -48,6 +49,7 @@ const restoreOptions = async () => {
 
   document.getElementById("textCustomPrompt2").value = options.textCustomPrompt2;
   document.getElementById("textCustomPrompt3").value = options.textCustomPrompt3;
+  document.getElementById("contextMenus").checked = options.contextMenus;
   document.getElementById("streaming").checked = options.streaming;
   document.getElementById("theme").value = options.theme;
 
@@ -72,16 +74,18 @@ const saveOptions = async () => {
     textCustomPrompt1: document.getElementById("textCustomPrompt1").value,
     textCustomPrompt2: document.getElementById("textCustomPrompt2").value,
     textCustomPrompt3: document.getElementById("textCustomPrompt3").value,
+    contextMenus: document.getElementById("contextMenus").checked,
     streaming: document.getElementById("streaming").checked,
     theme: document.getElementById("theme").value
   };
 
   await chrome.storage.local.set(options);
   await chrome.storage.session.set({ responseCacheQueue: [] });
+  await createContextMenus(options.contextMenus);
+  applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
   const status = document.getElementById("status");
   status.textContent = chrome.i18n.getMessage("options_saved");
   setTimeout(() => status.textContent = "", 1000);
-  applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
 };
 
 const initialize = async () => {

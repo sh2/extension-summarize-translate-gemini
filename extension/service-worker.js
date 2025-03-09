@@ -1,4 +1,4 @@
-import { getModelId, generateContent, streamGenerateContent } from "./utils.js";
+import { getModelId, generateContent, streamGenerateContent, createContextMenus } from "./utils.js";
 
 const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLength) => {
   const languageNames = {
@@ -299,33 +299,10 @@ chrome.contextMenus.onClicked.addListener((info) => {
   })();
 });
 
-const createContextMenus = async () => {
-  await chrome.contextMenus.removeAll();
-
-  chrome.contextMenus.create({
-    id: "standard-action",
-    title: chrome.i18n.getMessage("context_standard_action"),
-    contexts: ["page", "selection", "action"]
-  });
-
-  chrome.contextMenus.create({
-    id: "custom-action-1",
-    title: chrome.i18n.getMessage("context_custom_action_1"),
-    contexts: ["page", "selection", "action"]
-  });
-
-  chrome.contextMenus.create({
-    id: "custom-action-2",
-    title: chrome.i18n.getMessage("context_custom_action_2"),
-    contexts: ["page", "selection", "action"]
-  });
-
-  chrome.contextMenus.create({
-    id: "custom-action-3",
-    title: chrome.i18n.getMessage("context_custom_action_3"),
-    contexts: ["page", "selection", "action"]
-  });
+const initContextMenus = async () => {
+  const { contextMenus } = await chrome.storage.local.get({ contextMenus: true });
+  await createContextMenus(contextMenus);
 };
 
-chrome.runtime.onStartup.addListener(createContextMenus);
-chrome.runtime.onInstalled.addListener(createContextMenus);
+chrome.runtime.onStartup.addListener(initContextMenus);
+chrome.runtime.onInstalled.addListener(initContextMenus);

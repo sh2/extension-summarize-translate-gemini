@@ -146,6 +146,9 @@
     "options_text_custom_notes": {
         "message": "カスタムアクションはコンテキストメニューから呼び出すこともできます (デスクトップのみ)。"
     },
+    "options_contextmenus": {
+        "message": "コンテキストメニューに登録する"
+    },
     "options_streaming": {
         "message": "言語モデルからの出力をストリーミングする"
     },

@@ -210,3 +210,33 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
     };
   }
 };
+
+export const createContextMenus = async (useContextMenus) => {
+  await chrome.contextMenus.removeAll();
+
+  if (useContextMenus) {
+    chrome.contextMenus.create({
+      id: "standard-action",
+      title: chrome.i18n.getMessage("context_standard_action"),
+      contexts: ["page", "selection", "action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-1",
+      title: chrome.i18n.getMessage("context_custom_action_1"),
+      contexts: ["page", "selection", "action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-2",
+      title: chrome.i18n.getMessage("context_custom_action_2"),
+      contexts: ["page", "selection", "action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-3",
+      title: chrome.i18n.getMessage("context_custom_action_3"),
+      contexts: ["page", "selection", "action"]
+    });
+  }
+};
