@@ -1,4 +1,9 @@
-import { getModelId, generateContent, streamGenerateContent, createContextMenus } from "./utils.js";
+import {
+  getModelId,
+  generateContent,
+  streamGenerateContent,
+  createContextMenus
+} from "./utils.js";
 
 const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLength) => {
   const languageNames = {

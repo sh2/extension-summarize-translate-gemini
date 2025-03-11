@@ -1,4 +1,9 @@
-import { applyTheme, adjustLayoutForScreenSize, loadTemplate, createContextMenus } from "./utils.js";
+import {
+  applyTheme,
+  adjustLayoutForScreenSize,
+  loadTemplate,
+  createContextMenus
+} from "./utils.js";
 
 const restoreOptions = async () => {
   const options = await chrome.storage.local.get({
