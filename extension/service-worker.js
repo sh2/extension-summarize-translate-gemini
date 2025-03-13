@@ -125,6 +125,12 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
       translate: 8192,
       noTextCustom: 1572864,
       textCustom: 1572864
+    },
+    "gemma-3-27b-it": {
+      summarize: 98304,
+      translate: 8192,
+      noTextCustom: 98304,
+      textCustom: 98304
     }
   };
 
