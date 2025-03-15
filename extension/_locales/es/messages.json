@@ -51,7 +51,7 @@
         "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
-        "message": "Esta página no se puede resumir ni traducir."
+        "message": "Esta página no puede ser resumida ni traducida."
     },
     "results_title": {
         "message": "Resultados - Resumir y Traducir con Gemini"
@@ -160,6 +160,18 @@
     },
     "options_saved": {
         "message": "Guardado."
+    },
+    "options_export": {
+        "message": "Exportar opciones"
+    },
+    "options_export_api_key": {
+        "message": "Incluir clave de API"
+    },
+    "options_import": {
+        "message": "Importar opciones"
+    },
+    "options_import_failed": {
+        "message": "Error al importar."
     },
     "context_standard_action": {
         "message": "Acción estándar"

@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用Gemini进行总结和翻译"
+        "message": "使用 Gemini 总结和翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页。使用Gemini作为后端。"
+        "message": "总结和翻译网页。使用 Gemini 作为后端。"
     },
     "popup_button_copy": {
         "message": "复制"
@@ -54,7 +54,7 @@
         "message": "此页面无法被总结或翻译。"
     },
     "results_title": {
-        "message": "结果 - 使用Gemini进行总结和翻译"
+        "message": "结果 - 使用 Gemini 总结和翻译"
     },
     "results_button_clear": {
         "message": "清除对话"
@@ -81,7 +81,7 @@
         "message": "发生未知错误。请检查控制台日志。"
     },
     "options_title": {
-        "message": "选项 - 使用Gemini进行总结和翻译"
+        "message": "选项 - 使用 Gemini 总结和翻译"
     },
     "options_apikey": {
         "message": "Gemini API 密钥"
@@ -160,6 +160,18 @@
     },
     "options_saved": {
         "message": "已保存。"
+    },
+    "options_export": {
+        "message": "导出选项"
+    },
+    "options_export_api_key": {
+        "message": "包括 API 密钥"
+    },
+    "options_import": {
+        "message": "导入选项"
+    },
+    "options_import_failed": {
+        "message": "导入失败。"
     },
     "context_standard_action": {
         "message": "标准操作"

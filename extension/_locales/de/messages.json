@@ -24,7 +24,7 @@
         "message": "Zusammenfassen"
     },
     "popup_summarizing_captions": {
-        "message": "Die Beschriftungen werden zusammengefasst"
+        "message": "Die Bildunterschriften werden zusammengefasst"
     },
     "popup_summarizing_image": {
         "message": "Das Bild wird zusammengefasst"
@@ -33,7 +33,7 @@
         "message": "Übersetzen"
     },
     "popup_translating_captions": {
-        "message": "Die Beschriftungen werden übersetzt"
+        "message": "Die Bildunterschriften werden übersetzt"
     },
     "popup_translating_image": {
         "message": "Das Bild wird übersetzt"
@@ -160,6 +160,18 @@
     },
     "options_saved": {
         "message": "Gespeichert."
+    },
+    "options_export": {
+        "message": "Optionen exportieren"
+    },
+    "options_export_api_key": {
+        "message": "API-Schlüssel einschließen"
+    },
+    "options_import": {
+        "message": "Optionen importieren"
+    },
+    "options_import_failed": {
+        "message": "Import fehlgeschlagen."
     },
     "context_standard_action": {
         "message": "Standardaktion"

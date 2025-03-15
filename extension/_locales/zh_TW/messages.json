@@ -48,7 +48,7 @@
         "message": "回應已遭封鎖。"
     },
     "popup_unexpected_response": {
-        "message": "發生不明錯誤。請檢查主控台日誌。"
+        "message": "發生不明錯誤。請檢查主控台記錄。"
     },
     "popup_miscellaneous_error": {
         "message": "無法摘要或翻譯此頁面。"
@@ -78,7 +78,7 @@
         "message": "回應已遭封鎖。"
     },
     "results_unexpected_response": {
-        "message": "發生不明錯誤。請檢查主控台日誌。"
+        "message": "發生不明錯誤。請檢查主控台記錄。"
     },
     "options_title": {
         "message": "選項 - 使用 Gemini 進行摘要和翻譯"
@@ -123,7 +123,7 @@
         "message": "自訂動作 3"
     },
     "options_no_text_custom_notes": {
-        "message": "自訂動作也可以從上下文選單中調用 (僅限桌面版)。"
+        "message": "自訂動作也可以從內容選單中呼叫 (僅限桌面版)。"
     },
     "options_text_action": {
         "message": "選取文字時，執行以下動作"
@@ -144,10 +144,10 @@
         "message": "自訂動作 3"
     },
     "options_text_custom_notes": {
-        "message": "自訂動作也可以從上下文選單中調用 (僅限桌面版)。"
+        "message": "自訂動作也可以從內容選單中呼叫 (僅限桌面版)。"
     },
     "options_contextmenus": {
-        "message": "在上下文選單中註冊"
+        "message": "在內容選單中註冊"
     },
     "options_streaming": {
         "message": "從語言模型串流輸出"
@@ -160,6 +160,18 @@
     },
     "options_saved": {
         "message": "已儲存。"
+    },
+    "options_export": {
+        "message": "匯出選項"
+    },
+    "options_export_api_key": {
+        "message": "包含 API 金鑰"
+    },
+    "options_import": {
+        "message": "匯入選項"
+    },
+    "options_import_failed": {
+        "message": "匯入失敗。"
     },
     "context_standard_action": {
         "message": "標準動作"

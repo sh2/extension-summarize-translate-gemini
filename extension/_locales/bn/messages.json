@@ -161,6 +161,18 @@
     "options_saved": {
         "message": "সংরক্ষিত হয়েছে।"
     },
+    "options_export": {
+        "message": "অপশনগুলি রপ্তানি করুন"
+    },
+    "options_export_api_key": {
+        "message": "API কী অন্তর্ভুক্ত করুন"
+    },
+    "options_import": {
+        "message": "অপশনগুলি আমদানি করুন"
+    },
+    "options_import_failed": {
+        "message": "আমদানি ব্যর্থ হয়েছে।"
+    },
     "context_standard_action": {
         "message": "স্ট্যান্ডার্ড অ্যাকশন"
     },

@@ -161,6 +161,18 @@
     "options_saved": {
         "message": "Salvo."
     },
+    "options_export": {
+        "message": "Exportar opções"
+    },
+    "options_export_api_key": {
+        "message": "Incluir Chave da API"
+    },
+    "options_import": {
+        "message": "Importar opções"
+    },
+    "options_import_failed": {
+        "message": "Falha na importação."
+    },
     "context_standard_action": {
         "message": "Ação padrão"
     },
