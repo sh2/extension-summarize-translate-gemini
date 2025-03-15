@@ -161,6 +161,18 @@
     "options_saved": {
         "message": "保存しました。"
     },
+    "options_export": {
+        "message": "オプションをエクスポートする"
+    },
+    "options_export_api_key": {
+        "message": "APIキーを含める"
+    },
+    "options_import": {
+        "message": "オプションをインポートする"
+    },
+    "options_import_failed": {
+        "message": "インポートに失敗しました。"
+    },
     "context_standard_action": {
         "message": "標準アクション"
     },

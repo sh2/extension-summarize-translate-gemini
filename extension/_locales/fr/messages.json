@@ -21,13 +21,13 @@
         "message": "Ouvrir la page d'options"
     },
     "popup_summarizing": {
-        "message": "Résumé en cours"
+        "message": "Résumisation en cours"
     },
     "popup_summarizing_captions": {
-        "message": "Résumé des légendes en cours"
+        "message": "Résumisation des légendes en cours"
     },
     "popup_summarizing_image": {
-        "message": "Résumé de l'image en cours"
+        "message": "Résumisation de l'image en cours"
     },
     "popup_translating": {
         "message": "Traduction en cours"
@@ -126,7 +126,7 @@
         "message": "Les actions personnalisées peuvent également être invoquées depuis le menu contextuel (bureau uniquement)."
     },
     "options_text_action": {
-        "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
+        "message": "Lorsque du texte est sélectionné, effectuer l'action suivante"
     },
     "options_text_summarize": {
         "message": "Résumer"
@@ -150,7 +150,7 @@
         "message": "Enregistrer dans le menu contextuel"
     },
     "options_streaming": {
-        "message": "Sortie en continu du modèle de langage"
+        "message": "Sortie en flux continu du modèle de langage"
     },
     "options_theme": {
         "message": "Thème"
@@ -160,6 +160,18 @@
     },
     "options_saved": {
         "message": "Enregistré."
+    },
+    "options_export": {
+        "message": "Exporter les options"
+    },
+    "options_export_api_key": {
+        "message": "Inclure la clé API"
+    },
+    "options_import": {
+        "message": "Importer les options"
+    },
+    "options_import_failed": {
+        "message": "L'importation a échoué."
     },
     "context_standard_action": {
         "message": "Action standard"

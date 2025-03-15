@@ -161,6 +161,18 @@
     "options_saved": {
         "message": "تم الحفظ."
     },
+    "options_export": {
+        "message": "تصدير الخيارات"
+    },
+    "options_export_api_key": {
+        "message": "تضمين مفتاح واجهة برمجة التطبيقات"
+    },
+    "options_import": {
+        "message": "استيراد الخيارات"
+    },
+    "options_import_failed": {
+        "message": "فشل الاستيراد."
+    },
     "context_standard_action": {
         "message": "إجراء قياسي"
     },

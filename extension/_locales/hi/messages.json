@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "Gemini के साथ संक्षेप करें और अनुवाद करें"
+        "message": "\"Gemini\" के साथ संक्षेप और अनुवाद करें"
     },
     "extension_description": {
-        "message": "वेब पृष्ठों का संक्षेप और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
+        "message": "वेब पृष्ठों का संक्षेप और अनुवाद करें। बैकएंड के रूप में \"Gemini\" का उपयोग करता है।"
     },
     "popup_button_copy": {
         "message": "कॉपी करें"
@@ -39,7 +39,7 @@
         "message": "छवि का अनुवाद किया जा रहा है"
     },
     "popup_processing": {
-        "message": "प्रसंस्करण किया जा रहा है"
+        "message": "प्रसंस्करण"
     },
     "popup_prompt_blocked": {
         "message": "प्रॉम्प्ट को ब्लॉक कर दिया गया था।"
@@ -54,7 +54,7 @@
         "message": "इस पृष्ठ का संक्षेप या अनुवाद नहीं किया जा सकता है।"
     },
     "results_title": {
-        "message": "परिणाम - Gemini के साथ संक्षेप करें और अनुवाद करें"
+        "message": "परिणाम - \"Gemini\" के साथ संक्षेप और अनुवाद करें"
     },
     "results_button_clear": {
         "message": "वार्तालाप साफ़ करें"
@@ -81,13 +81,13 @@
         "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग की जाँच करें।"
     },
     "options_title": {
-        "message": "विकल्प - Gemini के साथ संक्षेप करें और अनुवाद करें"
+        "message": "विकल्प - \"Gemini\" के साथ संक्षेप और अनुवाद करें"
     },
     "options_apikey": {
-        "message": "Gemini API कुंजी"
+        "message": "\"Gemini\" API कुंजी"
     },
     "options_apikey_hint": {
-        "message": "आप निम्नलिखित पृष्ठ पर Gemini API कुंजी प्राप्त कर सकते हैं।"
+        "message": "आप निम्नलिखित पृष्ठ पर एक \"Gemini\" API कुंजी प्राप्त कर सकते हैं।"
     },
     "options_model": {
         "message": "भाषा मॉडल"
@@ -96,7 +96,7 @@
         "message": "उपयोगकर्ता-निर्दिष्ट मॉडल"
     },
     "options_language": {
-        "message": "इसमें संक्षेप करें / इसमें अनुवाद करें"
+        "message": "में संक्षेप करें / में अनुवाद करें"
     },
     "options_language_user": {
         "message": "उपयोगकर्ता-निर्दिष्ट भाषा"
@@ -160,6 +160,18 @@
     },
     "options_saved": {
         "message": "सहेजा गया।"
+    },
+    "options_export": {
+        "message": "विकल्प निर्यात करें"
+    },
+    "options_export_api_key": {
+        "message": "API कुंजी शामिल करें"
+    },
+    "options_import": {
+        "message": "विकल्प आयात करें"
+    },
+    "options_import_failed": {
+        "message": "आयात विफल रहा।"
     },
     "context_standard_action": {
         "message": "मानक क्रिया"
