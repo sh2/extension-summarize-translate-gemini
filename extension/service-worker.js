@@ -281,34 +281,40 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   return true;
 });
 
-chrome.commands.onCommand.addListener((command) => {
-  (async () => {
-    const currentWindow = await chrome.windows.getCurrent({});
+// Firefox for Android does not support chrome.commands, so check for its existence first
+if (chrome.commands) {
+  chrome.commands.onCommand.addListener((command) => {
+    (async () => {
+      const currentWindow = await chrome.windows.getCurrent({});
 
-    if (currentWindow.focused) {
+      if (currentWindow.focused) {
+        try {
+          await chrome.storage.session.set({ triggerAction: command });
+          await chrome.action.openPopup();
+        } catch (error) {
+          await chrome.storage.session.remove("triggerAction");
+          console.log(error);
+          console.log("If you're using Firefox, open \"about:config\" and set \"extensions.openPopupWithoutUserGesture.enabled\" to true.");
+        }
+      }
+    })();
+  });
+}
+
+// Firefox for Android does not support chrome.contextMenus, so check for its existence first
+if (chrome.contextMenus) {
+  chrome.contextMenus.onClicked.addListener((info) => {
+    (async () => {
       try {
-        await chrome.storage.session.set({ triggerAction: command });
+        await chrome.storage.session.set({ triggerAction: info.menuItemId });
         await chrome.action.openPopup();
       } catch (error) {
         await chrome.storage.session.remove("triggerAction");
         console.log(error);
-        console.log("If you're using Firefox, open \"about:config\" and set \"extensions.openPopupWithoutUserGesture.enabled\" to true.");
       }
-    }
-  })();
-});
-
-chrome.contextMenus.onClicked.addListener((info) => {
-  (async () => {
-    try {
-      await chrome.storage.session.set({ triggerAction: info.menuItemId });
-      await chrome.action.openPopup();
-    } catch (error) {
-      await chrome.storage.session.remove("triggerAction");
-      console.log(error);
-    }
-  })();
-});
+    })();
+  });
+}
 
 const initContextMenus = async () => {
   const { contextMenus } = await chrome.storage.local.get({ contextMenus: true });

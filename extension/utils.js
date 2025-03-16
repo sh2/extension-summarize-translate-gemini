@@ -235,6 +235,11 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
 };
 
 export const createContextMenus = async (useContextMenus) => {
+  if (!chrome.contextMenus) {
+    // Firefox for Android does not support chrome.contextMenus
+    return;
+  }
+
   await chrome.contextMenus.removeAll();
 
   if (useContextMenus) {
