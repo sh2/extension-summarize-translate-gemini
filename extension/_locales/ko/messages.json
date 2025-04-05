@@ -105,7 +105,7 @@
         "message": "사용자 지정 작업에서는 언어 설정이 무시됩니다."
     },
     "options_no_text_action": {
-        "message": "텍스트가 선택되지 않은 경우 다음 작업 수행"
+        "message": "선택된 텍스트가 없을 때 다음 작업 수행"
     },
     "options_no_text_summarize": {
         "message": "요약 (기본)"
@@ -126,7 +126,7 @@
         "message": "사용자 지정 작업은 컨텍스트 메뉴에서도 호출할 수 있습니다 (데스크톱 전용)."
     },
     "options_text_action": {
-        "message": "텍스트가 선택된 경우 다음 작업 수행"
+        "message": "텍스트가 선택되었을 때 다음 작업 수행"
     },
     "options_text_summarize": {
         "message": "요약"
@@ -154,6 +154,9 @@
     },
     "options_theme": {
         "message": "테마"
+    },
+    "options_font_size": {
+        "message": "글꼴 크기"
     },
     "options_button_save": {
         "message": "옵션 저장"

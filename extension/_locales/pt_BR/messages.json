@@ -155,6 +155,9 @@
     "options_theme": {
         "message": "Tema"
     },
+    "options_font_size": {
+        "message": "Tamanho da fonte"
+    },
     "options_button_save": {
         "message": "Salvar opções"
     },

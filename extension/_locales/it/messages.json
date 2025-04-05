@@ -33,10 +33,10 @@
         "message": "Traduco"
     },
     "popup_translating_captions": {
-        "message": "Traduco le didascalie"
+        "message": "Traducendo le didascalie"
     },
     "popup_translating_image": {
-        "message": "Traduco l'immagine"
+        "message": "Traducendo l'immagine"
     },
     "popup_processing": {
         "message": "Elaborazione in corso"
@@ -154,6 +154,9 @@
     },
     "options_theme": {
         "message": "Tema"
+    },
+    "options_font_size": {
+        "message": "Dimensione del carattere"
     },
     "options_button_save": {
         "message": "Salva opzioni"

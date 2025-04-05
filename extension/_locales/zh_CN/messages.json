@@ -105,7 +105,7 @@
         "message": "在自定义操作中，语言设置将被忽略。"
     },
     "options_no_text_action": {
-        "message": "当未选择文本时，执行以下操作"
+        "message": "未选择文本时，执行以下操作"
     },
     "options_no_text_summarize": {
         "message": "总结（默认）"
@@ -123,10 +123,10 @@
         "message": "自定义操作 3"
     },
     "options_no_text_custom_notes": {
-        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
+        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面版）。"
     },
     "options_text_action": {
-        "message": "当选择文本时，执行以下操作"
+        "message": "选择文本时，执行以下操作"
     },
     "options_text_summarize": {
         "message": "总结"
@@ -144,7 +144,7 @@
         "message": "自定义操作 3"
     },
     "options_text_custom_notes": {
-        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
+        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面版）。"
     },
     "options_contextmenus": {
         "message": "在上下文菜单中注册"
@@ -154,6 +154,9 @@
     },
     "options_theme": {
         "message": "主题"
+    },
+    "options_font_size": {
+        "message": "字体大小"
     },
     "options_button_save": {
         "message": "保存选项"

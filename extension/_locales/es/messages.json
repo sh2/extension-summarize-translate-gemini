@@ -3,7 +3,7 @@
         "message": "Resumir y Traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resuma y traduzca páginas web. Utiliza Gemini como backend."
+        "message": "Resume y traduce páginas web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -51,7 +51,7 @@
         "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
-        "message": "Esta página no puede ser resumida ni traducida."
+        "message": "Esta página no puede ser resumida o traducida."
     },
     "results_title": {
         "message": "Resultados - Resumir y Traducir con Gemini"
@@ -84,13 +84,13 @@
         "message": "Opciones - Resumir y Traducir con Gemini"
     },
     "options_apikey": {
-        "message": "Clave de API de Gemini"
+        "message": "Clave API de Gemini"
     },
     "options_apikey_hint": {
-        "message": "Puede obtener una clave de API de Gemini en la siguiente página."
+        "message": "Puede obtener una clave API de Gemini en la siguiente página."
     },
     "options_model": {
-        "message": "Modelo de lenguaje"
+        "message": "Modelo de Lenguaje"
     },
     "options_model_user": {
         "message": "Modelo especificado por el usuario"
@@ -155,6 +155,9 @@
     "options_theme": {
         "message": "Tema"
     },
+    "options_font_size": {
+        "message": "Tamaño de fuente"
+    },
     "options_button_save": {
         "message": "Guardar opciones"
     },
@@ -165,7 +168,7 @@
         "message": "Exportar opciones"
     },
     "options_export_api_key": {
-        "message": "Incluir clave de API"
+        "message": "Incluir clave API"
     },
     "options_import": {
         "message": "Importar opciones"

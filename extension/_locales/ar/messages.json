@@ -69,7 +69,7 @@
         "message": "إرسال"
     },
     "results_waiting_response": {
-        "message": "في انتظار رد"
+        "message": "في انتظار الرد"
     },
     "results_prompt_blocked": {
         "message": "تم حظر الطلب."
@@ -154,6 +154,9 @@
     },
     "options_theme": {
         "message": "السمة"
+    },
+    "options_font_size": {
+        "message": "حجم الخط"
     },
     "options_button_save": {
         "message": "حفظ الخيارات"

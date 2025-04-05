@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "Gemini দিয়ে সংক্ষিপ্ত করুন এবং অনুবাদ করুন"
+        "message": "Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
     "extension_description": {
-        "message": "ওয়েব পেজগুলির সারসংক্ষেপ করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসাবে Gemini ব্যবহার করে।"
+        "message": "ওয়েব পেজগুলোর সারসংক্ষেপ করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসেবে Gemini ব্যবহার করা হয়।"
     },
     "popup_button_copy": {
         "message": "কপি করুন"
@@ -21,19 +21,19 @@
         "message": "অপশন পেজ খুলুন"
     },
     "popup_summarizing": {
-        "message": "সংক্ষিপ্ত করা হচ্ছে"
+        "message": "সারসংক্ষেপ করা হচ্ছে"
     },
     "popup_summarizing_captions": {
-        "message": "ক্যাপশনগুলির সংক্ষিপ্তসার করা হচ্ছে"
+        "message": "ক্যাপশনগুলোর সারসংক্ষেপ করা হচ্ছে"
     },
     "popup_summarizing_image": {
-        "message": "ছবিটির সংক্ষিপ্তসার করা হচ্ছে"
+        "message": "ছবিটির সারসংক্ষেপ করা হচ্ছে"
     },
     "popup_translating": {
         "message": "অনুবাদ করা হচ্ছে"
     },
     "popup_translating_captions": {
-        "message": "ক্যাপশনগুলির অনুবাদ করা হচ্ছে"
+        "message": "ক্যাপশনগুলোর অনুবাদ করা হচ্ছে"
     },
     "popup_translating_image": {
         "message": "ছবিটির অনুবাদ করা হচ্ছে"
@@ -51,10 +51,10 @@
         "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। অনুগ্রহ করে কনসোল লগটি দেখুন।"
     },
     "popup_miscellaneous_error": {
-        "message": "এই পৃষ্ঠাটির সারসংক্ষেপ বা অনুবাদ করা সম্ভব নয়।"
+        "message": "এই পেজটির সারসংক্ষেপ বা অনুবাদ করা সম্ভব নয়।"
     },
     "results_title": {
-        "message": "ফলাফল - Gemini দিয়ে সংক্ষিপ্ত করুন এবং অনুবাদ করুন"
+        "message": "ফলাফল - Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
     "results_button_clear": {
         "message": "কথোপকথন পরিষ্কার করুন"
@@ -81,13 +81,13 @@
         "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। অনুগ্রহ করে কনসোল লগটি দেখুন।"
     },
     "options_title": {
-        "message": "অপশন - Gemini দিয়ে সংক্ষিপ্ত করুন এবং অনুবাদ করুন"
+        "message": "অপশন - Gemini দিয়ে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
     "options_apikey": {
         "message": "Gemini API কী"
     },
     "options_apikey_hint": {
-        "message": "আপনি নিম্নলিখিত পৃষ্ঠা থেকে একটি Gemini API কী পেতে পারেন।"
+        "message": "আপনি নিম্নলিখিত পেজ থেকে একটি Gemini API কী পেতে পারেন।"
     },
     "options_model": {
         "message": "ভাষা মডেল"
@@ -96,19 +96,19 @@
         "message": "ব্যবহারকারী-নির্দিষ্ট মডেল"
     },
     "options_language": {
-        "message": "সংক্ষিপ্ত করুন / অনুবাদ করুন"
+        "message": "যে ভাষায় সারসংক্ষেপ করতে চান / অনুবাদ করতে চান"
     },
     "options_language_user": {
         "message": "ব্যবহারকারী-নির্দিষ্ট ভাষা"
     },
     "options_language_notes": {
-        "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিংস উপেক্ষা করা হয়।"
+        "message": "কাস্টম অ্যাকশনগুলোতে ভাষার সেটিং অগ্রাহ্য করা হয়।"
     },
     "options_no_text_action": {
-        "message": "যখন কোনো টেক্সট নির্বাচন করা না হয়, তখন নিম্নলিখিত কাজটি করুন"
+        "message": "যখন কোনো টেক্সট নির্বাচন করা না হয়, তখন নিম্নলিখিত অ্যাকশনটি করুন"
     },
     "options_no_text_summarize": {
-        "message": "সংক্ষিপ্ত করুন (ডিফল্ট)"
+        "message": "সারসংক্ষেপ করুন (ডিফল্ট)"
     },
     "options_no_text_translate": {
         "message": "অনুবাদ করুন"
@@ -123,13 +123,13 @@
         "message": "কাস্টম অ্যাকশন ৩"
     },
     "options_no_text_custom_notes": {
-        "message": "কাস্টম অ্যাকশনগুলি প্রসঙ্গ মেনু থেকেও আহ্বান করা যেতে পারে (শুধুমাত্র ডেস্কটপ)।"
+        "message": "কাস্টম অ্যাকশনগুলো কনটেক্সট মেনু থেকেও আহ্বান করা যেতে পারে (শুধুমাত্র ডেস্কটপ)।"
     },
     "options_text_action": {
-        "message": "যখন টেক্সট নির্বাচন করা হয়, তখন নিম্নলিখিত কাজটি করুন"
+        "message": "যখন টেক্সট নির্বাচন করা হয়, তখন নিম্নলিখিত অ্যাকশনটি করুন"
     },
     "options_text_summarize": {
-        "message": "সংক্ষিপ্ত করুন"
+        "message": "সারসংক্ষেপ করুন"
     },
     "options_text_translate": {
         "message": "অনুবাদ করুন (ডিফল্ট)"
@@ -144,10 +144,10 @@
         "message": "কাস্টম অ্যাকশন ৩"
     },
     "options_text_custom_notes": {
-        "message": "কাস্টম অ্যাকশনগুলি প্রসঙ্গ মেনু থেকেও আহ্বান করা যেতে পারে (শুধুমাত্র ডেস্কটপ)।"
+        "message": "কাস্টম অ্যাকশনগুলো কনটেক্সট মেনু থেকেও আহ্বান করা যেতে পারে (শুধুমাত্র ডেস্কটপ)।"
     },
     "options_contextmenus": {
-        "message": "প্রসঙ্গ মেনুতে নিবন্ধন করুন"
+        "message": "কনটেক্সট মেনুতে রেজিস্টার করুন"
     },
     "options_streaming": {
         "message": "ভাষা মডেল থেকে স্ট্রিমিং আউটপুট"
@@ -155,23 +155,26 @@
     "options_theme": {
         "message": "থিম"
     },
+    "options_font_size": {
+        "message": "ফন্টের আকার"
+    },
     "options_button_save": {
-        "message": "অপশনগুলি সংরক্ষণ করুন"
+        "message": "অপশনগুলো সংরক্ষণ করুন"
     },
     "options_saved": {
         "message": "সংরক্ষিত হয়েছে।"
     },
     "options_export": {
-        "message": "অপশনগুলি রপ্তানি করুন"
+        "message": "অপশনগুলো এক্সপোর্ট করুন"
     },
     "options_export_api_key": {
         "message": "API কী অন্তর্ভুক্ত করুন"
     },
     "options_import": {
-        "message": "অপশনগুলি আমদানি করুন"
+        "message": "অপশনগুলো ইম্পোর্ট করুন"
     },
     "options_import_failed": {
-        "message": "আমদানি ব্যর্থ হয়েছে।"
+        "message": "ইম্পোর্ট করা যায়নি।"
     },
     "context_standard_action": {
         "message": "স্ট্যান্ডার্ড অ্যাকশন"
