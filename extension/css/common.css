@@ -35,3 +35,39 @@ body[data-theme="dark"] {
   --nc-ac-1: #7928CA;
   --nc-ac-tx: #FFFFFF;
 }
+
+body[data-font-size="large"] {
+  font-size: larger;
+
+  button,
+  select,
+  input,
+  textarea {
+    font-size: larger;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+}
+
+body[data-font-size="medium"] {
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
+body[data-font-size="small"] {
+  font-size: smaller;
+
+  button,
+  select,
+  input,
+  textarea {
+    font-size: smaller;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+}

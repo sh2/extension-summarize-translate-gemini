@@ -11,7 +11,7 @@
 
 <body>
   <header style="padding-top: 1rem; padding-bottom: 0rem;">
-    <h1 id="header" style="display: flex; align-items: center; font-size: 1.2rem;">
+    <h1 id="header" style="display: flex; align-items: center;">
       <img src="img/icon-128.png" alt="" width="48" height="48" style="margin-right: .5rem;">
       <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" data-i18n="options_title">
         Options - Summarize and Translate with Gemini
@@ -79,13 +79,16 @@
     <label for="noTextCustom3" data-i18n="options_no_text_custom_3">Custom action 3</label>
     <br>
     <span data-i18n="options_no_text_custom_1">Custom action 1</span>
+    <br>
     <textarea id="noTextCustomPrompt1" rows="8" cols="80"
       placeholder="(Example)&#10;Summarize the entire text as up to 3-item Markdown numbered list in English and reply only with the list.&#10;Format:&#10;1. First point.&#10;2. Second point.&#10;3. Third point."></textarea>
     <br>
     <span data-i18n="options_no_text_custom_2">Custom action 2</span>
+    <br>
     <textarea id="noTextCustomPrompt2" rows="2" cols="80"></textarea>
     <br>
     <span data-i18n="options_no_text_custom_3">Custom action 3</span>
+    <br>
     <textarea id="noTextCustomPrompt3" rows="2" cols="80"></textarea>
     <br>
     <small>
@@ -115,13 +118,16 @@
     <label for="textCustom3" data-i18n="options_text_custom_3">Custom action 3</label>
     <br>
     <span data-i18n="options_text_custom_1">Custom action 1</span>
+    <br>
     <textarea id="textCustomPrompt1" rows="8" cols="80"
       placeholder="(Example)&#10;Translate the entire text into English and reply only with the translated result."></textarea>
     <br>
     <span data-i18n="options_text_custom_2">Custom action 2</span>
+    <br>
     <textarea id="textCustomPrompt2" rows="2" cols="80"></textarea>
     <br>
     <span data-i18n="options_text_custom_3">Custom action 3</span>
+    <br>
     <textarea id="textCustomPrompt3" rows="2" cols="80"></textarea>
     <br>
     <small>
@@ -153,6 +159,18 @@
       <option value="system">System</option>
       <option value="light">Light</option>
       <option value="dark">Dark</option>
+    </select>
+  </p>
+
+  <hr>
+
+  <p>
+    <span data-i18n="options_font_size">Font Size</span>
+    <br>
+    <select id="fontSize">
+      <option value="large">Large</option>
+      <option value="medium">Medium</option>
+      <option value="small">Small</option>
     </select>
   </p>
 

@@ -155,6 +155,9 @@
     "options_theme": {
         "message": "テーマ"
     },
+    "options_font_size": {
+        "message": "フォントサイズ"
+    },
     "options_button_save": {
         "message": "オプションを保存する"
     },

@@ -39,6 +39,16 @@ export const applyTheme = (theme) => {
   }
 };
 
+export const applyFontSize = (fontSize) => {
+  if (fontSize === "large") {
+    document.body.setAttribute("data-font-size", "large");
+  } else if (fontSize === "small") {
+    document.body.setAttribute("data-font-size", "small");
+  } else {
+    document.body.setAttribute("data-font-size", "medium");
+  }
+};
+
 export const adjustLayoutForScreenSize = () => {
   // Add the narrow class if the screen width is narrow
   if (document.getElementById("header").clientWidth < 640) {

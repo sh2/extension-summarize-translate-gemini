@@ -1,5 +1,6 @@
 import {
   applyTheme,
+  applyFontSize,
   adjustLayoutForScreenSize,
   loadTemplate,
   createContextMenus
@@ -24,7 +25,8 @@ const restoreOptions = async () => {
     textCustomPrompt3: "",
     contextMenus: true,
     streaming: false,
-    theme: "system"
+    theme: "system",
+    fontSize: "medium"
   });
 
   document.getElementById("apiKey").value = options.apiKey;
@@ -57,6 +59,7 @@ const restoreOptions = async () => {
   document.getElementById("contextMenus").checked = options.contextMenus;
   document.getElementById("streaming").checked = options.streaming;
   document.getElementById("theme").value = options.theme;
+  document.getElementById("fontSize").value = options.fontSize;
 
   // Set the default language model if the language model is not set
   if (!document.getElementById("languageModel").value) {
@@ -81,13 +84,15 @@ const saveOptions = async () => {
     textCustomPrompt3: document.getElementById("textCustomPrompt3").value,
     contextMenus: document.getElementById("contextMenus").checked,
     streaming: document.getElementById("streaming").checked,
-    theme: document.getElementById("theme").value
+    theme: document.getElementById("theme").value,
+    fontSize: document.getElementById("fontSize").value
   };
 
   await chrome.storage.local.set(options);
   await chrome.storage.session.set({ responseCacheQueue: [] });
   await createContextMenus(options.contextMenus);
   applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
+  applyFontSize((await chrome.storage.local.get({ fontSize: "medium" })).fontSize);
   const status = document.getElementById("status");
   status.textContent = chrome.i18n.getMessage("options_saved");
   setTimeout(() => status.textContent = "", 1000);
@@ -112,7 +117,8 @@ const exportOptions = async () => {
     textCustomPrompt3: document.getElementById("textCustomPrompt3").value,
     contextMenus: document.getElementById("contextMenus").checked,
     streaming: document.getElementById("streaming").checked,
-    theme: document.getElementById("theme").value
+    theme: document.getElementById("theme").value,
+    fontSize: document.getElementById("fontSize").value
   });
 
   if (document.getElementById("exportApiKey").checked) {
@@ -231,6 +237,10 @@ const importOptions = async () => {
     if (options.theme) {
       document.getElementById("theme").value = options.theme;
     }
+    
+    if (options.fontSize) {
+      document.getElementById("fontSize").value = options.fontSize;
+    }
 
     saveOptions();
   });
@@ -241,6 +251,9 @@ const importOptions = async () => {
 const initialize = async () => {
   // Apply the theme
   applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
+  
+  // Apply font size
+  applyFontSize((await chrome.storage.local.get({ fontSize: "medium" })).fontSize);
 
   // Check if the screen is narrow  
   adjustLayoutForScreenSize();
