@@ -149,6 +149,15 @@
     "options_contextmenus": {
         "message": "コンテキストメニューに登録する"
     },
+    "options_contextmenu_label_1": {
+        "message": "カスタムアクション1のラベル (オプション)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "カスタムアクション2のラベル (オプション)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "カスタムアクション3のラベル (オプション)"
+    },
     "options_streaming": {
         "message": "言語モデルからの出力をストリーミングする"
     },

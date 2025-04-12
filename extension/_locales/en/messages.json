@@ -149,6 +149,15 @@
     "options_contextmenus": {
         "message": "Register in the context menu"
     },
+    "options_contextmenu_label_1": {
+        "message": "Label for Custom action 1 (optional)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "Label for Custom action 2 (optional)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "Label for Custom action 3 (optional)"
+    },
     "options_streaming": {
         "message": "Streaming output from the language model"
     },

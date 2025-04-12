@@ -24,6 +24,9 @@ const restoreOptions = async () => {
     textCustomPrompt2: "",
     textCustomPrompt3: "",
     contextMenus: true,
+    contextMenuLabel1: "",
+    contextMenuLabel2: "",
+    contextMenuLabel3: "",
     streaming: false,
     theme: "system",
     fontSize: "medium"
@@ -57,6 +60,9 @@ const restoreOptions = async () => {
   document.getElementById("textCustomPrompt2").value = options.textCustomPrompt2;
   document.getElementById("textCustomPrompt3").value = options.textCustomPrompt3;
   document.getElementById("contextMenus").checked = options.contextMenus;
+  document.getElementById("contextMenuLabel1").value = options.contextMenuLabel1;
+  document.getElementById("contextMenuLabel2").value = options.contextMenuLabel2;
+  document.getElementById("contextMenuLabel3").value = options.contextMenuLabel3;
   document.getElementById("streaming").checked = options.streaming;
   document.getElementById("theme").value = options.theme;
   document.getElementById("fontSize").value = options.fontSize;
@@ -83,6 +89,9 @@ const saveOptions = async () => {
     textCustomPrompt2: document.getElementById("textCustomPrompt2").value,
     textCustomPrompt3: document.getElementById("textCustomPrompt3").value,
     contextMenus: document.getElementById("contextMenus").checked,
+    contextMenuLabel1: document.getElementById("contextMenuLabel1").value,
+    contextMenuLabel2: document.getElementById("contextMenuLabel2").value,
+    contextMenuLabel3: document.getElementById("contextMenuLabel3").value,
     streaming: document.getElementById("streaming").checked,
     theme: document.getElementById("theme").value,
     fontSize: document.getElementById("fontSize").value
@@ -90,7 +99,14 @@ const saveOptions = async () => {
 
   await chrome.storage.local.set(options);
   await chrome.storage.session.set({ responseCacheQueue: [] });
-  await createContextMenus(options.contextMenus);
+
+  await createContextMenus(
+    options.contextMenus,
+    options.contextMenuLabel1,
+    options.contextMenuLabel2,
+    options.contextMenuLabel3
+  );
+
   applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
   applyFontSize((await chrome.storage.local.get({ fontSize: "medium" })).fontSize);
   const status = document.getElementById("status");
@@ -116,6 +132,9 @@ const exportOptions = async () => {
     textCustomPrompt2: document.getElementById("textCustomPrompt2").value,
     textCustomPrompt3: document.getElementById("textCustomPrompt3").value,
     contextMenus: document.getElementById("contextMenus").checked,
+    contextMenuLabel1: document.getElementById("contextMenuLabel1").value,
+    contextMenuLabel2: document.getElementById("contextMenuLabel2").value,
+    contextMenuLabel3: document.getElementById("contextMenuLabel3").value,
     streaming: document.getElementById("streaming").checked,
     theme: document.getElementById("theme").value,
     fontSize: document.getElementById("fontSize").value
@@ -230,6 +249,21 @@ const importOptions = async () => {
       document.getElementById("contextMenus").checked = options.contextMenus;
     }
 
+    // contextMenuLabel1 allows an empty string
+    if (options.contextMenuLabel1 !== undefined) {
+      document.getElementById("contextMenuLabel1").value = options.contextMenuLabel1;
+    }
+
+    // contextMenuLabel2 allows an empty string
+    if (options.contextMenuLabel2 !== undefined) {
+      document.getElementById("contextMenuLabel2").value = options.contextMenuLabel2;
+    }
+
+    // contextMenuLabel3 allows an empty string
+    if (options.contextMenuLabel3 !== undefined) {
+      document.getElementById("contextMenuLabel3").value = options.contextMenuLabel3;
+    }
+
     if (options.streaming !== undefined) {
       document.getElementById("streaming").checked = options.streaming;
     }
@@ -237,7 +271,7 @@ const importOptions = async () => {
     if (options.theme) {
       document.getElementById("theme").value = options.theme;
     }
-    
+
     if (options.fontSize) {
       document.getElementById("fontSize").value = options.fontSize;
     }
@@ -251,7 +285,7 @@ const importOptions = async () => {
 const initialize = async () => {
   // Apply the theme
   applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
-  
+
   // Apply font size
   applyFontSize((await chrome.storage.local.get({ fontSize: "medium" })).fontSize);
 

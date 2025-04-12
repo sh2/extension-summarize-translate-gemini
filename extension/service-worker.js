@@ -323,8 +323,19 @@ if (chrome.contextMenus) {
 }
 
 const initContextMenus = async () => {
-  const { contextMenus } = await chrome.storage.local.get({ contextMenus: true });
-  await createContextMenus(contextMenus);
+  const options = await chrome.storage.local.get({
+    contextMenus: true,
+    contextMenuLabel1: "",
+    contextMenuLabel2: "",
+    contextMenuLabel3: ""
+  });
+
+  await createContextMenus(
+    options.contextMenus,
+    options.contextMenuLabel1,
+    options.contextMenuLabel2,
+    options.contextMenuLabel3
+  );
 };
 
 chrome.runtime.onStartup.addListener(initContextMenus);

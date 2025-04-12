@@ -245,7 +245,7 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
   }
 };
 
-export const createContextMenus = async (useContextMenus) => {
+export const createContextMenus = async (useContextMenus, label1, label2, label3) => {
   if (!chrome.contextMenus) {
     // Firefox for Android does not support chrome.contextMenus
     return;
@@ -262,19 +262,19 @@ export const createContextMenus = async (useContextMenus) => {
 
     chrome.contextMenus.create({
       id: "custom-action-1",
-      title: chrome.i18n.getMessage("context_custom_action_1"),
+      title: label1 || chrome.i18n.getMessage("context_custom_action_1"),
       contexts: ["page", "selection", "action"]
     });
 
     chrome.contextMenus.create({
       id: "custom-action-2",
-      title: chrome.i18n.getMessage("context_custom_action_2"),
+      title: label2 || chrome.i18n.getMessage("context_custom_action_2"),
       contexts: ["page", "selection", "action"]
     });
 
     chrome.contextMenus.create({
       id: "custom-action-3",
-      title: chrome.i18n.getMessage("context_custom_action_3"),
+      title: label3 || chrome.i18n.getMessage("context_custom_action_3"),
       contexts: ["page", "selection", "action"]
     });
   }
