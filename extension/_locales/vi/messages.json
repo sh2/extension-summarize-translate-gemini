@@ -102,7 +102,7 @@
         "message": "Ngôn ngữ do người dùng chỉ định"
     },
     "options_language_notes": {
-        "message": "Cài đặt ngôn ngữ không được tính đến trong các hành động tùy chỉnh."
+        "message": "Cài đặt ngôn ngữ bị bỏ qua trong các hành động tùy chỉnh."
     },
     "options_no_text_action": {
         "message": "Khi không có văn bản nào được chọn, hãy thực hiện hành động sau"
@@ -149,11 +149,20 @@
     "options_contextmenus": {
         "message": "Đăng ký trong menu ngữ cảnh"
     },
+    "options_contextmenu_label_1": {
+        "message": "Nhãn cho Hành động tùy chỉnh 1 (tùy chọn)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "Nhãn cho Hành động tùy chỉnh 2 (tùy chọn)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "Nhãn cho Hành động tùy chỉnh 3 (tùy chọn)"
+    },
     "options_streaming": {
         "message": "Truyền trực tuyến đầu ra từ mô hình ngôn ngữ"
     },
     "options_theme": {
-        "message": "Chủ đề"
+        "message": "Giao diện"
     },
     "options_font_size": {
         "message": "Cỡ chữ"

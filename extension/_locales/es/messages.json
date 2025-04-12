@@ -3,7 +3,7 @@
         "message": "Resumir y Traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resume y traduce páginas web. Utiliza Gemini como backend."
+        "message": "Resuma y traduzca páginas web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -51,7 +51,7 @@
         "message": "Ocurrió un error desconocido. Por favor, revise el registro de la consola."
     },
     "popup_miscellaneous_error": {
-        "message": "Esta página no puede ser resumida o traducida."
+        "message": "Esta página no puede ser resumida ni traducida."
     },
     "results_title": {
         "message": "Resultados - Resumir y Traducir con Gemini"
@@ -148,6 +148,15 @@
     },
     "options_contextmenus": {
         "message": "Registrar en el menú contextual"
+    },
+    "options_contextmenu_label_1": {
+        "message": "Etiqueta para la Acción personalizada 1 (opcional)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "Etiqueta para la Acción personalizada 2 (opcional)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "Etiqueta para la Acción personalizada 3 (opcional)"
     },
     "options_streaming": {
         "message": "Salida de transmisión desde el modelo de lenguaje"

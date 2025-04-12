@@ -1,6 +1,6 @@
 {
     "extension_name": {
-        "message": "Gemini के साथ संक्षेप करें और अनुवाद करें"
+        "message": "Gemini के साथ संक्षेप और अनुवाद करें"
     },
     "extension_description": {
         "message": "वेब पृष्ठों का संक्षेप और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
@@ -54,7 +54,7 @@
         "message": "इस पृष्ठ का संक्षेप या अनुवाद नहीं किया जा सकता है।"
     },
     "results_title": {
-        "message": "परिणाम - Gemini के साथ संक्षेप करें और अनुवाद करें"
+        "message": "परिणाम - Gemini के साथ संक्षेप और अनुवाद करें"
     },
     "results_button_clear": {
         "message": "वार्तालाप साफ़ करें"
@@ -81,7 +81,7 @@
         "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग की जाँच करें।"
     },
     "options_title": {
-        "message": "विकल्प - Gemini के साथ संक्षेप करें और अनुवाद करें"
+        "message": "विकल्प - Gemini के साथ संक्षेप और अनुवाद करें"
     },
     "options_apikey": {
         "message": "Gemini API कुंजी"
@@ -148,6 +148,15 @@
     },
     "options_contextmenus": {
         "message": "संदर्भ मेनू में रजिस्टर करें"
+    },
+    "options_contextmenu_label_1": {
+        "message": "कस्टम क्रिया 1 के लिए लेबल (वैकल्पिक)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "कस्टम क्रिया 2 के लिए लेबल (वैकल्पिक)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "कस्टम क्रिया 3 के लिए लेबल (वैकल्पिक)"
     },
     "options_streaming": {
         "message": "भाषा मॉडल से स्ट्रीमिंग आउटपुट"

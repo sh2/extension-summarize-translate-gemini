@@ -102,7 +102,7 @@
         "message": "사용자 지정 언어"
     },
     "options_language_notes": {
-        "message": "사용자 지정 작업에서는 언어 설정이 무시됩니다."
+        "message": "사용자 정의 작업에서는 언어 설정이 무시됩니다."
     },
     "options_no_text_action": {
         "message": "선택된 텍스트가 없을 때 다음 작업 수행"
@@ -114,19 +114,19 @@
         "message": "번역"
     },
     "options_no_text_custom_1": {
-        "message": "사용자 지정 작업 1"
+        "message": "사용자 정의 작업 1"
     },
     "options_no_text_custom_2": {
-        "message": "사용자 지정 작업 2"
+        "message": "사용자 정의 작업 2"
     },
     "options_no_text_custom_3": {
-        "message": "사용자 지정 작업 3"
+        "message": "사용자 정의 작업 3"
     },
     "options_no_text_custom_notes": {
-        "message": "사용자 지정 작업은 컨텍스트 메뉴에서도 호출할 수 있습니다 (데스크톱 전용)."
+        "message": "사용자 정의 작업은 컨텍스트 메뉴에서도 호출할 수 있습니다 (데스크톱 전용)."
     },
     "options_text_action": {
-        "message": "텍스트가 선택되었을 때 다음 작업 수행"
+        "message": "선택된 텍스트가 있을 때 다음 작업 수행"
     },
     "options_text_summarize": {
         "message": "요약"
@@ -135,19 +135,28 @@
         "message": "번역 (기본)"
     },
     "options_text_custom_1": {
-        "message": "사용자 지정 작업 1"
+        "message": "사용자 정의 작업 1"
     },
     "options_text_custom_2": {
-        "message": "사용자 지정 작업 2"
+        "message": "사용자 정의 작업 2"
     },
     "options_text_custom_3": {
-        "message": "사용자 지정 작업 3"
+        "message": "사용자 정의 작업 3"
     },
     "options_text_custom_notes": {
-        "message": "사용자 지정 작업은 컨텍스트 메뉴에서도 호출할 수 있습니다 (데스크톱 전용)."
+        "message": "사용자 정의 작업은 컨텍스트 메뉴에서도 호출할 수 있습니다 (데스크톱 전용)."
     },
     "options_contextmenus": {
         "message": "컨텍스트 메뉴에 등록"
+    },
+    "options_contextmenu_label_1": {
+        "message": "사용자 정의 작업 1 레이블 (선택 사항)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "사용자 정의 작업 2 레이블 (선택 사항)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "사용자 정의 작업 3 레이블 (선택 사항)"
     },
     "options_streaming": {
         "message": "언어 모델에서 스트리밍 출력"
@@ -180,12 +189,12 @@
         "message": "표준 작업"
     },
     "context_custom_action_1": {
-        "message": "사용자 지정 작업 1"
+        "message": "사용자 정의 작업 1"
     },
     "context_custom_action_2": {
-        "message": "사용자 지정 작업 2"
+        "message": "사용자 정의 작업 2"
     },
     "context_custom_action_3": {
-        "message": "사용자 지정 작업 3"
+        "message": "사용자 정의 작업 3"
     }
 }

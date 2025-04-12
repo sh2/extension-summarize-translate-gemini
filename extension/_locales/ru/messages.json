@@ -149,6 +149,15 @@
     "options_contextmenus": {
         "message": "Зарегистрировать в контекстном меню"
     },
+    "options_contextmenu_label_1": {
+        "message": "Метка для пользовательского действия 1 (необязательно)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "Метка для пользовательского действия 2 (необязательно)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "Метка для пользовательского действия 3 (необязательно)"
+    },
     "options_streaming": {
         "message": "Потоковый вывод из языковой модели"
     },
@@ -174,7 +183,7 @@
         "message": "Импортировать настройки"
     },
     "options_import_failed": {
-        "message": "Ошибка импорта."
+        "message": "Импорт не удался."
     },
     "context_standard_action": {
         "message": "Стандартное действие"

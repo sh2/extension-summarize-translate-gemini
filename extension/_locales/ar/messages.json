@@ -69,7 +69,7 @@
         "message": "إرسال"
     },
     "results_waiting_response": {
-        "message": "في انتظار الرد"
+        "message": "في انتظار رد"
     },
     "results_prompt_blocked": {
         "message": "تم حظر الطلب."
@@ -148,6 +148,15 @@
     },
     "options_contextmenus": {
         "message": "تسجيل في قائمة السياق"
+    },
+    "options_contextmenu_label_1": {
+        "message": "تسمية للإجراء المخصص 1 (اختياري)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "تسمية للإجراء المخصص 2 (اختياري)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "تسمية للإجراء المخصص 3 (اختياري)"
     },
     "options_streaming": {
         "message": "تدفق الإخراج من نموذج اللغة"

@@ -3,7 +3,7 @@
         "message": "Zusammenfassen und Übersetzen mit Gemini"
     },
     "extension_description": {
-        "message": "Webseiten zusammenfassen und übersetzen. Verwendet Gemini als Backend."
+        "message": "Fasst Webseiten zusammen und übersetzt sie. Verwendet Gemini als Backend."
     },
     "popup_button_copy": {
         "message": "Kopieren"
@@ -24,7 +24,7 @@
         "message": "Zusammenfassen"
     },
     "popup_summarizing_captions": {
-        "message": "Die Bildunterschriften werden zusammengefasst"
+        "message": "Die Beschriftungen werden zusammengefasst"
     },
     "popup_summarizing_image": {
         "message": "Das Bild wird zusammengefasst"
@@ -33,7 +33,7 @@
         "message": "Übersetzen"
     },
     "popup_translating_captions": {
-        "message": "Die Bildunterschriften werden übersetzt"
+        "message": "Die Beschriftungen werden übersetzt"
     },
     "popup_translating_image": {
         "message": "Das Bild wird übersetzt"
@@ -48,7 +48,7 @@
         "message": "Die Antwort wurde blockiert."
     },
     "popup_unexpected_response": {
-        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
+        "message": "Es ist ein unbekannter Fehler aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
     },
     "popup_miscellaneous_error": {
         "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
@@ -78,7 +78,7 @@
         "message": "Die Antwort wurde blockiert."
     },
     "results_unexpected_response": {
-        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
+        "message": "Es ist ein unbekannter Fehler aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
     },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
@@ -148,6 +148,15 @@
     },
     "options_contextmenus": {
         "message": "Im Kontextmenü registrieren"
+    },
+    "options_contextmenu_label_1": {
+        "message": "Bezeichnung für benutzerdefinierte Aktion 1 (optional)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "Bezeichnung für benutzerdefinierte Aktion 2 (optional)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "Bezeichnung für benutzerdefinierte Aktion 3 (optional)"
     },
     "options_streaming": {
         "message": "Streaming-Ausgabe vom Sprachmodell"

@@ -3,7 +3,7 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résumez et traduisez des pages web. Utilise Gemini comme backend."
+        "message": "Résume et traduit les pages web. Utilise Gemini comme backend."
     },
     "popup_button_copy": {
         "message": "Copier"
@@ -18,25 +18,25 @@
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
-        "message": "Ouvrir la page des options"
+        "message": "Ouvrir la page d'options"
     },
     "popup_summarizing": {
         "message": "Résumé en cours"
     },
     "popup_summarizing_captions": {
-        "message": "Résumé des légendes"
+        "message": "Résumé des légendes en cours"
     },
     "popup_summarizing_image": {
-        "message": "Résumé de l'image"
+        "message": "Résumé de l'image en cours"
     },
     "popup_translating": {
         "message": "Traduction en cours"
     },
     "popup_translating_captions": {
-        "message": "Traduction des légendes"
+        "message": "Traduction des légendes en cours"
     },
     "popup_translating_image": {
-        "message": "Traduction de l'image"
+        "message": "Traduction de l'image en cours"
     },
     "popup_processing": {
         "message": "Traitement en cours"
@@ -149,8 +149,17 @@
     "options_contextmenus": {
         "message": "Enregistrer dans le menu contextuel"
     },
+    "options_contextmenu_label_1": {
+        "message": "Libellé pour l'action personnalisée 1 (facultatif)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "Libellé pour l'action personnalisée 2 (facultatif)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "Libellé pour l'action personnalisée 3 (facultatif)"
+    },
     "options_streaming": {
-        "message": "Sortie en continu du modèle de langage"
+        "message": "Sortie en flux continu du modèle de langage"
     },
     "options_theme": {
         "message": "Thème"

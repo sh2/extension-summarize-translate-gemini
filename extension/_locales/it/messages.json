@@ -48,7 +48,7 @@
         "message": "La risposta è stata bloccata."
     },
     "popup_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
     },
     "popup_miscellaneous_error": {
         "message": "Questa pagina non può essere riassunta o tradotta."
@@ -78,7 +78,7 @@
         "message": "La risposta è stata bloccata."
     },
     "results_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
     },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
@@ -148,6 +148,15 @@
     },
     "options_contextmenus": {
         "message": "Registra nel menu contestuale"
+    },
+    "options_contextmenu_label_1": {
+        "message": "Etichetta per l'azione personalizzata 1 (opzionale)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "Etichetta per l'azione personalizzata 2 (opzionale)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "Etichetta per l'azione personalizzata 3 (opzionale)"
     },
     "options_streaming": {
         "message": "Output in streaming dal modello linguistico"

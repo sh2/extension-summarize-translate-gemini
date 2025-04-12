@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resuma e traduza páginas da web. Utiliza Gemini como backend."
+        "message": "Resume e traduz páginas da web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -87,7 +87,7 @@
         "message": "Chave da API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Você pode obter uma Chave da API Gemini na seguinte página."
+        "message": "Você pode obter uma chave da API Gemini na seguinte página."
     },
     "options_model": {
         "message": "Modelo de Linguagem"
@@ -149,6 +149,15 @@
     "options_contextmenus": {
         "message": "Registrar no menu de contexto"
     },
+    "options_contextmenu_label_1": {
+        "message": "Rótulo para Ação personalizada 1 (opcional)"
+    },
+    "options_contextmenu_label_2": {
+        "message": "Rótulo para Ação personalizada 2 (opcional)"
+    },
+    "options_contextmenu_label_3": {
+        "message": "Rótulo para Ação personalizada 3 (opcional)"
+    },
     "options_streaming": {
         "message": "Saída de streaming do modelo de linguagem"
     },
@@ -156,7 +165,7 @@
         "message": "Tema"
     },
     "options_font_size": {
-        "message": "Tamanho da fonte"
+        "message": "Tamanho da Fonte"
     },
     "options_button_save": {
         "message": "Salvar opções"
