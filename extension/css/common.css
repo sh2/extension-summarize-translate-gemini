@@ -2,12 +2,14 @@ body {
   width: 640px;
 }
 
-button {
-  margin-bottom: .5rem;
+@media (max-width: 639px) {
+  body {
+    width: 84%;
+  }
 }
 
-body.narrow {
-  width: 84%;
+button {
+  margin-bottom: .5rem;
 }
 
 body[data-theme="light"] {
