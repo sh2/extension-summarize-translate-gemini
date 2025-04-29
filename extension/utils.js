@@ -213,6 +213,15 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
     // To receive the last candidate, re-parse the buffer
     const json = JSON.parse(buffer);
 
+    if (json.at(-1).error) {
+      // If the last candidate is an error, return the error
+      return {
+        ok: false,
+        status: json.at(-1).error.code,
+        body: { error: { message: json.at(-1).error.message } }
+      };
+    }
+
     if (response.ok) {
       // Concatenate the remaining candidates
       for (let index = processed + 1; index < json.length; index++) {
