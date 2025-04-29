@@ -1,7 +1,7 @@
 Summarize and translate web pages with a single click.
 Generate high-quality summaries and translations using Google's AI model, Gemini.
 
-Summarize 
+Summarize
 Simply open a web page and click on the extension icon to summarize its content.
 
 Translate
