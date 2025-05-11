@@ -111,13 +111,15 @@ export const convertMarkdownToHtml = (content, breaks) => {
 };
 
 export const getModelId = (languageModel, userModelId) => {
+  const languageModelKey = languageModel.split(":")[0];
+
   const modelMappings = {
     "2.0-flash": "gemini-2.0-flash",
     "2.0-flash-lite": "gemini-2.0-flash-lite",
     "1.5-pro": "gemini-1.5-pro",
     "1.5-flash": "gemini-1.5-flash",
     "1.5-flash-8b": "gemini-1.5-flash-8b",
-    "2.5-pro-preview-03-25": "gemini-2.5-pro-preview-03-25",
+    "2.5-pro-preview-05-06": "gemini-2.5-pro-preview-05-06",
     "2.5-flash-preview-04-17": "gemini-2.5-flash-preview-04-17",
     "2.5-pro-exp-03-25": "gemini-2.5-pro-exp-03-25",
     "gemma-3-27b-it": "gemma-3-27b-it"
@@ -126,11 +128,11 @@ export const getModelId = (languageModel, userModelId) => {
   if (languageModel === "zz") {
     return userModelId;
   } else {
-    return modelMappings[languageModel];
+    return modelMappings[languageModelKey];
   }
 };
 
-export const generateContent = async (apiKey, modelId, apiContents) => {
+export const generateContent = async (apiKey, modelId, apiContents, apiConfig) => {
   try {
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`, {
       method: "POST",
@@ -140,7 +142,8 @@ export const generateContent = async (apiKey, modelId, apiContents) => {
       },
       body: JSON.stringify({
         contents: apiContents,
-        safetySettings: safetySettings
+        safetySettings: safetySettings,
+        generationConfig: apiConfig
       })
     });
 
@@ -158,7 +161,7 @@ export const generateContent = async (apiKey, modelId, apiContents) => {
   }
 };
 
-export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
+export const streamGenerateContent = async (apiKey, modelId, apiContents, apiConfig) => {
   try {
     await chrome.storage.session.remove("streamContent");
 
@@ -170,7 +173,8 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents) => {
       },
       body: JSON.stringify({
         contents: apiContents,
-        safetySettings: safetySettings
+        safetySettings: safetySettings,
+        generationConfig: apiConfig
       })
     });
 

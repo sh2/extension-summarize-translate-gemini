@@ -91,10 +91,21 @@ const askQuestion = async () => {
   const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.0-flash-001" });
   const languageModel = document.getElementById("languageModel").value;
   const modelId = getModelId(languageModel, userModelId);
+  const thinkingBudgetInt = parseInt(languageModel.split(":")[1]);
+  const thinkingBudget = isNaN(thinkingBudgetInt) ? undefined : thinkingBudgetInt;
+  let apiConfig = {};
   let response = null;
 
+  if (thinkingBudget !== undefined) {
+    if (!apiConfig.thinkingConfig) {
+      apiConfig.thinkingConfig = {};
+    }
+
+    apiConfig.thinkingConfig.thinkingBudget = thinkingBudget;
+  }
+
   if (streaming) {
-    const responsePromise = streamGenerateContent(apiKey, modelId, apiContents);
+    const responsePromise = streamGenerateContent(apiKey, modelId, apiContents, apiConfig);
 
     // Stream the content
     const streamIntervalId = setInterval(async () => {
@@ -112,7 +123,7 @@ const askQuestion = async () => {
       clearInterval(streamIntervalId);
     }
   } else {
-    response = await generateContent(apiKey, modelId, apiContents);
+    response = await generateContent(apiKey, modelId, apiContents, apiConfig);
   }
 
   console.log(response);

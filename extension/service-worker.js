@@ -120,7 +120,7 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
       noTextCustom: 750000,
       textCustom: 750000
     },
-    "gemini-2.5-pro-preview-03-25": {
+    "gemini-2.5-pro-preview-05-06": {
       summarize: 786432,
       translate: 65536,
       noTextCustom: 786432,
@@ -230,6 +230,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       const { actionType, mediaType, taskInput, languageModel, languageCode } = request;
       const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.0-flash-001" });
       const modelId = getModelId(languageModel, userModelId);
+      const thinkingBudgetInt = parseInt(languageModel.split(":")[1]);
+      const thinkingBudget = isNaN(thinkingBudgetInt) ? undefined : thinkingBudgetInt;
 
       const systemPrompt = await getSystemPrompt(
         actionType,
@@ -239,6 +241,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       );
 
       let apiContent = {};
+      let apiConfig = {};
       let response = null;
 
       if (mediaType === "image") {
@@ -264,10 +267,18 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         };
       }
 
+      if (thinkingBudget !== undefined) {
+        if (!apiConfig.thinkingConfig) {
+          apiConfig.thinkingConfig = {};
+        }
+
+        apiConfig.thinkingConfig.thinkingBudget = thinkingBudget;
+      }
+
       if (streaming) {
-        response = await streamGenerateContent(apiKey, modelId, [apiContent]);
+        response = await streamGenerateContent(apiKey, modelId, [apiContent], apiConfig);
       } else {
-        response = await generateContent(apiKey, modelId, [apiContent]);
+        response = await generateContent(apiKey, modelId, [apiContent], apiConfig);
       }
 
       // Add the system prompt and the user input to the response
