@@ -3,7 +3,7 @@
         "message": "Zusammenfassen und Übersetzen mit Gemini"
     },
     "extension_description": {
-        "message": "Fasst Webseiten zusammen und übersetzt sie. Verwendet Gemini als Backend."
+        "message": "Webseiten zusammenfassen und übersetzen. Verwendet Gemini als Backend."
     },
     "popup_button_copy": {
         "message": "Kopieren"
@@ -24,7 +24,7 @@
         "message": "Zusammenfassen"
     },
     "popup_summarizing_captions": {
-        "message": "Die Beschriftungen werden zusammengefasst"
+        "message": "Die Bildunterschriften werden zusammengefasst"
     },
     "popup_summarizing_image": {
         "message": "Das Bild wird zusammengefasst"
@@ -33,7 +33,7 @@
         "message": "Übersetzen"
     },
     "popup_translating_captions": {
-        "message": "Die Beschriftungen werden übersetzt"
+        "message": "Die Bildunterschriften werden übersetzt"
     },
     "popup_translating_image": {
         "message": "Das Bild wird übersetzt"
@@ -48,7 +48,7 @@
         "message": "Die Antwort wurde blockiert."
     },
     "popup_unexpected_response": {
-        "message": "Es ist ein unbekannter Fehler aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
+        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
     },
     "popup_miscellaneous_error": {
         "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
@@ -78,7 +78,7 @@
         "message": "Die Antwort wurde blockiert."
     },
     "results_unexpected_response": {
-        "message": "Es ist ein unbekannter Fehler aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
+        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
     },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
@@ -174,16 +174,34 @@
         "message": "Gespeichert."
     },
     "options_export": {
-        "message": "Optionen exportieren"
+        "message": "Optionen in eine Datei exportieren"
     },
     "options_export_api_key": {
         "message": "API-Schlüssel einschließen"
     },
     "options_import": {
-        "message": "Optionen importieren"
+        "message": "Optionen aus einer Datei importieren"
+    },
+    "options_import_succeeded": {
+        "message": "Import erfolgreich."
     },
     "options_import_failed": {
         "message": "Import fehlgeschlagen."
+    },
+    "options_sync_cloud": {
+        "message": "Optionen mit der Cloud synchronisieren"
+    },
+    "options_sync_cloud_started": {
+        "message": "Synchronisierung gestartet."
+    },
+    "options_sync_cloud_failed": {
+        "message": "Synchronisierung fehlgeschlagen."
+    },
+    "options_restore_cloud": {
+        "message": "Optionen aus der Cloud wiederherstellen"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "Wiederherstellung erfolgreich."
     },
     "context_standard_action": {
         "message": "Standardaktion"

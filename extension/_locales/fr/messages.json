@@ -18,7 +18,7 @@
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
-        "message": "Ouvrir la page d'options"
+        "message": "Ouvrir la page des options"
     },
     "popup_summarizing": {
         "message": "Résumé en cours"
@@ -96,7 +96,7 @@
         "message": "Modèle spécifié par l'utilisateur"
     },
     "options_language": {
-        "message": "Résumer en / Traduire vers"
+        "message": "Résumer en / Traduire en"
     },
     "options_language_user": {
         "message": "Langue spécifiée par l'utilisateur"
@@ -126,7 +126,7 @@
         "message": "Les actions personnalisées peuvent également être invoquées depuis le menu contextuel (bureau uniquement)."
     },
     "options_text_action": {
-        "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
+        "message": "Lorsque du texte est sélectionné, effectuer l'action suivante"
     },
     "options_text_summarize": {
         "message": "Résumer"
@@ -174,16 +174,34 @@
         "message": "Enregistré."
     },
     "options_export": {
-        "message": "Exporter les options"
+        "message": "Exporter les options vers un fichier"
     },
     "options_export_api_key": {
         "message": "Inclure la clé API"
     },
     "options_import": {
-        "message": "Importer les options"
+        "message": "Importer les options depuis un fichier"
+    },
+    "options_import_succeeded": {
+        "message": "Importation réussie."
     },
     "options_import_failed": {
-        "message": "L'importation a échoué."
+        "message": "Échec de l'importation."
+    },
+    "options_sync_cloud": {
+        "message": "Synchroniser les options avec le cloud"
+    },
+    "options_sync_cloud_started": {
+        "message": "Synchronisation démarrée."
+    },
+    "options_sync_cloud_failed": {
+        "message": "Échec de la synchronisation."
+    },
+    "options_restore_cloud": {
+        "message": "Restaurer les options depuis le cloud"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "Restauration réussie."
     },
     "context_standard_action": {
         "message": "Action standard"

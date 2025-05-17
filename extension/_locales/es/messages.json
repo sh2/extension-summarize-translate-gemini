@@ -3,7 +3,7 @@
         "message": "Resumir y Traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resuma y traduzca páginas web. Utiliza Gemini como backend."
+        "message": "Resume y traduce páginas web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -123,7 +123,7 @@
         "message": "Acción personalizada 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo en el escritorio)."
+        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo escritorio)."
     },
     "options_text_action": {
         "message": "Cuando se selecciona texto, realizar la siguiente acción"
@@ -144,7 +144,7 @@
         "message": "Acción personalizada 3"
     },
     "options_text_custom_notes": {
-        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo en el escritorio)."
+        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo escritorio)."
     },
     "options_contextmenus": {
         "message": "Registrar en el menú contextual"
@@ -174,16 +174,34 @@
         "message": "Guardado."
     },
     "options_export": {
-        "message": "Exportar opciones"
+        "message": "Exportar opciones a un archivo"
     },
     "options_export_api_key": {
         "message": "Incluir clave API"
     },
     "options_import": {
-        "message": "Importar opciones"
+        "message": "Importar opciones desde un archivo"
+    },
+    "options_import_succeeded": {
+        "message": "Importación exitosa."
     },
     "options_import_failed": {
-        "message": "Error al importar."
+        "message": "Falló la importación."
+    },
+    "options_sync_cloud": {
+        "message": "Sincronizar opciones a la nube"
+    },
+    "options_sync_cloud_started": {
+        "message": "Sincronización iniciada."
+    },
+    "options_sync_cloud_failed": {
+        "message": "Falló la sincronización."
+    },
+    "options_restore_cloud": {
+        "message": "Restaurar opciones desde la nube"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "Restauración exitosa."
     },
     "context_standard_action": {
         "message": "Acción estándar"

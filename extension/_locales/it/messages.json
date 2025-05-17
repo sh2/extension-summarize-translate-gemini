@@ -33,10 +33,10 @@
         "message": "Traduco"
     },
     "popup_translating_captions": {
-        "message": "Traducendo le didascalie"
+        "message": "Traduco le didascalie"
     },
     "popup_translating_image": {
-        "message": "Traducendo l'immagine"
+        "message": "Traduco l'immagine"
     },
     "popup_processing": {
         "message": "Elaborazione in corso"
@@ -48,7 +48,7 @@
         "message": "La risposta è stata bloccata."
     },
     "popup_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
     },
     "popup_miscellaneous_error": {
         "message": "Questa pagina non può essere riassunta o tradotta."
@@ -78,7 +78,7 @@
         "message": "La risposta è stata bloccata."
     },
     "results_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
+        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il registro della console."
     },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
@@ -123,7 +123,7 @@
         "message": "Azione personalizzata 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Le azioni personalizzate possono essere invocate anche dal menu contestuale (solo desktop)."
+        "message": "Le azioni personalizzate possono essere richiamate anche dal menu contestuale (solo desktop)."
     },
     "options_text_action": {
         "message": "Quando è selezionato del testo, esegui la seguente azione"
@@ -144,7 +144,7 @@
         "message": "Azione personalizzata 3"
     },
     "options_text_custom_notes": {
-        "message": "Le azioni personalizzate possono essere invocate anche dal menu contestuale (solo desktop)."
+        "message": "Le azioni personalizzate possono essere richiamate anche dal menu contestuale (solo desktop)."
     },
     "options_contextmenus": {
         "message": "Registra nel menu contestuale"
@@ -165,7 +165,7 @@
         "message": "Tema"
     },
     "options_font_size": {
-        "message": "Dimensione del carattere"
+        "message": "Dimensione carattere"
     },
     "options_button_save": {
         "message": "Salva opzioni"
@@ -174,16 +174,34 @@
         "message": "Salvato."
     },
     "options_export": {
-        "message": "Esporta opzioni"
+        "message": "Esporta le opzioni in un file"
     },
     "options_export_api_key": {
         "message": "Includi chiave API"
     },
     "options_import": {
-        "message": "Importa opzioni"
+        "message": "Importa le opzioni da un file"
+    },
+    "options_import_succeeded": {
+        "message": "Importazione riuscita."
     },
     "options_import_failed": {
-        "message": "Importazione non riuscita."
+        "message": "Importazione fallita."
+    },
+    "options_sync_cloud": {
+        "message": "Sincronizza le opzioni sul cloud"
+    },
+    "options_sync_cloud_started": {
+        "message": "Sincronizzazione avviata."
+    },
+    "options_sync_cloud_failed": {
+        "message": "Sincronizzazione fallita."
+    },
+    "options_restore_cloud": {
+        "message": "Ripristina le opzioni dal cloud"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "Ripristino riuscito."
     },
     "context_standard_action": {
         "message": "Azione standard"

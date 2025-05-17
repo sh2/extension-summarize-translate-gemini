@@ -24,10 +24,10 @@
         "message": "সংক্ষিপ্ত করা হচ্ছে"
     },
     "popup_summarizing_captions": {
-        "message": "ক্যাপশনগুলির সারসংক্ষেপ করা হচ্ছে"
+        "message": "ক্যাপশনগুলির সংক্ষিপ্তসার করা হচ্ছে"
     },
     "popup_summarizing_image": {
-        "message": "ছবিটির সারসংক্ষেপ করা হচ্ছে"
+        "message": "ছবিটির সংক্ষিপ্তসার করা হচ্ছে"
     },
     "popup_translating": {
         "message": "অনুবাদ করা হচ্ছে"
@@ -105,7 +105,7 @@
         "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিংস উপেক্ষা করা হয়।"
     },
     "options_no_text_action": {
-        "message": "যখন কোনো টেক্সট নির্বাচন করা না হয়, তখন নিম্নলিখিত কাজটি করুন"
+        "message": "যখন কোনও টেক্সট নির্বাচন করা না হয়, তখন নিম্নলিখিত অ্যাকশনটি করুন"
     },
     "options_no_text_summarize": {
         "message": "সংক্ষিপ্ত করুন (ডিফল্ট)"
@@ -126,7 +126,7 @@
         "message": "কাস্টম অ্যাকশনগুলি প্রসঙ্গ মেনু থেকেও আহ্বান করা যেতে পারে (শুধুমাত্র ডেস্কটপ)।"
     },
     "options_text_action": {
-        "message": "যখন টেক্সট নির্বাচন করা হয়, তখন নিম্নলিখিত কাজটি করুন"
+        "message": "যখন টেক্সট নির্বাচন করা হয়, তখন নিম্নলিখিত অ্যাকশনটি করুন"
     },
     "options_text_summarize": {
         "message": "সংক্ষিপ্ত করুন"
@@ -174,16 +174,34 @@
         "message": "সংরক্ষিত হয়েছে।"
     },
     "options_export": {
-        "message": "অপশনগুলি রপ্তানি করুন"
+        "message": "একটি ফাইলে অপশনগুলি রপ্তানি করুন"
     },
     "options_export_api_key": {
         "message": "API কী অন্তর্ভুক্ত করুন"
     },
     "options_import": {
-        "message": "অপশনগুলি আমদানি করুন"
+        "message": "একটি ফাইল থেকে অপশনগুলি আমদানি করুন"
+    },
+    "options_import_succeeded": {
+        "message": "আমদানি সফল হয়েছে।"
     },
     "options_import_failed": {
         "message": "আমদানি ব্যর্থ হয়েছে।"
+    },
+    "options_sync_cloud": {
+        "message": "ক্লাউডে অপশনগুলি সিঙ্ক করুন"
+    },
+    "options_sync_cloud_started": {
+        "message": "সিঙ্ক শুরু হয়েছে।"
+    },
+    "options_sync_cloud_failed": {
+        "message": "সিঙ্ক ব্যর্থ হয়েছে।"
+    },
+    "options_restore_cloud": {
+        "message": "ক্লাউড থেকে অপশনগুলি পুনরুদ্ধার করুন"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "পুনরুদ্ধার সফল হয়েছে।"
     },
     "context_standard_action": {
         "message": "স্ট্যান্ডার্ড অ্যাকশন"

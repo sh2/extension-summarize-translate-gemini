@@ -174,16 +174,34 @@
         "message": "Đã lưu."
     },
     "options_export": {
-        "message": "Xuất tùy chọn"
+        "message": "Xuất tùy chọn ra một tệp"
     },
     "options_export_api_key": {
         "message": "Bao gồm Khóa API"
     },
     "options_import": {
-        "message": "Nhập tùy chọn"
+        "message": "Nhập tùy chọn từ một tệp"
+    },
+    "options_import_succeeded": {
+        "message": "Nhập thành công."
     },
     "options_import_failed": {
-        "message": "Nhập không thành công."
+        "message": "Nhập thất bại."
+    },
+    "options_sync_cloud": {
+        "message": "Đồng bộ hóa tùy chọn lên đám mây"
+    },
+    "options_sync_cloud_started": {
+        "message": "Đã bắt đầu đồng bộ hóa."
+    },
+    "options_sync_cloud_failed": {
+        "message": "Đồng bộ hóa thất bại."
+    },
+    "options_restore_cloud": {
+        "message": "Khôi phục tùy chọn từ đám mây"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "Khôi phục thành công."
     },
     "context_standard_action": {
         "message": "Hành động tiêu chuẩn"

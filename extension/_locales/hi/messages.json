@@ -96,7 +96,7 @@
         "message": "उपयोगकर्ता-निर्दिष्ट मॉडल"
     },
     "options_language": {
-        "message": "इसमें संक्षेप करें / इसमें अनुवाद करें"
+        "message": "में संक्षेप करें / में अनुवाद करें"
     },
     "options_language_user": {
         "message": "उपयोगकर्ता-निर्दिष्ट भाषा"
@@ -174,16 +174,34 @@
         "message": "सहेजा गया।"
     },
     "options_export": {
-        "message": "विकल्प निर्यात करें"
+        "message": "विकल्पों को एक फ़ाइल में निर्यात करें"
     },
     "options_export_api_key": {
         "message": "API कुंजी शामिल करें"
     },
     "options_import": {
-        "message": "विकल्प आयात करें"
+        "message": "एक फ़ाइल से विकल्प आयात करें"
+    },
+    "options_import_succeeded": {
+        "message": "आयात सफल हुआ।"
     },
     "options_import_failed": {
-        "message": "आयात विफल रहा।"
+        "message": "आयात विफल हुआ।"
+    },
+    "options_sync_cloud": {
+        "message": "विकल्पों को क्लाउड में सिंक करें"
+    },
+    "options_sync_cloud_started": {
+        "message": "सिंक शुरू हो गया है।"
+    },
+    "options_sync_cloud_failed": {
+        "message": "सिंक विफल हो गया।"
+    },
+    "options_restore_cloud": {
+        "message": "क्लाउड से विकल्प पुनर्स्थापित करें"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "पुनर्स्थापना सफल हुई।"
     },
     "context_standard_action": {
         "message": "मानक क्रिया"

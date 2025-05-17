@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resume e traduz páginas da web. Utiliza Gemini como backend."
+        "message": "Resuma e traduza páginas da web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -87,7 +87,7 @@
         "message": "Chave da API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Você pode obter uma chave da API Gemini na seguinte página."
+        "message": "Você pode obter uma Chave da API Gemini na seguinte página."
     },
     "options_model": {
         "message": "Modelo de Linguagem"
@@ -165,7 +165,7 @@
         "message": "Tema"
     },
     "options_font_size": {
-        "message": "Tamanho da Fonte"
+        "message": "Tamanho da fonte"
     },
     "options_button_save": {
         "message": "Salvar opções"
@@ -174,16 +174,34 @@
         "message": "Salvo."
     },
     "options_export": {
-        "message": "Exportar opções"
+        "message": "Exportar opções para um arquivo"
     },
     "options_export_api_key": {
         "message": "Incluir Chave da API"
     },
     "options_import": {
-        "message": "Importar opções"
+        "message": "Importar opções de um arquivo"
+    },
+    "options_import_succeeded": {
+        "message": "Importação bem-sucedida."
     },
     "options_import_failed": {
         "message": "Falha na importação."
+    },
+    "options_sync_cloud": {
+        "message": "Sincronizar opções com a nuvem"
+    },
+    "options_sync_cloud_started": {
+        "message": "Sincronização iniciada."
+    },
+    "options_sync_cloud_failed": {
+        "message": "Falha na sincronização."
+    },
+    "options_restore_cloud": {
+        "message": "Restaurar opções da nuvem"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "Restauração bem-sucedida."
     },
     "context_standard_action": {
         "message": "Ação padrão"

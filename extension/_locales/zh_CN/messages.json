@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用Gemini进行总结和翻译"
+        "message": "使用 Gemini 总结和翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页。使用Gemini作为后端。"
+        "message": "总结和翻译网页。使用 Gemini 作为后端。"
     },
     "popup_button_copy": {
         "message": "复制"
@@ -54,7 +54,7 @@
         "message": "此页面无法被总结或翻译。"
     },
     "results_title": {
-        "message": "结果 - 使用Gemini进行总结和翻译"
+        "message": "结果 - 使用 Gemini 总结和翻译"
     },
     "results_button_clear": {
         "message": "清除对话"
@@ -81,7 +81,7 @@
         "message": "发生未知错误。请检查控制台日志。"
     },
     "options_title": {
-        "message": "选项 - 使用Gemini进行总结和翻译"
+        "message": "选项 - 使用 Gemini 总结和翻译"
     },
     "options_apikey": {
         "message": "Gemini API 密钥"
@@ -96,7 +96,7 @@
         "message": "用户指定的模型"
     },
     "options_language": {
-        "message": "总结为/翻译为"
+        "message": "总结为 / 翻译为"
     },
     "options_language_user": {
         "message": "用户指定的语言"
@@ -105,7 +105,7 @@
         "message": "在自定义操作中，语言设置将被忽略。"
     },
     "options_no_text_action": {
-        "message": "当未选择文本时，执行以下操作"
+        "message": "未选择文本时，执行以下操作"
     },
     "options_no_text_summarize": {
         "message": "总结（默认）"
@@ -126,7 +126,7 @@
         "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
     },
     "options_text_action": {
-        "message": "当选择文本时，执行以下操作"
+        "message": "选择文本时，执行以下操作"
     },
     "options_text_summarize": {
         "message": "总结"
@@ -159,7 +159,7 @@
         "message": "自定义操作 3 的标签（可选）"
     },
     "options_streaming": {
-        "message": "来自语言模型的流式输出"
+        "message": "从语言模型流式输出"
     },
     "options_theme": {
         "message": "主题"
@@ -174,16 +174,34 @@
         "message": "已保存。"
     },
     "options_export": {
-        "message": "导出选项"
+        "message": "将选项导出到文件"
     },
     "options_export_api_key": {
         "message": "包括 API 密钥"
     },
     "options_import": {
-        "message": "导入选项"
+        "message": "从文件导入选项"
+    },
+    "options_import_succeeded": {
+        "message": "导入成功。"
     },
     "options_import_failed": {
         "message": "导入失败。"
+    },
+    "options_sync_cloud": {
+        "message": "将选项同步到云端"
+    },
+    "options_sync_cloud_started": {
+        "message": "同步已开始。"
+    },
+    "options_sync_cloud_failed": {
+        "message": "同步失败。"
+    },
+    "options_restore_cloud": {
+        "message": "从云端恢复选项"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "恢复成功。"
     },
     "context_standard_action": {
         "message": "标准操作"
