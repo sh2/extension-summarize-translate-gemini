@@ -1,6 +1,6 @@
 /* globals DOMPurify, marked */
 
-const safetySettings = [{
+const SAFETY_SETTINGS = [{
   category: "HARM_CATEGORY_HARASSMENT",
   threshold: "BLOCK_NONE"
 },
@@ -142,7 +142,7 @@ export const generateContent = async (apiKey, modelId, apiContents, apiConfig) =
       },
       body: JSON.stringify({
         contents: apiContents,
-        safetySettings: safetySettings,
+        safetySettings: SAFETY_SETTINGS,
         generationConfig: apiConfig
       })
     });
@@ -173,7 +173,7 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents, apiCon
       },
       body: JSON.stringify({
         contents: apiContents,
-        safetySettings: safetySettings,
+        safetySettings: SAFETY_SETTINGS,
         generationConfig: apiConfig
       })
     });

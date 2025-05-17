@@ -174,16 +174,34 @@
         "message": "Saved."
     },
     "options_export": {
-        "message": "Export options"
+        "message": "Export options to a file"
     },
     "options_export_api_key": {
         "message": "Include API Key"
     },
     "options_import": {
-        "message": "Import options"
+        "message": "Import options from a a file"
+    },
+    "options_import_succeeded": {
+        "message": "Import succeeded."
     },
     "options_import_failed": {
         "message": "Import failed."
+    },
+    "options_sync_cloud": {
+        "message": "Sync options to the cloud"
+    },
+    "options_sync_cloud_started": {
+        "message": "Sync started."
+    },
+    "options_sync_cloud_failed": {
+        "message": "Sync failed."
+    },
+    "options_restore_cloud": {
+        "message": "Restore options from the cloud"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "Restore succeeded."
     },
     "context_standard_action": {
         "message": "Standard action"

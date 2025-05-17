@@ -174,16 +174,34 @@
         "message": "保存しました。"
     },
     "options_export": {
-        "message": "オプションをエクスポートする"
+        "message": "オプションをファイルにエクスポートする"
     },
     "options_export_api_key": {
         "message": "APIキーを含める"
     },
     "options_import": {
-        "message": "オプションをインポートする"
+        "message": "オプションをファイルからインポートする"
+    },
+    "options_import_succeeded": {
+        "message": "インポートに成功しました。"
     },
     "options_import_failed": {
         "message": "インポートに失敗しました。"
+    },
+    "options_sync_cloud": {
+        "message": "オプションをクラウドに同期する"
+    },
+    "options_sync_cloud_started": {
+        "message": "同期を開始しました。"
+    },
+    "options_sync_cloud_failed": {
+        "message": "同期に失敗しました。"
+    },
+    "options_restore_cloud": {
+        "message": "オプションをクラウドから復元する"
+    },
+    "options_restore_cloud_succeeded": {
+        "message": "復元に成功しました。"
     },
     "context_standard_action": {
         "message": "標準アクション"
