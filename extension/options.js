@@ -291,7 +291,7 @@ const importOptionsFromFile = async () => {
 };
 
 const restoreOptionsFromCloud = async () => {
-  const options = await chrome.storage.sync.get(INITIAL_OPTIONS);
+  const options = await chrome.storage.sync.get();
 
   applyOptionsToForm(options);
   await saveOptions();
