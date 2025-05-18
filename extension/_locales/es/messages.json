@@ -123,7 +123,7 @@
         "message": "Acción personalizada 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo escritorio)."
+        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo en el escritorio)."
     },
     "options_text_action": {
         "message": "Cuando se selecciona texto, realizar la siguiente acción"
@@ -144,7 +144,7 @@
         "message": "Acción personalizada 3"
     },
     "options_text_custom_notes": {
-        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo escritorio)."
+        "message": "Las acciones personalizadas también se pueden invocar desde el menú contextual (solo en el escritorio)."
     },
     "options_contextmenus": {
         "message": "Registrar en el menú contextual"

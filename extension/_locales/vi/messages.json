@@ -24,7 +24,7 @@
         "message": "Đang tóm tắt"
     },
     "popup_summarizing_captions": {
-        "message": "Đang tóm tắt chú thích"
+        "message": "Đang tóm tắt các chú thích"
     },
     "popup_summarizing_image": {
         "message": "Đang tóm tắt hình ảnh"
@@ -33,7 +33,7 @@
         "message": "Đang dịch"
     },
     "popup_translating_captions": {
-        "message": "Đang dịch chú thích"
+        "message": "Đang dịch các chú thích"
     },
     "popup_translating_image": {
         "message": "Đang dịch hình ảnh"
@@ -174,13 +174,13 @@
         "message": "Đã lưu."
     },
     "options_export": {
-        "message": "Xuất tùy chọn ra một tệp"
+        "message": "Xuất tùy chọn ra một tập tin"
     },
     "options_export_api_key": {
         "message": "Bao gồm Khóa API"
     },
     "options_import": {
-        "message": "Nhập tùy chọn từ một tệp"
+        "message": "Nhập tùy chọn từ một tập tin"
     },
     "options_import_succeeded": {
         "message": "Nhập thành công."

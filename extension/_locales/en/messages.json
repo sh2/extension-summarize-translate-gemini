@@ -180,7 +180,7 @@
         "message": "Include API Key"
     },
     "options_import": {
-        "message": "Import options from a a file"
+        "message": "Import options from a file"
     },
     "options_import_succeeded": {
         "message": "Import succeeded."

@@ -18,16 +18,16 @@
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
-        "message": "Ouvrir la page des options"
+        "message": "Ouvrir la page d'options"
     },
     "popup_summarizing": {
-        "message": "Résumé en cours"
+        "message": "Résumisation en cours"
     },
     "popup_summarizing_captions": {
-        "message": "Résumé des légendes en cours"
+        "message": "Résumisation des légendes en cours"
     },
     "popup_summarizing_image": {
-        "message": "Résumé de l'image en cours"
+        "message": "Résumisation de l'image en cours"
     },
     "popup_translating": {
         "message": "Traduction en cours"
@@ -96,7 +96,7 @@
         "message": "Modèle spécifié par l'utilisateur"
     },
     "options_language": {
-        "message": "Résumer en / Traduire en"
+        "message": "Résumer en / Traduire vers"
     },
     "options_language_user": {
         "message": "Langue spécifiée par l'utilisateur"
@@ -126,7 +126,7 @@
         "message": "Les actions personnalisées peuvent également être invoquées depuis le menu contextuel (bureau uniquement)."
     },
     "options_text_action": {
-        "message": "Lorsque du texte est sélectionné, effectuer l'action suivante"
+        "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
     },
     "options_text_summarize": {
         "message": "Résumer"

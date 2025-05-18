@@ -96,7 +96,7 @@
         "message": "用户指定的模型"
     },
     "options_language": {
-        "message": "总结为 / 翻译为"
+        "message": "总结为/翻译为"
     },
     "options_language_user": {
         "message": "用户指定的语言"
@@ -159,7 +159,7 @@
         "message": "自定义操作 3 的标签（可选）"
     },
     "options_streaming": {
-        "message": "从语言模型流式输出"
+        "message": "来自语言模型的流式输出"
     },
     "options_theme": {
         "message": "主题"

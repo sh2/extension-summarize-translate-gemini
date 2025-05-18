@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resuma e traduza páginas da web. Utiliza Gemini como backend."
+        "message": "Resume e traduz páginas da web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
