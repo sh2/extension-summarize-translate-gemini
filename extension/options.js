@@ -216,6 +216,11 @@ const applyOptionsToForm = (options) => {
   if (options.fontSize) {
     document.getElementById("fontSize").value = options.fontSize;
   }
+
+  // Set the default language model if the language model is not set
+  if (!document.getElementById("languageModel").value) {
+    document.getElementById("languageModel").value = "2.0-flash";
+  }
 };
 
 const saveOptions = async () => {
