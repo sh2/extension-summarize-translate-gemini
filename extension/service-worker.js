@@ -1,5 +1,6 @@
 import {
   getModelId,
+  getThinkingBudget,
   generateContent,
   streamGenerateContent,
   createContextMenus
@@ -230,8 +231,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       const { actionType, mediaType, taskInput, languageModel, languageCode } = request;
       const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.0-flash-001" });
       const modelId = getModelId(languageModel, userModelId);
-      const thinkingBudgetInt = parseInt(languageModel.split(":")[1]);
-      const thinkingBudget = isNaN(thinkingBudgetInt) ? undefined : thinkingBudgetInt;
+      const thinkingBudget = getThinkingBudget(languageModel, userModelId);
 
       const systemPrompt = await getSystemPrompt(
         actionType,

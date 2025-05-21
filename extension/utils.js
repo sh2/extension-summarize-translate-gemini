@@ -126,10 +126,16 @@ export const getModelId = (languageModel, userModelId) => {
   };
 
   if (languageModel === "zz") {
-    return userModelId;
+    return userModelId.split(":")[0];
   } else {
     return modelMappings[languageModelKey];
   }
+};
+
+export const getThinkingBudget = (languageModel, userModelId) => {
+  const modelIdWithBudget = languageModel === "zz" ? userModelId : languageModel;
+  const thinkingBudgetInt = parseInt(modelIdWithBudget.split(":")[1]);
+  return isNaN(thinkingBudgetInt) ? undefined : thinkingBudgetInt;
 };
 
 export const generateContent = async (apiKey, modelId, apiContents, apiConfig) => {

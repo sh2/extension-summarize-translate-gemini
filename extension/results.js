@@ -5,6 +5,7 @@ import {
   displayLoadingMessage,
   convertMarkdownToHtml,
   getModelId,
+  getThinkingBudget,
   generateContent,
   streamGenerateContent
 } from "./utils.js";
@@ -91,8 +92,7 @@ const askQuestion = async () => {
   const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.0-flash-001" });
   const languageModel = document.getElementById("languageModel").value;
   const modelId = getModelId(languageModel, userModelId);
-  const thinkingBudgetInt = parseInt(languageModel.split(":")[1]);
-  const thinkingBudget = isNaN(thinkingBudgetInt) ? undefined : thinkingBudgetInt;
+  const thinkingBudget = getThinkingBudget(languageModel, userModelId);
   let apiConfig = {};
   let response = null;
 
