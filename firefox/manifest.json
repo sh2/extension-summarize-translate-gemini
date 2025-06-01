@@ -6,7 +6,7 @@
     }
   },
   "name": "__MSG_extension_name__",
-  "version": "1.6.17",
+  "version": "1.6.18",
   "description": "__MSG_extension_description__",
   "default_locale": "en",
   "icons": {
