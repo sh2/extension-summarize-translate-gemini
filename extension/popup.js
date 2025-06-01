@@ -41,7 +41,7 @@ const getWholeText = () => {
   }
 };
 
-const getCaptions = async (videoUrl, languageCode) => {
+const getCaptions = async (videoUrl, languageCode, useCredentials) => {
   // Return the captions of the YouTube video
   const languageCodeForCaptions = {
     en: "en",
@@ -63,7 +63,7 @@ const getCaptions = async (videoUrl, languageCode) => {
   };
 
   const preferredLanguages = [languageCodeForCaptions[languageCode], "en"];
-  const videoResponse = await fetch(videoUrl);
+  const videoResponse = useCredentials ? await fetch(videoUrl) : await fetch(videoUrl, { credentials: "omit" });
   const videoBody = await videoResponse.text();
   const captionsConfigJson = videoBody.match(/"captions":(.*?),"videoDetails":/s);
   let captions = "";
@@ -89,7 +89,7 @@ const getCaptions = async (videoUrl, languageCode) => {
       });
 
       const captionsUrl = captionTracks[0].baseUrl;
-      const captionsResponse = await fetch(captionsUrl);
+      const captionsResponse = useCredentials ? await fetch(captionsUrl) : await fetch(captionsUrl, { credentials: "omit" });
       const captionsXml = await captionsResponse.text();
       const xmlDocument = new DOMParser().parseFromString(captionsXml, "application/xml");
       const textElements = xmlDocument.getElementsByTagName("text");
@@ -161,10 +161,23 @@ const extractTaskInformation = async (languageCode, triggerAction) => {
         taskInput = (await chrome.scripting.executeScript({
           target: { tabId: tab.id },
           func: getCaptions,
-          args: [tab.url, languageCode]
+          args: [tab.url, languageCode, true]
         }))[0].result;
       } catch (error) {
         console.log(error);
+      }
+
+      if (!taskInput) {
+        // If the captions are not available, try to get the captions without credentials
+        try {
+          taskInput = (await chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: getCaptions,
+            args: [tab.url, languageCode, false]
+          }))[0].result;
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
 
