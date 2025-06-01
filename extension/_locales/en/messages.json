@@ -50,6 +50,9 @@
     "popup_unexpected_response": {
         "message": "An unknown error occurred. Please check the console log."
     },
+    "popup_no_apikey": {
+        "message": "Please open the options page and set your Gemini API Key."
+    },
     "popup_miscellaneous_error": {
         "message": "This page cannot be summarized or translated."
     },

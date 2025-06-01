@@ -50,6 +50,9 @@
     "popup_unexpected_response": {
         "message": "不明なエラーが発生しました。コンソールログを確認してください。"
     },
+    "popup_no_apikey": {
+        "message": "オプションページを開き、Gemini APIキーを設定してください。"
+    },
     "popup_miscellaneous_error": {
         "message": "このページは要約や翻訳ができません。"
     },

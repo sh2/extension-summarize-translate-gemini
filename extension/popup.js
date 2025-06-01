@@ -249,7 +249,7 @@ const main = async (useCache) => {
   await chrome.storage.session.set({ resultIndex: resultIndex });
 
   try {
-    const { streaming } = await chrome.storage.local.get({ streaming: false });
+    const { apiKey, streaming } = await chrome.storage.local.get({ apiKey: "", streaming: false });
     const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
     const triggerAction = document.getElementById("triggerAction").value;
@@ -356,6 +356,12 @@ const main = async (useCache) => {
       } else {
         // A response error occurred
         content = `Error: ${response.status}\n\n${response.body.error.message}`;
+
+        if (!apiKey) {
+          // If the API Key is not set, add a message to prompt the user to set it
+          content += `\n\n${chrome.i18n.getMessage("popup_no_apikey")}`;
+        }
+
         break;
       }
     }
