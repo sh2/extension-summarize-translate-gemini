@@ -12,7 +12,7 @@
         "message": "Copied."
     },
     "popup_button_run": {
-        "message": "Run it again"
+        "message": "Run again"
     },
     "popup_button_results": {
         "message": "Open results in a new tab"
@@ -24,7 +24,7 @@
         "message": "Summarizing"
     },
     "popup_summarizing_captions": {
-        "message": "Summarizing the captions"
+        "message": "Summarizing captions"
     },
     "popup_summarizing_image": {
         "message": "Summarizing the image"
@@ -33,7 +33,7 @@
         "message": "Translating"
     },
     "popup_translating_captions": {
-        "message": "Translating the captions"
+        "message": "Translating captions"
     },
     "popup_translating_image": {
         "message": "Translating the image"
@@ -48,13 +48,13 @@
         "message": "The response was blocked."
     },
     "popup_unexpected_response": {
-        "message": "An unknown error occurred. Please check the console log."
+        "message": "An unexpected error occurred. Please check the console for details."
     },
     "popup_no_apikey": {
-        "message": "Please open the options page and set your Gemini API Key."
+        "message": "Please set your Gemini API key on the options page."
     },
     "popup_miscellaneous_error": {
-        "message": "This page cannot be summarized or translated."
+        "message": "Unable to summarize or translate this page."
     },
     "results_title": {
         "message": "Results - Summarize and Translate with Gemini"
@@ -72,7 +72,7 @@
         "message": "Send"
     },
     "results_waiting_response": {
-        "message": "Waiting for a response"
+        "message": "Waiting for response"
     },
     "results_prompt_blocked": {
         "message": "The prompt was blocked."
@@ -81,34 +81,34 @@
         "message": "The response was blocked."
     },
     "results_unexpected_response": {
-        "message": "An unknown error occurred. Please check the console log."
+        "message": "An unexpected error occurred. Please check the console for details."
     },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"
     },
     "options_apikey": {
-        "message": "Gemini API Key"
+        "message": "Gemini API key"
     },
     "options_apikey_hint": {
-        "message": "You can obtain a Gemini API Key at the following page."
+        "message": "You can obtain a Gemini API key from the following page."
     },
     "options_model": {
-        "message": "Language Model"
+        "message": "Language model"
     },
     "options_model_user": {
-        "message": "User-specified Model"
+        "message": "User-specified model"
     },
     "options_language": {
-        "message": "Summarize in / Translate to"
+        "message": "Language for Summarization and Translation"
     },
     "options_language_user": {
-        "message": "User-specified Language"
+        "message": "User-specified language"
     },
     "options_language_notes": {
-        "message": "The language setting is disregarded in custom actions."
+        "message": "Note: This language setting does not affect custom actions."
     },
     "options_no_text_action": {
-        "message": "When no text is selected, do the following action"
+        "message": "When no text is selected, perform the following action"
     },
     "options_no_text_summarize": {
         "message": "Summarize (default)"
@@ -126,10 +126,10 @@
         "message": "Custom action 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Custom actions can also be invoked from the context menu (desktop only)."
+        "message": "Custom actions are also accessible via the context menu (desktop only)."
     },
     "options_text_action": {
-        "message": "When text is selected, do the following action"
+        "message": "When text is selected, perform the following action"
     },
     "options_text_summarize": {
         "message": "Summarize"
@@ -147,28 +147,28 @@
         "message": "Custom action 3"
     },
     "options_text_custom_notes": {
-        "message": "Custom actions can also be invoked from the context menu (desktop only)."
+        "message": "Custom actions are also accessible via the context menu (desktop only)."
     },
     "options_contextmenus": {
-        "message": "Register in the context menu"
+        "message": "Add to context menu"
     },
     "options_contextmenu_label_1": {
-        "message": "Label for Custom action 1 (optional)"
+        "message": "Label for custom action 1 (optional)"
     },
     "options_contextmenu_label_2": {
-        "message": "Label for Custom action 2 (optional)"
+        "message": "Label for custom action 2 (optional)"
     },
     "options_contextmenu_label_3": {
-        "message": "Label for Custom action 3 (optional)"
+        "message": "Label for custom action 3 (optional)"
     },
     "options_streaming": {
-        "message": "Streaming output from the language model"
+        "message": "Enable streaming output from the language model"
     },
     "options_theme": {
         "message": "Theme"
     },
     "options_font_size": {
-        "message": "Font Size"
+        "message": "Font size"
     },
     "options_button_save": {
         "message": "Save options"
@@ -177,13 +177,13 @@
         "message": "Saved."
     },
     "options_export": {
-        "message": "Export options to a file"
+        "message": "Export options to file"
     },
     "options_export_api_key": {
-        "message": "Include API Key"
+        "message": "Include API key"
     },
     "options_import": {
-        "message": "Import options from a file"
+        "message": "Import options from file"
     },
     "options_import_succeeded": {
         "message": "Import succeeded."
@@ -192,7 +192,7 @@
         "message": "Import failed."
     },
     "options_sync_cloud": {
-        "message": "Sync options to the cloud"
+        "message": "Sync options to cloud"
     },
     "options_sync_cloud_started": {
         "message": "Sync started."
@@ -201,7 +201,7 @@
         "message": "Sync failed."
     },
     "options_restore_cloud": {
-        "message": "Restore options from the cloud"
+        "message": "Restore options from cloud"
     },
     "options_restore_cloud_succeeded": {
         "message": "Restore succeeded."

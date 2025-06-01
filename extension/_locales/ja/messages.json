@@ -48,10 +48,10 @@
         "message": "レスポンスがブロックされました。"
     },
     "popup_unexpected_response": {
-        "message": "不明なエラーが発生しました。コンソールログを確認してください。"
+        "message": "予期せぬエラーが発生しました。詳細はコンソールを確認してください。"
     },
     "popup_no_apikey": {
-        "message": "オプションページを開き、Gemini APIキーを設定してください。"
+        "message": "オプションページでGemini APIキーを設定してください。"
     },
     "popup_miscellaneous_error": {
         "message": "このページは要約や翻訳ができません。"
@@ -81,7 +81,7 @@
         "message": "レスポンスがブロックされました。"
     },
     "results_unexpected_response": {
-        "message": "不明なエラーが発生しました。コンソールログを確認してください。"
+        "message": "予期せぬエラーが発生しました。詳細はコンソールを確認してください。"
     },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
@@ -90,7 +90,7 @@
         "message": "Gemini APIキー"
     },
     "options_apikey_hint": {
-        "message": "Gemini APIキーは、以下のページから取得できます。"
+        "message": "Gemini APIキーは以下のページから取得できます。"
     },
     "options_model": {
         "message": "言語モデル"
@@ -99,13 +99,13 @@
         "message": "ユーザー指定モデル"
     },
     "options_language": {
-        "message": "以下の言語で要約/翻訳する"
+        "message": "要約と翻訳に用いる言語"
     },
     "options_language_user": {
         "message": "ユーザー指定言語"
     },
     "options_language_notes": {
-        "message": "カスタムアクションでは、言語設定は無視されます。"
+        "message": "注意: この言語設定はカスタムアクションには影響しません。"
     },
     "options_no_text_action": {
         "message": "テキストが選択されなかったときは、以下のアクションを実行する"
@@ -126,7 +126,7 @@
         "message": "カスタムアクション3"
     },
     "options_no_text_custom_notes": {
-        "message": "カスタムアクションはコンテキストメニューから呼び出すこともできます (デスクトップのみ)。"
+        "message": "カスタムアクションはコンテキストメニューからも利用可能です (デスクトップのみ)。"
     },
     "options_text_action": {
         "message": "テキストが選択されたときは、以下のアクションを実行する"
@@ -147,7 +147,7 @@
         "message": "カスタムアクション3"
     },
     "options_text_custom_notes": {
-        "message": "カスタムアクションはコンテキストメニューから呼び出すこともできます (デスクトップのみ)。"
+        "message": "カスタムアクションはコンテキストメニューからも利用可能です (デスクトップのみ)。"
     },
     "options_contextmenus": {
         "message": "コンテキストメニューに登録する"
@@ -162,7 +162,7 @@
         "message": "カスタムアクション3のラベル (オプション)"
     },
     "options_streaming": {
-        "message": "言語モデルからの出力をストリーミングする"
+        "message": "言語モデルからのストリーミング出力を有効にする"
     },
     "options_theme": {
         "message": "テーマ"
