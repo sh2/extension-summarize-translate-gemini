@@ -12,7 +12,7 @@ The following are instructions for manual installation, for development purposes
 3. Click 'Load unpacked' and select `extension` directory.
 4. Open 'Options' page and register the Gemini API Key, then select the language.
 
-You can obtain a Gemini API Key from [Google AI for Developers](https://ai.google.dev/).
+You can obtain a Gemini API Key from [Google AI Studio](https://aistudio.google.com).
 This extension uses Gemini 2.0 Flash by default.
 
 ## Usage
