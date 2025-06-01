@@ -1,87 +1,90 @@
 {
     "extension_name": {
-        "message": "Gemini দিয়ে সংক্ষিপ্ত করুন এবং অনুবাদ করুন"
+        "message": "Gemini ব্যবহার করে সারসংক্ষেপ ও অনুবাদ করুন"
     },
     "extension_description": {
-        "message": "ওয়েব পেজগুলির সারসংক্ষেপ করুন এবং অনুবাদ করুন। ব্যাকএন্ড হিসাবে Gemini ব্যবহার করে।"
+        "message": "ওয়েব পৃষ্ঠা সারসংক্ষেপ ও অনুবাদ করুন। এটি Gemini ব্যাকএন্ড হিসেবে ব্যবহার করে।"
     },
     "popup_button_copy": {
-        "message": "কপি করুন"
+        "message": "অনুলিপি করুন"
     },
     "popup_copied": {
-        "message": "কপি করা হয়েছে।"
+        "message": "অনুলিপি করা হয়েছে।"
     },
     "popup_button_run": {
-        "message": "আবার চালান"
+        "message": "পুনরায় চালান"
     },
     "popup_button_results": {
         "message": "নতুন ট্যাবে ফলাফল খুলুন"
     },
     "popup_button_options": {
-        "message": "অপশন পেজ খুলুন"
+        "message": "বিকল্প পৃষ্ঠা খুলুন"
     },
     "popup_summarizing": {
-        "message": "সংক্ষিপ্ত করা হচ্ছে"
+        "message": "সারসংক্ষেপ করা হচ্ছে"
     },
     "popup_summarizing_captions": {
-        "message": "ক্যাপশনগুলির সংক্ষিপ্তসার করা হচ্ছে"
+        "message": "ক্যাপশন সারসংক্ষেপ করা হচ্ছে"
     },
     "popup_summarizing_image": {
-        "message": "ছবিটির সংক্ষিপ্তসার করা হচ্ছে"
+        "message": "ছবি সারসংক্ষেপ করা হচ্ছে"
     },
     "popup_translating": {
         "message": "অনুবাদ করা হচ্ছে"
     },
     "popup_translating_captions": {
-        "message": "ক্যাপশনগুলির অনুবাদ করা হচ্ছে"
+        "message": "ক্যাপশন অনুবাদ করা হচ্ছে"
     },
     "popup_translating_image": {
-        "message": "ছবিটির অনুবাদ করা হচ্ছে"
+        "message": "ছবি অনুবাদ করা হচ্ছে"
     },
     "popup_processing": {
-        "message": "প্রক্রিয়াকরণ করা হচ্ছে"
+        "message": "প্রক্রিয়াকরণ চলছে"
     },
     "popup_prompt_blocked": {
-        "message": "প্রম্পটটি ব্লক করা হয়েছে।"
+        "message": "প্রম্পট ব্লক করা হয়েছে।"
     },
     "popup_response_blocked": {
-        "message": "উত্তরটি ব্লক করা হয়েছে।"
+        "message": "প্রতিক্রিয়া ব্লক করা হয়েছে।"
     },
     "popup_unexpected_response": {
-        "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। অনুগ্রহ করে কনসোল লগটি দেখুন।"
+        "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। বিস্তারিত জানতে কনসোল দেখুন।"
+    },
+    "popup_no_apikey": {
+        "message": "বিকল্প পৃষ্ঠায় আপনার Gemini API কী সেট করুন।"
     },
     "popup_miscellaneous_error": {
-        "message": "এই পৃষ্ঠাটির সারসংক্ষেপ বা অনুবাদ করা সম্ভব নয়।"
+        "message": "এই পৃষ্ঠাটি সারসংক্ষেপ বা অনুবাদ করা সম্ভব নয়।"
     },
     "results_title": {
-        "message": "ফলাফল - Gemini দিয়ে সংক্ষিপ্ত করুন এবং অনুবাদ করুন"
+        "message": "ফলাফল - Gemini ব্যবহার করে সারসংক্ষেপ ও অনুবাদ করুন"
     },
     "results_button_clear": {
-        "message": "কথোপকথন পরিষ্কার করুন"
+        "message": "কথোপকথন মুছে ফেলুন"
     },
     "results_button_copy": {
-        "message": "কপি করুন"
+        "message": "অনুলিপি করুন"
     },
     "results_copied": {
-        "message": "কপি করা হয়েছে।"
+        "message": "অনুলিপি করা হয়েছে।"
     },
     "results_button_send": {
-        "message": "প্রেরণ করুন"
+        "message": "পাঠান"
     },
     "results_waiting_response": {
-        "message": "একটি উত্তরের জন্য অপেক্ষা করা হচ্ছে"
+        "message": "প্রতিক্রিয়ার জন্য অপেক্ষা করা হচ্ছে"
     },
     "results_prompt_blocked": {
-        "message": "প্রম্পটটি ব্লক করা হয়েছে।"
+        "message": "প্রম্পট ব্লক করা হয়েছে।"
     },
     "results_response_blocked": {
-        "message": "উত্তরটি ব্লক করা হয়েছে।"
+        "message": "প্রতিক্রিয়া ব্লক করা হয়েছে।"
     },
     "results_unexpected_response": {
-        "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। অনুগ্রহ করে কনসোল লগটি দেখুন।"
+        "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। বিস্তারিত জানতে কনসোল দেখুন।"
     },
     "options_title": {
-        "message": "অপশন - Gemini দিয়ে সংক্ষিপ্ত করুন এবং অনুবাদ করুন"
+        "message": "বিকল্প - Gemini ব্যবহার করে সারসংক্ষেপ ও অনুবাদ করুন"
     },
     "options_apikey": {
         "message": "Gemini API কী"
@@ -96,19 +99,19 @@
         "message": "ব্যবহারকারী-নির্দিষ্ট মডেল"
     },
     "options_language": {
-        "message": "সংক্ষিপ্ত করুন / অনুবাদ করুন"
+        "message": "সারসংক্ষেপ ও অনুবাদের জন্য ভাষা"
     },
     "options_language_user": {
         "message": "ব্যবহারকারী-নির্দিষ্ট ভাষা"
     },
     "options_language_notes": {
-        "message": "কাস্টম অ্যাকশনগুলিতে ভাষা সেটিংস উপেক্ষা করা হয়।"
+        "message": "দ্রষ্টব্য: এই ভাষা সেটিং কাস্টম অ্যাকশনকে প্রভাবিত করে না।"
     },
     "options_no_text_action": {
-        "message": "যখন কোনো টেক্সট নির্বাচন করা না হয়, তখন নিম্নলিখিত অ্যাকশনটি করুন"
+        "message": "কোনো লেখা নির্বাচন করা না থাকলে, নিম্নলিখিত কাজটি করুন"
     },
     "options_no_text_summarize": {
-        "message": "সংক্ষিপ্ত করুন (ডিফল্ট)"
+        "message": "সারসংক্ষেপ করুন (ডিফল্ট)"
     },
     "options_no_text_translate": {
         "message": "অনুবাদ করুন"
@@ -123,13 +126,13 @@
         "message": "কাস্টম অ্যাকশন ৩"
     },
     "options_no_text_custom_notes": {
-        "message": "কাস্টম অ্যাকশনগুলি প্রসঙ্গ মেনু থেকেও আহ্বান করা যেতে পারে (শুধুমাত্র ডেস্কটপ)।"
+        "message": "কাস্টম অ্যাকশনগুলি কনটেক্সট মেনু থেকেও অ্যাক্সেসযোগ্য (শুধুমাত্র ডেস্কটপ)।"
     },
     "options_text_action": {
-        "message": "যখন টেক্সট নির্বাচন করা হয়, তখন নিম্নলিখিত অ্যাকশনটি করুন"
+        "message": "লেখা নির্বাচন করা থাকলে, নিম্নলিখিত কাজটি করুন"
     },
     "options_text_summarize": {
-        "message": "সংক্ষিপ্ত করুন"
+        "message": "সারসংক্ষেপ করুন"
     },
     "options_text_translate": {
         "message": "অনুবাদ করুন (ডিফল্ট)"
@@ -144,10 +147,10 @@
         "message": "কাস্টম অ্যাকশন ৩"
     },
     "options_text_custom_notes": {
-        "message": "কাস্টম অ্যাকশনগুলি প্রসঙ্গ মেনু থেকেও আহ্বান করা যেতে পারে (শুধুমাত্র ডেস্কটপ)।"
+        "message": "কাস্টম অ্যাকশনগুলি কনটেক্সট মেনু থেকেও অ্যাক্সেসযোগ্য (শুধুমাত্র ডেস্কটপ)।"
     },
     "options_contextmenus": {
-        "message": "প্রসঙ্গ মেনুতে রেজিস্টার করুন"
+        "message": "কনটেক্সট মেনুতে যোগ করুন"
     },
     "options_contextmenu_label_1": {
         "message": "কাস্টম অ্যাকশন ১-এর জন্য লেবেল (ঐচ্ছিক)"
@@ -159,7 +162,7 @@
         "message": "কাস্টম অ্যাকশন ৩-এর জন্য লেবেল (ঐচ্ছিক)"
     },
     "options_streaming": {
-        "message": "ভাষা মডেল থেকে স্ট্রিমিং আউটপুট"
+        "message": "ভাষা মডেল থেকে স্ট্রিমিং আউটপুট সক্ষম করুন"
     },
     "options_theme": {
         "message": "থিম"
@@ -168,43 +171,43 @@
         "message": "ফন্টের আকার"
     },
     "options_button_save": {
-        "message": "অপশনগুলি সংরক্ষণ করুন"
+        "message": "বিকল্প সংরক্ষণ করুন"
     },
     "options_saved": {
-        "message": "সংরক্ষিত হয়েছে।"
+        "message": "সংরক্ষিত হয়েছে।"
     },
     "options_export": {
-        "message": "একটি ফাইলে অপশনগুলি রপ্তানি করুন"
+        "message": "বিকল্পগুলি ফাইলে এক্সপোর্ট করুন"
     },
     "options_export_api_key": {
         "message": "API কী অন্তর্ভুক্ত করুন"
     },
     "options_import": {
-        "message": "একটি ফাইল থেকে অপশনগুলি আমদানি করুন"
+        "message": "ফাইল থেকে বিকল্প ইম্পোর্ট করুন"
     },
     "options_import_succeeded": {
-        "message": "আমদানি সফল হয়েছে।"
+        "message": "ইম্পোর্ট সফল হয়েছে।"
     },
     "options_import_failed": {
-        "message": "আমদানি ব্যর্থ হয়েছে।"
+        "message": "ইম্পোর্ট ব্যর্থ হয়েছে।"
     },
     "options_sync_cloud": {
-        "message": "ক্লাউডে অপশনগুলি সিঙ্ক করুন"
+        "message": "বিকল্পগুলি ক্লাউডে সিঙ্ক করুন"
     },
     "options_sync_cloud_started": {
-        "message": "সিঙ্ক শুরু হয়েছে।"
+        "message": "সিঙ্ক শুরু হয়েছে।"
     },
     "options_sync_cloud_failed": {
-        "message": "সিঙ্ক ব্যর্থ হয়েছে।"
+        "message": "সিঙ্ক ব্যর্থ হয়েছে।"
     },
     "options_restore_cloud": {
-        "message": "ক্লাউড থেকে অপশনগুলি পুনরুদ্ধার করুন"
+        "message": "ক্লাউড থেকে বিকল্প পুনরুদ্ধার করুন"
     },
     "options_restore_cloud_succeeded": {
-        "message": "পুনরুদ্ধার সফল হয়েছে।"
+        "message": "পুনরুদ্ধার সফল হয়েছে।"
     },
     "context_standard_action": {
-        "message": "স্ট্যান্ডার্ড অ্যাকশন"
+        "message": "সাধারণ অ্যাকশন"
     },
     "context_custom_action_1": {
         "message": "কাস্টম অ্যাকশন ১"

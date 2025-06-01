@@ -3,7 +3,7 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résume et traduit les pages web. Utilise Gemini comme backend."
+        "message": "Résume et traduit les pages web. Utilise Gemini comme service principal."
     },
     "popup_button_copy": {
         "message": "Copier"
@@ -18,16 +18,16 @@
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
-        "message": "Ouvrir la page d'options"
+        "message": "Ouvrir la page des options"
     },
     "popup_summarizing": {
-        "message": "Résumisation en cours"
+        "message": "Résumé en cours"
     },
     "popup_summarizing_captions": {
-        "message": "Résumisation des légendes en cours"
+        "message": "Résumé des légendes en cours"
     },
     "popup_summarizing_image": {
-        "message": "Résumisation de l'image en cours"
+        "message": "Résumé de l'image en cours"
     },
     "popup_translating": {
         "message": "Traduction en cours"
@@ -48,10 +48,13 @@
         "message": "La réponse a été bloquée."
     },
     "popup_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
+        "message": "Une erreur inattendue est survenue. Veuillez consulter la console pour plus de détails."
+    },
+    "popup_no_apikey": {
+        "message": "Veuillez définir votre clé API Gemini sur la page des options."
     },
     "popup_miscellaneous_error": {
-        "message": "Cette page ne peut pas être résumée ou traduite."
+        "message": "Impossible de résumer ou de traduire cette page."
     },
     "results_title": {
         "message": "Résultats - Résumer et traduire avec Gemini"
@@ -69,7 +72,7 @@
         "message": "Envoyer"
     },
     "results_waiting_response": {
-        "message": "En attente d'une réponse"
+        "message": "En attente de réponse"
     },
     "results_prompt_blocked": {
         "message": "L'invite a été bloquée."
@@ -78,7 +81,7 @@
         "message": "La réponse a été bloquée."
     },
     "results_unexpected_response": {
-        "message": "Une erreur inconnue s'est produite. Veuillez consulter le journal de la console."
+        "message": "Une erreur inattendue est survenue. Veuillez consulter la console pour plus de détails."
     },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"
@@ -90,19 +93,19 @@
         "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
     "options_model": {
-        "message": "Modèle de langage"
+        "message": "Modèle linguistique"
     },
     "options_model_user": {
         "message": "Modèle spécifié par l'utilisateur"
     },
     "options_language": {
-        "message": "Résumer en / Traduire vers"
+        "message": "Langue pour le résumé et la traduction"
     },
     "options_language_user": {
         "message": "Langue spécifiée par l'utilisateur"
     },
     "options_language_notes": {
-        "message": "Le paramètre de langue est ignoré dans les actions personnalisées."
+        "message": "Remarque : Ce paramètre de langue n'affecte pas les actions personnalisées."
     },
     "options_no_text_action": {
         "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
@@ -123,7 +126,7 @@
         "message": "Action personnalisée 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Les actions personnalisées peuvent également être invoquées depuis le menu contextuel (bureau uniquement)."
+        "message": "Les actions personnalisées sont également accessibles via le menu contextuel (ordinateur de bureau uniquement)."
     },
     "options_text_action": {
         "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
@@ -144,10 +147,10 @@
         "message": "Action personnalisée 3"
     },
     "options_text_custom_notes": {
-        "message": "Les actions personnalisées peuvent également être invoquées depuis le menu contextuel (bureau uniquement)."
+        "message": "Les actions personnalisées sont également accessibles via le menu contextuel (ordinateur de bureau uniquement)."
     },
     "options_contextmenus": {
-        "message": "Enregistrer dans le menu contextuel"
+        "message": "Ajouter au menu contextuel"
     },
     "options_contextmenu_label_1": {
         "message": "Libellé pour l'action personnalisée 1 (facultatif)"
@@ -159,7 +162,7 @@
         "message": "Libellé pour l'action personnalisée 3 (facultatif)"
     },
     "options_streaming": {
-        "message": "Sortie en flux continu du modèle de langage"
+        "message": "Activer la sortie en continu du modèle linguistique"
     },
     "options_theme": {
         "message": "Thème"
@@ -186,7 +189,7 @@
         "message": "Importation réussie."
     },
     "options_import_failed": {
-        "message": "Échec de l'importation."
+        "message": "Importation échouée."
     },
     "options_sync_cloud": {
         "message": "Synchroniser les options avec le cloud"
@@ -195,7 +198,7 @@
         "message": "Synchronisation démarrée."
     },
     "options_sync_cloud_failed": {
-        "message": "Échec de la synchronisation."
+        "message": "Synchronisation échouée."
     },
     "options_restore_cloud": {
         "message": "Restaurer les options depuis le cloud"

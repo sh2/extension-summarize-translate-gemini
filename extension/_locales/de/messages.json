@@ -15,40 +15,43 @@
         "message": "Erneut ausführen"
     },
     "popup_button_results": {
-        "message": "Ergebnisse in einem neuen Tab öffnen"
+        "message": "Ergebnisse in neuem Tab öffnen"
     },
     "popup_button_options": {
-        "message": "Optionsseite öffnen"
+        "message": "Optionen öffnen"
     },
     "popup_summarizing": {
-        "message": "Zusammenfassen"
+        "message": "Wird zusammengefasst"
     },
     "popup_summarizing_captions": {
-        "message": "Die Bildunterschriften werden zusammengefasst"
+        "message": "Bildunterschriften werden zusammengefasst"
     },
     "popup_summarizing_image": {
-        "message": "Das Bild wird zusammengefasst"
+        "message": "Bild wird zusammengefasst"
     },
     "popup_translating": {
-        "message": "Übersetzen"
+        "message": "Wird übersetzt"
     },
     "popup_translating_captions": {
-        "message": "Die Bildunterschriften werden übersetzt"
+        "message": "Bildunterschriften werden übersetzt"
     },
     "popup_translating_image": {
-        "message": "Das Bild wird übersetzt"
+        "message": "Bild wird übersetzt"
     },
     "popup_processing": {
-        "message": "Verarbeitung"
+        "message": "Wird verarbeitet"
     },
     "popup_prompt_blocked": {
-        "message": "Die Eingabeaufforderung wurde blockiert."
+        "message": "Die Anfrage wurde blockiert."
     },
     "popup_response_blocked": {
         "message": "Die Antwort wurde blockiert."
     },
     "popup_unexpected_response": {
-        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
+        "message": "Ein unerwarteter Fehler ist aufgetreten. Bitte überprüfen Sie die Konsole für Details."
+    },
+    "popup_no_apikey": {
+        "message": "Bitte legen Sie Ihren Gemini API-Schlüssel auf der Optionsseite fest."
     },
     "popup_miscellaneous_error": {
         "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
@@ -69,16 +72,16 @@
         "message": "Senden"
     },
     "results_waiting_response": {
-        "message": "Warten auf eine Antwort"
+        "message": "Warten auf Antwort"
     },
     "results_prompt_blocked": {
-        "message": "Die Eingabeaufforderung wurde blockiert."
+        "message": "Die Anfrage wurde blockiert."
     },
     "results_response_blocked": {
         "message": "Die Antwort wurde blockiert."
     },
     "results_unexpected_response": {
-        "message": "Ein unbekannter Fehler ist aufgetreten. Bitte überprüfen Sie das Konsolenprotokoll."
+        "message": "Ein unerwarteter Fehler ist aufgetreten. Bitte überprüfen Sie die Konsole für Details."
     },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
@@ -96,16 +99,16 @@
         "message": "Benutzerdefiniertes Modell"
     },
     "options_language": {
-        "message": "Zusammenfassen in / Übersetzen nach"
+        "message": "Sprache für Zusammenfassung und Übersetzung"
     },
     "options_language_user": {
         "message": "Benutzerdefinierte Sprache"
     },
     "options_language_notes": {
-        "message": "Die Spracheinstellung wird in benutzerdefinierten Aktionen ignoriert."
+        "message": "Hinweis: Diese Spracheinstellung beeinflusst keine benutzerdefinierten Aktionen."
     },
     "options_no_text_action": {
-        "message": "Wenn kein Text ausgewählt ist, führe folgende Aktion aus"
+        "message": "Wenn kein Text ausgewählt ist, folgende Aktion ausführen"
     },
     "options_no_text_summarize": {
         "message": "Zusammenfassen (Standard)"
@@ -123,10 +126,10 @@
         "message": "Benutzerdefinierte Aktion 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Benutzerdefinierte Aktionen können auch über das Kontextmenü aufgerufen werden (nur Desktop)."
+        "message": "Benutzerdefinierte Aktionen sind auch über das Kontextmenü zugänglich (nur Desktop)."
     },
     "options_text_action": {
-        "message": "Wenn Text ausgewählt ist, führe folgende Aktion aus"
+        "message": "Wenn Text ausgewählt ist, folgende Aktion ausführen"
     },
     "options_text_summarize": {
         "message": "Zusammenfassen"
@@ -144,10 +147,10 @@
         "message": "Benutzerdefinierte Aktion 3"
     },
     "options_text_custom_notes": {
-        "message": "Benutzerdefinierte Aktionen können auch über das Kontextmenü aufgerufen werden (nur Desktop)."
+        "message": "Benutzerdefinierte Aktionen sind auch über das Kontextmenü zugänglich (nur Desktop)."
     },
     "options_contextmenus": {
-        "message": "Im Kontextmenü registrieren"
+        "message": "Zum Kontextmenü hinzufügen"
     },
     "options_contextmenu_label_1": {
         "message": "Bezeichnung für benutzerdefinierte Aktion 1 (optional)"
@@ -159,10 +162,10 @@
         "message": "Bezeichnung für benutzerdefinierte Aktion 3 (optional)"
     },
     "options_streaming": {
-        "message": "Streaming-Ausgabe vom Sprachmodell"
+        "message": "Streaming-Ausgabe vom Sprachmodell aktivieren"
     },
     "options_theme": {
-        "message": "Thema"
+        "message": "Design"
     },
     "options_font_size": {
         "message": "Schriftgröße"
@@ -174,13 +177,13 @@
         "message": "Gespeichert."
     },
     "options_export": {
-        "message": "Optionen in eine Datei exportieren"
+        "message": "Optionen in Datei exportieren"
     },
     "options_export_api_key": {
         "message": "API-Schlüssel einschließen"
     },
     "options_import": {
-        "message": "Optionen aus einer Datei importieren"
+        "message": "Optionen aus Datei importieren"
     },
     "options_import_succeeded": {
         "message": "Import erfolgreich."
@@ -189,7 +192,7 @@
         "message": "Import fehlgeschlagen."
     },
     "options_sync_cloud": {
-        "message": "Optionen mit der Cloud synchronisieren"
+        "message": "Optionen mit Cloud synchronisieren"
     },
     "options_sync_cloud_started": {
         "message": "Synchronisierung gestartet."
@@ -198,7 +201,7 @@
         "message": "Synchronisierung fehlgeschlagen."
     },
     "options_restore_cloud": {
-        "message": "Optionen aus der Cloud wiederherstellen"
+        "message": "Optionen aus Cloud wiederherstellen"
     },
     "options_restore_cloud_succeeded": {
         "message": "Wiederherstellung erfolgreich."

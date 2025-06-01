@@ -3,7 +3,7 @@
         "message": "使用 Gemini 总结和翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页。使用 Gemini 作为后端。"
+        "message": "总结和翻译网页内容。后端使用 Gemini。"
     },
     "popup_button_copy": {
         "message": "复制"
@@ -18,7 +18,7 @@
         "message": "在新标签页中打开结果"
     },
     "popup_button_options": {
-        "message": "打开选项页面"
+        "message": "打开选项页"
     },
     "popup_summarizing": {
         "message": "正在总结"
@@ -27,7 +27,7 @@
         "message": "正在总结字幕"
     },
     "popup_summarizing_image": {
-        "message": "正在总结图像"
+        "message": "正在总结图片"
     },
     "popup_translating": {
         "message": "正在翻译"
@@ -36,22 +36,25 @@
         "message": "正在翻译字幕"
     },
     "popup_translating_image": {
-        "message": "正在翻译图像"
+        "message": "正在翻译图片"
     },
     "popup_processing": {
         "message": "正在处理"
     },
     "popup_prompt_blocked": {
-        "message": "提示被阻止。"
+        "message": "提示已被阻止。"
     },
     "popup_response_blocked": {
-        "message": "响应被阻止。"
+        "message": "响应已被阻止。"
     },
     "popup_unexpected_response": {
-        "message": "发生未知错误。请检查控制台日志。"
+        "message": "发生意外错误。请查看控制台获取详情。"
+    },
+    "popup_no_apikey": {
+        "message": "请在选项页设置您的 Gemini API 密钥。"
     },
     "popup_miscellaneous_error": {
-        "message": "此页面无法被总结或翻译。"
+        "message": "无法总结或翻译此页面。"
     },
     "results_title": {
         "message": "结果 - 使用 Gemini 总结和翻译"
@@ -72,13 +75,13 @@
         "message": "等待响应"
     },
     "results_prompt_blocked": {
-        "message": "提示被阻止。"
+        "message": "提示已被阻止。"
     },
     "results_response_blocked": {
-        "message": "响应被阻止。"
+        "message": "响应已被阻止。"
     },
     "results_unexpected_response": {
-        "message": "发生未知错误。请检查控制台日志。"
+        "message": "发生意外错误。请查看控制台获取详情。"
     },
     "options_title": {
         "message": "选项 - 使用 Gemini 总结和翻译"
@@ -87,22 +90,22 @@
         "message": "Gemini API 密钥"
     },
     "options_apikey_hint": {
-        "message": "您可以在以下页面获取 Gemini API 密钥。"
+        "message": "您可以从以下页面获取 Gemini API 密钥。"
     },
     "options_model": {
         "message": "语言模型"
     },
     "options_model_user": {
-        "message": "用户指定的模型"
+        "message": "用户指定模型"
     },
     "options_language": {
-        "message": "总结为/翻译为"
+        "message": "总结和翻译语言"
     },
     "options_language_user": {
-        "message": "用户指定的语言"
+        "message": "用户指定语言"
     },
     "options_language_notes": {
-        "message": "在自定义操作中，语言设置将被忽略。"
+        "message": "注意：此语言设置不影响自定义操作。"
     },
     "options_no_text_action": {
         "message": "未选择文本时，执行以下操作"
@@ -123,7 +126,7 @@
         "message": "自定义操作 3"
     },
     "options_no_text_custom_notes": {
-        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
+        "message": "自定义操作也可通过上下文菜单访问（仅限桌面版）。"
     },
     "options_text_action": {
         "message": "选择文本时，执行以下操作"
@@ -144,10 +147,10 @@
         "message": "自定义操作 3"
     },
     "options_text_custom_notes": {
-        "message": "自定义操作也可以从上下文菜单中调用（仅限桌面）。"
+        "message": "自定义操作也可通过上下文菜单访问（仅限桌面版）。"
     },
     "options_contextmenus": {
-        "message": "在上下文菜单中注册"
+        "message": "添加到上下文菜单"
     },
     "options_contextmenu_label_1": {
         "message": "自定义操作 1 的标签（可选）"
@@ -159,7 +162,7 @@
         "message": "自定义操作 3 的标签（可选）"
     },
     "options_streaming": {
-        "message": "来自语言模型的流式输出"
+        "message": "启用语言模型流式输出"
     },
     "options_theme": {
         "message": "主题"
@@ -174,10 +177,10 @@
         "message": "已保存。"
     },
     "options_export": {
-        "message": "将选项导出到文件"
+        "message": "导出选项到文件"
     },
     "options_export_api_key": {
-        "message": "包括 API 密钥"
+        "message": "包含 API 密钥"
     },
     "options_import": {
         "message": "从文件导入选项"

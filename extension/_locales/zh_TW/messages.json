@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 進行摘要和翻譯"
+        "message": "使用 Gemini 進行摘要與翻譯"
     },
     "extension_description": {
-        "message": "摘要和翻譯網頁。使用 Gemini 作為後端。"
+        "message": "摘要並翻譯網頁內容。使用 Gemini 作為後端。"
     },
     "popup_button_copy": {
         "message": "複製"
@@ -21,40 +21,43 @@
         "message": "開啟選項頁面"
     },
     "popup_summarizing": {
-        "message": "摘要中"
+        "message": "正在摘要"
     },
     "popup_summarizing_captions": {
-        "message": "摘要字幕中"
+        "message": "正在摘要字幕"
     },
     "popup_summarizing_image": {
-        "message": "摘要圖片中"
+        "message": "正在摘要圖片"
     },
     "popup_translating": {
-        "message": "翻譯中"
+        "message": "正在翻譯"
     },
     "popup_translating_captions": {
-        "message": "翻譯字幕中"
+        "message": "正在翻譯字幕"
     },
     "popup_translating_image": {
-        "message": "翻譯圖片中"
+        "message": "正在翻譯圖片"
     },
     "popup_processing": {
-        "message": "處理中"
+        "message": "正在處理"
     },
     "popup_prompt_blocked": {
-        "message": "提示已遭封鎖。"
+        "message": "提示已被封鎖。"
     },
     "popup_response_blocked": {
-        "message": "回應已遭封鎖。"
+        "message": "回應已被封鎖。"
     },
     "popup_unexpected_response": {
-        "message": "發生不明錯誤。請檢查主控台記錄。"
+        "message": "發生意外錯誤。請檢查主控台以獲取詳細資訊。"
+    },
+    "popup_no_apikey": {
+        "message": "請在選項頁面設定您的 Gemini API 金鑰。"
     },
     "popup_miscellaneous_error": {
         "message": "無法摘要或翻譯此頁面。"
     },
     "results_title": {
-        "message": "結果 - 使用 Gemini 進行摘要和翻譯"
+        "message": "結果 - 使用 Gemini 進行摘要與翻譯"
     },
     "results_button_clear": {
         "message": "清除對話"
@@ -72,43 +75,43 @@
         "message": "等待回應"
     },
     "results_prompt_blocked": {
-        "message": "提示已遭封鎖。"
+        "message": "提示已被封鎖。"
     },
     "results_response_blocked": {
-        "message": "回應已遭封鎖。"
+        "message": "回應已被封鎖。"
     },
     "results_unexpected_response": {
-        "message": "發生不明錯誤。請檢查主控台記錄。"
+        "message": "發生意外錯誤。請檢查主控台以獲取詳細資訊。"
     },
     "options_title": {
-        "message": "選項 - 使用 Gemini 進行摘要和翻譯"
+        "message": "選項 - 使用 Gemini 進行摘要與翻譯"
     },
     "options_apikey": {
         "message": "Gemini API 金鑰"
     },
     "options_apikey_hint": {
-        "message": "您可以在以下頁面取得 Gemini API 金鑰。"
+        "message": "您可以從以下頁面獲取 Gemini API 金鑰。"
     },
     "options_model": {
         "message": "語言模型"
     },
     "options_model_user": {
-        "message": "使用者指定的模型"
+        "message": "使用者指定模型"
     },
     "options_language": {
-        "message": "摘要為 / 翻譯為"
+        "message": "摘要與翻譯語言"
     },
     "options_language_user": {
-        "message": "使用者指定的語言"
+        "message": "使用者指定語言"
     },
     "options_language_notes": {
-        "message": "在自訂動作中，語言設定會被忽略。"
+        "message": "注意：此語言設定不影響自訂動作。"
     },
     "options_no_text_action": {
         "message": "未選取文字時，執行以下動作"
     },
     "options_no_text_summarize": {
-        "message": "摘要 (預設)"
+        "message": "摘要（預設）"
     },
     "options_no_text_translate": {
         "message": "翻譯"
@@ -123,7 +126,7 @@
         "message": "自訂動作 3"
     },
     "options_no_text_custom_notes": {
-        "message": "自訂動作也可以從內容選單中呼叫 (僅限桌面版)。"
+        "message": "自訂動作也可透過右鍵選單存取（僅限桌面版）。"
     },
     "options_text_action": {
         "message": "選取文字時，執行以下動作"
@@ -132,7 +135,7 @@
         "message": "摘要"
     },
     "options_text_translate": {
-        "message": "翻譯 (預設)"
+        "message": "翻譯（預設）"
     },
     "options_text_custom_1": {
         "message": "自訂動作 1"
@@ -144,22 +147,22 @@
         "message": "自訂動作 3"
     },
     "options_text_custom_notes": {
-        "message": "自訂動作也可以從內容選單中呼叫 (僅限桌面版)。"
+        "message": "自訂動作也可透過右鍵選單存取（僅限桌面版）。"
     },
     "options_contextmenus": {
-        "message": "在內容選單中註冊"
+        "message": "新增至右鍵選單"
     },
     "options_contextmenu_label_1": {
-        "message": "自訂動作 1 的標籤 (選填)"
+        "message": "自訂動作 1 的標籤（選填）"
     },
     "options_contextmenu_label_2": {
-        "message": "自訂動作 2 的標籤 (選填)"
+        "message": "自訂動作 2 的標籤（選填）"
     },
     "options_contextmenu_label_3": {
-        "message": "自訂動作 3 的標籤 (選填)"
+        "message": "自訂動作 3 的標籤（選填）"
     },
     "options_streaming": {
-        "message": "從語言模型串流輸出"
+        "message": "啟用語言模型串流輸出"
     },
     "options_theme": {
         "message": "主題"
@@ -174,7 +177,7 @@
         "message": "已儲存。"
     },
     "options_export": {
-        "message": "將選項匯出到檔案"
+        "message": "匯出選項至檔案"
     },
     "options_export_api_key": {
         "message": "包含 API 金鑰"
@@ -189,7 +192,7 @@
         "message": "匯入失敗。"
     },
     "options_sync_cloud": {
-        "message": "將選項同步到雲端"
+        "message": "將選項同步至雲端"
     },
     "options_sync_cloud_started": {
         "message": "同步已開始。"

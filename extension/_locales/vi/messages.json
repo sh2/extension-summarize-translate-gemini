@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "Tóm tắt và Dịch thuật với Gemini"
+        "message": "Tóm tắt và Dịch với Gemini"
     },
     "extension_description": {
-        "message": "Tóm tắt và dịch các trang web. Sử dụng Gemini làm backend."
+        "message": "Tóm tắt và dịch trang web. Sử dụng Gemini làm nền tảng."
     },
     "popup_button_copy": {
         "message": "Sao chép"
@@ -24,7 +24,7 @@
         "message": "Đang tóm tắt"
     },
     "popup_summarizing_captions": {
-        "message": "Đang tóm tắt các chú thích"
+        "message": "Đang tóm tắt phụ đề"
     },
     "popup_summarizing_image": {
         "message": "Đang tóm tắt hình ảnh"
@@ -33,7 +33,7 @@
         "message": "Đang dịch"
     },
     "popup_translating_captions": {
-        "message": "Đang dịch các chú thích"
+        "message": "Đang dịch phụ đề"
     },
     "popup_translating_image": {
         "message": "Đang dịch hình ảnh"
@@ -48,16 +48,19 @@
         "message": "Phản hồi đã bị chặn."
     },
     "popup_unexpected_response": {
-        "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký console."
+        "message": "Đã xảy ra lỗi không mong muốn. Vui lòng kiểm tra bảng điều khiển để biết chi tiết."
+    },
+    "popup_no_apikey": {
+        "message": "Vui lòng đặt khóa API Gemini của bạn trên trang tùy chọn."
     },
     "popup_miscellaneous_error": {
         "message": "Không thể tóm tắt hoặc dịch trang này."
     },
     "results_title": {
-        "message": "Kết quả - Tóm tắt và Dịch thuật với Gemini"
+        "message": "Kết quả - Tóm tắt và Dịch với Gemini"
     },
     "results_button_clear": {
-        "message": "Xóa hội thoại"
+        "message": "Xóa cuộc trò chuyện"
     },
     "results_button_copy": {
         "message": "Sao chép"
@@ -78,16 +81,16 @@
         "message": "Phản hồi đã bị chặn."
     },
     "results_unexpected_response": {
-        "message": "Đã xảy ra lỗi không xác định. Vui lòng kiểm tra nhật ký console."
+        "message": "Đã xảy ra lỗi không mong muốn. Vui lòng kiểm tra bảng điều khiển để biết chi tiết."
     },
     "options_title": {
-        "message": "Tùy chọn - Tóm tắt và Dịch thuật với Gemini"
+        "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
     },
     "options_apikey": {
         "message": "Khóa API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Bạn có thể lấy Khóa API Gemini tại trang sau."
+        "message": "Bạn có thể lấy khóa API Gemini từ trang sau."
     },
     "options_model": {
         "message": "Mô hình ngôn ngữ"
@@ -96,16 +99,16 @@
         "message": "Mô hình do người dùng chỉ định"
     },
     "options_language": {
-        "message": "Tóm tắt bằng / Dịch sang"
+        "message": "Ngôn ngữ cho Tóm tắt và Dịch"
     },
     "options_language_user": {
         "message": "Ngôn ngữ do người dùng chỉ định"
     },
     "options_language_notes": {
-        "message": "Cài đặt ngôn ngữ bị bỏ qua trong các hành động tùy chỉnh."
+        "message": "Lưu ý: Cài đặt ngôn ngữ này không ảnh hưởng đến các hành động tùy chỉnh."
     },
     "options_no_text_action": {
-        "message": "Khi không có văn bản nào được chọn, hãy thực hiện hành động sau"
+        "message": "Khi không có văn bản nào được chọn, thực hiện hành động sau"
     },
     "options_no_text_summarize": {
         "message": "Tóm tắt (mặc định)"
@@ -123,10 +126,10 @@
         "message": "Hành động tùy chỉnh 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Các hành động tùy chỉnh cũng có thể được gọi từ menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
+        "message": "Các hành động tùy chỉnh cũng có thể truy cập qua menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
     },
     "options_text_action": {
-        "message": "Khi văn bản được chọn, hãy thực hiện hành động sau"
+        "message": "Khi văn bản được chọn, thực hiện hành động sau"
     },
     "options_text_summarize": {
         "message": "Tóm tắt"
@@ -144,25 +147,25 @@
         "message": "Hành động tùy chỉnh 3"
     },
     "options_text_custom_notes": {
-        "message": "Các hành động tùy chỉnh cũng có thể được gọi từ menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
+        "message": "Các hành động tùy chỉnh cũng có thể truy cập qua menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
     },
     "options_contextmenus": {
-        "message": "Đăng ký trong menu ngữ cảnh"
+        "message": "Thêm vào menu ngữ cảnh"
     },
     "options_contextmenu_label_1": {
-        "message": "Nhãn cho Hành động tùy chỉnh 1 (tùy chọn)"
+        "message": "Nhãn cho hành động tùy chỉnh 1 (tùy chọn)"
     },
     "options_contextmenu_label_2": {
-        "message": "Nhãn cho Hành động tùy chỉnh 2 (tùy chọn)"
+        "message": "Nhãn cho hành động tùy chỉnh 2 (tùy chọn)"
     },
     "options_contextmenu_label_3": {
-        "message": "Nhãn cho Hành động tùy chỉnh 3 (tùy chọn)"
+        "message": "Nhãn cho hành động tùy chỉnh 3 (tùy chọn)"
     },
     "options_streaming": {
-        "message": "Truyền trực tuyến đầu ra từ mô hình ngôn ngữ"
+        "message": "Bật đầu ra truyền trực tuyến từ mô hình ngôn ngữ"
     },
     "options_theme": {
-        "message": "Giao diện"
+        "message": "Chủ đề"
     },
     "options_font_size": {
         "message": "Cỡ chữ"
@@ -174,13 +177,13 @@
         "message": "Đã lưu."
     },
     "options_export": {
-        "message": "Xuất tùy chọn ra một tập tin"
+        "message": "Xuất tùy chọn ra tệp"
     },
     "options_export_api_key": {
-        "message": "Bao gồm Khóa API"
+        "message": "Bao gồm khóa API"
     },
     "options_import": {
-        "message": "Nhập tùy chọn từ một tập tin"
+        "message": "Nhập tùy chọn từ tệp"
     },
     "options_import_succeeded": {
         "message": "Nhập thành công."
@@ -189,13 +192,13 @@
         "message": "Nhập thất bại."
     },
     "options_sync_cloud": {
-        "message": "Đồng bộ hóa tùy chọn lên đám mây"
+        "message": "Đồng bộ tùy chọn lên đám mây"
     },
     "options_sync_cloud_started": {
-        "message": "Đã bắt đầu đồng bộ hóa."
+        "message": "Đồng bộ đã bắt đầu."
     },
     "options_sync_cloud_failed": {
-        "message": "Đồng bộ hóa thất bại."
+        "message": "Đồng bộ thất bại."
     },
     "options_restore_cloud": {
         "message": "Khôi phục tùy chọn từ đám mây"

@@ -3,7 +3,7 @@
         "message": "Riassumi e Traduci con Gemini"
     },
     "extension_description": {
-        "message": "Riassumi e traduci pagine web. Utilizza Gemini come backend."
+        "message": "Riassume e traduce pagine web. Utilizza Gemini come backend."
     },
     "popup_button_copy": {
         "message": "Copia"
@@ -15,28 +15,28 @@
         "message": "Esegui di nuovo"
     },
     "popup_button_results": {
-        "message": "Apri i risultati in una nuova scheda"
+        "message": "Apri risultati in una nuova scheda"
     },
     "popup_button_options": {
-        "message": "Apri la pagina delle opzioni"
+        "message": "Apri pagina opzioni"
     },
     "popup_summarizing": {
         "message": "Riassumendo"
     },
     "popup_summarizing_captions": {
-        "message": "Riassumendo le didascalie"
+        "message": "Riassumendo didascalie"
     },
     "popup_summarizing_image": {
         "message": "Riassumendo l'immagine"
     },
     "popup_translating": {
-        "message": "Traduco"
+        "message": "Traducendo"
     },
     "popup_translating_captions": {
-        "message": "Traduco le didascalie"
+        "message": "Traducendo didascalie"
     },
     "popup_translating_image": {
-        "message": "Traduco l'immagine"
+        "message": "Traducendo l'immagine"
     },
     "popup_processing": {
         "message": "Elaborazione in corso"
@@ -48,10 +48,13 @@
         "message": "La risposta è stata bloccata."
     },
     "popup_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
+        "message": "Si è verificato un errore imprevisto. Controllare la console per i dettagli."
+    },
+    "popup_no_apikey": {
+        "message": "Impostare la chiave API Gemini nella pagina delle opzioni."
     },
     "popup_miscellaneous_error": {
-        "message": "Questa pagina non può essere riassunta o tradotta."
+        "message": "Impossibile riassumere o tradurre questa pagina."
     },
     "results_title": {
         "message": "Risultati - Riassumi e Traduci con Gemini"
@@ -69,7 +72,7 @@
         "message": "Invia"
     },
     "results_waiting_response": {
-        "message": "In attesa di una risposta"
+        "message": "In attesa di risposta"
     },
     "results_prompt_blocked": {
         "message": "Il prompt è stato bloccato."
@@ -78,7 +81,7 @@
         "message": "La risposta è stata bloccata."
     },
     "results_unexpected_response": {
-        "message": "Si è verificato un errore sconosciuto. Si prega di controllare il log della console."
+        "message": "Si è verificato un errore imprevisto. Controllare la console per i dettagli."
     },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
@@ -87,7 +90,7 @@
         "message": "Chiave API Gemini"
     },
     "options_apikey_hint": {
-        "message": "È possibile ottenere una chiave API Gemini alla pagina seguente."
+        "message": "È possibile ottenere una chiave API Gemini dalla seguente pagina."
     },
     "options_model": {
         "message": "Modello linguistico"
@@ -96,16 +99,16 @@
         "message": "Modello specificato dall'utente"
     },
     "options_language": {
-        "message": "Riassumi in / Traduci in"
+        "message": "Lingua per Riassunto e Traduzione"
     },
     "options_language_user": {
         "message": "Lingua specificata dall'utente"
     },
     "options_language_notes": {
-        "message": "L'impostazione della lingua viene ignorata nelle azioni personalizzate."
+        "message": "Nota: questa impostazione della lingua non influisce sulle azioni personalizzate."
     },
     "options_no_text_action": {
-        "message": "Quando non è selezionato alcun testo, esegui la seguente azione"
+        "message": "Quando nessun testo è selezionato, eseguire la seguente azione"
     },
     "options_no_text_summarize": {
         "message": "Riassumi (predefinito)"
@@ -123,10 +126,10 @@
         "message": "Azione personalizzata 3"
     },
     "options_no_text_custom_notes": {
-        "message": "Le azioni personalizzate possono essere invocate anche dal menu contestuale (solo desktop)."
+        "message": "Le azioni personalizzate sono accessibili anche tramite il menu contestuale (solo desktop)."
     },
     "options_text_action": {
-        "message": "Quando è selezionato del testo, esegui la seguente azione"
+        "message": "Quando il testo è selezionato, eseguire la seguente azione"
     },
     "options_text_summarize": {
         "message": "Riassumi"
@@ -144,28 +147,28 @@
         "message": "Azione personalizzata 3"
     },
     "options_text_custom_notes": {
-        "message": "Le azioni personalizzate possono essere invocate anche dal menu contestuale (solo desktop)."
+        "message": "Le azioni personalizzate sono accessibili anche tramite il menu contestuale (solo desktop)."
     },
     "options_contextmenus": {
-        "message": "Registra nel menu contestuale"
+        "message": "Aggiungi al menu contestuale"
     },
     "options_contextmenu_label_1": {
-        "message": "Etichetta per l'azione personalizzata 1 (opzionale)"
+        "message": "Etichetta per azione personalizzata 1 (opzionale)"
     },
     "options_contextmenu_label_2": {
-        "message": "Etichetta per l'azione personalizzata 2 (opzionale)"
+        "message": "Etichetta per azione personalizzata 2 (opzionale)"
     },
     "options_contextmenu_label_3": {
-        "message": "Etichetta per l'azione personalizzata 3 (opzionale)"
+        "message": "Etichetta per azione personalizzata 3 (opzionale)"
     },
     "options_streaming": {
-        "message": "Output in streaming dal modello linguistico"
+        "message": "Abilita output in streaming dal modello linguistico"
     },
     "options_theme": {
         "message": "Tema"
     },
     "options_font_size": {
-        "message": "Dimensione del carattere"
+        "message": "Dimensione carattere"
     },
     "options_button_save": {
         "message": "Salva opzioni"
@@ -174,13 +177,13 @@
         "message": "Salvato."
     },
     "options_export": {
-        "message": "Esporta le opzioni in un file"
+        "message": "Esporta opzioni su file"
     },
     "options_export_api_key": {
         "message": "Includi chiave API"
     },
     "options_import": {
-        "message": "Importa le opzioni da un file"
+        "message": "Importa opzioni da file"
     },
     "options_import_succeeded": {
         "message": "Importazione riuscita."
@@ -189,7 +192,7 @@
         "message": "Importazione fallita."
     },
     "options_sync_cloud": {
-        "message": "Sincronizza le opzioni sul cloud"
+        "message": "Sincronizza opzioni su cloud"
     },
     "options_sync_cloud_started": {
         "message": "Sincronizzazione avviata."
@@ -198,7 +201,7 @@
         "message": "Sincronizzazione fallita."
     },
     "options_restore_cloud": {
-        "message": "Ripristina le opzioni dal cloud"
+        "message": "Ripristina opzioni da cloud"
     },
     "options_restore_cloud_succeeded": {
         "message": "Ripristino riuscito."

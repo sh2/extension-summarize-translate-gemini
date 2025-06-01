@@ -1,93 +1,96 @@
 {
     "extension_name": {
-        "message": "\"Gemini\" के साथ संक्षेप और अनुवाद करें"
+        "message": "Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "extension_description": {
-        "message": "वेब पृष्ठों का संक्षेप और अनुवाद करें। बैकएंड के रूप में \"Gemini\" का उपयोग करता है।"
+        "message": "वेब पेजों का सारांश और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
     },
     "popup_button_copy": {
         "message": "कॉपी करें"
     },
     "popup_copied": {
-        "message": "कॉपी किया गया।"
+        "message": "कॉपी हो गया।"
     },
     "popup_button_run": {
-        "message": "इसे फिर से चलाएँ"
+        "message": "फिर से चलाएँ"
     },
     "popup_button_results": {
-        "message": "परिणामों को एक नए टैब में खोलें"
+        "message": "नए टैब में परिणाम खोलें"
     },
     "popup_button_options": {
         "message": "विकल्प पृष्ठ खोलें"
     },
     "popup_summarizing": {
-        "message": "संक्षेप किया जा रहा है"
+        "message": "सारांशित कर रहा है"
     },
     "popup_summarizing_captions": {
-        "message": "कैप्शन का संक्षेप किया जा रहा है"
+        "message": "कैप्शन का सारांश कर रहा है"
     },
     "popup_summarizing_image": {
-        "message": "छवि का संक्षेप किया जा रहा है"
+        "message": "छवि का सारांश कर रहा है"
     },
     "popup_translating": {
-        "message": "अनुवाद किया जा रहा है"
+        "message": "अनुवाद कर रहा है"
     },
     "popup_translating_captions": {
-        "message": "कैप्शन का अनुवाद किया जा रहा है"
+        "message": "कैप्शन का अनुवाद कर रहा है"
     },
     "popup_translating_image": {
-        "message": "छवि का अनुवाद किया जा रहा है"
+        "message": "छवि का अनुवाद कर रहा है"
     },
     "popup_processing": {
-        "message": "प्रसंस्करण"
+        "message": "प्रोसेस कर रहा है"
     },
     "popup_prompt_blocked": {
-        "message": "प्रॉम्प्ट को ब्लॉक कर दिया गया था।"
+        "message": "प्रॉम्प्ट ब्लॉक कर दिया गया था।"
     },
     "popup_response_blocked": {
-        "message": "प्रतिक्रिया को ब्लॉक कर दिया गया था।"
+        "message": "प्रतिक्रिया ब्लॉक कर दी गई थी।"
     },
     "popup_unexpected_response": {
-        "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग की जाँच करें।"
+        "message": "एक अप्रत्याशित त्रुटि हुई। विवरण के लिए कंसोल देखें।"
+    },
+    "popup_no_apikey": {
+        "message": "कृपया विकल्प पृष्ठ पर अपनी Gemini API कुंजी सेट करें।"
     },
     "popup_miscellaneous_error": {
-        "message": "इस पृष्ठ का संक्षेप या अनुवाद नहीं किया जा सकता है।"
+        "message": "इस पृष्ठ का सारांश या अनुवाद करने में असमर्थ।"
     },
     "results_title": {
-        "message": "परिणाम - \"Gemini\" के साथ संक्षेप और अनुवाद करें"
+        "message": "परिणाम - Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "results_button_clear": {
-        "message": "वार्तालाप साफ़ करें"
+        "message": "बातचीत साफ़ करें"
     },
     "results_button_copy": {
         "message": "कॉपी करें"
     },
     "results_copied": {
-        "message": "कॉपी किया गया।"
+        "message": "कॉपी हो गया।"
     },
     "results_button_send": {
         "message": "भेजें"
     },
     "results_waiting_response": {
-        "message": "प्रतिक्रिया की प्रतीक्षा की जा रही है"
+        "message": "प्रतिक्रिया की प्रतीक्षा कर रहा है"
     },
     "results_prompt_blocked": {
-        "message": "प्रॉम्प्ट को ब्लॉक कर दिया गया था।"
+        "message": "प्रॉम्प्ट ब्लॉक कर दिया गया था।"
     },
     "results_response_blocked": {
-        "message": "प्रतिक्रिया को ब्लॉक कर दिया गया था।"
+        "message": "प्रतिक्रिया ब्लॉक कर दी गई थी।"
     },
     "results_unexpected_response": {
-        "message": "एक अज्ञात त्रुटि हुई। कृपया कंसोल लॉग की जाँच करें।"
+        "message": "एक अप्रत्याशित त्रुटि हुई। विवरण के लिए कंसोल देखें।"
     },
     "options_title": {
-        "message": "विकल्प - \"Gemini\" के साथ संक्षेप और अनुवाद करें"
+        "message": "विकल्प - Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "options_apikey": {
-        "message": "\"Gemini\" API कुंजी"
+        "message": "Gemini API कुंजी"
     },
     "options_apikey_hint": {
-        "message": "आप निम्नलिखित पृष्ठ पर एक \"Gemini\" API कुंजी प्राप्त कर सकते हैं।"
+        "message": "आप निम्न पृष्ठ से Gemini API कुंजी प्राप्त कर सकते हैं।"
     },
     "options_model": {
         "message": "भाषा मॉडल"
@@ -96,19 +99,19 @@
         "message": "उपयोगकर्ता-निर्दिष्ट मॉडल"
     },
     "options_language": {
-        "message": "में संक्षेप करें / में अनुवाद करें"
+        "message": "सारांश और अनुवाद के लिए भाषा"
     },
     "options_language_user": {
         "message": "उपयोगकर्ता-निर्दिष्ट भाषा"
     },
     "options_language_notes": {
-        "message": "कस्टम क्रियाओं में भाषा सेटिंग को अनदेखा किया जाता है।"
+        "message": "ध्यान दें: यह भाषा सेटिंग कस्टम क्रियाओं को प्रभावित नहीं करती है।"
     },
     "options_no_text_action": {
-        "message": "जब कोई पाठ चयनित नहीं है, तो निम्नलिखित क्रिया करें"
+        "message": "जब कोई टेक्स्ट चयनित न हो, तो निम्न क्रिया करें"
     },
     "options_no_text_summarize": {
-        "message": "संक्षेप करें (डिफ़ॉल्ट)"
+        "message": "सारांशित करें (डिफ़ॉल्ट)"
     },
     "options_no_text_translate": {
         "message": "अनुवाद करें"
@@ -123,13 +126,13 @@
         "message": "कस्टम क्रिया 3"
     },
     "options_no_text_custom_notes": {
-        "message": "कस्टम क्रियाओं को संदर्भ मेनू से भी लागू किया जा सकता है (केवल डेस्कटॉप)।"
+        "message": "कस्टम क्रियाएँ संदर्भ मेनू (केवल डेस्कटॉप) के माध्यम से भी उपलब्ध हैं।"
     },
     "options_text_action": {
-        "message": "जब पाठ चयनित है, तो निम्नलिखित क्रिया करें"
+        "message": "जब टेक्स्ट चयनित हो, तो निम्न क्रिया करें"
     },
     "options_text_summarize": {
-        "message": "संक्षेप करें"
+        "message": "सारांशित करें"
     },
     "options_text_translate": {
         "message": "अनुवाद करें (डिफ़ॉल्ट)"
@@ -144,10 +147,10 @@
         "message": "कस्टम क्रिया 3"
     },
     "options_text_custom_notes": {
-        "message": "कस्टम क्रियाओं को संदर्भ मेनू से भी लागू किया जा सकता है (केवल डेस्कटॉप)।"
+        "message": "कस्टम क्रियाएँ संदर्भ मेनू (केवल डेस्कटॉप) के माध्यम से भी उपलब्ध हैं।"
     },
     "options_contextmenus": {
-        "message": "संदर्भ मेनू में रजिस्टर करें"
+        "message": "संदर्भ मेनू में जोड़ें"
     },
     "options_contextmenu_label_1": {
         "message": "कस्टम क्रिया 1 के लिए लेबल (वैकल्पिक)"
@@ -159,7 +162,7 @@
         "message": "कस्टम क्रिया 3 के लिए लेबल (वैकल्पिक)"
     },
     "options_streaming": {
-        "message": "भाषा मॉडल से स्ट्रीमिंग आउटपुट"
+        "message": "भाषा मॉडल से स्ट्रीमिंग आउटपुट सक्षम करें"
     },
     "options_theme": {
         "message": "थीम"
@@ -174,34 +177,34 @@
         "message": "सहेजा गया।"
     },
     "options_export": {
-        "message": "विकल्पों को एक फ़ाइल में निर्यात करें"
+        "message": "विकल्पों को फ़ाइल में निर्यात करें"
     },
     "options_export_api_key": {
         "message": "API कुंजी शामिल करें"
     },
     "options_import": {
-        "message": "एक फ़ाइल से विकल्प आयात करें"
+        "message": "फ़ाइल से विकल्प आयात करें"
     },
     "options_import_succeeded": {
-        "message": "आयात सफल हुआ।"
+        "message": "आयात सफल रहा।"
     },
     "options_import_failed": {
-        "message": "आयात विफल हुआ।"
+        "message": "आयात विफल रहा।"
     },
     "options_sync_cloud": {
-        "message": "विकल्पों को क्लाउड में सिंक करें"
+        "message": "विकल्पों को क्लाउड से सिंक करें"
     },
     "options_sync_cloud_started": {
-        "message": "सिंक शुरू हो गया है।"
+        "message": "सिंक शुरू हो गया।"
     },
     "options_sync_cloud_failed": {
-        "message": "सिंक विफल हो गया।"
+        "message": "सिंक विफल रहा।"
     },
     "options_restore_cloud": {
         "message": "क्लाउड से विकल्प पुनर्स्थापित करें"
     },
     "options_restore_cloud_succeeded": {
-        "message": "पुनर्स्थापना सफल हुई।"
+        "message": "पुनर्स्थापना सफल रही।"
     },
     "context_standard_action": {
         "message": "मानक क्रिया"

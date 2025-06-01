@@ -48,16 +48,19 @@
         "message": "응답이 차단되었습니다."
     },
     "popup_unexpected_response": {
-        "message": "알 수 없는 오류가 발생했습니다. 콘솔 로그를 확인하십시오."
+        "message": "예기치 않은 오류가 발생했습니다. 자세한 내용은 콘솔을 확인하십시오."
+    },
+    "popup_no_apikey": {
+        "message": "옵션 페이지에서 Gemini API 키를 설정하십시오."
     },
     "popup_miscellaneous_error": {
-        "message": "이 페이지는 요약하거나 번역할 수 없습니다."
+        "message": "이 페이지를 요약하거나 번역할 수 없습니다."
     },
     "results_title": {
         "message": "결과 - Gemini로 요약 및 번역"
     },
     "results_button_clear": {
-        "message": "대화 내용 지우기"
+        "message": "대화 지우기"
     },
     "results_button_copy": {
         "message": "복사"
@@ -78,7 +81,7 @@
         "message": "응답이 차단되었습니다."
     },
     "results_unexpected_response": {
-        "message": "알 수 없는 오류가 발생했습니다. 콘솔 로그를 확인하십시오."
+        "message": "예기치 않은 오류가 발생했습니다. 자세한 내용은 콘솔을 확인하십시오."
     },
     "options_title": {
         "message": "옵션 - Gemini로 요약 및 번역"
@@ -96,19 +99,19 @@
         "message": "사용자 지정 모델"
     },
     "options_language": {
-        "message": "요약/번역할 언어"
+        "message": "요약 및 번역 언어"
     },
     "options_language_user": {
         "message": "사용자 지정 언어"
     },
     "options_language_notes": {
-        "message": "언어 설정은 사용자 지정 작업에서 무시됩니다."
+        "message": "참고: 이 언어 설정은 사용자 지정 작업에 영향을 주지 않습니다."
     },
     "options_no_text_action": {
         "message": "텍스트가 선택되지 않았을 때 다음 작업 수행"
     },
     "options_no_text_summarize": {
-        "message": "요약 (기본)"
+        "message": "요약 (기본값)"
     },
     "options_no_text_translate": {
         "message": "번역"
@@ -123,7 +126,7 @@
         "message": "사용자 지정 작업 3"
     },
     "options_no_text_custom_notes": {
-        "message": "사용자 지정 작업은 컨텍스트 메뉴에서도 호출할 수 있습니다 (데스크톱 전용)."
+        "message": "사용자 지정 작업은 상황에 맞는 메뉴(데스크톱 전용)를 통해서도 접근할 수 있습니다."
     },
     "options_text_action": {
         "message": "텍스트가 선택되었을 때 다음 작업 수행"
@@ -132,7 +135,7 @@
         "message": "요약"
     },
     "options_text_translate": {
-        "message": "번역 (기본)"
+        "message": "번역 (기본값)"
     },
     "options_text_custom_1": {
         "message": "사용자 지정 작업 1"
@@ -144,10 +147,10 @@
         "message": "사용자 지정 작업 3"
     },
     "options_text_custom_notes": {
-        "message": "사용자 지정 작업은 컨텍스트 메뉴에서도 호출할 수 있습니다 (데스크톱 전용)."
+        "message": "사용자 지정 작업은 상황에 맞는 메뉴(데스크톱 전용)를 통해서도 접근할 수 있습니다."
     },
     "options_contextmenus": {
-        "message": "컨텍스트 메뉴에 등록"
+        "message": "상황에 맞는 메뉴에 추가"
     },
     "options_contextmenu_label_1": {
         "message": "사용자 지정 작업 1 레이블 (선택 사항)"
@@ -159,7 +162,7 @@
         "message": "사용자 지정 작업 3 레이블 (선택 사항)"
     },
     "options_streaming": {
-        "message": "언어 모델에서 스트리밍 출력"
+        "message": "언어 모델에서 스트리밍 출력 활성화"
     },
     "options_theme": {
         "message": "테마"
@@ -189,10 +192,10 @@
         "message": "가져오기 실패."
     },
     "options_sync_cloud": {
-        "message": "클라우드에 옵션 동기화"
+        "message": "옵션을 클라우드에 동기화"
     },
     "options_sync_cloud_started": {
-        "message": "동기화 시작됨."
+        "message": "동기화 시작."
     },
     "options_sync_cloud_failed": {
         "message": "동기화 실패."

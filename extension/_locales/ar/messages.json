@@ -3,7 +3,7 @@
         "message": "تلخيص وترجمة باستخدام Gemini"
     },
     "extension_description": {
-        "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كخادم خلفي."
+        "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كواجهة خلفية."
     },
     "popup_button_copy": {
         "message": "نسخ"
@@ -12,7 +12,7 @@
         "message": "تم النسخ."
     },
     "popup_button_run": {
-        "message": "إعادة التشغيل"
+        "message": "تشغيل مرة أخرى"
     },
     "popup_button_results": {
         "message": "فتح النتائج في علامة تبويب جديدة"
@@ -42,16 +42,19 @@
         "message": "جارٍ المعالجة"
     },
     "popup_prompt_blocked": {
-        "message": "تم حظر الطلب."
+        "message": "تم حظر المطالبة."
     },
     "popup_response_blocked": {
         "message": "تم حظر الاستجابة."
     },
     "popup_unexpected_response": {
-        "message": "حدث خطأ غير متوقع. يرجى التحقق من سجل وحدة التحكم."
+        "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
+    },
+    "popup_no_apikey": {
+        "message": "يرجى تعيين مفتاح API الخاص بـ Gemini في صفحة الخيارات."
     },
     "popup_miscellaneous_error": {
-        "message": "لا يمكن تلخيص هذه الصفحة أو ترجمتها."
+        "message": "تعذر تلخيص أو ترجمة هذه الصفحة."
     },
     "results_title": {
         "message": "النتائج - تلخيص وترجمة باستخدام Gemini"
@@ -69,25 +72,25 @@
         "message": "إرسال"
     },
     "results_waiting_response": {
-        "message": "في انتظار رد"
+        "message": "في انتظار الاستجابة"
     },
     "results_prompt_blocked": {
-        "message": "تم حظر الطلب."
+        "message": "تم حظر المطالبة."
     },
     "results_response_blocked": {
         "message": "تم حظر الاستجابة."
     },
     "results_unexpected_response": {
-        "message": "حدث خطأ غير متوقع. يرجى التحقق من سجل وحدة التحكم."
+        "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
     },
     "options_title": {
-        "message": "خيارات - تلخيص وترجمة باستخدام Gemini"
+        "message": "الخيارات - تلخيص وترجمة باستخدام Gemini"
     },
     "options_apikey": {
-        "message": "مفتاح واجهة برمجة تطبيقات Gemini"
+        "message": "مفتاح API الخاص بـ Gemini"
     },
     "options_apikey_hint": {
-        "message": "يمكنك الحصول على مفتاح واجهة برمجة تطبيقات Gemini في الصفحة التالية."
+        "message": "يمكنك الحصول على مفتاح API الخاص بـ Gemini من الصفحة التالية."
     },
     "options_model": {
         "message": "نموذج اللغة"
@@ -96,16 +99,16 @@
         "message": "نموذج محدد من قبل المستخدم"
     },
     "options_language": {
-        "message": "تلخيص في / ترجمة إلى"
+        "message": "لغة التلخيص والترجمة"
     },
     "options_language_user": {
         "message": "لغة محددة من قبل المستخدم"
     },
     "options_language_notes": {
-        "message": "يتم تجاهل إعداد اللغة في الإجراءات المخصصة."
+        "message": "ملاحظة: إعداد اللغة هذا لا يؤثر على الإجراءات المخصصة."
     },
     "options_no_text_action": {
-        "message": "عند عدم تحديد أي نص، قم بالإجراء التالي"
+        "message": "عند عدم تحديد نص، قم بالإجراء التالي"
     },
     "options_no_text_summarize": {
         "message": "تلخيص (افتراضي)"
@@ -123,7 +126,7 @@
         "message": "إجراء مخصص 3"
     },
     "options_no_text_custom_notes": {
-        "message": "يمكن أيضًا استدعاء الإجراءات المخصصة من قائمة السياق (سطح المكتب فقط)."
+        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (سطح المكتب فقط)."
     },
     "options_text_action": {
         "message": "عند تحديد نص، قم بالإجراء التالي"
@@ -144,10 +147,10 @@
         "message": "إجراء مخصص 3"
     },
     "options_text_custom_notes": {
-        "message": "يمكن أيضًا استدعاء الإجراءات المخصصة من قائمة السياق (سطح المكتب فقط)."
+        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (سطح المكتب فقط)."
     },
     "options_contextmenus": {
-        "message": "تسجيل في قائمة السياق"
+        "message": "إضافة إلى قائمة السياق"
     },
     "options_contextmenu_label_1": {
         "message": "تسمية للإجراء المخصص 1 (اختياري)"
@@ -159,7 +162,7 @@
         "message": "تسمية للإجراء المخصص 3 (اختياري)"
     },
     "options_streaming": {
-        "message": "تدفق الإخراج من نموذج اللغة"
+        "message": "تمكين إخراج البث من نموذج اللغة"
     },
     "options_theme": {
         "message": "السمة"
@@ -177,7 +180,7 @@
         "message": "تصدير الخيارات إلى ملف"
     },
     "options_export_api_key": {
-        "message": "تضمين مفتاح واجهة برمجة التطبيقات"
+        "message": "تضمين مفتاح API"
     },
     "options_import": {
         "message": "استيراد الخيارات من ملف"
