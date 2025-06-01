@@ -36,7 +36,7 @@ def main():
             "Output in plain text without using Markdown."
 
         model = google.generativeai.GenerativeModel(
-            model_name="gemini-2.0-flash",
+            model_name="gemini-2.5-flash-preview-05-20",
             system_instruction=system_instruction,
             generation_config={
                 "temperature": 0.0
