@@ -20,6 +20,9 @@
     "popup_button_options": {
         "message": "オプションページを開く"
     },
+    "popup_retrieving_captions": {
+        "message": "字幕の取得を試みています"
+    },
     "popup_summarizing": {
         "message": "要約しています"
     },

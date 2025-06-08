@@ -41,7 +41,7 @@ const getWholeText = () => {
   }
 };
 
-const getCaptions = async (videoUrl, languageCode, useCredentials) => {
+const getCaptions = async (videoUrl, languageCode) => {
   // Return the captions of the YouTube video
   const languageCodeForCaptions = {
     en: "en",
@@ -63,9 +63,10 @@ const getCaptions = async (videoUrl, languageCode, useCredentials) => {
   };
 
   const preferredLanguages = [languageCodeForCaptions[languageCode], "en"];
-  const videoResponse = useCredentials ? await fetch(videoUrl) : await fetch(videoUrl, { credentials: "omit" });
+  const videoResponse = await fetch(videoUrl, { credentials: "omit", headers: { "Cache-Control": "no-cache" } });
   const videoBody = await videoResponse.text();
   const captionsConfigJson = videoBody.match(/"captions":(.*?),"videoDetails":/s);
+  let hasCaptions = false;
   let captions = "";
 
   if (captionsConfigJson) {
@@ -89,11 +90,12 @@ const getCaptions = async (videoUrl, languageCode, useCredentials) => {
       });
 
       const captionsUrl = captionTracks[0].baseUrl;
-      const captionsResponse = useCredentials ? await fetch(captionsUrl) : await fetch(captionsUrl, { credentials: "omit" });
+      const captionsResponse = await fetch(captionsUrl, { credentials: "omit", headers: { "Cache-Control": "no-cache" } });
       const captionsXml = await captionsResponse.text();
       const xmlDocument = new DOMParser().parseFromString(captionsXml, "application/xml");
       const textElements = xmlDocument.getElementsByTagName("text");
       captions = Array.from(textElements).map(element => element.textContent).join("\n");
+      hasCaptions = true;
     } else {
       console.log("No captionTracks found.");
     }
@@ -101,7 +103,7 @@ const getCaptions = async (videoUrl, languageCode, useCredentials) => {
     console.log("No captions found.");
   }
 
-  return captions;
+  return { hasCaptions, captions };
 };
 
 const extractTaskInformation = async (languageCode, triggerAction) => {
@@ -157,26 +159,33 @@ const extractTaskInformation = async (languageCode, triggerAction) => {
       // If the page is a YouTube video, get the captions instead of the whole text
       mediaType = "captions";
 
-      try {
-        taskInput = (await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          func: getCaptions,
-          args: [tab.url, languageCode, true]
-        }))[0].result;
-      } catch (error) {
-        console.log(error);
-      }
+      const displayIntervalId = setInterval(displayLoadingMessage, 500, "status", chrome.i18n.getMessage("popup_retrieving_captions"));
 
-      if (!taskInput) {
-        // If the captions are not available, try to get the captions without credentials
-        try {
-          taskInput = (await chrome.scripting.executeScript({
+      try {
+        for (let retryCount = 0; retryCount < 5; retryCount++) {
+          const captionData = (await chrome.scripting.executeScript({
             target: { tabId: tab.id },
             func: getCaptions,
-            args: [tab.url, languageCode, false]
+            args: [tab.url, languageCode]
           }))[0].result;
-        } catch (error) {
-          console.log(error);
+
+          if (!captionData.hasCaptions) {
+            // If captions are not available, break the loop
+            break;
+          } else if (captionData.captions) {
+            // If captions are available, set the task input and break the loop
+            taskInput = captionData.captions;
+            break;
+          } else {
+            // If captions are available but could not be retrieved, wait a bit and retry
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        if (displayIntervalId) {
+          clearInterval(displayIntervalId);
         }
       }
     }

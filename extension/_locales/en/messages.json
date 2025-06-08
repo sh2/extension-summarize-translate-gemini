@@ -20,6 +20,9 @@
     "popup_button_options": {
         "message": "Open options page"
     },
+    "popup_retrieving_captions": {
+        "message": "Attempting to retrieve captions"
+    },
     "popup_summarizing": {
         "message": "Summarizing"
     },
