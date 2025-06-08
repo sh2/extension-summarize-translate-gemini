@@ -3,7 +3,7 @@
         "message": "Resumir y Traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resume y traduce páginas web. Utiliza Gemini como backend."
+        "message": "Resume y traduce páginas web. Utiliza Gemini como motor."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -19,6 +19,9 @@
     },
     "popup_button_options": {
         "message": "Abrir página de opciones"
+    },
+    "popup_retrieving_captions": {
+        "message": "Intentando recuperar subtítulos"
     },
     "popup_summarizing": {
         "message": "Resumiendo"
@@ -48,7 +51,7 @@
         "message": "La respuesta fue bloqueada."
     },
     "popup_unexpected_response": {
-        "message": "Ocurrió un error inesperado. Por favor, revise la consola para más detalles."
+        "message": "Ocurrió un error inesperado. Consulte la consola para más detalles."
     },
     "popup_no_apikey": {
         "message": "Por favor, configure su clave API de Gemini en la página de opciones."
@@ -81,7 +84,7 @@
         "message": "La respuesta fue bloqueada."
     },
     "results_unexpected_response": {
-        "message": "Ocurrió un error inesperado. Por favor, revise la consola para más detalles."
+        "message": "Ocurrió un error inesperado. Consulte la consola para más detalles."
     },
     "options_title": {
         "message": "Opciones - Resumir y Traducir con Gemini"
@@ -105,7 +108,7 @@
         "message": "Idioma especificado por el usuario"
     },
     "options_language_notes": {
-        "message": "Nota: Esta configuración de idioma no afecta las acciones personalizadas."
+        "message": "Nota: Esta configuración de idioma no afecta a las acciones personalizadas."
     },
     "options_no_text_action": {
         "message": "Cuando no hay texto seleccionado, realizar la siguiente acción"

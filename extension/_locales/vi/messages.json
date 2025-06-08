@@ -20,6 +20,9 @@
     "popup_button_options": {
         "message": "Mở trang tùy chọn"
     },
+    "popup_retrieving_captions": {
+        "message": "Đang cố gắng truy xuất phụ đề"
+    },
     "popup_summarizing": {
         "message": "Đang tóm tắt"
     },
@@ -99,7 +102,7 @@
         "message": "Mô hình do người dùng chỉ định"
     },
     "options_language": {
-        "message": "Ngôn ngữ cho Tóm tắt và Dịch"
+        "message": "Ngôn ngữ để Tóm tắt và Dịch"
     },
     "options_language_user": {
         "message": "Ngôn ngữ do người dùng chỉ định"

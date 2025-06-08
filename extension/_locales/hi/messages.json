@@ -3,49 +3,52 @@
         "message": "Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "extension_description": {
-        "message": "वेब पेजों का सारांश और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
+        "message": "वेब पेजों को सारांशित और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
     },
     "popup_button_copy": {
         "message": "कॉपी करें"
     },
     "popup_copied": {
-        "message": "कॉपी हो गया।"
+        "message": "कॉपी किया गया।"
     },
     "popup_button_run": {
         "message": "फिर से चलाएँ"
     },
     "popup_button_results": {
-        "message": "नए टैब में परिणाम खोलें"
+        "message": "परिणाम नए टैब में खोलें"
     },
     "popup_button_options": {
         "message": "विकल्प पृष्ठ खोलें"
     },
+    "popup_retrieving_captions": {
+        "message": "कैप्शन प्राप्त करने का प्रयास किया जा रहा है"
+    },
     "popup_summarizing": {
-        "message": "सारांशित कर रहा है"
+        "message": "सारांशित किया जा रहा है"
     },
     "popup_summarizing_captions": {
-        "message": "कैप्शन का सारांश कर रहा है"
+        "message": "कैप्शन सारांशित किए जा रहे हैं"
     },
     "popup_summarizing_image": {
-        "message": "छवि का सारांश कर रहा है"
+        "message": "छवि सारांशित की जा रही है"
     },
     "popup_translating": {
-        "message": "अनुवाद कर रहा है"
+        "message": "अनुवाद किया जा रहा है"
     },
     "popup_translating_captions": {
-        "message": "कैप्शन का अनुवाद कर रहा है"
+        "message": "कैप्शन अनुवाद किए जा रहे हैं"
     },
     "popup_translating_image": {
-        "message": "छवि का अनुवाद कर रहा है"
+        "message": "छवि अनुवाद की जा रही है"
     },
     "popup_processing": {
-        "message": "प्रोसेस कर रहा है"
+        "message": "प्रक्रिया जारी है"
     },
     "popup_prompt_blocked": {
-        "message": "प्रॉम्प्ट ब्लॉक कर दिया गया था।"
+        "message": "प्रॉम्प्ट ब्लॉक कर दिया गया।"
     },
     "popup_response_blocked": {
-        "message": "प्रतिक्रिया ब्लॉक कर दी गई थी।"
+        "message": "प्रतिक्रिया ब्लॉक कर दी गई।"
     },
     "popup_unexpected_response": {
         "message": "एक अप्रत्याशित त्रुटि हुई। विवरण के लिए कंसोल देखें।"
@@ -54,7 +57,7 @@
         "message": "कृपया विकल्प पृष्ठ पर अपनी Gemini API कुंजी सेट करें।"
     },
     "popup_miscellaneous_error": {
-        "message": "इस पृष्ठ का सारांश या अनुवाद करने में असमर्थ।"
+        "message": "इस पृष्ठ को सारांशित या अनुवाद नहीं किया जा सकता।"
     },
     "results_title": {
         "message": "परिणाम - Gemini के साथ सारांशित करें और अनुवाद करें"
@@ -66,19 +69,19 @@
         "message": "कॉपी करें"
     },
     "results_copied": {
-        "message": "कॉपी हो गया।"
+        "message": "कॉपी किया गया।"
     },
     "results_button_send": {
         "message": "भेजें"
     },
     "results_waiting_response": {
-        "message": "प्रतिक्रिया की प्रतीक्षा कर रहा है"
+        "message": "प्रतिक्रिया की प्रतीक्षा है"
     },
     "results_prompt_blocked": {
-        "message": "प्रॉम्प्ट ब्लॉक कर दिया गया था।"
+        "message": "प्रॉम्प्ट ब्लॉक कर दिया गया।"
     },
     "results_response_blocked": {
-        "message": "प्रतिक्रिया ब्लॉक कर दी गई थी।"
+        "message": "प्रतिक्रिया ब्लॉक कर दी गई।"
     },
     "results_unexpected_response": {
         "message": "एक अप्रत्याशित त्रुटि हुई। विवरण के लिए कंसोल देखें।"
@@ -177,7 +180,7 @@
         "message": "सहेजा गया।"
     },
     "options_export": {
-        "message": "विकल्पों को फ़ाइल में निर्यात करें"
+        "message": "विकल्प फ़ाइल में निर्यात करें"
     },
     "options_export_api_key": {
         "message": "API कुंजी शामिल करें"
@@ -192,10 +195,10 @@
         "message": "आयात विफल रहा।"
     },
     "options_sync_cloud": {
-        "message": "विकल्पों को क्लाउड से सिंक करें"
+        "message": "विकल्प क्लाउड से सिंक करें"
     },
     "options_sync_cloud_started": {
-        "message": "सिंक शुरू हो गया।"
+        "message": "सिंक शुरू हुआ।"
     },
     "options_sync_cloud_failed": {
         "message": "सिंक विफल रहा।"

@@ -20,11 +20,14 @@
     "popup_button_options": {
         "message": "Apri pagina opzioni"
     },
+    "popup_retrieving_captions": {
+        "message": "Tentativo di recupero didascalie"
+    },
     "popup_summarizing": {
         "message": "Riassumendo"
     },
     "popup_summarizing_captions": {
-        "message": "Riassumendo didascalie"
+        "message": "Riassumendo le didascalie"
     },
     "popup_summarizing_image": {
         "message": "Riassumendo l'immagine"
@@ -33,7 +36,7 @@
         "message": "Traducendo"
     },
     "popup_translating_captions": {
-        "message": "Traducendo didascalie"
+        "message": "Traducendo le didascalie"
     },
     "popup_translating_image": {
         "message": "Traducendo l'immagine"
@@ -108,7 +111,7 @@
         "message": "Nota: questa impostazione della lingua non influisce sulle azioni personalizzate."
     },
     "options_no_text_action": {
-        "message": "Quando nessun testo è selezionato, eseguire la seguente azione"
+        "message": "Quando non è selezionato alcun testo, esegui la seguente azione"
     },
     "options_no_text_summarize": {
         "message": "Riassumi (predefinito)"
@@ -129,7 +132,7 @@
         "message": "Le azioni personalizzate sono accessibili anche tramite il menu contestuale (solo desktop)."
     },
     "options_text_action": {
-        "message": "Quando il testo è selezionato, eseguire la seguente azione"
+        "message": "Quando il testo è selezionato, esegui la seguente azione"
     },
     "options_text_summarize": {
         "message": "Riassumi"

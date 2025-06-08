@@ -3,7 +3,7 @@
         "message": "Résumer et traduire avec Gemini"
     },
     "extension_description": {
-        "message": "Résume et traduit les pages web. Utilise Gemini comme service principal."
+        "message": "Résume et traduit les pages web. Utilise Gemini comme moteur."
     },
     "popup_button_copy": {
         "message": "Copier"
@@ -12,13 +12,16 @@
         "message": "Copié."
     },
     "popup_button_run": {
-        "message": "Exécuter à nouveau"
+        "message": "Réexécuter"
     },
     "popup_button_results": {
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
         "message": "Ouvrir la page des options"
+    },
+    "popup_retrieving_captions": {
+        "message": "Tentative de récupération des légendes"
     },
     "popup_summarizing": {
         "message": "Résumé en cours"
@@ -162,7 +165,7 @@
         "message": "Libellé pour l'action personnalisée 3 (facultatif)"
     },
     "options_streaming": {
-        "message": "Activer la sortie en continu du modèle linguistique"
+        "message": "Activer la diffusion en continu de la sortie du modèle linguistique"
     },
     "options_theme": {
         "message": "Thème"
@@ -192,7 +195,7 @@
         "message": "Importation échouée."
     },
     "options_sync_cloud": {
-        "message": "Synchroniser les options avec le cloud"
+        "message": "Synchroniser les options vers le cloud"
     },
     "options_sync_cloud_started": {
         "message": "Synchronisation démarrée."

@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 進行摘要與翻譯"
+        "message": "使用 Gemini 摘要與翻譯"
     },
     "extension_description": {
-        "message": "摘要並翻譯網頁內容。使用 Gemini 作為後端。"
+        "message": "摘要並翻譯網頁。使用 Gemini 作為後端。"
     },
     "popup_button_copy": {
         "message": "複製"
@@ -19,6 +19,9 @@
     },
     "popup_button_options": {
         "message": "開啟選項頁面"
+    },
+    "popup_retrieving_captions": {
+        "message": "正在嘗試擷取字幕"
     },
     "popup_summarizing": {
         "message": "正在摘要"
@@ -57,7 +60,7 @@
         "message": "無法摘要或翻譯此頁面。"
     },
     "results_title": {
-        "message": "結果 - 使用 Gemini 進行摘要與翻譯"
+        "message": "結果 - 使用 Gemini 摘要與翻譯"
     },
     "results_button_clear": {
         "message": "清除對話"
@@ -84,13 +87,13 @@
         "message": "發生意外錯誤。請檢查主控台以獲取詳細資訊。"
     },
     "options_title": {
-        "message": "選項 - 使用 Gemini 進行摘要與翻譯"
+        "message": "選項 - 使用 Gemini 摘要與翻譯"
     },
     "options_apikey": {
         "message": "Gemini API 金鑰"
     },
     "options_apikey_hint": {
-        "message": "您可以從以下頁面獲取 Gemini API 金鑰。"
+        "message": "您可以從以下頁面取得 Gemini API 金鑰。"
     },
     "options_model": {
         "message": "語言模型"
@@ -111,7 +114,7 @@
         "message": "未選取文字時，執行以下動作"
     },
     "options_no_text_summarize": {
-        "message": "摘要（預設）"
+        "message": "摘要 (預設)"
     },
     "options_no_text_translate": {
         "message": "翻譯"
@@ -126,7 +129,7 @@
         "message": "自訂動作 3"
     },
     "options_no_text_custom_notes": {
-        "message": "自訂動作也可透過右鍵選單存取（僅限桌面版）。"
+        "message": "自訂動作也可透過右鍵選單存取 (僅限桌面版)。"
     },
     "options_text_action": {
         "message": "選取文字時，執行以下動作"
@@ -135,7 +138,7 @@
         "message": "摘要"
     },
     "options_text_translate": {
-        "message": "翻譯（預設）"
+        "message": "翻譯 (預設)"
     },
     "options_text_custom_1": {
         "message": "自訂動作 1"
@@ -147,19 +150,19 @@
         "message": "自訂動作 3"
     },
     "options_text_custom_notes": {
-        "message": "自訂動作也可透過右鍵選單存取（僅限桌面版）。"
+        "message": "自訂動作也可透過右鍵選單存取 (僅限桌面版)。"
     },
     "options_contextmenus": {
         "message": "新增至右鍵選單"
     },
     "options_contextmenu_label_1": {
-        "message": "自訂動作 1 的標籤（選填）"
+        "message": "自訂動作 1 的標籤 (選填)"
     },
     "options_contextmenu_label_2": {
-        "message": "自訂動作 2 的標籤（選填）"
+        "message": "自訂動作 2 的標籤 (選填)"
     },
     "options_contextmenu_label_3": {
-        "message": "自訂動作 3 的標籤（選填）"
+        "message": "自訂動作 3 的標籤 (選填)"
     },
     "options_streaming": {
         "message": "啟用語言模型串流輸出"

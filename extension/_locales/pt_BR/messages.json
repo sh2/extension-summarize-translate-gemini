@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resume e traduz páginas web. Utiliza Gemini como backend."
+        "message": "Resume e traduz páginas da web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -19,6 +19,9 @@
     },
     "popup_button_options": {
         "message": "Abrir página de opções"
+    },
+    "popup_retrieving_captions": {
+        "message": "Tentando recuperar legendas"
     },
     "popup_summarizing": {
         "message": "Resumindo"
@@ -51,7 +54,7 @@
         "message": "Ocorreu um erro inesperado. Verifique o console para detalhes."
     },
     "popup_no_apikey": {
-        "message": "Por favor, defina sua chave de API Gemini na página de opções."
+        "message": "Defina sua chave de API Gemini na página de opções."
     },
     "popup_miscellaneous_error": {
         "message": "Não foi possível resumir ou traduzir esta página."

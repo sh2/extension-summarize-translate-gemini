@@ -20,26 +20,29 @@
     "popup_button_options": {
         "message": "فتح صفحة الخيارات"
     },
+    "popup_retrieving_captions": {
+        "message": "جاري استرداد التسميات التوضيحية"
+    },
     "popup_summarizing": {
-        "message": "جارٍ التلخيص"
+        "message": "جاري التلخيص"
     },
     "popup_summarizing_captions": {
-        "message": "جارٍ تلخيص التسميات التوضيحية"
+        "message": "جاري تلخيص التسميات التوضيحية"
     },
     "popup_summarizing_image": {
-        "message": "جارٍ تلخيص الصورة"
+        "message": "جاري تلخيص الصورة"
     },
     "popup_translating": {
-        "message": "جارٍ الترجمة"
+        "message": "جاري الترجمة"
     },
     "popup_translating_captions": {
-        "message": "جارٍ ترجمة التسميات التوضيحية"
+        "message": "جاري ترجمة التسميات التوضيحية"
     },
     "popup_translating_image": {
-        "message": "جارٍ ترجمة الصورة"
+        "message": "جاري ترجمة الصورة"
     },
     "popup_processing": {
-        "message": "جارٍ المعالجة"
+        "message": "جاري المعالجة"
     },
     "popup_prompt_blocked": {
         "message": "تم حظر المطالبة."
@@ -51,7 +54,7 @@
         "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
     },
     "popup_no_apikey": {
-        "message": "يرجى تعيين مفتاح API الخاص بـ Gemini في صفحة الخيارات."
+        "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
     },
     "popup_miscellaneous_error": {
         "message": "تعذر تلخيص أو ترجمة هذه الصفحة."
@@ -87,10 +90,10 @@
         "message": "الخيارات - تلخيص وترجمة باستخدام Gemini"
     },
     "options_apikey": {
-        "message": "مفتاح API الخاص بـ Gemini"
+        "message": "مفتاح Gemini API"
     },
     "options_apikey_hint": {
-        "message": "يمكنك الحصول على مفتاح API الخاص بـ Gemini من الصفحة التالية."
+        "message": "يمكنك الحصول على مفتاح Gemini API من الصفحة التالية."
     },
     "options_model": {
         "message": "نموذج اللغة"
@@ -162,7 +165,7 @@
         "message": "تسمية للإجراء المخصص 3 (اختياري)"
     },
     "options_streaming": {
-        "message": "تمكين إخراج البث من نموذج اللغة"
+        "message": "تمكين إخراج التدفق من نموذج اللغة"
     },
     "options_theme": {
         "message": "السمة"

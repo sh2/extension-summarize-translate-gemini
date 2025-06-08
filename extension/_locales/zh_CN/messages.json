@@ -20,6 +20,9 @@
     "popup_button_options": {
         "message": "打开选项页"
     },
+    "popup_retrieving_captions": {
+        "message": "正在尝试检索字幕"
+    },
     "popup_summarizing": {
         "message": "正在总结"
     },
@@ -48,7 +51,7 @@
         "message": "响应已被阻止。"
     },
     "popup_unexpected_response": {
-        "message": "发生意外错误。请查看控制台获取详情。"
+        "message": "发生意外错误。请检查控制台以获取详细信息。"
     },
     "popup_no_apikey": {
         "message": "请在选项页设置您的 Gemini API 密钥。"
@@ -81,7 +84,7 @@
         "message": "响应已被阻止。"
     },
     "results_unexpected_response": {
-        "message": "发生意外错误。请查看控制台获取详情。"
+        "message": "发生意外错误。请检查控制台以获取详细信息。"
     },
     "options_title": {
         "message": "选项 - 使用 Gemini 总结和翻译"
