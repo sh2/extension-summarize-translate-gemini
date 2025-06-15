@@ -232,3 +232,5 @@ $root.VideoMetadata = (function() {
 
     return VideoMetadata;
 })();
+
+undefined;

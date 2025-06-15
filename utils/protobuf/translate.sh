@@ -9,3 +9,7 @@ npx pbjs --target static --out video-metadata.js video-metadata.proto
 #
 # -var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 # +var $root = protobuf.roots["default"] || (protobuf.roots["default"] = {});
+#
+# Then, add the following line at the end of the file
+#
+# undefined;
