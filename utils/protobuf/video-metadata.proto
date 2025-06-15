@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message VideoMetadata {
+  string param1 = 1;
+  string param2 = 2;
+}
