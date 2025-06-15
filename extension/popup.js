@@ -1,4 +1,4 @@
-/* globals Readability */
+/* globals protobuf Readability */
 
 import {
   applyTheme,
@@ -42,7 +42,20 @@ const getWholeText = () => {
 };
 
 const getCaptions = async (videoUrl, languageCode) => {
-  // Return the captions of the YouTube video
+  const encodeToBase64 = (metadataObj) => {
+    // Encode the metadata object to a base64 string using protobuf
+    const VideoMetadata = protobuf.roots["default"].VideoMetadata;
+    const message = VideoMetadata.create(metadataObj);
+    const buffer = VideoMetadata.encode(message).finish();
+    let binaryString = "";
+
+    for (let i = 0; i < buffer.byteLength; i++) {
+      binaryString += String.fromCharCode(buffer[i]);
+    }
+
+    return btoa(binaryString);
+  };
+
   const languageCodeForCaptions = {
     en: "en",
     de: "de",
@@ -63,10 +76,10 @@ const getCaptions = async (videoUrl, languageCode) => {
   };
 
   const preferredLanguages = [languageCodeForCaptions[languageCode], "en"];
-  const videoResponse = await fetch(videoUrl, { credentials: "omit", headers: { "Cache-Control": "no-cache" } });
+  const videoId = new URLSearchParams(new URL(videoUrl).search).get("v");
+  const videoResponse = await fetch(videoUrl, { credentials: "omit", });
   const videoBody = await videoResponse.text();
   const captionsConfigJson = videoBody.match(/"captions":(.*?),"videoDetails":/s);
-  let hasCaptions = false;
   let captions = "";
 
   if (captionsConfigJson) {
@@ -89,13 +102,50 @@ const getCaptions = async (videoUrl, languageCode) => {
         return valueA - valueB;
       });
 
-      const captionsUrl = captionTracks[0].baseUrl;
-      const captionsResponse = await fetch(captionsUrl, { credentials: "omit", headers: { "Cache-Control": "no-cache" } });
-      const captionsXml = await captionsResponse.text();
-      const xmlDocument = new DOMParser().parseFromString(captionsXml, "application/xml");
-      const textElements = xmlDocument.getElementsByTagName("text");
-      captions = Array.from(textElements).map(element => element.textContent).join("\n");
-      hasCaptions = true;
+      const payload = {
+        context: {
+          client: {
+            clientName: "WEB",
+            clientVersion: "2.20250613.00.00",
+          }
+        },
+        params: encodeToBase64({
+          param1: videoId,
+          param2: encodeToBase64({
+            param1: captionTracks[0].kind ? captionTracks[0].kind : "",
+            param2: captionTracks[0].languageCode
+          })
+        })
+      };
+
+      const captionsResponse = await fetch("https://www.youtube.com/youtubei/v1/get_transcript", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload),
+        credentials: "omit"
+      });
+
+      const captionsJson = await captionsResponse.json();
+
+      const initialSegments = captionsJson?.actions?.[0]?.
+        updateEngagementPanelAction?.content?.transcriptRenderer?.content?.
+        transcriptSearchPanelRenderer?.body?.transcriptSegmentListRenderer?.initialSegments;
+
+      let texts = [];
+
+      if (initialSegments) {
+        for (const segment of initialSegments) {
+          const text = segment?.transcriptSegmentRenderer?.snippet?.runs?.[0]?.text;
+
+          if (text) {
+            texts.push(text);
+          }
+        }
+
+        captions = texts.join(" ");
+      }
     } else {
       console.log("No captionTracks found.");
     }
@@ -103,7 +153,7 @@ const getCaptions = async (videoUrl, languageCode) => {
     console.log("No captions found.");
   }
 
-  return { hasCaptions, captions };
+  return captions;
 };
 
 const extractTaskInformation = async (languageCode, triggerAction) => {
@@ -162,25 +212,21 @@ const extractTaskInformation = async (languageCode, triggerAction) => {
       const displayIntervalId = setInterval(displayLoadingMessage, 500, "status", chrome.i18n.getMessage("popup_retrieving_captions"));
 
       try {
-        for (let retryCount = 0; retryCount < 5; retryCount++) {
-          const captionData = (await chrome.scripting.executeScript({
-            target: { tabId: tab.id },
-            func: getCaptions,
-            args: [tab.url, languageCode]
-          }))[0].result;
+        await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ["lib/protobuf.min.js"]
+        });
 
-          if (!captionData.hasCaptions) {
-            // If captions are not available, break the loop
-            break;
-          } else if (captionData.captions) {
-            // If captions are available, set the task input and break the loop
-            taskInput = captionData.captions;
-            break;
-          } else {
-            // If captions are available but could not be retrieved, wait a bit and retry
-            await new Promise(resolve => setTimeout(resolve, 2000));
-          }
-        }
+        await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ["lib/video-metadata.js"]
+        });
+
+        taskInput = (await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: getCaptions,
+          args: [tab.url, languageCode]
+        }))[0].result;
       } catch (error) {
         console.log(error);
       } finally {
