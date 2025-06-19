@@ -194,12 +194,12 @@ const initialize = async () => {
   });
 
   // Restore the language model from the local storage
-  const { languageModel } = await chrome.storage.local.get({ languageModel: "2.0-flash" });
+  const { languageModel } = await chrome.storage.local.get({ languageModel: "2.5-flash:0" });
   document.getElementById("languageModel").value = languageModel;
 
   // Set the default language model if the language model is not set
   if (!document.getElementById("languageModel").value) {
-    document.getElementById("languageModel").value = "2.0-flash";
+    document.getElementById("languageModel").value = "2.5-flash:0";
   }
 
   // Restore the content from the session storage

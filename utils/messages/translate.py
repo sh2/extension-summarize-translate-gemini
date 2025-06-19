@@ -37,7 +37,7 @@ def main():
             "Keep the word Gemini in English."
 
         model = google.generativeai.GenerativeModel(
-            model_name="gemini-2.5-flash-preview-05-20",
+            model_name="gemini-2.5-flash",
             system_instruction=system_instruction,
             generation_config={
                 "response_mime_type": "application/json",

@@ -91,6 +91,18 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
   // noTextCustom: The same as Summarize
   // textCustom: The same as Summarize
   const characterLimits = {
+    "gemini-2.5-pro": {
+      summarize: 786432,
+      translate: 65536,
+      noTextCustom: 786432,
+      textCustom: 786432
+    },
+    "gemini-2.5-flash": {
+      summarize: 786432,
+      translate: 65536,
+      noTextCustom: 786432,
+      textCustom: 786432
+    },
     "gemini-2.0-flash": {
       summarize: 786432,
       translate: 8192,
@@ -121,13 +133,7 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
       noTextCustom: 750000,
       textCustom: 750000
     },
-    "gemini-2.5-pro-preview-06-05": {
-      summarize: 786432,
-      translate: 65536,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
-    "gemini-2.5-flash-preview-05-20": {
+    "gemini-2.5-flash-lite-preview-06-17": {
       summarize: 786432,
       translate: 65536,
       noTextCustom: 786432,
