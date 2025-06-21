@@ -51,22 +51,12 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
     }
   } else if (actionType === "noTextCustom1") {
     systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt1: "" })).noTextCustomPrompt1;
-
-    if (!systemPrompt) {
-      // Restore the prompt of the previous version
-      systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt: "" })).noTextCustomPrompt;
-    }
   } else if (actionType === "noTextCustom2") {
     systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt2: "" })).noTextCustomPrompt2;
   } else if (actionType === "noTextCustom3") {
     systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt3: "" })).noTextCustomPrompt3;
   } else if (actionType === "textCustom1") {
     systemPrompt = (await chrome.storage.local.get({ textCustomPrompt1: "" })).textCustomPrompt1;
-
-    if (!systemPrompt) {
-      // Restore the prompt of the previous version
-      systemPrompt = (await chrome.storage.local.get({ textCustomPrompt: "" })).textCustomPrompt;
-    }
   } else if (actionType === "textCustom2") {
     systemPrompt = (await chrome.storage.local.get({ textCustomPrompt2: "" })).textCustomPrompt2;
   } else if (actionType === "textCustom3") {

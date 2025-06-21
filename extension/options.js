@@ -12,12 +12,10 @@ const INITIAL_OPTIONS = {
   languageCode: "en",
   userLanguage: "Turkish",
   noTextAction: "summarize",
-  noTextCustomPrompt: "",
   noTextCustomPrompt1: "",
   noTextCustomPrompt2: "",
   noTextCustomPrompt3: "",
   textAction: "translate",
-  textCustomPrompt: "",
   textCustomPrompt1: "",
   textCustomPrompt2: "",
   textCustomPrompt3: "",
@@ -81,25 +79,11 @@ const setOptionsToForm = async () => {
   document.getElementById("languageCode").value = options.languageCode;
   document.getElementById("userLanguage").value = options.userLanguage;
   document.querySelector(`input[name="noTextAction"][value="${options.noTextAction}"]`).checked = true;
-
-  if (options.noTextCustomPrompt && !options.noTextCustomPrompt1) {
-    // Restore the prompt of the previous version
-    document.getElementById("noTextCustomPrompt1").value = options.noTextCustomPrompt;
-  } else {
-    document.getElementById("noTextCustomPrompt1").value = options.noTextCustomPrompt1;
-  }
-
+  document.getElementById("noTextCustomPrompt1").value = options.noTextCustomPrompt1;
   document.getElementById("noTextCustomPrompt2").value = options.noTextCustomPrompt2;
   document.getElementById("noTextCustomPrompt3").value = options.noTextCustomPrompt3;
   document.querySelector(`input[name="textAction"][value="${options.textAction}"]`).checked = true;
-
-  if (options.textCustomPrompt && !options.textCustomPrompt1) {
-    // Restore the prompt of the previous version
-    document.getElementById("textCustomPrompt1").value = options.textCustomPrompt;
-  } else {
-    document.getElementById("textCustomPrompt1").value = options.textCustomPrompt1;
-  }
-
+  document.getElementById("textCustomPrompt1").value = options.textCustomPrompt1;
   document.getElementById("textCustomPrompt2").value = options.textCustomPrompt2;
   document.getElementById("textCustomPrompt3").value = options.textCustomPrompt3;
   document.getElementById("contextMenus").checked = options.contextMenus;
