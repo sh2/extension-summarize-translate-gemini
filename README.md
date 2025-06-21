@@ -2,6 +2,16 @@
 
 Chrome extension to summarize and translate web pages. Uses Gemini as the backend.
 
+## FAQ
+
+### Pop-up windows are not appearing from the context menus in Firefox
+
+To open a popup from the context menu in Firefox, set `extensions.openPopupWithoutUserGesture.enabled` to true in `about:config`.
+
+![Firefox Preferences](img/firefox_preferences.png)
+
+This is being tracked as Firefox [Bug 1799344](https://bugzilla.mozilla.org/show_bug.cgi?id=1799344).
+
 ## Setup
 
 This extension can be installed from [Chrome Web Store](https://chromewebstore.google.com/detail/hmdcbbbdmfapkpdaganadiihfmdnpngi), [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/ljmmilamifhanifgbfliknbicfjllheb), or [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/summarize-translate-gemini/).
