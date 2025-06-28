@@ -1,6 +1,7 @@
-import google.generativeai
 import os
 import time
+from google import genai
+from google.genai.types import Content, GenerateContentConfig, Part
 
 
 def main():
@@ -17,12 +18,11 @@ def main():
         "bn": "Bengali",
         "zh_CN": "Simplified Chinese",
         "zh_TW": "Traditional Chinese",
+        "ja": "Japanese",
         "ko": "Korean"
     }
 
-    google.generativeai.configure(
-        api_key=os.environ.get("GEMINI_API_KEY", "")
-    )
+    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", ""))
 
     with open("description_en.txt", 'r') as f:
         description = f.read()
@@ -35,21 +35,32 @@ def main():
             "Keep the word Gemini in English. " \
             "Output in plain text without using Markdown."
 
-        model = google.generativeai.GenerativeModel(
-            model_name="gemini-2.5-flash",
+        config = GenerateContentConfig(
             system_instruction=system_instruction,
-            generation_config={
-                "temperature": 0.0
-            }
+            temperature=0.0
         )
 
-        try:
-            response = model.generate_content(description)
-            translated_text = response.candidates[0].content.parts[0].text
-            os.makedirs("output", exist_ok=True)
+        contents = [
+            Content(
+                role="user",
+                parts=[Part.from_text(text=description)]
+            )
+        ]
 
-            with open(f"output/description_{languageCode}.txt", 'w') as f:
-                f.write(translated_text)
+        try:
+            response = client.models.generate_content(
+                config=config,
+                contents=contents,
+                model="gemini-2.5-flash"
+            )
+
+            if response.text:
+                os.makedirs("output", exist_ok=True)
+
+                with open(f"output/description_{languageCode}.txt", 'w') as f:
+                    f.write(response.text)
+            else:
+                print("No text returned in response.")
         except Exception as e:
             print("Failed to generate content:", e)
 

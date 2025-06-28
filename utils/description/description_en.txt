@@ -1,16 +1,16 @@
-Summarize and translate web pages with a single click.
-Generate high-quality summaries and translations using Google's AI model, Gemini.
+Summarize and translate web pages with one click.
+Using Google's AI model Gemini, generate high-quality summaries and translations.
 
 Summarize
-Simply open a web page and click on the extension icon to summarize its content.
+Simply open a web page and click the extension icon to summarize its content.
 
 Translate
-Select the text you want to translate and click on the extension icon.
+Select the text you want to translate and click the extension icon.
 
-You can also use the shortcut key (Alt+G by default).
+A shortcut key (Alt+G by default) is also available.
 
 If a YouTube video has captions, this extension will summarize the captions.
-If you open an image file or a PDF file, this extension will summarize the currently displayed image.
+If an image file or PDF file is opened, this extension will summarize the currently displayed image.
 
 A Gemini API key is required to use this extension.
-You can obtain the Gemini API key on the Google AI for Developers page.
+You can obtain a Gemini API key from Google AI Studio.
