@@ -106,7 +106,7 @@ const getCaptions = async (videoUrl, languageCode) => {
         context: {
           client: {
             clientName: "WEB",
-            clientVersion: "2.20250620.01.00",
+            clientVersion: "2.20991231.01.00",
           }
         },
         params: encodeToBase64({
