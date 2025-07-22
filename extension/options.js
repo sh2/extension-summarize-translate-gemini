@@ -15,10 +15,16 @@ const INITIAL_OPTIONS = {
   noTextCustomPrompt1: "",
   noTextCustomPrompt2: "",
   noTextCustomPrompt3: "",
+  noTextCustomModel1: "2.5-flash:0",
+  noTextCustomModel2: "2.5-flash:0",
+  noTextCustomModel3: "2.5-flash:0",
   textAction: "translate",
   textCustomPrompt1: "",
   textCustomPrompt2: "",
   textCustomPrompt3: "",
+  textCustomModel1: "2.5-flash:0",
+  textCustomModel2: "2.5-flash:0",
+  textCustomModel3: "2.5-flash:0",
   contextMenus: true,
   contextMenuLabel1: "",
   contextMenuLabel2: "",
@@ -50,10 +56,16 @@ const getOptionsFromForm = (includeApiKey) => {
     noTextCustomPrompt1: document.getElementById("noTextCustomPrompt1").value,
     noTextCustomPrompt2: document.getElementById("noTextCustomPrompt2").value,
     noTextCustomPrompt3: document.getElementById("noTextCustomPrompt3").value,
+    noTextCustomModel1: document.getElementById("noTextCustomModel1").value,
+    noTextCustomModel2: document.getElementById("noTextCustomModel2").value,
+    noTextCustomModel3: document.getElementById("noTextCustomModel3").value,
     textAction: document.querySelector('input[name="textAction"]:checked').value,
     textCustomPrompt1: document.getElementById("textCustomPrompt1").value,
     textCustomPrompt2: document.getElementById("textCustomPrompt2").value,
     textCustomPrompt3: document.getElementById("textCustomPrompt3").value,
+    textCustomModel1: document.getElementById("textCustomModel1").value,
+    textCustomModel2: document.getElementById("textCustomModel2").value,
+    textCustomModel3: document.getElementById("textCustomModel3").value,
     contextMenus: document.getElementById("contextMenus").checked,
     contextMenuLabel1: document.getElementById("contextMenuLabel1").value,
     contextMenuLabel2: document.getElementById("contextMenuLabel2").value,
@@ -82,10 +94,16 @@ const setOptionsToForm = async () => {
   document.getElementById("noTextCustomPrompt1").value = options.noTextCustomPrompt1;
   document.getElementById("noTextCustomPrompt2").value = options.noTextCustomPrompt2;
   document.getElementById("noTextCustomPrompt3").value = options.noTextCustomPrompt3;
+  document.getElementById("noTextCustomModel1").value = options.noTextCustomModel1;
+  document.getElementById("noTextCustomModel2").value = options.noTextCustomModel2;
+  document.getElementById("noTextCustomModel3").value = options.noTextCustomModel3;
   document.querySelector(`input[name="textAction"][value="${options.textAction}"]`).checked = true;
   document.getElementById("textCustomPrompt1").value = options.textCustomPrompt1;
   document.getElementById("textCustomPrompt2").value = options.textCustomPrompt2;
   document.getElementById("textCustomPrompt3").value = options.textCustomPrompt3;
+  document.getElementById("textCustomModel1").value = options.textCustomModel1;
+  document.getElementById("textCustomModel2").value = options.textCustomModel2;
+  document.getElementById("textCustomModel3").value = options.textCustomModel3;
   document.getElementById("contextMenus").checked = options.contextMenus;
   document.getElementById("contextMenuLabel1").value = options.contextMenuLabel1;
   document.getElementById("contextMenuLabel2").value = options.contextMenuLabel2;
@@ -147,6 +165,18 @@ const applyOptionsToForm = (options) => {
     document.getElementById("noTextCustomPrompt3").value = options.noTextCustomPrompt3;
   }
 
+  if (options.noTextCustomModel1) {
+    document.getElementById("noTextCustomModel1").value = options.noTextCustomModel1;
+  }
+
+  if (options.noTextCustomModel2) {
+    document.getElementById("noTextCustomModel2").value = options.noTextCustomModel2;
+  }
+
+  if (options.noTextCustomModel3) {
+    document.getElementById("noTextCustomModel3").value = options.noTextCustomModel3;
+  }
+
   if (options.textAction) {
     const textActionElement = document.querySelector(`input[name="textAction"][value="${options.textAction}"]`);
 
@@ -168,6 +198,18 @@ const applyOptionsToForm = (options) => {
   // textCustomPrompt3 allows an empty string
   if (options.textCustomPrompt3 !== undefined) {
     document.getElementById("textCustomPrompt3").value = options.textCustomPrompt3;
+  }
+
+  if (options.textCustomModel1) {
+    document.getElementById("textCustomModel1").value = options.textCustomModel1;
+  }
+
+  if (options.textCustomModel2) {
+    document.getElementById("textCustomModel2").value = options.textCustomModel2;
+  }
+
+  if (options.textCustomModel3) {
+    document.getElementById("textCustomModel3").value = options.textCustomModel3;
   }
 
   if (options.contextMenus !== undefined) {
@@ -297,6 +339,17 @@ const initialize = async () => {
   // Load the language model template
   const languageModelTemplate = await loadTemplate("languageModelTemplate");
   document.getElementById("languageModelContainer").appendChild(languageModelTemplate);
+
+  // Load the language model template for custom actions
+  for (let i = 1; i <= 3; i++) {
+    const noTextCustomModelTemplate = await loadTemplate("languageModelTemplate");
+    noTextCustomModelTemplate.id = `noTextCustomModel${i}`;
+    document.getElementById(`noTextCustomModelContainer${i}`).appendChild(noTextCustomModelTemplate);
+
+    const textCustomModelTemplate = await loadTemplate("languageModelTemplate");
+    textCustomModelTemplate.id = `textCustomModel${i}`;
+    document.getElementById(`textCustomModelContainer${i}`).appendChild(textCustomModelTemplate);
+  }
 
   // Load the language code template
   const languageCodeTemplate = await loadTemplate("languageCodeTemplate");
