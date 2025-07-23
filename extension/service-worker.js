@@ -123,7 +123,7 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
       noTextCustom: 750000,
       textCustom: 750000
     },
-    "gemini-2.5-flash-lite-preview-06-17": {
+    "gemini-2.5-flash-lite": {
       summarize: 786432,
       translate: 65536,
       noTextCustom: 786432,

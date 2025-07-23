@@ -121,7 +121,7 @@ export const getModelId = (languageModel, userModelId) => {
     "1.5-pro": "gemini-1.5-pro",
     "1.5-flash": "gemini-1.5-flash",
     "1.5-flash-8b": "gemini-1.5-flash-8b",
-    "2.5-flash-lite-preview-06-17": "gemini-2.5-flash-lite-preview-06-17",
+    "2.5-flash-lite": "gemini-2.5-flash-lite",
     "gemma-3-27b-it": "gemma-3-27b-it"
   };
 
