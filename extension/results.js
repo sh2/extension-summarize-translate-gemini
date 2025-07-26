@@ -165,11 +165,6 @@ const askQuestion = async () => {
   // Update the formatted answer in the conversation
   formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false);
 
-  // Scroll to the bottom of the page
-  if (!streaming) {
-    window.scrollTo(0, document.body.scrollHeight);
-  }
-
   // Add the question and answer to the conversation
   conversation.push({ question: question, answer: answer });
 };

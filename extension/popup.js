@@ -398,11 +398,6 @@ const main = async (useCache) => {
           // A normal response was returned
           content += `${response.body.candidates[0].content.parts[0].text}\n\n`;
           document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false);
-
-          // Scroll to the bottom of the page
-          if (!streaming) {
-            window.scrollTo(0, document.body.scrollHeight);
-          }
         } else {
           // The expected response was not returned
           content = chrome.i18n.getMessage("popup_unexpected_response");
