@@ -350,21 +350,23 @@ const main = async (useCache) => {
         response = responseCache.value;
       } else {
         // Generate content
+        const streamKey = `streamContent_${resultIndex}`;
+        let streamIntervalId = 0;
+
         const responsePromise = chrome.runtime.sendMessage({
           message: "generate",
           actionType: actionType,
           mediaType: mediaType,
           taskInput: taskInputChunk,
           languageModel: languageModel,
-          languageCode: languageCode
+          languageCode: languageCode,
+          streamKey: streamKey
         });
-
-        let streamIntervalId = 0;
 
         if (streaming) {
           // Stream the content
           streamIntervalId = setInterval(async () => {
-            const { streamContent } = await chrome.storage.session.get({ streamContent: "" });
+            const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
 
             if (streamContent) {
               document.getElementById("content").innerHTML =

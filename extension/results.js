@@ -11,6 +11,7 @@ import {
 } from "./utils.js";
 
 const conversation = [];
+let resultIndex = 0;
 let result = {};
 
 const clearConversation = () => {
@@ -105,11 +106,12 @@ const askQuestion = async () => {
   }
 
   if (streaming) {
-    const responsePromise = streamGenerateContent(apiKey, modelId, apiContents, apiConfig);
+    const streamKey = `streamContent_${resultIndex}`;
+    const responsePromise = streamGenerateContent(apiKey, modelId, apiContents, apiConfig, streamKey);
 
     // Stream the content
     const streamIntervalId = setInterval(async () => {
-      const { streamContent } = await chrome.storage.session.get({ streamContent: "" });
+      const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
 
       if (streamContent) {
         formattedAnswerDiv.innerHTML = convertMarkdownToHtml(`${streamContent}\n\n`, false);
@@ -199,7 +201,7 @@ const initialize = async () => {
 
   // Restore the content from the session storage
   const urlParams = new URLSearchParams(window.location.search);
-  const resultIndex = urlParams.get("i");
+  resultIndex = urlParams.get("i");
   result = (await chrome.storage.session.get({ [`r_${resultIndex}`]: "" }))[`r_${resultIndex}`];
 
   // Convert the content from Markdown to HTML

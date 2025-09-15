@@ -164,9 +164,9 @@ export const generateContent = async (apiKey, modelId, apiContents, apiConfig) =
   }
 };
 
-export const streamGenerateContent = async (apiKey, modelId, apiContents, apiConfig) => {
+export const streamGenerateContent = async (apiKey, modelId, apiContents, apiConfig, streamKey) => {
   try {
-    await chrome.storage.session.remove("streamContent");
+    await chrome.storage.session.remove(streamKey);
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:streamGenerateContent`, {
       method: "POST",
@@ -206,7 +206,7 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents, apiCon
           }
 
           // Set the concatenated content to the session storage
-          await chrome.storage.session.set({ streamContent: content });
+          await chrome.storage.session.set({ [streamKey]: content });
         } catch {
           // If it cannot be parsed as JSON, wait for the next chunk
         }

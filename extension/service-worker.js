@@ -200,7 +200,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       sendResponse(taskInputChunks);
     } else if (request.message === "generate") {
       // Generate content
-      const { actionType, mediaType, taskInput, languageModel, languageCode } = request;
+      const { actionType, mediaType, taskInput, languageModel, languageCode, streamKey } = request;
       const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.0-flash-001" });
       const modelId = getModelId(languageModel, userModelId);
       const thinkingBudget = getThinkingBudget(languageModel, userModelId);
@@ -248,7 +248,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       }
 
       if (streaming) {
-        response = await streamGenerateContent(apiKey, modelId, [apiContent], apiConfig);
+        response = await streamGenerateContent(apiKey, modelId, [apiContent], apiConfig, streamKey);
       } else {
         response = await generateContent(apiKey, modelId, [apiContent], apiConfig);
       }
