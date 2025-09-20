@@ -74,8 +74,14 @@
     "results_button_copy": {
         "message": "Copy"
     },
+    "results_button_save": {
+        "message": "Save"
+    },
     "results_copied": {
         "message": "Copied."
+    },
+    "results_saved": {
+        "message": "Saved."
     },
     "results_button_send": {
         "message": "Send"

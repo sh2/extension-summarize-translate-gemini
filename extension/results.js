@@ -51,7 +51,7 @@ const saveContent = () => {
   exportTextToFile(result.url + "\n\n" + content);
 
   // Display a message indicating that the content was saved
-  operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
+  operationStatus.textContent = chrome.i18n.getMessage("results_saved");
   setTimeout(() => operationStatus.textContent = "", 1000);
 };
 
