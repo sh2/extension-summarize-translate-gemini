@@ -8,8 +8,14 @@
     "popup_button_copy": {
         "message": "Kopieren"
     },
+    "popup_button_save": {
+        "message": "Speichern"
+    },
     "popup_copied": {
         "message": "Kopiert."
+    },
+    "popup_saved": {
+        "message": "Gespeichert."
     },
     "popup_button_run": {
         "message": "Erneut ausführen"
@@ -68,14 +74,20 @@
     "results_button_copy": {
         "message": "Kopieren"
     },
+    "results_button_save": {
+        "message": "Speichern"
+    },
     "results_copied": {
         "message": "Kopiert."
+    },
+    "results_saved": {
+        "message": "Gespeichert."
     },
     "results_button_send": {
         "message": "Senden"
     },
     "results_waiting_response": {
-        "message": "Warte auf Antwort"
+        "message": "Warten auf Antwort"
     },
     "results_prompt_blocked": {
         "message": "Die Anfrage wurde blockiert."

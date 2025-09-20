@@ -3,13 +3,19 @@
         "message": "使用 Gemini 总结和翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页内容。后端使用 Gemini。"
+        "message": "总结和翻译网页。使用 Gemini 作为后端。"
     },
     "popup_button_copy": {
         "message": "复制"
     },
+    "popup_button_save": {
+        "message": "保存"
+    },
     "popup_copied": {
         "message": "已复制。"
+    },
+    "popup_saved": {
+        "message": "已保存。"
     },
     "popup_button_run": {
         "message": "再次运行"
@@ -51,7 +57,7 @@
         "message": "响应已被阻止。"
     },
     "popup_unexpected_response": {
-        "message": "发生意外错误。请检查控制台以获取详细信息。"
+        "message": "发生意外错误。请查看控制台获取详情。"
     },
     "popup_no_apikey": {
         "message": "请在选项页设置您的 Gemini API 密钥。"
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "复制"
     },
+    "results_button_save": {
+        "message": "保存"
+    },
     "results_copied": {
         "message": "已复制。"
+    },
+    "results_saved": {
+        "message": "已保存。"
     },
     "results_button_send": {
         "message": "发送"
@@ -84,7 +96,7 @@
         "message": "响应已被阻止。"
     },
     "results_unexpected_response": {
-        "message": "发生意外错误。请检查控制台以获取详细信息。"
+        "message": "发生意外错误。请查看控制台获取详情。"
     },
     "options_title": {
         "message": "选项 - 使用 Gemini 总结和翻译"

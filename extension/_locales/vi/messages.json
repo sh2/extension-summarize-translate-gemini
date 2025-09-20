@@ -8,8 +8,14 @@
     "popup_button_copy": {
         "message": "Sao chép"
     },
+    "popup_button_save": {
+        "message": "Lưu"
+    },
     "popup_copied": {
         "message": "Đã sao chép."
+    },
+    "popup_saved": {
+        "message": "Đã lưu."
     },
     "popup_button_run": {
         "message": "Chạy lại"
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "Sao chép"
     },
+    "results_button_save": {
+        "message": "Lưu"
+    },
     "results_copied": {
         "message": "Đã sao chép."
+    },
+    "results_saved": {
+        "message": "Đã lưu."
     },
     "results_button_send": {
         "message": "Gửi"

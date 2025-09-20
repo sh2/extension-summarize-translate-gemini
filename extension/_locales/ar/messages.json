@@ -1,15 +1,21 @@
 {
     "extension_name": {
-        "message": "تلخيص وترجمة باستخدام Gemini"
+        "message": "تلخيص وترجمة مع Gemini"
     },
     "extension_description": {
-        "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كواجهة خلفية."
+        "message": "لخص وترجم صفحات الويب. يستخدم Gemini كخدمة أساسية."
     },
     "popup_button_copy": {
         "message": "نسخ"
     },
+    "popup_button_save": {
+        "message": "حفظ"
+    },
     "popup_copied": {
         "message": "تم النسخ."
+    },
+    "popup_saved": {
+        "message": "تم الحفظ."
     },
     "popup_button_run": {
         "message": "تشغيل مرة أخرى"
@@ -21,28 +27,28 @@
         "message": "فتح صفحة الخيارات"
     },
     "popup_retrieving_captions": {
-        "message": "جاري استرداد التسميات التوضيحية"
+        "message": "محاولة استرداد التسميات التوضيحية"
     },
     "popup_summarizing": {
-        "message": "جاري التلخيص"
+        "message": "جارٍ التلخيص"
     },
     "popup_summarizing_captions": {
-        "message": "جاري تلخيص التسميات التوضيحية"
+        "message": "جارٍ تلخيص التسميات التوضيحية"
     },
     "popup_summarizing_image": {
-        "message": "جاري تلخيص الصورة"
+        "message": "جارٍ تلخيص الصورة"
     },
     "popup_translating": {
-        "message": "جاري الترجمة"
+        "message": "جارٍ الترجمة"
     },
     "popup_translating_captions": {
-        "message": "جاري ترجمة التسميات التوضيحية"
+        "message": "جارٍ ترجمة التسميات التوضيحية"
     },
     "popup_translating_image": {
-        "message": "جاري ترجمة الصورة"
+        "message": "جارٍ ترجمة الصورة"
     },
     "popup_processing": {
-        "message": "جاري المعالجة"
+        "message": "جارٍ المعالجة"
     },
     "popup_prompt_blocked": {
         "message": "تم حظر المطالبة."
@@ -54,13 +60,13 @@
         "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
     },
     "popup_no_apikey": {
-        "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
+        "message": "يرجى تعيين مفتاح API الخاص بـ Gemini في صفحة الخيارات."
     },
     "popup_miscellaneous_error": {
         "message": "تعذر تلخيص أو ترجمة هذه الصفحة."
     },
     "results_title": {
-        "message": "النتائج - تلخيص وترجمة باستخدام Gemini"
+        "message": "النتائج - تلخيص وترجمة مع Gemini"
     },
     "results_button_clear": {
         "message": "مسح المحادثة"
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "نسخ"
     },
+    "results_button_save": {
+        "message": "حفظ"
+    },
     "results_copied": {
         "message": "تم النسخ."
+    },
+    "results_saved": {
+        "message": "تم الحفظ."
     },
     "results_button_send": {
         "message": "إرسال"
@@ -87,13 +99,13 @@
         "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
     },
     "options_title": {
-        "message": "الخيارات - تلخيص وترجمة باستخدام Gemini"
+        "message": "الخيارات - تلخيص وترجمة مع Gemini"
     },
     "options_apikey": {
-        "message": "مفتاح Gemini API"
+        "message": "مفتاح API لـ Gemini"
     },
     "options_apikey_hint": {
-        "message": "يمكنك الحصول على مفتاح Gemini API من الصفحة التالية."
+        "message": "يمكنك الحصول على مفتاح API لـ Gemini من الصفحة التالية."
     },
     "options_model": {
         "message": "نموذج اللغة"
@@ -129,7 +141,7 @@
         "message": "إجراء مخصص 3"
     },
     "options_no_text_custom_notes": {
-        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (سطح المكتب فقط)."
+        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (لأجهزة سطح المكتب فقط)."
     },
     "options_text_action": {
         "message": "عند تحديد نص، قم بالإجراء التالي"
@@ -150,7 +162,7 @@
         "message": "إجراء مخصص 3"
     },
     "options_text_custom_notes": {
-        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (سطح المكتب فقط)."
+        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (لأجهزة سطح المكتب فقط)."
     },
     "options_contextmenus": {
         "message": "إضافة إلى قائمة السياق"
@@ -165,7 +177,7 @@
         "message": "تسمية للإجراء المخصص 3 (اختياري)"
     },
     "options_streaming": {
-        "message": "تمكين إخراج التدفق من نموذج اللغة"
+        "message": "تمكين إخراج البث من نموذج اللغة"
     },
     "options_theme": {
         "message": "السمة"

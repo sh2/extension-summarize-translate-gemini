@@ -1,6 +1,6 @@
 {
     "extension_name": {
-        "message": "Суммировать и переводить с Gemini"
+        "message": "Суммирование и перевод с Gemini"
     },
     "extension_description": {
         "message": "Суммирование и перевод веб-страниц. Использует Gemini в качестве бэкенда."
@@ -8,8 +8,14 @@
     "popup_button_copy": {
         "message": "Копировать"
     },
+    "popup_button_save": {
+        "message": "Сохранить"
+    },
     "popup_copied": {
         "message": "Скопировано."
+    },
+    "popup_saved": {
+        "message": "Сохранено."
     },
     "popup_button_run": {
         "message": "Повторить"
@@ -18,10 +24,10 @@
         "message": "Открыть результаты в новой вкладке"
     },
     "popup_button_options": {
-        "message": "Открыть настройки"
+        "message": "Открыть страницу настроек"
     },
     "popup_retrieving_captions": {
-        "message": "Получение субтитров"
+        "message": "Попытка получить субтитры"
     },
     "popup_summarizing": {
         "message": "Суммирование"
@@ -51,10 +57,10 @@
         "message": "Ответ заблокирован."
     },
     "popup_unexpected_response": {
-        "message": "Произошла непредвиденная ошибка. Подробности в консоли."
+        "message": "Произошла непредвиденная ошибка. Подробности см. в консоли."
     },
     "popup_no_apikey": {
-        "message": "Укажите ключ API Gemini на странице настроек."
+        "message": "Пожалуйста, укажите ключ API Gemini на странице настроек."
     },
     "popup_miscellaneous_error": {
         "message": "Не удалось суммировать или перевести эту страницу."
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "Копировать"
     },
+    "results_button_save": {
+        "message": "Сохранить"
+    },
     "results_copied": {
         "message": "Скопировано."
+    },
+    "results_saved": {
+        "message": "Сохранено."
     },
     "results_button_send": {
         "message": "Отправить"
@@ -84,7 +96,7 @@
         "message": "Ответ заблокирован."
     },
     "results_unexpected_response": {
-        "message": "Произошла непредвиденная ошибка. Подробности в консоли."
+        "message": "Произошла непредвиденная ошибка. Подробности см. в консоли."
     },
     "options_title": {
         "message": "Настройки - Суммирование и перевод с Gemini"
@@ -156,16 +168,16 @@
         "message": "Добавить в контекстное меню"
     },
     "options_contextmenu_label_1": {
-        "message": "Название для пользовательского действия 1 (необязательно)"
+        "message": "Метка для пользовательского действия 1 (необязательно)"
     },
     "options_contextmenu_label_2": {
-        "message": "Название для пользовательского действия 2 (необязательно)"
+        "message": "Метка для пользовательского действия 2 (необязательно)"
     },
     "options_contextmenu_label_3": {
-        "message": "Название для пользовательского действия 3 (необязательно)"
+        "message": "Метка для пользовательского действия 3 (необязательно)"
     },
     "options_streaming": {
-        "message": "Включить потоковый вывод от языковой модели"
+        "message": "Включить потоковый вывод из языковой модели"
     },
     "options_theme": {
         "message": "Тема"
