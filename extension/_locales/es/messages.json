@@ -8,14 +8,20 @@
     "popup_button_copy": {
         "message": "Copiar"
     },
+    "popup_button_save": {
+        "message": "Guardar"
+    },
     "popup_copied": {
         "message": "Copiado."
     },
+    "popup_saved": {
+        "message": "Guardado."
+    },
     "popup_button_run": {
-        "message": "Ejecutar de nuevo"
+        "message": "Volver a ejecutar"
     },
     "popup_button_results": {
-        "message": "Abrir resultados en una nueva pestaña"
+        "message": "Abrir resultados en nueva pestaña"
     },
     "popup_button_options": {
         "message": "Abrir página de opciones"
@@ -54,7 +60,7 @@
         "message": "Ocurrió un error inesperado. Consulte la consola para más detalles."
     },
     "popup_no_apikey": {
-        "message": "Por favor, configure su clave API de Gemini en la página de opciones."
+        "message": "Configure su clave API de Gemini en la página de opciones."
     },
     "popup_miscellaneous_error": {
         "message": "No se pudo resumir o traducir esta página."
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "Copiar"
     },
+    "results_button_save": {
+        "message": "Guardar"
+    },
     "results_copied": {
         "message": "Copiado."
+    },
+    "results_saved": {
+        "message": "Guardado."
     },
     "results_button_send": {
         "message": "Enviar"
@@ -108,7 +120,7 @@
         "message": "Idioma especificado por el usuario"
     },
     "options_language_notes": {
-        "message": "Nota: Esta configuración de idioma no afecta a las acciones personalizadas."
+        "message": "Nota: Esta configuración de idioma no afecta las acciones personalizadas."
     },
     "options_no_text_action": {
         "message": "Cuando no hay texto seleccionado, realizar la siguiente acción"

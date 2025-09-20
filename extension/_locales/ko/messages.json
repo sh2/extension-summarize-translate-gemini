@@ -8,8 +8,14 @@
     "popup_button_copy": {
         "message": "복사"
     },
+    "popup_button_save": {
+        "message": "저장"
+    },
     "popup_copied": {
         "message": "복사되었습니다."
+    },
+    "popup_saved": {
+        "message": "저장되었습니다."
     },
     "popup_button_run": {
         "message": "다시 실행"
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "복사"
     },
+    "results_button_save": {
+        "message": "저장"
+    },
     "results_copied": {
         "message": "복사되었습니다."
+    },
+    "results_saved": {
+        "message": "저장되었습니다."
     },
     "results_button_send": {
         "message": "보내기"
@@ -111,7 +123,7 @@
         "message": "참고: 이 언어 설정은 사용자 지정 작업에 영향을 주지 않습니다."
     },
     "options_no_text_action": {
-        "message": "텍스트가 선택되지 않은 경우 다음 작업 수행"
+        "message": "텍스트가 선택되지 않았을 때 다음 작업 수행"
     },
     "options_no_text_summarize": {
         "message": "요약 (기본값)"
@@ -132,7 +144,7 @@
         "message": "사용자 지정 작업은 상황에 맞는 메뉴(데스크톱 전용)를 통해서도 접근할 수 있습니다."
     },
     "options_text_action": {
-        "message": "텍스트가 선택된 경우 다음 작업 수행"
+        "message": "텍스트가 선택되었을 때 다음 작업 수행"
     },
     "options_text_summarize": {
         "message": "요약"
@@ -165,7 +177,7 @@
         "message": "사용자 지정 작업 3 레이블 (선택 사항)"
     },
     "options_streaming": {
-        "message": "언어 모델에서 스트리밍 출력 활성화"
+        "message": "언어 모델의 스트리밍 출력 활성화"
     },
     "options_theme": {
         "message": "테마"
@@ -198,7 +210,7 @@
         "message": "옵션을 클라우드에 동기화"
     },
     "options_sync_cloud_started": {
-        "message": "동기화 시작됨."
+        "message": "동기화 시작."
     },
     "options_sync_cloud_failed": {
         "message": "동기화 실패."

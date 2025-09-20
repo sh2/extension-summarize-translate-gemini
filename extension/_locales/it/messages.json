@@ -8,17 +8,23 @@
     "popup_button_copy": {
         "message": "Copia"
     },
+    "popup_button_save": {
+        "message": "Salva"
+    },
     "popup_copied": {
         "message": "Copiato."
+    },
+    "popup_saved": {
+        "message": "Salvato."
     },
     "popup_button_run": {
         "message": "Esegui di nuovo"
     },
     "popup_button_results": {
-        "message": "Apri risultati in una nuova scheda"
+        "message": "Apri i risultati in una nuova scheda"
     },
     "popup_button_options": {
-        "message": "Apri pagina opzioni"
+        "message": "Apri la pagina delle opzioni"
     },
     "popup_retrieving_captions": {
         "message": "Tentativo di recupero didascalie"
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "Copia"
     },
+    "results_button_save": {
+        "message": "Salva"
+    },
     "results_copied": {
         "message": "Copiato."
+    },
+    "results_saved": {
+        "message": "Salvato."
     },
     "results_button_send": {
         "message": "Invia"
@@ -102,7 +114,7 @@
         "message": "Modello specificato dall'utente"
     },
     "options_language": {
-        "message": "Lingua per Riassunto e Traduzione"
+        "message": "Lingua per riassunto e traduzione"
     },
     "options_language_user": {
         "message": "Lingua specificata dall'utente"
@@ -111,7 +123,7 @@
         "message": "Nota: questa impostazione della lingua non influisce sulle azioni personalizzate."
     },
     "options_no_text_action": {
-        "message": "Quando non è selezionato alcun testo, esegui la seguente azione"
+        "message": "Quando non è selezionato alcun testo, eseguire la seguente azione"
     },
     "options_no_text_summarize": {
         "message": "Riassumi (predefinito)"
@@ -132,7 +144,7 @@
         "message": "Le azioni personalizzate sono accessibili anche tramite il menu contestuale (solo desktop)."
     },
     "options_text_action": {
-        "message": "Quando il testo è selezionato, esegui la seguente azione"
+        "message": "Quando è selezionato del testo, eseguire la seguente azione"
     },
     "options_text_summarize": {
         "message": "Riassumi"

@@ -8,8 +8,14 @@
     "popup_button_copy": {
         "message": "Copiar"
     },
+    "popup_button_save": {
+        "message": "Salvar"
+    },
     "popup_copied": {
         "message": "Copiado."
+    },
+    "popup_saved": {
+        "message": "Salvo."
     },
     "popup_button_run": {
         "message": "Executar novamente"
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "Copiar"
     },
+    "results_button_save": {
+        "message": "Salvar"
+    },
     "results_copied": {
         "message": "Copiado."
+    },
+    "results_saved": {
+        "message": "Salvo."
     },
     "results_button_send": {
         "message": "Enviar"

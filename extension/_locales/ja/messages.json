@@ -8,8 +8,14 @@
     "popup_button_copy": {
         "message": "コピーする"
     },
+    "popup_button_save": {
+        "message": "保存する"
+    },
     "popup_copied": {
         "message": "コピーしました。"
+    },
+    "popup_saved": {
+        "message": "保存しました。"
     },
     "popup_button_run": {
         "message": "もう一度実行する"
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "コピーする"
     },
+    "results_button_save": {
+        "message": "保存する"
+    },
     "results_copied": {
         "message": "コピーしました。"
+    },
+    "results_saved": {
+        "message": "保存しました。"
     },
     "results_button_send": {
         "message": "送信する"

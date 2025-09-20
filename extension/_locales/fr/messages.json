@@ -8,8 +8,14 @@
     "popup_button_copy": {
         "message": "Copier"
     },
+    "popup_button_save": {
+        "message": "Enregistrer"
+    },
     "popup_copied": {
         "message": "Copié."
+    },
+    "popup_saved": {
+        "message": "Enregistré."
     },
     "popup_button_run": {
         "message": "Réexécuter"
@@ -18,7 +24,7 @@
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
-        "message": "Ouvrir la page des options"
+        "message": "Ouvrir les options"
     },
     "popup_retrieving_captions": {
         "message": "Tentative de récupération des légendes"
@@ -57,7 +63,7 @@
         "message": "Veuillez définir votre clé API Gemini sur la page des options."
     },
     "popup_miscellaneous_error": {
-        "message": "Impossible de résumer ou de traduire cette page."
+        "message": "Impossible de résumer ou traduire cette page."
     },
     "results_title": {
         "message": "Résultats - Résumer et traduire avec Gemini"
@@ -68,8 +74,14 @@
     "results_button_copy": {
         "message": "Copier"
     },
+    "results_button_save": {
+        "message": "Enregistrer"
+    },
     "results_copied": {
         "message": "Copié."
+    },
+    "results_saved": {
+        "message": "Enregistré."
     },
     "results_button_send": {
         "message": "Envoyer"
@@ -171,7 +183,7 @@
         "message": "Thème"
     },
     "options_font_size": {
-        "message": "Taille de la police"
+        "message": "Taille de police"
     },
     "options_button_save": {
         "message": "Enregistrer les options"
