@@ -34,12 +34,9 @@ Simply open a web page and click on the extension icon to summarize its content.
 ![Summarize](img/screenshot_summarize.png)
 
 If a YouTube video has captions, this extension will summarize the captions.
+Also, if you open an image file or a PDF file, this extension will summarize the currently displayed image.
 
-![Summarize - YouTube](img/screenshot_youtube.png)
-
-If you open an image file or a PDF file, this extension will summarize the currently displayed image.
-
-![Summarize - Image](img/screenshot_image.png)
+![Summarize - YouTube/Image](img/screenshot_youtube_image.png)
 
 ### Translate
 
