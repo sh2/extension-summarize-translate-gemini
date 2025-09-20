@@ -5,7 +5,8 @@ import {
   applyFontSize,
   loadTemplate,
   displayLoadingMessage,
-  convertMarkdownToHtml
+  convertMarkdownToHtml,
+  exportTextToFile
 } from "./utils.js";
 
 let resultIndex = 0;
@@ -20,6 +21,18 @@ const copyContent = async () => {
 
   // Display a message indicating that the content was copied
   operationStatus.textContent = chrome.i18n.getMessage("popup_copied");
+  setTimeout(() => operationStatus.textContent = "", 1000);
+};
+
+const saveContent = async () => {
+  const operationStatus = document.getElementById("operation-status");
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  // Save the content to a text file
+  exportTextToFile(tab.url + "\n\n" + content);
+
+  // Display a message indicating that the content was saved
+  operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
   setTimeout(() => operationStatus.textContent = "", 1000);
 };
 
@@ -317,6 +330,7 @@ const main = async (useCache) => {
     document.getElementById("languageModel").disabled = true;
     document.getElementById("languageCode").disabled = true;
     document.getElementById("copy").disabled = true;
+    document.getElementById("save").disabled = true;
     document.getElementById("results").disabled = true;
 
     // Extract the task information
@@ -432,16 +446,20 @@ const main = async (useCache) => {
     document.getElementById("languageModel").disabled = false;
     document.getElementById("languageCode").disabled = false;
     document.getElementById("copy").disabled = false;
+    document.getElementById("save").disabled = false;
     document.getElementById("results").disabled = false;
 
     // Convert the content from Markdown to HTML
     document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false);
 
     // Save the content to the session storage
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
     await chrome.storage.session.set({
-      [`r_${resultIndex}`]: {
+      [`result_${resultIndex}`]: {
         requestApiContent: response.requestApiContent,
-        responseContent: content
+        responseContent: content,
+        url: tab.url,
       }
     });
   }
@@ -497,6 +515,8 @@ document.getElementById("run").addEventListener("click", () => {
 });
 
 document.getElementById("copy").addEventListener("click", copyContent);
+
+document.getElementById("save").addEventListener("click", saveContent);
 
 document.getElementById("results").addEventListener("click", () => {
   chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${resultIndex}`) }, () => {

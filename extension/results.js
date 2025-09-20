@@ -7,7 +7,8 @@ import {
   getModelId,
   getThinkingBudget,
   generateContent,
-  streamGenerateContent
+  streamGenerateContent,
+  exportTextToFile
 } from "./utils.js";
 
 const conversation = [];
@@ -37,6 +38,23 @@ const copyContent = async () => {
   setTimeout(() => operationStatus.textContent = "", 1000);
 };
 
+const saveContent = () => {
+  const operationStatus = document.getElementById("operation-status");
+  let content = result.responseContent.replace(/\n+$/, "") + "\n\n";
+
+  conversation.forEach((item) => {
+    content += item.question.replace(/\n+$/, "") + "\n\n";
+    content += item.answer.replace(/\n+$/, "") + "\n\n";
+  });
+
+  // Save the content to a text file
+  exportTextToFile(result.url + "\n\n" + content);
+
+  // Display a message indicating that the content was saved
+  operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
+  setTimeout(() => operationStatus.textContent = "", 1000);
+};
+
 const askQuestion = async () => {
   const question = document.getElementById("text").value.trim();
   let answer = "";
@@ -48,6 +66,7 @@ const askQuestion = async () => {
   // Disable the buttons and input fields
   document.getElementById("clear").disabled = true;
   document.getElementById("copy").disabled = true;
+  document.getElementById("save").disabled = true;
   document.getElementById("text").disabled = true;
   document.getElementById("languageModel").disabled = true;
   document.getElementById("send").disabled = true;
@@ -160,6 +179,7 @@ const askQuestion = async () => {
   document.getElementById("send-status").textContent = "";
   document.getElementById("clear").disabled = false;
   document.getElementById("copy").disabled = false;
+  document.getElementById("save").disabled = false;
   document.getElementById("text").disabled = false;
   document.getElementById("languageModel").disabled = false;
   document.getElementById("send").disabled = false;
@@ -202,7 +222,7 @@ const initialize = async () => {
   // Restore the content from the session storage
   const urlParams = new URLSearchParams(window.location.search);
   resultIndex = urlParams.get("i");
-  result = (await chrome.storage.session.get({ [`r_${resultIndex}`]: "" }))[`r_${resultIndex}`];
+  result = (await chrome.storage.session.get({ [`result_${resultIndex}`]: "" }))[`result_${resultIndex}`];
 
   // Convert the content from Markdown to HTML
   document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false);
@@ -211,4 +231,5 @@ const initialize = async () => {
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("clear").addEventListener("click", clearConversation);
 document.getElementById("copy").addEventListener("click", copyContent);
+document.getElementById("save").addEventListener("click", saveContent);
 document.getElementById("send").addEventListener("click", askQuestion);

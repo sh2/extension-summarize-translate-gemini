@@ -14,6 +14,9 @@
     "popup_copied": {
         "message": "Copied."
     },
+    "popup_saved": {
+        "message": "Saved."
+    },
     "popup_button_run": {
         "message": "Run again"
     },

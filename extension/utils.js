@@ -102,9 +102,9 @@ export const convertMarkdownToHtml = (content, breaks) => {
   // Replace the HTML entities with the original characters in the code blocks
   htmlDiv.querySelectorAll("code").forEach(codeBlock => {
     codeBlock.innerHTML = codeBlock.innerHTML
-      .replace(/&lt;/g, "<")
-      .replace(/&gt;/g, ">")
-      .replace(/&amp;/g, "&");
+      .replaceAll("&lt;", "<")
+      .replaceAll("&gt;", ">")
+      .replaceAll("&amp;", "&");
   });
 
   return htmlDiv.innerHTML;
@@ -286,4 +286,17 @@ export const createContextMenus = async (useContextMenus, label1, label2, label3
       contexts: ["page", "selection", "action"]
     });
   }
+};
+
+export const exportTextToFile = (text) => {
+  const currentDate = new Date();
+  const adjustedDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
+  const localDateTimeString = adjustedDate.toISOString().split(".")[0].replaceAll("T", "_").replaceAll(":", "-");
+  const blob = new Blob([text], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `gemini-result_${localDateTimeString}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
 };
