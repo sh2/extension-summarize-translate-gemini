@@ -515,7 +515,6 @@ document.getElementById("run").addEventListener("click", () => {
 });
 
 document.getElementById("copy").addEventListener("click", copyContent);
-
 document.getElementById("save").addEventListener("click", saveContent);
 
 document.getElementById("results").addEventListener("click", () => {
