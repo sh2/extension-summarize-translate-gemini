@@ -296,7 +296,7 @@ export const exportTextToFile = (text) => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `gemini-result_${localDateTimeString}.txt`;
+  a.download = `gemini-results_${localDateTimeString}.txt`;
   a.click();
   URL.revokeObjectURL(url);
 };
