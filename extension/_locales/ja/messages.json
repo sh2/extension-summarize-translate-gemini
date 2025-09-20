@@ -8,6 +8,9 @@
     "popup_button_copy": {
         "message": "コピーする"
     },
+    "popup_button_save": {
+        "message": "保存する"
+    },
     "popup_copied": {
         "message": "コピーしました。"
     },

@@ -12,15 +12,15 @@ let resultIndex = 0;
 let content = "";
 
 const copyContent = async () => {
-  const copyStatus = document.getElementById("copy-status");
+  const operationStatus = document.getElementById("operation-status");
   let clipboardContent = content.replace(/\n+$/, "") + "\n\n";
 
   // Copy the content to the clipboard
   await navigator.clipboard.writeText(clipboardContent);
 
   // Display a message indicating that the content was copied
-  copyStatus.textContent = chrome.i18n.getMessage("popup_copied");
-  setTimeout(() => copyStatus.textContent = "", 1000);
+  operationStatus.textContent = chrome.i18n.getMessage("popup_copied");
+  setTimeout(() => operationStatus.textContent = "", 1000);
 };
 
 const getSelectedText = () => {

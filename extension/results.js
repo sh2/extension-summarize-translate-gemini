@@ -21,7 +21,7 @@ const clearConversation = () => {
 };
 
 const copyContent = async () => {
-  const copyStatus = document.getElementById("copy-status");
+  const operationStatus = document.getElementById("operation-status");
   let clipboardContent = result.responseContent.replace(/\n+$/, "") + "\n\n";
 
   conversation.forEach((item) => {
@@ -33,8 +33,8 @@ const copyContent = async () => {
   await navigator.clipboard.writeText(clipboardContent);
 
   // Display a message indicating that the content was copied
-  copyStatus.textContent = chrome.i18n.getMessage("results_copied");
-  setTimeout(() => copyStatus.textContent = "", 1000);
+  operationStatus.textContent = chrome.i18n.getMessage("results_copied");
+  setTimeout(() => operationStatus.textContent = "", 1000);
 };
 
 const askQuestion = async () => {

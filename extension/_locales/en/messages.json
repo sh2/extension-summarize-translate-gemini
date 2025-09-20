@@ -8,6 +8,9 @@
     "popup_button_copy": {
         "message": "Copy"
     },
+    "popup_button_save": {
+        "message": "Save"
+    },
     "popup_copied": {
         "message": "Copied."
     },
