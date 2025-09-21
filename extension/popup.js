@@ -459,7 +459,7 @@ const main = async (useCache) => {
       [`result_${resultIndex}`]: {
         requestApiContent: response.requestApiContent,
         responseContent: content,
-        url: tab.url,
+        url: tab.url
       }
     });
   }
