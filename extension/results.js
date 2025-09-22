@@ -175,6 +175,12 @@ const askQuestion = async () => {
     clearInterval(displayIntervalId);
   }
 
+  // Update the formatted answer in the conversation
+  formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false);
+
+  // Add the question and answer to the conversation
+  conversation.push({ question: question, answer: answer });
+
   // Enable the buttons and input fields
   document.getElementById("send-status").textContent = "";
   document.getElementById("clear").disabled = false;
@@ -183,12 +189,6 @@ const askQuestion = async () => {
   document.getElementById("text").disabled = false;
   document.getElementById("languageModel").disabled = false;
   document.getElementById("send").disabled = false;
-
-  // Update the formatted answer in the conversation
-  formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false);
-
-  // Add the question and answer to the conversation
-  conversation.push({ question: question, answer: answer });
 };
 
 const initialize = async () => {

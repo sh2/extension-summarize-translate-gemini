@@ -440,15 +440,6 @@ const main = async (useCache) => {
       clearInterval(displayIntervalId);
     }
 
-    // Enable the buttons and input fields
-    document.getElementById("status").textContent = "";
-    document.getElementById("run").disabled = false;
-    document.getElementById("languageModel").disabled = false;
-    document.getElementById("languageCode").disabled = false;
-    document.getElementById("copy").disabled = false;
-    document.getElementById("save").disabled = false;
-    document.getElementById("results").disabled = false;
-
     // Convert the content from Markdown to HTML
     document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false);
 
@@ -462,6 +453,15 @@ const main = async (useCache) => {
         url: tab.url
       }
     });
+
+    // Enable the buttons and input fields
+    document.getElementById("status").textContent = "";
+    document.getElementById("run").disabled = false;
+    document.getElementById("languageModel").disabled = false;
+    document.getElementById("languageCode").disabled = false;
+    document.getElementById("copy").disabled = false;
+    document.getElementById("save").disabled = false;
+    document.getElementById("results").disabled = false;
   }
 };
 
