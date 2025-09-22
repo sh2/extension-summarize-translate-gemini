@@ -18,7 +18,7 @@
         "message": "Guardado."
     },
     "popup_button_run": {
-        "message": "Volver a ejecutar"
+        "message": "Ejecutar de nuevo"
     },
     "popup_button_results": {
         "message": "Abrir resultados en nueva pestaña"
@@ -60,7 +60,7 @@
         "message": "Ocurrió un error inesperado. Consulte la consola para más detalles."
     },
     "popup_no_apikey": {
-        "message": "Configure su clave API de Gemini en la página de opciones."
+        "message": "Por favor, configure su clave API de Gemini en la página de opciones."
     },
     "popup_miscellaneous_error": {
         "message": "No se pudo resumir o traducir esta página."
@@ -120,7 +120,7 @@
         "message": "Idioma especificado por el usuario"
     },
     "options_language_notes": {
-        "message": "Nota: Esta configuración de idioma no afecta las acciones personalizadas."
+        "message": "Nota: Esta configuración de idioma no afecta a las acciones personalizadas."
     },
     "options_no_text_action": {
         "message": "Cuando no hay texto seleccionado, realizar la siguiente acción"
@@ -179,6 +179,9 @@
     "options_streaming": {
         "message": "Habilitar salida de streaming del modelo de lenguaje"
     },
+    "options_auto_save": {
+        "message": "Guardar resultados automáticamente después de la generación"
+    },
     "options_theme": {
         "message": "Tema"
     },
@@ -207,7 +210,7 @@
         "message": "Importación fallida."
     },
     "options_sync_cloud": {
-        "message": "Sincronizar opciones con la nube"
+        "message": "Sincronizar opciones en la nube"
     },
     "options_sync_cloud_started": {
         "message": "Sincronización iniciada."

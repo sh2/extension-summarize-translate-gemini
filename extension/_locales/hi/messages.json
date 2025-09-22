@@ -3,7 +3,7 @@
         "message": "Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "extension_description": {
-        "message": "वेब पृष्ठों का सारांश करें और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
+        "message": "वेब पेजों का सारांश करें और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
     },
     "popup_button_copy": {
         "message": "कॉपी करें"
@@ -21,7 +21,7 @@
         "message": "पुनः चलाएँ"
     },
     "popup_button_results": {
-        "message": "परिणामों को नए टैब में खोलें"
+        "message": "नए टैब में परिणाम खोलें"
     },
     "popup_button_options": {
         "message": "विकल्प पृष्ठ खोलें"
@@ -48,7 +48,7 @@
         "message": "छवि का अनुवाद किया जा रहा है"
     },
     "popup_processing": {
-        "message": "प्रक्रिया जारी है"
+        "message": "संसाधित किया जा रहा है"
     },
     "popup_prompt_blocked": {
         "message": "प्रॉम्प्ट अवरुद्ध कर दिया गया।"
@@ -69,7 +69,7 @@
         "message": "परिणाम - Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "results_button_clear": {
-        "message": "बातचीत साफ़ करें"
+        "message": "वार्तालाप साफ़ करें"
     },
     "results_button_copy": {
         "message": "कॉपी करें"
@@ -178,6 +178,9 @@
     },
     "options_streaming": {
         "message": "भाषा मॉडल से स्ट्रीमिंग आउटपुट सक्षम करें"
+    },
+    "options_auto_save": {
+        "message": "जनरेशन के बाद परिणामों को स्वतः सहेजें"
     },
     "options_theme": {
         "message": "थीम"

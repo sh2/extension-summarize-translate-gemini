@@ -3,7 +3,7 @@
         "message": "تلخيص وترجمة مع Gemini"
     },
     "extension_description": {
-        "message": "لخص وترجم صفحات الويب. يستخدم Gemini كخدمة أساسية."
+        "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كواجهة خلفية."
     },
     "popup_button_copy": {
         "message": "نسخ"
@@ -60,7 +60,7 @@
         "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
     },
     "popup_no_apikey": {
-        "message": "يرجى تعيين مفتاح API الخاص بـ Gemini في صفحة الخيارات."
+        "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
     },
     "popup_miscellaneous_error": {
         "message": "تعذر تلخيص أو ترجمة هذه الصفحة."
@@ -102,10 +102,10 @@
         "message": "الخيارات - تلخيص وترجمة مع Gemini"
     },
     "options_apikey": {
-        "message": "مفتاح API لـ Gemini"
+        "message": "مفتاح Gemini API"
     },
     "options_apikey_hint": {
-        "message": "يمكنك الحصول على مفتاح API لـ Gemini من الصفحة التالية."
+        "message": "يمكنك الحصول على مفتاح Gemini API من الصفحة التالية."
     },
     "options_model": {
         "message": "نموذج اللغة"
@@ -178,6 +178,9 @@
     },
     "options_streaming": {
         "message": "تمكين إخراج البث من نموذج اللغة"
+    },
+    "options_auto_save": {
+        "message": "حفظ النتائج تلقائيًا بعد الإنشاء"
     },
     "options_theme": {
         "message": "السمة"

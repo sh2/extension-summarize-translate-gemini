@@ -123,7 +123,7 @@
         "message": "Remarque : Ce paramètre de langue n'affecte pas les actions personnalisées."
     },
     "options_no_text_action": {
-        "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
+        "message": "Si aucun texte n'est sélectionné, effectuer l'action suivante"
     },
     "options_no_text_summarize": {
         "message": "Résumer (par défaut)"
@@ -144,7 +144,7 @@
         "message": "Les actions personnalisées sont également accessibles via le menu contextuel (ordinateur de bureau uniquement)."
     },
     "options_text_action": {
-        "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
+        "message": "Si du texte est sélectionné, effectuer l'action suivante"
     },
     "options_text_summarize": {
         "message": "Résumer"
@@ -178,6 +178,9 @@
     },
     "options_streaming": {
         "message": "Activer la diffusion en continu de la sortie du modèle linguistique"
+    },
+    "options_auto_save": {
+        "message": "Enregistrer automatiquement les résultats après génération"
     },
     "options_theme": {
         "message": "Thème"

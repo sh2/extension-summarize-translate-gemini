@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "Gemini সহ সারসংক্ষেপ ও অনুবাদ"
+        "message": "Gemini ব্যবহার করে সারসংক্ষেপ ও অনুবাদ করুন"
     },
     "extension_description": {
-        "message": "ওয়েব পৃষ্ঠা সারসংক্ষেপ ও অনুবাদ করুন। এটি Gemini ব্যাকএন্ড হিসেবে ব্যবহার করে।"
+        "message": "ওয়েব পৃষ্ঠা সারসংক্ষেপ ও অনুবাদ করুন। এটি Gemini কে ব্যাকএন্ড হিসেবে ব্যবহার করে।"
     },
     "popup_button_copy": {
         "message": "অনুলিপি করুন"
@@ -15,7 +15,7 @@
         "message": "অনুলিপি করা হয়েছে।"
     },
     "popup_saved": {
-        "message": "সংরক্ষণ করা হয়েছে।"
+        "message": "সংরক্ষিত হয়েছে।"
     },
     "popup_button_run": {
         "message": "পুনরায় চালান"
@@ -66,7 +66,7 @@
         "message": "এই পৃষ্ঠাটি সারসংক্ষেপ বা অনুবাদ করা সম্ভব নয়।"
     },
     "results_title": {
-        "message": "ফলাফল - Gemini সহ সারসংক্ষেপ ও অনুবাদ"
+        "message": "ফলাফল - Gemini ব্যবহার করে সারসংক্ষেপ ও অনুবাদ করুন"
     },
     "results_button_clear": {
         "message": "কথোপকথন মুছে ফেলুন"
@@ -81,10 +81,10 @@
         "message": "অনুলিপি করা হয়েছে।"
     },
     "results_saved": {
-        "message": "সংরক্ষণ করা হয়েছে।"
+        "message": "সংরক্ষিত হয়েছে।"
     },
     "results_button_send": {
-        "message": "পাঠান"
+        "message": "প্রেরণ করুন"
     },
     "results_waiting_response": {
         "message": "প্রতিক্রিয়ার জন্য অপেক্ষা করা হচ্ছে"
@@ -99,7 +99,7 @@
         "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। বিস্তারিত জানতে কনসোল দেখুন।"
     },
     "options_title": {
-        "message": "বিকল্প - Gemini সহ সারসংক্ষেপ ও অনুবাদ"
+        "message": "বিকল্প - Gemini ব্যবহার করে সারসংক্ষেপ ও অনুবাদ করুন"
     },
     "options_apikey": {
         "message": "Gemini API কী"
@@ -123,7 +123,7 @@
         "message": "দ্রষ্টব্য: এই ভাষা সেটিং কাস্টম অ্যাকশনগুলিকে প্রভাবিত করে না।"
     },
     "options_no_text_action": {
-        "message": "কোনো টেক্সট নির্বাচিত না থাকলে, নিম্নলিখিত কাজটি করুন"
+        "message": "কোনো পাঠ্য নির্বাচিত না থাকলে, নিম্নলিখিত ক্রিয়াটি সম্পাদন করুন"
     },
     "options_no_text_summarize": {
         "message": "সারসংক্ষেপ করুন (ডিফল্ট)"
@@ -144,7 +144,7 @@
         "message": "কাস্টম অ্যাকশনগুলি কনটেক্সট মেনু (শুধুমাত্র ডেস্কটপ) থেকেও অ্যাক্সেসযোগ্য।"
     },
     "options_text_action": {
-        "message": "টেক্সট নির্বাচিত থাকলে, নিম্নলিখিত কাজটি করুন"
+        "message": "পাঠ্য নির্বাচিত থাকলে, নিম্নলিখিত ক্রিয়াটি সম্পাদন করুন"
     },
     "options_text_summarize": {
         "message": "সারসংক্ষেপ করুন"
@@ -179,6 +179,9 @@
     "options_streaming": {
         "message": "ভাষা মডেল থেকে স্ট্রিমিং আউটপুট সক্ষম করুন"
     },
+    "options_auto_save": {
+        "message": "জেনারেট করার পর স্বয়ংক্রিয়ভাবে ফলাফল সংরক্ষণ করুন"
+    },
     "options_theme": {
         "message": "থিম"
     },
@@ -186,13 +189,13 @@
         "message": "ফন্টের আকার"
     },
     "options_button_save": {
-        "message": "বিকল্পগুলি সংরক্ষণ করুন"
+        "message": "বিকল্প সংরক্ষণ করুন"
     },
     "options_saved": {
-        "message": "সংরক্ষণ করা হয়েছে।"
+        "message": "সংরক্ষিত হয়েছে।"
     },
     "options_export": {
-        "message": "ফাইলে বিকল্পগুলি এক্সপোর্ট করুন"
+        "message": "বিকল্পগুলি ফাইলে এক্সপোর্ট করুন"
     },
     "options_export_api_key": {
         "message": "API কী অন্তর্ভুক্ত করুন"
@@ -207,7 +210,7 @@
         "message": "ইম্পোর্ট ব্যর্থ হয়েছে।"
     },
     "options_sync_cloud": {
-        "message": "ক্লাউডে বিকল্পগুলি সিঙ্ক করুন"
+        "message": "বিকল্পগুলি ক্লাউডে সিঙ্ক করুন"
     },
     "options_sync_cloud_started": {
         "message": "সিঙ্ক শুরু হয়েছে।"
@@ -222,7 +225,7 @@
         "message": "পুনরুদ্ধার সফল হয়েছে।"
     },
     "context_standard_action": {
-        "message": "সাধারণ অ্যাকশন"
+        "message": "সাধারণ ক্রিয়া"
     },
     "context_custom_action_1": {
         "message": "কাস্টম অ্যাকশন ১"

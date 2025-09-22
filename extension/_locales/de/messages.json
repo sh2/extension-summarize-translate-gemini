@@ -60,7 +60,7 @@
         "message": "Ein unerwarteter Fehler ist aufgetreten. Details in der Konsole prüfen."
     },
     "popup_no_apikey": {
-        "message": "Bitte legen Sie Ihren Gemini API-Schlüssel auf der Optionsseite fest."
+        "message": "Bitte geben Sie Ihren Gemini API-Schlüssel auf der Optionsseite ein."
     },
     "popup_miscellaneous_error": {
         "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
@@ -178,6 +178,9 @@
     },
     "options_streaming": {
         "message": "Streaming-Ausgabe vom Sprachmodell aktivieren"
+    },
+    "options_auto_save": {
+        "message": "Ergebnisse nach Generierung automatisch speichern"
     },
     "options_theme": {
         "message": "Design"

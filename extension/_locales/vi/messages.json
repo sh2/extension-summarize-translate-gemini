@@ -177,7 +177,10 @@
         "message": "Nhãn cho hành động tùy chỉnh 3 (tùy chọn)"
     },
     "options_streaming": {
-        "message": "Bật đầu ra truyền trực tuyến từ mô hình ngôn ngữ"
+        "message": "Bật đầu ra phát trực tuyến từ mô hình ngôn ngữ"
+    },
+    "options_auto_save": {
+        "message": "Tự động lưu kết quả sau khi tạo"
     },
     "options_theme": {
         "message": "Chủ đề"
@@ -207,13 +210,13 @@
         "message": "Nhập thất bại."
     },
     "options_sync_cloud": {
-        "message": "Đồng bộ tùy chọn lên đám mây"
+        "message": "Đồng bộ hóa tùy chọn lên đám mây"
     },
     "options_sync_cloud_started": {
-        "message": "Đồng bộ đã bắt đầu."
+        "message": "Đồng bộ hóa đã bắt đầu."
     },
     "options_sync_cloud_failed": {
-        "message": "Đồng bộ thất bại."
+        "message": "Đồng bộ hóa thất bại."
     },
     "options_restore_cloud": {
         "message": "Khôi phục tùy chọn từ đám mây"

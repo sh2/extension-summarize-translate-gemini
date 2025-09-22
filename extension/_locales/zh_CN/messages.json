@@ -3,7 +3,7 @@
         "message": "使用 Gemini 总结和翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页。使用 Gemini 作为后端。"
+        "message": "总结和翻译网页内容。使用 Gemini 作为后端。"
     },
     "popup_button_copy": {
         "message": "复制"
@@ -51,7 +51,7 @@
         "message": "正在处理"
     },
     "popup_prompt_blocked": {
-        "message": "提示已被阻止。"
+        "message": "提示词已被阻止。"
     },
     "popup_response_blocked": {
         "message": "响应已被阻止。"
@@ -90,7 +90,7 @@
         "message": "等待响应"
     },
     "results_prompt_blocked": {
-        "message": "提示已被阻止。"
+        "message": "提示词已被阻止。"
     },
     "results_response_blocked": {
         "message": "响应已被阻止。"
@@ -178,6 +178,9 @@
     },
     "options_streaming": {
         "message": "启用语言模型流式输出"
+    },
+    "options_auto_save": {
+        "message": "生成后自动保存结果"
     },
     "options_theme": {
         "message": "主题"
