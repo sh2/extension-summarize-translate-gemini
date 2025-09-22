@@ -179,6 +179,9 @@
     "options_streaming": {
         "message": "言語モデルからのストリーミング出力を有効にする"
     },
+    "options_auto_save": {
+        "message": "生成後に結果を自動保存する"
+    },
     "options_theme": {
         "message": "テーマ"
     },

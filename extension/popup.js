@@ -307,6 +307,7 @@ const getLoadingMessage = (actionType, mediaType) => {
 const main = async (useCache) => {
   let displayIntervalId = 0;
   let response = {};
+  let didGenerate = false;
 
   // Clear the content
   content = "";
@@ -363,6 +364,9 @@ const main = async (useCache) => {
         // Use the cached response
         response = responseCache.value;
       } else {
+        // Indicate that a generation request was made
+        didGenerate = true;
+
         // Generate content
         const streamKey = `streamContent_${resultIndex}`;
         let streamIntervalId = 0;
@@ -453,6 +457,13 @@ const main = async (useCache) => {
         url: tab.url
       }
     });
+
+    // If auto-save is enabled and content was generated, save the content
+    const { autoSave } = await chrome.storage.local.get({ autoSave: false });
+
+    if (autoSave && didGenerate) {
+      await saveContent();
+    }
 
     // Enable the buttons and input fields
     document.getElementById("status").textContent = "";

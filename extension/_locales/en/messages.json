@@ -179,6 +179,9 @@
     "options_streaming": {
         "message": "Enable streaming output from the language model"
     },
+    "options_auto_save": {
+        "message": "Automatically save results after generation"
+    },
     "options_theme": {
         "message": "Theme"
     },

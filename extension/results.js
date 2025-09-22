@@ -109,7 +109,13 @@ const askQuestion = async () => {
   window.scrollTo(0, document.body.scrollHeight);
 
   // Generate the response
-  const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.0-flash-001" });
+  const { apiKey, streaming, userModelId, autoSave } = await chrome.storage.local.get({
+    apiKey: "",
+    streaming: false,
+    userModelId: "gemini-2.0-flash-001",
+    autoSave: false
+  });
+
   const languageModel = document.getElementById("languageModel").value;
   const modelId = getModelId(languageModel, userModelId);
   const thinkingBudget = getThinkingBudget(languageModel, userModelId);
@@ -180,6 +186,11 @@ const askQuestion = async () => {
 
   // Add the question and answer to the conversation
   conversation.push({ question: question, answer: answer });
+
+  // If auto-save is enabled, save the content
+  if (autoSave) {
+    saveContent();
+  }
 
   // Enable the buttons and input fields
   document.getElementById("send-status").textContent = "";
