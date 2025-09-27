@@ -190,13 +190,31 @@ const extractTaskInformation = async (languageCode, triggerAction) => {
     actionType = (await chrome.storage.local.get({ textAction: "translate" })).textAction;
 
     switch (triggerAction) {
+      case "summarize":
+        actionType = "summarize";
+        break;
+      case "translate":
+        actionType = "translate";
+        break;
+      case "custom-action-1-no-selection":
+        actionType = "noTextCustom1";
+        break;
+      case "custom-action-2-no-selection":
+        actionType = "noTextCustom2";
+        break;
+      case "custom-action-3-no-selection":
+        actionType = "noTextCustom3";
+        break;
       case "custom-action-1":
+      case "custom-action-1-selection":
         actionType = "textCustom1";
         break;
       case "custom-action-2":
+      case "custom-action-2-selection":
         actionType = "textCustom2";
         break;
       case "custom-action-3":
+      case "custom-action-3-selection":
         actionType = "textCustom3";
         break;
     }
@@ -207,14 +225,32 @@ const extractTaskInformation = async (languageCode, triggerAction) => {
     actionType = (await chrome.storage.local.get({ noTextAction: "summarize" })).noTextAction;
 
     switch (triggerAction) {
+      case "summarize":
+        actionType = "summarize";
+        break;
+      case "translate":
+        actionType = "translate";
+        break;
       case "custom-action-1":
+      case "custom-action-1-no-selection":
         actionType = "noTextCustom1";
         break;
       case "custom-action-2":
+      case "custom-action-2-no-selection":
         actionType = "noTextCustom2";
         break;
       case "custom-action-3":
+      case "custom-action-3-no-selection":
         actionType = "noTextCustom3";
+        break;
+      case "custom-action-1-selection":
+        actionType = "textCustom1";
+        break;
+      case "custom-action-2-selection":
+        actionType = "textCustom2";
+        break;
+      case "custom-action-3-selection":
+        actionType = "textCustom3";
         break;
     }
 

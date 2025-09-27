@@ -306,6 +306,7 @@ if (chrome.contextMenus) {
       } catch (error) {
         await chrome.storage.session.remove("triggerAction");
         console.log(error);
+        console.log("If you're using Firefox, open \"about:config\" and set \"extensions.openPopupWithoutUserGesture.enabled\" to true.");
       }
     })();
   });
@@ -316,14 +317,20 @@ const initContextMenus = async () => {
     contextMenus: true,
     contextMenuLabel1: "",
     contextMenuLabel2: "",
-    contextMenuLabel3: ""
+    contextMenuLabel3: "",
+    contextMenuLabel1Text: "",
+    contextMenuLabel2Text: "",
+    contextMenuLabel3Text: ""
   });
 
   await createContextMenus(
     options.contextMenus,
     options.contextMenuLabel1,
     options.contextMenuLabel2,
-    options.contextMenuLabel3
+    options.contextMenuLabel3,
+    options.contextMenuLabel1Text,
+    options.contextMenuLabel2Text,
+    options.contextMenuLabel3Text
   );
 };
 

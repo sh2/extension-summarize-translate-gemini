@@ -122,59 +122,65 @@
     "options_language_notes": {
         "message": "Note: This language setting does not affect custom actions."
     },
-    "options_no_text_action": {
+    "options_action_description_no_selection": {
         "message": "When no text is selected, perform the following action"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "Summarize (default)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "Translate"
     },
-    "options_no_text_custom_1": {
-        "message": "Custom action 1"
+    "options_action_custom_1_no_selection": {
+        "message": "Custom action 1 (No selection)"
     },
-    "options_no_text_custom_2": {
-        "message": "Custom action 2"
+    "options_action_custom_2_no_selection": {
+        "message": "Custom action 2 (No selection)"
     },
-    "options_no_text_custom_3": {
-        "message": "Custom action 3"
+    "options_action_custom_3_no_selection": {
+        "message": "Custom action 3 (No selection)"
     },
-    "options_no_text_custom_notes": {
-        "message": "Custom actions are also accessible via the context menu (desktop only)."
-    },
-    "options_text_action": {
+    "options_action_description_selection": {
         "message": "When text is selected, perform the following action"
     },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "Summarize"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "Translate (default)"
     },
-    "options_text_custom_1": {
-        "message": "Custom action 1"
+    "options_action_custom_1_selection": {
+        "message": "Custom action 1 (Selection)"
     },
-    "options_text_custom_2": {
-        "message": "Custom action 2"
+    "options_action_custom_2_selection": {
+        "message": "Custom action 2 (Selection)"
     },
-    "options_text_custom_3": {
-        "message": "Custom action 3"
-    },
-    "options_text_custom_notes": {
-        "message": "Custom actions are also accessible via the context menu (desktop only)."
-    },
-    "options_contextmenus": {
-        "message": "Add to context menu"
+    "options_action_custom_3_selection": {
+        "message": "Custom action 3 (Selection)"
     },
     "options_contextmenu_label_1": {
-        "message": "Label for custom action 1 (optional)"
+        "message": "Label for custom action 1 (No selection)"
     },
     "options_contextmenu_label_2": {
-        "message": "Label for custom action 2 (optional)"
+        "message": "Label for custom action 2 (No selection)"
     },
     "options_contextmenu_label_3": {
-        "message": "Label for custom action 3 (optional)"
+        "message": "Label for custom action 3 (No selection)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "Label for custom action 1 (Selection)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "Label for custom action 2 (Selection)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "Label for custom action 3 (Selection)"
+    },
+    "options_contextmenus_add": {
+        "message": "Add to context menu"
+    },
+    "options_contextmenus_notes": {
+        "message": "Custom actions are also accessible via the context menu (desktop only)."
     },
     "options_streaming": {
         "message": "Enable streaming output from the language model"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "Restore succeeded."
     },
-    "context_standard_action": {
-        "message": "Standard action"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "Custom action 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "Custom action 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "Custom action 3"
     }
 }

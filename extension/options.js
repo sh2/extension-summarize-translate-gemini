@@ -23,6 +23,9 @@ const INITIAL_OPTIONS = {
   contextMenuLabel1: "",
   contextMenuLabel2: "",
   contextMenuLabel3: "",
+  contextMenuLabel1Text: "",
+  contextMenuLabel2Text: "",
+  contextMenuLabel3Text: "",
   streaming: false,
   autoSave: false,
   theme: "system",
@@ -59,6 +62,9 @@ const getOptionsFromForm = (includeApiKey) => {
     contextMenuLabel1: document.getElementById("contextMenuLabel1").value,
     contextMenuLabel2: document.getElementById("contextMenuLabel2").value,
     contextMenuLabel3: document.getElementById("contextMenuLabel3").value,
+    contextMenuLabel1Text: document.getElementById("contextMenuLabel1Text").value,
+    contextMenuLabel2Text: document.getElementById("contextMenuLabel2Text").value,
+    contextMenuLabel3Text: document.getElementById("contextMenuLabel3Text").value,
     streaming: document.getElementById("streaming").checked,
     autoSave: document.getElementById("autoSave").checked,
     theme: document.getElementById("theme").value,
@@ -92,6 +98,9 @@ const setOptionsToForm = async () => {
   document.getElementById("contextMenuLabel1").value = options.contextMenuLabel1;
   document.getElementById("contextMenuLabel2").value = options.contextMenuLabel2;
   document.getElementById("contextMenuLabel3").value = options.contextMenuLabel3;
+  document.getElementById("contextMenuLabel1Text").value = options.contextMenuLabel1Text;
+  document.getElementById("contextMenuLabel2Text").value = options.contextMenuLabel2Text;
+  document.getElementById("contextMenuLabel3Text").value = options.contextMenuLabel3Text;
   document.getElementById("streaming").checked = options.streaming;
   document.getElementById("autoSave").checked = options.autoSave;
   document.getElementById("theme").value = options.theme;
@@ -192,6 +201,21 @@ const applyOptionsToForm = (options) => {
     document.getElementById("contextMenuLabel3").value = options.contextMenuLabel3;
   }
 
+  // contextMenuLabel1Text allows an empty string
+  if (options.contextMenuLabel1Text !== undefined) {
+    document.getElementById("contextMenuLabel1Text").value = options.contextMenuLabel1Text;
+  }
+
+  // contextMenuLabel2Text allows an empty string
+  if (options.contextMenuLabel2Text !== undefined) {
+    document.getElementById("contextMenuLabel2Text").value = options.contextMenuLabel2Text;
+  }
+
+  // contextMenuLabel3Text allows an empty string
+  if (options.contextMenuLabel3Text !== undefined) {
+    document.getElementById("contextMenuLabel3Text").value = options.contextMenuLabel3Text;
+  }
+
   if (options.streaming !== undefined) {
     document.getElementById("streaming").checked = options.streaming;
   }
@@ -224,7 +248,10 @@ const saveOptions = async () => {
     options.contextMenus,
     options.contextMenuLabel1,
     options.contextMenuLabel2,
-    options.contextMenuLabel3
+    options.contextMenuLabel3,
+    options.contextMenuLabel1Text,
+    options.contextMenuLabel2Text,
+    options.contextMenuLabel3Text
   );
 
   applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);

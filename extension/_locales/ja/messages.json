@@ -122,59 +122,65 @@
     "options_language_notes": {
         "message": "注意: この言語設定はカスタムアクションには影響しません。"
     },
-    "options_no_text_action": {
+    "options_action_description_no_selection": {
         "message": "テキストが選択されなかったときは、以下のアクションを実行する"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "要約 (デフォルト)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "翻訳"
     },
-    "options_no_text_custom_1": {
-        "message": "カスタムアクション1"
+    "options_action_custom_1_no_selection": {
+        "message": "カスタムアクション1 (選択なし)"
     },
-    "options_no_text_custom_2": {
-        "message": "カスタムアクション2"
+    "options_action_custom_2_no_selection": {
+        "message": "カスタムアクション2 (選択なし)"
     },
-    "options_no_text_custom_3": {
-        "message": "カスタムアクション3"
+    "options_action_custom_3_no_selection": {
+        "message": "カスタムアクション3 (選択なし)"
     },
-    "options_no_text_custom_notes": {
-        "message": "カスタムアクションはコンテキストメニューからも利用可能です (デスクトップのみ)。"
-    },
-    "options_text_action": {
+    "options_action_description_selection": {
         "message": "テキストが選択されたときは、以下のアクションを実行する"
     },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "要約"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "翻訳 (デフォルト)"
     },
-    "options_text_custom_1": {
-        "message": "カスタムアクション1"
+    "options_action_custom_1_selection": {
+        "message": "カスタムアクション1 (選択あり)"
     },
-    "options_text_custom_2": {
-        "message": "カスタムアクション2"
+    "options_action_custom_2_selection": {
+        "message": "カスタムアクション2 (選択あり)"
     },
-    "options_text_custom_3": {
-        "message": "カスタムアクション3"
-    },
-    "options_text_custom_notes": {
-        "message": "カスタムアクションはコンテキストメニューからも利用可能です (デスクトップのみ)。"
-    },
-    "options_contextmenus": {
-        "message": "コンテキストメニューに登録する"
+    "options_action_custom_3_selection": {
+        "message": "カスタムアクション3 (選択あり)"
     },
     "options_contextmenu_label_1": {
-        "message": "カスタムアクション1のラベル (オプション)"
+        "message": "カスタムアクション1のラベル (選択なし)"
     },
     "options_contextmenu_label_2": {
-        "message": "カスタムアクション2のラベル (オプション)"
+        "message": "カスタムアクション2のラベル (選択なし)"
     },
     "options_contextmenu_label_3": {
-        "message": "カスタムアクション3のラベル (オプション)"
+        "message": "カスタムアクション3のラベル (選択なし)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "カスタムアクション1のラベル (選択あり)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "カスタムアクション2のラベル (選択あり)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "カスタムアクション3のラベル (選択あり)"
+    },
+    "options_contextmenus_add": {
+        "message": "コンテキストメニューに登録する"
+    },
+    "options_contextmenus_notes": {
+        "message": "カスタムアクションはコンテキストメニューからも利用可能です (デスクトップのみ)。"
     },
     "options_streaming": {
         "message": "言語モデルからのストリーミング出力を有効にする"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "復元に成功しました。"
     },
-    "context_standard_action": {
-        "message": "標準アクション"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "カスタムアクション1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "カスタムアクション2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "カスタムアクション3"
     }
 }

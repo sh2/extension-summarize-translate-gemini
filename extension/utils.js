@@ -253,7 +253,13 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents, apiCon
   }
 };
 
-export const createContextMenus = async (useContextMenus, label1, label2, label3) => {
+const formatTitle = (label1, label1DefaultKey, label2, label2DefaultKey) => {
+  const title1 = label1 || chrome.i18n.getMessage(label1DefaultKey);
+  const title2 = label2 || chrome.i18n.getMessage(label2DefaultKey);
+  return `${title1} / ${title2}`;
+};
+
+export const createContextMenus = async (useContextMenus, label1, label2, label3, label1Text, label2Text, label3Text) => {
   if (!chrome.contextMenus) {
     // Firefox for Android does not support chrome.contextMenus
     return;
@@ -263,27 +269,87 @@ export const createContextMenus = async (useContextMenus, label1, label2, label3
 
   if (useContextMenus) {
     chrome.contextMenus.create({
-      id: "standard-action",
-      title: chrome.i18n.getMessage("context_standard_action"),
-      contexts: ["page", "selection", "action"]
+      id: "summarize",
+      title: chrome.i18n.getMessage("options_action_summarize_selection"),
+      contexts: ["page", "selection", "image", "action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "translate",
+      title: chrome.i18n.getMessage("options_action_translate_no_selection"),
+      contexts: ["page", "selection", "image", "action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "separator-1",
+      type: "separator",
+      contexts: ["action"]
     });
 
     chrome.contextMenus.create({
       id: "custom-action-1",
-      title: label1 || chrome.i18n.getMessage("context_custom_action_1"),
-      contexts: ["page", "selection", "action"]
+      title: formatTitle(label1, "options_action_custom_1_no_selection", label1Text, "options_action_custom_1_selection"),
+      contexts: ["action"]
     });
 
     chrome.contextMenus.create({
       id: "custom-action-2",
-      title: label2 || chrome.i18n.getMessage("context_custom_action_2"),
-      contexts: ["page", "selection", "action"]
+      title: formatTitle(label2, "options_action_custom_2_no_selection", label2Text, "options_action_custom_2_selection"),
+      contexts: ["action"]
     });
 
     chrome.contextMenus.create({
       id: "custom-action-3",
-      title: label3 || chrome.i18n.getMessage("context_custom_action_3"),
-      contexts: ["page", "selection", "action"]
+      title: formatTitle(label3, "options_action_custom_3_no_selection", label3Text, "options_action_custom_3_selection"),
+      contexts: ["action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "separator-2",
+      type: "separator",
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-1-no-selection",
+      title: label1 || chrome.i18n.getMessage("options_action_custom_1_no_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-2-no-selection",
+      title: label2 || chrome.i18n.getMessage("options_action_custom_2_no_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-3-no-selection",
+      title: label3 || chrome.i18n.getMessage("options_action_custom_3_no_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "separator-3",
+      type: "separator",
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-1-selection",
+      title: label1Text || chrome.i18n.getMessage("options_action_custom_1_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-2-selection",
+      title: label2Text || chrome.i18n.getMessage("options_action_custom_2_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-3-selection",
+      title: label3Text || chrome.i18n.getMessage("options_action_custom_3_selection"),
+      contexts: ["page", "selection", "image"]
     });
   }
 };
