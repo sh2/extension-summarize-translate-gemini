@@ -3,7 +3,7 @@
         "message": "使用 Gemini 总结和翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页内容。使用 Gemini 作为后端。"
+        "message": "总结和翻译网页。使用 Gemini 作为后端。"
     },
     "popup_button_copy": {
         "message": "复制"
@@ -51,13 +51,13 @@
         "message": "正在处理"
     },
     "popup_prompt_blocked": {
-        "message": "提示词已被阻止。"
+        "message": "提示已被阻止。"
     },
     "popup_response_blocked": {
         "message": "响应已被阻止。"
     },
     "popup_unexpected_response": {
-        "message": "发生意外错误。请查看控制台获取详情。"
+        "message": "发生意外错误。请检查控制台以获取详细信息。"
     },
     "popup_no_apikey": {
         "message": "请在选项页设置您的 Gemini API 密钥。"
@@ -87,16 +87,16 @@
         "message": "发送"
     },
     "results_waiting_response": {
-        "message": "等待响应"
+        "message": "正在等待响应"
     },
     "results_prompt_blocked": {
-        "message": "提示词已被阻止。"
+        "message": "提示已被阻止。"
     },
     "results_response_blocked": {
         "message": "响应已被阻止。"
     },
     "results_unexpected_response": {
-        "message": "发生意外错误。请查看控制台获取详情。"
+        "message": "发生意外错误。请检查控制台以获取详细信息。"
     },
     "options_title": {
         "message": "选项 - 使用 Gemini 总结和翻译"
@@ -122,59 +122,65 @@
     "options_language_notes": {
         "message": "注意：此语言设置不影响自定义操作。"
     },
-    "options_no_text_action": {
+    "options_action_description_no_selection": {
         "message": "未选择文本时，执行以下操作"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "总结（默认）"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "翻译"
     },
-    "options_no_text_custom_1": {
-        "message": "自定义操作 1"
+    "options_action_custom_1_no_selection": {
+        "message": "自定义操作 1（未选择）"
     },
-    "options_no_text_custom_2": {
-        "message": "自定义操作 2"
+    "options_action_custom_2_no_selection": {
+        "message": "自定义操作 2（未选择）"
     },
-    "options_no_text_custom_3": {
-        "message": "自定义操作 3"
+    "options_action_custom_3_no_selection": {
+        "message": "自定义操作 3（未选择）"
     },
-    "options_no_text_custom_notes": {
-        "message": "自定义操作也可通过上下文菜单访问（仅限桌面版）。"
-    },
-    "options_text_action": {
+    "options_action_description_selection": {
         "message": "选择文本时，执行以下操作"
     },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "总结"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "翻译（默认）"
     },
-    "options_text_custom_1": {
-        "message": "自定义操作 1"
+    "options_action_custom_1_selection": {
+        "message": "自定义操作 1（已选择）"
     },
-    "options_text_custom_2": {
-        "message": "自定义操作 2"
+    "options_action_custom_2_selection": {
+        "message": "自定义操作 2（已选择）"
     },
-    "options_text_custom_3": {
-        "message": "自定义操作 3"
-    },
-    "options_text_custom_notes": {
-        "message": "自定义操作也可通过上下文菜单访问（仅限桌面版）。"
-    },
-    "options_contextmenus": {
-        "message": "添加到上下文菜单"
+    "options_action_custom_3_selection": {
+        "message": "自定义操作 3（已选择）"
     },
     "options_contextmenu_label_1": {
-        "message": "自定义操作 1 的标签（可选）"
+        "message": "自定义操作 1 标签（未选择）"
     },
     "options_contextmenu_label_2": {
-        "message": "自定义操作 2 的标签（可选）"
+        "message": "自定义操作 2 标签（未选择）"
     },
     "options_contextmenu_label_3": {
-        "message": "自定义操作 3 的标签（可选）"
+        "message": "自定义操作 3 标签（未选择）"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "自定义操作 1 标签（已选择）"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "自定义操作 2 标签（已选择）"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "自定义操作 3 标签（已选择）"
+    },
+    "options_contextmenus_add": {
+        "message": "添加到上下文菜单"
+    },
+    "options_contextmenus_notes": {
+        "message": "自定义操作也可通过上下文菜单访问（仅限桌面版）。"
     },
     "options_streaming": {
         "message": "启用语言模型流式输出"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "恢复成功。"
     },
-    "context_standard_action": {
-        "message": "标准操作"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "自定义操作 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "自定义操作 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "自定义操作 3"
     }
 }

@@ -3,7 +3,7 @@
         "message": "Gemini로 요약 및 번역"
     },
     "extension_description": {
-        "message": "웹 페이지를 요약하고 번역합니다. Gemini를 백엔드로 사용합니다."
+        "message": "웹페이지를 요약하고 번역합니다. Gemini를 백엔드로 사용합니다."
     },
     "popup_button_copy": {
         "message": "복사"
@@ -84,7 +84,7 @@
         "message": "저장되었습니다."
     },
     "results_button_send": {
-        "message": "보내기"
+        "message": "전송"
     },
     "results_waiting_response": {
         "message": "응답 대기 중"
@@ -122,62 +122,68 @@
     "options_language_notes": {
         "message": "참고: 이 언어 설정은 사용자 지정 작업에 영향을 주지 않습니다."
     },
-    "options_no_text_action": {
-        "message": "텍스트가 선택되지 않은 경우 다음 작업 수행"
+    "options_action_description_no_selection": {
+        "message": "텍스트가 선택되지 않았을 때 다음 작업 수행"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "요약 (기본값)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "번역"
     },
-    "options_no_text_custom_1": {
-        "message": "사용자 지정 작업 1"
+    "options_action_custom_1_no_selection": {
+        "message": "사용자 지정 작업 1 (선택 없음)"
     },
-    "options_no_text_custom_2": {
-        "message": "사용자 지정 작업 2"
+    "options_action_custom_2_no_selection": {
+        "message": "사용자 지정 작업 2 (선택 없음)"
     },
-    "options_no_text_custom_3": {
-        "message": "사용자 지정 작업 3"
+    "options_action_custom_3_no_selection": {
+        "message": "사용자 지정 작업 3 (선택 없음)"
     },
-    "options_no_text_custom_notes": {
-        "message": "사용자 지정 작업은 상황에 맞는 메뉴(데스크톱 전용)를 통해서도 접근할 수 있습니다."
+    "options_action_description_selection": {
+        "message": "텍스트가 선택되었을 때 다음 작업 수행"
     },
-    "options_text_action": {
-        "message": "텍스트가 선택된 경우 다음 작업 수행"
-    },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "요약"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "번역 (기본값)"
     },
-    "options_text_custom_1": {
-        "message": "사용자 지정 작업 1"
+    "options_action_custom_1_selection": {
+        "message": "사용자 지정 작업 1 (선택됨)"
     },
-    "options_text_custom_2": {
-        "message": "사용자 지정 작업 2"
+    "options_action_custom_2_selection": {
+        "message": "사용자 지정 작업 2 (선택됨)"
     },
-    "options_text_custom_3": {
-        "message": "사용자 지정 작업 3"
-    },
-    "options_text_custom_notes": {
-        "message": "사용자 지정 작업은 상황에 맞는 메뉴(데스크톱 전용)를 통해서도 접근할 수 있습니다."
-    },
-    "options_contextmenus": {
-        "message": "상황에 맞는 메뉴에 추가"
+    "options_action_custom_3_selection": {
+        "message": "사용자 지정 작업 3 (선택됨)"
     },
     "options_contextmenu_label_1": {
-        "message": "사용자 지정 작업 1 레이블 (선택 사항)"
+        "message": "사용자 지정 작업 1 레이블 (선택 없음)"
     },
     "options_contextmenu_label_2": {
-        "message": "사용자 지정 작업 2 레이블 (선택 사항)"
+        "message": "사용자 지정 작업 2 레이블 (선택 없음)"
     },
     "options_contextmenu_label_3": {
-        "message": "사용자 지정 작업 3 레이블 (선택 사항)"
+        "message": "사용자 지정 작업 3 레이블 (선택 없음)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "사용자 지정 작업 1 레이블 (선택됨)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "사용자 지정 작업 2 레이블 (선택됨)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "사용자 지정 작업 3 레이블 (선택됨)"
+    },
+    "options_contextmenus_add": {
+        "message": "상황에 맞는 메뉴에 추가"
+    },
+    "options_contextmenus_notes": {
+        "message": "사용자 지정 작업은 상황에 맞는 메뉴를 통해서도 접근할 수 있습니다 (데스크톱 전용)."
     },
     "options_streaming": {
-        "message": "언어 모델의 스트리밍 출력 활성화"
+        "message": "언어 모델 스트리밍 출력 활성화"
     },
     "options_auto_save": {
         "message": "생성 후 결과 자동 저장"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "복원 성공."
     },
-    "context_standard_action": {
-        "message": "표준 작업"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "사용자 지정 작업 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "사용자 지정 작업 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "사용자 지정 작업 3"
     }
 }

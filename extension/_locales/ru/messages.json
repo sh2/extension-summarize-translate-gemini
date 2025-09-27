@@ -57,19 +57,19 @@
         "message": "Ответ заблокирован."
     },
     "popup_unexpected_response": {
-        "message": "Произошла непредвиденная ошибка. Проверьте консоль для получения подробностей."
+        "message": "Произошла непредвиденная ошибка. Подробности см. в консоли."
     },
     "popup_no_apikey": {
-        "message": "Пожалуйста, укажите ваш ключ API Gemini на странице настроек."
+        "message": "Пожалуйста, укажите ключ API Gemini на странице настроек."
     },
     "popup_miscellaneous_error": {
-        "message": "Невозможно суммировать или перевести эту страницу."
+        "message": "Не удалось суммировать или перевести эту страницу."
     },
     "results_title": {
         "message": "Результаты - Суммирование и перевод с Gemini"
     },
     "results_button_clear": {
-        "message": "Очистить беседу"
+        "message": "Очистить диалог"
     },
     "results_button_copy": {
         "message": "Копировать"
@@ -96,7 +96,7 @@
         "message": "Ответ заблокирован."
     },
     "results_unexpected_response": {
-        "message": "Произошла непредвиденная ошибка. Проверьте консоль для получения подробностей."
+        "message": "Произошла непредвиденная ошибка. Подробности см. в консоли."
     },
     "options_title": {
         "message": "Настройки - Суммирование и перевод с Gemini"
@@ -122,59 +122,65 @@
     "options_language_notes": {
         "message": "Примечание: Эта настройка языка не влияет на пользовательские действия."
     },
-    "options_no_text_action": {
+    "options_action_description_no_selection": {
         "message": "Если текст не выбран, выполнить следующее действие"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "Суммировать (по умолчанию)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "Перевести"
     },
-    "options_no_text_custom_1": {
-        "message": "Пользовательское действие 1"
+    "options_action_custom_1_no_selection": {
+        "message": "Пользовательское действие 1 (без выделения)"
     },
-    "options_no_text_custom_2": {
-        "message": "Пользовательское действие 2"
+    "options_action_custom_2_no_selection": {
+        "message": "Пользовательское действие 2 (без выделения)"
     },
-    "options_no_text_custom_3": {
-        "message": "Пользовательское действие 3"
+    "options_action_custom_3_no_selection": {
+        "message": "Пользовательское действие 3 (без выделения)"
     },
-    "options_no_text_custom_notes": {
-        "message": "Пользовательские действия также доступны через контекстное меню (только для ПК)."
+    "options_action_description_selection": {
+        "message": "Если текст выделен, выполнить следующее действие"
     },
-    "options_text_action": {
-        "message": "Если текст выбран, выполнить следующее действие"
-    },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "Суммировать"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "Перевести (по умолчанию)"
     },
-    "options_text_custom_1": {
-        "message": "Пользовательское действие 1"
+    "options_action_custom_1_selection": {
+        "message": "Пользовательское действие 1 (с выделением)"
     },
-    "options_text_custom_2": {
-        "message": "Пользовательское действие 2"
+    "options_action_custom_2_selection": {
+        "message": "Пользовательское действие 2 (с выделением)"
     },
-    "options_text_custom_3": {
-        "message": "Пользовательское действие 3"
-    },
-    "options_text_custom_notes": {
-        "message": "Пользовательские действия также доступны через контекстное меню (только для ПК)."
-    },
-    "options_contextmenus": {
-        "message": "Добавить в контекстное меню"
+    "options_action_custom_3_selection": {
+        "message": "Пользовательское действие 3 (с выделением)"
     },
     "options_contextmenu_label_1": {
-        "message": "Метка для пользовательского действия 1 (необязательно)"
+        "message": "Метка для пользовательского действия 1 (без выделения)"
     },
     "options_contextmenu_label_2": {
-        "message": "Метка для пользовательского действия 2 (необязательно)"
+        "message": "Метка для пользовательского действия 2 (без выделения)"
     },
     "options_contextmenu_label_3": {
-        "message": "Метка для пользовательского действия 3 (необязательно)"
+        "message": "Метка для пользовательского действия 3 (без выделения)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "Метка для пользовательского действия 1 (с выделением)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "Метка для пользовательского действия 2 (с выделением)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "Метка для пользовательского действия 3 (с выделением)"
+    },
+    "options_contextmenus_add": {
+        "message": "Добавить в контекстное меню"
+    },
+    "options_contextmenus_notes": {
+        "message": "Пользовательские действия также доступны через контекстное меню (только для ПК)."
     },
     "options_streaming": {
         "message": "Включить потоковый вывод из языковой модели"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "Восстановление выполнено успешно."
     },
-    "context_standard_action": {
-        "message": "Стандартное действие"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "Пользовательское действие 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "Пользовательское действие 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "Пользовательское действие 3"
     }
 }

@@ -114,7 +114,7 @@
         "message": "Modello specificato dall'utente"
     },
     "options_language": {
-        "message": "Lingua per riassunto e traduzione"
+        "message": "Lingua per Riassunto e Traduzione"
     },
     "options_language_user": {
         "message": "Lingua specificata dall'utente"
@@ -122,62 +122,68 @@
     "options_language_notes": {
         "message": "Nota: questa impostazione della lingua non influisce sulle azioni personalizzate."
     },
-    "options_no_text_action": {
-        "message": "Quando non è selezionato alcun testo, eseguire la seguente azione"
+    "options_action_description_no_selection": {
+        "message": "Quando nessun testo è selezionato, eseguire la seguente azione"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "Riassumi (predefinito)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "Traduci"
     },
-    "options_no_text_custom_1": {
-        "message": "Azione personalizzata 1"
+    "options_action_custom_1_no_selection": {
+        "message": "Azione personalizzata 1 (Nessuna selezione)"
     },
-    "options_no_text_custom_2": {
-        "message": "Azione personalizzata 2"
+    "options_action_custom_2_no_selection": {
+        "message": "Azione personalizzata 2 (Nessuna selezione)"
     },
-    "options_no_text_custom_3": {
-        "message": "Azione personalizzata 3"
+    "options_action_custom_3_no_selection": {
+        "message": "Azione personalizzata 3 (Nessuna selezione)"
     },
-    "options_no_text_custom_notes": {
-        "message": "Le azioni personalizzate sono accessibili anche tramite il menu contestuale (solo desktop)."
+    "options_action_description_selection": {
+        "message": "Quando il testo è selezionato, eseguire la seguente azione"
     },
-    "options_text_action": {
-        "message": "Quando è selezionato del testo, eseguire la seguente azione"
-    },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "Riassumi"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "Traduci (predefinito)"
     },
-    "options_text_custom_1": {
-        "message": "Azione personalizzata 1"
+    "options_action_custom_1_selection": {
+        "message": "Azione personalizzata 1 (Selezione)"
     },
-    "options_text_custom_2": {
-        "message": "Azione personalizzata 2"
+    "options_action_custom_2_selection": {
+        "message": "Azione personalizzata 2 (Selezione)"
     },
-    "options_text_custom_3": {
-        "message": "Azione personalizzata 3"
-    },
-    "options_text_custom_notes": {
-        "message": "Le azioni personalizzate sono accessibili anche tramite il menu contestuale (solo desktop)."
-    },
-    "options_contextmenus": {
-        "message": "Aggiungi al menu contestuale"
+    "options_action_custom_3_selection": {
+        "message": "Azione personalizzata 3 (Selezione)"
     },
     "options_contextmenu_label_1": {
-        "message": "Etichetta per azione personalizzata 1 (opzionale)"
+        "message": "Etichetta per azione personalizzata 1 (Nessuna selezione)"
     },
     "options_contextmenu_label_2": {
-        "message": "Etichetta per azione personalizzata 2 (opzionale)"
+        "message": "Etichetta per azione personalizzata 2 (Nessuna selezione)"
     },
     "options_contextmenu_label_3": {
-        "message": "Etichetta per azione personalizzata 3 (opzionale)"
+        "message": "Etichetta per azione personalizzata 3 (Nessuna selezione)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "Etichetta per azione personalizzata 1 (Selezione)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "Etichetta per azione personalizzata 2 (Selezione)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "Etichetta per azione personalizzata 3 (Selezione)"
+    },
+    "options_contextmenus_add": {
+        "message": "Aggiungi al menu contestuale"
+    },
+    "options_contextmenus_notes": {
+        "message": "Le azioni personalizzate sono accessibili anche tramite il menu contestuale (solo desktop)."
     },
     "options_streaming": {
-        "message": "Abilita output in streaming dal modello linguistico"
+        "message": "Abilita l'output in streaming dal modello linguistico"
     },
     "options_auto_save": {
         "message": "Salva automaticamente i risultati dopo la generazione"
@@ -210,7 +216,7 @@
         "message": "Importazione fallita."
     },
     "options_sync_cloud": {
-        "message": "Sincronizza opzioni su cloud"
+        "message": "Sincronizza opzioni sul cloud"
     },
     "options_sync_cloud_started": {
         "message": "Sincronizzazione avviata."
@@ -219,21 +225,18 @@
         "message": "Sincronizzazione fallita."
     },
     "options_restore_cloud": {
-        "message": "Ripristina opzioni da cloud"
+        "message": "Ripristina opzioni dal cloud"
     },
     "options_restore_cloud_succeeded": {
         "message": "Ripristino riuscito."
     },
-    "context_standard_action": {
-        "message": "Azione standard"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "Azione personalizzata 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "Azione personalizzata 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "Azione personalizzata 3"
     }
 }

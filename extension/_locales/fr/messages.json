@@ -24,7 +24,7 @@
         "message": "Ouvrir les résultats dans un nouvel onglet"
     },
     "popup_button_options": {
-        "message": "Ouvrir les options"
+        "message": "Ouvrir la page des options"
     },
     "popup_retrieving_captions": {
         "message": "Tentative de récupération des légendes"
@@ -122,59 +122,65 @@
     "options_language_notes": {
         "message": "Remarque : Ce paramètre de langue n'affecte pas les actions personnalisées."
     },
-    "options_no_text_action": {
-        "message": "Si aucun texte n'est sélectionné, effectuer l'action suivante"
+    "options_action_description_no_selection": {
+        "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "Résumer (par défaut)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "Traduire"
     },
-    "options_no_text_custom_1": {
-        "message": "Action personnalisée 1"
+    "options_action_custom_1_no_selection": {
+        "message": "Action personnalisée 1 (Aucune sélection)"
     },
-    "options_no_text_custom_2": {
-        "message": "Action personnalisée 2"
+    "options_action_custom_2_no_selection": {
+        "message": "Action personnalisée 2 (Aucune sélection)"
     },
-    "options_no_text_custom_3": {
-        "message": "Action personnalisée 3"
+    "options_action_custom_3_no_selection": {
+        "message": "Action personnalisée 3 (Aucune sélection)"
     },
-    "options_no_text_custom_notes": {
-        "message": "Les actions personnalisées sont également accessibles via le menu contextuel (ordinateur de bureau uniquement)."
+    "options_action_description_selection": {
+        "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
     },
-    "options_text_action": {
-        "message": "Si du texte est sélectionné, effectuer l'action suivante"
-    },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "Résumer"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "Traduire (par défaut)"
     },
-    "options_text_custom_1": {
-        "message": "Action personnalisée 1"
+    "options_action_custom_1_selection": {
+        "message": "Action personnalisée 1 (Sélection)"
     },
-    "options_text_custom_2": {
-        "message": "Action personnalisée 2"
+    "options_action_custom_2_selection": {
+        "message": "Action personnalisée 2 (Sélection)"
     },
-    "options_text_custom_3": {
-        "message": "Action personnalisée 3"
-    },
-    "options_text_custom_notes": {
-        "message": "Les actions personnalisées sont également accessibles via le menu contextuel (ordinateur de bureau uniquement)."
-    },
-    "options_contextmenus": {
-        "message": "Ajouter au menu contextuel"
+    "options_action_custom_3_selection": {
+        "message": "Action personnalisée 3 (Sélection)"
     },
     "options_contextmenu_label_1": {
-        "message": "Libellé pour l'action personnalisée 1 (facultatif)"
+        "message": "Libellé pour l'action personnalisée 1 (Aucune sélection)"
     },
     "options_contextmenu_label_2": {
-        "message": "Libellé pour l'action personnalisée 2 (facultatif)"
+        "message": "Libellé pour l'action personnalisée 2 (Aucune sélection)"
     },
     "options_contextmenu_label_3": {
-        "message": "Libellé pour l'action personnalisée 3 (facultatif)"
+        "message": "Libellé pour l'action personnalisée 3 (Aucune sélection)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "Libellé pour l'action personnalisée 1 (Sélection)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "Libellé pour l'action personnalisée 2 (Sélection)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "Libellé pour l'action personnalisée 3 (Sélection)"
+    },
+    "options_contextmenus_add": {
+        "message": "Ajouter au menu contextuel"
+    },
+    "options_contextmenus_notes": {
+        "message": "Les actions personnalisées sont également accessibles via le menu contextuel (ordinateur de bureau uniquement)."
     },
     "options_streaming": {
         "message": "Activer la diffusion en continu de la sortie du modèle linguistique"
@@ -210,7 +216,7 @@
         "message": "Importation échouée."
     },
     "options_sync_cloud": {
-        "message": "Synchroniser les options vers le cloud"
+        "message": "Synchroniser les options avec le cloud"
     },
     "options_sync_cloud_started": {
         "message": "Synchronisation démarrée."
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "Restauration réussie."
     },
-    "context_standard_action": {
-        "message": "Action standard"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "Action personnalisée 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "Action personnalisée 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "Action personnalisée 3"
     }
 }

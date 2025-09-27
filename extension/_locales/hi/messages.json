@@ -3,7 +3,7 @@
         "message": "Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "extension_description": {
-        "message": "वेब पेजों का सारांश करें और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
+        "message": "वेब पृष्ठों का सारांश करें और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
     },
     "popup_button_copy": {
         "message": "कॉपी करें"
@@ -21,7 +21,7 @@
         "message": "पुनः चलाएँ"
     },
     "popup_button_results": {
-        "message": "नए टैब में परिणाम खोलें"
+        "message": "परिणामों को नए टैब में खोलें"
     },
     "popup_button_options": {
         "message": "विकल्प पृष्ठ खोलें"
@@ -48,16 +48,16 @@
         "message": "छवि का अनुवाद किया जा रहा है"
     },
     "popup_processing": {
-        "message": "संसाधित किया जा रहा है"
+        "message": "प्रसंस्करण किया जा रहा है"
     },
     "popup_prompt_blocked": {
-        "message": "प्रॉम्प्ट अवरुद्ध कर दिया गया।"
+        "message": "प्रॉम्प्ट अवरुद्ध कर दिया गया था।"
     },
     "popup_response_blocked": {
-        "message": "प्रतिक्रिया अवरुद्ध कर दी गई।"
+        "message": "प्रतिक्रिया अवरुद्ध कर दी गई थी।"
     },
     "popup_unexpected_response": {
-        "message": "एक अप्रत्याशित त्रुटि हुई। विवरण के लिए कंसोल देखें।"
+        "message": "एक अप्रत्याशित त्रुटि हुई। कृपया विवरण के लिए कंसोल देखें।"
     },
     "popup_no_apikey": {
         "message": "कृपया विकल्प पृष्ठ पर अपनी Gemini API कुंजी सेट करें।"
@@ -90,13 +90,13 @@
         "message": "प्रतिक्रिया की प्रतीक्षा है"
     },
     "results_prompt_blocked": {
-        "message": "प्रॉम्प्ट अवरुद्ध कर दिया गया।"
+        "message": "प्रॉम्प्ट अवरुद्ध कर दिया गया था।"
     },
     "results_response_blocked": {
-        "message": "प्रतिक्रिया अवरुद्ध कर दी गई।"
+        "message": "प्रतिक्रिया अवरुद्ध कर दी गई थी।"
     },
     "results_unexpected_response": {
-        "message": "एक अप्रत्याशित त्रुटि हुई। विवरण के लिए कंसोल देखें।"
+        "message": "एक अप्रत्याशित त्रुटि हुई। कृपया विवरण के लिए कंसोल देखें।"
     },
     "options_title": {
         "message": "विकल्प - Gemini के साथ सारांशित करें और अनुवाद करें"
@@ -122,65 +122,71 @@
     "options_language_notes": {
         "message": "ध्यान दें: यह भाषा सेटिंग कस्टम क्रियाओं को प्रभावित नहीं करती है।"
     },
-    "options_no_text_action": {
-        "message": "जब कोई टेक्स्ट चयनित न हो, तो निम्न क्रिया करें"
+    "options_action_description_no_selection": {
+        "message": "जब कोई पाठ चयनित न हो, तो निम्न क्रिया करें"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "सारांशित करें (डिफ़ॉल्ट)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "अनुवाद करें"
     },
-    "options_no_text_custom_1": {
-        "message": "कस्टम क्रिया 1"
+    "options_action_custom_1_no_selection": {
+        "message": "कस्टम क्रिया 1 (कोई चयन नहीं)"
     },
-    "options_no_text_custom_2": {
-        "message": "कस्टम क्रिया 2"
+    "options_action_custom_2_no_selection": {
+        "message": "कस्टम क्रिया 2 (कोई चयन नहीं)"
     },
-    "options_no_text_custom_3": {
-        "message": "कस्टम क्रिया 3"
+    "options_action_custom_3_no_selection": {
+        "message": "कस्टम क्रिया 3 (कोई चयन नहीं)"
     },
-    "options_no_text_custom_notes": {
-        "message": "कस्टम क्रियाएँ संदर्भ मेनू (केवल डेस्कटॉप) के माध्यम से भी उपलब्ध हैं।"
+    "options_action_description_selection": {
+        "message": "जब पाठ चयनित हो, तो निम्न क्रिया करें"
     },
-    "options_text_action": {
-        "message": "जब टेक्स्ट चयनित हो, तो निम्न क्रिया करें"
-    },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "सारांशित करें"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "अनुवाद करें (डिफ़ॉल्ट)"
     },
-    "options_text_custom_1": {
-        "message": "कस्टम क्रिया 1"
+    "options_action_custom_1_selection": {
+        "message": "कस्टम क्रिया 1 (चयनित)"
     },
-    "options_text_custom_2": {
-        "message": "कस्टम क्रिया 2"
+    "options_action_custom_2_selection": {
+        "message": "कस्टम क्रिया 2 (चयनित)"
     },
-    "options_text_custom_3": {
-        "message": "कस्टम क्रिया 3"
-    },
-    "options_text_custom_notes": {
-        "message": "कस्टम क्रियाएँ संदर्भ मेनू (केवल डेस्कटॉप) के माध्यम से भी उपलब्ध हैं।"
-    },
-    "options_contextmenus": {
-        "message": "संदर्भ मेनू में जोड़ें"
+    "options_action_custom_3_selection": {
+        "message": "कस्टम क्रिया 3 (चयनित)"
     },
     "options_contextmenu_label_1": {
-        "message": "कस्टम क्रिया 1 के लिए लेबल (वैकल्पिक)"
+        "message": "कस्टम क्रिया 1 के लिए लेबल (कोई चयन नहीं)"
     },
     "options_contextmenu_label_2": {
-        "message": "कस्टम क्रिया 2 के लिए लेबल (वैकल्पिक)"
+        "message": "कस्टम क्रिया 2 के लिए लेबल (कोई चयन नहीं)"
     },
     "options_contextmenu_label_3": {
-        "message": "कस्टम क्रिया 3 के लिए लेबल (वैकल्पिक)"
+        "message": "कस्टम क्रिया 3 के लिए लेबल (कोई चयन नहीं)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "कस्टम क्रिया 1 के लिए लेबल (चयनित)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "कस्टम क्रिया 2 के लिए लेबल (चयनित)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "कस्टम क्रिया 3 के लिए लेबल (चयनित)"
+    },
+    "options_contextmenus_add": {
+        "message": "संदर्भ मेनू में जोड़ें"
+    },
+    "options_contextmenus_notes": {
+        "message": "कस्टम क्रियाएँ संदर्भ मेनू (केवल डेस्कटॉप) के माध्यम से भी सुलभ हैं।"
     },
     "options_streaming": {
         "message": "भाषा मॉडल से स्ट्रीमिंग आउटपुट सक्षम करें"
     },
     "options_auto_save": {
-        "message": "जनरेशन के बाद परिणामों को स्वतः सहेजें"
+        "message": "उत्पत्ति के बाद परिणामों को स्वतः सहेजें"
     },
     "options_theme": {
         "message": "थीम"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "पुनर्स्थापना सफल रही।"
     },
-    "context_standard_action": {
-        "message": "मानक क्रिया"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "कस्टम क्रिया 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "कस्टम क्रिया 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "कस्टम क्रिया 3"
     }
 }

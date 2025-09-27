@@ -3,7 +3,7 @@
         "message": "تلخيص وترجمة مع Gemini"
     },
     "extension_description": {
-        "message": "تلخيص وترجمة صفحات الويب. يستخدم Gemini كواجهة خلفية."
+        "message": "لخص وترجم صفحات الويب. يعتمد على Gemini كواجهة خلفية."
     },
     "popup_button_copy": {
         "message": "نسخ"
@@ -60,7 +60,7 @@
         "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
     },
     "popup_no_apikey": {
-        "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
+        "message": "يرجى تعيين مفتاح API الخاص بـ Gemini في صفحة الخيارات."
     },
     "popup_miscellaneous_error": {
         "message": "تعذر تلخيص أو ترجمة هذه الصفحة."
@@ -102,10 +102,10 @@
         "message": "الخيارات - تلخيص وترجمة مع Gemini"
     },
     "options_apikey": {
-        "message": "مفتاح Gemini API"
+        "message": "مفتاح API لـ Gemini"
     },
     "options_apikey_hint": {
-        "message": "يمكنك الحصول على مفتاح Gemini API من الصفحة التالية."
+        "message": "يمكنك الحصول على مفتاح API لـ Gemini من الصفحة التالية."
     },
     "options_model": {
         "message": "نموذج اللغة"
@@ -122,59 +122,65 @@
     "options_language_notes": {
         "message": "ملاحظة: إعداد اللغة هذا لا يؤثر على الإجراءات المخصصة."
     },
-    "options_no_text_action": {
+    "options_action_description_no_selection": {
         "message": "عند عدم تحديد نص، قم بالإجراء التالي"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "تلخيص (افتراضي)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "ترجمة"
     },
-    "options_no_text_custom_1": {
-        "message": "إجراء مخصص 1"
+    "options_action_custom_1_no_selection": {
+        "message": "إجراء مخصص 1 (بدون تحديد)"
     },
-    "options_no_text_custom_2": {
-        "message": "إجراء مخصص 2"
+    "options_action_custom_2_no_selection": {
+        "message": "إجراء مخصص 2 (بدون تحديد)"
     },
-    "options_no_text_custom_3": {
-        "message": "إجراء مخصص 3"
+    "options_action_custom_3_no_selection": {
+        "message": "إجراء مخصص 3 (بدون تحديد)"
     },
-    "options_no_text_custom_notes": {
-        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (لأجهزة سطح المكتب فقط)."
-    },
-    "options_text_action": {
+    "options_action_description_selection": {
         "message": "عند تحديد نص، قم بالإجراء التالي"
     },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "تلخيص"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "ترجمة (افتراضي)"
     },
-    "options_text_custom_1": {
-        "message": "إجراء مخصص 1"
+    "options_action_custom_1_selection": {
+        "message": "إجراء مخصص 1 (مع تحديد)"
     },
-    "options_text_custom_2": {
-        "message": "إجراء مخصص 2"
+    "options_action_custom_2_selection": {
+        "message": "إجراء مخصص 2 (مع تحديد)"
     },
-    "options_text_custom_3": {
-        "message": "إجراء مخصص 3"
-    },
-    "options_text_custom_notes": {
-        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (لأجهزة سطح المكتب فقط)."
-    },
-    "options_contextmenus": {
-        "message": "إضافة إلى قائمة السياق"
+    "options_action_custom_3_selection": {
+        "message": "إجراء مخصص 3 (مع تحديد)"
     },
     "options_contextmenu_label_1": {
-        "message": "تسمية للإجراء المخصص 1 (اختياري)"
+        "message": "تسمية للإجراء المخصص 1 (بدون تحديد)"
     },
     "options_contextmenu_label_2": {
-        "message": "تسمية للإجراء المخصص 2 (اختياري)"
+        "message": "تسمية للإجراء المخصص 2 (بدون تحديد)"
     },
     "options_contextmenu_label_3": {
-        "message": "تسمية للإجراء المخصص 3 (اختياري)"
+        "message": "تسمية للإجراء المخصص 3 (بدون تحديد)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "تسمية للإجراء المخصص 1 (مع تحديد)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "تسمية للإجراء المخصص 2 (مع تحديد)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "تسمية للإجراء المخصص 3 (مع تحديد)"
+    },
+    "options_contextmenus_add": {
+        "message": "إضافة إلى قائمة السياق"
+    },
+    "options_contextmenus_notes": {
+        "message": "يمكن الوصول إلى الإجراءات المخصصة أيضًا عبر قائمة السياق (لأجهزة سطح المكتب فقط)."
     },
     "options_streaming": {
         "message": "تمكين إخراج البث من نموذج اللغة"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "تمت الاستعادة بنجاح."
     },
-    "context_standard_action": {
-        "message": "إجراء قياسي"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "إجراء مخصص 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "إجراء مخصص 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "إجراء مخصص 3"
     }
 }

@@ -57,7 +57,7 @@
         "message": "Die Antwort wurde blockiert."
     },
     "popup_unexpected_response": {
-        "message": "Ein unerwarteter Fehler ist aufgetreten. Details in der Konsole prüfen."
+        "message": "Ein unerwarteter Fehler ist aufgetreten. Details finden Sie in der Konsole."
     },
     "popup_no_apikey": {
         "message": "Bitte geben Sie Ihren Gemini API-Schlüssel auf der Optionsseite ein."
@@ -96,7 +96,7 @@
         "message": "Die Antwort wurde blockiert."
     },
     "results_unexpected_response": {
-        "message": "Ein unerwarteter Fehler ist aufgetreten. Details in der Konsole prüfen."
+        "message": "Ein unerwarteter Fehler ist aufgetreten. Details finden Sie in der Konsole."
     },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
@@ -122,59 +122,65 @@
     "options_language_notes": {
         "message": "Hinweis: Diese Spracheinstellung beeinflusst keine benutzerdefinierten Aktionen."
     },
-    "options_no_text_action": {
+    "options_action_description_no_selection": {
         "message": "Wenn kein Text ausgewählt ist, folgende Aktion ausführen"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "Zusammenfassen (Standard)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "Übersetzen"
     },
-    "options_no_text_custom_1": {
-        "message": "Benutzerdefinierte Aktion 1"
+    "options_action_custom_1_no_selection": {
+        "message": "Benutzerdefinierte Aktion 1 (Keine Auswahl)"
     },
-    "options_no_text_custom_2": {
-        "message": "Benutzerdefinierte Aktion 2"
+    "options_action_custom_2_no_selection": {
+        "message": "Benutzerdefinierte Aktion 2 (Keine Auswahl)"
     },
-    "options_no_text_custom_3": {
-        "message": "Benutzerdefinierte Aktion 3"
+    "options_action_custom_3_no_selection": {
+        "message": "Benutzerdefinierte Aktion 3 (Keine Auswahl)"
     },
-    "options_no_text_custom_notes": {
-        "message": "Benutzerdefinierte Aktionen sind auch über das Kontextmenü zugänglich (nur Desktop)."
-    },
-    "options_text_action": {
+    "options_action_description_selection": {
         "message": "Wenn Text ausgewählt ist, folgende Aktion ausführen"
     },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "Zusammenfassen"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "Übersetzen (Standard)"
     },
-    "options_text_custom_1": {
-        "message": "Benutzerdefinierte Aktion 1"
+    "options_action_custom_1_selection": {
+        "message": "Benutzerdefinierte Aktion 1 (Auswahl)"
     },
-    "options_text_custom_2": {
-        "message": "Benutzerdefinierte Aktion 2"
+    "options_action_custom_2_selection": {
+        "message": "Benutzerdefinierte Aktion 2 (Auswahl)"
     },
-    "options_text_custom_3": {
-        "message": "Benutzerdefinierte Aktion 3"
-    },
-    "options_text_custom_notes": {
-        "message": "Benutzerdefinierte Aktionen sind auch über das Kontextmenü zugänglich (nur Desktop)."
-    },
-    "options_contextmenus": {
-        "message": "Zum Kontextmenü hinzufügen"
+    "options_action_custom_3_selection": {
+        "message": "Benutzerdefinierte Aktion 3 (Auswahl)"
     },
     "options_contextmenu_label_1": {
-        "message": "Bezeichnung für benutzerdefinierte Aktion 1 (optional)"
+        "message": "Beschriftung für benutzerdefinierte Aktion 1 (Keine Auswahl)"
     },
     "options_contextmenu_label_2": {
-        "message": "Bezeichnung für benutzerdefinierte Aktion 2 (optional)"
+        "message": "Beschriftung für benutzerdefinierte Aktion 2 (Keine Auswahl)"
     },
     "options_contextmenu_label_3": {
-        "message": "Bezeichnung für benutzerdefinierte Aktion 3 (optional)"
+        "message": "Beschriftung für benutzerdefinierte Aktion 3 (Keine Auswahl)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "Beschriftung für benutzerdefinierte Aktion 1 (Auswahl)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "Beschriftung für benutzerdefinierte Aktion 2 (Auswahl)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "Beschriftung für benutzerdefinierte Aktion 3 (Auswahl)"
+    },
+    "options_contextmenus_add": {
+        "message": "Zum Kontextmenü hinzufügen"
+    },
+    "options_contextmenus_notes": {
+        "message": "Benutzerdefinierte Aktionen sind auch über das Kontextmenü zugänglich (nur Desktop)."
     },
     "options_streaming": {
         "message": "Streaming-Ausgabe vom Sprachmodell aktivieren"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "Wiederherstellung erfolgreich."
     },
-    "context_standard_action": {
-        "message": "Standardaktion"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "Benutzerdefinierte Aktion 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "Benutzerdefinierte Aktion 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "Benutzerdefinierte Aktion 3"
     }
 }

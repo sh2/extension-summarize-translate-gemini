@@ -54,7 +54,7 @@
         "message": "প্রম্পটটি ব্লক করা হয়েছে।"
     },
     "popup_response_blocked": {
-        "message": "প্রতিক্রিয়াটি ব্লক করা হয়েছে।"
+        "message": "প্রতিক্রিয়া ব্লক করা হয়েছে।"
     },
     "popup_unexpected_response": {
         "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। বিস্তারিত জানতে কনসোল দেখুন।"
@@ -93,7 +93,7 @@
         "message": "প্রম্পটটি ব্লক করা হয়েছে।"
     },
     "results_response_blocked": {
-        "message": "প্রতিক্রিয়াটি ব্লক করা হয়েছে।"
+        "message": "প্রতিক্রিয়া ব্লক করা হয়েছে।"
     },
     "results_unexpected_response": {
         "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। বিস্তারিত জানতে কনসোল দেখুন।"
@@ -122,59 +122,65 @@
     "options_language_notes": {
         "message": "দ্রষ্টব্য: এই ভাষা সেটিং কাস্টম অ্যাকশনগুলিকে প্রভাবিত করে না।"
     },
-    "options_no_text_action": {
-        "message": "কোনো পাঠ্য নির্বাচিত না থাকলে, নিম্নলিখিত ক্রিয়াটি সম্পাদন করুন"
+    "options_action_description_no_selection": {
+        "message": "কোনো লেখা নির্বাচন না করা হলে, নিম্নলিখিত কাজটি করুন"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "সারসংক্ষেপ করুন (ডিফল্ট)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "অনুবাদ করুন"
     },
-    "options_no_text_custom_1": {
-        "message": "কাস্টম অ্যাকশন ১"
+    "options_action_custom_1_no_selection": {
+        "message": "কাস্টম অ্যাকশন ১ (কোনো নির্বাচন নেই)"
     },
-    "options_no_text_custom_2": {
-        "message": "কাস্টম অ্যাকশন ২"
+    "options_action_custom_2_no_selection": {
+        "message": "কাস্টম অ্যাকশন ২ (কোনো নির্বাচন নেই)"
     },
-    "options_no_text_custom_3": {
-        "message": "কাস্টম অ্যাকশন ৩"
+    "options_action_custom_3_no_selection": {
+        "message": "কাস্টম অ্যাকশন ৩ (কোনো নির্বাচন নেই)"
     },
-    "options_no_text_custom_notes": {
-        "message": "কাস্টম অ্যাকশনগুলি কনটেক্সট মেনু (শুধুমাত্র ডেস্কটপ) থেকেও অ্যাক্সেসযোগ্য।"
+    "options_action_description_selection": {
+        "message": "লেখা নির্বাচন করা হলে, নিম্নলিখিত কাজটি করুন"
     },
-    "options_text_action": {
-        "message": "পাঠ্য নির্বাচিত থাকলে, নিম্নলিখিত ক্রিয়াটি সম্পাদন করুন"
-    },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "সারসংক্ষেপ করুন"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "অনুবাদ করুন (ডিফল্ট)"
     },
-    "options_text_custom_1": {
-        "message": "কাস্টম অ্যাকশন ১"
+    "options_action_custom_1_selection": {
+        "message": "কাস্টম অ্যাকশন ১ (নির্বাচন)"
     },
-    "options_text_custom_2": {
-        "message": "কাস্টম অ্যাকশন ২"
+    "options_action_custom_2_selection": {
+        "message": "কাস্টম অ্যাকশন ২ (নির্বাচন)"
     },
-    "options_text_custom_3": {
-        "message": "কাস্টম অ্যাকশন ৩"
-    },
-    "options_text_custom_notes": {
-        "message": "কাস্টম অ্যাকশনগুলি কনটেক্সট মেনু (শুধুমাত্র ডেস্কটপ) থেকেও অ্যাক্সেসযোগ্য।"
-    },
-    "options_contextmenus": {
-        "message": "কনটেক্সট মেনুতে যোগ করুন"
+    "options_action_custom_3_selection": {
+        "message": "কাস্টম অ্যাকশন ৩ (নির্বাচন)"
     },
     "options_contextmenu_label_1": {
-        "message": "কাস্টম অ্যাকশন ১ এর জন্য লেবেল (ঐচ্ছিক)"
+        "message": "কাস্টম অ্যাকশন ১ এর লেবেল (কোনো নির্বাচন নেই)"
     },
     "options_contextmenu_label_2": {
-        "message": "কাস্টম অ্যাকশন ২ এর জন্য লেবেল (ঐচ্ছিক)"
+        "message": "কাস্টম অ্যাকশন ২ এর লেবেল (কোনো নির্বাচন নেই)"
     },
     "options_contextmenu_label_3": {
-        "message": "কাস্টম অ্যাকশন ৩ এর জন্য লেবেল (ঐচ্ছিক)"
+        "message": "কাস্টম অ্যাকশন ৩ এর লেবেল (কোনো নির্বাচন নেই)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "কাস্টম অ্যাকশন ১ এর লেবেল (নির্বাচন)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "কাস্টম অ্যাকশন ২ এর লেবেল (নির্বাচন)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "কাস্টম অ্যাকশন ৩ এর লেবেল (নির্বাচন)"
+    },
+    "options_contextmenus_add": {
+        "message": "প্রসঙ্গ মেনুতে যোগ করুন"
+    },
+    "options_contextmenus_notes": {
+        "message": "কাস্টম অ্যাকশনগুলি প্রসঙ্গ মেনু থেকেও অ্যাক্সেসযোগ্য (শুধুমাত্র ডেস্কটপ)।"
     },
     "options_streaming": {
         "message": "ভাষা মডেল থেকে স্ট্রিমিং আউটপুট সক্ষম করুন"
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "পুনরুদ্ধার সফল হয়েছে।"
     },
-    "context_standard_action": {
-        "message": "সাধারণ ক্রিয়া"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "কাস্টম অ্যাকশন ১"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "কাস্টম অ্যাকশন ২"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "কাস্টম অ্যাকশন ৩"
     }
 }

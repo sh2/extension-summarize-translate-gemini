@@ -3,7 +3,7 @@
         "message": "Resumir y Traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resume y traduce páginas web. Utiliza Gemini como motor."
+        "message": "Resume y traduce páginas web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -21,7 +21,7 @@
         "message": "Ejecutar de nuevo"
     },
     "popup_button_results": {
-        "message": "Abrir resultados en nueva pestaña"
+        "message": "Abrir resultados en una nueva pestaña"
     },
     "popup_button_options": {
         "message": "Abrir página de opciones"
@@ -120,61 +120,67 @@
         "message": "Idioma especificado por el usuario"
     },
     "options_language_notes": {
-        "message": "Nota: Esta configuración de idioma no afecta a las acciones personalizadas."
+        "message": "Nota: Esta configuración de idioma no afecta las acciones personalizadas."
     },
-    "options_no_text_action": {
+    "options_action_description_no_selection": {
         "message": "Cuando no hay texto seleccionado, realizar la siguiente acción"
     },
-    "options_no_text_summarize": {
+    "options_action_summarize_no_selection": {
         "message": "Resumir (predeterminado)"
     },
-    "options_no_text_translate": {
+    "options_action_translate_no_selection": {
         "message": "Traducir"
     },
-    "options_no_text_custom_1": {
-        "message": "Acción personalizada 1"
+    "options_action_custom_1_no_selection": {
+        "message": "Acción personalizada 1 (Sin selección)"
     },
-    "options_no_text_custom_2": {
-        "message": "Acción personalizada 2"
+    "options_action_custom_2_no_selection": {
+        "message": "Acción personalizada 2 (Sin selección)"
     },
-    "options_no_text_custom_3": {
-        "message": "Acción personalizada 3"
+    "options_action_custom_3_no_selection": {
+        "message": "Acción personalizada 3 (Sin selección)"
     },
-    "options_no_text_custom_notes": {
-        "message": "Las acciones personalizadas también son accesibles a través del menú contextual (solo escritorio)."
-    },
-    "options_text_action": {
+    "options_action_description_selection": {
         "message": "Cuando hay texto seleccionado, realizar la siguiente acción"
     },
-    "options_text_summarize": {
+    "options_action_summarize_selection": {
         "message": "Resumir"
     },
-    "options_text_translate": {
+    "options_action_translate_selection": {
         "message": "Traducir (predeterminado)"
     },
-    "options_text_custom_1": {
-        "message": "Acción personalizada 1"
+    "options_action_custom_1_selection": {
+        "message": "Acción personalizada 1 (Con selección)"
     },
-    "options_text_custom_2": {
-        "message": "Acción personalizada 2"
+    "options_action_custom_2_selection": {
+        "message": "Acción personalizada 2 (Con selección)"
     },
-    "options_text_custom_3": {
-        "message": "Acción personalizada 3"
-    },
-    "options_text_custom_notes": {
-        "message": "Las acciones personalizadas también son accesibles a través del menú contextual (solo escritorio)."
-    },
-    "options_contextmenus": {
-        "message": "Añadir al menú contextual"
+    "options_action_custom_3_selection": {
+        "message": "Acción personalizada 3 (Con selección)"
     },
     "options_contextmenu_label_1": {
-        "message": "Etiqueta para acción personalizada 1 (opcional)"
+        "message": "Etiqueta para acción personalizada 1 (Sin selección)"
     },
     "options_contextmenu_label_2": {
-        "message": "Etiqueta para acción personalizada 2 (opcional)"
+        "message": "Etiqueta para acción personalizada 2 (Sin selección)"
     },
     "options_contextmenu_label_3": {
-        "message": "Etiqueta para acción personalizada 3 (opcional)"
+        "message": "Etiqueta para acción personalizada 3 (Sin selección)"
+    },
+    "options_contextmenu_label_1_text": {
+        "message": "Etiqueta para acción personalizada 1 (Con selección)"
+    },
+    "options_contextmenu_label_2_text": {
+        "message": "Etiqueta para acción personalizada 2 (Con selección)"
+    },
+    "options_contextmenu_label_3_text": {
+        "message": "Etiqueta para acción personalizada 3 (Con selección)"
+    },
+    "options_contextmenus_add": {
+        "message": "Añadir al menú contextual"
+    },
+    "options_contextmenus_notes": {
+        "message": "Las acciones personalizadas también son accesibles a través del menú contextual (solo escritorio)."
     },
     "options_streaming": {
         "message": "Habilitar salida de streaming del modelo de lenguaje"
@@ -210,7 +216,7 @@
         "message": "Importación fallida."
     },
     "options_sync_cloud": {
-        "message": "Sincronizar opciones en la nube"
+        "message": "Sincronizar opciones con la nube"
     },
     "options_sync_cloud_started": {
         "message": "Sincronización iniciada."
@@ -224,16 +230,13 @@
     "options_restore_cloud_succeeded": {
         "message": "Restauración exitosa."
     },
-    "context_standard_action": {
-        "message": "Acción estándar"
-    },
-    "context_custom_action_1": {
+    "shortcuts_custom_action_1": {
         "message": "Acción personalizada 1"
     },
-    "context_custom_action_2": {
+    "shortcuts_custom_action_2": {
         "message": "Acción personalizada 2"
     },
-    "context_custom_action_3": {
+    "shortcuts_custom_action_3": {
         "message": "Acción personalizada 3"
     }
 }
