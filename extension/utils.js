@@ -119,6 +119,8 @@ export const getModelId = (languageModel, userModelId) => {
     "2.5-flash-lite": "gemini-2.5-flash-lite",
     "2.0-flash": "gemini-2.0-flash",
     "2.0-flash-lite": "gemini-2.0-flash-lite",
+    "flash-latest": "gemini-flash-latest",
+    "flash-lite-latest": "gemini-flash-lite-latest",
     "gemma-3-27b-it": "gemma-3-27b-it"
   };
 

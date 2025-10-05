@@ -74,52 +74,11 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
 const getCharacterLimit = async (apiKey, modelId, actionType) => {
   // Limit on the number of characters handled at one time
   // so as not to exceed the maximum number of tokens sent and received by the API.
-  // In Gemini, the calculation is performed in the following way
-  // Summarize: The number of characters is the same as the maximum number of input tokens in the model,
-  //            but is reduced because an Internal Server Error occurs
-  // Translate: Number of characters equal to the maximum number of output tokens in the model
-  // noTextCustom: The same as Summarize
-  // textCustom: The same as Summarize
-  const characterLimits = {
-    "gemini-2.5-pro": {
-      summarize: 786432,
-      translate: 65536,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
-    "gemini-2.5-flash": {
-      summarize: 786432,
-      translate: 65536,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
-    "gemini-2.5-flash-lite": {
-      summarize: 786432,
-      translate: 65536,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
-    "gemini-2.0-flash": {
-      summarize: 786432,
-      translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
-    "gemini-2.0-flash-lite": {
-      summarize: 786432,
-      translate: 8192,
-      noTextCustom: 786432,
-      textCustom: 786432
-    },
-    "gemma-3-27b-it": {
-      summarize: 98304,
-      translate: 8192,
-      noTextCustom: 98304,
-      textCustom: 98304
-    }
-  };
+  const { characterLimitsCache } = await chrome.storage.session.get({ characterLimitsCache: {} });
 
-  if (!characterLimits[modelId]) {
+  if (characterLimitsCache[modelId] && Date.now() < characterLimitsCache[modelId].expiresAt) {
+    return characterLimitsCache[modelId][actionType];
+  } else {
     // Get the character limits from the API
     const characterLimitsFromAPI = {
       summarize: 8192,
@@ -139,10 +98,20 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
       if (response.ok) {
         const json = await response.json();
 
+        // summarize: The number of characters is the same as the maximum number of input tokens in the model,
+        //            but is reduced because an Internal Server Error occurs
+        // translate: Number of characters equal to the maximum number of output tokens in the model
+        // noTextCustom: The same as Summarize
+        // textCustom: The same as Summarize
         characterLimitsFromAPI.summarize = json.inputTokenLimit * 3 / 4;
         characterLimitsFromAPI.translate = json.outputTokenLimit;
         characterLimitsFromAPI.noTextCustom = json.inputTokenLimit * 3 / 4;
         characterLimitsFromAPI.textCustom = json.inputTokenLimit * 3 / 4;
+
+        // Update the cache
+        characterLimitsCache[modelId] = characterLimitsFromAPI;
+        characterLimitsCache[modelId].expiresAt = Date.now() + 24 * 60 * 60 * 1000; // Cache for 24 hours
+        await chrome.storage.session.set({ characterLimitsCache: characterLimitsCache });
       } else {
         console.log(await response.text());
       }
@@ -151,8 +120,6 @@ const getCharacterLimit = async (apiKey, modelId, actionType) => {
     }
 
     return characterLimitsFromAPI[actionType];
-  } else {
-    return characterLimits[modelId][actionType];
   }
 };
 
