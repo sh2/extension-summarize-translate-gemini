@@ -244,3 +244,18 @@ document.getElementById("clear").addEventListener("click", clearConversation);
 document.getElementById("copy").addEventListener("click", copyContent);
 document.getElementById("save").addEventListener("click", saveContent);
 document.getElementById("send").addEventListener("click", askQuestion);
+
+document.getElementById("text").addEventListener("keydown", (e) => {
+  if (e.isComposing || e.key === "Process") {
+    return;
+  }
+
+  // Check if Ctrl (or Cmd) + Enter is pressed
+  if ((e.ctrlKey || e.metaKey) && (e.key === "Enter" || e.key === "NumpadEnter")) {
+    e.preventDefault();
+
+    if (!document.getElementById("send").disabled) {
+      askQuestion();
+    }
+  }
+});
