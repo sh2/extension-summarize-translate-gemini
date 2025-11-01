@@ -67,7 +67,7 @@ const askQuestion = async () => {
   document.getElementById("clear").disabled = true;
   document.getElementById("copy").disabled = true;
   document.getElementById("save").disabled = true;
-  document.getElementById("text").disabled = true;
+  document.getElementById("text").readOnly = true;
   document.getElementById("languageModel").disabled = true;
   document.getElementById("send").disabled = true;
 
@@ -197,7 +197,7 @@ const askQuestion = async () => {
   document.getElementById("clear").disabled = false;
   document.getElementById("copy").disabled = false;
   document.getElementById("save").disabled = false;
-  document.getElementById("text").disabled = false;
+  document.getElementById("text").readOnly = false;
   document.getElementById("languageModel").disabled = false;
   document.getElementById("send").disabled = false;
 };
