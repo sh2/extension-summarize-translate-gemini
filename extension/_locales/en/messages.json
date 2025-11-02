@@ -185,6 +185,12 @@
     "options_streaming": {
         "message": "Enable streaming output from the language model"
     },
+    "options_render_links": {
+        "message": "Display URLs in the output as hyperlinks"
+    },
+    "options_render_links_notes": {
+        "message": "AI-generated URLs may be incorrect or dangerous. Always check before opening."
+    },
     "options_auto_save": {
         "message": "Automatically save results after generation"
     },

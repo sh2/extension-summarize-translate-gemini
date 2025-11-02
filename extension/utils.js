@@ -90,14 +90,23 @@ export const displayLoadingMessage = (elementId, loadingMessage) => {
   }
 };
 
-export const convertMarkdownToHtml = (content, breaks) => {
-  // Disable links when converting from Markdown to HTML
-  marked.use({ renderer: { link: ({ text }) => text } });
+export const convertMarkdownToHtml = (content, breaks, links) => {
+  const renderer = new marked.Renderer();
+
+  if (!links) {
+    renderer.link = ({ text }) => text;
+  }
 
   const markdownDiv = document.createElement("div");
   markdownDiv.textContent = content;
   const htmlDiv = document.createElement("div");
-  htmlDiv.innerHTML = DOMPurify.sanitize(marked.parse(markdownDiv.innerHTML, { breaks: breaks }));
+  htmlDiv.innerHTML = DOMPurify.sanitize(marked.parse(markdownDiv.innerHTML, { breaks: breaks, renderer: renderer }));
+
+  // Set links to open in a new tab with security attributes
+  htmlDiv.querySelectorAll("a[href]").forEach(anchor => {
+    anchor.setAttribute("target", "_blank");
+    anchor.setAttribute("rel", "noopener noreferrer");
+  });
 
   // Replace the HTML entities with the original characters in the code blocks
   htmlDiv.querySelectorAll("code").forEach(codeBlock => {

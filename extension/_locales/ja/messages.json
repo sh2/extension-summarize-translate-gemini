@@ -185,6 +185,12 @@
     "options_streaming": {
         "message": "言語モデルからのストリーミング出力を有効にする"
     },
+    "options_render_links": {
+        "message": "出力に含まれるURLをハイパーリンクとして表示する"
+    },
+    "options_render_links_notes": {
+        "message": "生成AIが出力したURLは誤っている場合や危険な場合があります。開く前に必ず確認してください。"
+    },
     "options_auto_save": {
         "message": "生成後に結果を自動保存する"
     },

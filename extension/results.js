@@ -95,7 +95,7 @@ const askQuestion = async () => {
   formattedQuestionDiv.style.borderRadius = "1rem";
   formattedQuestionDiv.style.margin = "1.5rem";
   formattedQuestionDiv.style.padding = "1rem 1rem .1rem";
-  formattedQuestionDiv.innerHTML = convertMarkdownToHtml(question, true);
+  formattedQuestionDiv.innerHTML = convertMarkdownToHtml(question, true, false);
 
   // Append the formatted question to the conversation
   document.getElementById("conversation").appendChild(formattedQuestionDiv);
@@ -109,10 +109,11 @@ const askQuestion = async () => {
   window.scrollTo(0, document.body.scrollHeight);
 
   // Generate the response
-  const { apiKey, streaming, userModelId, autoSave } = await chrome.storage.local.get({
+  const { apiKey, streaming, userModelId, renderLinks, autoSave } = await chrome.storage.local.get({
     apiKey: "",
     streaming: false,
     userModelId: "gemini-2.0-flash-001",
+    renderLinks: false,
     autoSave: false
   });
 
@@ -139,7 +140,7 @@ const askQuestion = async () => {
       const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
 
       if (streamContent) {
-        formattedAnswerDiv.innerHTML = convertMarkdownToHtml(`${streamContent}\n\n`, false);
+        formattedAnswerDiv.innerHTML = convertMarkdownToHtml(`${streamContent}\n\n`, false, renderLinks);
       }
     }, 1000);
 
@@ -182,7 +183,7 @@ const askQuestion = async () => {
   }
 
   // Update the formatted answer in the conversation
-  formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false);
+  formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false, renderLinks);
 
   // Add the question and answer to the conversation
   conversation.push({ question: question, answer: answer });
@@ -236,7 +237,8 @@ const initialize = async () => {
   result = (await chrome.storage.session.get({ [`result_${resultIndex}`]: "" }))[`result_${resultIndex}`];
 
   // Convert the content from Markdown to HTML
-  document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false);
+  const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
+  document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false, renderLinks);
 };
 
 document.addEventListener("DOMContentLoaded", initialize);

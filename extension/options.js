@@ -27,6 +27,7 @@ const INITIAL_OPTIONS = {
   contextMenuLabel2Text: "",
   contextMenuLabel3Text: "",
   streaming: false,
+  renderLinks: false,
   autoSave: false,
   theme: "system",
   fontSize: "medium"
@@ -66,6 +67,7 @@ const getOptionsFromForm = (includeApiKey) => {
     contextMenuLabel2Text: document.getElementById("contextMenuLabel2Text").value,
     contextMenuLabel3Text: document.getElementById("contextMenuLabel3Text").value,
     streaming: document.getElementById("streaming").checked,
+    renderLinks: document.getElementById("renderLinks").checked,
     autoSave: document.getElementById("autoSave").checked,
     theme: document.getElementById("theme").value,
     fontSize: document.getElementById("fontSize").value
@@ -102,6 +104,7 @@ const setOptionsToForm = async () => {
   document.getElementById("contextMenuLabel2Text").value = options.contextMenuLabel2Text;
   document.getElementById("contextMenuLabel3Text").value = options.contextMenuLabel3Text;
   document.getElementById("streaming").checked = options.streaming;
+  document.getElementById("renderLinks").checked = options.renderLinks;
   document.getElementById("autoSave").checked = options.autoSave;
   document.getElementById("theme").value = options.theme;
   document.getElementById("fontSize").value = options.fontSize;
@@ -218,6 +221,10 @@ const applyOptionsToForm = (options) => {
 
   if (options.streaming !== undefined) {
     document.getElementById("streaming").checked = options.streaming;
+  }
+
+  if (options.renderLinks !== undefined) {
+    document.getElementById("renderLinks").checked = options.renderLinks;
   }
 
   if (options.autoSave !== undefined) {

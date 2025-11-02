@@ -341,6 +341,7 @@ const getLoadingMessage = (actionType, mediaType) => {
 };
 
 const main = async (useCache) => {
+  const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
   let displayIntervalId = 0;
   let response = {};
   let didGenerate = false;
@@ -424,7 +425,7 @@ const main = async (useCache) => {
 
             if (streamContent) {
               document.getElementById("content").innerHTML =
-                convertMarkdownToHtml(`${content}\n\n${streamContent}\n\n`, false);
+                convertMarkdownToHtml(`${content}\n\n${streamContent}\n\n`, false, renderLinks);
             }
           }, 1000);
         }
@@ -453,7 +454,7 @@ const main = async (useCache) => {
         } else if (response.body.candidates?.[0].content) {
           // A normal response was returned
           content += `${response.body.candidates[0].content.parts[0].text}\n\n`;
-          document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false);
+          document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks);
         } else {
           // The expected response was not returned
           content = chrome.i18n.getMessage("popup_unexpected_response");
@@ -481,7 +482,7 @@ const main = async (useCache) => {
     }
 
     // Convert the content from Markdown to HTML
-    document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false);
+    document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks);
 
     // Save the content to the session storage
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
