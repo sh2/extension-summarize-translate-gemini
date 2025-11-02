@@ -3,7 +3,7 @@
         "message": "Resumir e Traduzir com Gemini"
     },
     "extension_description": {
-        "message": "Resume e traduz páginas web. Utiliza Gemini como backend."
+        "message": "Resume e traduz páginas da web. Utiliza Gemini como backend."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -60,7 +60,7 @@
         "message": "Ocorreu um erro inesperado. Verifique o console para detalhes."
     },
     "popup_no_apikey": {
-        "message": "Defina sua chave API Gemini na página de opções."
+        "message": "Defina sua chave de API Gemini na página de opções."
     },
     "popup_miscellaneous_error": {
         "message": "Não foi possível resumir ou traduzir esta página."
@@ -102,10 +102,10 @@
         "message": "Opções - Resumir e Traduzir com Gemini"
     },
     "options_apikey": {
-        "message": "Chave API Gemini"
+        "message": "Chave de API Gemini"
     },
     "options_apikey_hint": {
-        "message": "Você pode obter uma chave API Gemini na seguinte página."
+        "message": "Você pode obter uma chave de API Gemini na seguinte página."
     },
     "options_model": {
         "message": "Modelo de linguagem"
@@ -185,6 +185,12 @@
     "options_streaming": {
         "message": "Ativar saída de streaming do modelo de linguagem"
     },
+    "options_render_links": {
+        "message": "Exibir URLs na saída como hiperlinks"
+    },
+    "options_render_links_notes": {
+        "message": "URLs geradas por IA podem estar incorretas ou ser perigosas. Sempre verifique antes de abrir."
+    },
     "options_auto_save": {
         "message": "Salvar resultados automaticamente após a geração"
     },
@@ -204,7 +210,7 @@
         "message": "Exportar opções para arquivo"
     },
     "options_export_api_key": {
-        "message": "Incluir chave API"
+        "message": "Incluir chave de API"
     },
     "options_import": {
         "message": "Importar opções de arquivo"
@@ -216,7 +222,7 @@
         "message": "Importação falhou."
     },
     "options_sync_cloud": {
-        "message": "Sincronizar opções para a nuvem"
+        "message": "Sincronizar opções com a nuvem"
     },
     "options_sync_cloud_started": {
         "message": "Sincronização iniciada."

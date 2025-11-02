@@ -3,7 +3,7 @@
         "message": "Resumir y Traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resume y traduce páginas web. Utiliza Gemini como backend."
+        "message": "Resume y traduce páginas web. Utiliza Gemini como motor."
     },
     "popup_button_copy": {
         "message": "Copiar"
@@ -21,7 +21,7 @@
         "message": "Ejecutar de nuevo"
     },
     "popup_button_results": {
-        "message": "Abrir resultados en una nueva pestaña"
+        "message": "Abrir resultados en nueva pestaña"
     },
     "popup_button_options": {
         "message": "Abrir página de opciones"
@@ -60,7 +60,7 @@
         "message": "Ocurrió un error inesperado. Consulte la consola para más detalles."
     },
     "popup_no_apikey": {
-        "message": "Por favor, configure su clave API de Gemini en la página de opciones."
+        "message": "Configure su clave API de Gemini en la página de opciones."
     },
     "popup_miscellaneous_error": {
         "message": "No se pudo resumir o traducir esta página."
@@ -180,10 +180,16 @@
         "message": "Añadir al menú contextual"
     },
     "options_contextmenus_notes": {
-        "message": "Las acciones personalizadas también son accesibles a través del menú contextual (solo escritorio)."
+        "message": "Las acciones personalizadas también son accesibles desde el menú contextual (solo escritorio)."
     },
     "options_streaming": {
         "message": "Habilitar salida de streaming del modelo de lenguaje"
+    },
+    "options_render_links": {
+        "message": "Mostrar URLs en la salida como hipervínculos"
+    },
+    "options_render_links_notes": {
+        "message": "Las URLs generadas por IA pueden ser incorrectas o peligrosas. Verifique siempre antes de abrir."
     },
     "options_auto_save": {
         "message": "Guardar resultados automáticamente después de la generación"

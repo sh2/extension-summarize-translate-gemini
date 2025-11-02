@@ -3,7 +3,7 @@
         "message": "Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "extension_description": {
-        "message": "वेब पृष्ठों का सारांश करें और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
+        "message": "वेब पृष्ठों का सारांशित और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
     },
     "popup_button_copy": {
         "message": "कॉपी करें"
@@ -33,10 +33,10 @@
         "message": "सारांशित किया जा रहा है"
     },
     "popup_summarizing_captions": {
-        "message": "कैप्शन का सारांश किया जा रहा है"
+        "message": "कैप्शन का सारांशित किया जा रहा है"
     },
     "popup_summarizing_image": {
-        "message": "छवि का सारांश किया जा रहा है"
+        "message": "छवि का सारांशित किया जा रहा है"
     },
     "popup_translating": {
         "message": "अनुवाद किया जा रहा है"
@@ -123,7 +123,7 @@
         "message": "ध्यान दें: यह भाषा सेटिंग कस्टम क्रियाओं को प्रभावित नहीं करती है।"
     },
     "options_action_description_no_selection": {
-        "message": "जब कोई पाठ चयनित न हो, तो निम्न क्रिया करें"
+        "message": "जब कोई टेक्स्ट चयनित न हो, तो निम्न क्रिया करें"
     },
     "options_action_summarize_no_selection": {
         "message": "सारांशित करें (डिफ़ॉल्ट)"
@@ -141,7 +141,7 @@
         "message": "कस्टम क्रिया 3 (कोई चयन नहीं)"
     },
     "options_action_description_selection": {
-        "message": "जब पाठ चयनित हो, तो निम्न क्रिया करें"
+        "message": "जब टेक्स्ट चयनित हो, तो निम्न क्रिया करें"
     },
     "options_action_summarize_selection": {
         "message": "सारांशित करें"
@@ -180,13 +180,19 @@
         "message": "संदर्भ मेनू में जोड़ें"
     },
     "options_contextmenus_notes": {
-        "message": "कस्टम क्रियाएँ संदर्भ मेनू (केवल डेस्कटॉप) के माध्यम से भी सुलभ हैं।"
+        "message": "कस्टम क्रियाएँ संदर्भ मेनू (केवल डेस्कटॉप) के माध्यम से भी उपलब्ध हैं।"
     },
     "options_streaming": {
         "message": "भाषा मॉडल से स्ट्रीमिंग आउटपुट सक्षम करें"
     },
+    "options_render_links": {
+        "message": "आउटपुट में URL को हाइपरलिंक के रूप में प्रदर्शित करें"
+    },
+    "options_render_links_notes": {
+        "message": "AI-जनित URL गलत या खतरनाक हो सकते हैं। खोलने से पहले हमेशा जांचें।"
+    },
     "options_auto_save": {
-        "message": "उत्पत्ति के बाद परिणामों को स्वतः सहेजें"
+        "message": "जनरेशन के बाद परिणामों को स्वचालित रूप से सहेजें"
     },
     "options_theme": {
         "message": "थीम"

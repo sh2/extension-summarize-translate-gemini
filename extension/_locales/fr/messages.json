@@ -63,7 +63,7 @@
         "message": "Veuillez définir votre clé API Gemini sur la page des options."
     },
     "popup_miscellaneous_error": {
-        "message": "Impossible de résumer ou traduire cette page."
+        "message": "Impossible de résumer ou de traduire cette page."
     },
     "results_title": {
         "message": "Résultats - Résumer et traduire avec Gemini"
@@ -132,13 +132,13 @@
         "message": "Traduire"
     },
     "options_action_custom_1_no_selection": {
-        "message": "Action personnalisée 1 (Aucune sélection)"
+        "message": "Action personnalisée 1 (Pas de sélection)"
     },
     "options_action_custom_2_no_selection": {
-        "message": "Action personnalisée 2 (Aucune sélection)"
+        "message": "Action personnalisée 2 (Pas de sélection)"
     },
     "options_action_custom_3_no_selection": {
-        "message": "Action personnalisée 3 (Aucune sélection)"
+        "message": "Action personnalisée 3 (Pas de sélection)"
     },
     "options_action_description_selection": {
         "message": "Lorsqu'un texte est sélectionné, effectuer l'action suivante"
@@ -159,13 +159,13 @@
         "message": "Action personnalisée 3 (Sélection)"
     },
     "options_contextmenu_label_1": {
-        "message": "Libellé pour l'action personnalisée 1 (Aucune sélection)"
+        "message": "Libellé pour l'action personnalisée 1 (Pas de sélection)"
     },
     "options_contextmenu_label_2": {
-        "message": "Libellé pour l'action personnalisée 2 (Aucune sélection)"
+        "message": "Libellé pour l'action personnalisée 2 (Pas de sélection)"
     },
     "options_contextmenu_label_3": {
-        "message": "Libellé pour l'action personnalisée 3 (Aucune sélection)"
+        "message": "Libellé pour l'action personnalisée 3 (Pas de sélection)"
     },
     "options_contextmenu_label_1_text": {
         "message": "Libellé pour l'action personnalisée 1 (Sélection)"
@@ -185,6 +185,12 @@
     "options_streaming": {
         "message": "Activer la diffusion en continu de la sortie du modèle linguistique"
     },
+    "options_render_links": {
+        "message": "Afficher les URL dans la sortie sous forme de liens hypertexte"
+    },
+    "options_render_links_notes": {
+        "message": "Les URL générées par l'IA peuvent être incorrectes ou dangereuses. Toujours vérifier avant d'ouvrir."
+    },
     "options_auto_save": {
         "message": "Enregistrer automatiquement les résultats après génération"
     },
@@ -192,7 +198,7 @@
         "message": "Thème"
     },
     "options_font_size": {
-        "message": "Taille de police"
+        "message": "Taille de la police"
     },
     "options_button_save": {
         "message": "Enregistrer les options"
@@ -216,7 +222,7 @@
         "message": "Importation échouée."
     },
     "options_sync_cloud": {
-        "message": "Synchroniser les options avec le cloud"
+        "message": "Synchroniser les options vers le cloud"
     },
     "options_sync_cloud_started": {
         "message": "Synchronisation démarrée."

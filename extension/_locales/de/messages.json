@@ -27,7 +27,7 @@
         "message": "Optionen öffnen"
     },
     "popup_retrieving_captions": {
-        "message": "Untertitel werden abgerufen"
+        "message": "Versuche, Untertitel abzurufen"
     },
     "popup_summarizing": {
         "message": "Zusammenfassen"
@@ -48,7 +48,7 @@
         "message": "Bild übersetzen"
     },
     "popup_processing": {
-        "message": "Verarbeiten"
+        "message": "Verarbeite"
     },
     "popup_prompt_blocked": {
         "message": "Die Anfrage wurde blockiert."
@@ -87,7 +87,7 @@
         "message": "Senden"
     },
     "results_waiting_response": {
-        "message": "Warten auf Antwort"
+        "message": "Warte auf Antwort"
     },
     "results_prompt_blocked": {
         "message": "Die Anfrage wurde blockiert."
@@ -184,6 +184,12 @@
     },
     "options_streaming": {
         "message": "Streaming-Ausgabe vom Sprachmodell aktivieren"
+    },
+    "options_render_links": {
+        "message": "URLs in der Ausgabe als Hyperlinks anzeigen"
+    },
+    "options_render_links_notes": {
+        "message": "KI-generierte URLs können falsch oder gefährlich sein. Immer vor dem Öffnen prüfen."
     },
     "options_auto_save": {
         "message": "Ergebnisse nach Generierung automatisch speichern"

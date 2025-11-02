@@ -3,7 +3,7 @@
         "message": "تلخيص وترجمة مع Gemini"
     },
     "extension_description": {
-        "message": "لخص وترجم صفحات الويب. يعتمد على Gemini كواجهة خلفية."
+        "message": "لخص وترجم صفحات الويب. يستخدم Gemini كواجهة خلفية."
     },
     "popup_button_copy": {
         "message": "نسخ"
@@ -57,10 +57,10 @@
         "message": "تم حظر الاستجابة."
     },
     "popup_unexpected_response": {
-        "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
+        "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للتفاصيل."
     },
     "popup_no_apikey": {
-        "message": "يرجى تعيين مفتاح API الخاص بـ Gemini في صفحة الخيارات."
+        "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
     },
     "popup_miscellaneous_error": {
         "message": "تعذر تلخيص أو ترجمة هذه الصفحة."
@@ -96,16 +96,16 @@
         "message": "تم حظر الاستجابة."
     },
     "results_unexpected_response": {
-        "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للحصول على التفاصيل."
+        "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للتفاصيل."
     },
     "options_title": {
         "message": "الخيارات - تلخيص وترجمة مع Gemini"
     },
     "options_apikey": {
-        "message": "مفتاح API لـ Gemini"
+        "message": "مفتاح Gemini API"
     },
     "options_apikey_hint": {
-        "message": "يمكنك الحصول على مفتاح API لـ Gemini من الصفحة التالية."
+        "message": "يمكنك الحصول على مفتاح Gemini API من الصفحة التالية."
     },
     "options_model": {
         "message": "نموذج اللغة"
@@ -132,13 +132,13 @@
         "message": "ترجمة"
     },
     "options_action_custom_1_no_selection": {
-        "message": "إجراء مخصص 1 (بدون تحديد)"
+        "message": "إجراء مخصص 1 (لا يوجد تحديد)"
     },
     "options_action_custom_2_no_selection": {
-        "message": "إجراء مخصص 2 (بدون تحديد)"
+        "message": "إجراء مخصص 2 (لا يوجد تحديد)"
     },
     "options_action_custom_3_no_selection": {
-        "message": "إجراء مخصص 3 (بدون تحديد)"
+        "message": "إجراء مخصص 3 (لا يوجد تحديد)"
     },
     "options_action_description_selection": {
         "message": "عند تحديد نص، قم بالإجراء التالي"
@@ -150,31 +150,31 @@
         "message": "ترجمة (افتراضي)"
     },
     "options_action_custom_1_selection": {
-        "message": "إجراء مخصص 1 (مع تحديد)"
+        "message": "إجراء مخصص 1 (تحديد)"
     },
     "options_action_custom_2_selection": {
-        "message": "إجراء مخصص 2 (مع تحديد)"
+        "message": "إجراء مخصص 2 (تحديد)"
     },
     "options_action_custom_3_selection": {
-        "message": "إجراء مخصص 3 (مع تحديد)"
+        "message": "إجراء مخصص 3 (تحديد)"
     },
     "options_contextmenu_label_1": {
-        "message": "تسمية للإجراء المخصص 1 (بدون تحديد)"
+        "message": "تسمية للإجراء المخصص 1 (لا يوجد تحديد)"
     },
     "options_contextmenu_label_2": {
-        "message": "تسمية للإجراء المخصص 2 (بدون تحديد)"
+        "message": "تسمية للإجراء المخصص 2 (لا يوجد تحديد)"
     },
     "options_contextmenu_label_3": {
-        "message": "تسمية للإجراء المخصص 3 (بدون تحديد)"
+        "message": "تسمية للإجراء المخصص 3 (لا يوجد تحديد)"
     },
     "options_contextmenu_label_1_text": {
-        "message": "تسمية للإجراء المخصص 1 (مع تحديد)"
+        "message": "تسمية للإجراء المخصص 1 (تحديد)"
     },
     "options_contextmenu_label_2_text": {
-        "message": "تسمية للإجراء المخصص 2 (مع تحديد)"
+        "message": "تسمية للإجراء المخصص 2 (تحديد)"
     },
     "options_contextmenu_label_3_text": {
-        "message": "تسمية للإجراء المخصص 3 (مع تحديد)"
+        "message": "تسمية للإجراء المخصص 3 (تحديد)"
     },
     "options_contextmenus_add": {
         "message": "إضافة إلى قائمة السياق"
@@ -184,6 +184,12 @@
     },
     "options_streaming": {
         "message": "تمكين إخراج البث من نموذج اللغة"
+    },
+    "options_render_links": {
+        "message": "عرض عناوين URL في الإخراج كروابط تشعبية"
+    },
+    "options_render_links_notes": {
+        "message": "قد تكون عناوين URL التي تم إنشاؤها بواسطة الذكاء الاصطناعي غير صحيحة أو خطيرة. تحقق دائمًا قبل الفتح."
     },
     "options_auto_save": {
         "message": "حفظ النتائج تلقائيًا بعد الإنشاء"

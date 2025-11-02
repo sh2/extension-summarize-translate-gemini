@@ -180,10 +180,16 @@
         "message": "Thêm vào menu ngữ cảnh"
     },
     "options_contextmenus_notes": {
-        "message": "Các hành động tùy chỉnh cũng có thể truy cập qua menu ngữ cảnh (chỉ trên máy tính để bàn)."
+        "message": "Các hành động tùy chỉnh cũng có thể truy cập qua menu ngữ cảnh (chỉ dành cho máy tính để bàn)."
     },
     "options_streaming": {
-        "message": "Bật đầu ra phát trực tiếp từ mô hình ngôn ngữ"
+        "message": "Bật đầu ra phát trực tuyến từ mô hình ngôn ngữ"
+    },
+    "options_render_links": {
+        "message": "Hiển thị URL trong đầu ra dưới dạng siêu liên kết"
+    },
+    "options_render_links_notes": {
+        "message": "Các URL do AI tạo ra có thể không chính xác hoặc nguy hiểm. Luôn kiểm tra trước khi mở."
     },
     "options_auto_save": {
         "message": "Tự động lưu kết quả sau khi tạo"

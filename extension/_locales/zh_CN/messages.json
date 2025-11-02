@@ -1,9 +1,9 @@
 {
     "extension_name": {
-        "message": "使用 Gemini 总结和翻译"
+        "message": "使用 Gemini 总结与翻译"
     },
     "extension_description": {
-        "message": "总结和翻译网页。使用 Gemini 作为后端。"
+        "message": "总结并翻译网页内容。使用 Gemini 作为后端。"
     },
     "popup_button_copy": {
         "message": "复制"
@@ -24,7 +24,7 @@
         "message": "在新标签页中打开结果"
     },
     "popup_button_options": {
-        "message": "打开选项页"
+        "message": "打开选项页面"
     },
     "popup_retrieving_captions": {
         "message": "正在尝试检索字幕"
@@ -51,7 +51,7 @@
         "message": "正在处理"
     },
     "popup_prompt_blocked": {
-        "message": "提示已被阻止。"
+        "message": "提示词已被阻止。"
     },
     "popup_response_blocked": {
         "message": "响应已被阻止。"
@@ -60,13 +60,13 @@
         "message": "发生意外错误。请检查控制台以获取详细信息。"
     },
     "popup_no_apikey": {
-        "message": "请在选项页设置您的 Gemini API 密钥。"
+        "message": "请在选项页面设置您的 Gemini API 密钥。"
     },
     "popup_miscellaneous_error": {
         "message": "无法总结或翻译此页面。"
     },
     "results_title": {
-        "message": "结果 - 使用 Gemini 总结和翻译"
+        "message": "结果 - 使用 Gemini 总结与翻译"
     },
     "results_button_clear": {
         "message": "清除对话"
@@ -87,10 +87,10 @@
         "message": "发送"
     },
     "results_waiting_response": {
-        "message": "正在等待响应"
+        "message": "等待响应"
     },
     "results_prompt_blocked": {
-        "message": "提示已被阻止。"
+        "message": "提示词已被阻止。"
     },
     "results_response_blocked": {
         "message": "响应已被阻止。"
@@ -99,7 +99,7 @@
         "message": "发生意外错误。请检查控制台以获取详细信息。"
     },
     "options_title": {
-        "message": "选项 - 使用 Gemini 总结和翻译"
+        "message": "选项 - 使用 Gemini 总结与翻译"
     },
     "options_apikey": {
         "message": "Gemini API 密钥"
@@ -114,7 +114,7 @@
         "message": "用户指定模型"
     },
     "options_language": {
-        "message": "总结和翻译语言"
+        "message": "总结与翻译语言"
     },
     "options_language_user": {
         "message": "用户指定语言"
@@ -132,13 +132,13 @@
         "message": "翻译"
     },
     "options_action_custom_1_no_selection": {
-        "message": "自定义操作 1（未选择）"
+        "message": "自定义操作 1（无选择）"
     },
     "options_action_custom_2_no_selection": {
-        "message": "自定义操作 2（未选择）"
+        "message": "自定义操作 2（无选择）"
     },
     "options_action_custom_3_no_selection": {
-        "message": "自定义操作 3（未选择）"
+        "message": "自定义操作 3（无选择）"
     },
     "options_action_description_selection": {
         "message": "选择文本时，执行以下操作"
@@ -150,31 +150,31 @@
         "message": "翻译（默认）"
     },
     "options_action_custom_1_selection": {
-        "message": "自定义操作 1（已选择）"
+        "message": "自定义操作 1（有选择）"
     },
     "options_action_custom_2_selection": {
-        "message": "自定义操作 2（已选择）"
+        "message": "自定义操作 2（有选择）"
     },
     "options_action_custom_3_selection": {
-        "message": "自定义操作 3（已选择）"
+        "message": "自定义操作 3（有选择）"
     },
     "options_contextmenu_label_1": {
-        "message": "自定义操作 1 标签（未选择）"
+        "message": "自定义操作 1 的标签（无选择）"
     },
     "options_contextmenu_label_2": {
-        "message": "自定义操作 2 标签（未选择）"
+        "message": "自定义操作 2 的标签（无选择）"
     },
     "options_contextmenu_label_3": {
-        "message": "自定义操作 3 标签（未选择）"
+        "message": "自定义操作 3 的标签（无选择）"
     },
     "options_contextmenu_label_1_text": {
-        "message": "自定义操作 1 标签（已选择）"
+        "message": "自定义操作 1 的标签（有选择）"
     },
     "options_contextmenu_label_2_text": {
-        "message": "自定义操作 2 标签（已选择）"
+        "message": "自定义操作 2 的标签（有选择）"
     },
     "options_contextmenu_label_3_text": {
-        "message": "自定义操作 3 标签（已选择）"
+        "message": "自定义操作 3 的标签（有选择）"
     },
     "options_contextmenus_add": {
         "message": "添加到上下文菜单"
@@ -183,7 +183,13 @@
         "message": "自定义操作也可通过上下文菜单访问（仅限桌面版）。"
     },
     "options_streaming": {
-        "message": "启用语言模型流式输出"
+        "message": "启用语言模型的流式输出"
+    },
+    "options_render_links": {
+        "message": "将输出中的 URL 显示为超链接"
+    },
+    "options_render_links_notes": {
+        "message": "AI 生成的 URL 可能不正确或存在风险。打开前请务必检查。"
     },
     "options_auto_save": {
         "message": "生成后自动保存结果"
@@ -201,7 +207,7 @@
         "message": "已保存。"
     },
     "options_export": {
-        "message": "导出选项到文件"
+        "message": "将选项导出到文件"
     },
     "options_export_api_key": {
         "message": "包含 API 密钥"

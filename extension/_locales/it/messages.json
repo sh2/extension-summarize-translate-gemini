@@ -21,10 +21,10 @@
         "message": "Esegui di nuovo"
     },
     "popup_button_results": {
-        "message": "Apri i risultati in una nuova scheda"
+        "message": "Apri risultati in una nuova scheda"
     },
     "popup_button_options": {
-        "message": "Apri la pagina delle opzioni"
+        "message": "Apri pagina opzioni"
     },
     "popup_retrieving_captions": {
         "message": "Tentativo di recupero didascalie"
@@ -48,7 +48,7 @@
         "message": "Traducendo l'immagine"
     },
     "popup_processing": {
-        "message": "Elaborazione in corso"
+        "message": "Elaborazione"
     },
     "popup_prompt_blocked": {
         "message": "Il prompt è stato bloccato."
@@ -183,7 +183,13 @@
         "message": "Le azioni personalizzate sono accessibili anche tramite il menu contestuale (solo desktop)."
     },
     "options_streaming": {
-        "message": "Abilita l'output in streaming dal modello linguistico"
+        "message": "Abilita output in streaming dal modello linguistico"
+    },
+    "options_render_links": {
+        "message": "Visualizza gli URL nell'output come collegamenti ipertestuali"
+    },
+    "options_render_links_notes": {
+        "message": "Gli URL generati dall'IA potrebbero essere errati o pericolosi. Verificare sempre prima di aprire."
     },
     "options_auto_save": {
         "message": "Salva automaticamente i risultati dopo la generazione"
@@ -216,7 +222,7 @@
         "message": "Importazione fallita."
     },
     "options_sync_cloud": {
-        "message": "Sincronizza opzioni sul cloud"
+        "message": "Sincronizza opzioni su cloud"
     },
     "options_sync_cloud_started": {
         "message": "Sincronizzazione avviata."
@@ -225,7 +231,7 @@
         "message": "Sincronizzazione fallita."
     },
     "options_restore_cloud": {
-        "message": "Ripristina opzioni dal cloud"
+        "message": "Ripristina opzioni da cloud"
     },
     "options_restore_cloud_succeeded": {
         "message": "Ripristino riuscito."
