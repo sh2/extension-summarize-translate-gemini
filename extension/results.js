@@ -5,7 +5,7 @@ import {
   displayLoadingMessage,
   convertMarkdownToHtml,
   getModelId,
-  getThinkingBudget,
+  getThinkingConfig,
   generateContent,
   streamGenerateContent,
   exportTextToFile
@@ -119,16 +119,20 @@ const askQuestion = async () => {
 
   const languageModel = document.getElementById("languageModel").value;
   const modelId = getModelId(languageModel, userModelId);
-  const thinkingBudget = getThinkingBudget(languageModel, userModelId);
+  const thinkingConfig = getThinkingConfig(languageModel, userModelId);
   let apiConfig = {};
   let response = null;
 
-  if (thinkingBudget !== undefined) {
+  if (thinkingConfig !== undefined) {
     if (!apiConfig.thinkingConfig) {
       apiConfig.thinkingConfig = {};
     }
 
-    apiConfig.thinkingConfig.thinkingBudget = thinkingBudget;
+    if (thinkingConfig.thinkingLevel) {
+      apiConfig.thinkingConfig.thinkingLevel = thinkingConfig.thinkingLevel;
+    } else if (thinkingConfig.thinkingBudget) {
+      apiConfig.thinkingConfig.thinkingBudget = thinkingConfig.thinkingBudget;
+    }
   }
 
   if (streaming) {

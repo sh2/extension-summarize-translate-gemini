@@ -128,6 +128,7 @@ export const getModelId = (languageModel, userModelId) => {
     "2.5-flash-lite": "gemini-2.5-flash-lite",
     "2.0-flash": "gemini-2.0-flash",
     "2.0-flash-lite": "gemini-2.0-flash-lite",
+    "3-pro-preview": "gemini-3-pro-preview",
     "flash-latest": "gemini-flash-latest",
     "flash-lite-latest": "gemini-flash-lite-latest",
     "gemma-3-27b-it": "gemma-3-27b-it"
@@ -140,10 +141,22 @@ export const getModelId = (languageModel, userModelId) => {
   }
 };
 
-export const getThinkingBudget = (languageModel, userModelId) => {
+export const getThinkingConfig = (languageModel, userModelId) => {
   const modelIdWithBudget = languageModel === "zz" ? userModelId : languageModel;
-  const thinkingBudgetInt = parseInt(modelIdWithBudget.split(":")[1]);
-  return isNaN(thinkingBudgetInt) ? undefined : thinkingBudgetInt;
+  const parts = modelIdWithBudget.split(":");
+
+  if (parts.length < 2) {
+    return undefined;
+  }
+
+  const configValue = parts[1];
+
+  if (configValue === "high" || configValue === "low") {
+    return { thinkingLevel: configValue };
+  }
+
+  const thinkingBudgetInt = parseInt(configValue);
+  return isNaN(thinkingBudgetInt) ? undefined : { thinkingBudget: thinkingBudgetInt };
 };
 
 export const generateContent = async (apiKey, modelId, apiContents, apiConfig) => {
