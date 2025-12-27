@@ -1,4 +1,4 @@
-/* globals protobuf Readability */
+/* globals Readability */
 
 import {
   applyTheme,
@@ -54,122 +54,56 @@ const getWholeText = () => {
   }
 };
 
-const getCaptions = async (videoUrl, languageCode) => {
-  const encodeToBase64 = (metadataObj) => {
-    // Encode the metadata object to a base64 string using protobuf
-    const VideoMetadata = protobuf.roots["default"].VideoMetadata;
-    const message = VideoMetadata.create(metadataObj);
-    const buffer = VideoMetadata.encode(message).finish();
-    let binaryString = "";
+const getTranscript = async () => {
+  const button = document.querySelector("ytd-video-description-transcript-section-renderer button");
+  let transcriptRenderer;
 
-    for (let i = 0; i < buffer.byteLength; i++) {
-      binaryString += String.fromCharCode(buffer[i]);
-    }
-
-    return btoa(binaryString);
-  };
-
-  const languageCodeForCaptions = {
-    en: "en",
-    de: "de",
-    es: "es",
-    fr: "fr",
-    it: "it",
-    pt_br: "pt-BR",
-    vi: "vi",
-    ru: "ru",
-    ar: "ar",
-    hi: "hi",
-    bn: "bn",
-    zh_cn: "zh-CN",
-    zh_tw: "zh-TW",
-    ja: "ja",
-    ko: "ko",
-    zz: "en"
-  };
-
-  const preferredLanguages = [languageCodeForCaptions[languageCode], "en"];
-  const videoId = new URLSearchParams(new URL(videoUrl).search).get("v");
-  const videoResponse = await fetch(videoUrl, { credentials: "omit", });
-  const videoBody = await videoResponse.text();
-  const captionsConfigJson = videoBody.match(/"captions":(.*?),"videoDetails":/s);
-  let captions = "";
-
-  if (captionsConfigJson) {
-    const captionsConfig = JSON.parse(captionsConfigJson[1]);
-
-    if (captionsConfig?.playerCaptionsTracklistRenderer?.captionTracks) {
-      const captionTracks = captionsConfig.playerCaptionsTracklistRenderer.captionTracks;
-
-      const calculateValue = (a) => {
-        let value = preferredLanguages.indexOf(a.languageCode);
-        value = value === -1 ? 9999 : value;
-        value += a.kind === "asr" ? 0.5 : 0;
-        return value;
-      };
-
-      // Sort the caption tracks by the preferred languages and the kind
-      captionTracks.sort((a, b) => {
-        const valueA = calculateValue(a);
-        const valueB = calculateValue(b);
-        return valueA - valueB;
-      });
-
-      const payload = {
-        context: {
-          client: {
-            clientName: "WEB",
-            clientVersion: "2.20991231.01.00",
-          }
-        },
-        params: encodeToBase64({
-          param1: videoId,
-          param2: encodeToBase64({
-            param1: captionTracks[0].kind ? captionTracks[0].kind : "",
-            param2: captionTracks[0].languageCode
-          })
-        })
-      };
-
-      const captionsResponse = await fetch("https://www.youtube.com/youtubei/v1/get_transcript", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload),
-        credentials: "omit"
-      });
-
-      const captionsJson = await captionsResponse.json();
-
-      const initialSegments = captionsJson?.actions?.[0]?.
-        updateEngagementPanelAction?.content?.transcriptRenderer?.content?.
-        transcriptSearchPanelRenderer?.body?.transcriptSegmentListRenderer?.initialSegments;
-
-      let texts = [];
-
-      if (initialSegments) {
-        for (const segment of initialSegments) {
-          const text = segment?.transcriptSegmentRenderer?.snippet?.runs?.[0]?.text;
-
-          if (text) {
-            texts.push(text);
-          }
-        }
-
-        captions = texts.join(" ");
-      }
-    } else {
-      console.log("No captionTracks found.");
-    }
-  } else {
-    console.log("No captions found.");
+  if (!button) {
+    return "";
   }
 
-  return captions;
+  button.click();
+
+  try {
+    transcriptRenderer = await new Promise((resolve, reject) => {
+      if (document.querySelector("ytd-transcript-renderer")) {
+        return resolve(document.querySelector("ytd-transcript-renderer"));
+      }
+
+      const timeoutId = setTimeout(() => {
+        observer.disconnect();
+        reject(new Error("ytd-transcript-renderer not found within 10 seconds."));
+      }, 10000);
+
+      const observer = new MutationObserver(() => {
+        if (document.querySelector("ytd-transcript-renderer")) {
+          clearTimeout(timeoutId);
+          observer.disconnect();
+          resolve(document.querySelector("ytd-transcript-renderer"));
+        }
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    return "";
+  }
+
+  const transcriptSegments = transcriptRenderer.querySelectorAll("ytd-transcript-segment-renderer");
+
+  const transcriptTexts = Array.from(transcriptSegments).map(segment => {
+    const textElement = segment.querySelector("yt-formatted-string");
+    return textElement ? textElement.textContent.trim() : "";
+  });
+
+  return transcriptTexts.join("\n");
 };
 
-const extractTaskInformation = async (languageCode, triggerAction) => {
+const extractTaskInformation = async (triggerAction) => {
   let actionType = "";
   let mediaType = "";
   let taskInput = "";
@@ -261,20 +195,9 @@ const extractTaskInformation = async (languageCode, triggerAction) => {
       const displayIntervalId = setInterval(displayLoadingMessage, 500, "status", chrome.i18n.getMessage("popup_retrieving_captions"));
 
       try {
-        await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          files: ["lib/protobuf.min.js"]
-        });
-
-        await chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          files: ["lib/video-metadata.js"]
-        });
-
         taskInput = (await chrome.scripting.executeScript({
           target: { tabId: tab.id },
-          func: getCaptions,
-          args: [tab.url, languageCode]
+          func: getTranscript
         }))[0].result;
       } catch (error) {
         console.log(error);
@@ -372,7 +295,7 @@ const main = async (useCache) => {
     document.getElementById("results").disabled = true;
 
     // Extract the task information
-    const { actionType, mediaType, taskInput } = await extractTaskInformation(languageCode, triggerAction);
+    const { actionType, mediaType, taskInput } = await extractTaskInformation(triggerAction);
 
     // Display a loading message
     displayIntervalId = setInterval(displayLoadingMessage, 500, "status", getLoadingMessage(actionType, mediaType));
