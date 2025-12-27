@@ -129,6 +129,7 @@ export const getModelId = (languageModel, userModelId) => {
     "2.0-flash": "gemini-2.0-flash",
     "2.0-flash-lite": "gemini-2.0-flash-lite",
     "3-pro-preview": "gemini-3-pro-preview",
+    "3-flash-preview": "gemini-3-flash-preview",
     "flash-latest": "gemini-flash-latest",
     "flash-lite-latest": "gemini-flash-lite-latest",
     "gemma-3-27b-it": "gemma-3-27b-it"
@@ -151,7 +152,7 @@ export const getThinkingConfig = (languageModel, userModelId) => {
 
   const configValue = parts[1];
 
-  if (configValue === "high" || configValue === "low") {
+  if (configValue === "high" || configValue === "medium" || configValue === "low" || configValue === "minimal") {
     return { thinkingLevel: configValue };
   }
 
