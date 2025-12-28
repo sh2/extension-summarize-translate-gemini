@@ -188,7 +188,7 @@ const extractTaskInformation = async (triggerAction) => {
         break;
     }
 
-    if (tab.url.startsWith("https://www.youtube.com/watch?v=") || tab.url.startsWith("https://m.youtube.com/watch?v=")) {
+    if (tab.url.startsWith("https://www.youtube.com/watch?")) {
       // If the page is a YouTube video, get the captions instead of the whole text
       mediaType = "captions";
 
