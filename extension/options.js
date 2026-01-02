@@ -8,7 +8,7 @@ import {
 const INITIAL_OPTIONS = {
   apiKey: "",
   languageModel: "2.5-flash:0",
-  userModelId: "gemini-2.0-flash-001",
+  userModelId: "gemini-2.5-flash",
   languageCode: "en",
   userLanguage: "Turkish",
   noTextAction: "summarize",

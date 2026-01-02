@@ -119,8 +119,8 @@ export const convertMarkdownToHtml = (content, breaks, links) => {
   return htmlDiv.innerHTML;
 };
 
-export const getModelId = (languageModel, userModelId) => {
-  const languageModelKey = languageModel.split(":")[0];
+export const getModelConfigs = (languageModel, userModelId) => {
+  // languageModel: "3-flash-preview:minimal/2.5-flash:0/gemma-3-27b-it/zz"
 
   const modelMappings = {
     "2.5-pro": "gemini-2.5-pro",
@@ -135,32 +135,39 @@ export const getModelId = (languageModel, userModelId) => {
     "gemma-3-27b-it": "gemma-3-27b-it"
   };
 
-  if (languageModel === "zz") {
-    return userModelId.split(":")[0];
-  } else {
-    return modelMappings[languageModelKey];
-  }
+  // modelSegments: ["3-flash-preview:minimal", "2.5-flash:0", "gemma-3-27b-it", "zz"]
+  const modelSegments = languageModel.split("/");
+
+  const modelConfigs = modelSegments.map(segment => {
+    const resolvedSegment = segment === "zz" ? userModelId : segment;
+    const segmentParts = resolvedSegment.split(":");
+    const modelId = segment === "zz" ? segmentParts[0] : modelMappings[segmentParts[0]];
+    let generationConfig = {};
+
+    if (segmentParts.length >= 2) {
+      const thinkingValue = segmentParts[1];
+
+      if (["high", "medium", "low", "minimal"].includes(thinkingValue)) {
+        generationConfig.thinkingConfig = { thinkingLevel: thinkingValue };
+      } else {
+        const thinkingBudgetInt = parseInt(thinkingValue);
+
+        if (!isNaN(thinkingBudgetInt)) {
+          generationConfig.thinkingConfig = { thinkingBudget: thinkingBudgetInt };
+        }
+      }
+    }
+
+    return { modelId, generationConfig };
+  });
+
+  // [{ "gemini-3-flash-preview", { thinkingConfig: { thinkingLevel: "minimal" }}}, ...]
+  return modelConfigs;
 };
 
-export const getThinkingConfig = (languageModel, userModelId) => {
-  const modelIdWithBudget = languageModel === "zz" ? userModelId : languageModel;
-  const parts = modelIdWithBudget.split(":");
+const generateContent = async (apiKey, apiContents, modelConfig) => {
+  const { modelId, generationConfig } = modelConfig;
 
-  if (parts.length < 2) {
-    return undefined;
-  }
-
-  const configValue = parts[1];
-
-  if (configValue === "high" || configValue === "medium" || configValue === "low" || configValue === "minimal") {
-    return { thinkingLevel: configValue };
-  }
-
-  const thinkingBudgetInt = parseInt(configValue);
-  return isNaN(thinkingBudgetInt) ? undefined : { thinkingBudget: thinkingBudgetInt };
-};
-
-export const generateContent = async (apiKey, modelId, apiContents, apiConfig) => {
   try {
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`, {
       method: "POST",
@@ -171,7 +178,7 @@ export const generateContent = async (apiKey, modelId, apiContents, apiConfig) =
       body: JSON.stringify({
         contents: apiContents,
         safetySettings: SAFETY_SETTINGS,
-        generationConfig: apiConfig
+        generationConfig: generationConfig
       })
     });
 
@@ -189,7 +196,27 @@ export const generateContent = async (apiKey, modelId, apiContents, apiConfig) =
   }
 };
 
-export const streamGenerateContent = async (apiKey, modelId, apiContents, apiConfig, streamKey) => {
+export const generateContentWithFallback = async (apiKey, apiContents, modelConfigs) => {
+  let response = {
+    ok: false,
+    status: 1001,
+    body: { error: { message: "No models available." } }
+  };
+
+  for (const modelConfig of modelConfigs) {
+    response = await generateContent(apiKey, apiContents, modelConfig);
+
+    if (response.ok || response.status !== 429) {
+      break;
+    }
+  }
+
+  return response;
+};
+
+const streamGenerateContent = async (apiKey, apiContents, modelConfig, streamKey) => {
+  const { modelId, generationConfig } = modelConfig;
+
   try {
     await chrome.storage.session.remove(streamKey);
 
@@ -202,7 +229,7 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents, apiCon
       body: JSON.stringify({
         contents: apiContents,
         safetySettings: SAFETY_SETTINGS,
-        generationConfig: apiConfig
+        generationConfig: generationConfig
       })
     });
 
@@ -276,6 +303,24 @@ export const streamGenerateContent = async (apiKey, modelId, apiContents, apiCon
       body: { error: { message: error.stack } }
     };
   }
+};
+
+export const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfigs, streamKey) => {
+  let response = {
+    ok: false,
+    status: 1001,
+    body: { error: { message: "No models available." } }
+  };
+
+  for (const modelConfig of modelConfigs) {
+    response = await streamGenerateContent(apiKey, apiContents, modelConfig, streamKey);
+
+    if (response.ok || response.status !== 429) {
+      break;
+    }
+  }
+
+  return response;
 };
 
 const formatTitle = (label1, label1DefaultKey, label2, label2DefaultKey) => {

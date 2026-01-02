@@ -14,7 +14,7 @@ let content = "";
 
 const copyContent = async () => {
   const operationStatus = document.getElementById("operation-status");
-  let clipboardContent = content.replace(/\n+$/, "") + "\n\n";
+  let clipboardContent = `${content.replace(/\n+$/, "")}\n\n`;
 
   // Copy the content to the clipboard
   await navigator.clipboard.writeText(clipboardContent);
@@ -29,7 +29,7 @@ const saveContent = async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
   // Save the content to a text file
-  exportTextToFile(tab.url + "\n\n" + content);
+  exportTextToFile(`${tab.url}\n\n${content}`);
 
   // Display a message indicating that the content was saved
   operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
@@ -282,7 +282,6 @@ const main = async (useCache) => {
     const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
     const triggerAction = document.getElementById("triggerAction").value;
-    let taskInputChunks = [];
 
     // Disable the buttons and input fields
     document.getElementById("content").textContent = "";
@@ -300,99 +299,85 @@ const main = async (useCache) => {
     // Display a loading message
     displayIntervalId = setInterval(displayLoadingMessage, 500, "status", getLoadingMessage(actionType, mediaType));
 
-    // Split the task input
-    if (mediaType === "image") {
-      // If the task input is an image, do not split it
-      taskInputChunks = [taskInput];
+    // Check the cache
+    const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
+    const cacheIdentifier = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
+    const responseCache = responseCacheQueue.find(item => item.key === cacheIdentifier);
+
+    if (useCache && responseCache) {
+      // Use the cached response
+      response = responseCache.value;
     } else {
-      taskInputChunks = await chrome.runtime.sendMessage({
-        message: "chunk",
+      // Indicate that a generation request was made
+      didGenerate = true;
+
+      // Generate content
+      const streamKey = `streamContent_${resultIndex}`;
+      let streamIntervalId = 0;
+
+      const responsePromise = chrome.runtime.sendMessage({
+        message: "generate",
         actionType: actionType,
+        mediaType: mediaType,
         taskInput: taskInput,
-        languageModel: languageModel
+        languageModel: languageModel,
+        languageCode: languageCode,
+        streamKey: streamKey
       });
 
-      console.log(taskInputChunks);
-    }
+      console.log("Request:", {
+        actionType: actionType,
+        mediaType: mediaType,
+        taskInput: taskInput,
+        languageModel: languageModel,
+        languageCode: languageCode,
+        streamKey: streamKey
+      });
 
-    for (const taskInputChunk of taskInputChunks) {
-      const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
-      const cacheIdentifier = JSON.stringify({ actionType, mediaType, taskInput: taskInputChunk, languageModel, languageCode });
-      const responseCache = responseCacheQueue.find(item => item.key === cacheIdentifier);
+      if (streaming) {
+        // Stream the content
+        streamIntervalId = setInterval(async () => {
+          const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
 
-      if (useCache && responseCache) {
-        // Use the cached response
-        response = responseCache.value;
-      } else {
-        // Indicate that a generation request was made
-        didGenerate = true;
-
-        // Generate content
-        const streamKey = `streamContent_${resultIndex}`;
-        let streamIntervalId = 0;
-
-        const responsePromise = chrome.runtime.sendMessage({
-          message: "generate",
-          actionType: actionType,
-          mediaType: mediaType,
-          taskInput: taskInputChunk,
-          languageModel: languageModel,
-          languageCode: languageCode,
-          streamKey: streamKey
-        });
-
-        if (streaming) {
-          // Stream the content
-          streamIntervalId = setInterval(async () => {
-            const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
-
-            if (streamContent) {
-              document.getElementById("content").innerHTML =
-                convertMarkdownToHtml(`${content}\n\n${streamContent}\n\n`, false, renderLinks);
-            }
-          }, 1000);
-        }
-
-        // Wait for responsePromise
-        response = await responsePromise;
-
-        if (streamIntervalId) {
-          clearInterval(streamIntervalId);
-        }
+          if (streamContent) {
+            document.getElementById("content").innerHTML =
+              convertMarkdownToHtml(streamContent, false, renderLinks);
+          }
+        }, 1000);
       }
 
-      console.log(response);
+      // Wait for responsePromise
+      response = await responsePromise;
 
-      if (response.ok) {
-        if (response.body.promptFeedback?.blockReason) {
-          // The prompt was blocked
-          content = `${chrome.i18n.getMessage("popup_prompt_blocked")} ` +
-            `Reason: ${response.body.promptFeedback.blockReason}`;
-          break;
-        } else if (response.body.candidates?.[0].finishReason !== "STOP") {
-          // The response was blocked
-          content = `${chrome.i18n.getMessage("popup_response_blocked")} ` +
-            `Reason: ${response.body.candidates[0].finishReason}`;
-          break;
-        } else if (response.body.candidates?.[0].content) {
-          // A normal response was returned
-          content += `${response.body.candidates[0].content.parts[0].text}\n\n`;
-          document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks);
-        } else {
-          // The expected response was not returned
-          content = chrome.i18n.getMessage("popup_unexpected_response");
-          break;
-        }
+      if (streamIntervalId) {
+        clearInterval(streamIntervalId);
+      }
+    }
+
+    console.log("Response:", response);
+
+    if (response.ok) {
+      if (response.body.promptFeedback?.blockReason) {
+        // The prompt was blocked
+        content = `${chrome.i18n.getMessage("popup_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
+      } else if (response.body.candidates?.[0].finishReason !== "STOP") {
+        // The response was blocked
+        content = `${chrome.i18n.getMessage("popup_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
+      } else if (response.body.candidates?.[0].content) {
+        // A normal response was returned
+        content = response.body.candidates[0].content.parts[0].text;
+        document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks);
       } else {
-        // A response error occurred
-        content = `Error: ${response.status}\n\n${response.body.error.message}`;
+        // The expected response was not returned
+        content = chrome.i18n.getMessage("popup_unexpected_response");
+      }
+    } else {
+      // A response error occurred
+      content = `Error: ${response.status}\n\n${response.body.error.message}`;
 
-        if (!apiKey) {
-          // If the API Key is not set, add a message to prompt the user to set it
-          content += `\n\n${chrome.i18n.getMessage("popup_no_apikey")}`;
-        }
-
-        break;
+      if (!apiKey) {
+        // If the API Key is not set, add a message to prompt the user to set it
+        content += `\n\n${chrome.i18n.getMessage("popup_no_apikey")}`;
       }
     }
   } catch (error) {
@@ -426,7 +411,12 @@ const main = async (useCache) => {
     }
 
     // Enable the buttons and input fields
-    document.getElementById("status").textContent = "";
+    if (document.getElementById("languageModel").value.includes("/")) {
+      document.getElementById("status").textContent = response.body?.modelVersion ?? "";
+    } else {
+      document.getElementById("status").textContent = "";
+    }
+
     document.getElementById("run").disabled = false;
     document.getElementById("languageModel").disabled = false;
     document.getElementById("languageCode").disabled = false;

@@ -4,10 +4,9 @@ import {
   loadTemplate,
   displayLoadingMessage,
   convertMarkdownToHtml,
-  getModelId,
-  getThinkingConfig,
-  generateContent,
-  streamGenerateContent,
+  getModelConfigs,
+  generateContentWithFallback,
+  streamGenerateContentWithFallback,
   exportTextToFile
 } from "./utils.js";
 
@@ -23,11 +22,11 @@ const clearConversation = () => {
 
 const copyContent = async () => {
   const operationStatus = document.getElementById("operation-status");
-  let clipboardContent = result.responseContent.replace(/\n+$/, "") + "\n\n";
+  let clipboardContent = `${result.responseContent.replace(/\n+$/, "")}\n\n`;
 
   conversation.forEach((item) => {
-    clipboardContent += item.question.replace(/\n+$/, "") + "\n\n";
-    clipboardContent += item.answer.replace(/\n+$/, "") + "\n\n";
+    clipboardContent += `${item.question.replace(/\n+$/, "")}\n\n`;
+    clipboardContent += `${item.answer.replace(/\n+$/, "")}\n\n`;
   });
 
   // Copy the content to the clipboard
@@ -40,15 +39,15 @@ const copyContent = async () => {
 
 const saveContent = () => {
   const operationStatus = document.getElementById("operation-status");
-  let content = result.responseContent.replace(/\n+$/, "") + "\n\n";
+  let content = `${result.responseContent.replace(/\n+$/, "")}\n\n`;
 
   conversation.forEach((item) => {
-    content += item.question.replace(/\n+$/, "") + "\n\n";
-    content += item.answer.replace(/\n+$/, "") + "\n\n";
+    content += `${item.question.replace(/\n+$/, "")}\n\n`;
+    content += `${item.answer.replace(/\n+$/, "")}\n\n`;
   });
 
   // Save the content to a text file
-  exportTextToFile(result.url + "\n\n" + content);
+  exportTextToFile(`${result.url}\n\n${content}`);
 
   // Display a message indicating that the content was saved
   operationStatus.textContent = chrome.i18n.getMessage("results_saved");
@@ -112,32 +111,18 @@ const askQuestion = async () => {
   const { apiKey, streaming, userModelId, renderLinks, autoSave } = await chrome.storage.local.get({
     apiKey: "",
     streaming: false,
-    userModelId: "gemini-2.0-flash-001",
+    userModelId: "gemini-2.5-flash",
     renderLinks: false,
     autoSave: false
   });
 
   const languageModel = document.getElementById("languageModel").value;
-  const modelId = getModelId(languageModel, userModelId);
-  const thinkingConfig = getThinkingConfig(languageModel, userModelId);
-  let apiConfig = {};
+  const modelConfigs = getModelConfigs(languageModel, userModelId);
   let response = null;
-
-  if (thinkingConfig !== undefined) {
-    if (!apiConfig.thinkingConfig) {
-      apiConfig.thinkingConfig = {};
-    }
-
-    if (thinkingConfig.thinkingLevel) {
-      apiConfig.thinkingConfig.thinkingLevel = thinkingConfig.thinkingLevel;
-    } else if (thinkingConfig.thinkingBudget) {
-      apiConfig.thinkingConfig.thinkingBudget = thinkingConfig.thinkingBudget;
-    }
-  }
 
   if (streaming) {
     const streamKey = `streamContent_${resultIndex}`;
-    const responsePromise = streamGenerateContent(apiKey, modelId, apiContents, apiConfig, streamKey);
+    const responsePromise = streamGenerateContentWithFallback(apiKey, apiContents, modelConfigs, streamKey);
 
     // Stream the content
     const streamIntervalId = setInterval(async () => {
@@ -155,7 +140,7 @@ const askQuestion = async () => {
       clearInterval(streamIntervalId);
     }
   } else {
-    response = await generateContent(apiKey, modelId, apiContents, apiConfig);
+    response = await generateContentWithFallback(apiKey, apiContents, modelConfigs);
   }
 
   console.log(response);
@@ -163,12 +148,10 @@ const askQuestion = async () => {
   if (response.ok) {
     if (response.body.promptFeedback?.blockReason) {
       // The prompt was blocked
-      answer = `${chrome.i18n.getMessage("results_prompt_blocked")} ` +
-        `Reason: ${response.body.promptFeedback.blockReason}`;
+      answer = `${chrome.i18n.getMessage("results_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
     } else if (response.body.candidates?.[0].finishReason !== "STOP") {
       // The response was blocked
-      answer = `${chrome.i18n.getMessage("results_response_blocked")} ` +
-        `Reason: ${response.body.candidates[0].finishReason}`;
+      answer = `${chrome.i18n.getMessage("results_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
     } else if (response.body.candidates?.[0].content) {
       // A normal response was returned
       answer = response.body.candidates[0].content.parts[0].text;
@@ -198,7 +181,12 @@ const askQuestion = async () => {
   }
 
   // Enable the buttons and input fields
-  document.getElementById("send-status").textContent = "";
+  if (document.getElementById("languageModel").value.includes("/")) {
+    document.getElementById("send-status").textContent = response.body?.modelVersion ?? "";
+  } else {
+    document.getElementById("send-status").textContent = "";
+  }
+
   document.getElementById("clear").disabled = false;
   document.getElementById("copy").disabled = false;
   document.getElementById("save").disabled = false;
