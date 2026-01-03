@@ -113,6 +113,9 @@
     "options_model_user": {
         "message": "ユーザー指定モデル"
     },
+    "options_model_hint": {
+        "message": "Auto-fallbackについては以下のページを参照してください。"
+    },
     "options_language": {
         "message": "要約と翻訳に用いる言語"
     },

@@ -12,6 +12,19 @@ To open a popup from the context menu in Firefox, set `extensions.openPopupWitho
 
 This is being tracked as Firefox [Bug 1799344](https://bugzilla.mozilla.org/show_bug.cgi?id=1799344).
 
+### What is Auto-fallback?
+
+The Gemini API Free Tier has strict [rate limits](https://ai.google.dev/gemini-api/docs/rate-limits). The Auto-fallback feature automatically tries alternative models when the current model hits its rate limit (HTTP 429 error).
+
+When you select **"Gemini Flash with Gemma Fallback"** in the options, the extension will try models in this priority order:
+
+1. Gemini 3 Flash Preview (Thinking Minimal)
+2. Gemini 2.5 Flash (Thinking Off)
+3. Gemini 2.5 Flash-Lite (Thinking Off)
+4. Gemma 3 27B
+
+Gemma models have more relaxed rate limits, so they serve as the final fallback option to ensure the extension remains functional even under heavy usage.
+
 ## Setup
 
 This extension can be installed from [Chrome Web Store](https://chromewebstore.google.com/detail/hmdcbbbdmfapkpdaganadiihfmdnpngi), [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/ljmmilamifhanifgbfliknbicfjllheb), or [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/summarize-translate-gemini/).
