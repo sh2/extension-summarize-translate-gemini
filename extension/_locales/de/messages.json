@@ -113,6 +113,9 @@
     "options_model_user": {
         "message": "Benutzerdefiniertes Modell"
     },
+    "options_model_hint": {
+        "message": "Informationen zu Auto-fallback finden Sie auf der folgenden Seite."
+    },
     "options_language": {
         "message": "Sprache für Zusammenfassung und Übersetzung"
     },

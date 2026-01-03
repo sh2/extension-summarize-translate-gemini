@@ -113,6 +113,9 @@
     "options_model_user": {
         "message": "Modello specificato dall'utente"
     },
+    "options_model_hint": {
+        "message": "Per informazioni su Auto-fallback, consultare la pagina seguente."
+    },
     "options_language": {
         "message": "Lingua per Riassunto e Traduzione"
     },

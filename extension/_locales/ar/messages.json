@@ -113,6 +113,9 @@
     "options_model_user": {
         "message": "نموذج محدد من قبل المستخدم"
     },
+    "options_model_hint": {
+        "message": "للحصول على معلومات حول Auto-fallback، يرجى الاطلاع على الصفحة التالية."
+    },
     "options_language": {
         "message": "لغة التلخيص والترجمة"
     },

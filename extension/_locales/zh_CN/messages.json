@@ -113,6 +113,9 @@
     "options_model_user": {
         "message": "用户指定模型"
     },
+    "options_model_hint": {
+        "message": "有关 Auto-fallback 的信息，请参阅以下页面。"
+    },
     "options_language": {
         "message": "总结与翻译语言"
     },

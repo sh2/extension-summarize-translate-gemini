@@ -113,6 +113,9 @@
     "options_model_user": {
         "message": "Модель, указанная пользователем"
     },
+    "options_model_hint": {
+        "message": "Информацию об Auto-fallback см. на следующей странице."
+    },
     "options_language": {
         "message": "Язык для суммирования и перевода"
     },

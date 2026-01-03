@@ -113,6 +113,9 @@
     "options_model_user": {
         "message": "Mô hình do người dùng chỉ định"
     },
+    "options_model_hint": {
+        "message": "Để biết thông tin về Auto-fallback, vui lòng xem trang sau."
+    },
     "options_language": {
         "message": "Ngôn ngữ để Tóm tắt và Dịch"
     },
