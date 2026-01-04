@@ -86,7 +86,6 @@ const askQuestion = async () => {
 
   // Add the new question to the conversation
   apiContents.push({ role: "user", parts: [{ text: question }] });
-  console.log(apiContents);
 
   // Create a new div element with the formatted question
   const formattedQuestionDiv = document.createElement("div");
@@ -124,12 +123,18 @@ const askQuestion = async () => {
     const streamKey = `streamContent_${resultIndex}`;
     const responsePromise = streamGenerateContentWithFallback(apiKey, apiContents, modelConfigs, streamKey);
 
+    console.log("Request:", {
+      apiContents,
+      modelConfigs,
+      streamKey
+    });
+
     // Stream the content
     const streamIntervalId = setInterval(async () => {
       const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
 
       if (streamContent) {
-        formattedAnswerDiv.innerHTML = convertMarkdownToHtml(`${streamContent}\n\n`, false, renderLinks);
+        formattedAnswerDiv.innerHTML = convertMarkdownToHtml(streamContent, false, renderLinks);
       }
     }, 1000);
 
@@ -143,7 +148,7 @@ const askQuestion = async () => {
     response = await generateContentWithFallback(apiKey, apiContents, modelConfigs);
   }
 
-  console.log(response);
+  console.log("Response:", response);
 
   if (response.ok) {
     if (response.body.promptFeedback?.blockReason) {
