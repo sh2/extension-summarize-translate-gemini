@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "自定义操作 3"
+    },
+    "options_auto_close_transcript": {
+        "message": "自动关闭转录面板"
     }
 }

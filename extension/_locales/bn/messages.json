@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "কাস্টম অ্যাকশন ৩"
+    },
+    "options_auto_close_transcript": {
+        "message": "ট্রান্সক্রিপ্ট প্যানেলটি স্বয়ংক্রিয়ভাবে বন্ধ করুন"
     }
 }

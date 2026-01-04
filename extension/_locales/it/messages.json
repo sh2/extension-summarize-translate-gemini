@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "Azione personalizzata 3"
+    },
+    "options_auto_close_transcript": {
+        "message": "Chiudi automaticamente il pannello della trascrizione"
     }
 }

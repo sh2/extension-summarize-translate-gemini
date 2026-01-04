@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "कस्टम क्रिया 3"
+    },
+    "options_auto_close_transcript": {
+        "message": "ट्रांसक्रिप्ट पैनल को स्वचालित रूप से बंद करें"
     }
 }

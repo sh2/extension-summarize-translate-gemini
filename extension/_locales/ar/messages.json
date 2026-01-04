@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "إجراء مخصص 3"
+    },
+    "options_auto_close_transcript": {
+        "message": "إغلاق لوحة النص تلقائيًا"
     }
 }

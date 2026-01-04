@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "Hành động tùy chỉnh 3"
+    },
+    "options_auto_close_transcript": {
+        "message": "Tự động đóng bảng phiên âm"
     }
 }

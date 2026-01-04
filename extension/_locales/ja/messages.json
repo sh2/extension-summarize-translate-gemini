@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "カスタムアクション3"
+    },
+    "options_auto_close_transcript": {
+        "message": "文字起こしパネルを自動的に閉じる"
     }
 }

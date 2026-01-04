@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "사용자 지정 작업 3"
+    },
+    "options_auto_close_transcript": {
+        "message": "스크립트 패널 자동으로 닫기"
     }
 }

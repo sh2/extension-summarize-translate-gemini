@@ -247,5 +247,8 @@
     },
     "shortcuts_custom_action_3": {
         "message": "Custom action 3"
+    },
+    "options_auto_close_transcript": {
+        "message": "Automatically close the transcript panel"
     }
 }
