@@ -100,6 +100,15 @@ const getTranscript = async () => {
     return textElement ? textElement.textContent.trim() : "";
   });
 
+  // Close the transcript panel
+  const { autoCloseTranscript } = await chrome.storage.local.get({ autoCloseTranscript: false });
+  if (autoCloseTranscript) {
+    const closeButton = document.querySelector('ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-searchable-transcript"] #visibility-button button');
+    if (closeButton) {
+      closeButton.click();
+    }
+  }
+
   return transcriptTexts.join("\n");
 };
 
