@@ -340,8 +340,7 @@ const main = async (useCache) => {
           const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
 
           if (streamContent) {
-            document.getElementById("content").innerHTML =
-              convertMarkdownToHtml(streamContent, false, renderLinks);
+            document.getElementById("content").innerHTML = convertMarkdownToHtml(streamContent, false, renderLinks);
           }
         }, 1000);
       }
@@ -366,7 +365,6 @@ const main = async (useCache) => {
       } else if (response.body.candidates?.[0].content) {
         // A normal response was returned
         content = response.body.candidates[0].content.parts[0].text;
-        document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks);
       } else {
         // The expected response was not returned
         content = chrome.i18n.getMessage("popup_unexpected_response");
