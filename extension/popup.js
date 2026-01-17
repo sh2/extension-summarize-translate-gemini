@@ -55,63 +55,83 @@ const getWholeText = () => {
 };
 
 const getTranscript = async () => {
-  const panelSelector = 'ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-searchable-transcript"]';
-  const panel = document.querySelector(panelSelector);
-  const wasAlreadyOpen = panel && panel.getAttribute("visibility") === "ENGAGEMENT_PANEL_VISIBILITY_EXPANDED";
+  const SELECTORS = {
+    PANEL: "ytd-engagement-panel-section-list-renderer[target-id=\"engagement-panel-searchable-transcript\"]",
+    OPEN_BUTTON: "ytd-video-description-transcript-section-renderer button",
+    CLOSE_BUTTON: "ytd-engagement-panel-section-list-renderer[target-id=\"engagement-panel-searchable-transcript\"] #visibility-button button",
+    RENDERER: "ytd-transcript-renderer",
+    SEGMENTS: "ytd-transcript-segment-renderer",
+    TEXT: "yt-formatted-string"
+  };
 
-  const button = document.querySelector("ytd-video-description-transcript-section-renderer button");
-  let transcriptRenderer;
+  // Helper: Check if the transcript panel is open
+  const isPanelOpen = () => {
+    const panel = document.querySelector(SELECTORS.PANEL);
+    return panel && panel.getAttribute("visibility") === "ENGAGEMENT_PANEL_VISIBILITY_EXPANDED";
+  };
 
-  if (!button) {
-    return "";
-  }
+  // Helper: Wait for the transcript renderer to be available
+  const waitForRenderer = () => {
+    return new Promise((resolve, reject) => {
+      const renderer = document.querySelector(SELECTORS.RENDERER);
 
-  button.click();
-
-  try {
-    transcriptRenderer = await new Promise((resolve, reject) => {
-      if (document.querySelector("ytd-transcript-renderer")) {
-        return resolve(document.querySelector("ytd-transcript-renderer"));
+      if (isPanelOpen() && renderer) {
+        return resolve(renderer);
       }
+
+      const observer = new MutationObserver(() => {
+        const renderer = document.querySelector(SELECTORS.RENDERER);
+
+        if (isPanelOpen() && renderer) {
+          clearTimeout(timeoutId);
+          observer.disconnect();
+          resolve(renderer);
+        }
+      });
 
       const timeoutId = setTimeout(() => {
         observer.disconnect();
         reject(new Error("ytd-transcript-renderer not found within 10 seconds."));
       }, 10000);
 
-      const observer = new MutationObserver(() => {
-        if (document.querySelector("ytd-transcript-renderer")) {
-          clearTimeout(timeoutId);
-          observer.disconnect();
-          resolve(document.querySelector("ytd-transcript-renderer"));
-        }
-      });
-
       observer.observe(document.body, {
+        subtree: true,
         childList: true,
-        subtree: true
+        attributes: true,
+        attributeFilter: ["visibility"]
       });
     });
-  } catch (error) {
-    console.log(error);
+  };
+
+  // Main logic to get the transcript text
+  const wasAlreadyOpen = isPanelOpen();
+  const openButton = document.querySelector(SELECTORS.OPEN_BUTTON);
+
+  if (!openButton) {
     return "";
   }
 
-  const transcriptSegments = transcriptRenderer.querySelectorAll("ytd-transcript-segment-renderer");
+  openButton.click();
 
-  const transcriptTexts = Array.from(transcriptSegments).map(segment => {
-    const textElement = segment.querySelector("yt-formatted-string");
-    return textElement ? textElement.textContent.trim() : "";
-  });
+  try {
+    const transcriptRenderer = await waitForRenderer();
+    const transcriptSegments = transcriptRenderer.querySelectorAll(SELECTORS.SEGMENTS);
 
-  if (!wasAlreadyOpen) {
-    const closeButton = document.querySelector(`${panelSelector} #visibility-button button`);
-    if (closeButton) {
-      closeButton.click();
+    const transcriptTexts = Array.from(transcriptSegments).map(segment => {
+      const textElement = segment.querySelector(SELECTORS.TEXT);
+      return textElement ? textElement.textContent.trim() : "";
+    });
+
+    return transcriptTexts.join("\n");
+  } catch (error) {
+    console.log(error);
+    return "";
+  } finally {
+    if (!wasAlreadyOpen) {
+      const closeButton = document.querySelector(SELECTORS.CLOSE_BUTTON);
+      closeButton?.click();
     }
   }
-
-  return transcriptTexts.join("\n");
 };
 
 const extractTaskInformation = async (triggerAction) => {
