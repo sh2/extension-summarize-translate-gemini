@@ -55,6 +55,10 @@ const getWholeText = () => {
 };
 
 const getTranscript = async () => {
+  const panelSelector = 'ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-searchable-transcript"]';
+  const panel = document.querySelector(panelSelector);
+  const wasAlreadyOpen = panel && panel.getAttribute("visibility") === "ENGAGEMENT_PANEL_VISIBILITY_EXPANDED";
+
   const button = document.querySelector("ytd-video-description-transcript-section-renderer button");
   let transcriptRenderer;
 
@@ -99,6 +103,13 @@ const getTranscript = async () => {
     const textElement = segment.querySelector("yt-formatted-string");
     return textElement ? textElement.textContent.trim() : "";
   });
+
+  if (!wasAlreadyOpen) {
+    const closeButton = document.querySelector(`${panelSelector} #visibility-button button`);
+    if (closeButton) {
+      closeButton.click();
+    }
+  }
 
   return transcriptTexts.join("\n");
 };
