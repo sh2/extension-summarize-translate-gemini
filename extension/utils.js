@@ -126,8 +126,6 @@ export const getModelConfigs = (languageModel, userModelId) => {
     "2.5-pro": "gemini-2.5-pro",
     "2.5-flash": "gemini-2.5-flash",
     "2.5-flash-lite": "gemini-2.5-flash-lite",
-    "2.0-flash": "gemini-2.0-flash",
-    "2.0-flash-lite": "gemini-2.0-flash-lite",
     "3-pro-preview": "gemini-3-pro-preview",
     "3-flash-preview": "gemini-3-flash-preview",
     "flash-latest": "gemini-flash-latest",
