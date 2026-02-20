@@ -21,13 +21,7 @@ const SAFETY_SETTINGS = [{
   threshold: "BLOCK_NONE"
 }];
 
-const tryParseJson = (text) => {
-  try {
-    return JSON.parse(text);
-  } catch {
-    return { error: { message: text } };
-  }
-};
+export const DEFAULT_LANGUAGE_MODEL = "2.5-flash:0";
 
 export const applyTheme = (theme) => {
   if (theme === "light") {
@@ -126,6 +120,7 @@ export const getModelConfigs = (languageModel, userModelId) => {
     "2.5-pro": "gemini-2.5-pro",
     "2.5-flash": "gemini-2.5-flash",
     "2.5-flash-lite": "gemini-2.5-flash-lite",
+    "3.1-pro-preview": "gemini-3.1-pro-preview",
     "3-pro-preview": "gemini-3-pro-preview",
     "3-flash-preview": "gemini-3-flash-preview",
     "flash-latest": "gemini-flash-latest",
@@ -161,6 +156,14 @@ export const getModelConfigs = (languageModel, userModelId) => {
 
   // [{ "gemini-3-flash-preview", { thinkingConfig: { thinkingLevel: "minimal" }}}, ...]
   return modelConfigs;
+};
+
+const tryParseJson = (text) => {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { error: { message: text } };
+  }
 };
 
 const generateContent = async (apiKey, apiContents, modelConfig) => {
