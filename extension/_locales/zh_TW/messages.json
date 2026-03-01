@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "正在處理"
     },
-    "popup_prompt_blocked": {
-        "message": "提示已被封鎖。"
-    },
-    "popup_response_blocked": {
-        "message": "回應已被封鎖。"
-    },
-    "popup_unexpected_response": {
-        "message": "發生意外錯誤。請檢查主控台以獲取詳細資訊。"
-    },
-    "popup_no_apikey": {
-        "message": "請在選項頁面設定您的 Gemini API 金鑰。"
-    },
     "popup_miscellaneous_error": {
         "message": "無法摘要或翻譯此頁面。"
+    },
+    "popup_taking_long": {
+        "message": "耗時超出預期。點擊此處在新分頁中查看結果。"
     },
     "results_title": {
         "message": "結果 - 使用 Gemini 摘要與翻譯"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "等待回應"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "等待結果"
+    },
+    "response_prompt_blocked": {
         "message": "提示已被封鎖。"
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "回應已被封鎖。"
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "發生意外錯誤。請檢查主控台以獲取詳細資訊。"
+    },
+    "response_no_apikey": {
+        "message": "請在選項頁面設定您的 Gemini API 金鑰。"
     },
     "options_title": {
         "message": "選項 - 使用 Gemini 摘要與翻譯"

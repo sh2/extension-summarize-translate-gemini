@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "Verarbeite"
     },
-    "popup_prompt_blocked": {
-        "message": "Die Anfrage wurde blockiert."
-    },
-    "popup_response_blocked": {
-        "message": "Die Antwort wurde blockiert."
-    },
-    "popup_unexpected_response": {
-        "message": "Ein unerwarteter Fehler ist aufgetreten. Details finden Sie in der Konsole."
-    },
-    "popup_no_apikey": {
-        "message": "Bitte geben Sie Ihren Gemini API-Schlüssel auf der Optionsseite ein."
-    },
     "popup_miscellaneous_error": {
         "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
+    },
+    "popup_taking_long": {
+        "message": "Es dauert länger als erwartet. Klicken Sie hier, um die Ergebnisse in einem neuen Tab anzuzeigen."
     },
     "results_title": {
         "message": "Ergebnisse - Zusammenfassen und Übersetzen mit Gemini"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "Warte auf Antwort"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "Warte auf Ergebnis"
+    },
+    "response_prompt_blocked": {
         "message": "Die Anfrage wurde blockiert."
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "Die Antwort wurde blockiert."
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "Ein unerwarteter Fehler ist aufgetreten. Details finden Sie in der Konsole."
+    },
+    "response_no_apikey": {
+        "message": "Bitte geben Sie Ihren Gemini API-Schlüssel auf der Optionsseite ein."
     },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"

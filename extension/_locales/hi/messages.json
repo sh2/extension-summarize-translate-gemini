@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "प्रसंस्करण किया जा रहा है"
     },
-    "popup_prompt_blocked": {
-        "message": "प्रॉम्प्ट अवरुद्ध कर दिया गया था।"
-    },
-    "popup_response_blocked": {
-        "message": "प्रतिक्रिया अवरुद्ध कर दी गई थी।"
-    },
-    "popup_unexpected_response": {
-        "message": "एक अप्रत्याशित त्रुटि हुई। कृपया विवरण के लिए कंसोल देखें।"
-    },
-    "popup_no_apikey": {
-        "message": "कृपया विकल्प पृष्ठ पर अपनी Gemini API कुंजी सेट करें।"
-    },
     "popup_miscellaneous_error": {
         "message": "इस पृष्ठ का सारांश या अनुवाद करने में असमर्थ।"
+    },
+    "popup_taking_long": {
+        "message": "अपेक्षा से अधिक समय लग रहा है। नए टैब में परिणाम देखने के लिए यहाँ क्लिक करें।"
     },
     "results_title": {
         "message": "परिणाम - Gemini के साथ सारांशित करें और अनुवाद करें"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "प्रतिक्रिया की प्रतीक्षा है"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "परिणाम की प्रतीक्षा है"
+    },
+    "response_prompt_blocked": {
         "message": "प्रॉम्प्ट अवरुद्ध कर दिया गया था।"
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "प्रतिक्रिया अवरुद्ध कर दी गई थी।"
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "एक अप्रत्याशित त्रुटि हुई। कृपया विवरण के लिए कंसोल देखें।"
+    },
+    "response_no_apikey": {
+        "message": "कृपया विकल्प पृष्ठ पर अपनी Gemini API कुंजी सेट करें।"
     },
     "options_title": {
         "message": "विकल्प - Gemini के साथ सारांशित करें और अनुवाद करें"

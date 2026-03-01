@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "جارٍ المعالجة"
     },
-    "popup_prompt_blocked": {
-        "message": "تم حظر المطالبة."
-    },
-    "popup_response_blocked": {
-        "message": "تم حظر الاستجابة."
-    },
-    "popup_unexpected_response": {
-        "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للتفاصيل."
-    },
-    "popup_no_apikey": {
-        "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
-    },
     "popup_miscellaneous_error": {
         "message": "تعذر تلخيص أو ترجمة هذه الصفحة."
+    },
+    "popup_taking_long": {
+        "message": "يستغرق وقتًا أطول من المتوقع. انقر هنا لعرض النتائج في علامة تبويب جديدة."
     },
     "results_title": {
         "message": "النتائج - تلخيص وترجمة مع Gemini"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "في انتظار الاستجابة"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "في انتظار النتيجة"
+    },
+    "response_prompt_blocked": {
         "message": "تم حظر المطالبة."
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "تم حظر الاستجابة."
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "حدث خطأ غير متوقع. يرجى التحقق من وحدة التحكم للتفاصيل."
+    },
+    "response_no_apikey": {
+        "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
     },
     "options_title": {
         "message": "الخيارات - تلخيص وترجمة مع Gemini"

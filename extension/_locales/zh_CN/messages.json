@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "正在处理"
     },
-    "popup_prompt_blocked": {
-        "message": "提示词已被阻止。"
-    },
-    "popup_response_blocked": {
-        "message": "响应已被阻止。"
-    },
-    "popup_unexpected_response": {
-        "message": "发生意外错误。请检查控制台以获取详细信息。"
-    },
-    "popup_no_apikey": {
-        "message": "请在选项页面设置您的 Gemini API 密钥。"
-    },
     "popup_miscellaneous_error": {
         "message": "无法总结或翻译此页面。"
+    },
+    "popup_taking_long": {
+        "message": "耗时超出预期。点击此处在新标签页中查看结果。"
     },
     "results_title": {
         "message": "结果 - 使用 Gemini 总结与翻译"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "等待响应"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "等待结果"
+    },
+    "response_prompt_blocked": {
         "message": "提示词已被阻止。"
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "响应已被阻止。"
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "发生意外错误。请检查控制台以获取详细信息。"
+    },
+    "response_no_apikey": {
+        "message": "请在选项页面设置您的 Gemini API 密钥。"
     },
     "options_title": {
         "message": "选项 - 使用 Gemini 总结与翻译"

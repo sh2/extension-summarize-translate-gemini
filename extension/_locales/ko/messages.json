@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "처리 중"
     },
-    "popup_prompt_blocked": {
-        "message": "프롬프트가 차단되었습니다."
-    },
-    "popup_response_blocked": {
-        "message": "응답이 차단되었습니다."
-    },
-    "popup_unexpected_response": {
-        "message": "예기치 않은 오류가 발생했습니다. 자세한 내용은 콘솔을 확인하십시오."
-    },
-    "popup_no_apikey": {
-        "message": "옵션 페이지에서 Gemini API 키를 설정하십시오."
-    },
     "popup_miscellaneous_error": {
         "message": "이 페이지를 요약하거나 번역할 수 없습니다."
+    },
+    "popup_taking_long": {
+        "message": "예상보다 시간이 오래 걸리고 있습니다. 새 탭에서 결과를 보려면 여기를 클릭하세요."
     },
     "results_title": {
         "message": "결과 - Gemini로 요약 및 번역"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "응답 대기 중"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "결과를 기다리는 중"
+    },
+    "response_prompt_blocked": {
         "message": "프롬프트가 차단되었습니다."
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "응답이 차단되었습니다."
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "예기치 않은 오류가 발생했습니다. 자세한 내용은 콘솔을 확인하십시오."
+    },
+    "response_no_apikey": {
+        "message": "옵션 페이지에서 Gemini API 키를 설정하십시오."
     },
     "options_title": {
         "message": "옵션 - Gemini로 요약 및 번역"

@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "Traitement en cours"
     },
-    "popup_prompt_blocked": {
-        "message": "L'invite a été bloquée."
-    },
-    "popup_response_blocked": {
-        "message": "La réponse a été bloquée."
-    },
-    "popup_unexpected_response": {
-        "message": "Une erreur inattendue est survenue. Veuillez consulter la console pour plus de détails."
-    },
-    "popup_no_apikey": {
-        "message": "Veuillez définir votre clé API Gemini sur la page des options."
-    },
     "popup_miscellaneous_error": {
         "message": "Impossible de résumer ou de traduire cette page."
+    },
+    "popup_taking_long": {
+        "message": "Cela prend plus de temps que prévu. Cliquez ici pour afficher les résultats dans un nouvel onglet."
     },
     "results_title": {
         "message": "Résultats - Résumer et traduire avec Gemini"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "En attente de réponse"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "En attente du résultat"
+    },
+    "response_prompt_blocked": {
         "message": "L'invite a été bloquée."
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "La réponse a été bloquée."
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "Une erreur inattendue est survenue. Veuillez consulter la console pour plus de détails."
+    },
+    "response_no_apikey": {
+        "message": "Veuillez définir votre clé API Gemini sur la page des options."
     },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"

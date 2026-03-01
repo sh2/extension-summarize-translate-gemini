@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "প্রক্রিয়াকরণ চলছে"
     },
-    "popup_prompt_blocked": {
-        "message": "প্রম্পটটি ব্লক করা হয়েছে।"
-    },
-    "popup_response_blocked": {
-        "message": "প্রতিক্রিয়াটি ব্লক করা হয়েছে।"
-    },
-    "popup_unexpected_response": {
-        "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। বিস্তারিত জানতে কনসোল পরীক্ষা করুন।"
-    },
-    "popup_no_apikey": {
-        "message": "বিকল্প পৃষ্ঠায় আপনার Gemini API কী সেট করুন।"
-    },
     "popup_miscellaneous_error": {
         "message": "এই পৃষ্ঠাটি সারসংক্ষেপ বা অনুবাদ করা সম্ভব নয়।"
+    },
+    "popup_taking_long": {
+        "message": "প্রত্যাশার চেয়ে বেশি সময় লাগছে। নতুন ট্যাবে ফলাফল দেখতে এখানে ক্লিক করুন।"
     },
     "results_title": {
         "message": "ফলাফল - Gemini ব্যবহার করে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "প্রতিক্রিয়ার জন্য অপেক্ষা করা হচ্ছে"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "ফলাফলের জন্য অপেক্ষা করা হচ্ছে"
+    },
+    "response_prompt_blocked": {
         "message": "প্রম্পটটি ব্লক করা হয়েছে।"
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "প্রতিক্রিয়াটি ব্লক করা হয়েছে।"
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে। বিস্তারিত জানতে কনসোল পরীক্ষা করুন।"
+    },
+    "response_no_apikey": {
+        "message": "বিকল্প পৃষ্ঠায় আপনার Gemini API কী সেট করুন।"
     },
     "options_title": {
         "message": "বিকল্প - Gemini ব্যবহার করে সারসংক্ষেপ করুন এবং অনুবাদ করুন"

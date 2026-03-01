@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "Đang xử lý"
     },
-    "popup_prompt_blocked": {
-        "message": "Lời nhắc đã bị chặn."
-    },
-    "popup_response_blocked": {
-        "message": "Phản hồi đã bị chặn."
-    },
-    "popup_unexpected_response": {
-        "message": "Đã xảy ra lỗi không mong muốn. Vui lòng kiểm tra bảng điều khiển để biết chi tiết."
-    },
-    "popup_no_apikey": {
-        "message": "Vui lòng đặt khóa API Gemini của bạn trên trang tùy chọn."
-    },
     "popup_miscellaneous_error": {
         "message": "Không thể tóm tắt hoặc dịch trang này."
+    },
+    "popup_taking_long": {
+        "message": "Mất nhiều thời gian hơn dự kiến. Nhấp vào đây để xem kết quả trong tab mới."
     },
     "results_title": {
         "message": "Kết quả - Tóm tắt và Dịch với Gemini"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "Đang chờ phản hồi"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "Đang chờ kết quả"
+    },
+    "response_prompt_blocked": {
         "message": "Lời nhắc đã bị chặn."
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "Phản hồi đã bị chặn."
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "Đã xảy ra lỗi không mong muốn. Vui lòng kiểm tra bảng điều khiển để biết chi tiết."
+    },
+    "response_no_apikey": {
+        "message": "Vui lòng đặt khóa API Gemini của bạn trên trang tùy chọn."
     },
     "options_title": {
         "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"

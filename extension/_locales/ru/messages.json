@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "Обработка"
     },
-    "popup_prompt_blocked": {
-        "message": "Запрос заблокирован."
-    },
-    "popup_response_blocked": {
-        "message": "Ответ заблокирован."
-    },
-    "popup_unexpected_response": {
-        "message": "Произошла непредвиденная ошибка. Подробности см. в консоли."
-    },
-    "popup_no_apikey": {
-        "message": "Укажите ключ API Gemini на странице настроек."
-    },
     "popup_miscellaneous_error": {
         "message": "Не удалось суммировать или перевести эту страницу."
+    },
+    "popup_taking_long": {
+        "message": "Это занимает больше времени, чем ожидалось. Нажмите здесь, чтобы просмотреть результаты в новой вкладке."
     },
     "results_title": {
         "message": "Результаты - Суммирование и перевод с Gemini"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "Ожидание ответа"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "Ожидание результата"
+    },
+    "response_prompt_blocked": {
         "message": "Запрос заблокирован."
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "Ответ заблокирован."
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "Произошла непредвиденная ошибка. Подробности см. в консоли."
+    },
+    "response_no_apikey": {
+        "message": "Укажите ключ API Gemini на странице настроек."
     },
     "options_title": {
         "message": "Настройки - Суммирование и перевод с Gemini"
