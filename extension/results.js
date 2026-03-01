@@ -8,6 +8,7 @@ import {
   getModelConfigs,
   generateContentWithFallback,
   streamGenerateContentWithFallback,
+  getResponseContent,
   exportTextToFile
 } from "./utils.js";
 
@@ -142,38 +143,17 @@ const askQuestion = async () => {
     // Wait for responsePromise
     response = await responsePromise;
 
-    if (streamIntervalId) {
-      clearInterval(streamIntervalId);
-    }
+    // Stop streaming
+    clearInterval(streamIntervalId);
   } else {
     response = await generateContentWithFallback(apiKey, apiContents, modelConfigs);
   }
 
   console.log("Response:", response);
+  answer = getResponseContent(response, Boolean(apiKey));
 
-  if (response.ok) {
-    if (response.body.promptFeedback?.blockReason) {
-      // The prompt was blocked
-      answer = `${chrome.i18n.getMessage("results_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
-    } else if (response.body.candidates?.[0].finishReason !== "STOP") {
-      // The response was blocked
-      answer = `${chrome.i18n.getMessage("results_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
-    } else if (response.body.candidates?.[0].content) {
-      // A normal response was returned
-      answer = response.body.candidates[0].content.parts[0].text;
-    } else {
-      // The expected response was not returned
-      answer = chrome.i18n.getMessage("results_unexpected_response");
-    }
-  } else {
-    // A response error occurred
-    answer = `Error: ${response.status}\n\n${response.body.error.message}`;
-  }
-
-  // Clear the loading message
-  if (displayIntervalId) {
-    clearInterval(displayIntervalId);
-  }
+  // Stop displaying the loading message
+  clearInterval(displayIntervalId);
 
   // Update the formatted answer in the conversation
   formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false, renderLinks);
@@ -199,6 +179,56 @@ const askQuestion = async () => {
   document.getElementById("text").readOnly = false;
   document.getElementById("languageModel").disabled = false;
   document.getElementById("send").disabled = false;
+};
+
+const waitForResult = async (resultIndex) => {
+  const { streaming, renderLinks } = await chrome.storage.local.get({ streaming: false, renderLinks: false });
+  const streamKey = `streamContent_${resultIndex}`;
+  const resultKey = `result_${resultIndex}`;
+  const contentElement = document.getElementById("content");
+
+  // Keepalive: periodically ping the service worker to prevent termination
+  const keepaliveIntervalId = setInterval(async () => {
+    try {
+      await chrome.runtime.sendMessage({ message: "keepalive" });
+    } catch {
+      // Ignore errors during keepalive ping
+    }
+  }, 20000);
+
+  // Streaming poll: show intermediate content while waiting
+  let streamIntervalId = null;
+
+  if (streaming) {
+    streamIntervalId = setInterval(async () => {
+      const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
+
+      if (streamContent && contentElement) {
+        contentElement.innerHTML = convertMarkdownToHtml(streamContent, false, renderLinks);
+      }
+    }, 1000);
+  }
+
+  // Result poll: wait for the final result
+  const result = await new Promise((resolve) => {
+    const check = async () => {
+      const storedResult = (await chrome.storage.session.get({ [resultKey]: "" }))[resultKey];
+
+      if (storedResult) {
+        resolve(storedResult);
+      } else {
+        setTimeout(check, 500);
+      }
+    };
+
+    check();
+  });
+
+  // Stop the keepalive and streaming intervals
+  clearInterval(keepaliveIntervalId);
+  clearInterval(streamIntervalId);
+
+  return result;
 };
 
 const initialize = async () => {
@@ -233,6 +263,34 @@ const initialize = async () => {
   const urlParams = new URLSearchParams(window.location.search);
   resultIndex = urlParams.get("i");
   result = (await chrome.storage.session.get({ [`result_${resultIndex}`]: "" }))[`result_${resultIndex}`];
+
+  if (!result) {
+    // Disable the buttons and input fields while waiting
+    document.getElementById("clear").disabled = true;
+    document.getElementById("copy").disabled = true;
+    document.getElementById("save").disabled = true;
+    document.getElementById("text").readOnly = true;
+    document.getElementById("languageModel").disabled = true;
+    document.getElementById("send").disabled = true;
+
+    // Display a loading message while waiting for the result
+    const displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_for_result"));
+
+    // Wait for the result to be available in the session storage
+    result = await waitForResult(resultIndex);
+
+    // Stop displaying the loading message
+    clearInterval(displayIntervalId);
+    document.getElementById("send-status").textContent = "";
+
+    // Re-enable the buttons and input fields
+    document.getElementById("clear").disabled = false;
+    document.getElementById("copy").disabled = false;
+    document.getElementById("save").disabled = false;
+    document.getElementById("text").readOnly = false;
+    document.getElementById("languageModel").disabled = false;
+    document.getElementById("send").disabled = false;
+  }
 
   // Convert the content from Markdown to HTML
   const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });

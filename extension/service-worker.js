@@ -2,6 +2,7 @@ import {
   getModelConfigs,
   generateContentWithFallback,
   streamGenerateContentWithFallback,
+  getResponseContent,
   createContextMenus
 } from "./utils.js";
 
@@ -74,7 +75,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
     if (request.message === "generate") {
       // Generate content
-      const { actionType, mediaType, taskInput, languageModel, languageCode, streamKey } = request;
+      const { actionType, mediaType, taskInput, languageModel, languageCode, streamKey, resultIndex, url } = request;
       const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.5-flash" });
       const modelConfigs = getModelConfigs(languageModel, userModelId);
 
@@ -117,8 +118,17 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         response = await generateContentWithFallback(apiKey, [apiContent], modelConfigs);
       }
 
-      // Add the system prompt and the user input to the response
-      response.requestApiContent = apiContent;
+      // Extract the response content
+      const responseContent = getResponseContent(response, Boolean(apiKey));
+
+      // Save the result to session storage (persists even if popup is closed)
+      await chrome.storage.session.set({
+        [`result_${resultIndex}`]: {
+          requestApiContent: apiContent,
+          responseContent: responseContent,
+          url: url
+        }
+      });
 
       if (response.ok) {
         // Update the cache
@@ -127,13 +137,21 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 
         const updatedQueue = responseCacheQueue
           .filter(item => item.key !== responseCacheKey)
-          .concat({ key: responseCacheKey, value: response })
+          .concat({
+            key: responseCacheKey,
+            value: {
+              requestApiContent: apiContent,
+              responseContent: responseContent
+            }
+          })
           .slice(-10);
 
         await chrome.storage.session.set({ responseCacheQueue: updatedQueue });
       }
 
       sendResponse(response);
+    } else if (request.message === "keepalive") {
+      sendResponse({ status: "alive" });
     }
   })();
 

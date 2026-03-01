@@ -324,6 +324,36 @@ export const streamGenerateContentWithFallback = async (apiKey, apiContents, mod
   return response;
 };
 
+export const getResponseContent = (response, hasApiKey) => {
+  let responseContent = "";
+
+  if (response.ok) {
+    if (response.body.promptFeedback?.blockReason) {
+      // The prompt was blocked
+      responseContent = `${chrome.i18n.getMessage("response_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
+    } else if (response.body.candidates?.[0].finishReason !== "STOP") {
+      // The response was blocked
+      responseContent = `${chrome.i18n.getMessage("response_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
+    } else if (response.body.candidates?.[0].content) {
+      // A normal response was returned
+      responseContent = response.body.candidates[0].content.parts[0].text;
+    } else {
+      // The expected response was not returned
+      responseContent = chrome.i18n.getMessage("response_unexpected_response");
+    }
+  } else {
+    // A response error occurred
+    responseContent = `Error: ${response.status}\n\n${response.body.error.message}`;
+
+    if (!hasApiKey) {
+      // If the API Key is not set, add a message to prompt the user to set it
+      responseContent += `\n\n${chrome.i18n.getMessage("response_no_apikey")}`;
+    }
+  }
+
+  return responseContent;
+};
+
 const formatTitle = (label1, label1DefaultKey, label2, label2DefaultKey) => {
   const title1 = label1 || chrome.i18n.getMessage(label1DefaultKey);
   const title2 = label2 || chrome.i18n.getMessage(label2DefaultKey);

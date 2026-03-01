@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "Processing"
     },
-    "popup_prompt_blocked": {
-        "message": "The prompt was blocked."
-    },
-    "popup_response_blocked": {
-        "message": "The response was blocked."
-    },
-    "popup_unexpected_response": {
-        "message": "An unexpected error occurred. Please check the console for details."
-    },
-    "popup_no_apikey": {
-        "message": "Please set your Gemini API key on the options page."
-    },
     "popup_miscellaneous_error": {
         "message": "Unable to summarize or translate this page."
+    },
+    "popup_taking_long": {
+        "message": "Taking longer than expected. Click here to view results in a new tab."
     },
     "results_title": {
         "message": "Results - Summarize and Translate with Gemini"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "Waiting for response"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "Waiting for result"
+    },
+    "response_prompt_blocked": {
         "message": "The prompt was blocked."
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "The response was blocked."
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "An unexpected error occurred. Please check the console for details."
+    },
+    "response_no_apikey": {
+        "message": "Please set your Gemini API key on the options page."
     },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"

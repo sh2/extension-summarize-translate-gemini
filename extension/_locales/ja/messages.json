@@ -50,20 +50,11 @@
     "popup_processing": {
         "message": "処理しています"
     },
-    "popup_prompt_blocked": {
-        "message": "プロンプトがブロックされました。"
-    },
-    "popup_response_blocked": {
-        "message": "レスポンスがブロックされました。"
-    },
-    "popup_unexpected_response": {
-        "message": "予期せぬエラーが発生しました。詳細はコンソールを確認してください。"
-    },
-    "popup_no_apikey": {
-        "message": "オプションページでGemini APIキーを設定してください。"
-    },
     "popup_miscellaneous_error": {
         "message": "このページは要約や翻訳ができません。"
+    },
+    "popup_taking_long": {
+        "message": "時間がかかっています。ここをクリックして新しいタブで結果を確認できます。"
     },
     "results_title": {
         "message": "結果 - Geminiによる要約と翻訳"
@@ -89,14 +80,20 @@
     "results_waiting_response": {
         "message": "応答を待っています"
     },
-    "results_prompt_blocked": {
+    "results_waiting_for_result": {
+        "message": "結果を待っています"
+    },
+    "response_prompt_blocked": {
         "message": "プロンプトがブロックされました。"
     },
-    "results_response_blocked": {
+    "response_response_blocked": {
         "message": "レスポンスがブロックされました。"
     },
-    "results_unexpected_response": {
+    "response_unexpected_response": {
         "message": "予期せぬエラーが発生しました。詳細はコンソールを確認してください。"
+    },
+    "response_no_apikey": {
+        "message": "オプションページでGemini APIキーを設定してください。"
     },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
