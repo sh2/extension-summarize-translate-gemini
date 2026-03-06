@@ -21,7 +21,7 @@ const SAFETY_SETTINGS = [{
   threshold: "BLOCK_NONE"
 }];
 
-export const DEFAULT_LANGUAGE_MODEL = "2.5-flash:0";
+export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite-preview:minimal";
 
 export const applyTheme = (theme) => {
   if (theme === "light") {
@@ -121,6 +121,7 @@ export const getModelConfigs = (languageModel, userModelId) => {
     "2.5-flash": "gemini-2.5-flash",
     "2.5-flash-lite": "gemini-2.5-flash-lite",
     "3.1-pro-preview": "gemini-3.1-pro-preview",
+    "3.1-flash-lite-preview": "gemini-3.1-flash-lite-preview",
     "3-flash-preview": "gemini-3-flash-preview",
     "flash-latest": "gemini-flash-latest",
     "flash-lite-latest": "gemini-flash-lite-latest",

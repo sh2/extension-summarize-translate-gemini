@@ -20,8 +20,9 @@ When you select **"Gemini Flash with Gemma Fallback"** in the options, the exten
 
 1. Gemini 3 Flash Preview (Thinking Minimal)
 2. Gemini 2.5 Flash (Thinking Off)
-3. Gemini 2.5 Flash-Lite (Thinking Off)
-4. Gemma 3 27B
+3. Gemini 3.1 Flash-Lite Preview (Thinking Minimal)
+4. Gemini 2.5 Flash-Lite (Thinking Off)
+5. Gemma 3 27B
 
 Gemma models have more relaxed rate limits, so they serve as the final fallback option to ensure the extension remains functional even under heavy usage.
 
@@ -36,7 +37,7 @@ The following are instructions for manual installation, for development purposes
 4. Open 'Options' page and register the Gemini API Key, then select the language.
 
 You can obtain a Gemini API Key from [Google AI Studio](https://aistudio.google.com).
-This extension uses Gemini 2.5 Flash by default.
+This extension uses Gemini 3.1 Flash-Lite Preview by default.
 
 ## Usage
 
