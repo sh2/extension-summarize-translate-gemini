@@ -57,11 +57,30 @@ const getWholeText = () => {
 };
 
 const getTranscript = async () => {
-  const SELECTORS = {
-    OPEN_BUTTON: "ytd-video-description-transcript-section-renderer button",
-    RENDERER: "ytd-macro-markers-list-renderer",
-    SEGMENTS: "transcript-segment-view-model",
-    TEXT: ".yt-core-attributed-string"
+  const TRANSCRIPT_VARIANTS = [
+    {
+      RENDERER: "ytd-macro-markers-list-renderer",
+      SEGMENTS: "transcript-segment-view-model",
+      TEXT: ".yt-core-attributed-string"
+    },
+    {
+      RENDERER: "ytd-transcript-renderer",
+      SEGMENTS: "ytd-transcript-segment-renderer",
+      TEXT: "yt-formatted-string"
+    }
+  ];
+
+  const getTranscriptElements = () => {
+    for (const variant of TRANSCRIPT_VARIANTS) {
+      const renderer = document.querySelector(variant.RENDERER);
+      const segments = renderer ? renderer.querySelectorAll(variant.SEGMENTS) : [];
+
+      if (segments.length > 0) {
+        return { variant, segments };
+      }
+    }
+
+    return null;
   };
 
   // Helper: Wait for the transcript renderer and segments to be fully loaded
@@ -70,15 +89,14 @@ const getTranscript = async () => {
     let matchCount = 0;
 
     for (let i = 0; i < 20; i++) {
-      const renderer = document.querySelector(SELECTORS.RENDERER);
-      const segments = renderer ? renderer.querySelectorAll(SELECTORS.SEGMENTS) : [];
-      const currentLength = segments.length;
+      const transcriptElements = getTranscriptElements();
+      const currentLength = transcriptElements ? transcriptElements.segments.length : 0;
 
       if (currentLength > 0 && currentLength === lastLength) {
         matchCount++;
 
         if (matchCount >= 2) {
-          return segments;
+          return transcriptElements;
         }
       } else {
         matchCount = 0;
@@ -88,18 +106,11 @@ const getTranscript = async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
     }
 
-    const renderer = document.querySelector(SELECTORS.RENDERER);
-    const segments = renderer ? renderer.querySelectorAll(SELECTORS.SEGMENTS) : [];
-
-    if (segments.length > 0) {
-      return segments;
-    }
-
     throw new Error("transcript segments not found within 10 seconds.");
   };
 
   // Main logic to get the transcript text
-  const openButton = document.querySelector(SELECTORS.OPEN_BUTTON);
+  const openButton = document.querySelector("ytd-video-description-transcript-section-renderer button");
 
   if (!openButton) {
     return "";
@@ -108,10 +119,10 @@ const getTranscript = async () => {
   openButton.click();
 
   try {
-    const transcriptSegments = await waitForTranscriptSegments();
+    const { variant, segments } = await waitForTranscriptSegments();
 
-    const transcriptTexts = Array.from(transcriptSegments).map(segment => {
-      const textElement = segment.querySelector(SELECTORS.TEXT);
+    const transcriptTexts = Array.from(segments).map(segment => {
+      const textElement = segment.querySelector(variant.TEXT);
       return textElement ? textElement.textContent.trim() : "";
     });
 
