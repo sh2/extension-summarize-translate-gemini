@@ -58,55 +58,47 @@ const getWholeText = () => {
 
 const getTranscript = async () => {
   const SELECTORS = {
-    PANEL: "ytd-engagement-panel-section-list-renderer[target-id=\"engagement-panel-searchable-transcript\"]",
     OPEN_BUTTON: "ytd-video-description-transcript-section-renderer button",
-    CLOSE_BUTTON: "ytd-engagement-panel-section-list-renderer[target-id=\"engagement-panel-searchable-transcript\"] #visibility-button button",
-    RENDERER: "ytd-transcript-renderer",
-    SEGMENTS: "ytd-transcript-segment-renderer",
-    TEXT: "yt-formatted-string"
+    RENDERER: "ytd-macro-markers-list-renderer",
+    SEGMENTS: "transcript-segment-view-model",
+    TEXT: ".yt-core-attributed-string"
   };
 
-  // Helper: Check if the transcript panel is open
-  const isPanelOpen = () => {
-    const panel = document.querySelector(SELECTORS.PANEL);
-    return panel && panel.getAttribute("visibility") === "ENGAGEMENT_PANEL_VISIBILITY_EXPANDED";
-  };
+  // Helper: Wait for the transcript renderer and segments to be fully loaded
+  const waitForTranscriptSegments = async () => {
+    let lastLength = 0;
+    let matchCount = 0;
 
-  // Helper: Wait for the transcript renderer to be available
-  const waitForRenderer = () => {
-    return new Promise((resolve, reject) => {
+    for (let i = 0; i < 20; i++) {
       const renderer = document.querySelector(SELECTORS.RENDERER);
+      const segments = renderer ? renderer.querySelectorAll(SELECTORS.SEGMENTS) : [];
+      const currentLength = segments.length;
 
-      if (isPanelOpen() && renderer) {
-        return resolve(renderer);
+      if (currentLength > 0 && currentLength === lastLength) {
+        matchCount++;
+
+        if (matchCount >= 2) {
+          return segments;
+        }
+      } else {
+        matchCount = 0;
       }
 
-      const observer = new MutationObserver(() => {
-        const renderer = document.querySelector(SELECTORS.RENDERER);
+      lastLength = currentLength;
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
 
-        if (isPanelOpen() && renderer) {
-          clearTimeout(timeoutId);
-          observer.disconnect();
-          resolve(renderer);
-        }
-      });
+    const renderer = document.querySelector(SELECTORS.RENDERER);
+    const segments = renderer ? renderer.querySelectorAll(SELECTORS.SEGMENTS) : [];
 
-      const timeoutId = setTimeout(() => {
-        observer.disconnect();
-        reject(new Error("ytd-transcript-renderer not found within 10 seconds."));
-      }, 10000);
+    if (segments.length > 0) {
+      return segments;
+    }
 
-      observer.observe(document.body, {
-        subtree: true,
-        childList: true,
-        attributes: true,
-        attributeFilter: ["visibility"]
-      });
-    });
+    throw new Error("transcript segments not found within 10 seconds.");
   };
 
   // Main logic to get the transcript text
-  const wasAlreadyOpen = isPanelOpen();
   const openButton = document.querySelector(SELECTORS.OPEN_BUTTON);
 
   if (!openButton) {
@@ -116,8 +108,7 @@ const getTranscript = async () => {
   openButton.click();
 
   try {
-    const transcriptRenderer = await waitForRenderer();
-    const transcriptSegments = transcriptRenderer.querySelectorAll(SELECTORS.SEGMENTS);
+    const transcriptSegments = await waitForTranscriptSegments();
 
     const transcriptTexts = Array.from(transcriptSegments).map(segment => {
       const textElement = segment.querySelector(SELECTORS.TEXT);
@@ -128,11 +119,6 @@ const getTranscript = async () => {
   } catch (error) {
     console.log(error);
     return "";
-  } finally {
-    if (!wasAlreadyOpen) {
-      const closeButton = document.querySelector(SELECTORS.CLOSE_BUTTON);
-      closeButton?.click();
-    }
   }
 };
 
