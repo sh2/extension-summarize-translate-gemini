@@ -59,7 +59,7 @@ const getWholeText = () => {
 const getTranscript = async () => {
   const TRANSCRIPT_VARIANTS = [
     {
-      RENDERER: "ytd-macro-markers-list-renderer",
+      RENDERER: "yt-section-list-renderer",
       SEGMENTS: "transcript-segment-view-model",
       TEXT: ".yt-core-attributed-string"
     },
