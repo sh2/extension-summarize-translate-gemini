@@ -14,6 +14,15 @@ import {
 let resultIndex = 0;
 let content = "";
 
+const setPopupControlsEnabled = (enabled) => {
+  document.getElementById("run").disabled = !enabled;
+  document.getElementById("languageModel").disabled = !enabled;
+  document.getElementById("languageCode").disabled = !enabled;
+  document.getElementById("copy").disabled = !enabled;
+  document.getElementById("save").disabled = !enabled;
+  document.getElementById("results").disabled = !enabled;
+};
+
 const copyContent = async () => {
   const operationStatus = document.getElementById("operation-status");
   let clipboardContent = `${content.replace(/\n+$/, "")}\n\n`;
@@ -322,12 +331,7 @@ const main = async (useCache) => {
     // Disable the buttons and input fields
     document.getElementById("content").textContent = "";
     document.getElementById("status").textContent = "";
-    document.getElementById("run").disabled = true;
-    document.getElementById("languageModel").disabled = true;
-    document.getElementById("languageCode").disabled = true;
-    document.getElementById("copy").disabled = true;
-    document.getElementById("save").disabled = true;
-    document.getElementById("results").disabled = true;
+    setPopupControlsEnabled(false);
 
     // Extract the task information
     const { actionType, mediaType, taskInput } = await extractTaskInformation(triggerAction);
@@ -431,12 +435,7 @@ const main = async (useCache) => {
 
     // Enable the buttons and input fields
     document.getElementById("status").textContent = modelVersion;
-    document.getElementById("run").disabled = false;
-    document.getElementById("languageModel").disabled = false;
-    document.getElementById("languageCode").disabled = false;
-    document.getElementById("copy").disabled = false;
-    document.getElementById("save").disabled = false;
-    document.getElementById("results").disabled = false;
+    setPopupControlsEnabled(true);
   }
 };
 

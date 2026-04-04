@@ -12,9 +12,57 @@ import {
   exportTextToFile
 } from "./utils.js";
 
+const RESULT_VIEW_STATUS = Object.freeze({
+  IDLE: "idle",
+  WAITING: "waiting",
+  UNREAD: "unread"
+});
+
 const conversation = [];
 let resultIndex = 0;
 let result = {};
+let resultViewStatus = RESULT_VIEW_STATUS.IDLE;
+
+const setResultControlsEnabled = (enabled) => {
+  document.getElementById("clear").disabled = !enabled;
+  document.getElementById("copy").disabled = !enabled;
+  document.getElementById("save").disabled = !enabled;
+  document.getElementById("text").readOnly = !enabled;
+  document.getElementById("languageModel").disabled = !enabled;
+  document.getElementById("send").disabled = !enabled;
+};
+
+const isResultTabActive = () => document.visibilityState === "visible" && document.hasFocus();
+
+const updateDocumentTitle = () => {
+  const baseTitle = chrome.i18n.getMessage("results_title");
+
+  if (resultViewStatus === RESULT_VIEW_STATUS.UNREAD) {
+    document.title = `● ${baseTitle}`;
+  } else if (resultViewStatus === RESULT_VIEW_STATUS.WAITING) {
+    document.title = `… ${baseTitle}`;
+  } else {
+    document.title = baseTitle;
+  }
+};
+
+const syncAttentionCue = () => {
+  if (resultViewStatus === RESULT_VIEW_STATUS.UNREAD && isResultTabActive()) {
+    resultViewStatus = RESULT_VIEW_STATUS.IDLE;
+  }
+
+  updateDocumentTitle();
+};
+
+const beginWaitingForResult = () => {
+  resultViewStatus = RESULT_VIEW_STATUS.WAITING;
+  updateDocumentTitle();
+};
+
+const completeWaitingForResult = () => {
+  resultViewStatus = isResultTabActive() ? RESULT_VIEW_STATUS.IDLE : RESULT_VIEW_STATUS.UNREAD;
+  updateDocumentTitle();
+};
 
 const clearConversation = () => {
   // Clear the conversation
@@ -65,12 +113,7 @@ const askQuestion = async () => {
   }
 
   // Disable the buttons and input fields
-  document.getElementById("clear").disabled = true;
-  document.getElementById("copy").disabled = true;
-  document.getElementById("save").disabled = true;
-  document.getElementById("text").readOnly = true;
-  document.getElementById("languageModel").disabled = true;
-  document.getElementById("send").disabled = true;
+  setResultControlsEnabled(false);
 
   // Display a loading message
   let displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_response"));
@@ -173,12 +216,7 @@ const askQuestion = async () => {
     document.getElementById("send-status").textContent = "";
   }
 
-  document.getElementById("clear").disabled = false;
-  document.getElementById("copy").disabled = false;
-  document.getElementById("save").disabled = false;
-  document.getElementById("text").readOnly = false;
-  document.getElementById("languageModel").disabled = false;
-  document.getElementById("send").disabled = false;
+  setResultControlsEnabled(true);
 };
 
 const waitForResult = async (resultIndex) => {
@@ -266,30 +304,22 @@ const initialize = async () => {
 
   if (!result) {
     // Disable the buttons and input fields while waiting
-    document.getElementById("clear").disabled = true;
-    document.getElementById("copy").disabled = true;
-    document.getElementById("save").disabled = true;
-    document.getElementById("text").readOnly = true;
-    document.getElementById("languageModel").disabled = true;
-    document.getElementById("send").disabled = true;
+    setResultControlsEnabled(false);
+    beginWaitingForResult();
 
     // Display a loading message while waiting for the result
     const displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_for_result"));
 
     // Wait for the result to be available in the session storage
     result = await waitForResult(resultIndex);
+    completeWaitingForResult();
 
     // Stop displaying the loading message
     clearInterval(displayIntervalId);
     document.getElementById("send-status").textContent = "";
 
     // Re-enable the buttons and input fields
-    document.getElementById("clear").disabled = false;
-    document.getElementById("copy").disabled = false;
-    document.getElementById("save").disabled = false;
-    document.getElementById("text").readOnly = false;
-    document.getElementById("languageModel").disabled = false;
-    document.getElementById("send").disabled = false;
+    setResultControlsEnabled(true);
   }
 
   // Convert the content from Markdown to HTML
@@ -297,6 +327,8 @@ const initialize = async () => {
   document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false, renderLinks);
 };
 
+window.addEventListener("focus", syncAttentionCue);
+document.addEventListener("visibilitychange", syncAttentionCue);
 document.addEventListener("DOMContentLoaded", initialize);
 document.getElementById("clear").addEventListener("click", clearConversation);
 document.getElementById("copy").addEventListener("click", copyContent);
