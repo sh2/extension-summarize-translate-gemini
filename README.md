@@ -10,7 +10,7 @@ To open a popup from the context menu in Firefox, set `extensions.openPopupWitho
 
 ![Firefox Preferences](img/firefox_preferences.png)
 
-This is being tracked as Firefox [Bug 1799344](https://bugzilla.mozilla.org/show_bug.cgi?id=1799344).
+This issue was tracked as Firefox [Bug 1799344](https://bugzilla.mozilla.org/show_bug.cgi?id=1799344) and was fixed in Firefox 149.
 
 ### What is Auto-fallback?
 
@@ -22,7 +22,8 @@ When you select **"Gemini Flash with Gemma Fallback"** in the options, the exten
 2. Gemini 2.5 Flash (Thinking Off)
 3. Gemini 3.1 Flash-Lite Preview (Thinking Minimal)
 4. Gemini 2.5 Flash-Lite (Thinking Off)
-5. Gemma 3 27B
+5. Gemma 4 31B
+6. Gemma 3 27B
 
 Gemma models have more relaxed rate limits, so they serve as the final fallback option to ensure the extension remains functional even under heavy usage.
 

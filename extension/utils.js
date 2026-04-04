@@ -123,8 +123,7 @@ export const getModelConfigs = (languageModel, userModelId) => {
     "3.1-pro-preview": "gemini-3.1-pro-preview",
     "3.1-flash-lite-preview": "gemini-3.1-flash-lite-preview",
     "3-flash-preview": "gemini-3-flash-preview",
-    "flash-latest": "gemini-flash-latest",
-    "flash-lite-latest": "gemini-flash-lite-latest",
+    "gemma-4-31b-it": "gemma-4-31b-it",
     "gemma-3-27b-it": "gemma-3-27b-it"
   };
 
@@ -237,8 +236,20 @@ const streamGenerateContent = async (apiKey, apiContents, modelConfig, streamKey
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
     let buffer = "";
+    let thought = "";
     let content = "";
+    let hasThought = false;
     let processed = -1;
+
+    const appendPartsText = (parts = []) => {
+      if (parts[0]?.thought === true) {
+        hasThought = true;
+        thought += parts[0].text ?? "";
+        content += parts[1]?.text ?? "";
+      } else {
+        content += parts[0]?.text ?? "";
+      }
+    };
 
     while (true) {
       const { value, done } = await reader.read();
@@ -254,7 +265,7 @@ const streamGenerateContent = async (apiKey, apiContents, modelConfig, streamKey
 
           // Concatenate the candidates
           for (let index = processed + 1; index < json.length; index++) {
-            content += json[index]?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+            appendPartsText(json[index]?.candidates?.[0]?.content?.parts);
             processed = index;
           }
 
@@ -285,11 +296,13 @@ const streamGenerateContent = async (apiKey, apiContents, modelConfig, streamKey
     if (response.ok) {
       // Concatenate the remaining candidates
       for (let index = processed + 1; index < json.length; index++) {
-        content += json[index]?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+        appendPartsText(json[index]?.candidates?.[0]?.content?.parts);
       }
 
       // Update the last candidate with the concatenated content
-      json.at(-1).candidates[0].content.parts = [{ text: content }];
+      json.at(-1).candidates[0].content.parts = hasThought
+        ? [{ text: thought, thought: true }, { text: content }]
+        : [{ text: content }];
     }
 
     return {
@@ -336,7 +349,9 @@ export const getResponseContent = (response, hasApiKey) => {
       responseContent = `${chrome.i18n.getMessage("response_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
     } else if (response.body.candidates?.[0].content) {
       // A normal response was returned
-      responseContent = response.body.candidates[0].content.parts[0].text;
+      const parts = response.body.candidates[0].content.parts || [];
+      const responsePart = parts[0]?.thought === true ? parts[1] : parts[0];
+      responseContent = responsePart?.text;
     } else {
       // The expected response was not returned
       responseContent = chrome.i18n.getMessage("response_unexpected_response");
