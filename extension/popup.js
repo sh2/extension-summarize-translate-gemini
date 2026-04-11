@@ -70,7 +70,7 @@ const getTranscript = async () => {
     {
       RENDERER: "yt-section-list-renderer",
       SEGMENTS: "transcript-segment-view-model",
-      TEXT: ".yt-core-attributed-string"
+      TEXT: ".ytAttributedStringHost"
     },
     {
       RENDERER: "ytd-transcript-renderer",
