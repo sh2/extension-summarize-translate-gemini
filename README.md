@@ -22,7 +22,7 @@ When you select **"Gemini Flash with Gemma Fallback"** in the options, the exten
 2. Gemini 2.5 Flash (Thinking Off)
 3. Gemini 3.1 Flash-Lite Preview (Thinking Minimal)
 4. Gemini 2.5 Flash-Lite (Thinking Off)
-5. Gemma 4 31B
+5. Gemma 4 31B (Thinking Minimal)
 6. Gemma 3 27B
 
 Gemma models have more relaxed rate limits, so they serve as the final fallback option to ensure the extension remains functional even under heavy usage.
