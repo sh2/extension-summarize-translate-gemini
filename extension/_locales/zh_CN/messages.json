@@ -98,11 +98,20 @@
     "options_title": {
         "message": "选项 - 使用 Gemini 总结与翻译"
     },
+    "options_provider": {
+        "message": "API 提供商"
+    },
     "options_apikey": {
         "message": "Gemini API 密钥"
     },
     "options_apikey_hint": {
         "message": "您可以从以下页面获取 Gemini API 密钥。"
+    },
+    "options_openai_apikey": {
+        "message": "OpenAI API 密钥"
+    },
+    "options_openai_base_url": {
+        "message": "基础 URL"
     },
     "options_model": {
         "message": "语言模型"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "有关 Auto-fallback 的信息，请参阅以下页面。"
+    },
+    "options_model_openai": {
+        "message": "用户指定模型"
     },
     "options_language": {
         "message": "总结与翻译语言"

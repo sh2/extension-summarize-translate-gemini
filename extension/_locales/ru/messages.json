@@ -98,11 +98,20 @@
     "options_title": {
         "message": "Настройки - Суммирование и перевод с Gemini"
     },
+    "options_provider": {
+        "message": "Провайдер API"
+    },
     "options_apikey": {
         "message": "Ключ API Gemini"
     },
     "options_apikey_hint": {
         "message": "Вы можете получить ключ API Gemini на следующей странице."
+    },
+    "options_openai_apikey": {
+        "message": "Ключ OpenAI API"
+    },
+    "options_openai_base_url": {
+        "message": "Базовый URL"
     },
     "options_model": {
         "message": "Языковая модель"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "Информацию об Auto-fallback см. на следующей странице."
+    },
+    "options_model_openai": {
+        "message": "Модель, указанная пользователем"
     },
     "options_language": {
         "message": "Язык для суммирования и перевода"

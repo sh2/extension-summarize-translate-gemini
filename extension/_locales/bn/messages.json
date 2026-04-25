@@ -98,11 +98,20 @@
     "options_title": {
         "message": "বিকল্প - Gemini ব্যবহার করে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },
+    "options_provider": {
+        "message": "API প্রদানকারী"
+    },
     "options_apikey": {
         "message": "Gemini API কী"
     },
     "options_apikey_hint": {
         "message": "আপনি নিম্নলিখিত পৃষ্ঠা থেকে একটি Gemini API কী পেতে পারেন।"
+    },
+    "options_openai_apikey": {
+        "message": "OpenAI API কী"
+    },
+    "options_openai_base_url": {
+        "message": "বেস URL"
     },
     "options_model": {
         "message": "ভাষা মডেল"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "Auto-fallback সম্পর্কে তথ্যের জন্য, অনুগ্রহ করে নিম্নলিখিত পৃষ্ঠাটি দেখুন।"
+    },
+    "options_model_openai": {
+        "message": "ব্যবহারকারী-নির্দিষ্ট মডেল"
     },
     "options_language": {
         "message": "সারসংক্ষেপ এবং অনুবাদের জন্য ভাষা"

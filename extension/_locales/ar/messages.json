@@ -98,11 +98,20 @@
     "options_title": {
         "message": "الخيارات - تلخيص وترجمة مع Gemini"
     },
+    "options_provider": {
+        "message": "موفر API"
+    },
     "options_apikey": {
         "message": "مفتاح Gemini API"
     },
     "options_apikey_hint": {
         "message": "يمكنك الحصول على مفتاح Gemini API من الصفحة التالية."
+    },
+    "options_openai_apikey": {
+        "message": "مفتاح OpenAI API"
+    },
+    "options_openai_base_url": {
+        "message": "عنوان URL الأساسي"
     },
     "options_model": {
         "message": "نموذج اللغة"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "للحصول على معلومات حول Auto-fallback، يرجى الاطلاع على الصفحة التالية."
+    },
+    "options_model_openai": {
+        "message": "نموذج محدد من قبل المستخدم"
     },
     "options_language": {
         "message": "لغة التلخيص والترجمة"

@@ -98,11 +98,20 @@
     "options_title": {
         "message": "विकल्प - Gemini के साथ सारांशित करें और अनुवाद करें"
     },
+    "options_provider": {
+        "message": "API प्रदाता"
+    },
     "options_apikey": {
         "message": "Gemini API कुंजी"
     },
     "options_apikey_hint": {
         "message": "आप निम्न पृष्ठ से Gemini API कुंजी प्राप्त कर सकते हैं।"
+    },
+    "options_openai_apikey": {
+        "message": "OpenAI API कुंजी"
+    },
+    "options_openai_base_url": {
+        "message": "बेस URL"
     },
     "options_model": {
         "message": "भाषा मॉडल"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "Auto-fallback के बारे में जानकारी के लिए, कृपया निम्न पृष्ठ देखें।"
+    },
+    "options_model_openai": {
+        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल"
     },
     "options_language": {
         "message": "सारांश और अनुवाद के लिए भाषा"

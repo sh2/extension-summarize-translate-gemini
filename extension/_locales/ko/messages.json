@@ -98,11 +98,20 @@
     "options_title": {
         "message": "옵션 - Gemini로 요약 및 번역"
     },
+    "options_provider": {
+        "message": "API 제공자"
+    },
     "options_apikey": {
         "message": "Gemini API 키"
     },
     "options_apikey_hint": {
         "message": "다음 페이지에서 Gemini API 키를 얻을 수 있습니다."
+    },
+    "options_openai_apikey": {
+        "message": "OpenAI API 키"
+    },
+    "options_openai_base_url": {
+        "message": "기본 URL"
     },
     "options_model": {
         "message": "언어 모델"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "Auto-fallback에 대한 정보는 다음 페이지를 참조하십시오."
+    },
+    "options_model_openai": {
+        "message": "사용자 지정 모델"
     },
     "options_language": {
         "message": "요약 및 번역 언어"

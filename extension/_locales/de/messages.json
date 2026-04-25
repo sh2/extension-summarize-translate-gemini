@@ -98,11 +98,20 @@
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
     },
+    "options_provider": {
+        "message": "API-Anbieter"
+    },
     "options_apikey": {
         "message": "Gemini API-Schlüssel"
     },
     "options_apikey_hint": {
         "message": "Einen Gemini API-Schlüssel erhalten Sie auf der folgenden Seite."
+    },
+    "options_openai_apikey": {
+        "message": "OpenAI API-Schlüssel"
+    },
+    "options_openai_base_url": {
+        "message": "Basis-URL"
     },
     "options_model": {
         "message": "Sprachmodell"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "Informationen zu Auto-fallback finden Sie auf der folgenden Seite."
+    },
+    "options_model_openai": {
+        "message": "Benutzerdefiniertes Modell"
     },
     "options_language": {
         "message": "Sprache für Zusammenfassung und Übersetzung"

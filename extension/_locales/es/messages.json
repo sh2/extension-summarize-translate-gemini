@@ -98,11 +98,20 @@
     "options_title": {
         "message": "Opciones - Resumir y Traducir con Gemini"
     },
+    "options_provider": {
+        "message": "Proveedor de API"
+    },
     "options_apikey": {
         "message": "Clave API de Gemini"
     },
     "options_apikey_hint": {
         "message": "Puede obtener una clave API de Gemini en la siguiente página."
+    },
+    "options_openai_apikey": {
+        "message": "Clave API de OpenAI"
+    },
+    "options_openai_base_url": {
+        "message": "URL base"
     },
     "options_model": {
         "message": "Modelo de lenguaje"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "Para obtener información sobre Auto-fallback, consulte la siguiente página."
+    },
+    "options_model_openai": {
+        "message": "Modelo especificado por el usuario"
     },
     "options_language": {
         "message": "Idioma para Resumen y Traducción"

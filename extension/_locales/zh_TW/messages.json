@@ -98,11 +98,20 @@
     "options_title": {
         "message": "選項 - 使用 Gemini 摘要與翻譯"
     },
+    "options_provider": {
+        "message": "API 提供者"
+    },
     "options_apikey": {
         "message": "Gemini API 金鑰"
     },
     "options_apikey_hint": {
         "message": "您可以從以下頁面獲取 Gemini API 金鑰。"
+    },
+    "options_openai_apikey": {
+        "message": "OpenAI API 金鑰"
+    },
+    "options_openai_base_url": {
+        "message": "基礎 URL"
     },
     "options_model": {
         "message": "語言模型"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "有關 Auto-fallback 的資訊，請參閱以下頁面。"
+    },
+    "options_model_openai": {
+        "message": "使用者指定模型"
     },
     "options_language": {
         "message": "摘要與翻譯語言"

@@ -98,11 +98,20 @@
     "options_title": {
         "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
     },
+    "options_provider": {
+        "message": "Nhà cung cấp API"
+    },
     "options_apikey": {
         "message": "Khóa API Gemini"
     },
     "options_apikey_hint": {
         "message": "Bạn có thể lấy khóa API Gemini từ trang sau."
+    },
+    "options_openai_apikey": {
+        "message": "Khóa API OpenAI"
+    },
+    "options_openai_base_url": {
+        "message": "URL cơ sở"
     },
     "options_model": {
         "message": "Mô hình ngôn ngữ"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "Để biết thông tin về Auto-fallback, vui lòng xem trang sau."
+    },
+    "options_model_openai": {
+        "message": "Mô hình do người dùng chỉ định"
     },
     "options_language": {
         "message": "Ngôn ngữ để Tóm tắt và Dịch"
