@@ -98,11 +98,20 @@
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
     },
+    "options_provider": {
+        "message": "APIプロバイダー"
+    },
     "options_apikey": {
         "message": "Gemini APIキー"
     },
     "options_apikey_hint": {
         "message": "Gemini APIキーは以下のページから取得できます。"
+    },
+    "options_openai_apikey": {
+        "message": "OpenAI APIキー"
+    },
+    "options_openai_base_url": {
+        "message": "ベースURL"
     },
     "options_model": {
         "message": "言語モデル"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "Auto-fallbackについては以下のページを参照してください。"
+    },
+    "options_model_openai": {
+        "message": "ユーザー指定モデル"
     },
     "options_language": {
         "message": "要約と翻訳に用いる言語"

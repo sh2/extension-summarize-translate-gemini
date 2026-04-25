@@ -98,11 +98,20 @@
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"
     },
+    "options_provider": {
+        "message": "API Provider"
+    },
     "options_apikey": {
         "message": "Gemini API key"
     },
     "options_apikey_hint": {
         "message": "You can obtain a Gemini API key from the following page."
+    },
+    "options_openai_apikey": {
+        "message": "OpenAI API Key"
+    },
+    "options_openai_base_url": {
+        "message": "Base URL"
     },
     "options_model": {
         "message": "Language model"
@@ -112,6 +121,9 @@
     },
     "options_model_hint": {
         "message": "For information about Auto-fallback, please see the following page."
+    },
+    "options_model_openai": {
+        "message": "User-specified model"
     },
     "options_language": {
         "message": "Language for Summarization and Translation"

@@ -19,47 +19,75 @@
     </h1>
   </header>
 
+  <hr>
+
   <p>
-    <span data-i18n="options_apikey">Gemini API Key</span>
+    <span data-i18n="options_provider">API Provider</span>
     <br>
-    <input type="password" id="apiKey" size="39">
+    <input id="providerGemini" type="radio" name="apiProvider" value="gemini" checked>
+    <label for="providerGemini">Gemini</label>
     <br>
-    <small>
-      <span data-i18n="options_apikey_hint">You can obtain a Gemini API Key at the following page.</span>
-      <a href="https://aistudio.google.com" target="_blank">Google AI Studio</a>
-    </small>
+    <input id="providerOpenai" type="radio" name="apiProvider" value="openai">
+    <label for="providerOpenai">OpenAI Compatible</label>
   </p>
 
   <hr>
 
-  <p>
-    <span data-i18n="options_model">Language Model</span>
-    <br>
-    <span id="languageModelContainer"></span>
-    <br>
-    <span data-i18n="options_model_user">User-specified Model</span>
-    <br>
-    <input id="userModelId" size="39" placeholder="gemini-2.5-flash">
-    <br>
-    <small>
-      <span data-i18n="options_model_hint">For information about Auto-fallback, please see this page.</span>
-      <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki" target="_blank">Extension FAQ</a>
-    </small>
-  </p>
+  <div id="geminiSection">
+    <p>
+      <span data-i18n="options_apikey">Gemini API key</span>
+      <br>
+      <input type="password" id="apiKey" size="39">
+      <br>
+      <small>
+        <span data-i18n="options_apikey_hint">You can obtain a Gemini API key from the following page.</span>
+        <a href="https://aistudio.google.com" target="_blank">Google AI Studio</a>
+      </small>
+      <br>
+      <span data-i18n="options_model">Language model</span>
+      <br>
+      <span id="languageModelContainer"></span>
+      <br>
+      <small>
+        <span data-i18n="options_model_hint">For information about Auto-fallback, please see the following page.</span>
+        <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki" target="_blank">Extension FAQ</a>
+      </small>
+      <br>
+      <span data-i18n="options_model_user">User-specified model</span>
+      <br>
+      <input id="userModelId" size="39" placeholder="gemini-2.5-flash">
+    </p>
+  </div>
+
+  <div id="openaiSection" style="display:none">
+    <p>
+      <span data-i18n="options_openai_apikey">OpenAI API Key</span>
+      <br>
+      <input type="password" id="openaiApiKey" size="39">
+      <br>
+      <span data-i18n="options_openai_base_url">Base URL</span>
+      <br>
+      <input id="openaiBaseUrl" size="39" placeholder="https://api.openai.com/v1">
+      <br>
+      <span data-i18n="options_model_openai">User-specified model</span>
+      <br>
+      <input id="openaiModelId" size="39" placeholder="gpt-5.4-nano">
+    </p>
+  </div>
 
   <hr>
 
   <p>
-    <span data-i18n="options_language">Summarize in / Translate to</span>
+    <span data-i18n="options_language">Language for Summarization and Translation</span>
     <br>
     <span id="languageCodeContainer"></span>
     <br>
-    <span data-i18n="options_language_user">User-specified Language</span>
+    <span data-i18n="options_language_user">User-specified language</span>
     <br>
     <input id="userLanguage" size="39" placeholder="Turkish">
     <br>
     <small>
-      <span data-i18n="options_language_notes">The language setting is disregarded in custom actions.</span>
+      <span data-i18n="options_language_notes">Note: This language setting does not affect custom actions.</span>
     </small>
   </p>
 
@@ -160,7 +188,7 @@
     <br>
     <small>
       <span data-i18n="options_contextmenus_notes">
-        Custom actions can also be invoked from the context menu (desktop only).</span>
+        Custom actions are also accessible via the context menu (desktop only).</span>
     </small>
   </p>
 
@@ -168,7 +196,7 @@
 
   <p>
     <input id="streaming" type="checkbox">
-    <label for="streaming" data-i18n="options_streaming">Streaming output from the language model</label>
+    <label for="streaming" data-i18n="options_streaming">Enable streaming output from the language model</label>
   </p>
 
   <hr>
@@ -206,7 +234,7 @@
   <hr>
 
   <p>
-    <span data-i18n="options_font_size">Font Size</span>
+    <span data-i18n="options_font_size">Font size</span>
     <br>
     <select id="fontSize">
       <option value="large">Large</option>
@@ -219,15 +247,15 @@
     <button id="save" data-i18n="options_button_save">Save options</button>
     <span id="status" style="color: gray;"></span>
     <br>
-    <a href="#" id="exportFile" data-i18n="options_export">Export options</a>
+    <a href="#" id="exportFile" data-i18n="options_export">Export options to file</a>
     <input id="exportApiKey" type="checkbox">
-    <label for="exportApiKey" data-i18n="options_export_api_key">Include API Key</label>
+    <label for="exportApiKey" data-i18n="options_export_api_key">Include API key</label>
     <br>
-    <a href="#" id="importFile" data-i18n="options_import">Import options</a>
+    <a href="#" id="importFile" data-i18n="options_import">Import options from file</a>
     <br>
-    <a href="#" id="syncCloud" data-i18n="options_sync_cloud">Sync options to the cloud</a>
+    <a href="#" id="syncCloud" data-i18n="options_sync_cloud">Sync options to cloud</a>
     <br>
-    <a href="#" id="restoreCloud" data-i18n="options_restore_cloud">Restore options from the cloud</a>
+    <a href="#" id="restoreCloud" data-i18n="options_restore_cloud">Restore options from cloud</a>
   </p>
 
   <script type="module" src="options.js"></script>

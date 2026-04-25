@@ -7,9 +7,13 @@ import {
 } from "./utils.js";
 
 const INITIAL_OPTIONS = {
+  apiProvider: "gemini",
   apiKey: "",
   languageModel: DEFAULT_LANGUAGE_MODEL,
   userModelId: "gemini-2.5-flash",
+  openaiApiKey: "",
+  openaiBaseUrl: "https://api.openai.com/v1",
+  openaiModelId: "gpt-5.4-nano",
   languageCode: "en",
   userLanguage: "Turkish",
   noTextAction: "summarize",
@@ -45,11 +49,21 @@ const showStatusMessage = (message, duration) => {
   }, duration);
 };
 
+const updateProviderUI = () => {
+  const isGemini = document.querySelector('input[name="apiProvider"]:checked').value === "gemini";
+
+  document.getElementById("geminiSection").style.display = isGemini ? "" : "none";
+  document.getElementById("openaiSection").style.display = isGemini ? "none" : "";
+};
+
 const getOptionsFromForm = (includeApiKey) => {
   const options = {
     version: chrome.runtime.getManifest().version,
+    apiProvider: document.querySelector('input[name="apiProvider"]:checked').value,
     languageModel: document.getElementById("languageModel").value,
     userModelId: document.getElementById("userModelId").value,
+    openaiBaseUrl: document.getElementById("openaiBaseUrl").value,
+    openaiModelId: document.getElementById("openaiModelId").value,
     languageCode: document.getElementById("languageCode").value,
     userLanguage: document.getElementById("userLanguage").value,
     noTextAction: document.querySelector('input[name="noTextAction"]:checked').value,
@@ -76,6 +90,7 @@ const getOptionsFromForm = (includeApiKey) => {
 
   if (includeApiKey) {
     options.apiKey = document.getElementById("apiKey").value;
+    options.openaiApiKey = document.getElementById("openaiApiKey").value;
   }
 
   return options;
@@ -84,9 +99,13 @@ const getOptionsFromForm = (includeApiKey) => {
 const setOptionsToForm = async () => {
   const options = await chrome.storage.local.get(INITIAL_OPTIONS);
 
+  document.querySelector(`input[name="apiProvider"][value="${options.apiProvider}"]`).checked = true;
   document.getElementById("apiKey").value = options.apiKey;
   document.getElementById("languageModel").value = options.languageModel;
   document.getElementById("userModelId").value = options.userModelId;
+  document.getElementById("openaiApiKey").value = options.openaiApiKey;
+  document.getElementById("openaiBaseUrl").value = options.openaiBaseUrl;
+  document.getElementById("openaiModelId").value = options.openaiModelId;
   document.getElementById("languageCode").value = options.languageCode;
   document.getElementById("userLanguage").value = options.userLanguage;
   document.querySelector(`input[name="noTextAction"][value="${options.noTextAction}"]`).checked = true;
@@ -114,10 +133,20 @@ const setOptionsToForm = async () => {
   if (!document.getElementById("languageModel").value) {
     document.getElementById("languageModel").value = DEFAULT_LANGUAGE_MODEL;
   }
+
+  updateProviderUI();
 };
 
 const applyOptionsToForm = (options) => {
-  // apiKey does not allow an empty string
+  if (options.apiProvider) {
+    const providerElement = document.querySelector(`input[name="apiProvider"][value="${options.apiProvider}"]`);
+
+    if (providerElement) {
+      providerElement.checked = true;
+    }
+  }
+
+  // Do not apply to the form when it is an empty string
   if (options.apiKey) {
     document.getElementById("apiKey").value = options.apiKey;
   }
@@ -129,6 +158,21 @@ const applyOptionsToForm = (options) => {
   // userModelId allows an empty string
   if (options.userModelId !== undefined) {
     document.getElementById("userModelId").value = options.userModelId;
+  }
+
+  // Do not apply to the form when it is an empty string
+  if (options.openaiApiKey) {
+    document.getElementById("openaiApiKey").value = options.openaiApiKey;
+  }
+
+  // openaiBaseUrl allows an empty string
+  if (options.openaiBaseUrl !== undefined) {
+    document.getElementById("openaiBaseUrl").value = options.openaiBaseUrl;
+  }
+
+  // openaiModelId allows an empty string
+  if (options.openaiModelId !== undefined) {
+    document.getElementById("openaiModelId").value = options.openaiModelId;
   }
 
   if (options.languageCode) {
@@ -244,6 +288,8 @@ const applyOptionsToForm = (options) => {
   if (!document.getElementById("languageModel").value) {
     document.getElementById("languageModel").value = DEFAULT_LANGUAGE_MODEL;
   }
+
+  updateProviderUI();
 };
 
 const saveOptions = async () => {
@@ -356,6 +402,10 @@ const initialize = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", initialize);
+
+document.querySelectorAll('input[name="apiProvider"]').forEach(radio => {
+  radio.addEventListener("change", updateProviderUI);
+});
 
 document.getElementById("save").addEventListener("click", async () => {
   await saveOptions();
