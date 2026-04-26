@@ -51,4 +51,3 @@ All conventions are enforced by ESLint. See `eslint.config.mjs` for the full con
 - Do not edit files in `extension/lib/` — they are third-party minified libraries.
 - `extension/` is the root of the unpacked extension. `manifest.json` defines the extension structure, permissions, and content scripts.
 - When updating the version, update both `extension/manifest.json` and `firefox/manifest.json`.
-- Translations in `_locales/*/messages.json` are managed by Python scripts in `utils/messages/`.
