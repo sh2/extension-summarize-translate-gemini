@@ -48,7 +48,7 @@
         "message": "Bild übersetzen"
     },
     "popup_processing": {
-        "message": "Verarbeite"
+        "message": "Verarbeiten"
     },
     "popup_miscellaneous_error": {
         "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
@@ -94,6 +94,12 @@
     },
     "response_no_apikey": {
         "message": "Bitte geben Sie Ihren Gemini API-Schlüssel auf der Optionsseite ein."
+    },
+    "response_no_apikey_openai": {
+        "message": "Bitte geben Sie Ihren OpenAI API-Schlüssel auf der Optionsseite ein."
+    },
+    "response_no_base_url": {
+        "message": "Bitte geben Sie die Basis-URL auf der Optionsseite ein."
     },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"

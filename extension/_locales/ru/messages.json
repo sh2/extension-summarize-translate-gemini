@@ -95,6 +95,12 @@
     "response_no_apikey": {
         "message": "Укажите ключ API Gemini на странице настроек."
     },
+    "response_no_apikey_openai": {
+        "message": "Укажите ключ API OpenAI на странице настроек."
+    },
+    "response_no_base_url": {
+        "message": "Укажите базовый URL на странице настроек."
+    },
     "options_title": {
         "message": "Настройки - Суммирование и перевод с Gemini"
     },

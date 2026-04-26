@@ -84,7 +84,7 @@
         "message": "في انتظار النتيجة"
     },
     "response_prompt_blocked": {
-        "message": "تم حظر المطالبة."
+        "message": "تم حظر الموجه."
     },
     "response_response_blocked": {
         "message": "تم حظر الاستجابة."
@@ -94,6 +94,12 @@
     },
     "response_no_apikey": {
         "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
+    },
+    "response_no_apikey_openai": {
+        "message": "يرجى تعيين مفتاح OpenAI API الخاص بك في صفحة الخيارات."
+    },
+    "response_no_base_url": {
+        "message": "يرجى تعيين عنوان URL الأساسي في صفحة الخيارات."
     },
     "options_title": {
         "message": "الخيارات - تلخيص وترجمة مع Gemini"

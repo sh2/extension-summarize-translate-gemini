@@ -95,6 +95,12 @@
     "response_no_apikey": {
         "message": "请在选项页面设置您的 Gemini API 密钥。"
     },
+    "response_no_apikey_openai": {
+        "message": "请在选项页面设置您的 OpenAI API 密钥。"
+    },
+    "response_no_base_url": {
+        "message": "请在选项页面设置基础 URL。"
+    },
     "options_title": {
         "message": "选项 - 使用 Gemini 总结与翻译"
     },

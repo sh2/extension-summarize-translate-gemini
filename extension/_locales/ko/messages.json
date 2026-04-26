@@ -95,6 +95,12 @@
     "response_no_apikey": {
         "message": "옵션 페이지에서 Gemini API 키를 설정하십시오."
     },
+    "response_no_apikey_openai": {
+        "message": "옵션 페이지에서 OpenAI API 키를 설정하십시오."
+    },
+    "response_no_base_url": {
+        "message": "옵션 페이지에서 기본 URL을 설정하십시오."
+    },
     "options_title": {
         "message": "옵션 - Gemini로 요약 및 번역"
     },

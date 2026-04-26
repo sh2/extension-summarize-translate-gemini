@@ -95,6 +95,12 @@
     "response_no_apikey": {
         "message": "Veuillez définir votre clé API Gemini sur la page des options."
     },
+    "response_no_apikey_openai": {
+        "message": "Veuillez définir votre clé API OpenAI sur la page des options."
+    },
+    "response_no_base_url": {
+        "message": "Veuillez définir l'URL de base sur la page des options."
+    },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"
     },

@@ -48,7 +48,7 @@
         "message": "Traducendo l'immagine"
     },
     "popup_processing": {
-        "message": "Elaborazione"
+        "message": "Elaborando"
     },
     "popup_miscellaneous_error": {
         "message": "Impossibile riassumere o tradurre questa pagina."
@@ -94,6 +94,12 @@
     },
     "response_no_apikey": {
         "message": "Impostare la chiave API Gemini nella pagina delle opzioni."
+    },
+    "response_no_apikey_openai": {
+        "message": "Impostare la chiave API OpenAI nella pagina delle opzioni."
+    },
+    "response_no_base_url": {
+        "message": "Impostare l'URL di base nella pagina delle opzioni."
     },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"

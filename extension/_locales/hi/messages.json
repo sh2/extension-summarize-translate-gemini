@@ -95,6 +95,12 @@
     "response_no_apikey": {
         "message": "कृपया विकल्प पृष्ठ पर अपनी Gemini API कुंजी सेट करें।"
     },
+    "response_no_apikey_openai": {
+        "message": "कृपया विकल्प पृष्ठ पर अपनी OpenAI API कुंजी सेट करें।"
+    },
+    "response_no_base_url": {
+        "message": "कृपया विकल्प पृष्ठ पर बेस URL सेट करें।"
+    },
     "options_title": {
         "message": "विकल्प - Gemini के साथ सारांशित करें और अनुवाद करें"
     },
@@ -234,7 +240,7 @@
         "message": "आयात विफल रहा।"
     },
     "options_sync_cloud": {
-        "message": "विकल्पों को क्लाउड से सिंक करें"
+        "message": "विकल्पों को क्लाउड में सिंक करें"
     },
     "options_sync_cloud_started": {
         "message": "सिंक शुरू हो गया।"

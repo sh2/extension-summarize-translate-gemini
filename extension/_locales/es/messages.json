@@ -95,6 +95,12 @@
     "response_no_apikey": {
         "message": "Configure su clave API de Gemini en la página de opciones."
     },
+    "response_no_apikey_openai": {
+        "message": "Configure su clave API de OpenAI en la página de opciones."
+    },
+    "response_no_base_url": {
+        "message": "Configure la URL base en la página de opciones."
+    },
     "options_title": {
         "message": "Opciones - Resumir y Traducir con Gemini"
     },
