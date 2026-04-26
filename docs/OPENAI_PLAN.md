@@ -202,7 +202,17 @@ const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
 **方針**: 内部では Gemini 形式のままで会話履歴を管理し、API呼び出し時にプロバイダに応じた形式に変換する。
 `utils.js` の変換ユーティリティ (`convertContentsForOpenAI` / `convertContentsForGemini`) を使用。
 
-### 4.4 モデルバージョン表示
+### 4.4 モデルドロップダウン制御
+
+`results.js` の `initialize()` でも `popup.js` と同様に、`apiProvider` を読み取り、OpenAI 選択時はモデルドロップダウンに「User-specified」(`zz`) のみを表示する。
+
+**実装方法**:
+
+- `initialize()` で `apiProvider` を `chrome.storage.local.get()` から取得
+- OpenAI 時: `languageModel` セレクトボックスの非 `zz` オプションを非表示
+- Gemini 時: 全オプションを表示（デフォルト動作）
+
+### 4.5 モデルバージョン表示
 
 OpenAI のレスポンスには `response.body.model` があり、これを modelVersion として表示可能。
 
@@ -214,9 +224,15 @@ OpenAI のレスポンスには `response.body.model` があり、これを mode
 
 ### 5.1 モデルリスト読み込み
 
-現在 `languageModelTemplate` を読み込んでいる。Gemini選択時はそのまま、OpenAI選択時はモデルドロップダウン不要（ユーザー指定のみ）だが、popupのUI変更は最小限に留める。
+現在 `languageModelTemplate` を読み込んでいる。Gemini選択時は全モデルを表示、OpenAI選択時は「User-specified」(`zz`) のみを表示する。
 
-**方針**: popupでは常に Gemini 用のモデルドロップダウンを表示する（OpenAI選択時もドロップダウンは表示されるが、service-worker側でモデル解決ロジックが適切に処理する）。
+**方針**: popupの初期化時に `apiProvider` を読み取り、OpenAI の場合は `getModelConfigs` に加えて UI 側でも非 `zz` オプションを非表示にする。これによりユーザーが OpenAI 選択時に Gemini モデルを選べなくなる。また `getModelConfigs` 側でも OpenAI 時は非 `zz` を `openaiModelId` にフォールバックする防御的実装を合わせて行う。
+
+**実装方法**:
+
+- `popup.js` の `initialize()` で `apiProvider` を `chrome.storage.local.get()` から取得
+- OpenAI 時: `languageModel` セレクトボックスの全 `<option>` のうち `value !== "zz"` なものを `display: none` または `hidden` に設定
+- Gemini 時: 全オプションを表示（デフォルト動作）
 
 ### 5.2 APIキー不足時のエラーメッセージ
 
@@ -226,7 +242,7 @@ OpenAI のレスポンスには `response.body.model` があり、これを mode
 
 ## Phase 6: `templates.html` — 変更不要
 
-OpenAI選択時はユーザー指定モデル入力のみのため、新規テンプレートは不要。
+OpenAI選択時はドロップダウンの非 `zz` オプションを JS 側で非表示にするため、`templates.html` のテンプレート自体は変更不要。
 既存の `languageModelTemplate` を維持。
 
 ---
