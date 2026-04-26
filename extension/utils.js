@@ -113,8 +113,12 @@ export const convertMarkdownToHtml = (content, breaks, links) => {
   return htmlDiv.innerHTML;
 };
 
-export const getModelConfigs = (languageModel, userModelId) => {
+export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini") => {
   // languageModel: "3-flash-preview:minimal/2.5-flash:0/gemma-3-27b-it/zz"
+
+  if (apiProvider === "openai") {
+    return [{ modelId: userModelId, generationConfig: {} }];
+  }
 
   const modelMappings = {
     "2.5-pro": "gemini-2.5-pro",
@@ -157,6 +161,60 @@ export const getModelConfigs = (languageModel, userModelId) => {
   return modelConfigs;
 };
 
+export const convertContentsForGemini = (apiContents) => {
+  return apiContents.map(item => {
+    const converted = { role: item.role === "assistant" ? "model" : item.role };
+
+    if (typeof item.content === "string") {
+      converted.parts = [{ text: item.content }];
+    } else if (Array.isArray(item.content)) {
+      converted.parts = item.content.map(part => {
+        if (part.type === "image_url") {
+          const dataUrl = part.image_url.url;
+          const match = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
+
+          if (match) {
+            return { inline_data: { mime_type: match[1], data: match[2] } };
+          }
+
+          return { text: "" };
+        }
+
+        return { text: part.text || "" };
+      });
+    } else {
+      converted.parts = [];
+    }
+
+    return converted;
+  });
+};
+
+export const convertContentsForOpenAI = (apiContents) => {
+  return apiContents.map(item => {
+    const converted = { role: item.role === "model" ? "assistant" : item.role };
+    const parts = item.parts || [];
+    const hasImage = parts.some(p => p.inline_data);
+
+    if (hasImage && parts.length > 1) {
+      converted.content = parts.map(p => {
+        if (p.inline_data) {
+          return {
+            type: "image_url",
+            image_url: { url: `data:${p.inline_data.mime_type};base64,${p.inline_data.data}` }
+          };
+        }
+
+        return { type: "text", text: p.text || "" };
+      });
+    } else {
+      converted.content = parts.map(p => p.text || "").join("");
+    }
+
+    return converted;
+  });
+};
+
 const tryParseJson = (text) => {
   try {
     return JSON.parse(text);
@@ -165,7 +223,7 @@ const tryParseJson = (text) => {
   }
 };
 
-const generateContent = async (apiKey, apiContents, modelConfig) => {
+const generateContentGemini = async (apiKey, apiContents, modelConfig) => {
   const { modelId, generationConfig } = modelConfig;
 
   try {
@@ -196,6 +254,42 @@ const generateContent = async (apiKey, apiContents, modelConfig) => {
   }
 };
 
+const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) => {
+  const { modelId } = modelConfig;
+
+  try {
+    const response = await fetch(`${baseUrl}/chat/completions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: modelId,
+        messages: apiContents
+      })
+    });
+
+    const body = tryParseJson(await response.text());
+
+    if (body.model) {
+      body.modelVersion = body.model;
+    }
+
+    return {
+      ok: response.ok,
+      status: response.status,
+      body: body
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      status: 1000,
+      body: { error: { message: error.stack } }
+    };
+  }
+};
+
 export const generateContentWithFallback = async (apiKey, apiContents, modelConfigs) => {
   let response = {
     ok: false,
@@ -204,7 +298,7 @@ export const generateContentWithFallback = async (apiKey, apiContents, modelConf
   };
 
   for (const modelConfig of modelConfigs) {
-    response = await generateContent(apiKey, apiContents, modelConfig);
+    response = await generateContentGemini(apiKey, apiContents, modelConfig);
 
     if (response.ok || response.status !== 429) {
       break;
@@ -214,7 +308,15 @@ export const generateContentWithFallback = async (apiKey, apiContents, modelConf
   return response;
 };
 
-const streamGenerateContent = async (apiKey, apiContents, modelConfig, streamKey) => {
+export const generateContent = async (apiKey, apiContents, modelConfigs, apiProvider, openaiBaseUrl) => {
+  if (apiProvider === "openai") {
+    const openaiContents = convertContentsForOpenAI(apiContents);
+    return await generateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0]);
+  }
+  return await generateContentWithFallback(apiKey, apiContents, modelConfigs);
+};
+
+const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, streamKey) => {
   const { modelId, generationConfig } = modelConfig;
 
   try {
@@ -319,6 +421,96 @@ const streamGenerateContent = async (apiKey, apiContents, modelConfig, streamKey
   }
 };
 
+const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig, streamKey) => {
+  const { modelId } = modelConfig;
+
+  try {
+    await chrome.storage.session.remove(streamKey);
+
+    const response = await fetch(`${baseUrl}/chat/completions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: modelId,
+        messages: apiContents,
+        stream: true
+      })
+    });
+
+    if (!response.ok) {
+      return {
+        ok: false,
+        status: response.status,
+        body: tryParseJson(await response.text())
+      };
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let content = "";
+    let buffer = "";
+
+    while (true) {
+      const { value, done } = await reader.read();
+
+      if (value) {
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+
+          if (!trimmed || !trimmed.startsWith("data: ")) {
+            continue;
+          }
+
+          const data = trimmed.slice(6);
+
+          if (data === "[DONE]") {
+            continue;
+          }
+
+          try {
+            const json = JSON.parse(data);
+            const delta = json.choices?.[0]?.delta;
+
+            if (delta?.content) {
+              content += delta.content;
+              await chrome.storage.session.set({ [streamKey]: content });
+            }
+          } catch {
+            // Skip unparseable lines
+          }
+        }
+      }
+
+      if (done) {
+        break;
+      }
+    }
+
+    return {
+      ok: true,
+      status: 200,
+      body: {
+        choices: [{ finish_reason: "stop", message: { content } }],
+        model: modelId,
+        modelVersion: modelId
+      }
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      status: 1000,
+      body: { error: { message: error.stack } }
+    };
+  }
+};
+
 export const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfigs, streamKey) => {
   let response = {
     ok: false,
@@ -327,7 +519,7 @@ export const streamGenerateContentWithFallback = async (apiKey, apiContents, mod
   };
 
   for (const modelConfig of modelConfigs) {
-    response = await streamGenerateContent(apiKey, apiContents, modelConfig, streamKey);
+    response = await streamGenerateContentGemini(apiKey, apiContents, modelConfig, streamKey);
 
     if (response.ok || response.status !== 429) {
       break;
@@ -337,24 +529,44 @@ export const streamGenerateContentWithFallback = async (apiKey, apiContents, mod
   return response;
 };
 
-export const getResponseContent = (response, hasApiKey) => {
+export const streamGenerateContent = async (apiKey, apiContents, modelConfigs, streamKey, apiProvider, openaiBaseUrl) => {
+  if (apiProvider === "openai") {
+    const openaiContents = convertContentsForOpenAI(apiContents);
+    return await streamGenerateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0], streamKey);
+  }
+  return await streamGenerateContentWithFallback(apiKey, apiContents, modelConfigs, streamKey);
+};
+
+export const getResponseContent = (response, hasApiKey, apiProvider = "gemini") => {
   let responseContent = "";
 
   if (response.ok) {
-    if (response.body.promptFeedback?.blockReason) {
-      // The prompt was blocked
-      responseContent = `${chrome.i18n.getMessage("response_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
-    } else if (response.body.candidates?.[0].finishReason !== "STOP") {
-      // The response was blocked
-      responseContent = `${chrome.i18n.getMessage("response_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
-    } else if (response.body.candidates?.[0].content) {
-      // A normal response was returned
-      const parts = response.body.candidates[0].content.parts || [];
-      const responsePart = parts[0]?.thought === true ? parts[1] : parts[0];
-      responseContent = responsePart?.text;
+    if (apiProvider === "openai") {
+      const choice = response.body.choices?.[0];
+
+      if (choice?.finish_reason && choice.finish_reason !== "stop") {
+        responseContent = `${chrome.i18n.getMessage("response_response_blocked")} Reason: ${choice.finish_reason}`;
+      } else if (choice?.message?.content) {
+        responseContent = choice.message.content;
+      } else {
+        responseContent = chrome.i18n.getMessage("response_unexpected_response");
+      }
     } else {
-      // The expected response was not returned
-      responseContent = chrome.i18n.getMessage("response_unexpected_response");
+      if (response.body.promptFeedback?.blockReason) {
+        // The prompt was blocked
+        responseContent = `${chrome.i18n.getMessage("response_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
+      } else if (response.body.candidates?.[0].finishReason !== "STOP") {
+        // The response was blocked
+        responseContent = `${chrome.i18n.getMessage("response_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
+      } else if (response.body.candidates?.[0].content) {
+        // A normal response was returned
+        const parts = response.body.candidates[0].content.parts || [];
+        const responsePart = parts[0]?.thought === true ? parts[1] : parts[0];
+        responseContent = responsePart?.text;
+      } else {
+        // The expected response was not returned
+        responseContent = chrome.i18n.getMessage("response_unexpected_response");
+      }
     }
   } else {
     // A response error occurred
@@ -362,7 +574,11 @@ export const getResponseContent = (response, hasApiKey) => {
 
     if (!hasApiKey) {
       // If the API Key is not set, add a message to prompt the user to set it
-      responseContent += `\n\n${chrome.i18n.getMessage("response_no_apikey")}`;
+      if (apiProvider === "openai") {
+        responseContent += `\n\n${chrome.i18n.getMessage("response_no_apikey_openai")}`;
+      } else {
+        responseContent += `\n\n${chrome.i18n.getMessage("response_no_apikey")}`;
+      }
     }
   }
 

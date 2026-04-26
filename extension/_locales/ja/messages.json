@@ -95,6 +95,12 @@
     "response_no_apikey": {
         "message": "オプションページでGemini APIキーを設定してください。"
     },
+    "response_no_apikey_openai": {
+        "message": "オプションページでOpenAI APIキーを設定してください。"
+    },
+    "response_no_base_url": {
+        "message": "オプションページでベースURLを設定してください。"
+    },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
     },

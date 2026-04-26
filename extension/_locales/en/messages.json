@@ -95,6 +95,12 @@
     "response_no_apikey": {
         "message": "Please set your Gemini API key on the options page."
     },
+    "response_no_apikey_openai": {
+        "message": "Please set your OpenAI API key on the options page."
+    },
+    "response_no_base_url": {
+        "message": "Please set the Base URL on the options page."
+    },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"
     },
