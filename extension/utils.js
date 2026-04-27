@@ -161,42 +161,13 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
   return modelConfigs;
 };
 
-export const convertContentsForGemini = (apiContents) => {
-  return apiContents.map(item => {
-    const converted = { role: item.role === "assistant" ? "model" : item.role };
-
-    if (typeof item.content === "string") {
-      converted.parts = [{ text: item.content }];
-    } else if (Array.isArray(item.content)) {
-      converted.parts = item.content.map(part => {
-        if (part.type === "image_url") {
-          const dataUrl = part.image_url.url;
-          const match = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
-
-          if (match) {
-            return { inline_data: { mime_type: match[1], data: match[2] } };
-          }
-
-          return { text: "" };
-        }
-
-        return { text: part.text || "" };
-      });
-    } else {
-      converted.parts = [];
-    }
-
-    return converted;
-  });
-};
-
-export const convertContentsForOpenAI = (apiContents) => {
+const convertToOpenAI = (apiContents) => {
   return apiContents.map(item => {
     const converted = { role: item.role === "model" ? "assistant" : item.role };
     const parts = item.parts || [];
     const hasImage = parts.some(p => p.inline_data);
 
-    if (hasImage && parts.length > 1) {
+    if (hasImage) {
       converted.content = parts.map(p => {
         if (p.inline_data) {
           return {
@@ -223,7 +194,7 @@ const tryParseJson = (text) => {
   }
 };
 
-const generateContentGemini = async (apiKey, apiContents, modelConfig) => {
+const generateContentGemini = async (apiKey, apiContents, modelConfig, systemInstruction) => {
   const { modelId, generationConfig } = modelConfig;
 
   try {
@@ -235,6 +206,7 @@ const generateContentGemini = async (apiKey, apiContents, modelConfig) => {
       },
       body: JSON.stringify({
         contents: apiContents,
+        systemInstruction: systemInstruction,
         safetySettings: SAFETY_SETTINGS,
         generationConfig: generationConfig
       })
@@ -290,7 +262,7 @@ const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) 
   }
 };
 
-export const generateContentWithFallback = async (apiKey, apiContents, modelConfigs) => {
+export const generateContentWithFallback = async (apiKey, apiContents, modelConfigs, systemInstruction) => {
   let response = {
     ok: false,
     status: 1001,
@@ -298,7 +270,7 @@ export const generateContentWithFallback = async (apiKey, apiContents, modelConf
   };
 
   for (const modelConfig of modelConfigs) {
-    response = await generateContentGemini(apiKey, apiContents, modelConfig);
+    response = await generateContentGemini(apiKey, apiContents, modelConfig, systemInstruction);
 
     if (response.ok || response.status !== 429) {
       break;
@@ -308,15 +280,36 @@ export const generateContentWithFallback = async (apiKey, apiContents, modelConf
   return response;
 };
 
-export const generateContent = async (apiKey, apiContents, modelConfigs, apiProvider, openaiBaseUrl) => {
-  if (apiProvider === "openai") {
-    const openaiContents = convertContentsForOpenAI(apiContents);
-    return await generateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0]);
+const extractSystemInstruction = (apiContents) => {
+  const systemParts = [];
+  const otherContents = [];
+
+  for (const item of apiContents) {
+    if (item.role === "system") {
+      systemParts.push(...(item.parts || []));
+    } else {
+      otherContents.push(item);
+    }
   }
-  return await generateContentWithFallback(apiKey, apiContents, modelConfigs);
+
+  if (systemParts.length > 0) {
+    return { systemInstruction: { parts: systemParts }, contents: otherContents };
+  }
+
+  return { systemInstruction: undefined, contents: apiContents };
 };
 
-const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, streamKey) => {
+export const generateContent = async (apiKey, apiContents, modelConfigs, apiProvider, openaiBaseUrl) => {
+  if (apiProvider === "openai") {
+    const openaiContents = convertToOpenAI(apiContents);
+    return await generateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0]);
+  }
+
+  const { systemInstruction, contents } = extractSystemInstruction(apiContents);
+  return await generateContentWithFallback(apiKey, contents, modelConfigs, systemInstruction);
+};
+
+const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, streamKey, systemInstruction) => {
   const { modelId, generationConfig } = modelConfig;
 
   try {
@@ -330,6 +323,7 @@ const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, str
       },
       body: JSON.stringify({
         contents: apiContents,
+        systemInstruction: systemInstruction,
         safetySettings: SAFETY_SETTINGS,
         generationConfig: generationConfig
       })
@@ -511,7 +505,7 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
   }
 };
 
-export const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfigs, streamKey) => {
+export const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfigs, streamKey, systemInstruction) => {
   let response = {
     ok: false,
     status: 1001,
@@ -519,7 +513,7 @@ export const streamGenerateContentWithFallback = async (apiKey, apiContents, mod
   };
 
   for (const modelConfig of modelConfigs) {
-    response = await streamGenerateContentGemini(apiKey, apiContents, modelConfig, streamKey);
+    response = await streamGenerateContentGemini(apiKey, apiContents, modelConfig, streamKey, systemInstruction);
 
     if (response.ok || response.status !== 429) {
       break;
@@ -531,10 +525,11 @@ export const streamGenerateContentWithFallback = async (apiKey, apiContents, mod
 
 export const streamGenerateContent = async (apiKey, apiContents, modelConfigs, streamKey, apiProvider, openaiBaseUrl) => {
   if (apiProvider === "openai") {
-    const openaiContents = convertContentsForOpenAI(apiContents);
+    const openaiContents = convertToOpenAI(apiContents);
     return await streamGenerateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0], streamKey);
   }
-  return await streamGenerateContentWithFallback(apiKey, apiContents, modelConfigs, streamKey);
+  const { systemInstruction, contents } = extractSystemInstruction(apiContents);
+  return await streamGenerateContentWithFallback(apiKey, contents, modelConfigs, streamKey, systemInstruction);
 };
 
 export const getResponseContent = (response, hasApiKey, apiProvider = "gemini") => {
