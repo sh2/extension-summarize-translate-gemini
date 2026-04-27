@@ -244,10 +244,6 @@ const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) 
 
     const body = tryParseJson(await response.text());
 
-    if (body.model) {
-      body.modelVersion = body.model;
-    }
-
     return {
       ok: response.ok,
       status: response.status,
@@ -492,8 +488,7 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
       status: 200,
       body: {
         choices: [{ finish_reason: "stop", message: { content } }],
-        model: modelId,
-        modelVersion: modelId
+        model: modelId
       }
     };
   } catch (error) {

@@ -6,8 +6,8 @@ import {
   displayLoadingMessage,
   convertMarkdownToHtml,
   getModelConfigs,
-  generateContentWithFallback,
-  streamGenerateContentWithFallback,
+  generateContent,
+  streamGenerateContent,
   getResponseContent,
   exportTextToFile
 } from "./utils.js";
@@ -119,8 +119,7 @@ const askQuestion = async () => {
   let displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_response"));
 
   // Prepare the first question and answer
-  const apiContents = [];
-  apiContents.push(result.requestApiContent);
+  const apiContents = [...result.requestApiContent];
   apiContents.push({ role: "model", parts: [{ text: result.responseContent }] });
 
   // Add the previous questions and answers to the conversation
@@ -152,8 +151,12 @@ const askQuestion = async () => {
   window.scrollTo(0, document.body.scrollHeight);
 
   // Generate the response
-  const { apiKey, streaming, userModelId, renderLinks, autoSave } = await chrome.storage.local.get({
+  const { apiKey, apiProvider, openaiApiKey, openaiBaseUrl, openaiModelId, streaming, userModelId, renderLinks, autoSave } = await chrome.storage.local.get({
     apiKey: "",
+    apiProvider: "gemini",
+    openaiApiKey: "",
+    openaiBaseUrl: "https://api.openai.com/v1",
+    openaiModelId: "gpt-5.4-nano",
     streaming: false,
     userModelId: "gemini-2.5-flash",
     renderLinks: false,
@@ -161,12 +164,15 @@ const askQuestion = async () => {
   });
 
   const languageModel = document.getElementById("languageModel").value;
-  const modelConfigs = getModelConfigs(languageModel, userModelId);
+  const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
+  const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
+  const baseUrl = openaiBaseUrl || "https://api.openai.com/v1";
+  const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider);
   let response = null;
 
   if (streaming) {
     const streamKey = `streamContent_${resultIndex}`;
-    const responsePromise = streamGenerateContentWithFallback(apiKey, apiContents, modelConfigs, streamKey);
+    const responsePromise = streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl);
 
     console.log("Request:", {
       apiContents,
@@ -189,11 +195,11 @@ const askQuestion = async () => {
     // Stop streaming
     clearInterval(streamIntervalId);
   } else {
-    response = await generateContentWithFallback(apiKey, apiContents, modelConfigs);
+    response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl);
   }
 
   console.log("Response:", response);
-  answer = getResponseContent(response, Boolean(apiKey));
+  answer = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
 
   // Stop displaying the loading message
   clearInterval(displayIntervalId);
@@ -288,13 +294,32 @@ const initialize = async () => {
     element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
   });
 
-  // Restore the language model from the local storage
-  const { languageModel } = await chrome.storage.local.get({ languageModel: DEFAULT_LANGUAGE_MODEL });
-  document.getElementById("languageModel").value = languageModel;
+  // Restore the language model and api provider from storage
+  const { languageModel, apiProvider } = await chrome.storage.local.get({ languageModel: DEFAULT_LANGUAGE_MODEL, apiProvider: "gemini" });
+  const languageModelSelect = document.getElementById("languageModel");
 
-  // Set the default language model if the language model is not set
-  if (!document.getElementById("languageModel").value) {
-    document.getElementById("languageModel").value = DEFAULT_LANGUAGE_MODEL;
+  if (apiProvider === "openai") {
+    languageModelSelect.querySelectorAll("option:not([value=zz])").forEach(option => {
+      option.setAttribute("hidden", "");
+    });
+
+    const zzOption = languageModelSelect.querySelector("option[value=zz]");
+    const userSpecifiedGroup = zzOption ? zzOption.closest("optgroup") : null;
+
+    languageModelSelect.querySelectorAll("optgroup").forEach(optgroup => {
+      if (optgroup !== userSpecifiedGroup) {
+        optgroup.setAttribute("hidden", "");
+      }
+    });
+
+    languageModelSelect.value = "zz";
+  } else {
+    languageModelSelect.value = languageModel;
+
+    // Set the default language model if the language model is not set
+    if (!languageModelSelect.value) {
+      languageModelSelect.value = DEFAULT_LANGUAGE_MODEL;
+    }
   }
 
   // Restore the content from the session storage
