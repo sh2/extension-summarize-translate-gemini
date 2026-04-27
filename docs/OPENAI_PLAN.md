@@ -240,7 +240,7 @@ const responseCacheKey = JSON.stringify({
 
 ---
 
-## Phase 4: `results.js` — フォローアップ会話 🔜 未実装
+## Phase 4: `results.js` — フォローアップ会話 ✅ 実装済み
 
 **ファイル**: `extension/results.js`
 
@@ -322,7 +322,7 @@ Phase 2以降で必要になる追加キー:
 | Phase 1 | ストレージキー追加 + options UI | ✅ 完了 |
 | Phase 2 | `utils.js` API抽象化レイヤー | ✅ 完了 |
 | Phase 3 | `service-worker.js` バックグラウンド処理 | ✅ 完了 |
-| Phase 4 | `results.js` フォローアップ会話 | 🔜 未着手 |
+| Phase 4 | `results.js` フォローアップ会話 | ✅ 完了 |
 | Phase 5 | `popup.js` 最小限の調整 | 🔜 未着手 |
 | Phase 6 | `templates.html` 確認 | 🔜 未着手 |
 | i18n | メッセージキー追加 | ✅ 完了 |
