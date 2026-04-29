@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "Восстановление выполнено успешно."
     },
+    "options_save_required_for_host_permission": {
+        "message": "Нажмите «Сохранить», чтобы применить настройки и предоставить доступ к хосту."
+    },
     "shortcuts_custom_action_1": {
         "message": "Пользовательское действие 1"
     },

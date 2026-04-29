@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "Wiederherstellung erfolgreich."
     },
+    "options_save_required_for_host_permission": {
+        "message": "Klicken Sie auf Speichern, um die Einstellungen zu übernehmen und Host-Zugriff zu gewähren."
+    },
     "shortcuts_custom_action_1": {
         "message": "Benutzerdefinierte Aktion 1"
     },

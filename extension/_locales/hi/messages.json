@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "पुनर्स्थापना सफल रही।"
     },
+    "options_save_required_for_host_permission": {
+        "message": "सेटिंग लागू करने और होस्ट एक्सेस देने के लिए सहेजें पर क्लिक करें।"
+    },
     "shortcuts_custom_action_1": {
         "message": "कस्टम क्रिया 1"
     },

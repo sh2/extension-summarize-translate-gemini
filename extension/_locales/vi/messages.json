@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "Khôi phục thành công."
     },
+    "options_save_required_for_host_permission": {
+        "message": "Nhấn Lưu để áp dụng cài đặt và cấp quyền truy cập máy chủ."
+    },
     "shortcuts_custom_action_1": {
         "message": "Hành động tùy chỉnh 1"
     },

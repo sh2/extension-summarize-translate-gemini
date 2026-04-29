@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "تمت الاستعادة بنجاح."
     },
+    "options_save_required_for_host_permission": {
+        "message": "انقر فوق حفظ لتطبيق الإعدادات ومنح الوصول إلى المضيف."
+    },
     "shortcuts_custom_action_1": {
         "message": "إجراء مخصص 1"
     },

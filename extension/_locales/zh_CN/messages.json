@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "恢复成功。"
     },
+    "options_save_required_for_host_permission": {
+        "message": "点击保存以应用设置并授予主机访问权限。"
+    },
     "shortcuts_custom_action_1": {
         "message": "自定义操作 1"
     },

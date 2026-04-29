@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "복원 성공."
     },
+    "options_save_required_for_host_permission": {
+        "message": "저장을 클릭하여 설정을 적용하고 호스트 액세스 권한을 부여하세요."
+    },
     "shortcuts_custom_action_1": {
         "message": "사용자 지정 작업 1"
     },

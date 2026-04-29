@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "Restauration réussie."
     },
+    "options_save_required_for_host_permission": {
+        "message": "Cliquez sur Enregistrer pour appliquer les paramètres et accorder l'accès à l'hôte."
+    },
     "shortcuts_custom_action_1": {
         "message": "Action personnalisée 1"
     },

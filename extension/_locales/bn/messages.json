@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "পুনরুদ্ধার সফল হয়েছে।"
     },
+    "options_save_required_for_host_permission": {
+        "message": "সেটিংস প্রয়োগ করতে এবং হোস্ট অ্যাক্সেস মঞ্জুর করতে সংরক্ষণ করুন-এ ক্লিক করুন।"
+    },
     "shortcuts_custom_action_1": {
         "message": "কাস্টম অ্যাকশন ১"
     },
