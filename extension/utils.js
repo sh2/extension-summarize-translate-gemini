@@ -23,6 +23,87 @@ const SAFETY_SETTINGS = [{
 
 export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite-preview:minimal";
 
+const EXCLUDED_BASE_URLS = new Set([
+  "https://api.openai.com/v1"
+]);
+
+export const normalizeBaseUrl = (baseUrl) => {
+  const trimmedBaseUrl = baseUrl.trim();
+  const url = new URL(trimmedBaseUrl);
+
+  // Base URL comparison ignores search/hash.
+  url.search = "";
+  url.hash = "";
+
+  // Remove trailing slashes for a canonical base URL.
+  url.pathname = url.pathname.replace(/\/+$/, "") || "/";
+
+  return url.pathname === "/" ? url.origin : `${url.origin}${url.pathname}`;
+};
+
+const tryNormalizeBaseUrl = (baseUrl) => {
+  if (!baseUrl) {
+    return "";
+  }
+
+  try {
+    return normalizeBaseUrl(baseUrl);
+  } catch {
+    return null;
+  }
+};
+
+const isExcludedBaseUrl = (normalizedBaseUrl) => {
+  return EXCLUDED_BASE_URLS.has(normalizedBaseUrl);
+};
+
+const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
+  const url = new URL(normalizedBaseUrl);
+  return `${url.protocol}//${url.host}/*`;
+};
+
+export const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+  const normalizedEndpointPath = endpointPath.startsWith("/") ? endpointPath : `/${endpointPath}`;
+  return `${normalizedBaseUrl}${normalizedEndpointPath}`;
+};
+
+export const needsHostPermissionPrompt = async (baseUrl) => {
+  const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
+
+  if (!normalizedBaseUrl || isExcludedBaseUrl(normalizedBaseUrl)) {
+    return false;
+  }
+
+  try {
+    const origin = getOriginPatternFromNormalizedBaseUrl(normalizedBaseUrl);
+    return !(await chrome.permissions.contains({ origins: [origin] }));
+  } catch {
+    return false;
+  }
+};
+
+export const ensureHostPermission = async (baseUrl) => {
+  const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
+
+  if (!normalizedBaseUrl || isExcludedBaseUrl(normalizedBaseUrl)) {
+    return true;
+  }
+
+  try {
+    const origin = getOriginPatternFromNormalizedBaseUrl(normalizedBaseUrl);
+    const hasPermission = await chrome.permissions.contains({ origins: [origin] });
+
+    if (hasPermission) {
+      return true;
+    }
+
+    return await chrome.permissions.request({ origins: [origin] });
+  } catch {
+    return false;
+  }
+};
+
 export const applyTheme = (theme) => {
   if (theme === "light") {
     document.body.setAttribute("data-theme", "light");
@@ -230,7 +311,7 @@ const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) 
   const { modelId } = modelConfig;
 
   try {
-    const response = await fetch(`${baseUrl}/chat/completions`, {
+    const response = await fetch(buildOpenAIApiUrl(baseUrl, "/chat/completions"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -417,7 +498,7 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
   try {
     await chrome.storage.session.remove(streamKey);
 
-    const response = await fetch(`${baseUrl}/chat/completions`, {
+    const response = await fetch(buildOpenAIApiUrl(baseUrl, "/chat/completions"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

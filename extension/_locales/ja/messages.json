@@ -254,6 +254,9 @@
     "options_restore_cloud_succeeded": {
         "message": "復元に成功しました。"
     },
+    "options_save_required_for_host_permission": {
+        "message": "保存するをクリックして設定を適用し、ホストアクセスを許可します。"
+    },
     "shortcuts_custom_action_1": {
         "message": "カスタムアクション1"
     },

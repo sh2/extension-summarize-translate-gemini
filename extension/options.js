@@ -3,7 +3,10 @@ import {
   applyTheme,
   applyFontSize,
   loadTemplate,
-  createContextMenus
+  createContextMenus,
+  normalizeBaseUrl,
+  ensureHostPermission,
+  needsHostPermissionPrompt
 } from "./utils.js";
 
 const INITIAL_OPTIONS = {
@@ -37,6 +40,8 @@ const INITIAL_OPTIONS = {
   theme: "system",
   fontSize: "medium"
 };
+
+const persistentStatus = document.getElementById("persistentStatus");
 
 const showStatusMessage = (message, duration) => {
   const status = document.getElementById("status");
@@ -295,6 +300,15 @@ const applyOptionsToForm = (options) => {
 const saveOptions = async () => {
   const options = getOptionsFromForm(true);
 
+  if (options.apiProvider === "openai" && options.openaiBaseUrl) {
+    try {
+      options.openaiBaseUrl = normalizeBaseUrl(options.openaiBaseUrl);
+      document.getElementById("openaiBaseUrl").value = options.openaiBaseUrl;
+    } catch {
+      // Keep the raw value when the URL is invalid.
+    }
+  }
+
   await chrome.storage.local.set(options);
   await chrome.storage.session.set({ responseCacheQueue: [] });
 
@@ -356,7 +370,20 @@ const importOptionsFromFile = async () => {
     try {
       options = JSON.parse(text);
       applyOptionsToForm(options);
+
+      const currentOptions = getOptionsFromForm(true);
+      const needsPrompt = currentOptions.apiProvider === "openai"
+        && await needsHostPermissionPrompt(currentOptions.openaiBaseUrl);
+
+      if (needsPrompt) {
+        persistentStatus.textContent = chrome.i18n.getMessage("options_save_required_for_host_permission");
+        persistentStatus.hidden = false;
+        return;
+      }
+
       await saveOptions();
+      persistentStatus.textContent = "";
+      persistentStatus.hidden = true;
       showStatusMessage(chrome.i18n.getMessage("options_import_succeeded"), 1000);
     } catch (error) {
       showStatusMessage(chrome.i18n.getMessage("options_import_failed"), 3000);
@@ -371,7 +398,20 @@ const restoreOptionsFromCloud = async () => {
   const options = await chrome.storage.sync.get();
 
   applyOptionsToForm(options);
+
+  const currentOptions = getOptionsFromForm(true);
+  const needsPrompt = currentOptions.apiProvider === "openai"
+    && await needsHostPermissionPrompt(currentOptions.openaiBaseUrl);
+
+  if (needsPrompt) {
+    persistentStatus.textContent = chrome.i18n.getMessage("options_save_required_for_host_permission");
+    persistentStatus.hidden = false;
+    return;
+  }
+
   await saveOptions();
+  persistentStatus.textContent = "";
+  persistentStatus.hidden = true;
   showStatusMessage(chrome.i18n.getMessage("options_restore_cloud_succeeded"), 1000);
 };
 
@@ -408,7 +448,15 @@ document.querySelectorAll('input[name="apiProvider"]').forEach(radio => {
 });
 
 document.getElementById("save").addEventListener("click", async () => {
+  const options = getOptionsFromForm(true);
+
+  if (options.apiProvider === "openai" && options.openaiBaseUrl) {
+    await ensureHostPermission(options.openaiBaseUrl);
+  }
+
   await saveOptions();
+  persistentStatus.textContent = "";
+  persistentStatus.hidden = true;
   showStatusMessage(chrome.i18n.getMessage("options_saved"), 1000);
 });
 
