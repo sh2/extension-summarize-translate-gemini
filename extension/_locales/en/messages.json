@@ -96,7 +96,7 @@
         "message": "Please set your Gemini API key on the options page."
     },
     "response_no_apikey_openai": {
-        "message": "Please set your OpenAI API key on the options page."
+           "message": "Please set your OpenAI-compatible API key on the options page."
     },
     "response_no_base_url": {
         "message": "Please set the Base URL on the options page."
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "API Provider"
     },
+       "options_provider_gemini": {
+           "message": "Gemini API"
+       },
+       "options_provider_openai": {
+           "message": "OpenAI-compatible API"
+       },
     "options_apikey": {
         "message": "Gemini API key"
     },
@@ -114,7 +120,7 @@
         "message": "You can obtain a Gemini API key from the following page."
     },
     "options_openai_apikey": {
-        "message": "OpenAI API Key"
+           "message": "OpenAI-compatible API key"
     },
     "options_openai_base_url": {
         "message": "Base URL"
@@ -126,13 +132,13 @@
         "message": "Language model"
     },
     "options_model_user": {
-        "message": "User-specified model"
+           "message": "User-specified model ID"
     },
     "options_model_hint": {
         "message": "For information about Auto-fallback, please see the following page."
     },
     "options_model_openai": {
-        "message": "User-specified model"
+           "message": "User-specified model ID"
     },
     "options_language": {
         "message": "Language for Summarization and Translation"

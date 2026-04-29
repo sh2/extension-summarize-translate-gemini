@@ -25,10 +25,10 @@
     <span data-i18n="options_provider">API Provider</span>
     <br>
     <input id="providerGemini" type="radio" name="apiProvider" value="gemini" checked>
-    <label for="providerGemini">Gemini</label>
+     <label for="providerGemini" data-i18n="options_provider_gemini">Gemini API</label>
     <br>
     <input id="providerOpenai" type="radio" name="apiProvider" value="openai">
-    <label for="providerOpenai">OpenAI Compatible</label>
+     <label for="providerOpenai" data-i18n="options_provider_openai">OpenAI-compatible API</label>
   </p>
 
   <hr>
@@ -53,7 +53,7 @@
         <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki" target="_blank">Extension FAQ</a>
       </small>
       <br>
-      <span data-i18n="options_model_user">User-specified model</span>
+      <span data-i18n="options_model_user">User-specified model ID</span>
       <br>
       <input id="userModelId" size="39" placeholder="gemini-2.5-flash">
     </p>
@@ -61,7 +61,7 @@
 
   <div id="openaiSection" style="display:none">
     <p>
-      <span data-i18n="options_openai_apikey">OpenAI API Key</span>
+      <span data-i18n="options_openai_apikey">OpenAI-compatible API key</span>
       <br>
       <input type="password" id="openaiApiKey" size="39">
       <br>
@@ -74,7 +74,7 @@
         <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki" target="_blank">Extension FAQ</a>
       </small>
       <br>
-      <span data-i18n="options_model_openai">User-specified model</span>
+      <span data-i18n="options_model_openai">User-specified model ID</span>
       <br>
       <input id="openaiModelId" size="39" placeholder="gpt-5.4-nano">
     </p>
