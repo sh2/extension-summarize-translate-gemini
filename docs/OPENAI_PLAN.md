@@ -335,5 +335,6 @@ Phase 2以降で必要になる追加キー:
 - **画像入力の形式差異**: Gemini の `inline_data` と OpenAI の `image_url` は互換性がない。変換は `_convertToOpenAI()` が担当。
 - **後方互換性**: `apiProvider` 未設定の既存ユーザーはデフォルト `"gemini"` が使われるため影響なし
 - **`systemInstruction`**: Gemini API の `systemInstruction` フィールドを使用。`undefined` 時は `JSON.stringify` がキーごと除去するため既存の呼び出し元に影響なし。
+- **Base URL の制約**: この拡張は permission を最小限に保つため追加の `host_permissions` を要求しない。したがって、カスタム `openaiBaseUrl` はブラウザ拡張からのクロスオリジンリクエストを受け入れる endpoint のみ利用可能で、より厳しい CORS 制約や追加ホスト権限を必要とする endpoint は対象外。
 - **firefox/manifest.json**: ストレージキーの追加のみで manifest の変更は不要
 - **`response_no_base_url` キー**: 全ロケールに存在するが、空文字の `openaiBaseUrl` はデフォルトにフォールバックする設計のため、現状このキーは使用されない。

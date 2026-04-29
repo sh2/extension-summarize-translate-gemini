@@ -1,6 +1,6 @@
 # extension-summarize-translate-gemini
 
-Chrome extension to summarize and translate web pages. Uses Gemini as the backend.
+Chrome extension to summarize and translate web pages. Uses Gemini or an OpenAI-compatible API as the backend.
 
 ## FAQ
 
@@ -26,6 +26,17 @@ When you select **"Gemini Flash with Gemma Fallback"** in the options, the exten
 6. Gemma 3 27B
 
 Gemma models have more relaxed rate limits, so they serve as the final fallback option to ensure the extension remains functional even under heavy usage.
+
+### Which OpenAI-compatible providers are confirmed to work?
+
+This extension can use an OpenAI-compatible `Base URL` from the options page.
+
+To keep browser permissions minimal, it does not request additional host permissions for arbitrary API endpoints. Because of that, a custom `Base URL` only works when the target endpoint already allows cross-origin requests from browser extensions.
+
+Confirmed working providers:
+
+1. OpenAI: `https://api.openai.com/v1`
+2. Gemini: `https://generativelanguage.googleapis.com/v1beta/openai`
 
 ## Setup
 
