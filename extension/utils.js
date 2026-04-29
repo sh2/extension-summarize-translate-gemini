@@ -442,6 +442,7 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
     const decoder = new TextDecoder("utf-8");
     let content = "";
     let buffer = "";
+    let finishReason = "stop";
 
     while (true) {
       const { value, done } = await reader.read();
@@ -454,11 +455,11 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
         for (const line of lines) {
           const trimmed = line.trim();
 
-          if (!trimmed || !trimmed.startsWith("data: ")) {
+          if (!trimmed || !trimmed.startsWith("data:")) {
             continue;
           }
 
-          const data = trimmed.slice(6);
+          const data = trimmed.slice(5).trimStart();
 
           if (data === "[DONE]") {
             continue;
@@ -471,6 +472,11 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
             if (delta?.content) {
               content += delta.content;
               await chrome.storage.session.set({ [streamKey]: content });
+            }
+
+            const currentFinishReason = json.choices?.[0]?.finish_reason;
+            if (currentFinishReason) {
+              finishReason = currentFinishReason;
             }
           } catch {
             // Skip unparseable lines
@@ -487,7 +493,7 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
       ok: true,
       status: 200,
       body: {
-        choices: [{ finish_reason: "stop", message: { content } }],
+        choices: [{ finish_reason: finishReason, message: { content } }],
         model: modelId
       }
     };
