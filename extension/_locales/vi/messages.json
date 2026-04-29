@@ -119,6 +119,9 @@
     "options_openai_base_url": {
         "message": "URL cơ sở"
     },
+    "options_openai_base_url_hint": {
+        "message": "Để biết thông tin về cách thiết lập URL cơ sở, vui lòng xem trang sau."
+    },
     "options_model": {
         "message": "Mô hình ngôn ngữ"
     },

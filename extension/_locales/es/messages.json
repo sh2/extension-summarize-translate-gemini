@@ -119,6 +119,9 @@
     "options_openai_base_url": {
         "message": "URL base"
     },
+    "options_openai_base_url_hint": {
+        "message": "Para obtener información sobre la configuración de la URL base, consulte la siguiente página."
+    },
     "options_model": {
         "message": "Modelo de lenguaje"
     },

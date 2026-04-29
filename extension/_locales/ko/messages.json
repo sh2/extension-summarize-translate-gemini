@@ -119,6 +119,9 @@
     "options_openai_base_url": {
         "message": "기본 URL"
     },
+    "options_openai_base_url_hint": {
+        "message": "기본 URL 설정에 대한 정보는 다음 페이지를 참조하십시오."
+    },
     "options_model": {
         "message": "언어 모델"
     },

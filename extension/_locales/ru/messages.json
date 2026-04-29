@@ -119,6 +119,9 @@
     "options_openai_base_url": {
         "message": "Базовый URL"
     },
+    "options_openai_base_url_hint": {
+        "message": "Информацию о настройке базового URL см. на следующей странице."
+    },
     "options_model": {
         "message": "Языковая модель"
     },

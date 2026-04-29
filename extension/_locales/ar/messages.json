@@ -119,6 +119,9 @@
     "options_openai_base_url": {
         "message": "عنوان URL الأساسي"
     },
+    "options_openai_base_url_hint": {
+        "message": "للحصول على معلومات حول إعداد عنوان URL الأساسي، يرجى الاطلاع على الصفحة التالية."
+    },
     "options_model": {
         "message": "نموذج اللغة"
     },

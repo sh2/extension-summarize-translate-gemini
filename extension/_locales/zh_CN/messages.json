@@ -119,6 +119,9 @@
     "options_openai_base_url": {
         "message": "基础 URL"
     },
+    "options_openai_base_url_hint": {
+        "message": "有关基础 URL 设置的信息，请参阅以下页面。"
+    },
     "options_model": {
         "message": "语言模型"
     },
