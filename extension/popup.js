@@ -322,7 +322,14 @@ const main = async (useCache) => {
   await chrome.storage.session.remove(`result_${resultIndex}`);
 
   try {
-    const { apiKey, streaming } = await chrome.storage.local.get({ apiKey: "", streaming: false });
+    const { apiKey, apiProvider, openaiApiKey, streaming } = await chrome.storage.local.get({
+      apiKey: "",
+      apiProvider: "gemini",
+      openaiApiKey: "",
+      streaming: false
+    });
+
+    const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
@@ -341,7 +348,7 @@ const main = async (useCache) => {
 
     // Check the cache
     const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
-    const cacheIdentifier = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
+    const cacheIdentifier = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode, apiProvider });
     const responseCache = responseCacheQueue.find(item => item.key === cacheIdentifier);
 
     if (useCache && responseCache) {
@@ -404,7 +411,7 @@ const main = async (useCache) => {
       // Wait for responsePromise
       const response = await responsePromise;
       console.log("Response:", response);
-      responseContent = getResponseContent(response, Boolean(apiKey));
+      responseContent = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
       modelVersion = languageModel.includes("/") ? response.body?.modelVersion ?? "" : "";
 
       // Clear the timeout for displaying the "View Results" link
@@ -462,17 +469,37 @@ const initialize = async () => {
     element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
   });
 
-  // Restore the language model and language code from the local storage
-  const { languageModel, languageCode } =
-    await chrome.storage.local.get({ languageModel: DEFAULT_LANGUAGE_MODEL, languageCode: "en" });
+  // Restore the language model, api provider and language code from the local storage
+  const { languageModel, languageCode, apiProvider } =
+    await chrome.storage.local.get({ languageModel: DEFAULT_LANGUAGE_MODEL, languageCode: "en", apiProvider: "gemini" });
 
-  document.getElementById("languageModel").value = languageModel;
-  document.getElementById("languageCode").value = languageCode;
+  const languageModelSelect = document.getElementById("languageModel");
 
-  // Set the default language model if the language model is not set
-  if (!document.getElementById("languageModel").value) {
-    document.getElementById("languageModel").value = DEFAULT_LANGUAGE_MODEL;
+  if (apiProvider === "openai") {
+    languageModelSelect.querySelectorAll("option:not([value=zz])").forEach(option => {
+      option.setAttribute("hidden", "");
+    });
+
+    const zzOption = languageModelSelect.querySelector("option[value=zz]");
+    const userSpecifiedGroup = zzOption ? zzOption.closest("optgroup") : null;
+
+    languageModelSelect.querySelectorAll("optgroup").forEach(optgroup => {
+      if (optgroup !== userSpecifiedGroup) {
+        optgroup.setAttribute("hidden", "");
+      }
+    });
+
+    languageModelSelect.value = "zz";
+  } else {
+    languageModelSelect.value = languageModel;
+
+    // Set the default language model if the language model is not set
+    if (!languageModelSelect.value) {
+      languageModelSelect.value = DEFAULT_LANGUAGE_MODEL;
+    }
   }
+
+  document.getElementById("languageCode").value = languageCode;
 
   // Restore the trigger action from the session storage
   const { triggerAction } = await chrome.storage.session.get({ triggerAction: "" });
