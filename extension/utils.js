@@ -23,6 +23,8 @@ const SAFETY_SETTINGS = [{
 
 export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite-preview:minimal";
 
+const DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1";
+
 const EXCLUDED_BASE_URLS = new Set([
   "https://api.openai.com/v1"
 ]);
@@ -62,8 +64,8 @@ const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
   return `${url.protocol}//${url.host}/*`;
 };
 
-export const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
-  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl || DEFAULT_OPENAI_BASE_URL);
   const normalizedEndpointPath = endpointPath.startsWith("/") ? endpointPath : `/${endpointPath}`;
   return `${normalizedBaseUrl}${normalizedEndpointPath}`;
 };
@@ -339,7 +341,7 @@ const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) 
   }
 };
 
-export const generateContentWithFallback = async (apiKey, apiContents, modelConfigs, systemInstruction) => {
+const generateContentWithFallback = async (apiKey, apiContents, modelConfigs, systemInstruction) => {
   let response = {
     ok: false,
     status: 1001,
@@ -587,7 +589,7 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
   }
 };
 
-export const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfigs, streamKey, systemInstruction) => {
+const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfigs, streamKey, systemInstruction) => {
   let response = {
     ok: false,
     status: 1001,

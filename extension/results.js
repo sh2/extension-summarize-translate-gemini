@@ -155,7 +155,7 @@ const askQuestion = async () => {
     apiKey: "",
     apiProvider: "gemini",
     openaiApiKey: "",
-    openaiBaseUrl: "https://api.openai.com/v1",
+    openaiBaseUrl: "",
     openaiModelId: "gpt-5.4-nano",
     streaming: false,
     userModelId: "gemini-2.5-flash",
@@ -166,7 +166,7 @@ const askQuestion = async () => {
   const languageModel = document.getElementById("languageModel").value;
   const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
   const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
-  const baseUrl = openaiBaseUrl || "https://api.openai.com/v1";
+  const baseUrl = openaiBaseUrl;
   const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider);
   let response = null;
 

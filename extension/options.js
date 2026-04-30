@@ -15,7 +15,7 @@ const INITIAL_OPTIONS = {
   languageModel: DEFAULT_LANGUAGE_MODEL,
   userModelId: "gemini-2.5-flash",
   openaiApiKey: "",
-  openaiBaseUrl: "https://api.openai.com/v1",
+  openaiBaseUrl: "",
   openaiModelId: "gpt-5.4-nano",
   languageCode: "en",
   userLanguage: "Turkish",
