@@ -2,23 +2,28 @@
 
 ## Project overview
 
-Cross-browser extension (Chrome, Firefox, Edge) that uses Google Gemini API to summarize and translate web pages. Also supports YouTube caption summarization, image/PDF summarization, follow-up questions, custom actions, and streaming LLM output.
+Cross-browser extension (Chrome, Firefox, Edge) that uses Google Gemini API and any OpenAI-compatible API to summarize and translate web pages. Also supports YouTube caption summarization, image/PDF summarization, follow-up questions, custom actions, and streaming LLM output.
 
 - **Platform:** Chrome Extension Manifest V3
 - **Language:** Vanilla JavaScript (ES modules) — no TypeScript, no bundler, no framework
-- **API backend:** Google Gemini (`generativelanguage.googleapis.com/v1beta`)
+- **API backend:** Google Gemini API + any OpenAI-compatible API (OpenAI, Ollama, etc.)
 - **Version:** 1.7.9 (in `extension/manifest.json` and `firefox/manifest.json`)
+
+## Architecture
+
+- **Normalized content format:** All conversation content is stored in a provider-agnostic format using Gemini-style `parts` arrays with `role` fields (`"system"`, `"user"`, `"model"`).
+- **Unified API wrappers:** `generateContent()` and `streamGenerateContent()` in `utils.js` are the sole entry points for LLM calls. They dispatch to the correct provider backend based on the `apiProvider` setting (`"gemini"` or `"openai"`).
 
 ## Directory structure
 
 | Path | Purpose |
 | --- | --- |
 | `extension/` | Extension source (loaded as unpacked extension in developer mode) |
-| `extension/service-worker.js` | Background worker — API calls to Gemini, context menus, keyboard shortcuts, result caching |
+| `extension/service-worker.js` | Background worker — LLM API calls, context menus, keyboard shortcuts, result caching |
 | `extension/popup.html` + `popup.js` | Extension popup UI — extracts page text/captions/images, displays results |
-| `extension/options.html` + `options.js` | Options page — API key, model selection, language, custom actions, themes |
+| `extension/options.html` + `options.js` | Options page — API provider selection, API keys, model selection, language, custom actions, themes |
 | `extension/results.html` + `results.js` | Standalone results tab — follow-up conversation, streaming display |
-| `extension/utils.js` | Shared utilities — model configs, Gemini API calls (generate + stream), fallback logic, theme/font, markdown rendering, context menus |
+| `extension/utils.js` | Shared utilities — LLM API abstraction layer (Gemini + OpenAI-compatible), model configs, theme/font, markdown rendering, context menus |
 | `extension/templates.html` | HTML `<template>` elements for language model and language code dropdowns |
 | `extension/_locales/` | 15 locale directories (ar, bn, de, en, es, fr, hi, it, ja, ko, pt_BR, ru, vi, zh_CN, zh_TW), each with `messages.json` |
 | `extension/lib/` | 3 minified vendor libraries: `marked.umd.min.js`, `purify.min.js`, `Readability.min.js` — **do not edit** |
