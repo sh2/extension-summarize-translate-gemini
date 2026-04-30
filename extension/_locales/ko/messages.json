@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "옵션 페이지에서 기본 URL을 설정하십시오."
     },
+    "response_invalid_base_url": {
+        "message": "옵션 페이지에서 기본 URL을 확인하십시오."
+    },
     "options_title": {
         "message": "옵션 - Gemini로 요약 및 번역"
     },

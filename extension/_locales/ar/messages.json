@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "يرجى تعيين عنوان URL الأساسي في صفحة الخيارات."
     },
+    "response_invalid_base_url": {
+        "message": "يرجى التحقق من عنوان URL الأساسي في صفحة الخيارات."
+    },
     "options_title": {
         "message": "الخيارات - تلخيص وترجمة مع Gemini"
     },

@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "বিকল্প পৃষ্ঠায় বেস URL সেট করুন।"
     },
+    "response_invalid_base_url": {
+        "message": "বিকল্প পৃষ্ঠায় বেস URL পরীক্ষা করুন।"
+    },
     "options_title": {
         "message": "বিকল্প - Gemini ব্যবহার করে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
     },

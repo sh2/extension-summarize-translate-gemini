@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "Bitte geben Sie die Basis-URL auf der Optionsseite ein."
     },
+    "response_invalid_base_url": {
+        "message": "Bitte überprüfen Sie die Basis-URL auf der Optionsseite."
+    },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
     },

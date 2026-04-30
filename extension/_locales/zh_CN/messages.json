@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "请在选项页面设置基础 URL。"
     },
+    "response_invalid_base_url": {
+        "message": "请在选项页面检查基础 URL。"
+    },
     "options_title": {
         "message": "选项 - 使用 Gemini 总结与翻译"
     },

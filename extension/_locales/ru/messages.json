@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "Укажите базовый URL на странице настроек."
     },
+    "response_invalid_base_url": {
+        "message": "Проверьте базовый URL на странице настроек."
+    },
     "options_title": {
         "message": "Настройки - Суммирование и перевод с Gemini"
     },

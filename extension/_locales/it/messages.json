@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "Impostare l'URL di base nella pagina delle opzioni."
     },
+    "response_invalid_base_url": {
+        "message": "Verificare l'URL di base nella pagina delle opzioni."
+    },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
     },

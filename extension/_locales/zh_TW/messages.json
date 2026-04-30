@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "請在選項頁面設定基礎 URL。"
     },
+    "response_invalid_base_url": {
+        "message": "請在選項頁面檢查基礎 URL。"
+    },
     "options_title": {
         "message": "選項 - 使用 Gemini 摘要與翻譯"
     },

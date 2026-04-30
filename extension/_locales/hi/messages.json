@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "कृपया विकल्प पृष्ठ पर बेस URL सेट करें।"
     },
+    "response_invalid_base_url": {
+        "message": "कृपया विकल्प पृष्ठ पर बेस URL जांचें।"
+    },
     "options_title": {
         "message": "विकल्प - Gemini के साथ सारांशित करें और अनुवाद करें"
     },

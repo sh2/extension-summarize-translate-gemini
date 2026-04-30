@@ -101,6 +101,9 @@
     "response_no_base_url": {
         "message": "Vui lòng đặt URL cơ sở trên trang tùy chọn."
     },
+    "response_invalid_base_url": {
+        "message": "Vui lòng kiểm tra URL cơ sở trên trang tùy chọn."
+    },
     "options_title": {
         "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
     },
