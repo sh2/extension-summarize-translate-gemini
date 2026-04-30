@@ -156,9 +156,9 @@ const askQuestion = async () => {
     apiProvider: "gemini",
     openaiApiKey: "",
     openaiBaseUrl: "",
-    openaiModelId: "gpt-5.4-nano",
+    openaiModelId: "",
     streaming: false,
-    userModelId: "gemini-2.5-flash",
+    userModelId: "",
     renderLinks: false,
     autoSave: false
   });

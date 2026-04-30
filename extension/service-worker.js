@@ -90,9 +90,9 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         apiProvider: "gemini",
         openaiApiKey: "",
         openaiBaseUrl: "",
-        openaiModelId: "gpt-5.4-nano",
+        openaiModelId: "",
         streaming: false,
-        userModelId: "gemini-2.5-flash"
+        userModelId: ""
       });
 
       const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
