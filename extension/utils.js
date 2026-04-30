@@ -23,12 +23,6 @@ const SAFETY_SETTINGS = [{
 
 export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite-preview:minimal";
 
-const DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1";
-
-const EXCLUDED_BASE_URLS = new Set([
-  "https://api.openai.com/v1"
-]);
-
 export const normalizeBaseUrl = (baseUrl) => {
   const trimmedBaseUrl = baseUrl.trim();
   const url = new URL(trimmedBaseUrl);
@@ -55,17 +49,13 @@ const tryNormalizeBaseUrl = (baseUrl) => {
   }
 };
 
-const isExcludedBaseUrl = (normalizedBaseUrl) => {
-  return EXCLUDED_BASE_URLS.has(normalizedBaseUrl);
-};
-
 const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
   const url = new URL(normalizedBaseUrl);
   return `${url.protocol}//${url.host}/*`;
 };
 
 const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
-  const normalizedBaseUrl = normalizeBaseUrl(baseUrl || DEFAULT_OPENAI_BASE_URL);
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
   const normalizedEndpointPath = endpointPath.startsWith("/") ? endpointPath : `/${endpointPath}`;
   return `${normalizedBaseUrl}${normalizedEndpointPath}`;
 };
@@ -73,7 +63,7 @@ const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
 export const needsHostPermissionPrompt = async (baseUrl) => {
   const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
 
-  if (!normalizedBaseUrl || isExcludedBaseUrl(normalizedBaseUrl)) {
+  if (!normalizedBaseUrl) {
     return false;
   }
 
@@ -88,7 +78,7 @@ export const needsHostPermissionPrompt = async (baseUrl) => {
 export const ensureHostPermission = async (baseUrl) => {
   const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
 
-  if (!normalizedBaseUrl || isExcludedBaseUrl(normalizedBaseUrl)) {
+  if (!normalizedBaseUrl) {
     return true;
   }
 
@@ -277,6 +267,30 @@ const tryParseJson = (text) => {
   }
 };
 
+const createOpenAIBaseUrlRequiredResponse = () => {
+  return {
+    ok: false,
+    status: 1002,
+    body: {
+      error: {
+        message: "OpenAI-compatible Base URL is not set."
+      }
+    }
+  };
+};
+
+const createOpenAIInvalidBaseUrlResponse = () => {
+  return {
+    ok: false,
+    status: 1003,
+    body: {
+      error: {
+        message: "OpenAI-compatible Base URL is invalid."
+      }
+    }
+  };
+};
+
 const generateContentGemini = async (apiKey, apiContents, modelConfig, systemInstruction) => {
   const { modelId, generationConfig } = modelConfig;
 
@@ -311,6 +325,14 @@ const generateContentGemini = async (apiKey, apiContents, modelConfig, systemIns
 
 const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) => {
   const { modelId } = modelConfig;
+
+  if (!baseUrl) {
+    return createOpenAIBaseUrlRequiredResponse();
+  }
+
+  if (!tryNormalizeBaseUrl(baseUrl)) {
+    return createOpenAIInvalidBaseUrlResponse();
+  }
 
   try {
     const response = await fetch(buildOpenAIApiUrl(baseUrl, "/chat/completions"), {
@@ -497,6 +519,14 @@ const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, str
 const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig, streamKey) => {
   const { modelId } = modelConfig;
 
+  if (!baseUrl) {
+    return createOpenAIBaseUrlRequiredResponse();
+  }
+
+  if (!tryNormalizeBaseUrl(baseUrl)) {
+    return createOpenAIInvalidBaseUrlResponse();
+  }
+
   try {
     await chrome.storage.session.remove(streamKey);
 
@@ -650,6 +680,12 @@ export const getResponseContent = (response, hasApiKey, apiProvider = "gemini") 
   } else {
     // A response error occurred
     responseContent = `Error: ${response.status}\n\n${response.body.error.message}`;
+
+    if (apiProvider === "openai" && response.status === 1002) {
+      responseContent += `\n\n${chrome.i18n.getMessage("response_no_base_url")}`;
+    } else if (apiProvider === "openai" && response.status === 1003) {
+      responseContent += `\n\n${chrome.i18n.getMessage("response_invalid_base_url")}`;
+    }
 
     if (!hasApiKey) {
       // If the API Key is not set, add a message to prompt the user to set it
