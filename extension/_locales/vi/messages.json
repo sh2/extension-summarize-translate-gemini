@@ -96,7 +96,7 @@
         "message": "Vui lòng đặt khóa API Gemini của bạn trên trang tùy chọn."
     },
     "response_no_apikey_openai": {
-        "message": "Vui lòng đặt khóa API OpenAI của bạn trên trang tùy chọn."
+        "message": "Vui lòng đặt khóa API tương thích với OpenAI của bạn trên trang tùy chọn."
     },
     "response_no_base_url": {
         "message": "Vui lòng đặt URL cơ sở trên trang tùy chọn."
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "Nhà cung cấp API"
     },
+    "options_provider_gemini": {
+        "message": "API Gemini"
+    },
+    "options_provider_openai": {
+        "message": "API tương thích với OpenAI"
+    },
     "options_apikey": {
         "message": "Khóa API Gemini"
     },
@@ -114,7 +120,7 @@
         "message": "Bạn có thể lấy khóa API Gemini từ trang sau."
     },
     "options_openai_apikey": {
-        "message": "Khóa API OpenAI"
+        "message": "Khóa API tương thích với OpenAI"
     },
     "options_openai_base_url": {
         "message": "URL cơ sở"
@@ -126,13 +132,13 @@
         "message": "Mô hình ngôn ngữ"
     },
     "options_model_user": {
-        "message": "Mô hình do người dùng chỉ định"
+        "message": "ID mô hình do người dùng chỉ định"
     },
     "options_model_hint": {
         "message": "Để biết thông tin về Auto-fallback, vui lòng xem trang sau."
     },
     "options_model_openai": {
-        "message": "Mô hình do người dùng chỉ định"
+        "message": "ID mô hình do người dùng chỉ định"
     },
     "options_language": {
         "message": "Ngôn ngữ để Tóm tắt và Dịch"

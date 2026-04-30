@@ -96,7 +96,7 @@
         "message": "Bitte geben Sie Ihren Gemini API-Schlüssel auf der Optionsseite ein."
     },
     "response_no_apikey_openai": {
-        "message": "Bitte geben Sie Ihren OpenAI API-Schlüssel auf der Optionsseite ein."
+        "message": "Bitte geben Sie Ihren OpenAI-kompatiblen API-Schlüssel auf der Optionsseite ein."
     },
     "response_no_base_url": {
         "message": "Bitte geben Sie die Basis-URL auf der Optionsseite ein."
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "API-Anbieter"
     },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI-kompatible API"
+    },
     "options_apikey": {
         "message": "Gemini API-Schlüssel"
     },
@@ -114,7 +120,7 @@
         "message": "Einen Gemini API-Schlüssel erhalten Sie auf der folgenden Seite."
     },
     "options_openai_apikey": {
-        "message": "OpenAI API-Schlüssel"
+        "message": "OpenAI-kompatibler API-Schlüssel"
     },
     "options_openai_base_url": {
         "message": "Basis-URL"
@@ -126,13 +132,13 @@
         "message": "Sprachmodell"
     },
     "options_model_user": {
-        "message": "Benutzerdefiniertes Modell"
+        "message": "Benutzerdefinierte Modell-ID"
     },
     "options_model_hint": {
         "message": "Informationen zu Auto-fallback finden Sie auf der folgenden Seite."
     },
     "options_model_openai": {
-        "message": "Benutzerdefiniertes Modell"
+        "message": "Benutzerdefinierte Modell-ID"
     },
     "options_language": {
         "message": "Sprache für Zusammenfassung und Übersetzung"

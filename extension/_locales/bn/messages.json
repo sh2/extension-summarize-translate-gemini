@@ -96,7 +96,7 @@
         "message": "বিকল্প পৃষ্ঠায় আপনার Gemini API কী সেট করুন।"
     },
     "response_no_apikey_openai": {
-        "message": "বিকল্প পৃষ্ঠায় আপনার OpenAI API কী সেট করুন।"
+        "message": "বিকল্প পৃষ্ঠায় আপনার OpenAI-সামঞ্জস্যপূর্ণ API কী সেট করুন।"
     },
     "response_no_base_url": {
         "message": "বিকল্প পৃষ্ঠায় বেস URL সেট করুন।"
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "API প্রদানকারী"
     },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI-সামঞ্জস্যপূর্ণ API"
+    },
     "options_apikey": {
         "message": "Gemini API কী"
     },
@@ -114,7 +120,7 @@
         "message": "আপনি নিম্নলিখিত পৃষ্ঠা থেকে একটি Gemini API কী পেতে পারেন।"
     },
     "options_openai_apikey": {
-        "message": "OpenAI API কী"
+        "message": "OpenAI-সামঞ্জস্যপূর্ণ API কী"
     },
     "options_openai_base_url": {
         "message": "বেস URL"
@@ -126,13 +132,13 @@
         "message": "ভাষা মডেল"
     },
     "options_model_user": {
-        "message": "ব্যবহারকারী-নির্দিষ্ট মডেল"
+        "message": "ব্যবহারকারী-নির্দিষ্ট মডেল ID"
     },
     "options_model_hint": {
         "message": "Auto-fallback সম্পর্কে তথ্যের জন্য, অনুগ্রহ করে নিম্নলিখিত পৃষ্ঠাটি দেখুন।"
     },
     "options_model_openai": {
-        "message": "ব্যবহারকারী-নির্দিষ্ট মডেল"
+        "message": "ব্যবহারকারী-নির্দিষ্ট মডেল ID"
     },
     "options_language": {
         "message": "সারসংক্ষেপ এবং অনুবাদের জন্য ভাষা"

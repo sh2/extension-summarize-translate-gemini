@@ -96,7 +96,7 @@
         "message": "Veuillez définir votre clé API Gemini sur la page des options."
     },
     "response_no_apikey_openai": {
-        "message": "Veuillez définir votre clé API OpenAI sur la page des options."
+        "message": "Veuillez définir votre clé API compatible avec OpenAI sur la page des options."
     },
     "response_no_base_url": {
         "message": "Veuillez définir l'URL de base sur la page des options."
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "Fournisseur d'API"
     },
+    "options_provider_gemini": {
+        "message": "API Gemini"
+    },
+    "options_provider_openai": {
+        "message": "API compatible avec OpenAI"
+    },
     "options_apikey": {
         "message": "Clé API Gemini"
     },
@@ -114,7 +120,7 @@
         "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
     "options_openai_apikey": {
-        "message": "Clé API OpenAI"
+        "message": "Clé API compatible avec OpenAI"
     },
     "options_openai_base_url": {
         "message": "URL de base"
@@ -126,13 +132,13 @@
         "message": "Modèle linguistique"
     },
     "options_model_user": {
-        "message": "Modèle spécifié par l'utilisateur"
+        "message": "ID de modèle spécifié par l'utilisateur"
     },
     "options_model_hint": {
         "message": "Pour plus d'informations sur Auto-fallback, veuillez consulter la page suivante."
     },
     "options_model_openai": {
-        "message": "Modèle spécifié par l'utilisateur"
+        "message": "ID de modèle spécifié par l'utilisateur"
     },
     "options_language": {
         "message": "Langue pour le résumé et la traduction"

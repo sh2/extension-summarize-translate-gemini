@@ -96,7 +96,7 @@
         "message": "يرجى تعيين مفتاح Gemini API الخاص بك في صفحة الخيارات."
     },
     "response_no_apikey_openai": {
-        "message": "يرجى تعيين مفتاح OpenAI API الخاص بك في صفحة الخيارات."
+        "message": "يرجى تعيين مفتاح API المتوافق مع OpenAI الخاص بك في صفحة الخيارات."
     },
     "response_no_base_url": {
         "message": "يرجى تعيين عنوان URL الأساسي في صفحة الخيارات."
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "موفر API"
     },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "API متوافق مع OpenAI"
+    },
     "options_apikey": {
         "message": "مفتاح Gemini API"
     },
@@ -114,7 +120,7 @@
         "message": "يمكنك الحصول على مفتاح Gemini API من الصفحة التالية."
     },
     "options_openai_apikey": {
-        "message": "مفتاح OpenAI API"
+        "message": "مفتاح API متوافق مع OpenAI"
     },
     "options_openai_base_url": {
         "message": "عنوان URL الأساسي"
@@ -126,13 +132,13 @@
         "message": "نموذج اللغة"
     },
     "options_model_user": {
-        "message": "نموذج محدد من قبل المستخدم"
+        "message": "معرّف النموذج المحدد من قبل المستخدم"
     },
     "options_model_hint": {
         "message": "للحصول على معلومات حول Auto-fallback، يرجى الاطلاع على الصفحة التالية."
     },
     "options_model_openai": {
-        "message": "نموذج محدد من قبل المستخدم"
+        "message": "معرّف النموذج المحدد من قبل المستخدم"
     },
     "options_language": {
         "message": "لغة التلخيص والترجمة"

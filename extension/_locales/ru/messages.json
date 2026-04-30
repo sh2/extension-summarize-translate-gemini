@@ -96,7 +96,7 @@
         "message": "Укажите ключ API Gemini на странице настроек."
     },
     "response_no_apikey_openai": {
-        "message": "Укажите ключ API OpenAI на странице настроек."
+        "message": "Укажите ключ OpenAI-совместимого API на странице настроек."
     },
     "response_no_base_url": {
         "message": "Укажите базовый URL на странице настроек."
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "Провайдер API"
     },
+    "options_provider_gemini": {
+        "message": "API Gemini"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI-совместимый API"
+    },
     "options_apikey": {
         "message": "Ключ API Gemini"
     },
@@ -114,7 +120,7 @@
         "message": "Вы можете получить ключ API Gemini на следующей странице."
     },
     "options_openai_apikey": {
-        "message": "Ключ OpenAI API"
+        "message": "Ключ OpenAI-совместимого API"
     },
     "options_openai_base_url": {
         "message": "Базовый URL"
@@ -126,13 +132,13 @@
         "message": "Языковая модель"
     },
     "options_model_user": {
-        "message": "Модель, указанная пользователем"
+        "message": "Идентификатор модели, указанный пользователем"
     },
     "options_model_hint": {
         "message": "Информацию об Auto-fallback см. на следующей странице."
     },
     "options_model_openai": {
-        "message": "Модель, указанная пользователем"
+        "message": "Идентификатор модели, указанный пользователем"
     },
     "options_language": {
         "message": "Язык для суммирования и перевода"

@@ -96,7 +96,7 @@
         "message": "请在选项页面设置您的 Gemini API 密钥。"
     },
     "response_no_apikey_openai": {
-        "message": "请在选项页面设置您的 OpenAI API 密钥。"
+        "message": "请在选项页面设置您的 OpenAI 兼容 API 密钥。"
     },
     "response_no_base_url": {
         "message": "请在选项页面设置基础 URL。"
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "API 提供商"
     },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI 兼容 API"
+    },
     "options_apikey": {
         "message": "Gemini API 密钥"
     },
@@ -114,7 +120,7 @@
         "message": "您可以从以下页面获取 Gemini API 密钥。"
     },
     "options_openai_apikey": {
-        "message": "OpenAI API 密钥"
+        "message": "OpenAI 兼容 API 密钥"
     },
     "options_openai_base_url": {
         "message": "基础 URL"
@@ -126,13 +132,13 @@
         "message": "语言模型"
     },
     "options_model_user": {
-        "message": "用户指定模型"
+        "message": "用户指定模型 ID"
     },
     "options_model_hint": {
         "message": "有关 Auto-fallback 的信息，请参阅以下页面。"
     },
     "options_model_openai": {
-        "message": "用户指定模型"
+        "message": "用户指定模型 ID"
     },
     "options_language": {
         "message": "总结与翻译语言"

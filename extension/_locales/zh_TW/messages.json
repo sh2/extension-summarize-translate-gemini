@@ -96,7 +96,7 @@
         "message": "請在選項頁面設定您的 Gemini API 金鑰。"
     },
     "response_no_apikey_openai": {
-        "message": "請在選項頁面設定您的 OpenAI API 金鑰。"
+        "message": "請在選項頁面設定您的 OpenAI 相容 API 金鑰。"
     },
     "response_no_base_url": {
         "message": "請在選項頁面設定基礎 URL。"
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "API 提供者"
     },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI 相容 API"
+    },
     "options_apikey": {
         "message": "Gemini API 金鑰"
     },
@@ -114,7 +120,7 @@
         "message": "您可以從以下頁面獲取 Gemini API 金鑰。"
     },
     "options_openai_apikey": {
-        "message": "OpenAI API 金鑰"
+        "message": "OpenAI 相容 API 金鑰"
     },
     "options_openai_base_url": {
         "message": "基礎 URL"
@@ -126,13 +132,13 @@
         "message": "語言模型"
     },
     "options_model_user": {
-        "message": "使用者指定模型"
+        "message": "使用者指定模型 ID"
     },
     "options_model_hint": {
         "message": "有關 Auto-fallback 的資訊，請參閱以下頁面。"
     },
     "options_model_openai": {
-        "message": "使用者指定模型"
+        "message": "使用者指定模型 ID"
     },
     "options_language": {
         "message": "摘要與翻譯語言"

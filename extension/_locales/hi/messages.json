@@ -96,7 +96,7 @@
         "message": "कृपया विकल्प पृष्ठ पर अपनी Gemini API कुंजी सेट करें।"
     },
     "response_no_apikey_openai": {
-        "message": "कृपया विकल्प पृष्ठ पर अपनी OpenAI API कुंजी सेट करें।"
+        "message": "कृपया विकल्प पृष्ठ पर अपनी OpenAI-संगत API कुंजी सेट करें।"
     },
     "response_no_base_url": {
         "message": "कृपया विकल्प पृष्ठ पर बेस URL सेट करें।"
@@ -107,6 +107,12 @@
     "options_provider": {
         "message": "API प्रदाता"
     },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI-संगत API"
+    },
     "options_apikey": {
         "message": "Gemini API कुंजी"
     },
@@ -114,7 +120,7 @@
         "message": "आप निम्न पृष्ठ से Gemini API कुंजी प्राप्त कर सकते हैं।"
     },
     "options_openai_apikey": {
-        "message": "OpenAI API कुंजी"
+        "message": "OpenAI-संगत API कुंजी"
     },
     "options_openai_base_url": {
         "message": "बेस URL"
@@ -126,13 +132,13 @@
         "message": "भाषा मॉडल"
     },
     "options_model_user": {
-        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल"
+        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल ID"
     },
     "options_model_hint": {
         "message": "Auto-fallback के बारे में जानकारी के लिए, कृपया निम्न पृष्ठ देखें।"
     },
     "options_model_openai": {
-        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल"
+        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल ID"
     },
     "options_language": {
         "message": "सारांश और अनुवाद के लिए भाषा"
