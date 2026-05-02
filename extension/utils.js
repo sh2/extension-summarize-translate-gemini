@@ -661,15 +661,17 @@ export const getResponseContent = (response, hasApiKey, apiProvider = "gemini") 
         responseContent = chrome.i18n.getMessage("response_unexpected_response");
       }
     } else {
+      const candidate = response.body.candidates?.[0];
+
       if (response.body.promptFeedback?.blockReason) {
         // The prompt was blocked
         responseContent = `${chrome.i18n.getMessage("response_prompt_blocked")} Reason: ${response.body.promptFeedback.blockReason}`;
-      } else if (response.body.candidates?.[0].finishReason !== "STOP") {
+      } else if (candidate?.finishReason && candidate.finishReason !== "STOP") {
         // The response was blocked
-        responseContent = `${chrome.i18n.getMessage("response_response_blocked")} Reason: ${response.body.candidates[0].finishReason}`;
-      } else if (response.body.candidates?.[0].content) {
+        responseContent = `${chrome.i18n.getMessage("response_response_blocked")} Reason: ${candidate.finishReason}`;
+      } else if (candidate?.content) {
         // A normal response was returned
-        const parts = response.body.candidates[0].content.parts || [];
+        const parts = candidate.content.parts || [];
         const responsePart = parts[0]?.thought === true ? parts[1] : parts[0];
         responseContent = responsePart?.text;
       } else {
