@@ -1,6 +1,6 @@
 # extension-summarize-translate-gemini
 
-Chrome extension to summarize and translate web pages. Uses Gemini as the backend.
+Chrome extension to summarize and translate web pages. Uses Gemini or an OpenAI-compatible API as the backend.
 
 ## FAQ
 
@@ -26,6 +26,26 @@ When you select **"Gemini Flash with Gemma Fallback"** in the options, the exten
 6. Gemma 3 27B
 
 Gemma models have more relaxed rate limits, so they serve as the final fallback option to ensure the extension remains functional even under heavy usage.
+
+### How do I set up an OpenAI-compatible Base URL?
+
+Enter the API root URL in `Base URL`. In most cases, this is the URL ending in `.../v1`.
+Do not enter a specific endpoint such as `/chat/completions`, because the extension appends the endpoint path automatically.
+
+Confirmed examples:
+
+| Service | Base URL |
+| --- | --- |
+| OpenAI | `https://api.openai.com/v1` |
+| OpenCode Go | `https://opencode.ai/zen/go/v1` |
+
+After you enter a `Base URL` and click `Save`, the browser may ask you to grant this extension permission to access that API origin.
+This is expected. You enter a normal `Base URL` such as `https://api.openai.com/v1`, and the extension requests permission only for that API origin.
+
+If you import settings from a file or restore them from cloud sync, the `Base URL` may be filled in without showing the permission dialog.
+If that API origin has not yet been approved in your browser, click `Save` once to request permission.
+
+Even when the `Base URL` is correct, a service may still not work if its API is not fully OpenAI-compatible or if it blocks cross-origin requests from browser extensions.
 
 ## Setup
 

@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "옵션 페이지에서 Gemini API 키를 설정하십시오."
     },
+    "response_no_apikey_openai": {
+        "message": "옵션 페이지에서 OpenAI 호환 API 키를 설정하십시오."
+    },
+    "response_no_base_url": {
+        "message": "옵션 페이지에서 기본 URL을 설정하십시오."
+    },
+    "response_invalid_base_url": {
+        "message": "옵션 페이지에서 기본 URL을 확인하십시오."
+    },
     "options_title": {
         "message": "옵션 - Gemini로 요약 및 번역"
+    },
+    "options_provider": {
+        "message": "API 제공자"
+    },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI 호환 API"
     },
     "options_apikey": {
         "message": "Gemini API 키"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "다음 페이지에서 Gemini API 키를 얻을 수 있습니다."
     },
+    "options_openai_apikey": {
+        "message": "OpenAI 호환 API 키"
+    },
+    "options_openai_base_url": {
+        "message": "기본 URL"
+    },
+    "options_openai_base_url_hint": {
+        "message": "기본 URL 설정에 대한 정보는 다음 페이지를 참조하십시오."
+    },
     "options_model": {
         "message": "언어 모델"
     },
     "options_model_user": {
-        "message": "사용자 지정 모델"
+        "message": "사용자 지정 모델 ID"
     },
     "options_model_hint": {
         "message": "Auto-fallback에 대한 정보는 다음 페이지를 참조하십시오."
+    },
+    "options_model_openai": {
+        "message": "사용자 지정 모델 ID"
     },
     "options_language": {
         "message": "요약 및 번역 언어"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "복원 성공."
+    },
+    "options_save_required_for_host_permission": {
+        "message": "저장을 클릭하여 설정을 적용하고 호스트 액세스 권한을 부여하세요."
     },
     "shortcuts_custom_action_1": {
         "message": "사용자 지정 작업 1"

@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "Configure su clave API de Gemini en la página de opciones."
     },
+    "response_no_apikey_openai": {
+        "message": "Configure su clave API compatible con OpenAI en la página de opciones."
+    },
+    "response_no_base_url": {
+        "message": "Configure la URL base en la página de opciones."
+    },
+    "response_invalid_base_url": {
+        "message": "Compruebe la URL base en la página de opciones."
+    },
     "options_title": {
         "message": "Opciones - Resumir y Traducir con Gemini"
+    },
+    "options_provider": {
+        "message": "Proveedor de API"
+    },
+    "options_provider_gemini": {
+        "message": "API de Gemini"
+    },
+    "options_provider_openai": {
+        "message": "API compatible con OpenAI"
     },
     "options_apikey": {
         "message": "Clave API de Gemini"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "Puede obtener una clave API de Gemini en la siguiente página."
     },
+    "options_openai_apikey": {
+        "message": "Clave API compatible con OpenAI"
+    },
+    "options_openai_base_url": {
+        "message": "URL base"
+    },
+    "options_openai_base_url_hint": {
+        "message": "Para obtener información sobre la configuración de la URL base, consulte la siguiente página."
+    },
     "options_model": {
         "message": "Modelo de lenguaje"
     },
     "options_model_user": {
-        "message": "Modelo especificado por el usuario"
+        "message": "ID de modelo especificado por el usuario"
     },
     "options_model_hint": {
         "message": "Para obtener información sobre Auto-fallback, consulte la siguiente página."
+    },
+    "options_model_openai": {
+        "message": "ID de modelo especificado por el usuario"
     },
     "options_language": {
         "message": "Idioma para Resumen y Traducción"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Restauración exitosa."
+    },
+    "options_save_required_for_host_permission": {
+        "message": "Haz clic en Guardar para aplicar la configuración y conceder acceso al host."
     },
     "shortcuts_custom_action_1": {
         "message": "Acción personalizada 1"

@@ -48,7 +48,7 @@
         "message": "Bild übersetzen"
     },
     "popup_processing": {
-        "message": "Verarbeite"
+        "message": "Verarbeiten"
     },
     "popup_miscellaneous_error": {
         "message": "Diese Seite kann nicht zusammengefasst oder übersetzt werden."
@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "Bitte geben Sie Ihren Gemini API-Schlüssel auf der Optionsseite ein."
     },
+    "response_no_apikey_openai": {
+        "message": "Bitte geben Sie Ihren OpenAI-kompatiblen API-Schlüssel auf der Optionsseite ein."
+    },
+    "response_no_base_url": {
+        "message": "Bitte geben Sie die Basis-URL auf der Optionsseite ein."
+    },
+    "response_invalid_base_url": {
+        "message": "Bitte überprüfen Sie die Basis-URL auf der Optionsseite."
+    },
     "options_title": {
         "message": "Optionen - Zusammenfassen und Übersetzen mit Gemini"
+    },
+    "options_provider": {
+        "message": "API-Anbieter"
+    },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI-kompatible API"
     },
     "options_apikey": {
         "message": "Gemini API-Schlüssel"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "Einen Gemini API-Schlüssel erhalten Sie auf der folgenden Seite."
     },
+    "options_openai_apikey": {
+        "message": "OpenAI-kompatibler API-Schlüssel"
+    },
+    "options_openai_base_url": {
+        "message": "Basis-URL"
+    },
+    "options_openai_base_url_hint": {
+        "message": "Informationen zur Basis-URL-Einrichtung finden Sie auf der folgenden Seite."
+    },
     "options_model": {
         "message": "Sprachmodell"
     },
     "options_model_user": {
-        "message": "Benutzerdefiniertes Modell"
+        "message": "Benutzerdefinierte Modell-ID"
     },
     "options_model_hint": {
         "message": "Informationen zu Auto-fallback finden Sie auf der folgenden Seite."
+    },
+    "options_model_openai": {
+        "message": "Benutzerdefinierte Modell-ID"
     },
     "options_language": {
         "message": "Sprache für Zusammenfassung und Übersetzung"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Wiederherstellung erfolgreich."
+    },
+    "options_save_required_for_host_permission": {
+        "message": "Klicken Sie auf Speichern, um die Einstellungen zu übernehmen und Host-Zugriff zu gewähren."
     },
     "shortcuts_custom_action_1": {
         "message": "Benutzerdefinierte Aktion 1"

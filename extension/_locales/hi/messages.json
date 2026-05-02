@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "कृपया विकल्प पृष्ठ पर अपनी Gemini API कुंजी सेट करें।"
     },
+    "response_no_apikey_openai": {
+        "message": "कृपया विकल्प पृष्ठ पर अपनी OpenAI-संगत API कुंजी सेट करें।"
+    },
+    "response_no_base_url": {
+        "message": "कृपया विकल्प पृष्ठ पर बेस URL सेट करें।"
+    },
+    "response_invalid_base_url": {
+        "message": "कृपया विकल्प पृष्ठ पर बेस URL जांचें।"
+    },
     "options_title": {
         "message": "विकल्प - Gemini के साथ सारांशित करें और अनुवाद करें"
+    },
+    "options_provider": {
+        "message": "API प्रदाता"
+    },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI-संगत API"
     },
     "options_apikey": {
         "message": "Gemini API कुंजी"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "आप निम्न पृष्ठ से Gemini API कुंजी प्राप्त कर सकते हैं।"
     },
+    "options_openai_apikey": {
+        "message": "OpenAI-संगत API कुंजी"
+    },
+    "options_openai_base_url": {
+        "message": "बेस URL"
+    },
+    "options_openai_base_url_hint": {
+        "message": "बेस URL सेटअप के बारे में जानकारी के लिए, कृपया निम्न पृष्ठ देखें।"
+    },
     "options_model": {
         "message": "भाषा मॉडल"
     },
     "options_model_user": {
-        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल"
+        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल ID"
     },
     "options_model_hint": {
         "message": "Auto-fallback के बारे में जानकारी के लिए, कृपया निम्न पृष्ठ देखें।"
+    },
+    "options_model_openai": {
+        "message": "उपयोगकर्ता-निर्दिष्ट मॉडल ID"
     },
     "options_language": {
         "message": "सारांश और अनुवाद के लिए भाषा"
@@ -222,7 +252,7 @@
         "message": "आयात विफल रहा।"
     },
     "options_sync_cloud": {
-        "message": "विकल्पों को क्लाउड से सिंक करें"
+        "message": "विकल्पों को क्लाउड में सिंक करें"
     },
     "options_sync_cloud_started": {
         "message": "सिंक शुरू हो गया।"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "पुनर्स्थापना सफल रही।"
+    },
+    "options_save_required_for_host_permission": {
+        "message": "सेटिंग लागू करने और होस्ट एक्सेस देने के लिए सहेजें पर क्लिक करें।"
     },
     "shortcuts_custom_action_1": {
         "message": "कस्टम क्रिया 1"

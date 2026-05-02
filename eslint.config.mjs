@@ -1,8 +1,10 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
 
-
 export default [
+  {
+    ignores: ["extension/lib/**"]
+  },
   pluginJs.configs.recommended,
   {
     languageOptions: {

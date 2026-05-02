@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "オプションページでGemini APIキーを設定してください。"
     },
+    "response_no_apikey_openai": {
+        "message": "オプションページでOpenAI互換APIキーを設定してください。"
+    },
+    "response_no_base_url": {
+        "message": "オプションページでベースURLを設定してください。"
+    },
+    "response_invalid_base_url": {
+        "message": "オプションページでベースURLを確認してください。"
+    },
     "options_title": {
         "message": "オプション - Geminiによる要約と翻訳"
+    },
+    "options_provider": {
+        "message": "APIプロバイダー"
+    },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI互換API"
     },
     "options_apikey": {
         "message": "Gemini APIキー"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "Gemini APIキーは以下のページから取得できます。"
     },
+    "options_openai_apikey": {
+        "message": "OpenAI互換APIキー"
+    },
+    "options_openai_base_url": {
+        "message": "ベースURL"
+    },
+    "options_openai_base_url_hint": {
+        "message": "ベースURLの設定については以下のページを参照してください。"
+    },
     "options_model": {
         "message": "言語モデル"
     },
     "options_model_user": {
-        "message": "ユーザー指定モデル"
+        "message": "ユーザー指定モデルID"
     },
     "options_model_hint": {
         "message": "Auto-fallbackについては以下のページを参照してください。"
+    },
+    "options_model_openai": {
+        "message": "ユーザー指定モデルID"
     },
     "options_language": {
         "message": "要約と翻訳に用いる言語"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "復元に成功しました。"
+    },
+    "options_save_required_for_host_permission": {
+        "message": "保存するをクリックして設定を適用し、ホストアクセスを許可します。"
     },
     "shortcuts_custom_action_1": {
         "message": "カスタムアクション1"

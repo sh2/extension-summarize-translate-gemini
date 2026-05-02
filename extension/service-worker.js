@@ -1,7 +1,7 @@
 import {
   getModelConfigs,
-  generateContentWithFallback,
-  streamGenerateContentWithFallback,
+  generateContent,
+  streamGenerateContent,
   getResponseContent,
   createContextMenus
 } from "./utils.js";
@@ -76,8 +76,29 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     if (request.message === "generate") {
       // Generate content
       const { actionType, mediaType, taskInput, languageModel, languageCode, streamKey, resultIndex, url } = request;
-      const { apiKey, streaming, userModelId } = await chrome.storage.local.get({ apiKey: "", streaming: false, userModelId: "gemini-2.5-flash" });
-      const modelConfigs = getModelConfigs(languageModel, userModelId);
+
+      const {
+        apiKey,
+        apiProvider,
+        openaiApiKey,
+        openaiBaseUrl,
+        openaiModelId,
+        streaming,
+        userModelId
+      } = await chrome.storage.local.get({
+        apiKey: "",
+        apiProvider: "gemini",
+        openaiApiKey: "",
+        openaiBaseUrl: "",
+        openaiModelId: "",
+        streaming: false,
+        userModelId: ""
+      });
+
+      const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
+      const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
+      const baseUrl = openaiBaseUrl;
+      const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider);
 
       const systemPrompt = await getSystemPrompt(
         actionType,
@@ -86,45 +107,37 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         taskInput.length
       );
 
-      let apiContent = {};
+      let apiContents = [];
       let response = null;
 
       if (mediaType === "image") {
         const [mediaInfo, mediaData] = taskInput.split(",");
-        const mediaType = mediaInfo.split(":")[1].split(";")[0];
+        const mimeType = mediaInfo.split(":")[1].split(";")[0];
 
-        apiContent = {
-          role: "user",
-          parts: [
-            { text: systemPrompt },
-            {
-              inline_data: {
-                mime_type: mediaType,
-                data: mediaData
-              }
-            }
-          ]
-        };
+        apiContents = [
+          { role: "system", parts: [{ text: systemPrompt }] },
+          { role: "user", parts: [{ inline_data: { mime_type: mimeType, data: mediaData } }] }
+        ];
       } else {
-        apiContent = {
-          role: "user",
-          parts: [{ text: systemPrompt + "\nText:\n" + taskInput }]
-        };
+        apiContents = [
+          { role: "system", parts: [{ text: systemPrompt }] },
+          { role: "user", parts: [{ text: taskInput }] }
+        ];
       }
 
       if (streaming) {
-        response = await streamGenerateContentWithFallback(apiKey, [apiContent], modelConfigs, streamKey);
+        response = await streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl);
       } else {
-        response = await generateContentWithFallback(apiKey, [apiContent], modelConfigs);
+        response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl);
       }
 
       // Extract the response content
-      const responseContent = getResponseContent(response, Boolean(apiKey));
+      const responseContent = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
 
       // Save the result to session storage (persists even if popup is closed)
       await chrome.storage.session.set({
         [`result_${resultIndex}`]: {
-          requestApiContent: apiContent,
+          requestApiContent: apiContents,
           responseContent: responseContent,
           url: url
         }
@@ -133,14 +146,14 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       if (response.ok) {
         // Update the cache
         const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
-        const responseCacheKey = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode });
+        const responseCacheKey = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode, apiProvider });
 
         const updatedQueue = responseCacheQueue
           .filter(item => item.key !== responseCacheKey)
           .concat({
             key: responseCacheKey,
             value: {
-              requestApiContent: apiContent,
+              requestApiContent: apiContents,
               responseContent: responseContent
             }
           })

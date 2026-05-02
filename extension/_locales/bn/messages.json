@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "বিকল্প পৃষ্ঠায় আপনার Gemini API কী সেট করুন।"
     },
+    "response_no_apikey_openai": {
+        "message": "বিকল্প পৃষ্ঠায় আপনার OpenAI-সামঞ্জস্যপূর্ণ API কী সেট করুন।"
+    },
+    "response_no_base_url": {
+        "message": "বিকল্প পৃষ্ঠায় বেস URL সেট করুন।"
+    },
+    "response_invalid_base_url": {
+        "message": "বিকল্প পৃষ্ঠায় বেস URL পরীক্ষা করুন।"
+    },
     "options_title": {
         "message": "বিকল্প - Gemini ব্যবহার করে সারসংক্ষেপ করুন এবং অনুবাদ করুন"
+    },
+    "options_provider": {
+        "message": "API প্রদানকারী"
+    },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI-সামঞ্জস্যপূর্ণ API"
     },
     "options_apikey": {
         "message": "Gemini API কী"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "আপনি নিম্নলিখিত পৃষ্ঠা থেকে একটি Gemini API কী পেতে পারেন।"
     },
+    "options_openai_apikey": {
+        "message": "OpenAI-সামঞ্জস্যপূর্ণ API কী"
+    },
+    "options_openai_base_url": {
+        "message": "বেস URL"
+    },
+    "options_openai_base_url_hint": {
+        "message": "বেস URL সেটআপ সম্পর্কে তথ্যের জন্য, অনুগ্রহ করে নিম্নলিখিত পৃষ্ঠাটি দেখুন।"
+    },
     "options_model": {
         "message": "ভাষা মডেল"
     },
     "options_model_user": {
-        "message": "ব্যবহারকারী-নির্দিষ্ট মডেল"
+        "message": "ব্যবহারকারী-নির্দিষ্ট মডেল ID"
     },
     "options_model_hint": {
         "message": "Auto-fallback সম্পর্কে তথ্যের জন্য, অনুগ্রহ করে নিম্নলিখিত পৃষ্ঠাটি দেখুন।"
+    },
+    "options_model_openai": {
+        "message": "ব্যবহারকারী-নির্দিষ্ট মডেল ID"
     },
     "options_language": {
         "message": "সারসংক্ষেপ এবং অনুবাদের জন্য ভাষা"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "পুনরুদ্ধার সফল হয়েছে।"
+    },
+    "options_save_required_for_host_permission": {
+        "message": "সেটিংস প্রয়োগ করতে এবং হোস্ট অ্যাক্সেস মঞ্জুর করতে সংরক্ষণ করুন-এ ক্লিক করুন।"
     },
     "shortcuts_custom_action_1": {
         "message": "কাস্টম অ্যাকশন ১"

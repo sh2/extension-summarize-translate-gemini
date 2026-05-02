@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "Please set your Gemini API key on the options page."
     },
+    "response_no_apikey_openai": {
+        "message": "Please set your OpenAI-compatible API key on the options page."
+    },
+    "response_no_base_url": {
+        "message": "Please set the Base URL on the options page."
+    },
+    "response_invalid_base_url": {
+        "message": "Please check the Base URL on the options page."
+    },
     "options_title": {
         "message": "Options - Summarize and Translate with Gemini"
+    },
+    "options_provider": {
+        "message": "API Provider"
+    },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI-compatible API"
     },
     "options_apikey": {
         "message": "Gemini API key"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "You can obtain a Gemini API key from the following page."
     },
+    "options_openai_apikey": {
+        "message": "OpenAI-compatible API key"
+    },
+    "options_openai_base_url": {
+        "message": "Base URL"
+    },
+    "options_openai_base_url_hint": {
+        "message": "For Base URL setup, please see the following page."
+    },
     "options_model": {
         "message": "Language model"
     },
     "options_model_user": {
-        "message": "User-specified model"
+        "message": "User-specified model ID"
     },
     "options_model_hint": {
         "message": "For information about Auto-fallback, please see the following page."
+    },
+    "options_model_openai": {
+        "message": "User-specified model ID"
     },
     "options_language": {
         "message": "Language for Summarization and Translation"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Restore succeeded."
+    },
+    "options_save_required_for_host_permission": {
+        "message": "Click Save to apply settings and grant host access."
     },
     "shortcuts_custom_action_1": {
         "message": "Custom action 1"

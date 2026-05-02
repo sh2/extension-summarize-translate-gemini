@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "Veuillez définir votre clé API Gemini sur la page des options."
     },
+    "response_no_apikey_openai": {
+        "message": "Veuillez définir votre clé API compatible avec OpenAI sur la page des options."
+    },
+    "response_no_base_url": {
+        "message": "Veuillez définir l'URL de base sur la page des options."
+    },
+    "response_invalid_base_url": {
+        "message": "Veuillez vérifier l'URL de base sur la page des options."
+    },
     "options_title": {
         "message": "Options - Résumer et traduire avec Gemini"
+    },
+    "options_provider": {
+        "message": "Fournisseur d'API"
+    },
+    "options_provider_gemini": {
+        "message": "API Gemini"
+    },
+    "options_provider_openai": {
+        "message": "API compatible avec OpenAI"
     },
     "options_apikey": {
         "message": "Clé API Gemini"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "Vous pouvez obtenir une clé API Gemini sur la page suivante."
     },
+    "options_openai_apikey": {
+        "message": "Clé API compatible avec OpenAI"
+    },
+    "options_openai_base_url": {
+        "message": "URL de base"
+    },
+    "options_openai_base_url_hint": {
+        "message": "Pour plus d'informations sur la configuration de l'URL de base, veuillez consulter la page suivante."
+    },
     "options_model": {
         "message": "Modèle linguistique"
     },
     "options_model_user": {
-        "message": "Modèle spécifié par l'utilisateur"
+        "message": "ID de modèle spécifié par l'utilisateur"
     },
     "options_model_hint": {
         "message": "Pour plus d'informations sur Auto-fallback, veuillez consulter la page suivante."
+    },
+    "options_model_openai": {
+        "message": "ID de modèle spécifié par l'utilisateur"
     },
     "options_language": {
         "message": "Langue pour le résumé et la traduction"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Restauration réussie."
+    },
+    "options_save_required_for_host_permission": {
+        "message": "Cliquez sur Enregistrer pour appliquer les paramètres et accorder l'accès à l'hôte."
     },
     "shortcuts_custom_action_1": {
         "message": "Action personnalisée 1"

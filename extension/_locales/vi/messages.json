@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "Vui lòng đặt khóa API Gemini của bạn trên trang tùy chọn."
     },
+    "response_no_apikey_openai": {
+        "message": "Vui lòng đặt khóa API tương thích với OpenAI của bạn trên trang tùy chọn."
+    },
+    "response_no_base_url": {
+        "message": "Vui lòng đặt URL cơ sở trên trang tùy chọn."
+    },
+    "response_invalid_base_url": {
+        "message": "Vui lòng kiểm tra URL cơ sở trên trang tùy chọn."
+    },
     "options_title": {
         "message": "Tùy chọn - Tóm tắt và Dịch với Gemini"
+    },
+    "options_provider": {
+        "message": "Nhà cung cấp API"
+    },
+    "options_provider_gemini": {
+        "message": "API Gemini"
+    },
+    "options_provider_openai": {
+        "message": "API tương thích với OpenAI"
     },
     "options_apikey": {
         "message": "Khóa API Gemini"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "Bạn có thể lấy khóa API Gemini từ trang sau."
     },
+    "options_openai_apikey": {
+        "message": "Khóa API tương thích với OpenAI"
+    },
+    "options_openai_base_url": {
+        "message": "URL cơ sở"
+    },
+    "options_openai_base_url_hint": {
+        "message": "Để biết thông tin về cách thiết lập URL cơ sở, vui lòng xem trang sau."
+    },
     "options_model": {
         "message": "Mô hình ngôn ngữ"
     },
     "options_model_user": {
-        "message": "Mô hình do người dùng chỉ định"
+        "message": "ID mô hình do người dùng chỉ định"
     },
     "options_model_hint": {
         "message": "Để biết thông tin về Auto-fallback, vui lòng xem trang sau."
+    },
+    "options_model_openai": {
+        "message": "ID mô hình do người dùng chỉ định"
     },
     "options_language": {
         "message": "Ngôn ngữ để Tóm tắt và Dịch"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Khôi phục thành công."
+    },
+    "options_save_required_for_host_permission": {
+        "message": "Nhấn Lưu để áp dụng cài đặt và cấp quyền truy cập máy chủ."
     },
     "shortcuts_custom_action_1": {
         "message": "Hành động tùy chỉnh 1"

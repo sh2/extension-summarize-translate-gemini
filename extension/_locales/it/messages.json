@@ -48,7 +48,7 @@
         "message": "Traducendo l'immagine"
     },
     "popup_processing": {
-        "message": "Elaborazione"
+        "message": "Elaborando"
     },
     "popup_miscellaneous_error": {
         "message": "Impossibile riassumere o tradurre questa pagina."
@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "Impostare la chiave API Gemini nella pagina delle opzioni."
     },
+    "response_no_apikey_openai": {
+        "message": "Impostare la chiave API compatibile con OpenAI nella pagina delle opzioni."
+    },
+    "response_no_base_url": {
+        "message": "Impostare l'URL di base nella pagina delle opzioni."
+    },
+    "response_invalid_base_url": {
+        "message": "Verificare l'URL di base nella pagina delle opzioni."
+    },
     "options_title": {
         "message": "Opzioni - Riassumi e Traduci con Gemini"
+    },
+    "options_provider": {
+        "message": "Provider API"
+    },
+    "options_provider_gemini": {
+        "message": "API Gemini"
+    },
+    "options_provider_openai": {
+        "message": "API compatibile con OpenAI"
     },
     "options_apikey": {
         "message": "Chiave API Gemini"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "È possibile ottenere una chiave API Gemini dalla seguente pagina."
     },
+    "options_openai_apikey": {
+        "message": "Chiave API compatibile con OpenAI"
+    },
+    "options_openai_base_url": {
+        "message": "URL di base"
+    },
+    "options_openai_base_url_hint": {
+        "message": "Per informazioni sulla configurazione dell'URL di base, consultare la pagina seguente."
+    },
     "options_model": {
         "message": "Modello linguistico"
     },
     "options_model_user": {
-        "message": "Modello specificato dall'utente"
+        "message": "ID del modello specificato dall'utente"
     },
     "options_model_hint": {
         "message": "Per informazioni su Auto-fallback, consultare la pagina seguente."
+    },
+    "options_model_openai": {
+        "message": "ID del modello specificato dall'utente"
     },
     "options_language": {
         "message": "Lingua per Riassunto e Traduzione"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Ripristino riuscito."
+    },
+    "options_save_required_for_host_permission": {
+        "message": "Clicca su Salva per applicare le impostazioni e concedere l'accesso all'host."
     },
     "shortcuts_custom_action_1": {
         "message": "Azione personalizzata 1"

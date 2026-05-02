@@ -95,8 +95,26 @@
     "response_no_apikey": {
         "message": "請在選項頁面設定您的 Gemini API 金鑰。"
     },
+    "response_no_apikey_openai": {
+        "message": "請在選項頁面設定您的 OpenAI 相容 API 金鑰。"
+    },
+    "response_no_base_url": {
+        "message": "請在選項頁面設定基礎 URL。"
+    },
+    "response_invalid_base_url": {
+        "message": "請在選項頁面檢查基礎 URL。"
+    },
     "options_title": {
         "message": "選項 - 使用 Gemini 摘要與翻譯"
+    },
+    "options_provider": {
+        "message": "API 提供者"
+    },
+    "options_provider_gemini": {
+        "message": "Gemini API"
+    },
+    "options_provider_openai": {
+        "message": "OpenAI 相容 API"
     },
     "options_apikey": {
         "message": "Gemini API 金鑰"
@@ -104,14 +122,26 @@
     "options_apikey_hint": {
         "message": "您可以從以下頁面獲取 Gemini API 金鑰。"
     },
+    "options_openai_apikey": {
+        "message": "OpenAI 相容 API 金鑰"
+    },
+    "options_openai_base_url": {
+        "message": "基礎 URL"
+    },
+    "options_openai_base_url_hint": {
+        "message": "有關基礎 URL 設置的資訊，請參閱以下頁面。"
+    },
     "options_model": {
         "message": "語言模型"
     },
     "options_model_user": {
-        "message": "使用者指定模型"
+        "message": "使用者指定模型 ID"
     },
     "options_model_hint": {
         "message": "有關 Auto-fallback 的資訊，請參閱以下頁面。"
+    },
+    "options_model_openai": {
+        "message": "使用者指定模型 ID"
     },
     "options_language": {
         "message": "摘要與翻譯語言"
@@ -235,6 +265,9 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "還原成功。"
+    },
+    "options_save_required_for_host_permission": {
+        "message": "點擊儲存以套用設定並授予主機存取權限。"
     },
     "shortcuts_custom_action_1": {
         "message": "自訂動作 1"
