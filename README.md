@@ -38,6 +38,7 @@ Confirmed examples:
 | --- | --- |
 | OpenAI | `https://api.openai.com/v1` |
 | Azure OpenAI | `https://YOUR-RESOURCE-NAME.openai.azure.com/openai/v1` |
+| OpenRouter | `https://openrouter.ai/api/v1` |
 | OpenCode Go | `https://opencode.ai/zen/go/v1` |
 | Ollama | `http://YOUR-HOST:11434/v1` |
 
