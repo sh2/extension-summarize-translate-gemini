@@ -106,7 +106,7 @@ const saveContent = () => {
 
 const askQuestion = async () => {
   const question = document.getElementById("text").value.trim();
-  let answer = "";
+  let answer;
 
   if (!question) {
     return;
@@ -168,7 +168,7 @@ const askQuestion = async () => {
   const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
   const baseUrl = openaiBaseUrl;
   const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider);
-  let response = null;
+  let response;
 
   if (streaming) {
     const streamKey = `streamContent_${resultIndex}`;

@@ -647,7 +647,7 @@ export const streamGenerateContent = async (apiKey, apiContents, modelConfigs, s
 };
 
 export const getResponseContent = (response, hasApiKey, apiProvider = "gemini") => {
-  let responseContent = "";
+  let responseContent;
 
   if (response.ok) {
     if (apiProvider === "openai") {

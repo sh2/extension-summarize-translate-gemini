@@ -365,7 +365,7 @@ const importOptionsFromFile = async () => {
   input.addEventListener("change", async () => {
     const file = input.files[0];
     const text = await file.text();
-    let options = {};
+    let options;
 
     try {
       options = JSON.parse(text);

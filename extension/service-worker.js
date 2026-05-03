@@ -107,8 +107,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         taskInput.length
       );
 
-      let apiContents = [];
-      let response = null;
+      let apiContents;
+      let response;
 
       if (mediaType === "image") {
         const [mediaInfo, mediaData] = taskInput.split(",");

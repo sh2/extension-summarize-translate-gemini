@@ -143,7 +143,7 @@ const getTranscript = async () => {
 };
 
 const extractTaskInformation = async (triggerAction) => {
-  let actionType = "";
+  let actionType;
   let mediaType = "";
   let taskInput = "";
 
@@ -278,7 +278,7 @@ const extractTaskInformation = async (triggerAction) => {
 };
 
 const getLoadingMessage = (actionType, mediaType) => {
-  let loadingMessage = "";
+  let loadingMessage;
 
   if (actionType === "summarize") {
     if (mediaType === "captions") {
@@ -306,7 +306,7 @@ const getLoadingMessage = (actionType, mediaType) => {
 const main = async (useCache) => {
   const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
   let displayIntervalId = 0;
-  let responseContent = "";
+  let responseContent;
   let modelVersion = "";
   let didGenerate = false;
 
