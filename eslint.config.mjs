@@ -15,6 +15,14 @@ export default [
     }
   },
   {
+    files: ["utils/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.node
+      }
+    }
+  },
+  {
     rules: {
       "quotes": ["error", "double", { "avoidEscape": true }],
       "semi": ["error", "always"]
