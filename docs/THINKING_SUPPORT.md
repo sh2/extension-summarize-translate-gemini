@@ -35,7 +35,7 @@ OpenAI 互換 API (Chat Completions) で reasoning（思考）モードを制御
 
 ```html
 <br>
-<span data-i18n="options_reasoning_effort">Reasoning effort</span>
+<span data-i18n="options_reasoning_effort">Reasoning effort (reasoning_effort)</span>
 <br>
 <select id="openaiReasoningEffort">
   <option value="">Unspecified</option>
@@ -48,7 +48,7 @@ OpenAI 互換 API (Chat Completions) で reasoning（思考）モードを制御
   </optgroup>
 </select>
 <br>
-<span data-i18n="options_thinking_type">Thinking mode</span>
+<span data-i18n="options_thinking_type">Thinking type (thinking.type)</span>
 <br>
 <select id="openaiThinkingType">
   <option value="">Unspecified</option>
@@ -99,10 +99,10 @@ if (options.openaiThinkingType !== undefined) {
 
 ```json
 "options_reasoning_effort": {
-    "message": "Reasoning effort"
+    "message": "Reasoning effort (reasoning_effort)"
 },
 "options_thinking_type": {
-    "message": "Thinking mode"
+    "message": "Thinking type (thinking.type)"
 }
 ```
 
@@ -225,14 +225,14 @@ const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvide
 
 ### 3-1. `extension/_locales/*/messages.json`
 
-各言語ファイルに以下 2 キーを追加。翻訳がないロケールは英語のままコピーする。
+各言語ファイルに以下 2 キーを追加。ラベルにはパラメーター名を併記する（例: `Reasoning effort (reasoning_effort)`）。翻訳がないロケールは英語のままコピーする。
 
 ```json
 "options_reasoning_effort": {
-    "message": "Reasoning effort"
+    "message": "Reasoning effort (reasoning_effort)"
 },
 "options_thinking_type": {
-    "message": "Thinking mode"
+    "message": "Thinking type (thinking.type)"
 }
 ```
 
