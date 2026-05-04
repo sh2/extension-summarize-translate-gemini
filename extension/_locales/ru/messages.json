@@ -3,7 +3,7 @@
         "message": "Суммирование и перевод с Gemini"
     },
     "extension_description": {
-        "message": "Суммируйте и переводите веб-страницы. Использует Gemini в качестве бэкенда."
+        "message": "Суммируйте и переводите веб-страницы с помощью Gemini или API, совместимых с OpenAI."
     },
     "popup_button_copy": {
         "message": "Копировать"

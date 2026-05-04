@@ -3,7 +3,7 @@
         "message": "Gemini के साथ सारांशित करें और अनुवाद करें"
     },
     "extension_description": {
-        "message": "वेब पृष्ठों का सारांशित और अनुवाद करें। बैकएंड के रूप में Gemini का उपयोग करता है।"
+        "message": "Gemini या OpenAI-संगत API का उपयोग करके वेब पृष्ठों का सारांशित और अनुवाद करें।"
     },
     "popup_button_copy": {
         "message": "कॉपी करें"

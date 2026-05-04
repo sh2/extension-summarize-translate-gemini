@@ -3,7 +3,7 @@
         "message": "Summarize and Translate with Gemini"
     },
     "extension_description": {
-        "message": "Summarize and translate web pages. Uses Gemini as the backend."
+        "message": "Summarize and translate web pages using Gemini or OpenAI-compatible APIs."
     },
     "popup_button_copy": {
         "message": "Copy"

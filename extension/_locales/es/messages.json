@@ -3,7 +3,7 @@
         "message": "Resumir y Traducir con Gemini"
     },
     "extension_description": {
-        "message": "Resume y traduce páginas web. Utiliza Gemini como motor."
+        "message": "Resume y traduce páginas web usando Gemini o APIs compatibles con OpenAI."
     },
     "popup_button_copy": {
         "message": "Copiar"

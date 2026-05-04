@@ -3,7 +3,7 @@
         "message": "Tóm tắt và Dịch với Gemini"
     },
     "extension_description": {
-        "message": "Tóm tắt và dịch các trang web. Sử dụng Gemini làm nền tảng."
+        "message": "Tóm tắt và dịch các trang web bằng Gemini hoặc API tương thích OpenAI."
     },
     "popup_button_copy": {
         "message": "Sao chép"

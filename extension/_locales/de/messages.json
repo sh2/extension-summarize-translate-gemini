@@ -3,7 +3,7 @@
         "message": "Zusammenfassen und Übersetzen mit Gemini"
     },
     "extension_description": {
-        "message": "Webseiten zusammenfassen und übersetzen. Nutzt Gemini als Backend."
+        "message": "Webseiten mit Gemini oder OpenAI-kompatiblen APIs zusammenfassen und übersetzen."
     },
     "popup_button_copy": {
         "message": "Kopieren"

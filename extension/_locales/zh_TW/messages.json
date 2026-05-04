@@ -3,7 +3,7 @@
         "message": "使用 Gemini 摘要與翻譯"
     },
     "extension_description": {
-        "message": "摘要並翻譯網頁。使用 Gemini 作為後端。"
+        "message": "使用 Gemini 或相容 OpenAI 的 API 摘要並翻譯網頁。"
     },
     "popup_button_copy": {
         "message": "複製"

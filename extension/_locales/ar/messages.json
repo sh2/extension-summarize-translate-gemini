@@ -3,7 +3,7 @@
         "message": "تلخيص وترجمة مع Gemini"
     },
     "extension_description": {
-        "message": "لخص وترجم صفحات الويب. يستخدم Gemini كواجهة خلفية."
+        "message": "لخص وترجم صفحات الويب باستخدام Gemini أو واجهات برمجة التطبيقات المتوافقة مع OpenAI."
     },
     "popup_button_copy": {
         "message": "نسخ"

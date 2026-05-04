@@ -3,7 +3,7 @@
         "message": "Gemini로 요약 및 번역"
     },
     "extension_description": {
-        "message": "웹페이지를 요약하고 번역합니다. Gemini를 백엔드로 사용합니다."
+        "message": "Gemini 또는 OpenAI 호환 API를 사용하여 웹페이지를 요약 및 번역합니다."
     },
     "popup_button_copy": {
         "message": "복사"

@@ -3,7 +3,7 @@
         "message": "Geminiによる要約と翻訳"
     },
     "extension_description": {
-        "message": "ウェブページを要約、翻訳します。バックエンドにGeminiを使用しています。"
+        "message": "GeminiまたはOpenAI互換APIを使用してウェブページを要約・翻訳します。"
     },
     "popup_button_copy": {
         "message": "コピーする"
