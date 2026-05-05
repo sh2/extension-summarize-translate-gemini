@@ -84,7 +84,9 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         openaiBaseUrl,
         openaiModelId,
         streaming,
-        userModelId
+        userModelId,
+        openaiReasoningEffort,
+        openaiThinkingType
       } = await chrome.storage.local.get({
         apiKey: "",
         apiProvider: "gemini",
@@ -92,13 +94,20 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         openaiBaseUrl: "",
         openaiModelId: "",
         streaming: false,
-        userModelId: ""
+        userModelId: "",
+        openaiReasoningEffort: "",
+        openaiThinkingType: ""
       });
 
       const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
       const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
       const baseUrl = openaiBaseUrl;
-      const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider);
+
+      const extraConfig = apiProvider === "openai"
+        ? { reasoningEffort: openaiReasoningEffort, thinkingType: openaiThinkingType }
+        : {};
+
+      const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider, extraConfig);
 
       const systemPrompt = await getSystemPrompt(
         actionType,

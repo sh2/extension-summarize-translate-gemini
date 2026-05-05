@@ -151,7 +151,19 @@ const askQuestion = async () => {
   window.scrollTo(0, document.body.scrollHeight);
 
   // Generate the response
-  const { apiKey, apiProvider, openaiApiKey, openaiBaseUrl, openaiModelId, streaming, userModelId, renderLinks, autoSave } = await chrome.storage.local.get({
+  const {
+    apiKey,
+    apiProvider,
+    openaiApiKey,
+    openaiBaseUrl,
+    openaiModelId,
+    streaming,
+    userModelId,
+    renderLinks,
+    autoSave,
+    openaiReasoningEffort,
+    openaiThinkingType
+  } = await chrome.storage.local.get({
     apiKey: "",
     apiProvider: "gemini",
     openaiApiKey: "",
@@ -160,14 +172,21 @@ const askQuestion = async () => {
     streaming: false,
     userModelId: "",
     renderLinks: false,
-    autoSave: false
+    autoSave: false,
+    openaiReasoningEffort: "",
+    openaiThinkingType: ""
   });
 
   const languageModel = document.getElementById("languageModel").value;
   const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
   const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
   const baseUrl = openaiBaseUrl;
-  const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider);
+
+  const extraConfig = apiProvider === "openai"
+    ? { reasoningEffort: openaiReasoningEffort, thinkingType: openaiThinkingType }
+    : {};
+
+  const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider, extraConfig);
   let response;
 
   if (streaming) {

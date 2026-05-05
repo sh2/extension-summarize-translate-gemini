@@ -186,11 +186,17 @@ export const convertMarkdownToHtml = (content, breaks, links) => {
   return htmlDiv.innerHTML;
 };
 
-export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini") => {
+export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini", extraConfig = {}) => {
   // languageModel: "3-flash-preview:minimal/2.5-flash:0/gemma-3-27b-it/zz"
 
   if (apiProvider === "openai") {
-    return [{ modelId: userModelId, generationConfig: {} }];
+    return [{
+      modelId: userModelId,
+      generationConfig: {
+        reasoningEffort: extraConfig.reasoningEffort || "",
+        thinkingType: extraConfig.thinkingType || ""
+      }
+    }];
   }
 
   const modelMappings = {
@@ -324,7 +330,7 @@ const generateContentGemini = async (apiKey, apiContents, modelConfig, systemIns
 };
 
 const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) => {
-  const { modelId } = modelConfig;
+  const { modelId, generationConfig } = modelConfig;
 
   if (!baseUrl) {
     return createOpenAIBaseUrlRequiredResponse();
@@ -335,16 +341,23 @@ const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) 
   }
 
   try {
+    const requestBody = { model: modelId, messages: apiContents };
+
+    if (generationConfig?.reasoningEffort) {
+      requestBody.reasoning_effort = generationConfig.reasoningEffort;
+    }
+
+    if (generationConfig?.thinkingType) {
+      requestBody.thinking = { type: generationConfig.thinkingType };
+    }
+
     const response = await fetch(buildOpenAIApiUrl(baseUrl, "/chat/completions"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${apiKey}`
       },
-      body: JSON.stringify({
-        model: modelId,
-        messages: apiContents
-      })
+      body: JSON.stringify(requestBody)
     });
 
     const body = tryParseJson(await response.text());
@@ -517,7 +530,7 @@ const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, str
 };
 
 const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig, streamKey) => {
-  const { modelId } = modelConfig;
+  const { modelId, generationConfig } = modelConfig;
 
   if (!baseUrl) {
     return createOpenAIBaseUrlRequiredResponse();
@@ -530,17 +543,23 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
   try {
     await chrome.storage.session.remove(streamKey);
 
+    const requestBody = { model: modelId, messages: apiContents, stream: true };
+
+    if (generationConfig?.reasoningEffort) {
+      requestBody.reasoning_effort = generationConfig.reasoningEffort;
+    }
+
+    if (generationConfig?.thinkingType) {
+      requestBody.thinking = { type: generationConfig.thinkingType };
+    }
+
     const response = await fetch(buildOpenAIApiUrl(baseUrl, "/chat/completions"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${apiKey}`
       },
-      body: JSON.stringify({
-        model: modelId,
-        messages: apiContents,
-        stream: true
-      })
+      body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {
