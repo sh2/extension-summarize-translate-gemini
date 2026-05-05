@@ -17,6 +17,8 @@ const INITIAL_OPTIONS = {
   openaiApiKey: "",
   openaiBaseUrl: "",
   openaiModelId: "gpt-5.4-nano",
+  openaiReasoningEffort: "",
+  openaiThinkingType: "",
   languageCode: "en",
   userLanguage: "Turkish",
   noTextAction: "summarize",
@@ -69,6 +71,8 @@ const getOptionsFromForm = (includeApiKey) => {
     userModelId: document.getElementById("userModelId").value,
     openaiBaseUrl: document.getElementById("openaiBaseUrl").value,
     openaiModelId: document.getElementById("openaiModelId").value,
+    openaiReasoningEffort: document.getElementById("openaiReasoningEffort").value,
+    openaiThinkingType: document.getElementById("openaiThinkingType").value,
     languageCode: document.getElementById("languageCode").value,
     userLanguage: document.getElementById("userLanguage").value,
     noTextAction: document.querySelector('input[name="noTextAction"]:checked').value,
@@ -111,6 +115,8 @@ const setOptionsToForm = async () => {
   document.getElementById("openaiApiKey").value = options.openaiApiKey;
   document.getElementById("openaiBaseUrl").value = options.openaiBaseUrl;
   document.getElementById("openaiModelId").value = options.openaiModelId;
+  document.getElementById("openaiReasoningEffort").value = options.openaiReasoningEffort;
+  document.getElementById("openaiThinkingType").value = options.openaiThinkingType;
   document.getElementById("languageCode").value = options.languageCode;
   document.getElementById("userLanguage").value = options.userLanguage;
   document.querySelector(`input[name="noTextAction"][value="${options.noTextAction}"]`).checked = true;
@@ -178,6 +184,16 @@ const applyOptionsToForm = (options) => {
   // openaiModelId allows an empty string
   if (options.openaiModelId !== undefined) {
     document.getElementById("openaiModelId").value = options.openaiModelId;
+  }
+
+  // openaiReasoningEffort allows an empty string
+  if (options.openaiReasoningEffort !== undefined) {
+    document.getElementById("openaiReasoningEffort").value = options.openaiReasoningEffort;
+  }
+
+  // openaiThinkingType allows an empty string
+  if (options.openaiThinkingType !== undefined) {
+    document.getElementById("openaiThinkingType").value = options.openaiThinkingType;
   }
 
   if (options.languageCode) {
