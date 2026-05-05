@@ -225,16 +225,34 @@ const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvide
 
 ### 3-1. `extension/_locales/*/messages.json`
 
-各言語ファイルに以下 2 キーを追加。ラベルにはパラメーター名を併記する（例: `Reasoning effort (reasoning_effort)`）。翻訳がないロケールは英語のままコピーする。
+各言語ファイルに以下 2 キーを追加。ラベルにはパラメーター名を併記する。全ロケールで翻訳を用意する（英語コピーは不要）。
 
-```json
-"options_reasoning_effort": {
-    "message": "Reasoning effort (reasoning_effort)"
-},
-"options_thinking_type": {
-    "message": "Thinking type (thinking.type)"
-}
-```
+翻訳にあたっては以下を基準とする：
+
+- 各国語で自然な表現であること
+- 既存のメッセージファイルと一貫性を保つこと（語彙、文体、ラベル長）
+- ツールの UI として簡潔な表現を保つこと（1〜4 語程度）
+- API パラメーター名 `reasoning_effort`、`thinking.type` は全ロケールで併記する
+
+翻訳一覧：
+
+| ロケール | `options_reasoning_effort` | `options_thinking_type` |
+| ---------- | --------------------------- | ------------------------- |
+| ar | جهد الاستدلال (reasoning_effort) | نوع التفكير (thinking.type) |
+| bn | যুক্তি প্রচেষ্টা (reasoning_effort) | চিন্তার ধরন (thinking.type) |
+| de | Reasoning-Aufwand (reasoning_effort) | Thinking-Typ (thinking.type) |
+| en | Reasoning effort (reasoning_effort) | Thinking type (thinking.type) |
+| es | Esfuerzo de razonamiento (reasoning_effort) | Tipo de pensamiento (thinking.type) |
+| fr | Effort de raisonnement (reasoning_effort) | Type de réflexion (thinking.type) |
+| hi | तर्क प्रयास (reasoning_effort) | सोच का प्रकार (thinking.type) |
+| it | Sforzo di ragionamento (reasoning_effort) | Tipo di pensiero (thinking.type) |
+| ja | 推論エフォート (reasoning_effort) | 思考タイプ (thinking.type) |
+| ko | 추론 노력 (reasoning_effort) | 사고 유형 (thinking.type) |
+| pt_BR | Esforço de raciocínio (reasoning_effort) | Tipo de pensamento (thinking.type) |
+| ru | Уровень рассуждения (reasoning_effort) | Тип мышления (thinking.type) |
+| vi | Nỗ lực suy luận (reasoning_effort) | Kiểu suy nghĩ (thinking.type) |
+| zh_CN | 推理深度 (reasoning_effort) | 思考类型 (thinking.type) |
+| zh_TW | 推理程度 (reasoning_effort) | 思考類型 (thinking.type) |
 
 ### 3-2. lint 実行
 
