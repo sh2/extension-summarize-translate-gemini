@@ -143,6 +143,12 @@
     "options_model_openai": {
         "message": "ID mô hình do người dùng chỉ định"
     },
+    "options_reasoning_effort": {
+        "message": "Nỗ lực suy luận (reasoning_effort)"
+    },
+    "options_thinking_type": {
+        "message": "Kiểu suy nghĩ (thinking.type)"
+    },
     "options_language": {
         "message": "Ngôn ngữ để Tóm tắt và Dịch"
     },

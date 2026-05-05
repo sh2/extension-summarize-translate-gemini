@@ -143,6 +143,12 @@
     "options_model_openai": {
         "message": "ID do modelo especificado pelo usuário"
     },
+    "options_reasoning_effort": {
+        "message": "Esforço de raciocínio (reasoning_effort)"
+    },
+    "options_thinking_type": {
+        "message": "Tipo de pensamento (thinking.type)"
+    },
     "options_language": {
         "message": "Idioma para Resumo e Tradução"
     },

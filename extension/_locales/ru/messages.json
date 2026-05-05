@@ -143,6 +143,12 @@
     "options_model_openai": {
         "message": "Идентификатор модели, указанный пользователем"
     },
+    "options_reasoning_effort": {
+        "message": "Уровень рассуждения (reasoning_effort)"
+    },
+    "options_thinking_type": {
+        "message": "Тип мышления (thinking.type)"
+    },
     "options_language": {
         "message": "Язык для суммирования и перевода"
     },

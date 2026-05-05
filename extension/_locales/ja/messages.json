@@ -143,6 +143,12 @@
     "options_model_openai": {
         "message": "ユーザー指定モデルID"
     },
+    "options_reasoning_effort": {
+        "message": "推論エフォート (reasoning_effort)"
+    },
+    "options_thinking_type": {
+        "message": "思考タイプ (thinking.type)"
+    },
     "options_language": {
         "message": "要約と翻訳に用いる言語"
     },

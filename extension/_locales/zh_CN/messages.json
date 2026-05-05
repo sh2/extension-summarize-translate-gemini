@@ -143,6 +143,12 @@
     "options_model_openai": {
         "message": "用户指定模型 ID"
     },
+    "options_reasoning_effort": {
+        "message": "推理深度 (reasoning_effort)"
+    },
+    "options_thinking_type": {
+        "message": "思考类型 (thinking.type)"
+    },
     "options_language": {
         "message": "总结与翻译语言"
     },

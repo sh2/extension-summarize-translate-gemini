@@ -143,6 +143,12 @@
     "options_model_openai": {
         "message": "사용자 지정 모델 ID"
     },
+    "options_reasoning_effort": {
+        "message": "추론 노력 (reasoning_effort)"
+    },
+    "options_thinking_type": {
+        "message": "사고 유형 (thinking.type)"
+    },
     "options_language": {
         "message": "요약 및 번역 언어"
     },

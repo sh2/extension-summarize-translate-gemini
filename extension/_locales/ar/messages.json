@@ -143,6 +143,12 @@
     "options_model_openai": {
         "message": "معرّف النموذج المحدد من قبل المستخدم"
     },
+    "options_reasoning_effort": {
+        "message": "جهد الاستدلال (reasoning_effort)"
+    },
+    "options_thinking_type": {
+        "message": "نوع التفكير (thinking.type)"
+    },
     "options_language": {
         "message": "لغة التلخيص والترجمة"
     },

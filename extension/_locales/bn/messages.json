@@ -143,6 +143,12 @@
     "options_model_openai": {
         "message": "ব্যবহারকারী-নির্দিষ্ট মডেল ID"
     },
+    "options_reasoning_effort": {
+        "message": "যুক্তি প্রচেষ্টা (reasoning_effort)"
+    },
+    "options_thinking_type": {
+        "message": "চিন্তার ধরন (thinking.type)"
+    },
     "options_language": {
         "message": "সারসংক্ষেপ এবং অনুবাদের জন্য ভাষা"
     },
