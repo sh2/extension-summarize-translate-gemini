@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "Thinking-Typ (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "Informationen zu Reasoning-Einstellungen finden Sie auf der folgenden Seite."
+    },
     "options_language": {
         "message": "Sprache für Zusammenfassung und Übersetzung"
     },

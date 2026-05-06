@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "思考类型 (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "有关推理控制的信息，请参阅以下页面。"
+    },
     "options_language": {
         "message": "总结与翻译语言"
     },

@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "চিন্তার ধরন (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "রিজনিং কন্ট্রোল সম্পর্কে তথ্যের জন্য, অনুগ্রহ করে নিম্নলিখিত পৃষ্ঠাটি দেখুন।"
+    },
     "options_language": {
         "message": "সারসংক্ষেপ এবং অনুবাদের জন্য ভাষা"
     },

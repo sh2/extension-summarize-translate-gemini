@@ -60,6 +60,37 @@ Browser extensions have their own origin scheme (e.g. `chrome-extension://...`),
 
 See the [Ollama FAQ](https://docs.ollama.com/faq) for more details.
 
+### What are Reasoning effort and Thinking type?
+
+When the API provider is set to OpenAI-compatible, the options page shows two additional settings that control reasoning behavior. If either setting is left as `Unspecified`, the extension omits that parameter and lets the API use its default behavior.
+
+| Setting | API parameter | Values |
+| --- | --- | --- |
+| Reasoning effort | `reasoning_effort` | `xhigh`, `high`, `medium`, `low`, `none` |
+| Thinking type | `thinking.type` | `enabled`, `disabled` |
+
+`thinking.type` is sent as a nested object: `"thinking": { "type": "..." }`.
+
+#### Model compatibility
+
+Support depends on the model.
+
+| Model | `reasoning_effort` | `thinking.type` | Notes |
+| --- | --- | --- | --- |
+| OpenAI GPT‑5.5 / 5.4 | Supported | Not supported — returns an error | — |
+| DeepSeek V4 Pro / Flash | Supported (except `none`) | Supported | If `thinking.type` is set to `disabled`, `reasoning_effort` must remain `Unspecified`. |
+
+If you choose an unsupported combination, the API may return an error. In that case, set the unsupported option back to `Unspecified` and save again.
+
+#### Suggested starting points
+
+Lightweight models with minimal reasoning give good quality for summarization and translation while responding noticeably faster. Try these first:
+
+| Provider | Model ID | `reasoning_effort` | `thinking.type` |
+| --- | --- | --- | --- |
+| OpenAI | `gpt-5.4-nano` | `none` | Unspecified |
+| DeepSeek | `deepseek-v4-flash` | Unspecified | `disabled` |
+
 ## Setup
 
 This extension is available on the [Chrome Web Store](https://chromewebstore.google.com/detail/hmdcbbbdmfapkpdaganadiihfmdnpngi), [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/ljmmilamifhanifgbfliknbicfjllheb), and [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/summarize-translate-gemini/).

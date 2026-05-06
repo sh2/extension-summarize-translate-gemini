@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "نوع التفكير (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "للحصول على معلومات حول إعدادات التحكم في الاستدلال، يرجى الاطلاع على الصفحة التالية."
+    },
     "options_language": {
         "message": "لغة التلخيص والترجمة"
     },

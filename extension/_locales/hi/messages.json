@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "सोच का प्रकार (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "रीज़निंग नियंत्रण के बारे में जानकारी के लिए, कृपया निम्न पृष्ठ देखें।"
+    },
     "options_language": {
         "message": "सारांश और अनुवाद के लिए भाषा"
     },

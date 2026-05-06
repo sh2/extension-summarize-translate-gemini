@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "思考タイプ (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "推論の制御については以下のページを参照してください。"
+    },
     "options_language": {
         "message": "要約と翻訳に用いる言語"
     },

@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "Thinking type (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "For information about reasoning controls, please see the following page."
+    },
     "options_language": {
         "message": "Language for Summarization and Translation"
     },

@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "Тип мышления (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "Информацию о настройках рассуждения см. на следующей странице."
+    },
     "options_language": {
         "message": "Язык для суммирования и перевода"
     },

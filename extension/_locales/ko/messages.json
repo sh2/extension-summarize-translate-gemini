@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "사고 유형 (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "추론 제어에 대한 정보는 다음 페이지를 참조하십시오."
+    },
     "options_language": {
         "message": "요약 및 번역 언어"
     },

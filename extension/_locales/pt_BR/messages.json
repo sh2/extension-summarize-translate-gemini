@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "Tipo de pensamento (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "Para obter informações sobre controles de raciocínio, consulte a página a seguir."
+    },
     "options_language": {
         "message": "Idioma para Resumo e Tradução"
     },

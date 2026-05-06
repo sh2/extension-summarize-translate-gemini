@@ -149,6 +149,9 @@
     "options_thinking_type": {
         "message": "Kiểu suy nghĩ (thinking.type)"
     },
+    "options_reasoning_hint": {
+        "message": "Để biết thông tin về kiểm soát suy luận, vui lòng xem trang sau."
+    },
     "options_language": {
         "message": "Ngôn ngữ để Tóm tắt và Dịch"
     },
