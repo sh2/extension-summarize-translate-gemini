@@ -21,7 +21,7 @@ const SAFETY_SETTINGS = [{
   threshold: "BLOCK_NONE"
 }];
 
-export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite-preview:minimal";
+export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite:minimal";
 
 export const normalizeBaseUrl = (baseUrl) => {
   const trimmedBaseUrl = baseUrl.trim();
@@ -200,11 +200,11 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
   }
 
   const modelMappings = {
+    "3.1-flash-lite": "gemini-3.1-flash-lite",
     "2.5-pro": "gemini-2.5-pro",
     "2.5-flash": "gemini-2.5-flash",
     "2.5-flash-lite": "gemini-2.5-flash-lite",
     "3.1-pro-preview": "gemini-3.1-pro-preview",
-    "3.1-flash-lite-preview": "gemini-3.1-flash-lite-preview",
     "3-flash-preview": "gemini-3-flash-preview",
     "gemma-4-31b-it": "gemma-4-31b-it",
     "gemma-3-27b-it": "gemma-3-27b-it"
