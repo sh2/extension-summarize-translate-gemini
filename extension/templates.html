@@ -3,11 +3,14 @@
 <template id="languageModelTemplate">
   <select id="languageModel">
     <optgroup label="Auto-fallback">
-      <option
-        value="3-flash-preview:minimal/2.5-flash:0/3.1-flash-lite:minimal/2.5-flash-lite:0/gemma-4-31b-it:minimal/gemma-3-27b-it">
+      <option value="3.5-flash:minimal/3.1-flash-lite:minimal/gemma-4-31b-it:minimal">
         Gemini Flash with Gemma Fallback</option>
     </optgroup>
     <optgroup label="Stable">
+      <option value="3.5-flash:high">Gemini 3.5 Flash (Thinking High)</option>
+      <option value="3.5-flash:medium">Gemini 3.5 Flash (Thinking Medium)</option>
+      <option value="3.5-flash:low">Gemini 3.5 Flash (Thinking Low)</option>
+      <option value="3.5-flash:minimal">Gemini 3.5 Flash (Thinking Minimal)</option>
       <option value="3.1-flash-lite:high">Gemini 3.1 Flash-Lite (Thinking High)</option>
       <option value="3.1-flash-lite:medium">Gemini 3.1 Flash-Lite (Thinking Medium)</option>
       <option value="3.1-flash-lite:low">Gemini 3.1 Flash-Lite (Thinking Low)</option>
@@ -30,7 +33,6 @@
     <optgroup label="Gemma">
       <option value="gemma-4-31b-it:high">Gemma 4 31B (Thinking High)</option>
       <option value="gemma-4-31b-it:minimal">Gemma 4 31B (Thinking Minimal)</option>
-      <option value="gemma-3-27b-it">Gemma 3 27B</option>
     </optgroup>
     <optgroup label="User-specified">
       <option value="zz">User-specified</option>
