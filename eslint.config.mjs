@@ -25,7 +25,12 @@ export default [
   {
     rules: {
       "quotes": ["error", "double", { "avoidEscape": true }],
-      "semi": ["error", "always"]
+      "semi": ["error", "always"],
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "always", prev: "*", next: "block-like" },
+        { blankLine: "always", prev: "block-like", next: "*" }
+      ]
     }
   }
 ];

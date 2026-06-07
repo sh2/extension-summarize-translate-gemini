@@ -15,6 +15,7 @@ Cross-browser extension (Chrome, Firefox, Edge) that uses Google Gemini API and 
 - `generateContent()` and `streamGenerateContent()` in `extension/utils.js` are the only entry points for LLM calls.
 - Keep changes inside `extension/` unless the task is specifically about `firefox/` manifests or the translation helper scripts in `utils/`.
 - Do not edit files in `extension/lib/`.
+- Always use block braces `{}` for control statements such as `if`, `else`, `for`, and `while` (brace-less single-line statements like `if (cond) return;` are strictly prohibited).
 
 ## Task routing
 
