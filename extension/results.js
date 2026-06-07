@@ -23,14 +23,57 @@ let resultIndex = 0;
 let result = {};
 let resultViewStatus = RESULT_VIEW_STATUS.IDLE;
 
-const setResultControlsEnabled = (enabled) => {
-  document.getElementById("clear").disabled = !enabled;
-  document.getElementById("copy").disabled = !enabled;
-  document.getElementById("save").disabled = !enabled;
-  document.getElementById("text").readOnly = !enabled;
-  document.getElementById("languageModel").disabled = !enabled;
-  document.getElementById("send").disabled = !enabled;
+// ── Pure utilities (no DOM access, no side effects) ────────────────────────
+
+const validateConversation = (data) => {
+  if (!Array.isArray(data)) {
+    return false;
+  }
+
+  // Ensure we have pairs of user and model entries
+  if (data.length % 2 !== 0) {
+    return false;
+  }
+
+  return data.every((item, index) => {
+    if (!item || typeof item !== "object") {
+      return false;
+    }
+
+    const expectedRole = index % 2 === 0 ? "user" : "model";
+    return item.role === expectedRole && Array.isArray(item.parts);
+  });
 };
+
+const extractTextFromParts = (parts) => {
+  if (!Array.isArray(parts)) {
+    return "";
+  }
+
+  return parts
+    .filter(part => part && typeof part.text === "string")
+    .map(part => part.text)
+    .join("\n");
+};
+
+const isSuccessfulResponse = (response, apiProvider) => {
+  if (!response || !response.ok) {
+    return false;
+  }
+
+  if (apiProvider === "openai") {
+    const choice = response.body?.choices?.[0];
+    return choice?.finish_reason === "stop" && Boolean(choice?.message?.content);
+  } else {
+    const candidate = response.body?.candidates?.[0];
+    const hasBlock = response.body?.promptFeedback?.blockReason || (candidate?.finishReason && candidate.finishReason !== "STOP");
+    const parts = candidate?.content?.parts || [];
+    const responsePart = parts[0]?.thought === true ? parts[1] : parts[0];
+    return !hasBlock && typeof responsePart?.text === "string" && responsePart.text.length > 0;
+  }
+};
+
+// ── Tab state & notification ────────────────────────────────────────────────
 
 const isResultTabActive = () => document.visibilityState === "visible" && document.hasFocus();
 
@@ -64,49 +107,99 @@ const completeWaitingForResult = () => {
   updateDocumentTitle();
 };
 
-const clearConversation = () => {
+// ── UI helpers ──────────────────────────────────────────────────────────────
+
+const appendQuestionToUi = (question) => {
+  const formattedQuestionDiv = document.createElement("div");
+  formattedQuestionDiv.style.backgroundColor = "var(--nc-bg-3)";
+  formattedQuestionDiv.style.borderRadius = "1rem";
+  formattedQuestionDiv.style.margin = "1.5rem";
+  formattedQuestionDiv.style.padding = "1rem 1rem .1rem";
+  formattedQuestionDiv.innerHTML = convertMarkdownToHtml(question, true, false);
+  document.getElementById("conversation").appendChild(formattedQuestionDiv);
+};
+
+const appendAnswerPlaceholderToUi = () => {
+  const formattedAnswerDiv = document.createElement("div");
+  document.getElementById("conversation").appendChild(formattedAnswerDiv);
+  return formattedAnswerDiv;
+};
+
+const setResultControlsEnabled = (enabled) => {
+  document.getElementById("clear").disabled = !enabled;
+  document.getElementById("copy").disabled = !enabled;
+  document.getElementById("save").disabled = !enabled;
+  document.getElementById("text").readOnly = !enabled;
+  document.getElementById("languageModel").disabled = !enabled;
+  document.getElementById("send").disabled = !enabled;
+};
+
+// ── Button action handlers ──────────────────────────────────────────────────
+
+const clearConversation = async () => {
   // Clear the conversation
   document.getElementById("conversation").replaceChildren();
   conversation.length = 0;
+
+  try {
+    await chrome.storage.session.remove(`conversation_${resultIndex}`);
+  } catch (error) {
+    console.error("Failed to remove conversation from session storage:", error);
+  }
 };
 
 const copyContent = async () => {
-  const operationStatus = document.getElementById("operation-status");
-  let clipboardContent = `${result.responseContent.replace(/\n+$/, "")}\n\n`;
+  try {
+    const operationStatus = document.getElementById("operation-status");
+    let clipboardContent = `${result.responseContent.replace(/\n+$/, "")}\n\n`;
 
-  conversation.forEach((item) => {
-    clipboardContent += `${item.question.replace(/\n+$/, "")}\n\n`;
-    clipboardContent += `${item.answer.replace(/\n+$/, "")}\n\n`;
-  });
+    for (const item of conversation) {
+      const text = extractTextFromParts(item?.parts);
 
-  // Copy the content to the clipboard
-  await navigator.clipboard.writeText(clipboardContent);
+      if (text) {
+        clipboardContent += `${text.replace(/\n+$/, "")}\n\n`;
+      }
+    }
 
-  // Display a message indicating that the content was copied
-  operationStatus.textContent = chrome.i18n.getMessage("results_copied");
-  setTimeout(() => operationStatus.textContent = "", 1000);
+    // Copy the content to the clipboard
+    await navigator.clipboard.writeText(clipboardContent);
+
+    // Display a message indicating that the content was copied
+    operationStatus.textContent = chrome.i18n.getMessage("results_copied");
+    setTimeout(() => operationStatus.textContent = "", 1000);
+  } catch (error) {
+    console.error("Failed to copy content:", error);
+  }
 };
 
 const saveContent = () => {
-  const operationStatus = document.getElementById("operation-status");
-  let content = `${result.responseContent.replace(/\n+$/, "")}\n\n`;
+  try {
+    const operationStatus = document.getElementById("operation-status");
+    let content = `${result.responseContent.replace(/\n+$/, "")}\n\n`;
 
-  conversation.forEach((item) => {
-    content += `${item.question.replace(/\n+$/, "")}\n\n`;
-    content += `${item.answer.replace(/\n+$/, "")}\n\n`;
-  });
+    for (const item of conversation) {
+      const text = extractTextFromParts(item?.parts);
 
-  // Save the content to a text file
-  exportTextToFile(`${result.url}\n\n${content}`);
+      if (text) {
+        content += `${text.replace(/\n+$/, "")}\n\n`;
+      }
+    }
 
-  // Display a message indicating that the content was saved
-  operationStatus.textContent = chrome.i18n.getMessage("results_saved");
-  setTimeout(() => operationStatus.textContent = "", 1000);
+    // Save the content to a text file
+    exportTextToFile(`${result.url}\n\n${content}`);
+
+    // Display a message indicating that the content was saved
+    operationStatus.textContent = chrome.i18n.getMessage("results_saved");
+    setTimeout(() => operationStatus.textContent = "", 1000);
+  } catch (error) {
+    console.error("Failed to save content:", error);
+  }
 };
+
+// ── Core async logic ────────────────────────────────────────────────────────
 
 const askQuestion = async () => {
   const question = document.getElementById("text").value.trim();
-  let answer;
 
   if (!question) {
     return;
@@ -118,130 +211,153 @@ const askQuestion = async () => {
   // Display a loading message
   let displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_response"));
 
-  // Prepare the first question and answer
-  const apiContents = [...result.requestApiContent];
-  apiContents.push({ role: "model", parts: [{ text: result.responseContent }] });
-
-  // Add the previous questions and answers to the conversation
-  conversation.forEach((message) => {
-    apiContents.push({ role: "user", parts: [{ text: message.question }] });
-    apiContents.push({ role: "model", parts: [{ text: message.answer }] });
-  });
-
-  // Add the new question to the conversation
-  apiContents.push({ role: "user", parts: [{ text: question }] });
-
-  // Create a new div element with the formatted question
-  const formattedQuestionDiv = document.createElement("div");
-  formattedQuestionDiv.style.backgroundColor = "var(--nc-bg-3)";
-  formattedQuestionDiv.style.borderRadius = "1rem";
-  formattedQuestionDiv.style.margin = "1.5rem";
-  formattedQuestionDiv.style.padding = "1rem 1rem .1rem";
-  formattedQuestionDiv.innerHTML = convertMarkdownToHtml(question, true, false);
-
-  // Append the formatted question to the conversation
-  document.getElementById("conversation").appendChild(formattedQuestionDiv);
+  // Render user's question immediately
+  appendQuestionToUi(question);
   document.getElementById("text").value = "";
 
-  // Append the formatted answer to the conversation
-  const formattedAnswerDiv = document.createElement("div");
-  document.getElementById("conversation").appendChild(formattedAnswerDiv);
+  // Append the formatted answer placeholder to the conversation
+  const formattedAnswerDiv = appendAnswerPlaceholderToUi();
 
   // Scroll to the bottom of the page
   window.scrollTo(0, document.body.scrollHeight);
 
-  // Generate the response
-  const {
-    apiKey,
-    apiProvider,
-    openaiApiKey,
-    openaiBaseUrl,
-    openaiModelId,
-    streaming,
-    userModelId,
-    renderLinks,
-    autoSave,
-    openaiReasoningEffort,
-    openaiThinkingType
-  } = await chrome.storage.local.get({
-    apiKey: "",
-    apiProvider: "gemini",
-    openaiApiKey: "",
-    openaiBaseUrl: "",
-    openaiModelId: "",
-    streaming: false,
-    userModelId: "",
-    renderLinks: false,
-    autoSave: false,
-    openaiReasoningEffort: "",
-    openaiThinkingType: ""
-  });
+  let answer;
+  let streamIntervalId = null;
 
-  const languageModel = document.getElementById("languageModel").value;
-  const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
-  const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
-  const baseUrl = openaiBaseUrl;
-
-  const extraConfig = apiProvider === "openai"
-    ? { reasoningEffort: openaiReasoningEffort, thinkingType: openaiThinkingType }
-    : {};
-
-  const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider, extraConfig);
-  let response;
-
-  if (streaming) {
-    const streamKey = `streamContent_${resultIndex}`;
-    const responsePromise = streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl);
-
-    console.log("Request:", {
-      apiContents,
-      modelConfigs,
-      streamKey
+  try {
+    // Generate the response
+    const {
+      apiKey,
+      apiProvider,
+      openaiApiKey,
+      openaiBaseUrl,
+      openaiModelId,
+      streaming,
+      userModelId,
+      renderLinks,
+      autoSave,
+      openaiReasoningEffort,
+      openaiThinkingType
+    } = await chrome.storage.local.get({
+      apiKey: "",
+      apiProvider: "gemini",
+      openaiApiKey: "",
+      openaiBaseUrl: "",
+      openaiModelId: "",
+      streaming: false,
+      userModelId: "",
+      renderLinks: false,
+      autoSave: false,
+      openaiReasoningEffort: "",
+      openaiThinkingType: ""
     });
 
-    // Stream the content
-    const streamIntervalId = setInterval(async () => {
-      const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
+    const languageModel = document.getElementById("languageModel").value;
+    const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
+    const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
+    const baseUrl = openaiBaseUrl;
 
-      if (streamContent) {
-        formattedAnswerDiv.innerHTML = convertMarkdownToHtml(streamContent, false, renderLinks);
+    const extraConfig = apiProvider === "openai"
+      ? { reasoningEffort: openaiReasoningEffort, thinkingType: openaiThinkingType }
+      : {};
+
+    const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider, extraConfig);
+
+    // Prepare the first question and answer
+    const apiContents = [...result.requestApiContent];
+    apiContents.push({ role: "model", parts: [{ text: result.responseContent }] });
+
+    // Add the previous questions and answers (already in Gemini style) to the conversation
+    apiContents.push(...conversation);
+
+    // Add the new question to the conversation
+    apiContents.push({ role: "user", parts: [{ text: question }] });
+
+    let response;
+
+    if (streaming) {
+      const streamKey = `streamContent_${resultIndex}`;
+      const responsePromise = streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl);
+
+      console.log("Request:", {
+        apiContents,
+        modelConfigs,
+        streamKey
+      });
+
+      // Stream the content
+      streamIntervalId = setInterval(async () => {
+        const streamContent = (await chrome.storage.session.get({ [streamKey]: "" }))[streamKey];
+
+        if (streamContent) {
+          formattedAnswerDiv.innerHTML = convertMarkdownToHtml(streamContent, false, renderLinks);
+        }
+      }, 1000);
+
+      // Wait for responsePromise
+      response = await responsePromise;
+
+      // Stop streaming
+      clearInterval(streamIntervalId);
+      streamIntervalId = null;
+    } else {
+      response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl);
+    }
+
+    console.log("Response:", response);
+    answer = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
+
+    // Update the formatted answer in the conversation
+    formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false, renderLinks);
+
+    // Display the model version for user-specified models
+    if (languageModel.includes("/")) {
+      document.getElementById("send-status").textContent = response.body?.modelVersion ?? "";
+    } else {
+      document.getElementById("send-status").textContent = "";
+    }
+
+    // If the response is successful, update the conversation list and storage
+    if (isSuccessfulResponse(response, apiProvider)) {
+      conversation.push({ role: "user", parts: [{ text: question }] });
+      conversation.push({ role: "model", parts: [{ text: answer }] });
+
+      try {
+        await chrome.storage.session.set({ [`conversation_${resultIndex}`]: conversation });
+      } catch (storageError) {
+        console.error("Failed to save conversation to session storage:", storageError);
       }
-    }, 1000);
 
-    // Wait for responsePromise
-    response = await responsePromise;
+      // If auto-save is enabled, save the content (safely isolated)
+      if (autoSave) {
+        try {
+          saveContent();
+        } catch (saveError) {
+          console.error("Auto-save failed:", saveError);
+        }
+      }
+    } else {
+      console.warn("API response was not successful or was blocked:", response);
+    }
 
-    // Stop streaming
-    clearInterval(streamIntervalId);
-  } else {
-    response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl);
-  }
+  } catch (error) {
+    console.error("Failed to generate content:", error);
 
-  console.log("Response:", response);
-  answer = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
+    if (streamIntervalId) {
+      clearInterval(streamIntervalId);
+    }
 
-  // Stop displaying the loading message
-  clearInterval(displayIntervalId);
-
-  // Update the formatted answer in the conversation
-  formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false, renderLinks);
-
-  // Add the question and answer to the conversation
-  conversation.push({ question: question, answer: answer });
-
-  // If auto-save is enabled, save the content
-  if (autoSave) {
-    saveContent();
-  }
-
-  // Enable the buttons and input fields
-  if (document.getElementById("languageModel").value.includes("/")) {
-    document.getElementById("send-status").textContent = response.body?.modelVersion ?? "";
-  } else {
+    // Display a friendly error message on the answer div
+    formattedAnswerDiv.textContent = chrome.i18n.getMessage("response_unexpected_response");
     document.getElementById("send-status").textContent = "";
-  }
+  } finally {
+    // Stop displaying the loading message
+    clearInterval(displayIntervalId);
+    setResultControlsEnabled(true);
 
-  setResultControlsEnabled(true);
+    // Scroll to the bottom of the page
+    window.scrollTo(0, document.body.scrollHeight);
+  }
 };
 
 const waitForResult = async (resultIndex) => {
@@ -344,7 +460,13 @@ const initialize = async () => {
   // Restore the content from the session storage
   const urlParams = new URLSearchParams(window.location.search);
   resultIndex = urlParams.get("i");
-  result = (await chrome.storage.session.get({ [`result_${resultIndex}`]: "" }))[`result_${resultIndex}`];
+
+  const sessionData = await chrome.storage.session.get({
+    [`result_${resultIndex}`]: "",
+    [`conversation_${resultIndex}`]: []
+  });
+
+  result = sessionData[`result_${resultIndex}`];
 
   if (!result) {
     // Disable the buttons and input fields while waiting
@@ -369,7 +491,31 @@ const initialize = async () => {
   // Convert the content from Markdown to HTML
   const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
   document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false, renderLinks);
+
+  // Restore the conversation from session storage if it exists and is valid
+  const savedConversation = sessionData[`conversation_${resultIndex}`];
+
+  if (validateConversation(savedConversation)) {
+    conversation.length = 0;
+    conversation.push(...savedConversation);
+
+    for (let i = 0; i < savedConversation.length; i += 2) {
+      const questionText = extractTextFromParts(savedConversation[i]?.parts);
+      const answerText = extractTextFromParts(savedConversation[i + 1]?.parts);
+
+      if (questionText) {
+        appendQuestionToUi(questionText);
+      }
+
+      if (answerText) {
+        const answerPlaceholder = appendAnswerPlaceholderToUi();
+        answerPlaceholder.innerHTML = convertMarkdownToHtml(answerText, false, renderLinks);
+      }
+    }
+  }
 };
+
+// ── Event listeners ─────────────────────────────────────────────────────────
 
 window.addEventListener("focus", syncAttentionCue);
 document.addEventListener("visibilitychange", syncAttentionCue);

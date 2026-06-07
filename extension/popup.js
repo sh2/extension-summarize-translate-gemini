@@ -24,27 +24,35 @@ const setPopupControlsEnabled = (enabled) => {
 };
 
 const copyContent = async () => {
-  const operationStatus = document.getElementById("operation-status");
-  let clipboardContent = `${content.replace(/\n+$/, "")}\n\n`;
+  try {
+    const operationStatus = document.getElementById("operation-status");
+    let clipboardContent = `${content.replace(/\n+$/, "")}\n\n`;
 
-  // Copy the content to the clipboard
-  await navigator.clipboard.writeText(clipboardContent);
+    // Copy the content to the clipboard
+    await navigator.clipboard.writeText(clipboardContent);
 
-  // Display a message indicating that the content was copied
-  operationStatus.textContent = chrome.i18n.getMessage("popup_copied");
-  setTimeout(() => operationStatus.textContent = "", 1000);
+    // Display a message indicating that the content was copied
+    operationStatus.textContent = chrome.i18n.getMessage("popup_copied");
+    setTimeout(() => operationStatus.textContent = "", 1000);
+  } catch (error) {
+    console.error("Failed to copy content:", error);
+  }
 };
 
 const saveContent = async () => {
-  const operationStatus = document.getElementById("operation-status");
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  try {
+    const operationStatus = document.getElementById("operation-status");
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-  // Save the content to a text file
-  exportTextToFile(`${tab.url}\n\n${content}`);
+    // Save the content to a text file
+    exportTextToFile(`${tab.url}\n\n${content}`);
 
-  // Display a message indicating that the content was saved
-  operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
-  setTimeout(() => operationStatus.textContent = "", 1000);
+    // Display a message indicating that the content was saved
+    operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
+    setTimeout(() => operationStatus.textContent = "", 1000);
+  } catch (error) {
+    console.error("Failed to save content:", error);
+  }
 };
 
 const getSelectedText = () => {
@@ -320,6 +328,7 @@ const main = async (useCache) => {
 
   // Clear stale result to prevent results.html from picking up old data
   await chrome.storage.session.remove(`result_${resultIndex}`);
+  await chrome.storage.session.remove(`conversation_${resultIndex}`);
 
   try {
     const { apiKey, apiProvider, openaiApiKey, streaming } = await chrome.storage.local.get({
