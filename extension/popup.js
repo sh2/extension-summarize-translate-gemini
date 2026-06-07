@@ -14,46 +14,35 @@ import {
 let resultIndex = 0;
 let content = "";
 
-const setPopupControlsEnabled = (enabled) => {
-  document.getElementById("run").disabled = !enabled;
-  document.getElementById("languageModel").disabled = !enabled;
-  document.getElementById("languageCode").disabled = !enabled;
-  document.getElementById("copy").disabled = !enabled;
-  document.getElementById("save").disabled = !enabled;
-  document.getElementById("results").disabled = !enabled;
-};
+// ── Pure utilities (no DOM access, no side effects) ────────────────────────
 
-const copyContent = async () => {
-  try {
-    const operationStatus = document.getElementById("operation-status");
-    let clipboardContent = `${content.replace(/\n+$/, "")}\n\n`;
+const getLoadingMessage = (actionType, mediaType) => {
+  let loadingMessage;
 
-    // Copy the content to the clipboard
-    await navigator.clipboard.writeText(clipboardContent);
-
-    // Display a message indicating that the content was copied
-    operationStatus.textContent = chrome.i18n.getMessage("popup_copied");
-    setTimeout(() => operationStatus.textContent = "", 1000);
-  } catch (error) {
-    console.error("Failed to copy content:", error);
+  if (actionType === "summarize") {
+    if (mediaType === "captions") {
+      loadingMessage = chrome.i18n.getMessage("popup_summarizing_captions");
+    } else if (mediaType === "image") {
+      loadingMessage = chrome.i18n.getMessage("popup_summarizing_image");
+    } else {
+      loadingMessage = chrome.i18n.getMessage("popup_summarizing");
+    }
+  } else if (actionType === "translate") {
+    if (mediaType === "captions") {
+      loadingMessage = chrome.i18n.getMessage("popup_translating_captions");
+    } else if (mediaType === "image") {
+      loadingMessage = chrome.i18n.getMessage("popup_translating_image");
+    } else {
+      loadingMessage = chrome.i18n.getMessage("popup_translating");
+    }
+  } else {
+    loadingMessage = chrome.i18n.getMessage("popup_processing");
   }
+
+  return loadingMessage;
 };
 
-const saveContent = async () => {
-  try {
-    const operationStatus = document.getElementById("operation-status");
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    // Save the content to a text file
-    exportTextToFile(`${tab.url}\n\n${content}`);
-
-    // Display a message indicating that the content was saved
-    operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
-    setTimeout(() => operationStatus.textContent = "", 1000);
-  } catch (error) {
-    console.error("Failed to save content:", error);
-  }
-};
+// ── Content script injection utilities ──────────────────────────────────────
 
 const getSelectedText = () => {
   // Return the selected text
@@ -149,6 +138,53 @@ const getTranscript = async () => {
     return "";
   }
 };
+
+// ── UI helpers ──────────────────────────────────────────────────────────────
+
+const setPopupControlsEnabled = (enabled) => {
+  document.getElementById("run").disabled = !enabled;
+  document.getElementById("languageModel").disabled = !enabled;
+  document.getElementById("languageCode").disabled = !enabled;
+  document.getElementById("copy").disabled = !enabled;
+  document.getElementById("save").disabled = !enabled;
+  document.getElementById("results").disabled = !enabled;
+};
+
+// ── Button action handlers ──────────────────────────────────────────────────
+
+const copyContent = async () => {
+  try {
+    const operationStatus = document.getElementById("operation-status");
+    let clipboardContent = `${content.replace(/\n+$/, "")}\n\n`;
+
+    // Copy the content to the clipboard
+    await navigator.clipboard.writeText(clipboardContent);
+
+    // Display a message indicating that the content was copied
+    operationStatus.textContent = chrome.i18n.getMessage("popup_copied");
+    setTimeout(() => operationStatus.textContent = "", 1000);
+  } catch (error) {
+    console.error("Failed to copy content:", error);
+  }
+};
+
+const saveContent = async () => {
+  try {
+    const operationStatus = document.getElementById("operation-status");
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    // Save the content to a text file
+    exportTextToFile(`${tab.url}\n\n${content}`);
+
+    // Display a message indicating that the content was saved
+    operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
+    setTimeout(() => operationStatus.textContent = "", 1000);
+  } catch (error) {
+    console.error("Failed to save content:", error);
+  }
+};
+
+// ── Core async logic ────────────────────────────────────────────────────────
 
 const extractTaskInformation = async (triggerAction) => {
   let actionType;
@@ -283,32 +319,6 @@ const extractTaskInformation = async (triggerAction) => {
   }
 
   return { actionType, mediaType, taskInput };
-};
-
-const getLoadingMessage = (actionType, mediaType) => {
-  let loadingMessage;
-
-  if (actionType === "summarize") {
-    if (mediaType === "captions") {
-      loadingMessage = chrome.i18n.getMessage("popup_summarizing_captions");
-    } else if (mediaType === "image") {
-      loadingMessage = chrome.i18n.getMessage("popup_summarizing_image");
-    } else {
-      loadingMessage = chrome.i18n.getMessage("popup_summarizing");
-    }
-  } else if (actionType === "translate") {
-    if (mediaType === "captions") {
-      loadingMessage = chrome.i18n.getMessage("popup_translating_captions");
-    } else if (mediaType === "image") {
-      loadingMessage = chrome.i18n.getMessage("popup_translating_image");
-    } else {
-      loadingMessage = chrome.i18n.getMessage("popup_translating");
-    }
-  } else {
-    loadingMessage = chrome.i18n.getMessage("popup_processing");
-  }
-
-  return loadingMessage;
 };
 
 const main = async (useCache) => {
@@ -517,6 +527,8 @@ const initialize = async () => {
 
   main(true);
 };
+
+// ── Event listeners ─────────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", initialize);
 
