@@ -607,6 +607,7 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
             }
 
             const currentFinishReason = json.choices?.[0]?.finish_reason;
+
             if (currentFinishReason) {
               finishReason = currentFinishReason;
             }
@@ -661,6 +662,7 @@ export const streamGenerateContent = async (apiKey, apiContents, modelConfigs, s
     const openaiContents = convertToOpenAI(apiContents);
     return await streamGenerateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0], streamKey);
   }
+
   const { systemInstruction, contents } = extractSystemInstruction(apiContents);
   return await streamGenerateContentWithFallback(apiKey, contents, modelConfigs, streamKey, systemInstruction);
 };

@@ -55,11 +55,13 @@ async function callOpenAI(apiKey, systemInstruction, userContent) {
 
 async function retry(fn, maxRetries) {
   let lastError;
+
   for (let i = 0; i < maxRetries; i++) {
     try {
       return await fn();
     } catch (e) {
       lastError = e;
+
       if (i < maxRetries - 1) {
         const wait = Math.pow(2, i) * 1000;
         console.error(`  Retry ${i + 1}/${maxRetries - 1} in ${wait}ms: ${e.message}`);
@@ -67,11 +69,13 @@ async function retry(fn, maxRetries) {
       }
     }
   }
+
   throw lastError;
 }
 
 async function main() {
   const apiKey = process.env.OPENAI_API_KEY;
+
   if (!apiKey) {
     console.error("Error: OPENAI_API_KEY environment variable is not set.");
     process.exit(1);
@@ -90,6 +94,7 @@ async function main() {
         () => callOpenAI(apiKey, systemInstruction, description),
         MAX_RETRIES
       );
+
       if (text) {
         await mkdir("output", { recursive: true });
         await writeFile(`output/description_${code}.txt`, text, "utf-8");
