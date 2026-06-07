@@ -6,6 +6,8 @@ import {
   createContextMenus
 } from "./utils.js";
 
+// ── Pure utilities (no DOM access, no side effects) ────────────────────────
+
 const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLength) => {
   const languageNames = {
     en: "English",
@@ -70,6 +72,32 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
 
   return systemPrompt;
 };
+
+// ── Core async logic ────────────────────────────────────────────────────────
+
+const initContextMenus = async () => {
+  const options = await chrome.storage.local.get({
+    contextMenus: true,
+    contextMenuLabel1: "",
+    contextMenuLabel2: "",
+    contextMenuLabel3: "",
+    contextMenuLabel1Text: "",
+    contextMenuLabel2Text: "",
+    contextMenuLabel3Text: ""
+  });
+
+  await createContextMenus(
+    options.contextMenus,
+    options.contextMenuLabel1,
+    options.contextMenuLabel2,
+    options.contextMenuLabel3,
+    options.contextMenuLabel1Text,
+    options.contextMenuLabel2Text,
+    options.contextMenuLabel3Text
+  );
+};
+
+// ── Event listeners ─────────────────────────────────────────────────────────
 
 chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
@@ -215,28 +243,6 @@ if (chrome.contextMenus) {
     })();
   });
 }
-
-const initContextMenus = async () => {
-  const options = await chrome.storage.local.get({
-    contextMenus: true,
-    contextMenuLabel1: "",
-    contextMenuLabel2: "",
-    contextMenuLabel3: "",
-    contextMenuLabel1Text: "",
-    contextMenuLabel2Text: "",
-    contextMenuLabel3Text: ""
-  });
-
-  await createContextMenus(
-    options.contextMenus,
-    options.contextMenuLabel1,
-    options.contextMenuLabel2,
-    options.contextMenuLabel3,
-    options.contextMenuLabel1Text,
-    options.contextMenuLabel2Text,
-    options.contextMenuLabel3Text
-  );
-};
 
 chrome.runtime.onStartup.addListener(initContextMenus);
 chrome.runtime.onInstalled.addListener(initContextMenus);

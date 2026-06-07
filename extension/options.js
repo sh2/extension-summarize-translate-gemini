@@ -45,6 +45,8 @@ const INITIAL_OPTIONS = {
 
 const persistentStatus = document.getElementById("persistentStatus");
 
+// ── UI helpers ──────────────────────────────────────────────────────────────
+
 const showStatusMessage = (message, duration) => {
   const status = document.getElementById("status");
   status.textContent = message;
@@ -313,6 +315,8 @@ const applyOptionsToForm = (options) => {
   updateProviderUI();
 };
 
+// ── Core async logic ────────────────────────────────────────────────────────
+
 const saveOptions = async () => {
   const options = getOptionsFromForm(true);
 
@@ -456,6 +460,8 @@ const initialize = async () => {
 
   setOptionsToForm();
 };
+
+// ── Event listeners ─────────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", initialize);
 

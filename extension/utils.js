@@ -23,78 +23,7 @@ const SAFETY_SETTINGS = [{
 
 export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite:minimal";
 
-export const normalizeBaseUrl = (baseUrl) => {
-  const trimmedBaseUrl = baseUrl.trim();
-  const url = new URL(trimmedBaseUrl);
-
-  // Base URL comparison ignores search/hash.
-  url.search = "";
-  url.hash = "";
-
-  // Remove trailing slashes for a canonical base URL.
-  url.pathname = url.pathname.replace(/\/+$/, "") || "/";
-
-  return url.pathname === "/" ? url.origin : `${url.origin}${url.pathname}`;
-};
-
-const tryNormalizeBaseUrl = (baseUrl) => {
-  if (!baseUrl) {
-    return "";
-  }
-
-  try {
-    return normalizeBaseUrl(baseUrl);
-  } catch {
-    return null;
-  }
-};
-
-const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
-  const url = new URL(normalizedBaseUrl);
-  return `${url.protocol}//${url.host}/*`;
-};
-
-const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
-  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
-  const normalizedEndpointPath = endpointPath.startsWith("/") ? endpointPath : `/${endpointPath}`;
-  return `${normalizedBaseUrl}${normalizedEndpointPath}`;
-};
-
-export const needsHostPermissionPrompt = async (baseUrl) => {
-  const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
-
-  if (!normalizedBaseUrl) {
-    return false;
-  }
-
-  try {
-    const origin = getOriginPatternFromNormalizedBaseUrl(normalizedBaseUrl);
-    return !(await chrome.permissions.contains({ origins: [origin] }));
-  } catch {
-    return false;
-  }
-};
-
-export const ensureHostPermission = async (baseUrl) => {
-  const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
-
-  if (!normalizedBaseUrl) {
-    return true;
-  }
-
-  try {
-    const origin = getOriginPatternFromNormalizedBaseUrl(normalizedBaseUrl);
-    const hasPermission = await chrome.permissions.contains({ origins: [origin] });
-
-    if (hasPermission) {
-      return true;
-    }
-
-    return await chrome.permissions.request({ origins: [origin] });
-  } catch {
-    return false;
-  }
-};
+// ── UI utilities ─────────────────────────────────────────────────────────
 
 export const applyTheme = (theme) => {
   if (theme === "light") {
@@ -186,6 +115,197 @@ export const convertMarkdownToHtml = (content, breaks, links) => {
   return htmlDiv.innerHTML;
 };
 
+export const exportTextToFile = (text) => {
+  const currentDate = new Date();
+  const adjustedDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
+  const localDateTimeString = adjustedDate.toISOString().split(".")[0].replaceAll("T", "_").replaceAll(":", "-");
+  const blob = new Blob([text], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `gemini-results_${localDateTimeString}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+// ── Extension helpers ────────────────────────────────────────────────────
+
+export const normalizeBaseUrl = (baseUrl) => {
+  const trimmedBaseUrl = baseUrl.trim();
+  const url = new URL(trimmedBaseUrl);
+
+  // Base URL comparison ignores search/hash.
+  url.search = "";
+  url.hash = "";
+
+  // Remove trailing slashes for a canonical base URL.
+  url.pathname = url.pathname.replace(/\/+$/, "") || "/";
+
+  return url.pathname === "/" ? url.origin : `${url.origin}${url.pathname}`;
+};
+
+const tryNormalizeBaseUrl = (baseUrl) => {
+  if (!baseUrl) {
+    return "";
+  }
+
+  try {
+    return normalizeBaseUrl(baseUrl);
+  } catch {
+    return null;
+  }
+};
+
+const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
+  const url = new URL(normalizedBaseUrl);
+  return `${url.protocol}//${url.host}/*`;
+};
+
+const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+  const normalizedEndpointPath = endpointPath.startsWith("/") ? endpointPath : `/${endpointPath}`;
+  return `${normalizedBaseUrl}${normalizedEndpointPath}`;
+};
+
+export const needsHostPermissionPrompt = async (baseUrl) => {
+  const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
+
+  if (!normalizedBaseUrl) {
+    return false;
+  }
+
+  try {
+    const origin = getOriginPatternFromNormalizedBaseUrl(normalizedBaseUrl);
+    return !(await chrome.permissions.contains({ origins: [origin] }));
+  } catch {
+    return false;
+  }
+};
+
+export const ensureHostPermission = async (baseUrl) => {
+  const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
+
+  if (!normalizedBaseUrl) {
+    return true;
+  }
+
+  try {
+    const origin = getOriginPatternFromNormalizedBaseUrl(normalizedBaseUrl);
+    const hasPermission = await chrome.permissions.contains({ origins: [origin] });
+
+    if (hasPermission) {
+      return true;
+    }
+
+    return await chrome.permissions.request({ origins: [origin] });
+  } catch {
+    return false;
+  }
+};
+
+const formatTitle = (label1, label1DefaultKey, label2, label2DefaultKey) => {
+  const title1 = label1 || chrome.i18n.getMessage(label1DefaultKey);
+  const title2 = label2 || chrome.i18n.getMessage(label2DefaultKey);
+  return `${title1} / ${title2}`;
+};
+
+export const createContextMenus = async (useContextMenus, label1, label2, label3, label1Text, label2Text, label3Text) => {
+  if (!chrome.contextMenus) {
+    // Firefox for Android does not support chrome.contextMenus
+    return;
+  }
+
+  await chrome.contextMenus.removeAll();
+
+  if (useContextMenus) {
+    chrome.contextMenus.create({
+      id: "summarize",
+      title: chrome.i18n.getMessage("options_action_summarize_selection"),
+      contexts: ["page", "selection", "image", "action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "translate",
+      title: chrome.i18n.getMessage("options_action_translate_no_selection"),
+      contexts: ["page", "selection", "image", "action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "separator-1",
+      type: "separator",
+      contexts: ["action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-1",
+      title: formatTitle(label1, "options_action_custom_1_no_selection", label1Text, "options_action_custom_1_selection"),
+      contexts: ["action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-2",
+      title: formatTitle(label2, "options_action_custom_2_no_selection", label2Text, "options_action_custom_2_selection"),
+      contexts: ["action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-3",
+      title: formatTitle(label3, "options_action_custom_3_no_selection", label3Text, "options_action_custom_3_selection"),
+      contexts: ["action"]
+    });
+
+    chrome.contextMenus.create({
+      id: "separator-2",
+      type: "separator",
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-1-no-selection",
+      title: label1 || chrome.i18n.getMessage("options_action_custom_1_no_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-2-no-selection",
+      title: label2 || chrome.i18n.getMessage("options_action_custom_2_no_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-3-no-selection",
+      title: label3 || chrome.i18n.getMessage("options_action_custom_3_no_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "separator-3",
+      type: "separator",
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-1-selection",
+      title: label1Text || chrome.i18n.getMessage("options_action_custom_1_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-2-selection",
+      title: label2Text || chrome.i18n.getMessage("options_action_custom_2_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+
+    chrome.contextMenus.create({
+      id: "custom-action-3-selection",
+      title: label3Text || chrome.i18n.getMessage("options_action_custom_3_selection"),
+      contexts: ["page", "selection", "image"]
+    });
+  }
+};
+
+// ── LLM APIs ─────────────────────────────────────────────────────────────
+
 export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini", extraConfig = {}) => {
   // languageModel: "3.5-flash:minimal/3.1-flash-lite:0/gemma-4-31b-it/zz"
 
@@ -271,6 +391,25 @@ const tryParseJson = (text) => {
   } catch {
     return { error: { message: text } };
   }
+};
+
+const extractSystemInstruction = (apiContents) => {
+  const systemParts = [];
+  const otherContents = [];
+
+  for (const item of apiContents) {
+    if (item.role === "system") {
+      systemParts.push(...(item.parts || []));
+    } else {
+      otherContents.push(item);
+    }
+  }
+
+  if (systemParts.length > 0) {
+    return { systemInstruction: { parts: systemParts }, contents: otherContents };
+  }
+
+  return { systemInstruction: undefined, contents: apiContents };
 };
 
 const createOpenAIBaseUrlRequiredResponse = () => {
@@ -392,25 +531,6 @@ const generateContentWithFallback = async (apiKey, apiContents, modelConfigs, sy
   }
 
   return response;
-};
-
-const extractSystemInstruction = (apiContents) => {
-  const systemParts = [];
-  const otherContents = [];
-
-  for (const item of apiContents) {
-    if (item.role === "system") {
-      systemParts.push(...(item.parts || []));
-    } else {
-      otherContents.push(item);
-    }
-  }
-
-  if (systemParts.length > 0) {
-    return { systemInstruction: { parts: systemParts }, contents: otherContents };
-  }
-
-  return { systemInstruction: undefined, contents: apiContents };
 };
 
 export const generateContent = async (apiKey, apiContents, modelConfigs, apiProvider, openaiBaseUrl) => {
@@ -721,118 +841,4 @@ export const getResponseContent = (response, hasApiKey, apiProvider = "gemini") 
   }
 
   return responseContent;
-};
-
-const formatTitle = (label1, label1DefaultKey, label2, label2DefaultKey) => {
-  const title1 = label1 || chrome.i18n.getMessage(label1DefaultKey);
-  const title2 = label2 || chrome.i18n.getMessage(label2DefaultKey);
-  return `${title1} / ${title2}`;
-};
-
-export const createContextMenus = async (useContextMenus, label1, label2, label3, label1Text, label2Text, label3Text) => {
-  if (!chrome.contextMenus) {
-    // Firefox for Android does not support chrome.contextMenus
-    return;
-  }
-
-  await chrome.contextMenus.removeAll();
-
-  if (useContextMenus) {
-    chrome.contextMenus.create({
-      id: "summarize",
-      title: chrome.i18n.getMessage("options_action_summarize_selection"),
-      contexts: ["page", "selection", "image", "action"]
-    });
-
-    chrome.contextMenus.create({
-      id: "translate",
-      title: chrome.i18n.getMessage("options_action_translate_no_selection"),
-      contexts: ["page", "selection", "image", "action"]
-    });
-
-    chrome.contextMenus.create({
-      id: "separator-1",
-      type: "separator",
-      contexts: ["action"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-1",
-      title: formatTitle(label1, "options_action_custom_1_no_selection", label1Text, "options_action_custom_1_selection"),
-      contexts: ["action"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-2",
-      title: formatTitle(label2, "options_action_custom_2_no_selection", label2Text, "options_action_custom_2_selection"),
-      contexts: ["action"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-3",
-      title: formatTitle(label3, "options_action_custom_3_no_selection", label3Text, "options_action_custom_3_selection"),
-      contexts: ["action"]
-    });
-
-    chrome.contextMenus.create({
-      id: "separator-2",
-      type: "separator",
-      contexts: ["page", "selection", "image"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-1-no-selection",
-      title: label1 || chrome.i18n.getMessage("options_action_custom_1_no_selection"),
-      contexts: ["page", "selection", "image"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-2-no-selection",
-      title: label2 || chrome.i18n.getMessage("options_action_custom_2_no_selection"),
-      contexts: ["page", "selection", "image"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-3-no-selection",
-      title: label3 || chrome.i18n.getMessage("options_action_custom_3_no_selection"),
-      contexts: ["page", "selection", "image"]
-    });
-
-    chrome.contextMenus.create({
-      id: "separator-3",
-      type: "separator",
-      contexts: ["page", "selection", "image"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-1-selection",
-      title: label1Text || chrome.i18n.getMessage("options_action_custom_1_selection"),
-      contexts: ["page", "selection", "image"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-2-selection",
-      title: label2Text || chrome.i18n.getMessage("options_action_custom_2_selection"),
-      contexts: ["page", "selection", "image"]
-    });
-
-    chrome.contextMenus.create({
-      id: "custom-action-3-selection",
-      title: label3Text || chrome.i18n.getMessage("options_action_custom_3_selection"),
-      contexts: ["page", "selection", "image"]
-    });
-  }
-};
-
-export const exportTextToFile = (text) => {
-  const currentDate = new Date();
-  const adjustedDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
-  const localDateTimeString = adjustedDate.toISOString().split(".")[0].replaceAll("T", "_").replaceAll(":", "-");
-  const blob = new Blob([text], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `gemini-results_${localDateTimeString}.txt`;
-  a.click();
-  URL.revokeObjectURL(url);
 };
