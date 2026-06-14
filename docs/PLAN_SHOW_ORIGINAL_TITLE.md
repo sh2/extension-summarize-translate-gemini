@@ -21,7 +21,7 @@
 | 7 | ソース要素の構造 | `#content` 上の独立した `<p id="page-source">` |
 | 8 | ソース要素のスタイル | 色を薄く（`var(--nc-tx-2)` + `opacity: 0.85`）、フォントサイズは変更しない |
 | 9 | `Copy` への含めるか | 含めない（現状維持） |
-| 10 | `Save`（手動保存・自動保存とも）への含めるか | 含める。ファイル先頭に「ラベル+タイトル」「URL」の順で記載 |
+| 10 | `Save`（ポップアップの Save ボタン、結果ページの Save ボタン、自動保存）への含めるか | 含める。ファイル先頭に「ラベル+タイトル」「URL」の順で記載 |
 | 11 | ストリーミング中の表示 | 本文は現行どおり逐次表示。タイトルは `result` オブジェクト保存後（完了後）に表示 |
 
 ## 変更ファイル一覧
@@ -86,6 +86,72 @@ const responsePromise = chrome.runtime.sendMessage({
 ```
 
 同様に `console.log("Request:", { ... })` の内容にも `title` を追加します（任意）。
+
+#### 1.4 ポップアップの `saveContent` を修正
+
+ポップアップの「Save」ボタンから保存するファイルにも、結果ページと同様にタイトルと URL を先頭に含めます。
+
+まず、モジュールレベル変数を追加します。
+
+```js
+let resultIndex = 0;
+let content = "";
+let pageUrl = "";
+let pageTitle = "";
+```
+
+`main()` の先頭では、`content` と同様に `pageUrl` と `pageTitle` もリセットしておきます。これにより、抽出処理が途中で例外になった場合に前回実行の古い値が残り、失敗後の手動 Save で誤ったヘッダが保存されるのを防ぎます。
+
+```js
+// Clear the content and source metadata
+content = "";
+pageUrl = "";
+pageTitle = "";
+```
+
+その後、`extractTaskInformation()` から取得した `url` と `title` を保存します。
+
+```js
+const { actionType, mediaType, taskInput, url, title } = await extractTaskInformation(triggerAction);
+pageUrl = url;
+pageTitle = title;
+```
+
+`saveContent()` を以下のように修正します。
+
+```js
+const saveContent = async () => {
+  try {
+    const operationStatus = document.getElementById("operation-status");
+    const headerLines = [];
+
+    if (pageTitle) {
+      headerLines.push(`${chrome.i18n.getMessage("results_source_page")}${pageTitle}`);
+    }
+
+    if (pageUrl) {
+      headerLines.push(pageUrl);
+    }
+
+    let fileContent = "";
+
+    if (headerLines.length > 0) {
+      fileContent += `${headerLines.join("\n")}\n\n`;
+    }
+
+    fileContent += `${content.replace(/\n+$/, "")}\n\n`;
+
+    exportTextToFile(fileContent);
+
+    operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
+    setTimeout(() => operationStatus.textContent = "", 1000);
+  } catch (error) {
+    console.error("Failed to save content:", error);
+  }
+};
+```
+
+これにより、ポップアップからの保存でも `chrome.tabs.query` を再度呼び出す必要がなくなり、結果ページと同じ形式のヘッダが付きます。
 
 ### 2. `extension/service-worker.js`
 
