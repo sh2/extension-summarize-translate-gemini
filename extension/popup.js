@@ -13,6 +13,8 @@ import {
 
 let resultIndex = 0;
 let content = "";
+let pageUrl = "";
+let pageTitle = "";
 
 // ── Pure utilities (no DOM access, no side effects) ────────────────────────
 
@@ -168,20 +170,31 @@ const copyContent = async () => {
   }
 };
 
-const saveContent = async () => {
-  try {
-    const operationStatus = document.getElementById("operation-status");
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+const saveContent = () => {
+  const operationStatus = document.getElementById("operation-status");
+  const headerLines = [];
+  let fileContent = "";
 
-    // Save the content to a text file
-    exportTextToFile(`${tab.url}\n\n${content}`);
-
-    // Display a message indicating that the content was saved
-    operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
-    setTimeout(() => operationStatus.textContent = "", 1000);
-  } catch (error) {
-    console.error("Failed to save content:", error);
+  if (pageTitle) {
+    headerLines.push(pageTitle);
   }
+
+  if (pageUrl) {
+    headerLines.push(pageUrl);
+  }
+
+  if (headerLines.length > 0) {
+    fileContent += `${headerLines.join("\n")}\n\n`;
+  }
+
+  fileContent += `${content.replace(/\n+$/, "")}\n\n`;
+
+  // Save the content to a text file
+  exportTextToFile(fileContent);
+
+  // Display a message indicating that the content was saved
+  operationStatus.textContent = chrome.i18n.getMessage("popup_saved");
+  setTimeout(() => operationStatus.textContent = "", 1000);
 };
 
 // ── Core async logic ────────────────────────────────────────────────────────
@@ -318,7 +331,7 @@ const extractTaskInformation = async (triggerAction) => {
     }
   }
 
-  return { actionType, mediaType, taskInput };
+  return { actionType, mediaType, taskInput, url: tab.url, title: tab.title };
 };
 
 const main = async (useCache) => {
@@ -328,8 +341,10 @@ const main = async (useCache) => {
   let modelVersion = "";
   let didGenerate = false;
 
-  // Clear the content
+  // Clear the content and source metadata
   content = "";
+  pageUrl = "";
+  pageTitle = "";
 
   // Increment the result index
   resultIndex = (await chrome.storage.session.get({ resultIndex: -1 })).resultIndex;
@@ -349,7 +364,6 @@ const main = async (useCache) => {
     });
 
     const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const languageModel = document.getElementById("languageModel").value;
     const languageCode = document.getElementById("languageCode").value;
     const triggerAction = document.getElementById("triggerAction").value;
@@ -360,7 +374,9 @@ const main = async (useCache) => {
     setPopupControlsEnabled(false);
 
     // Extract the task information
-    const { actionType, mediaType, taskInput } = await extractTaskInformation(triggerAction);
+    const { actionType, mediaType, taskInput, url, title } = await extractTaskInformation(triggerAction);
+    pageUrl = url;
+    pageTitle = title;
 
     // Display a loading message
     displayIntervalId = setInterval(displayLoadingMessage, 500, "status", getLoadingMessage(actionType, mediaType));
@@ -379,7 +395,8 @@ const main = async (useCache) => {
         [`result_${resultIndex}`]: {
           requestApiContent,
           responseContent: cachedResponseContent,
-          url: tab.url
+          url: url,
+          title: title
         }
       });
     } else {
@@ -399,7 +416,8 @@ const main = async (useCache) => {
         languageCode: languageCode,
         streamKey: streamKey,
         resultIndex: resultIndex,
-        url: tab.url
+        url: url,
+        title: title
       });
 
       console.log("Request:", {
@@ -410,7 +428,8 @@ const main = async (useCache) => {
         languageCode: languageCode,
         streamKey: streamKey,
         resultIndex: resultIndex,
-        url: tab.url
+        url: url,
+        title: title
       });
 
       if (streaming) {
@@ -456,7 +475,11 @@ const main = async (useCache) => {
     const { autoSave } = await chrome.storage.local.get({ autoSave: false });
 
     if (autoSave && didGenerate) {
-      await saveContent();
+      try {
+        saveContent();
+      } catch (saveError) {
+        console.error("Auto-save failed:", saveError);
+      }
     }
 
     // Enable the buttons and input fields

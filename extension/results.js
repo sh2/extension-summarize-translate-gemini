@@ -22,6 +22,7 @@ const conversation = [];
 let resultIndex = 0;
 let result = {};
 let resultViewStatus = RESULT_VIEW_STATUS.IDLE;
+let resultBaseTitle = chrome.i18n.getMessage("results_title");
 
 // ── Pure utilities (no DOM access, no side effects) ────────────────────────
 
@@ -78,14 +79,12 @@ const isSuccessfulResponse = (response, apiProvider) => {
 const isResultTabActive = () => document.visibilityState === "visible" && document.hasFocus();
 
 const updateDocumentTitle = () => {
-  const baseTitle = chrome.i18n.getMessage("results_title");
-
   if (resultViewStatus === RESULT_VIEW_STATUS.UNREAD) {
-    document.title = `● ${baseTitle}`;
+    document.title = `● ${resultBaseTitle}`;
   } else if (resultViewStatus === RESULT_VIEW_STATUS.WAITING) {
-    document.title = `… ${baseTitle}`;
+    document.title = `… ${resultBaseTitle}`;
   } else {
-    document.title = baseTitle;
+    document.title = resultBaseTitle;
   }
 };
 
@@ -134,6 +133,19 @@ const setResultControlsEnabled = (enabled) => {
   document.getElementById("send").disabled = !enabled;
 };
 
+const updatePageSource = () => {
+  const pageSourceElement = document.getElementById("page-source");
+  const pageSourceTitleElement = document.getElementById("page-source-title");
+
+  if (result.title) {
+    pageSourceTitleElement.textContent = result.title;
+    pageSourceElement.style.display = "block";
+  } else {
+    pageSourceTitleElement.textContent = "";
+    pageSourceElement.style.display = "none";
+  }
+};
+
 // ── Button action handlers ──────────────────────────────────────────────────
 
 const clearConversation = async () => {
@@ -173,27 +185,38 @@ const copyContent = async () => {
 };
 
 const saveContent = () => {
-  try {
-    const operationStatus = document.getElementById("operation-status");
-    let content = `${result.responseContent.replace(/\n+$/, "")}\n\n`;
+  const operationStatus = document.getElementById("operation-status");
+  const headerLines = [];
+  let fileContent = "";
 
-    for (const item of conversation) {
-      const text = extractTextFromParts(item?.parts);
-
-      if (text) {
-        content += `${text.replace(/\n+$/, "")}\n\n`;
-      }
-    }
-
-    // Save the content to a text file
-    exportTextToFile(`${result.url}\n\n${content}`);
-
-    // Display a message indicating that the content was saved
-    operationStatus.textContent = chrome.i18n.getMessage("results_saved");
-    setTimeout(() => operationStatus.textContent = "", 1000);
-  } catch (error) {
-    console.error("Failed to save content:", error);
+  if (result.title) {
+    headerLines.push(result.title);
   }
+
+  if (result.url) {
+    headerLines.push(result.url);
+  }
+
+  if (headerLines.length > 0) {
+    fileContent += `${headerLines.join("\n")}\n\n`;
+  }
+
+  fileContent += `${result.responseContent.replace(/\n+$/, "")}\n\n`;
+
+  for (const item of conversation) {
+    const text = extractTextFromParts(item?.parts);
+
+    if (text) {
+      fileContent += `${text.replace(/\n+$/, "")}\n\n`;
+    }
+  }
+
+  // Save the content to a text file
+  exportTextToFile(fileContent);
+
+  // Display a message indicating that the content was saved
+  operationStatus.textContent = chrome.i18n.getMessage("results_saved");
+  setTimeout(() => operationStatus.textContent = "", 1000);
 };
 
 // ── Core async logic ────────────────────────────────────────────────────────
@@ -487,6 +510,11 @@ const initialize = async () => {
     // Re-enable the buttons and input fields
     setResultControlsEnabled(true);
   }
+
+  const baseTitle = chrome.i18n.getMessage("results_title");
+  resultBaseTitle = result.title ? `${result.title} - ${baseTitle}` : baseTitle;
+  updateDocumentTitle();
+  updatePageSource();
 
   // Convert the content from Markdown to HTML
   const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });

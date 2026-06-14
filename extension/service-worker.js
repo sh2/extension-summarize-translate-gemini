@@ -103,7 +103,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
   (async () => {
     if (request.message === "generate") {
       // Generate content
-      const { actionType, mediaType, taskInput, languageModel, languageCode, streamKey, resultIndex, url } = request;
+      const { actionType, mediaType, taskInput, languageModel, languageCode, streamKey, resultIndex, url, title } = request;
 
       const {
         apiKey,
@@ -176,7 +176,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         [`result_${resultIndex}`]: {
           requestApiContent: apiContents,
           responseContent: responseContent,
-          url: url
+          url: url,
+          title: title
         }
       });
 
