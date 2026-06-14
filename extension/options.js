@@ -392,6 +392,7 @@ const importOptionsFromFile = async () => {
       applyOptionsToForm(options);
 
       const currentOptions = getOptionsFromForm(true);
+
       const needsPrompt = currentOptions.apiProvider === "openai"
         && await needsHostPermissionPrompt(currentOptions.openaiBaseUrl);
 
@@ -420,6 +421,7 @@ const restoreOptionsFromCloud = async () => {
   applyOptionsToForm(options);
 
   const currentOptions = getOptionsFromForm(true);
+
   const needsPrompt = currentOptions.apiProvider === "openai"
     && await needsHostPermissionPrompt(currentOptions.openaiBaseUrl);
 
