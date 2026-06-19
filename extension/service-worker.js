@@ -36,20 +36,30 @@ const getSystemPrompt = async (actionType, mediaType, languageCode, taskInputLen
   if (actionType === "summarize") {
     if (mediaType === "image") {
       systemPrompt = "Summarize the image as Markdown numbered list " +
-        `in ${languageNames[languageCode]} and reply only with the list.\n` +
-        "Format:\n1. First point.\n2. Second point.\n3. Third point.";
+        `in ${languageNames[languageCode]} and reply only with the list.\n\n` +
+        "Format:\n1. First point.\n2. Second point.\n3. Third point.\n\n" +
+        "Note: If the user asks a follow-up question, disregard the previous " +
+        "instruction to reply with a Markdown numbered list. Answer the follow-up " +
+        "question naturally, using any format that best fits the answer.";
     } else {
       systemPrompt = `Summarize the entire text as up to ${numItems}-item Markdown numbered list ` +
-        `in ${languageNames[languageCode]} and reply only with the list.\n` +
-        "Format:\n1. First point.\n2. Second point.\n3. Third point.";
+        `in ${languageNames[languageCode]} and reply only with the list.\n\n` +
+        "Format:\n1. First point.\n2. Second point.\n3. Third point.\n\n" +
+        "Note: If the user asks a follow-up question, disregard the previous " +
+        "instruction to reply with a Markdown numbered list. Answer the follow-up " +
+        "question naturally, using any format that best fits the answer.";
     }
   } else if (actionType === "translate") {
     if (mediaType === "image") {
       systemPrompt = `Translate the image into ${languageNames[languageCode]} ` +
-        "and reply only with the translated result.";
+        "and reply only with the translated result.\n" +
+        "If the user asks a follow-up question, disregard the previous instruction " +
+        "to translate and answer the follow-up question naturally.";
     } else {
       systemPrompt = `Translate the entire text into ${languageNames[languageCode]} ` +
-        "and reply only with the translated result.";
+        "and reply only with the translated result.\n" +
+        "If the user asks a follow-up question, disregard the previous instruction " +
+        "to translate and answer the follow-up question naturally.";
     }
   } else if (actionType === "noTextCustom1") {
     systemPrompt = (await chrome.storage.local.get({ noTextCustomPrompt1: "" })).noTextCustomPrompt1;
