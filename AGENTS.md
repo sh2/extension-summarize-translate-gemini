@@ -49,3 +49,23 @@ Defined in `extension/utils.js`. Used internally when API calls fail before rece
 | 1001 | No models available |
 | 1002 | OpenAI-compatible Base URL is not set |
 | 1003 | OpenAI-compatible Base URL is invalid |
+
+## Updating vendored libraries
+
+The files under `extension/lib/` are third-party libraries. Do not edit them in place. When updating, replace them with the latest minified builds downloaded from jsDelivr.
+
+Current vendored files:
+
+| File | Package | jsDelivr URL template |
+| --- | --- | --- |
+| `extension/lib/Readability.min.js` | `@mozilla/readability` | `https://cdn.jsdelivr.net/npm/@mozilla/readability@<version>/Readability.min.js` |
+| `extension/lib/marked.umd.min.js` | `marked` | `https://cdn.jsdelivr.net/npm/marked@<version>/lib/marked.umd.min.js` |
+| `extension/lib/purify.min.js` | `dompurify` | `https://cdn.jsdelivr.net/npm/dompurify@<version>/dist/purify.min.js` |
+
+Steps to update:
+
+1. Check the latest version on npm or GitHub for each package listed above.
+2. Download the minified build for the new version from the jsDelivr URL template, preserving the exact file names under `extension/lib/`.
+3. Do not modify the downloaded file contents.
+4. Run `npm run lint` after replacing the files.
+5. Verify the version strings in the file headers (e.g. `/npm/@mozilla/readability@0.6.0/Readability.js`, `marked@18.0.5`, `DOMPurify 3.4.11`).
