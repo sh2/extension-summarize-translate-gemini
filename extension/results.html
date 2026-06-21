@@ -8,11 +8,71 @@
   <link rel="stylesheet" href="css/new.min.css">
   <link rel="stylesheet" href="css/common.css">
   <style>
+    .results-drop-zone {
+      border: 2px dashed transparent;
+      border-radius: .75rem;
+      transition: border-color .2s ease, background-color .2s ease;
+    }
+
+    .results-drop-zone.dragover {
+      background-color: var(--nc-bg-2);
+      border-color: var(--nc-lk-1);
+    }
+
+    #attached-image-preview {
+      display: none;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 0 .75rem 0;
+    }
+
+    #attached-image-preview.has-image {
+      display: block;
+    }
+
+    .results-image-preview {
+      position: relative;
+      box-sizing: border-box;
+      border-radius: .75rem;
+      background-color: var(--nc-bg-2);
+      padding: .5rem;
+    }
+
+    .results-image-preview img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 180px;
+      margin: 0;
+      border-radius: .5rem;
+      object-fit: contain;
+    }
+
+    .results-image-preview button {
+      position: absolute;
+      top: .25rem;
+      right: .25rem;
+      width: 2rem;
+      height: 2rem;
+      margin: 0;
+      padding: 0;
+      border-radius: 999px;
+      line-height: 1;
+    }
+
+    .conversation-image-preview {
+      display: inline-block;
+      max-width: 320px;
+    }
+
     @media (max-width: 639px) {
 
       body select,
       body #clear,
-      body #copy {
+      body #copy,
+      body #attach-image-button,
+      body #send {
         display: block;
       }
     }
@@ -44,11 +104,17 @@
   </div>
 
   <div>
-    <textarea id="text" rows="4" placeholder="Ask a follow-up question (Press Ctrl/Cmd+Enter to send)"
-      style="width: 100%;"></textarea>
-    <br>
+    <div id="follow-up-text-wrapper" class="results-drop-zone">
+      <textarea id="text" rows="4" placeholder="Ask a follow-up question (Press Ctrl/Cmd+Enter to send)"
+        style="width: 100%; margin-bottom: 0;"></textarea>
+    </div>
+    <div id="attach-image-ui">
+      <button id="attach-image-button" type="button" data-i18n="results_button_attach_image">Attach image</button>
+      <input id="attach-image-input" type="file" accept="image/*" hidden>
+      <div id="attached-image-preview"></div>
+    </div>
     <span id="languageModelContainer"></span>
-    <button id="send" data-i18n="results_button_send">Send</button>
+    <button id="send" type="button" data-i18n="results_button_send">Send</button>
     <span id="send-status" style="color: gray;"></span>
   </div>
 

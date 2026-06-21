@@ -18,11 +18,19 @@ const RESULT_VIEW_STATUS = Object.freeze({
   UNREAD: "unread"
 });
 
+const ATTACHED_IMAGE_MIME_TYPE = "image/jpeg";
+const ATTACHED_IMAGE_MAX_EDGE = 1536;
+const ATTACHED_IMAGE_QUALITY = 0.8;
+
 const conversation = [];
 let resultIndex = 0;
 let result = {};
 let resultViewStatus = RESULT_VIEW_STATUS.IDLE;
 let resultBaseTitle = chrome.i18n.getMessage("results_title");
+let attachedImage = null;
+let resultControlsEnabled = true;
+let activeDropTargets = 0;
+let sendStatusTimeoutId = null;
 
 // ── Pure utilities (no DOM access, no side effects) ────────────────────────
 
@@ -55,6 +63,132 @@ const extractTextFromParts = (parts) => {
     .filter(part => part && typeof part.text === "string")
     .map(part => part.text)
     .join("\n");
+};
+
+const extractImageParts = (parts) => {
+  if (!Array.isArray(parts)) {
+    return [];
+  }
+
+  return parts.filter(part => {
+    return Boolean(
+      part?.inline_data &&
+      typeof part.inline_data.mime_type === "string" &&
+      typeof part.inline_data.data === "string"
+    );
+  });
+};
+
+const getImageDataUrl = (image) => {
+  if (!image?.mimeType || !image?.data) {
+    return "";
+  }
+
+  return `data:${image.mimeType};base64,${image.data}`;
+};
+
+const getScaledImageSize = (width, height, maxEdge) => {
+  if (width <= 0 || height <= 0) {
+    throw new Error("Invalid image dimensions.");
+  }
+
+  const longestEdge = Math.max(width, height);
+
+  if (longestEdge <= maxEdge) {
+    return { width, height };
+  }
+
+  const scale = maxEdge / longestEdge;
+  return {
+    width: Math.max(1, Math.round(width * scale)),
+    height: Math.max(1, Math.round(height * scale))
+  };
+};
+
+const readFileAsDataUrl = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+      if (typeof reader.result === "string" && reader.result) {
+        resolve(reader.result);
+      } else {
+        reject(new Error("Failed to read the selected file."));
+      }
+    });
+
+    reader.addEventListener("error", () => {
+      reject(reader.error || new Error("Failed to read the selected file."));
+    });
+
+    reader.readAsDataURL(file);
+  });
+};
+
+const loadImageElement = (dataUrl) => {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+
+    image.addEventListener("load", () => {
+      resolve(image);
+    });
+
+    image.addEventListener("error", () => {
+      reject(new Error("Failed to decode the selected image."));
+    });
+
+    image.src = dataUrl;
+  });
+};
+
+const normalizeImageFile = async (file) => {
+  const originalDataUrl = await readFileAsDataUrl(file);
+  const image = await loadImageElement(originalDataUrl);
+  const sourceWidth = image.naturalWidth || image.width;
+  const sourceHeight = image.naturalHeight || image.height;
+  const { width, height } = getScaledImageSize(sourceWidth, sourceHeight, ATTACHED_IMAGE_MAX_EDGE);
+  const canvas = document.createElement("canvas");
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    throw new Error("Failed to create a canvas context for image normalization.");
+  }
+
+  context.drawImage(image, 0, 0, width, height);
+
+  const normalizedDataUrl = canvas.toDataURL(ATTACHED_IMAGE_MIME_TYPE, ATTACHED_IMAGE_QUALITY);
+  const [, data = ""] = normalizedDataUrl.split(",", 2);
+
+  if (!data) {
+    throw new Error("Failed to encode the selected image.");
+  }
+
+  return {
+    mimeType: ATTACHED_IMAGE_MIME_TYPE,
+    data
+  };
+};
+
+const isImageFile = (file) => {
+  return Boolean(file?.type && file.type.startsWith("image/"));
+};
+
+const getFirstImageFile = (files) => {
+  for (const file of Array.from(files || [])) {
+    if (isImageFile(file)) {
+      return file;
+    }
+  }
+
+  return null;
+};
+
+const isFileDragEvent = (event) => {
+  return Array.from(event.dataTransfer?.types || []).includes("Files");
 };
 
 const isSuccessfulResponse = (response, apiProvider) => {
@@ -108,13 +242,150 @@ const completeWaitingForResult = () => {
 
 // ── UI helpers ──────────────────────────────────────────────────────────────
 
-const appendQuestionToUi = (question) => {
+const hasRequestApiContent = () => {
+  return Array.isArray(result.requestApiContent) && result.requestApiContent.length > 0;
+};
+
+const clearSendStatusMessage = () => {
+  clearTimeout(sendStatusTimeoutId);
+  sendStatusTimeoutId = null;
+  document.getElementById("send-status").textContent = "";
+};
+
+const showTransientSendStatusMessage = (message) => {
+  clearSendStatusMessage();
+  document.getElementById("send-status").textContent = message;
+
+  sendStatusTimeoutId = setTimeout(() => {
+    if (document.getElementById("send-status").textContent === message) {
+      document.getElementById("send-status").textContent = "";
+    }
+  }, 3000);
+};
+
+const updateSendButtonState = () => {
+  const canSend = resultControlsEnabled &&
+    hasRequestApiContent() &&
+    Boolean(document.getElementById("text").value.trim());
+
+  document.getElementById("send").disabled = !canSend;
+};
+
+const updateFollowUpInputState = () => {
+  const followUpEnabled = resultControlsEnabled && hasRequestApiContent();
+  const languageModel = document.getElementById("languageModel");
+
+  document.getElementById("text").readOnly = !followUpEnabled;
+  document.getElementById("attach-image-button").disabled = !followUpEnabled;
+  document.getElementById("attach-image-input").disabled = !followUpEnabled;
+
+  if (languageModel) {
+    languageModel.disabled = !followUpEnabled;
+  }
+
+  updateSendButtonState();
+};
+
+const setDropZoneHighlight = (active) => {
+  document.getElementById("follow-up-text-wrapper").classList.toggle("dragover", active);
+};
+
+const createImagePreviewElement = ({ imageDataUrl, removable = false, className = "" }) => {
+  const previewElement = document.createElement("div");
+  const classNames = ["results-image-preview"];
+
+  if (className) {
+    classNames.push(className);
+  }
+
+  previewElement.className = classNames.join(" ");
+
+  const imageElement = document.createElement("img");
+  imageElement.src = imageDataUrl;
+  imageElement.alt = "";
+  previewElement.appendChild(imageElement);
+
+  if (removable) {
+    const removeButton = document.createElement("button");
+    removeButton.type = "button";
+    removeButton.textContent = "×";
+    removeButton.setAttribute("aria-label", "Remove image");
+    removeButton.addEventListener("click", clearAttachedImage);
+    previewElement.appendChild(removeButton);
+  }
+
+  return previewElement;
+};
+
+const renderAttachedImagePreview = () => {
+  const previewContainer = document.getElementById("attached-image-preview");
+
+  previewContainer.replaceChildren();
+  previewContainer.classList.toggle("has-image", Boolean(attachedImage));
+
+  if (!attachedImage) {
+    return;
+  }
+
+  previewContainer.appendChild(createImagePreviewElement({
+    imageDataUrl: getImageDataUrl(attachedImage),
+    removable: true
+  }));
+};
+
+const clearAttachedImage = () => {
+  attachedImage = null;
+  renderAttachedImagePreview();
+};
+
+const setAttachedImageFromFile = async (file) => {
+  if (!isImageFile(file)) {
+    showTransientSendStatusMessage(chrome.i18n.getMessage("results_image_attachment_unsupported"));
+    return false;
+  }
+
+  try {
+    attachedImage = await normalizeImageFile(file);
+    renderAttachedImagePreview();
+    return true;
+  } catch (error) {
+    console.error("Failed to process the attached image:", error);
+    showTransientSendStatusMessage(chrome.i18n.getMessage("results_image_attachment_unsupported"));
+    return false;
+  }
+};
+
+const appendQuestionToUi = (parts) => {
+  const questionText = extractTextFromParts(parts);
+  const imageParts = extractImageParts(parts);
+
+  if (!questionText && imageParts.length === 0) {
+    return;
+  }
+
   const formattedQuestionDiv = document.createElement("div");
   formattedQuestionDiv.style.backgroundColor = "var(--nc-bg-3)";
   formattedQuestionDiv.style.borderRadius = "1rem";
   formattedQuestionDiv.style.margin = "1.5rem";
   formattedQuestionDiv.style.padding = "1rem 1rem .1rem";
-  formattedQuestionDiv.innerHTML = convertMarkdownToHtml(question, true, false);
+  formattedQuestionDiv.setAttribute("dir", "auto");
+
+  if (questionText) {
+    const formattedQuestionTextDiv = document.createElement("div");
+    formattedQuestionTextDiv.innerHTML = convertMarkdownToHtml(questionText, true, false);
+    formattedQuestionDiv.appendChild(formattedQuestionTextDiv);
+  }
+
+  for (const imagePart of imageParts) {
+    formattedQuestionDiv.appendChild(createImagePreviewElement({
+      imageDataUrl: getImageDataUrl({
+        mimeType: imagePart.inline_data.mime_type,
+        data: imagePart.inline_data.data
+      }),
+      className: "conversation-image-preview"
+    }));
+  }
+
   document.getElementById("conversation").appendChild(formattedQuestionDiv);
 };
 
@@ -125,12 +396,11 @@ const appendAnswerPlaceholderToUi = () => {
 };
 
 const setResultControlsEnabled = (enabled) => {
+  resultControlsEnabled = enabled;
   document.getElementById("clear").disabled = !enabled;
   document.getElementById("copy").disabled = !enabled;
   document.getElementById("save").disabled = !enabled;
-  document.getElementById("text").readOnly = !enabled;
-  document.getElementById("languageModel").disabled = !enabled;
-  document.getElementById("send").disabled = !enabled;
+  updateFollowUpInputState();
 };
 
 const updatePageSource = () => {
@@ -152,6 +422,7 @@ const clearConversation = async () => {
   // Clear the conversation
   document.getElementById("conversation").replaceChildren();
   conversation.length = 0;
+  clearAttachedImage();
 
   try {
     await chrome.storage.session.remove(`conversation_${resultIndex}`);
@@ -228,15 +499,29 @@ const askQuestion = async () => {
     return;
   }
 
+  const questionParts = [{ text: question }];
+
+  if (attachedImage) {
+    questionParts.push({
+      inline_data: {
+        mime_type: attachedImage.mimeType,
+        data: attachedImage.data
+      }
+    });
+  }
+
   // Disable the buttons and input fields
   setResultControlsEnabled(false);
+  clearSendStatusMessage();
 
   // Display a loading message
-  let displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_response"));
+  const displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_response"));
 
   // Render user's question immediately
-  appendQuestionToUi(question);
+  appendQuestionToUi(questionParts);
   document.getElementById("text").value = "";
+  clearAttachedImage();
+  updateSendButtonState();
 
   // Append the formatted answer placeholder to the conversation
   const formattedAnswerDiv = appendAnswerPlaceholderToUi();
@@ -294,7 +579,7 @@ const askQuestion = async () => {
     apiContents.push(...conversation);
 
     // Add the new question to the conversation
-    apiContents.push({ role: "user", parts: [{ text: question }] });
+    apiContents.push({ role: "user", parts: questionParts });
 
     let response;
 
@@ -342,7 +627,7 @@ const askQuestion = async () => {
 
     // If the response is successful, update the conversation list and storage
     if (isSuccessfulResponse(response, apiProvider)) {
-      conversation.push({ role: "user", parts: [{ text: question }] });
+      conversation.push({ role: "user", parts: questionParts });
       conversation.push({ role: "model", parts: [{ text: answer }] });
 
       try {
@@ -519,6 +804,7 @@ const initialize = async () => {
   // Convert the content from Markdown to HTML
   const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
   document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false, renderLinks);
+  renderAttachedImagePreview();
 
   // Consume the one-shot auto-save handoff before restoring follow-up conversation,
   // so the saved file matches the popup auto-save behavior for the initial result.
@@ -539,11 +825,6 @@ const initialize = async () => {
     }
   }
 
-  if (!Array.isArray(result.requestApiContent) || result.requestApiContent.length === 0) {
-    document.getElementById("text").readOnly = true;
-    document.getElementById("send").disabled = true;
-  }
-
   // Restore the conversation from session storage if it exists and is valid
   const savedConversation = sessionData[`conversation_${resultIndex}`];
 
@@ -552,12 +833,10 @@ const initialize = async () => {
     conversation.push(...savedConversation);
 
     for (let i = 0; i < savedConversation.length; i += 2) {
-      const questionText = extractTextFromParts(savedConversation[i]?.parts);
+      const questionParts = savedConversation[i]?.parts;
       const answerText = extractTextFromParts(savedConversation[i + 1]?.parts);
 
-      if (questionText) {
-        appendQuestionToUi(questionText);
-      }
+      appendQuestionToUi(questionParts);
 
       if (answerText) {
         const answerPlaceholder = appendAnswerPlaceholderToUi();
@@ -571,6 +850,8 @@ const initialize = async () => {
   } catch (error) {
     console.error("Failed to remove stream content from session storage:", error);
   }
+
+  updateFollowUpInputState();
 };
 
 // ── Event listeners ─────────────────────────────────────────────────────────
@@ -582,6 +863,103 @@ document.getElementById("clear").addEventListener("click", clearConversation);
 document.getElementById("copy").addEventListener("click", copyContent);
 document.getElementById("save").addEventListener("click", saveContent);
 document.getElementById("send").addEventListener("click", askQuestion);
+
+document.getElementById("attach-image-button").addEventListener("click", () => {
+  document.getElementById("attach-image-input").click();
+});
+
+document.getElementById("attach-image-input").addEventListener("change", async (event) => {
+  const input = event.target;
+  const imageFile = getFirstImageFile(input.files);
+
+  if (imageFile) {
+    await setAttachedImageFromFile(imageFile);
+  } else if (input.files?.length) {
+    showTransientSendStatusMessage(chrome.i18n.getMessage("results_image_attachment_unsupported"));
+  }
+
+  input.value = "";
+});
+
+document.getElementById("text").addEventListener("input", updateSendButtonState);
+
+document.getElementById("text").addEventListener("paste", async (event) => {
+  const fileItems = Array.from(event.clipboardData?.items || []).filter(item => item.kind === "file");
+
+  if (fileItems.length === 0) {
+    return;
+  }
+
+  const imageItem = fileItems.find(item => item.type.startsWith("image/"));
+
+  if (!imageItem) {
+    showTransientSendStatusMessage(chrome.i18n.getMessage("results_image_attachment_unsupported"));
+    return;
+  }
+
+  const imageFile = imageItem.getAsFile();
+
+  if (imageFile) {
+    await setAttachedImageFromFile(imageFile);
+  }
+});
+
+const dropZoneElement = document.getElementById("follow-up-text-wrapper");
+
+dropZoneElement.addEventListener("dragenter", (event) => {
+  if (!isFileDragEvent(event)) {
+    return;
+  }
+
+  event.preventDefault();
+  activeDropTargets += 1;
+  setDropZoneHighlight(true);
+});
+
+dropZoneElement.addEventListener("dragover", (event) => {
+  if (!isFileDragEvent(event)) {
+    return;
+  }
+
+  event.preventDefault();
+
+  if (event.dataTransfer) {
+    event.dataTransfer.dropEffect = "copy";
+  }
+
+  setDropZoneHighlight(true);
+});
+
+dropZoneElement.addEventListener("dragleave", (event) => {
+  if (!isFileDragEvent(event)) {
+    return;
+  }
+
+  event.preventDefault();
+  activeDropTargets = Math.max(0, activeDropTargets - 1);
+
+  if (activeDropTargets === 0) {
+    setDropZoneHighlight(false);
+  }
+});
+
+dropZoneElement.addEventListener("drop", async (event) => {
+  if (!isFileDragEvent(event)) {
+    return;
+  }
+
+  event.preventDefault();
+  activeDropTargets = 0;
+  setDropZoneHighlight(false);
+
+  const imageFile = getFirstImageFile(event.dataTransfer?.files);
+
+  if (imageFile) {
+    await setAttachedImageFromFile(imageFile);
+  } else {
+    showTransientSendStatusMessage(chrome.i18n.getMessage("results_image_attachment_unsupported"));
+  }
+});
 
 document.getElementById("text").addEventListener("keydown", (e) => {
   if (e.isComposing || e.key === "Process") {
