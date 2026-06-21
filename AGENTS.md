@@ -49,6 +49,7 @@ Defined in `extension/utils.js`. Used internally when API calls fail before rece
 | 1001 | No models available |
 | 1002 | OpenAI-compatible Base URL is not set |
 | 1003 | OpenAI-compatible Base URL is invalid |
+| 1004 | Unexpected internal error |
 
 ## Updating vendored libraries
 
