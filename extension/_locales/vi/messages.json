@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "Mất nhiều thời gian hơn dự kiến. Nhấp vào đây để xem kết quả trong tab mới."
     },
+    "popup_opening_in_tab": {
+        "message": "Đang mở kết quả trong tab mới. Cửa sổ bật lên này sẽ sớm đóng."
+    },
     "results_title": {
         "message": "Kết quả - Tóm tắt và Dịch với Gemini"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "Tự động lưu kết quả sau khi tạo"
+    },
+    "options_open_results_in_tab": {
+        "message": "Luôn mở kết quả trong tab mới"
     },
     "options_theme": {
         "message": "Chủ đề"

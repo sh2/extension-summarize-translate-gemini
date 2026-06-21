@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "耗时超出预期。点击此处在新标签页中查看结果。"
     },
+    "popup_opening_in_tab": {
+        "message": "正在新标签页中打开结果。此弹出窗口即将关闭。"
+    },
     "results_title": {
         "message": "结果 - 使用 Gemini 总结与翻译"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "生成后自动保存结果"
+    },
+    "options_open_results_in_tab": {
+        "message": "始终在新标签页中打开结果"
     },
     "options_theme": {
         "message": "主题"

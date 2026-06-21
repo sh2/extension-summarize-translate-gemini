@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "耗時超出預期。點擊此處在新分頁中查看結果。"
     },
+    "popup_opening_in_tab": {
+        "message": "正在新分頁中開啟結果。此彈出式視窗即將關閉。"
+    },
     "results_title": {
         "message": "結果 - 使用 Gemini 摘要與翻譯"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "生成後自動儲存結果"
+    },
+    "options_open_results_in_tab": {
+        "message": "始終在新分頁中開啟結果"
     },
     "options_theme": {
         "message": "主題"

@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "Sta impiegando più tempo del previsto. Fai clic qui per visualizzare i risultati in una nuova scheda."
     },
+    "popup_opening_in_tab": {
+        "message": "Apertura dei risultati in una nuova scheda. Questa finestra popup si chiuderà a breve."
+    },
     "results_title": {
         "message": "Risultati - Riassumi e Traduci con Gemini"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "Salva automaticamente i risultati dopo la generazione"
+    },
+    "options_open_results_in_tab": {
+        "message": "Apri sempre i risultati in una nuova scheda"
     },
     "options_theme": {
         "message": "Tema"

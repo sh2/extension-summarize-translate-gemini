@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "يستغرق وقتًا أطول من المتوقع. انقر هنا لعرض النتائج في علامة تبويب جديدة."
     },
+    "popup_opening_in_tab": {
+        "message": "يتم فتح النتائج في علامة تبويب جديدة. ستُغلق هذه النافذة المنبثقة قريبًا."
+    },
     "results_title": {
         "message": "النتائج - تلخيص وترجمة مع Gemini"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "حفظ النتائج تلقائيًا بعد الإنشاء"
+    },
+    "options_open_results_in_tab": {
+        "message": "افتح النتائج دائمًا في علامة تبويب جديدة"
     },
     "options_theme": {
         "message": "السمة"

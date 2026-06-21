@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "예상보다 시간이 오래 걸리고 있습니다. 새 탭에서 결과를 보려면 여기를 클릭하세요."
     },
+    "popup_opening_in_tab": {
+        "message": "새 탭에서 결과를 열고 있습니다. 이 팝업은 곧 닫힙니다."
+    },
     "results_title": {
         "message": "결과 - Gemini로 요약 및 번역"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "생성 후 결과 자동 저장"
+    },
+    "options_open_results_in_tab": {
+        "message": "항상 새 탭에서 결과 열기"
     },
     "options_theme": {
         "message": "테마"

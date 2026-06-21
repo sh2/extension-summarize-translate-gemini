@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "Es dauert länger als erwartet. Klicken Sie hier, um die Ergebnisse in einem neuen Tab anzuzeigen."
     },
+    "popup_opening_in_tab": {
+        "message": "Die Ergebnisse werden in einem neuen Tab geöffnet. Dieses Popup wird in Kürze geschlossen."
+    },
     "results_title": {
         "message": "Ergebnisse - Zusammenfassen und Übersetzen mit Gemini"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "Ergebnisse nach Generierung automatisch speichern"
+    },
+    "options_open_results_in_tab": {
+        "message": "Ergebnisse immer in einem neuen Tab öffnen"
     },
     "options_theme": {
         "message": "Design"

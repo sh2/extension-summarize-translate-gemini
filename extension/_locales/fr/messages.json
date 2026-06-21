@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "Cela prend plus de temps que prévu. Cliquez ici pour afficher les résultats dans un nouvel onglet."
     },
+    "popup_opening_in_tab": {
+        "message": "Ouverture des résultats dans un nouvel onglet. Cette fenêtre contextuelle va bientôt se fermer."
+    },
     "results_title": {
         "message": "Résultats - Résumer et traduire avec Gemini"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "Enregistrer automatiquement les résultats après génération"
+    },
+    "options_open_results_in_tab": {
+        "message": "Toujours ouvrir les résultats dans un nouvel onglet"
     },
     "options_theme": {
         "message": "Thème"
