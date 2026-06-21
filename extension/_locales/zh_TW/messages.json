@@ -80,6 +80,12 @@
     "results_button_send": {
         "message": "傳送"
     },
+    "results_button_attach_image": {
+        "message": "附加圖片"
+    },
+    "results_image_attachment_unsupported": {
+        "message": "只能附加支援的圖片檔案。"
+    },
     "results_waiting_response": {
         "message": "等待回應"
     },

@@ -80,6 +80,12 @@
     "results_button_send": {
         "message": "إرسال"
     },
+    "results_button_attach_image": {
+        "message": "إرفاق صورة"
+    },
+    "results_image_attachment_unsupported": {
+        "message": "يمكن إرفاق ملفات الصور المدعومة فقط."
+    },
     "results_waiting_response": {
         "message": "في انتظار الاستجابة"
     },

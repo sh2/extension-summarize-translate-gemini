@@ -80,6 +80,12 @@
     "results_button_send": {
         "message": "Отправить"
     },
+    "results_button_attach_image": {
+        "message": "Прикрепить изображение"
+    },
+    "results_image_attachment_unsupported": {
+        "message": "Можно прикреплять только поддерживаемые файлы изображений."
+    },
     "results_waiting_response": {
         "message": "Ожидание ответа"
     },

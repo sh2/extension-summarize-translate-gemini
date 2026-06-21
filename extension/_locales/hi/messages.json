@@ -80,6 +80,12 @@
     "results_button_send": {
         "message": "भेजें"
     },
+    "results_button_attach_image": {
+        "message": "छवि संलग्न करें"
+    },
+    "results_image_attachment_unsupported": {
+        "message": "केवल समर्थित छवि फ़ाइलें ही संलग्न की जा सकती हैं।"
+    },
     "results_waiting_response": {
         "message": "प्रतिक्रिया की प्रतीक्षा है"
     },

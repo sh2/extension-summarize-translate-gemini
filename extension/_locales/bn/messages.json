@@ -80,6 +80,12 @@
     "results_button_send": {
         "message": "প্রেরণ করুন"
     },
+    "results_button_attach_image": {
+        "message": "ছবি সংযুক্ত করুন"
+    },
+    "results_image_attachment_unsupported": {
+        "message": "শুধুমাত্র সমর্থিত ছবির ফাইল সংযুক্ত করা যাবে।"
+    },
     "results_waiting_response": {
         "message": "প্রতিক্রিয়ার জন্য অপেক্ষা করা হচ্ছে"
     },

@@ -80,6 +80,12 @@
     "results_button_send": {
         "message": "전송"
     },
+    "results_button_attach_image": {
+        "message": "이미지 첨부"
+    },
+    "results_image_attachment_unsupported": {
+        "message": "지원되는 이미지 파일만 첨부할 수 있습니다."
+    },
     "results_waiting_response": {
         "message": "응답 대기 중"
     },

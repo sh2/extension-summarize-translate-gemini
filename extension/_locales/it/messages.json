@@ -80,6 +80,12 @@
     "results_button_send": {
         "message": "Invia"
     },
+    "results_button_attach_image": {
+        "message": "Allega immagine"
+    },
+    "results_image_attachment_unsupported": {
+        "message": "È possibile allegare solo file immagine supportati."
+    },
     "results_waiting_response": {
         "message": "In attesa di risposta"
     },

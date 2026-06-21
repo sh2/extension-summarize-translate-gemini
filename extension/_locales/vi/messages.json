@@ -80,6 +80,12 @@
     "results_button_send": {
         "message": "Gửi"
     },
+    "results_button_attach_image": {
+        "message": "Đính kèm hình ảnh"
+    },
+    "results_image_attachment_unsupported": {
+        "message": "Chỉ có thể đính kèm các tệp hình ảnh được hỗ trợ."
+    },
     "results_waiting_response": {
         "message": "Đang chờ phản hồi"
     },
