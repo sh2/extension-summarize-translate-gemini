@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "時間がかかっています。ここをクリックして新しいタブで結果を確認できます。"
     },
+    "popup_opening_in_tab": {
+        "message": "結果を新しいタブで開いています。このポップアップはまもなく閉じます。"
+    },
     "results_title": {
         "message": "結果 - Geminiによる要約と翻訳"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "生成後に結果を自動保存する"
+    },
+    "options_open_results_in_tab": {
+        "message": "常に新しいタブで結果を開く"
     },
     "options_theme": {
         "message": "テーマ"

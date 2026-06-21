@@ -114,103 +114,140 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
     if (request.message === "generate") {
       // Generate content
       const { actionType, mediaType, taskInput, languageModel, languageCode, streamKey, resultIndex, url, title } = request;
-
-      const {
-        apiKey,
-        apiProvider,
-        openaiApiKey,
-        openaiBaseUrl,
-        openaiModelId,
-        streaming,
-        userModelId,
-        openaiReasoningEffort,
-        openaiThinkingType
-      } = await chrome.storage.local.get({
-        apiKey: "",
-        apiProvider: "gemini",
-        openaiApiKey: "",
-        openaiBaseUrl: "",
-        openaiModelId: "",
-        streaming: false,
-        userModelId: "",
-        openaiReasoningEffort: "",
-        openaiThinkingType: ""
-      });
-
-      const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
-      const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
-      const baseUrl = openaiBaseUrl;
-
-      const extraConfig = apiProvider === "openai"
-        ? { reasoningEffort: openaiReasoningEffort, thinkingType: openaiThinkingType }
-        : {};
-
-      const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider, extraConfig);
-
-      const systemPrompt = await getSystemPrompt(
-        actionType,
-        mediaType,
-        languageCode,
-        taskInput.length
-      );
-
       let apiContents;
       let response;
+      let responseContent;
+      let apiProvider;
 
-      if (mediaType === "image") {
-        const [mediaInfo, mediaData] = taskInput.split(",");
-        const mimeType = mediaInfo.split(":")[1].split(";")[0];
+      try {
+        const options = await chrome.storage.local.get({
+          apiKey: "",
+          apiProvider: "gemini",
+          openaiApiKey: "",
+          openaiBaseUrl: "",
+          openaiModelId: "",
+          streaming: false,
+          userModelId: "",
+          openaiReasoningEffort: "",
+          openaiThinkingType: ""
+        });
 
-        apiContents = [
-          { role: "system", parts: [{ text: systemPrompt }] },
-          { role: "user", parts: [{ inline_data: { mime_type: mimeType, data: mediaData } }] }
-        ];
-      } else {
-        apiContents = [
-          { role: "system", parts: [{ text: systemPrompt }] },
-          { role: "user", parts: [{ text: taskInput }] }
-        ];
-      }
+        const {
+          apiKey,
+          openaiApiKey,
+          openaiBaseUrl,
+          openaiModelId,
+          streaming,
+          userModelId,
+          openaiReasoningEffort,
+          openaiThinkingType
+        } = options;
 
-      if (streaming) {
-        response = await streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl);
-      } else {
-        response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl);
-      }
+        apiProvider = options.apiProvider;
+        const effectiveApiKey = apiProvider === "openai" ? openaiApiKey : apiKey;
+        const effectiveModelId = apiProvider === "openai" ? openaiModelId : userModelId;
+        const baseUrl = openaiBaseUrl;
 
-      // Extract the response content
-      const responseContent = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
+        const extraConfig = apiProvider === "openai"
+          ? { reasoningEffort: openaiReasoningEffort, thinkingType: openaiThinkingType }
+          : {};
 
-      // Save the result to session storage (persists even if popup is closed)
-      await chrome.storage.session.set({
-        [`result_${resultIndex}`]: {
-          requestApiContent: apiContents,
-          responseContent: responseContent,
-          url: url,
-          title: title
+        const modelConfigs = getModelConfigs(languageModel, effectiveModelId, apiProvider, extraConfig);
+
+        const systemPrompt = await getSystemPrompt(
+          actionType,
+          mediaType,
+          languageCode,
+          taskInput.length
+        );
+
+        if (mediaType === "image") {
+          const [mediaInfo, mediaData] = taskInput.split(",");
+          const mimeType = mediaInfo.split(":")[1].split(";")[0];
+
+          apiContents = [
+            { role: "system", parts: [{ text: systemPrompt }] },
+            { role: "user", parts: [{ inline_data: { mime_type: mimeType, data: mediaData } }] }
+          ];
+        } else {
+          apiContents = [
+            { role: "system", parts: [{ text: systemPrompt }] },
+            { role: "user", parts: [{ text: taskInput }] }
+          ];
         }
-      });
+
+        if (streaming) {
+          response = await streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl);
+        } else {
+          response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl);
+        }
+
+        responseContent = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
+
+        await chrome.storage.session.set({
+          [`result_${resultIndex}`]: {
+            requestApiContent: apiContents,
+            responseContent: responseContent,
+            url: url,
+            title: title
+          }
+        });
+      } catch (error) {
+        console.error("Failed to generate content:", error);
+
+        await chrome.storage.session.set({
+          [`result_${resultIndex}`]: {
+            requestApiContent: apiContents ?? [],
+            responseContent: chrome.i18n.getMessage("response_unexpected_response"),
+            url: url,
+            title: title
+          }
+        });
+
+        try {
+          sendResponse({
+            ok: false,
+            status: 1004,
+            body: {
+              error: {
+                message: chrome.i18n.getMessage("response_unexpected_response")
+              }
+            }
+          });
+        } catch (sendError) {
+          console.error("Failed to send error response:", sendError);
+        }
+
+        return;
+      }
 
       if (response.ok) {
-        // Update the cache
-        const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
-        const responseCacheKey = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode, apiProvider });
+        try {
+          const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
+          const responseCacheKey = JSON.stringify({ actionType, mediaType, taskInput, languageModel, languageCode, apiProvider });
 
-        const updatedQueue = responseCacheQueue
-          .filter(item => item.key !== responseCacheKey)
-          .concat({
-            key: responseCacheKey,
-            value: {
-              requestApiContent: apiContents,
-              responseContent: responseContent
-            }
-          })
-          .slice(-10);
+          const updatedQueue = responseCacheQueue
+            .filter(item => item.key !== responseCacheKey)
+            .concat({
+              key: responseCacheKey,
+              value: {
+                requestApiContent: apiContents,
+                responseContent: responseContent
+              }
+            })
+            .slice(-10);
 
-        await chrome.storage.session.set({ responseCacheQueue: updatedQueue });
+          await chrome.storage.session.set({ responseCacheQueue: updatedQueue });
+        } catch (cacheError) {
+          console.error("Failed to update cache:", cacheError);
+        }
       }
 
-      sendResponse(response);
+      try {
+        sendResponse(response);
+      } catch (sendError) {
+        console.error("Failed to send response:", sendError);
+      }
     } else if (request.message === "keepalive") {
       sendResponse({ status: "alive" });
     }

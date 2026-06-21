@@ -56,6 +56,9 @@
     "popup_taking_long": {
         "message": "Taking longer than expected. Click here to view results in a new tab."
     },
+    "popup_opening_in_tab": {
+        "message": "Opening results in a new tab. This popup will close shortly."
+    },
     "results_title": {
         "message": "Results - Summarize and Translate with Gemini"
     },
@@ -232,6 +235,9 @@
     },
     "options_auto_save": {
         "message": "Automatically save results after generation"
+    },
+    "options_open_results_in_tab": {
+        "message": "Always open results in a new tab"
     },
     "options_theme": {
         "message": "Theme"

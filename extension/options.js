@@ -39,6 +39,7 @@ const INITIAL_OPTIONS = {
   streaming: false,
   renderLinks: false,
   autoSave: false,
+  openResultsInTab: false,
   theme: "system",
   fontSize: "medium"
 };
@@ -95,6 +96,7 @@ const getOptionsFromForm = (includeApiKey) => {
     streaming: document.getElementById("streaming").checked,
     renderLinks: document.getElementById("renderLinks").checked,
     autoSave: document.getElementById("autoSave").checked,
+    openResultsInTab: document.getElementById("openResultsInTab").checked,
     theme: document.getElementById("theme").value,
     fontSize: document.getElementById("fontSize").value
   };
@@ -139,6 +141,7 @@ const setOptionsToForm = async () => {
   document.getElementById("streaming").checked = options.streaming;
   document.getElementById("renderLinks").checked = options.renderLinks;
   document.getElementById("autoSave").checked = options.autoSave;
+  document.getElementById("openResultsInTab").checked = options.openResultsInTab;
   document.getElementById("theme").value = options.theme;
   document.getElementById("fontSize").value = options.fontSize;
 
@@ -297,6 +300,10 @@ const applyOptionsToForm = (options) => {
 
   if (options.autoSave !== undefined) {
     document.getElementById("autoSave").checked = options.autoSave;
+  }
+
+  if (options.openResultsInTab !== undefined) {
+    document.getElementById("openResultsInTab").checked = options.openResultsInTab;
   }
 
   if (options.theme) {

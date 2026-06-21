@@ -520,6 +520,30 @@ const initialize = async () => {
   const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
   document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false, renderLinks);
 
+  // Consume the one-shot auto-save handoff before restoring follow-up conversation,
+  // so the saved file matches the popup auto-save behavior for the initial result.
+  const autoSavePendingKey = `autoSavePending_${resultIndex}`;
+  const autoSavePending = (await chrome.storage.session.get({ [autoSavePendingKey]: false }))[autoSavePendingKey];
+
+  if (autoSavePending) {
+    try {
+      saveContent();
+    } catch (saveError) {
+      console.error("Auto-save failed:", saveError);
+    } finally {
+      try {
+        await chrome.storage.session.remove(autoSavePendingKey);
+      } catch (storageError) {
+        console.error("Failed to remove auto-save pending flag from session storage:", storageError);
+      }
+    }
+  }
+
+  if (!Array.isArray(result.requestApiContent) || result.requestApiContent.length === 0) {
+    document.getElementById("text").readOnly = true;
+    document.getElementById("send").disabled = true;
+  }
+
   // Restore the conversation from session storage if it exists and is valid
   const savedConversation = sessionData[`conversation_${resultIndex}`];
 
@@ -540,6 +564,12 @@ const initialize = async () => {
         answerPlaceholder.innerHTML = convertMarkdownToHtml(answerText, false, renderLinks);
       }
     }
+  }
+
+  try {
+    await chrome.storage.session.remove(`streamContent_${resultIndex}`);
+  } catch (error) {
+    console.error("Failed to remove stream content from session storage:", error);
   }
 };
 

@@ -44,6 +44,10 @@ const getLoadingMessage = (actionType, mediaType) => {
   return loadingMessage;
 };
 
+const getResultsPageUrl = (index) => {
+  return chrome.runtime.getURL(`results.html?i=${index}`);
+};
+
 // ── Content script injection utilities ──────────────────────────────────────
 
 const getSelectedText = () => {
@@ -150,6 +154,38 @@ const setPopupControlsEnabled = (enabled) => {
   document.getElementById("copy").disabled = !enabled;
   document.getElementById("save").disabled = !enabled;
   document.getElementById("results").disabled = !enabled;
+};
+
+const closeStaleResultTab = async (index) => {
+  const { resultTabIds = {} } = await chrome.storage.session.get({ resultTabIds: {} });
+  const staleTabId = resultTabIds[index];
+
+  if (staleTabId === undefined) {
+    return;
+  }
+
+  try {
+    await chrome.tabs.remove(staleTabId);
+  } catch (error) {
+    console.debug("Stale results tab was already closed:", error);
+  }
+
+  delete resultTabIds[index];
+  await chrome.storage.session.set({ resultTabIds });
+};
+
+const rememberResultTab = async (index, tabId) => {
+  const { resultTabIds = {} } = await chrome.storage.session.get({ resultTabIds: {} });
+  resultTabIds[index] = tabId;
+  await chrome.storage.session.set({ resultTabIds });
+};
+
+const closePopupWithNotice = () => {
+  document.getElementById("status").textContent = chrome.i18n.getMessage("popup_opening_in_tab");
+
+  setTimeout(() => {
+    window.close();
+  }, 1000);
 };
 
 // ── Button action handlers ──────────────────────────────────────────────────
@@ -335,11 +371,17 @@ const extractTaskInformation = async (triggerAction) => {
 };
 
 const main = async (useCache) => {
-  const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
+  const { renderLinks, openResultsInTab, autoSave } = await chrome.storage.local.get({
+    renderLinks: false,
+    openResultsInTab: false,
+    autoSave: false
+  });
+
   let displayIntervalId = 0;
   let responseContent;
   let modelVersion = "";
   let didGenerate = false;
+  let openedInTab = false;
 
   // Clear the content and source metadata
   content = "";
@@ -348,12 +390,16 @@ const main = async (useCache) => {
 
   // Increment the result index
   resultIndex = (await chrome.storage.session.get({ resultIndex: -1 })).resultIndex;
-  resultIndex = (resultIndex + 1) % 10;
+  resultIndex = (resultIndex + 1) % 20;
   await chrome.storage.session.set({ resultIndex: resultIndex });
 
   // Clear stale result to prevent results.html from picking up old data
   await chrome.storage.session.remove(`result_${resultIndex}`);
   await chrome.storage.session.remove(`conversation_${resultIndex}`);
+  await chrome.storage.session.remove(`streamContent_${resultIndex}`);
+  await chrome.storage.session.remove(`autoSavePending_${resultIndex}`);
+
+  const resultsPageUrl = getResultsPageUrl(resultIndex);
 
   try {
     const { apiKey, apiProvider, openaiApiKey, streaming } = await chrome.storage.local.get({
@@ -399,6 +445,23 @@ const main = async (useCache) => {
           title: title
         }
       });
+
+      if (openResultsInTab) {
+        try {
+          await closeStaleResultTab(resultIndex);
+          const tab = await chrome.tabs.create({ url: resultsPageUrl, active: false });
+
+          if (tab.id !== undefined) {
+            await rememberResultTab(resultIndex, tab.id);
+          }
+
+          openedInTab = true;
+          closePopupWithNotice();
+          return;
+        } catch (error) {
+          console.error("Failed to open results tab:", error);
+        }
+      }
     } else {
       // Indicate that a generation request was made
       didGenerate = true;
@@ -432,6 +495,47 @@ const main = async (useCache) => {
         title: title
       });
 
+      if (openResultsInTab) {
+        if (autoSave) {
+          await chrome.storage.session.set({ [`autoSavePending_${resultIndex}`]: true });
+        }
+
+        responsePromise.catch(async (error) => {
+          console.error("sendMessage rejected:", error);
+
+          try {
+            await chrome.storage.session.remove(`autoSavePending_${resultIndex}`);
+
+            await chrome.storage.session.set({
+              [`result_${resultIndex}`]: {
+                requestApiContent: [],
+                responseContent: chrome.i18n.getMessage("response_unexpected_response"),
+                url: url,
+                title: title
+              }
+            });
+          } catch (storageError) {
+            console.error("Failed to persist sendMessage rejection result:", storageError);
+          }
+        });
+
+        try {
+          await closeStaleResultTab(resultIndex);
+          const tab = await chrome.tabs.create({ url: resultsPageUrl, active: false });
+
+          if (tab.id !== undefined) {
+            await rememberResultTab(resultIndex, tab.id);
+          }
+
+          openedInTab = true;
+          closePopupWithNotice();
+          return;
+        } catch (error) {
+          console.error("Failed to open results tab:", error);
+          await chrome.storage.session.remove(`autoSavePending_${resultIndex}`);
+        }
+      }
+
       if (streaming) {
         // Stream the content
         streamIntervalId = setInterval(async () => {
@@ -458,6 +562,10 @@ const main = async (useCache) => {
 
       // Stop streaming
       clearInterval(streamIntervalId);
+
+      if (streaming) {
+        await chrome.storage.session.remove(streamKey);
+      }
     }
 
     content = responseContent;
@@ -468,23 +576,23 @@ const main = async (useCache) => {
     // Stop displaying the loading message
     clearInterval(displayIntervalId);
 
-    // Convert the content from Markdown to HTML
-    document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks);
+    if (!openedInTab) {
+      // Convert the content from Markdown to HTML
+      document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks);
 
-    // If auto-save is enabled and content was generated, save the content
-    const { autoSave } = await chrome.storage.local.get({ autoSave: false });
-
-    if (autoSave && didGenerate) {
-      try {
-        saveContent();
-      } catch (saveError) {
-        console.error("Auto-save failed:", saveError);
+      // If auto-save is enabled and content was generated, save the content
+      if (autoSave && didGenerate) {
+        try {
+          saveContent();
+        } catch (saveError) {
+          console.error("Auto-save failed:", saveError);
+        }
       }
-    }
 
-    // Enable the buttons and input fields
-    document.getElementById("status").textContent = modelVersion;
-    setPopupControlsEnabled(true);
+      // Enable the buttons and input fields
+      document.getElementById("status").textContent = modelVersion;
+      setPopupControlsEnabled(true);
+    }
   }
 };
 
@@ -562,16 +670,26 @@ document.getElementById("run").addEventListener("click", () => {
 document.getElementById("copy").addEventListener("click", copyContent);
 document.getElementById("save").addEventListener("click", saveContent);
 
-document.getElementById("results").addEventListener("click", () => {
-  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${resultIndex}`) }, () => {
-    window.close();
-  });
+document.getElementById("results").addEventListener("click", async () => {
+  await closeStaleResultTab(resultIndex);
+  const tab = await chrome.tabs.create({ url: getResultsPageUrl(resultIndex) });
+
+  if (tab.id !== undefined) {
+    await rememberResultTab(resultIndex, tab.id);
+  }
+
+  window.close();
 });
 
-document.getElementById("results-link").addEventListener("click", () => {
-  chrome.tabs.create({ url: chrome.runtime.getURL(`results.html?i=${resultIndex}`) }, () => {
-    window.close();
-  });
+document.getElementById("results-link").addEventListener("click", async () => {
+  await closeStaleResultTab(resultIndex);
+  const tab = await chrome.tabs.create({ url: getResultsPageUrl(resultIndex) });
+
+  if (tab.id !== undefined) {
+    await rememberResultTab(resultIndex, tab.id);
+  }
+
+  window.close();
 });
 
 document.getElementById("options").addEventListener("click", () => {
