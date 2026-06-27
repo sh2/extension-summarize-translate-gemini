@@ -28,6 +28,8 @@ let result = {};
 let resultViewStatus = RESULT_VIEW_STATUS.IDLE;
 let resultBaseTitle = chrome.i18n.getMessage("results_title");
 let attachedImage = null;
+let isNormalizing = false;
+let normalizeToken = 0;
 let resultControlsEnabled = true;
 let activeDropTargets = 0;
 let sendStatusTimeoutId = null;
@@ -265,6 +267,7 @@ const showTransientSendStatusMessage = (message) => {
 
 const updateSendButtonState = () => {
   const canSend = resultControlsEnabled &&
+    !isNormalizing &&
     hasRequestApiContent() &&
     Boolean(document.getElementById("text").value.trim());
 
@@ -334,8 +337,11 @@ const renderAttachedImagePreview = () => {
 };
 
 const clearAttachedImage = () => {
+  normalizeToken += 1;
+  isNormalizing = false;
   attachedImage = null;
   renderAttachedImagePreview();
+  updateSendButtonState();
 };
 
 const setAttachedImageFromFile = async (file) => {
@@ -344,14 +350,33 @@ const setAttachedImageFromFile = async (file) => {
     return false;
   }
 
+  const myToken = ++normalizeToken;
+  isNormalizing = true;
+  updateSendButtonState();
+
   try {
-    attachedImage = await normalizeImageFile(file);
+    const normalized = await normalizeImageFile(file);
+
+    if (myToken !== normalizeToken) {
+      return false;
+    }
+
+    attachedImage = normalized;
     renderAttachedImagePreview();
     return true;
   } catch (error) {
+    if (myToken !== normalizeToken) {
+      return false;
+    }
+
     console.error("Failed to process the attached image:", error);
     showTransientSendStatusMessage(chrome.i18n.getMessage("results_image_attachment_unsupported"));
     return false;
+  } finally {
+    if (myToken === normalizeToken) {
+      isNormalizing = false;
+      updateSendButtonState();
+    }
   }
 };
 
@@ -884,6 +909,10 @@ document.getElementById("attach-image-input").addEventListener("change", async (
 document.getElementById("text").addEventListener("input", updateSendButtonState);
 
 document.getElementById("text").addEventListener("paste", async (event) => {
+  if (!(resultControlsEnabled && hasRequestApiContent())) {
+    return;
+  }
+
   const fileItems = Array.from(event.clipboardData?.items || []).filter(item => item.kind === "file");
 
   if (fileItems.length === 0) {
@@ -911,6 +940,10 @@ dropZoneElement.addEventListener("dragenter", (event) => {
     return;
   }
 
+  if (!(resultControlsEnabled && hasRequestApiContent())) {
+    return;
+  }
+
   event.preventDefault();
   activeDropTargets += 1;
   setDropZoneHighlight(true);
@@ -918,6 +951,10 @@ dropZoneElement.addEventListener("dragenter", (event) => {
 
 dropZoneElement.addEventListener("dragover", (event) => {
   if (!isFileDragEvent(event)) {
+    return;
+  }
+
+  if (!(resultControlsEnabled && hasRequestApiContent())) {
     return;
   }
 
@@ -951,6 +988,10 @@ dropZoneElement.addEventListener("drop", async (event) => {
   event.preventDefault();
   activeDropTargets = 0;
   setDropZoneHighlight(false);
+
+  if (!(resultControlsEnabled && hasRequestApiContent())) {
+    return;
+  }
 
   const imageFile = getFirstImageFile(event.dataTransfer?.files);
 
