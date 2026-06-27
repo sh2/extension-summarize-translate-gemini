@@ -830,6 +830,7 @@ const initialize = async () => {
   const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
   document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false, renderLinks);
   renderAttachedImagePreview();
+  document.getElementById("send-status").textContent = result.modelVersion ?? "";
 
   // Consume the one-shot auto-save handoff before restoring follow-up conversation,
   // so the saved file matches the popup auto-save behavior for the initial result.

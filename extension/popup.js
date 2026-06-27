@@ -434,15 +434,17 @@ const main = async (useCache) => {
 
     if (useCache && responseCache) {
       // Use the cached response
-      const { requestApiContent, responseContent: cachedResponseContent } = responseCache.value;
+      const { requestApiContent, responseContent: cachedResponseContent, modelVersion: cachedModelVersion } = responseCache.value;
       responseContent = cachedResponseContent;
+      modelVersion = cachedModelVersion ?? "";
 
       await chrome.storage.session.set({
         [`result_${resultIndex}`]: {
           requestApiContent,
           responseContent: cachedResponseContent,
           url: url,
-          title: title
+          title: title,
+          modelVersion: cachedModelVersion ?? ""
         }
       });
 
@@ -511,7 +513,8 @@ const main = async (useCache) => {
                 requestApiContent: [],
                 responseContent: chrome.i18n.getMessage("response_unexpected_response"),
                 url: url,
-                title: title
+                title: title,
+                modelVersion: ""
               }
             });
           } catch (storageError) {
@@ -554,7 +557,7 @@ const main = async (useCache) => {
       const response = await responsePromise;
       console.log("Response:", response);
       responseContent = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
-      modelVersion = languageModel.includes("/") ? response.body?.modelVersion ?? "" : "";
+      modelVersion = response.modelVersion ?? "";
 
       // Clear the timeout for displaying the "View Results" link
       clearTimeout(timeoutId);

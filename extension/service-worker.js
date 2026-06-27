@@ -118,6 +118,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       let response;
       let responseContent;
       let apiProvider;
+      let modelVersion = "";
 
       try {
         const options = await chrome.storage.local.get({
@@ -183,13 +184,15 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         }
 
         responseContent = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
+        modelVersion = languageModel.includes("/") ? response.body?.modelVersion ?? "" : "";
 
         await chrome.storage.session.set({
           [`result_${resultIndex}`]: {
             requestApiContent: apiContents,
             responseContent: responseContent,
             url: url,
-            title: title
+            title: title,
+            modelVersion: modelVersion
           }
         });
       } catch (error) {
@@ -200,7 +203,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
             requestApiContent: apiContents ?? [],
             responseContent: chrome.i18n.getMessage("response_unexpected_response"),
             url: url,
-            title: title
+            title: title,
+            modelVersion: modelVersion
           }
         });
 
@@ -232,7 +236,8 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
               key: responseCacheKey,
               value: {
                 requestApiContent: apiContents,
-                responseContent: responseContent
+                responseContent: responseContent,
+                modelVersion: modelVersion
               }
             })
             .slice(-10);
@@ -244,6 +249,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       }
 
       try {
+        response.modelVersion = modelVersion;
         sendResponse(response);
       } catch (sendError) {
         console.error("Failed to send response:", sendError);
