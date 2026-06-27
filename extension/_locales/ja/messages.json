@@ -81,7 +81,7 @@
         "message": "送信する"
     },
     "results_button_attach_image": {
-        "message": "画像を添付"
+        "message": "画像を添付する"
     },
     "results_image_attachment_unsupported": {
         "message": "対応している画像ファイルのみ添付できます。"
