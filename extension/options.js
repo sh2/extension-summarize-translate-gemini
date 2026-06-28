@@ -9,6 +9,8 @@ import {
   needsHostPermissionPrompt
 } from "./utils.js";
 
+// ── Pure utilities (no DOM access, no side effects) ────────────────────────
+
 const INITIAL_OPTIONS = {
   apiProvider: "gemini",
   apiKey: "",
@@ -44,9 +46,9 @@ const INITIAL_OPTIONS = {
   fontSize: "medium"
 };
 
-const persistentStatus = document.getElementById("persistentStatus");
-
 // ── UI helpers ──────────────────────────────────────────────────────────────
+
+const persistentStatus = document.getElementById("persistentStatus");
 
 const showStatusMessage = (message, duration) => {
   const status = document.getElementById("status");

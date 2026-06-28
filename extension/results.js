@@ -110,6 +110,75 @@ const getScaledImageSize = (width, height, maxEdge) => {
   };
 };
 
+const isImageFile = (file) => {
+  return Boolean(file?.type && file.type.startsWith("image/"));
+};
+
+const getFirstImageFile = (files) => {
+  for (const file of Array.from(files || [])) {
+    if (isImageFile(file)) {
+      return file;
+    }
+  }
+
+  return null;
+};
+
+const isFileDragEvent = (event) => {
+  return Array.from(event.dataTransfer?.types || []).includes("Files");
+};
+
+const isSuccessfulResponse = (response, apiProvider) => {
+  if (!response || !response.ok) {
+    return false;
+  }
+
+  if (apiProvider === "openai") {
+    const choice = response.body?.choices?.[0];
+    return choice?.finish_reason === "stop" && Boolean(choice?.message?.content);
+  } else {
+    const candidate = response.body?.candidates?.[0];
+    const hasBlock = response.body?.promptFeedback?.blockReason || (candidate?.finishReason && candidate.finishReason !== "STOP");
+    const parts = candidate?.content?.parts || [];
+    const responsePart = parts[0]?.thought === true ? parts[1] : parts[0];
+    return !hasBlock && typeof responsePart?.text === "string" && responsePart.text.length > 0;
+  }
+};
+
+// ── Tab state & notification ────────────────────────────────────────────────
+
+const isResultTabActive = () => document.visibilityState === "visible" && document.hasFocus();
+
+const updateDocumentTitle = () => {
+  if (resultViewStatus === RESULT_VIEW_STATUS.UNREAD) {
+    document.title = `● ${resultBaseTitle}`;
+  } else if (resultViewStatus === RESULT_VIEW_STATUS.WAITING) {
+    document.title = `… ${resultBaseTitle}`;
+  } else {
+    document.title = resultBaseTitle;
+  }
+};
+
+const syncAttentionCue = () => {
+  if (resultViewStatus === RESULT_VIEW_STATUS.UNREAD && isResultTabActive()) {
+    resultViewStatus = RESULT_VIEW_STATUS.IDLE;
+  }
+
+  updateDocumentTitle();
+};
+
+const beginWaitingForResult = () => {
+  resultViewStatus = RESULT_VIEW_STATUS.WAITING;
+  updateDocumentTitle();
+};
+
+const completeWaitingForResult = () => {
+  resultViewStatus = isResultTabActive() ? RESULT_VIEW_STATUS.IDLE : RESULT_VIEW_STATUS.UNREAD;
+  updateDocumentTitle();
+};
+
+// ── Image processing ───────────────────────────────────────────────────────
+
 const readFileAsDataUrl = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -176,73 +245,6 @@ const normalizeImageFile = async (file) => {
     mimeType: ATTACHED_IMAGE_MIME_TYPE,
     data
   };
-};
-
-const isImageFile = (file) => {
-  return Boolean(file?.type && file.type.startsWith("image/"));
-};
-
-const getFirstImageFile = (files) => {
-  for (const file of Array.from(files || [])) {
-    if (isImageFile(file)) {
-      return file;
-    }
-  }
-
-  return null;
-};
-
-const isFileDragEvent = (event) => {
-  return Array.from(event.dataTransfer?.types || []).includes("Files");
-};
-
-const isSuccessfulResponse = (response, apiProvider) => {
-  if (!response || !response.ok) {
-    return false;
-  }
-
-  if (apiProvider === "openai") {
-    const choice = response.body?.choices?.[0];
-    return choice?.finish_reason === "stop" && Boolean(choice?.message?.content);
-  } else {
-    const candidate = response.body?.candidates?.[0];
-    const hasBlock = response.body?.promptFeedback?.blockReason || (candidate?.finishReason && candidate.finishReason !== "STOP");
-    const parts = candidate?.content?.parts || [];
-    const responsePart = parts[0]?.thought === true ? parts[1] : parts[0];
-    return !hasBlock && typeof responsePart?.text === "string" && responsePart.text.length > 0;
-  }
-};
-
-// ── Tab state & notification ────────────────────────────────────────────────
-
-const isResultTabActive = () => document.visibilityState === "visible" && document.hasFocus();
-
-const updateDocumentTitle = () => {
-  if (resultViewStatus === RESULT_VIEW_STATUS.UNREAD) {
-    document.title = `● ${resultBaseTitle}`;
-  } else if (resultViewStatus === RESULT_VIEW_STATUS.WAITING) {
-    document.title = `… ${resultBaseTitle}`;
-  } else {
-    document.title = resultBaseTitle;
-  }
-};
-
-const syncAttentionCue = () => {
-  if (resultViewStatus === RESULT_VIEW_STATUS.UNREAD && isResultTabActive()) {
-    resultViewStatus = RESULT_VIEW_STATUS.IDLE;
-  }
-
-  updateDocumentTitle();
-};
-
-const beginWaitingForResult = () => {
-  resultViewStatus = RESULT_VIEW_STATUS.WAITING;
-  updateDocumentTitle();
-};
-
-const completeWaitingForResult = () => {
-  resultViewStatus = isResultTabActive() ? RESULT_VIEW_STATUS.IDLE : RESULT_VIEW_STATUS.UNREAD;
-  updateDocumentTitle();
 };
 
 // ── UI helpers ──────────────────────────────────────────────────────────────

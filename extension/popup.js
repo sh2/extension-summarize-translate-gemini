@@ -51,35 +51,6 @@ const getResultsPageUrl = (index) => {
   return chrome.runtime.getURL(`results.html?i=${index}`);
 };
 
-const startRetryStatusListener = async (index) => {
-  stopRetryStatusListener();
-
-  const retryStatusKey = `retryStatus_${index}`;
-
-  retryStatusListener = (changes, areaName) => {
-    if (areaName !== "session") {
-      return;
-    }
-
-    if (retryStatusKey in changes) {
-      currentRetryStatus = changes[retryStatusKey].newValue ?? null;
-    }
-  };
-
-  chrome.storage.onChanged.addListener(retryStatusListener);
-  const initialRetryStatus = (await chrome.storage.session.get({ [retryStatusKey]: null }))[retryStatusKey];
-  currentRetryStatus = initialRetryStatus ?? null;
-};
-
-const stopRetryStatusListener = () => {
-  if (retryStatusListener) {
-    chrome.storage.onChanged.removeListener(retryStatusListener);
-    retryStatusListener = null;
-  }
-
-  currentRetryStatus = null;
-};
-
 // ── Content script injection utilities ──────────────────────────────────────
 
 const getSelectedText = () => {
@@ -175,6 +146,37 @@ const getTranscript = async () => {
     console.log(error);
     return "";
   }
+};
+
+// ── Tab state & notification ────────────────────────────────────────────────
+
+const startRetryStatusListener = async (index) => {
+  stopRetryStatusListener();
+
+  const retryStatusKey = `retryStatus_${index}`;
+
+  retryStatusListener = (changes, areaName) => {
+    if (areaName !== "session") {
+      return;
+    }
+
+    if (retryStatusKey in changes) {
+      currentRetryStatus = changes[retryStatusKey].newValue ?? null;
+    }
+  };
+
+  chrome.storage.onChanged.addListener(retryStatusListener);
+  const initialRetryStatus = (await chrome.storage.session.get({ [retryStatusKey]: null }))[retryStatusKey];
+  currentRetryStatus = initialRetryStatus ?? null;
+};
+
+const stopRetryStatusListener = () => {
+  if (retryStatusListener) {
+    chrome.storage.onChanged.removeListener(retryStatusListener);
+    retryStatusListener = null;
+  }
+
+  currentRetryStatus = null;
 };
 
 // ── UI helpers ──────────────────────────────────────────────────────────────

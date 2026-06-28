@@ -1,29 +1,8 @@
 /* globals DOMPurify, marked */
 
-const SAFETY_SETTINGS = [{
-  category: "HARM_CATEGORY_HARASSMENT",
-  threshold: "BLOCK_NONE"
-},
-{
-  category: "HARM_CATEGORY_HATE_SPEECH",
-  threshold: "BLOCK_NONE"
-},
-{
-  category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-  threshold: "BLOCK_NONE"
-},
-{
-  category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-  threshold: "BLOCK_NONE"
-},
-{
-  category: "HARM_CATEGORY_CIVIC_INTEGRITY",
-  threshold: "BLOCK_NONE"
-}];
-
 export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite:minimal";
 
-// ── UI utilities ─────────────────────────────────────────────────────────
+// ── UI helpers ───────────────────────────────────────────────────────────
 
 export const applyTheme = (theme) => {
   if (theme === "light") {
@@ -142,18 +121,9 @@ export const exportTextToFile = (text) => {
 
 // ── Extension helpers ────────────────────────────────────────────────────
 
-export const normalizeBaseUrl = (baseUrl) => {
-  const trimmedBaseUrl = baseUrl.trim();
-  const url = new URL(trimmedBaseUrl);
-
-  // Base URL comparison ignores search/hash.
-  url.search = "";
-  url.hash = "";
-
-  // Remove trailing slashes for a canonical base URL.
-  url.pathname = url.pathname.replace(/\/+$/, "") || "/";
-
-  return url.pathname === "/" ? url.origin : `${url.origin}${url.pathname}`;
+const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
+  const url = new URL(normalizedBaseUrl);
+  return `${url.protocol}//${url.host}/*`;
 };
 
 const tryNormalizeBaseUrl = (baseUrl) => {
@@ -168,15 +138,24 @@ const tryNormalizeBaseUrl = (baseUrl) => {
   }
 };
 
-const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
-  const url = new URL(normalizedBaseUrl);
-  return `${url.protocol}//${url.host}/*`;
+const formatTitle = (label1, label1DefaultKey, label2, label2DefaultKey) => {
+  const title1 = label1 || chrome.i18n.getMessage(label1DefaultKey);
+  const title2 = label2 || chrome.i18n.getMessage(label2DefaultKey);
+  return `${title1} / ${title2}`;
 };
 
-const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
-  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
-  const normalizedEndpointPath = endpointPath.startsWith("/") ? endpointPath : `/${endpointPath}`;
-  return `${normalizedBaseUrl}${normalizedEndpointPath}`;
+export const normalizeBaseUrl = (baseUrl) => {
+  const trimmedBaseUrl = baseUrl.trim();
+  const url = new URL(trimmedBaseUrl);
+
+  // Base URL comparison ignores search/hash.
+  url.search = "";
+  url.hash = "";
+
+  // Remove trailing slashes for a canonical base URL.
+  url.pathname = url.pathname.replace(/\/+$/, "") || "/";
+
+  return url.pathname === "/" ? url.origin : `${url.origin}${url.pathname}`;
 };
 
 export const needsHostPermissionPrompt = async (baseUrl) => {
@@ -213,12 +192,6 @@ export const ensureHostPermission = async (baseUrl) => {
   } catch {
     return false;
   }
-};
-
-const formatTitle = (label1, label1DefaultKey, label2, label2DefaultKey) => {
-  const title1 = label1 || chrome.i18n.getMessage(label1DefaultKey);
-  const title2 = label2 || chrome.i18n.getMessage(label2DefaultKey);
-  return `${title1} / ${title2}`;
 };
 
 export const createContextMenus = async (useContextMenus, label1, label2, label3, label1Text, label2Text, label3Text) => {
@@ -318,58 +291,31 @@ export const createContextMenus = async (useContextMenus, label1, label2, label3
 
 // ── LLM APIs ─────────────────────────────────────────────────────────────
 
-export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini", extraConfig = {}) => {
-  // languageModel: "3.5-flash:minimal/3.1-flash-lite:0/gemma-4-31b-it/zz"
+const SAFETY_SETTINGS = [{
+  category: "HARM_CATEGORY_HARASSMENT",
+  threshold: "BLOCK_NONE"
+},
+{
+  category: "HARM_CATEGORY_HATE_SPEECH",
+  threshold: "BLOCK_NONE"
+},
+{
+  category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+  threshold: "BLOCK_NONE"
+},
+{
+  category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+  threshold: "BLOCK_NONE"
+},
+{
+  category: "HARM_CATEGORY_CIVIC_INTEGRITY",
+  threshold: "BLOCK_NONE"
+}];
 
-  if (apiProvider === "openai") {
-    return [{
-      modelId: userModelId,
-      generationConfig: {
-        reasoningEffort: extraConfig.reasoningEffort || "",
-        thinkingType: extraConfig.thinkingType || ""
-      }
-    }];
-  }
-
-  const modelMappings = {
-    "3.5-flash": "gemini-3.5-flash",
-    "3.1-flash-lite": "gemini-3.1-flash-lite",
-    "2.5-pro": "gemini-2.5-pro",
-    "2.5-flash": "gemini-2.5-flash",
-    "2.5-flash-lite": "gemini-2.5-flash-lite",
-    "3.1-pro-preview": "gemini-3.1-pro-preview",
-    "3-flash-preview": "gemini-3-flash-preview",
-    "gemma-4-31b-it": "gemma-4-31b-it"
-  };
-
-  // modelSegments: ["3.5-flash:minimal", "3.1-flash-lite:0", "gemma-4-31b-it", "zz"]
-  const modelSegments = languageModel.split("/");
-
-  const modelConfigs = modelSegments.map(segment => {
-    const resolvedSegment = segment === "zz" ? userModelId : segment;
-    const segmentParts = resolvedSegment.split(":");
-    const modelId = segment === "zz" ? segmentParts[0] : modelMappings[segmentParts[0]];
-    let generationConfig = {};
-
-    if (segmentParts.length >= 2) {
-      const thinkingValue = segmentParts[1];
-
-      if (["high", "medium", "low", "minimal"].includes(thinkingValue)) {
-        generationConfig.thinkingConfig = { thinkingLevel: thinkingValue };
-      } else {
-        const thinkingBudgetInt = parseInt(thinkingValue);
-
-        if (!isNaN(thinkingBudgetInt)) {
-          generationConfig.thinkingConfig = { thinkingBudget: thinkingBudgetInt };
-        }
-      }
-    }
-
-    return { modelId, generationConfig };
-  });
-
-  // [{ "gemini-3.5-flash", { thinkingConfig: { thinkingLevel: "minimal" }}}, ...]
-  return modelConfigs;
+const buildOpenAIApiUrl = (baseUrl, endpointPath) => {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+  const normalizedEndpointPath = endpointPath.startsWith("/") ? endpointPath : `/${endpointPath}`;
+  return `${normalizedBaseUrl}${normalizedEndpointPath}`;
 };
 
 const convertToOpenAI = (apiContents) => {
@@ -502,6 +448,60 @@ const reportRetryStatus = async (retryStatusKey, status) => {
   } catch (error) {
     console.error("Failed to report retry status:", error);
   }
+};
+
+export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini", extraConfig = {}) => {
+  // languageModel: "3.5-flash:minimal/3.1-flash-lite:0/gemma-4-31b-it/zz"
+
+  if (apiProvider === "openai") {
+    return [{
+      modelId: userModelId,
+      generationConfig: {
+        reasoningEffort: extraConfig.reasoningEffort || "",
+        thinkingType: extraConfig.thinkingType || ""
+      }
+    }];
+  }
+
+  const modelMappings = {
+    "3.5-flash": "gemini-3.5-flash",
+    "3.1-flash-lite": "gemini-3.1-flash-lite",
+    "2.5-pro": "gemini-2.5-pro",
+    "2.5-flash": "gemini-2.5-flash",
+    "2.5-flash-lite": "gemini-2.5-flash-lite",
+    "3.1-pro-preview": "gemini-3.1-pro-preview",
+    "3-flash-preview": "gemini-3-flash-preview",
+    "gemma-4-31b-it": "gemma-4-31b-it"
+  };
+
+  // modelSegments: ["3.5-flash:minimal", "3.1-flash-lite:0", "gemma-4-31b-it", "zz"]
+  const modelSegments = languageModel.split("/");
+
+  const modelConfigs = modelSegments.map(segment => {
+    const resolvedSegment = segment === "zz" ? userModelId : segment;
+    const segmentParts = resolvedSegment.split(":");
+    const modelId = segment === "zz" ? segmentParts[0] : modelMappings[segmentParts[0]];
+    let generationConfig = {};
+
+    if (segmentParts.length >= 2) {
+      const thinkingValue = segmentParts[1];
+
+      if (["high", "medium", "low", "minimal"].includes(thinkingValue)) {
+        generationConfig.thinkingConfig = { thinkingLevel: thinkingValue };
+      } else {
+        const thinkingBudgetInt = parseInt(thinkingValue);
+
+        if (!isNaN(thinkingBudgetInt)) {
+          generationConfig.thinkingConfig = { thinkingBudget: thinkingBudgetInt };
+        }
+      }
+    }
+
+    return { modelId, generationConfig };
+  });
+
+  // [{ "gemini-3.5-flash", { thinkingConfig: { thinkingLevel: "minimal" }}}, ...]
+  return modelConfigs;
 };
 
 const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) => {
