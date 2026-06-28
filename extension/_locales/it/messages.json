@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "Apertura dei risultati in una nuova scheda. Questa finestra popup si chiuderà a breve."
     },
+    "status_retrying": {
+        "message": "Il server è occupato. Nuovo tentativo in corso"
+    },
+    "status_fallback_retrying": {
+        "message": "Tentativo con un altro modello"
+    },
     "results_title": {
         "message": "Risultati - Riassumi e Traduci con Gemini"
     },

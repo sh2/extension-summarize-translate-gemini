@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "يتم فتح النتائج في علامة تبويب جديدة. ستُغلق هذه النافذة المنبثقة قريبًا."
     },
+    "status_retrying": {
+        "message": "الخادم مشغول. تجري إعادة المحاولة"
+    },
+    "status_fallback_retrying": {
+        "message": "تتم المحاولة باستخدام نموذج آخر"
+    },
     "results_title": {
         "message": "النتائج - تلخيص وترجمة مع Gemini"
     },

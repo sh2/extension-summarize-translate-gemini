@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "正在新标签页中打开结果。此弹出窗口即将关闭。"
     },
+    "status_retrying": {
+        "message": "服务器繁忙，正在重试"
+    },
+    "status_fallback_retrying": {
+        "message": "正在尝试其他模型"
+    },
     "results_title": {
         "message": "结果 - 使用 Gemini 总结与翻译"
     },

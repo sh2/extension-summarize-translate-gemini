@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "परिणाम एक नए टैब में खोले जा रहे हैं। यह पॉप-अप शीघ्र ही बंद हो जाएगा।"
     },
+    "status_retrying": {
+        "message": "सर्वर व्यस्त है। फिर से कोशिश की जा रही है"
+    },
+    "status_fallback_retrying": {
+        "message": "किसी दूसरे मॉडल से कोशिश की जा रही है"
+    },
     "results_title": {
         "message": "परिणाम - Gemini के साथ सारांशित करें और अनुवाद करें"
     },

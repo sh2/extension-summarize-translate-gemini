@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "Открываем результаты в новой вкладке. Это всплывающее окно скоро закроется."
     },
+    "status_retrying": {
+        "message": "Сервер перегружен. Повторная попытка"
+    },
+    "status_fallback_retrying": {
+        "message": "Пробуем другую модель"
+    },
     "results_title": {
         "message": "Результаты - Суммирование и перевод с Gemini"
     },

@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "正在新分頁中開啟結果。此彈出式視窗即將關閉。"
     },
+    "status_retrying": {
+        "message": "伺服器忙碌中，正在重試"
+    },
+    "status_fallback_retrying": {
+        "message": "正在嘗試其他模型"
+    },
     "results_title": {
         "message": "結果 - 使用 Gemini 摘要與翻譯"
     },

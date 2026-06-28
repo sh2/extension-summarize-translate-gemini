@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "Đang mở kết quả trong tab mới. Cửa sổ bật lên này sẽ sớm đóng."
     },
+    "status_retrying": {
+        "message": "Máy chủ đang bận. Đang thử lại"
+    },
+    "status_fallback_retrying": {
+        "message": "Đang thử mô hình khác"
+    },
     "results_title": {
         "message": "Kết quả - Tóm tắt và Dịch với Gemini"
     },

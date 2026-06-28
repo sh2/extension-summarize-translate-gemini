@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "새 탭에서 결과를 열고 있습니다. 이 팝업은 곧 닫힙니다."
     },
+    "status_retrying": {
+        "message": "서버가 혼잡하여 다시 시도하고 있습니다"
+    },
+    "status_fallback_retrying": {
+        "message": "다른 모델로 다시 시도하고 있습니다"
+    },
     "results_title": {
         "message": "결과 - Gemini로 요약 및 번역"
     },

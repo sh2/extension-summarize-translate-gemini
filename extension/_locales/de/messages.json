@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "Die Ergebnisse werden in einem neuen Tab geöffnet. Dieses Popup wird in Kürze geschlossen."
     },
+    "status_retrying": {
+        "message": "Der Server ist ausgelastet. Erneuter Versuch"
+    },
+    "status_fallback_retrying": {
+        "message": "Ein anderes Modell wird versucht"
+    },
     "results_title": {
         "message": "Ergebnisse - Zusammenfassen und Übersetzen mit Gemini"
     },
