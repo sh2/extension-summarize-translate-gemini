@@ -34,6 +34,29 @@ Cross-browser extension (Chrome, Firefox, Edge) that uses Google Gemini API and 
 - When modifying provider logic, verify both `apiProvider: "gemini"` and `apiProvider: "openai"` paths still work.
 - When updating the extension version, update both `extension/manifest.json` and `firefox/manifest.json`.
 
+## Logging policy
+
+`console.*` levels are used to separate "expected during normal use" from "extension internals went wrong". Keep the distinction consistent across `popup.js`, `results.js`, `options.js`, `service-worker.js`, and `utils.js`.
+
+### Level definitions
+
+| Level | Use for | Examples |
+| --- | --- | --- |
+| `console.error` | Extension-internal failures that should not happen during normal use. Bugs, broken invariants, infrastructure failures (storage, tabs, sendResponse, template loading). | `Failed to update cache`, `Failed to send response`, `Failed to find the template` |
+| `console.warn` | Reserved for cases that are abnormal but recoverable and worth surfacing without implying a bug. Avoid using it for ordinary API failures. | (currently none — prefer `log` for API outcomes) |
+| `console.log` | Expected or environment-dependent outcomes that users may hit during normal use, including LLM API errors, retry/fallback progress, permission denials, and fallback paths. | `503 retrying: ...`, `Failed to parse the article. Using document.body.innerText instead.`, clipboard permission denied |
+| `console.debug` | Noise that is only useful when tracing a specific issue. | `Stale results tab was already closed` |
+
+### Rules
+
+- LLM API failures returned as `{ ok: false, status, body }` from `generateContent()` / `streamGenerateContent()` are **expected outcomes**, not exceptions. Do not log them with `console.error` at the call site; use `console.log` if logging is needed. The retry/fallback progress logs in `extension/utils.js` are the canonical example.
+- `catch` blocks that wrap a broad flow (e.g. `main()` in `popup.js`, the generation handler in `service-worker.js`, `askQuestion()` in `results.js`) may still use `console.error`, because they catch unexpected internal failures rather than ordinary API responses. If such a block also surfaces a user-facing message, ensure the message text does not imply the API itself failed when the real cause is internal.
+- Do not log raw API keys, request headers, or `Authorization` values. The existing `"Request:"` / `"Response:"` debug logs in `popup.js` and `results.js` are acceptable because they only include request bodies and response payloads.
+- Storage / tab / messaging / template infrastructure failures stay at `console.error`.
+- User-environment failures (clipboard permission, unsupported image format, Readability fallback, missing YouTube transcript, `chrome://` page extraction) use `console.log` (or `console.debug` when truly noise-only).
+- When a failure is already surfaced to the user via UI (toast, status text), prefer `console.log` over `console.error` unless it represents an internal bug.
+- Do not introduce `console.info`. Use `console.log` for general informational output.
+
 ## Notes
 
 - `firefox/` only contains a manifest override; the extension source lives under `extension/`.
