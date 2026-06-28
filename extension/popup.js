@@ -6,6 +6,7 @@ import {
   applyFontSize,
   loadTemplate,
   displayLoadingMessage,
+  getRetryLoadingMessage,
   convertMarkdownToHtml,
   getResponseContent,
   exportTextToFile
@@ -15,6 +16,8 @@ let resultIndex = 0;
 let content = "";
 let pageUrl = "";
 let pageTitle = "";
+let currentRetryStatus = null;
+let retryStatusListener = null;
 
 // ── Pure utilities (no DOM access, no side effects) ────────────────────────
 
@@ -46,6 +49,35 @@ const getLoadingMessage = (actionType, mediaType) => {
 
 const getResultsPageUrl = (index) => {
   return chrome.runtime.getURL(`results.html?i=${index}`);
+};
+
+const startRetryStatusListener = async (index) => {
+  stopRetryStatusListener();
+
+  const retryStatusKey = `retryStatus_${index}`;
+
+  retryStatusListener = (changes, areaName) => {
+    if (areaName !== "session") {
+      return;
+    }
+
+    if (retryStatusKey in changes) {
+      currentRetryStatus = changes[retryStatusKey].newValue ?? null;
+    }
+  };
+
+  chrome.storage.onChanged.addListener(retryStatusListener);
+  const initialRetryStatus = (await chrome.storage.session.get({ [retryStatusKey]: null }))[retryStatusKey];
+  currentRetryStatus = initialRetryStatus ?? null;
+};
+
+const stopRetryStatusListener = () => {
+  if (retryStatusListener) {
+    chrome.storage.onChanged.removeListener(retryStatusListener);
+    retryStatusListener = null;
+  }
+
+  currentRetryStatus = null;
 };
 
 // ── Content script injection utilities ──────────────────────────────────────
@@ -398,6 +430,7 @@ const main = async (useCache) => {
   await chrome.storage.session.remove(`conversation_${resultIndex}`);
   await chrome.storage.session.remove(`streamContent_${resultIndex}`);
   await chrome.storage.session.remove(`autoSavePending_${resultIndex}`);
+  await chrome.storage.session.remove(`retryStatus_${resultIndex}`);
 
   const resultsPageUrl = getResultsPageUrl(resultIndex);
 
@@ -424,8 +457,12 @@ const main = async (useCache) => {
     pageUrl = url;
     pageTitle = title;
 
+    await startRetryStatusListener(resultIndex);
+
     // Display a loading message
-    displayIntervalId = setInterval(displayLoadingMessage, 500, "status", getLoadingMessage(actionType, mediaType));
+    displayIntervalId = setInterval(() => {
+      displayLoadingMessage("status", getRetryLoadingMessage(currentRetryStatus, getLoadingMessage(actionType, mediaType)));
+    }, 500);
 
     // Check the cache
     const { responseCacheQueue } = await chrome.storage.session.get({ responseCacheQueue: [] });
@@ -578,6 +615,7 @@ const main = async (useCache) => {
   } finally {
     // Stop displaying the loading message
     clearInterval(displayIntervalId);
+    stopRetryStatusListener();
 
     if (!openedInTab) {
       // Convert the content from Markdown to HTML

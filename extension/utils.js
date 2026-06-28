@@ -86,6 +86,18 @@ export const displayLoadingMessage = (elementId, loadingMessage) => {
   }
 };
 
+export const getRetryLoadingMessage = (retryStatus, defaultMessage) => {
+  if (retryStatus?.phase === "retrying") {
+    return chrome.i18n.getMessage("status_retrying");
+  }
+
+  if (retryStatus?.phase === "fallback") {
+    return chrome.i18n.getMessage("status_fallback_retrying");
+  }
+
+  return defaultMessage;
+};
+
 export const convertMarkdownToHtml = (content, breaks, links) => {
   const renderer = new marked.Renderer();
 
@@ -468,6 +480,30 @@ const generateContentGemini = async (apiKey, apiContents, modelConfig, systemIns
   }
 };
 
+const isRetryableStatus = (status) => {
+  return status === 503;
+};
+
+const sleep = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+const reportRetryStatus = async (retryStatusKey, status) => {
+  if (!retryStatusKey) {
+    return;
+  }
+
+  try {
+    if (status) {
+      await chrome.storage.session.set({ [retryStatusKey]: status });
+    } else {
+      await chrome.storage.session.remove(retryStatusKey);
+    }
+  } catch (error) {
+    console.error("Failed to report retry status:", error);
+  }
+};
+
 const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) => {
   const { modelId, generationConfig } = modelConfig;
 
@@ -515,32 +551,71 @@ const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) 
   }
 };
 
-const generateContentWithFallback = async (apiKey, apiContents, modelConfigs, systemInstruction) => {
+const generateContentWithFallback = async (apiKey, apiContents, modelConfigs, systemInstruction, retryStatusKey) => {
   let response = {
     ok: false,
     status: 1001,
     body: { error: { message: "No models available." } }
   };
 
-  for (const modelConfig of modelConfigs) {
-    response = await generateContentGemini(apiKey, apiContents, modelConfig, systemInstruction);
+  const singleModel = modelConfigs.length === 1;
+  const maxRetries = 2;
+  const backoffMs = [1000, 2000];
 
-    if (response.ok || response.status !== 429) {
-      break;
+  for (const modelConfig of modelConfigs) {
+    if (singleModel) {
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        response = await generateContentGemini(apiKey, apiContents, modelConfig, systemInstruction);
+
+        if (response.ok || !isRetryableStatus(response.status)) {
+          break;
+        }
+
+        if (attempt < maxRetries) {
+          console.log(`${response.status} retrying: model=${modelConfig.modelId}, attempt=${attempt + 1}/${maxRetries}, wait=${backoffMs[attempt]}ms`);
+
+          await reportRetryStatus(retryStatusKey, {
+            phase: "retrying",
+            status: response.status,
+            attempt: attempt + 1,
+            maxAttempts: maxRetries,
+            delayMs: backoffMs[attempt]
+          });
+
+          await sleep(backoffMs[attempt]);
+        }
+      }
+    } else {
+      response = await generateContentGemini(apiKey, apiContents, modelConfig, systemInstruction);
+
+      if (!response.ok && (response.status === 429 || isRetryableStatus(response.status))) {
+        console.log(`${response.status} fallback: model=${modelConfig.modelId}, moving to next model`);
+
+        await reportRetryStatus(retryStatusKey, {
+          phase: "fallback",
+          status: response.status
+        });
+
+        continue;
+      }
     }
+
+    await reportRetryStatus(retryStatusKey, null);
+    break;
   }
 
+  await reportRetryStatus(retryStatusKey, null);
   return response;
 };
 
-export const generateContent = async (apiKey, apiContents, modelConfigs, apiProvider, openaiBaseUrl) => {
+export const generateContent = async (apiKey, apiContents, modelConfigs, apiProvider, openaiBaseUrl, retryStatusKey) => {
   if (apiProvider === "openai") {
     const openaiContents = convertToOpenAI(apiContents);
     return await generateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0]);
   }
 
   const { systemInstruction, contents } = extractSystemInstruction(apiContents);
-  return await generateContentWithFallback(apiKey, contents, modelConfigs, systemInstruction);
+  return await generateContentWithFallback(apiKey, contents, modelConfigs, systemInstruction, retryStatusKey);
 };
 
 const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, streamKey, systemInstruction) => {
@@ -562,6 +637,17 @@ const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, str
         generationConfig: generationConfig
       })
     });
+
+    if (!response.ok) {
+      const body = tryParseJson(await response.text());
+      const normalizedBody = Array.isArray(body) ? body[0] ?? body : body;
+
+      return {
+        ok: false,
+        status: response.status,
+        body: normalizedBody
+      };
+    }
 
     const reader = response.body.getReader();
     const decoder = new TextDecoder("utf-8");
@@ -759,32 +845,71 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
   }
 };
 
-const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfigs, streamKey, systemInstruction) => {
+const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfigs, streamKey, systemInstruction, retryStatusKey) => {
   let response = {
     ok: false,
     status: 1001,
     body: { error: { message: "No models available." } }
   };
 
-  for (const modelConfig of modelConfigs) {
-    response = await streamGenerateContentGemini(apiKey, apiContents, modelConfig, streamKey, systemInstruction);
+  const singleModel = modelConfigs.length === 1;
+  const maxRetries = 2;
+  const backoffMs = [1000, 2000];
 
-    if (response.ok || response.status !== 429) {
-      break;
+  for (const modelConfig of modelConfigs) {
+    if (singleModel) {
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        response = await streamGenerateContentGemini(apiKey, apiContents, modelConfig, streamKey, systemInstruction);
+
+        if (response.ok || !isRetryableStatus(response.status)) {
+          break;
+        }
+
+        if (attempt < maxRetries) {
+          console.log(`${response.status} retrying (stream): model=${modelConfig.modelId}, attempt=${attempt + 1}/${maxRetries}, wait=${backoffMs[attempt]}ms`);
+
+          await reportRetryStatus(retryStatusKey, {
+            phase: "retrying",
+            status: response.status,
+            attempt: attempt + 1,
+            maxAttempts: maxRetries,
+            delayMs: backoffMs[attempt]
+          });
+
+          await sleep(backoffMs[attempt]);
+        }
+      }
+    } else {
+      response = await streamGenerateContentGemini(apiKey, apiContents, modelConfig, streamKey, systemInstruction);
+
+      if (!response.ok && (response.status === 429 || isRetryableStatus(response.status))) {
+        console.log(`${response.status} fallback (stream): model=${modelConfig.modelId}, moving to next model`);
+
+        await reportRetryStatus(retryStatusKey, {
+          phase: "fallback",
+          status: response.status
+        });
+
+        continue;
+      }
     }
+
+    await reportRetryStatus(retryStatusKey, null);
+    break;
   }
 
+  await reportRetryStatus(retryStatusKey, null);
   return response;
 };
 
-export const streamGenerateContent = async (apiKey, apiContents, modelConfigs, streamKey, apiProvider, openaiBaseUrl) => {
+export const streamGenerateContent = async (apiKey, apiContents, modelConfigs, streamKey, apiProvider, openaiBaseUrl, retryStatusKey) => {
   if (apiProvider === "openai") {
     const openaiContents = convertToOpenAI(apiContents);
     return await streamGenerateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0], streamKey);
   }
 
   const { systemInstruction, contents } = extractSystemInstruction(apiContents);
-  return await streamGenerateContentWithFallback(apiKey, contents, modelConfigs, streamKey, systemInstruction);
+  return await streamGenerateContentWithFallback(apiKey, contents, modelConfigs, streamKey, systemInstruction, retryStatusKey);
 };
 
 export const getResponseContent = (response, hasApiKey, apiProvider = "gemini") => {
@@ -822,7 +947,7 @@ export const getResponseContent = (response, hasApiKey, apiProvider = "gemini") 
     }
   } else {
     // A response error occurred
-    responseContent = `Error: ${response.status}\n\n${response.body.error.message}`;
+    responseContent = `Error: ${response.status}\n\n${response.body?.error?.message ?? JSON.stringify(response.body)}`;
 
     if (apiProvider === "openai" && response.status === 1002) {
       responseContent += `\n\n${chrome.i18n.getMessage("response_no_base_url")}`;

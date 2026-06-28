@@ -4,6 +4,7 @@ import {
   applyFontSize,
   loadTemplate,
   displayLoadingMessage,
+  getRetryLoadingMessage,
   convertMarkdownToHtml,
   getModelConfigs,
   generateContent,
@@ -33,6 +34,8 @@ let normalizeToken = 0;
 let resultControlsEnabled = true;
 let activeDropTargets = 0;
 let sendStatusTimeoutId = null;
+let currentRetryStatus = null;
+let retryStatusListener = null;
 
 // ── Pure utilities (no DOM access, no side effects) ────────────────────────
 
@@ -252,6 +255,35 @@ const clearSendStatusMessage = () => {
   clearTimeout(sendStatusTimeoutId);
   sendStatusTimeoutId = null;
   document.getElementById("send-status").textContent = "";
+};
+
+const startRetryStatusListener = async (index) => {
+  stopRetryStatusListener();
+
+  const retryStatusKey = `retryStatus_${index}`;
+
+  retryStatusListener = (changes, areaName) => {
+    if (areaName !== "session") {
+      return;
+    }
+
+    if (retryStatusKey in changes) {
+      currentRetryStatus = changes[retryStatusKey].newValue ?? null;
+    }
+  };
+
+  chrome.storage.onChanged.addListener(retryStatusListener);
+  const initialRetryStatus = (await chrome.storage.session.get({ [retryStatusKey]: null }))[retryStatusKey];
+  currentRetryStatus = initialRetryStatus ?? null;
+};
+
+const stopRetryStatusListener = () => {
+  if (retryStatusListener) {
+    chrome.storage.onChanged.removeListener(retryStatusListener);
+    retryStatusListener = null;
+  }
+
+  currentRetryStatus = null;
 };
 
 const showTransientSendStatusMessage = (message) => {
@@ -539,8 +571,14 @@ const askQuestion = async () => {
   setResultControlsEnabled(false);
   clearSendStatusMessage();
 
+  await startRetryStatusListener(resultIndex);
+
   // Display a loading message
-  const displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_response"));
+  const responseWaitingMessage = chrome.i18n.getMessage("results_waiting_response");
+
+  const displayIntervalId = setInterval(() => {
+    displayLoadingMessage("send-status", getRetryLoadingMessage(currentRetryStatus, responseWaitingMessage));
+  }, 500);
 
   // Render user's question immediately
   appendQuestionToUi(questionParts);
@@ -607,10 +645,20 @@ const askQuestion = async () => {
     apiContents.push({ role: "user", parts: questionParts });
 
     let response;
+    const retryStatusKey = `retryStatus_${resultIndex}`;
 
     if (streaming) {
       const streamKey = `streamContent_${resultIndex}`;
-      const responsePromise = streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl);
+
+      const responsePromise = streamGenerateContent(
+        effectiveApiKey,
+        apiContents,
+        modelConfigs,
+        streamKey,
+        apiProvider,
+        baseUrl,
+        retryStatusKey
+      );
 
       console.log("Request:", {
         apiContents,
@@ -634,7 +682,7 @@ const askQuestion = async () => {
       clearInterval(streamIntervalId);
       streamIntervalId = null;
     } else {
-      response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl);
+      response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl, retryStatusKey);
     }
 
     console.log("Response:", response);
@@ -686,6 +734,7 @@ const askQuestion = async () => {
   } finally {
     // Stop displaying the loading message
     clearInterval(displayIntervalId);
+    stopRetryStatusListener();
     setResultControlsEnabled(true);
 
     // Scroll to the bottom of the page
@@ -698,6 +747,8 @@ const waitForResult = async (resultIndex) => {
   const streamKey = `streamContent_${resultIndex}`;
   const resultKey = `result_${resultIndex}`;
   const contentElement = document.getElementById("content");
+
+  await startRetryStatusListener(resultIndex);
 
   // Keepalive: periodically ping the service worker to prevent termination
   const keepaliveIntervalId = setInterval(async () => {
@@ -721,26 +772,25 @@ const waitForResult = async (resultIndex) => {
     }, 1000);
   }
 
-  // Result poll: wait for the final result
-  const result = await new Promise((resolve) => {
-    const check = async () => {
-      const storedResult = (await chrome.storage.session.get({ [resultKey]: "" }))[resultKey];
+  try {
+    return await new Promise((resolve) => {
+      const check = async () => {
+        const storedResult = (await chrome.storage.session.get({ [resultKey]: "" }))[resultKey];
 
-      if (storedResult) {
-        resolve(storedResult);
-      } else {
-        setTimeout(check, 500);
-      }
-    };
+        if (storedResult) {
+          resolve(storedResult);
+        } else {
+          setTimeout(check, 500);
+        }
+      };
 
-    check();
-  });
-
-  // Stop the keepalive and streaming intervals
-  clearInterval(keepaliveIntervalId);
-  clearInterval(streamIntervalId);
-
-  return result;
+      check();
+    });
+  } finally {
+    clearInterval(keepaliveIntervalId);
+    clearInterval(streamIntervalId);
+    stopRetryStatusListener();
+  }
 };
 
 const initialize = async () => {
@@ -807,7 +857,11 @@ const initialize = async () => {
     beginWaitingForResult();
 
     // Display a loading message while waiting for the result
-    const displayIntervalId = setInterval(displayLoadingMessage, 500, "send-status", chrome.i18n.getMessage("results_waiting_for_result"));
+    const waitingForResultMessage = chrome.i18n.getMessage("results_waiting_for_result");
+
+    const displayIntervalId = setInterval(() => {
+      displayLoadingMessage("send-status", getRetryLoadingMessage(currentRetryStatus, waitingForResultMessage));
+    }, 500);
 
     // Wait for the result to be available in the session storage
     result = await waitForResult(resultIndex);

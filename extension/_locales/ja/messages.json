@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "結果を新しいタブで開いています。このポップアップはまもなく閉じます。"
     },
+    "status_retrying": {
+        "message": "サーバーが混雑しているため再試行しています"
+    },
+    "status_fallback_retrying": {
+        "message": "別モデルで再試行しています"
+    },
     "results_title": {
         "message": "結果 - Geminiによる要約と翻訳"
     },

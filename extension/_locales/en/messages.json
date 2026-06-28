@@ -59,6 +59,12 @@
     "popup_opening_in_tab": {
         "message": "Opening results in a new tab. This popup will close shortly."
     },
+    "status_retrying": {
+        "message": "The server is busy. Retrying"
+    },
+    "status_fallback_retrying": {
+        "message": "Trying another model"
+    },
     "results_title": {
         "message": "Results - Summarize and Translate with Gemini"
     },

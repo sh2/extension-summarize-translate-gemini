@@ -119,6 +119,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
       let responseContent;
       let apiProvider;
       let modelVersion = "";
+      const retryStatusKey = `retryStatus_${resultIndex}`;
 
       try {
         const options = await chrome.storage.local.get({
@@ -178,9 +179,9 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
         }
 
         if (streaming) {
-          response = await streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl);
+          response = await streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl, retryStatusKey);
         } else {
-          response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl);
+          response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl, retryStatusKey);
         }
 
         responseContent = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
