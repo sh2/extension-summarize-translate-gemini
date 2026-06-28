@@ -560,7 +560,7 @@ const generateContentWithFallback = async (apiKey, apiContents, modelConfigs, sy
 
   const singleModel = modelConfigs.length === 1;
   const maxRetries = 2;
-  const backoffMs = [1000, 2000];
+  const backoffMs = [5000, 10000];
 
   for (const modelConfig of modelConfigs) {
     if (singleModel) {
@@ -854,7 +854,7 @@ const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfi
 
   const singleModel = modelConfigs.length === 1;
   const maxRetries = 2;
-  const backoffMs = [1000, 2000];
+  const backoffMs = [5000, 10000];
 
   for (const modelConfig of modelConfigs) {
     if (singleModel) {
