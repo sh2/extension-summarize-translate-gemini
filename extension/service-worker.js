@@ -197,7 +197,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
           }
         });
       } catch (error) {
-        console.error("Failed to generate content:", error);
+        console.error("Unexpected failure while handling generation request:", error);
 
         await chrome.storage.session.set({
           [`result_${resultIndex}`]: {

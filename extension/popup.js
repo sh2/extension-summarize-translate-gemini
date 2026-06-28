@@ -234,7 +234,7 @@ const copyContent = async () => {
     operationStatus.textContent = chrome.i18n.getMessage("popup_copied");
     setTimeout(() => operationStatus.textContent = "", 1000);
   } catch (error) {
-    console.error("Failed to copy content:", error);
+    console.log("Failed to copy content:", error);
   }
 };
 

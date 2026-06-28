@@ -401,7 +401,7 @@ const setAttachedImageFromFile = async (file) => {
       return false;
     }
 
-    console.error("Failed to process the attached image:", error);
+    console.log("Failed to process the attached image:", error);
     showTransientSendStatusMessage(chrome.i18n.getMessage("results_image_attachment_unsupported"));
     return false;
   } finally {
@@ -508,7 +508,7 @@ const copyContent = async () => {
     operationStatus.textContent = chrome.i18n.getMessage("results_copied");
     setTimeout(() => operationStatus.textContent = "", 1000);
   } catch (error) {
-    console.error("Failed to copy content:", error);
+    console.log("Failed to copy content:", error);
   }
 };
 
@@ -718,11 +718,11 @@ const askQuestion = async () => {
         }
       }
     } else {
-      console.warn("API response was not successful or was blocked:", response);
+      console.log("API response was not successful or was blocked:", response);
     }
 
   } catch (error) {
-    console.error("Failed to generate content:", error);
+    console.error("Unexpected failure while handling follow-up question:", error);
 
     if (streamIntervalId) {
       clearInterval(streamIntervalId);

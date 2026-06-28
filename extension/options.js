@@ -380,7 +380,7 @@ const syncOptionsToCloud = async () => {
     showStatusMessage(chrome.i18n.getMessage("options_sync_cloud_started"), 1000);
   } catch (error) {
     showStatusMessage(chrome.i18n.getMessage("options_sync_cloud_failed"), 3000);
-    console.log(error);
+    console.error("Failed to sync options to cloud:", error);
   }
 };
 
