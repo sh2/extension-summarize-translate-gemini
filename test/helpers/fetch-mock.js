@@ -20,6 +20,30 @@ export const createTextResponse = (status, text, headers = {}) => {
   });
 };
 
+// Build a UTF-8 ReadableStream from arbitrary string chunks so tests can
+// exercise parser behavior across network chunk boundaries.
+export const createChunkedStream = (chunks) => {
+  const encoder = new TextEncoder();
+
+  return new ReadableStream({
+    start(controller) {
+      for (const chunk of chunks) {
+        controller.enqueue(encoder.encode(chunk));
+      }
+
+      controller.close();
+    }
+  });
+};
+
+// Build an HTTP response backed by a chunked ReadableStream body.
+export const createStreamResponse = (status, chunks, headers = {}) => {
+  return new Response(createChunkedStream(chunks), {
+    status,
+    headers
+  });
+};
+
 // Build a TypeError that, when dequeued, makes `fetch` reject. This mirrors the
 // shape of a real network failure (`fetch` rejects with a TypeError).
 export const createNetworkError = (message = "network unavailable") => {
@@ -70,6 +94,9 @@ export const installFetchMock = () => {
     },
     enqueueText: (status, text, headers) => {
       queue.push(createTextResponse(status, text, headers));
+    },
+    enqueueStream: (status, chunks, headers) => {
+      queue.push(createStreamResponse(status, chunks, headers));
     },
     enqueueNetworkError: (message) => {
       queue.push(createNetworkError(message));

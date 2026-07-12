@@ -1,5 +1,6 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { generateContent } from "../../extension/utils.js";
+import { installChromeStorageSessionMock } from "../helpers/chrome-storage-mock.js";
 import { installFetchMock } from "../helpers/fetch-mock.js";
 
 // Phase 2 contract tests for the non-streaming `generateContent()` entry point.
@@ -7,23 +8,40 @@ import { installFetchMock } from "../helpers/fetch-mock.js";
 // do not import or exercise internal helpers directly.
 
 const DUMMY_API_KEY = "test-api-key";
+const RETRY_KEY = "test-retry-key";
 
 const GEMINI_ENDPOINT = (modelId) =>
   `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent`;
 
 let mock;
+let storage;
 
 beforeEach(() => {
   mock = installFetchMock();
+  storage = installChromeStorageSessionMock();
 });
 
 afterEach(() => {
+  vi.useRealTimers();
   mock.restore();
+  storage.restore();
 });
 
 // Helper: parse the request body sent to fetch as an object.
 const parseBody = (init) => {
   return JSON.parse(init.body);
+};
+
+const flushMicrotasks = async (count = 5) => {
+  for (let index = 0; index < count; index++) {
+    await Promise.resolve();
+  }
+};
+
+const getSetValuesForKey = (key) => {
+  return storage.setCalls
+    .filter((call) => Object.hasOwn(call, key))
+    .map((call) => call[key]);
 };
 
 // ── Gemini: request contract ─────────────────────────────────────────────
@@ -383,5 +401,268 @@ describe("OpenAI-compatible response and error contract", () => {
     expect(result.body.error.message).toBeTruthy();
     expect(result.body.error.message).not.toContain(DUMMY_API_KEY);
     expect(result.body.error.message).not.toContain("Authorization");
+  });
+});
+
+// ── Gemini: retry / fallback contract ────────────────────────────────────
+
+describe("Gemini retry and fallback contract", () => {
+  it("R-01: retries a single-model 503 twice with 5s and 10s backoff, then stops on success", async () => {
+    vi.useFakeTimers();
+
+    const modelConfigs = [{ modelId: "gemini-test", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+
+    mock.enqueueJson(503, { error: { message: "temporary failure 1" } });
+    mock.enqueueJson(503, { error: { message: "temporary failure 2" } });
+    mock.enqueueJson(200, { candidates: [{ content: { parts: [{ text: "ok" }] } }] });
+
+    const pending = generateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      "gemini",
+      undefined,
+      RETRY_KEY
+    );
+
+    await flushMicrotasks();
+
+    expect(mock.calls).toHaveLength(1);
+
+    expect(getSetValuesForKey(RETRY_KEY)).toContainEqual({
+      phase: "retrying",
+      status: 503,
+      attempt: 1,
+      maxAttempts: 2,
+      delayMs: 5000
+    });
+
+    await vi.advanceTimersByTimeAsync(5000);
+    await flushMicrotasks();
+
+    expect(mock.calls).toHaveLength(2);
+
+    expect(getSetValuesForKey(RETRY_KEY)).toContainEqual({
+      phase: "retrying",
+      status: 503,
+      attempt: 2,
+      maxAttempts: 2,
+      delayMs: 10000
+    });
+
+    await vi.advanceTimersByTimeAsync(10000);
+
+    const result = await pending;
+
+    expect(mock.calls).toHaveLength(3);
+
+    expect(mock.calls.map((call) => call.url)).toEqual([
+      GEMINI_ENDPOINT("gemini-test"),
+      GEMINI_ENDPOINT("gemini-test"),
+      GEMINI_ENDPOINT("gemini-test")
+    ]);
+
+    expect(mock.calls.map((call) => parseBody(call.init).contents)).toEqual([
+      apiContents,
+      apiContents,
+      apiContents
+    ]);
+
+    expect(result).toEqual({
+      ok: true,
+      status: 200,
+      body: { candidates: [{ content: { parts: [{ text: "ok" }] } }] }
+    });
+
+    expect(storage.values).not.toHaveProperty(RETRY_KEY);
+
+    await vi.advanceTimersByTimeAsync(20000);
+    await flushMicrotasks();
+    expect(mock.calls).toHaveLength(3);
+  });
+
+  it("R-02: stops after the third 503 without sending a fourth request", async () => {
+    vi.useFakeTimers();
+
+    const modelConfigs = [{ modelId: "gemini-test", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+
+    mock.enqueueJson(503, { error: { message: "temporary failure 1" } });
+    mock.enqueueJson(503, { error: { message: "temporary failure 2" } });
+    mock.enqueueJson(503, { error: { message: "temporary failure 3" } });
+
+    const pending = generateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      "gemini",
+      undefined,
+      RETRY_KEY
+    );
+
+    await flushMicrotasks();
+    expect(mock.calls).toHaveLength(1);
+
+    await vi.advanceTimersByTimeAsync(5000);
+    await flushMicrotasks();
+    expect(mock.calls).toHaveLength(2);
+
+    await vi.advanceTimersByTimeAsync(10000);
+
+    const result = await pending;
+
+    expect(mock.calls).toHaveLength(3);
+
+    expect(result).toEqual({
+      ok: false,
+      status: 503,
+      body: { error: { message: "temporary failure 3" } }
+    });
+
+    expect(storage.values).not.toHaveProperty(RETRY_KEY);
+
+    await vi.advanceTimersByTimeAsync(20000);
+    await flushMicrotasks();
+    expect(mock.calls).toHaveLength(3);
+  });
+
+  it("F-01: immediately falls back on 429 and stops after the next model succeeds", async () => {
+    const modelConfigs = [
+      { modelId: "gemini-first", generationConfig: {} },
+      { modelId: "gemini-second", generationConfig: {} },
+      { modelId: "gemini-unused", generationConfig: {} }
+    ];
+
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+
+    mock.enqueueJson(429, { error: { message: "quota exceeded" } });
+    mock.enqueueJson(200, { candidates: [{ content: { parts: [{ text: "ok second" }] } }] });
+
+    const result = await generateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      "gemini",
+      undefined,
+      RETRY_KEY
+    );
+
+    expect(mock.calls).toHaveLength(2);
+    expect(mock.calls[0].url).toBe(GEMINI_ENDPOINT("gemini-first"));
+    expect(mock.calls[1].url).toBe(GEMINI_ENDPOINT("gemini-second"));
+    expect(getSetValuesForKey(RETRY_KEY)).toContainEqual({ phase: "fallback", status: 429 });
+
+    expect(result).toEqual({
+      ok: true,
+      status: 200,
+      body: { candidates: [{ content: { parts: [{ text: "ok second" }] } }] }
+    });
+
+    expect(storage.values).not.toHaveProperty(RETRY_KEY);
+  });
+
+  it("F-02: immediately falls back on 503 and does not try a third model after success", async () => {
+    const modelConfigs = [
+      { modelId: "gemini-first", generationConfig: {} },
+      { modelId: "gemini-second", generationConfig: {} },
+      { modelId: "gemini-unused", generationConfig: {} }
+    ];
+
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+
+    mock.enqueueJson(503, { error: { message: "temporary failure" } });
+    mock.enqueueJson(200, { candidates: [{ content: { parts: [{ text: "ok second" }] } }] });
+
+    const result = await generateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      "gemini",
+      undefined,
+      RETRY_KEY
+    );
+
+    expect(mock.calls).toHaveLength(2);
+    expect(mock.calls[0].url).toBe(GEMINI_ENDPOINT("gemini-first"));
+    expect(mock.calls[1].url).toBe(GEMINI_ENDPOINT("gemini-second"));
+    expect(getSetValuesForKey(RETRY_KEY)).toContainEqual({ phase: "fallback", status: 503 });
+
+    expect(result).toEqual({
+      ok: true,
+      status: 200,
+      body: { candidates: [{ content: { parts: [{ text: "ok second" }] } }] }
+    });
+
+    expect(storage.values).not.toHaveProperty(RETRY_KEY);
+  });
+
+  it("F-03: does not fall back on a non-retryable multi-model error", async () => {
+    const modelConfigs = [
+      { modelId: "gemini-first", generationConfig: {} },
+      { modelId: "gemini-second", generationConfig: {} }
+    ];
+
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+
+    mock.enqueueJson(400, { error: { message: "bad request" } });
+
+    const result = await generateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      "gemini",
+      undefined,
+      RETRY_KEY
+    );
+
+    expect(mock.calls).toHaveLength(1);
+
+    expect(result).toEqual({
+      ok: false,
+      status: 400,
+      body: { error: { message: "bad request" } }
+    });
+
+    expect(getSetValuesForKey(RETRY_KEY)).toEqual([]);
+    expect(storage.values).not.toHaveProperty(RETRY_KEY);
+  });
+
+  it("F-04: returns the last response when every model fails with a fallback-eligible status", async () => {
+    const modelConfigs = [
+      { modelId: "gemini-first", generationConfig: {} },
+      { modelId: "gemini-second", generationConfig: {} }
+    ];
+
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+
+    mock.enqueueJson(429, { error: { message: "quota exceeded" } });
+    mock.enqueueJson(503, { error: { message: "temporary failure" } });
+
+    const result = await generateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      "gemini",
+      undefined,
+      RETRY_KEY
+    );
+
+    expect(mock.calls).toHaveLength(2);
+    expect(mock.calls[0].url).toBe(GEMINI_ENDPOINT("gemini-first"));
+    expect(mock.calls[1].url).toBe(GEMINI_ENDPOINT("gemini-second"));
+
+    expect(getSetValuesForKey(RETRY_KEY)).toEqual([
+      { phase: "fallback", status: 429 },
+      { phase: "fallback", status: 503 }
+    ]);
+
+    expect(result).toEqual({
+      ok: false,
+      status: 503,
+      body: { error: { message: "temporary failure" } }
+    });
+
+    expect(storage.values).not.toHaveProperty(RETRY_KEY);
   });
 });
