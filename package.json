@@ -1,12 +1,15 @@
 {
   "name": "eslint",
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint": "^10.4.1",
-    "globals": "^17.6.0"
+    "eslint": "^10.7.0",
+    "globals": "^17.7.0",
+    "vitest": "^4.1.10"
   }
 }

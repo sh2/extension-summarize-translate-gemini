@@ -16,6 +16,15 @@ export default [
     }
   },
   {
+    files: ["test/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.vitest
+      }
+    }
+  },
+  {
     files: ["utils/**/*.js"],
     languageOptions: {
       globals: {
