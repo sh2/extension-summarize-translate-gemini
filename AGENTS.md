@@ -55,7 +55,7 @@ Reuse the existing section names rather than inventing new ones. The canonical s
 
 ## Validation
 
-- After code changes, run `npm run lint` and fix relevant errors before finishing.
+- After code changes, run `npm run lint` and `npm test`, and fix relevant errors or test failures before finishing.
 - When modifying provider logic, verify both `apiProvider: "gemini"` and `apiProvider: "openai"` paths still work.
 - When updating the extension version, update both `extension/manifest.json` and `firefox/manifest.json`.
 
