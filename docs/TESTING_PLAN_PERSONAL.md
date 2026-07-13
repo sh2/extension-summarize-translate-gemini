@@ -15,25 +15,35 @@ retry/fallback を最優先で保護する。
 
 ### 必須（最初に導入する）
 
-1. **Vitest による高速テスト**
+1. **Phase 1: Vitest による高速テスト**
    - 手順: [`TESTING_PHASE_1.md`](./TESTING_PHASE_1.md)
    - `utils.js` の既存 export と、新たに小さく抽出した純粋関数を対象にする。
    - 実行は `npm test`、開発中は watch mode を使う。
    - `jsdom` は DOM test 導入時に追加する。
-2. **LLM provider contract test**
+2. **Phase 2: LLM provider contract test**
+   - 手順: [`TESTING_PHASE_2.md`](./TESTING_PHASE_2.md)
    - Gemini / OpenAI 互換 API の request と response を fixture で検証する。
    - streaming はネットワーク chunk の途中分割を必ず検証する。
    - 503 retry と model fallback は fake timer または注入した `sleep` で検証する。
-3. **Markdown/XSS の回帰 test**
+3. **Phase 3: streaming / retry test**
+   - 手順: [`TESTING_PHASE_3.md`](./TESTING_PHASE_3.md)
+   - OpenAI SSE と Gemini streaming JSON の chunk 境界、`[DONE]`、malformed input を検証する。
+   - 503 retry、429/503 による model fallback、成功後の終了を検証する。
+4. **Phase 4: Markdown/XSS と静的整合性 test**
+   - 手順: [`TESTING_PHASE_4.md`](./TESTING_PHASE_4.md)
    - `convertMarkdownToHtml()` が script、event handler、`javascript:` URL を安全に
      処理することを検証する。
-4. **静的整合性 test**
    - Chrome / Firefox manifest の version 一致、参照ファイルの存在、locale key の
      一致を検証する。
-5. **Chromium の最小 E2E**
+5. **Phase 4a: Markdown URL protocol hardening**
+   - 手順: [`TESTING_PHASE_4a.md`](./TESTING_PHASE_4a.md)
+   - Phase 4 の characterization で確認した Markdown image の `data:` URL を、別変更で安全化する。
+   - `a[href]` / `img[src]` の protocol allowlist と safe URL の回帰 test を追加する。
+6. **Phase 5: Chromium の最小 E2E**
+   - 手順書: 未作成（最小 Chromium E2E の計画作成後に `TESTING_PHASE_5.md` を追加する）。
    - ローカル mock API を使い、要約、結果表示、follow-up を 1 本の主要経路として
      確認する。
-6. **リリース前の手動 smoke**
+7. **リリース前の手動 smoke**
    - Chrome、Edge、Firefox で popup、results、options の基本フローを確認する。
    - Gemini/OpenAI の実 API は必要な場合に限り、この時点で手動確認する。
 
@@ -59,20 +69,28 @@ retry/fallback を最優先で保護する。
 以下を小さな変更として順番に導入する。各段階で `npm run lint` と、それまでに
 追加したテストを通す。
 
-1. **Vitest と最初の Unit test**
+1. **Phase 1: Vitest と最初の Unit test**
    - 手順: [`TESTING_PHASE_1.md`](./TESTING_PHASE_1.md)
    - `test/`、`npm test`、`npm run test:watch` を追加する。
    - 最初は `normalizeBaseUrl()`、`getModelConfigs()`、`getResponseContent()` を対象にする。
    - `jsdom` は DOM test 導入時に追加する。
-2. **provider contract test**
+2. **Phase 2: provider contract test**
+   - 手順: [`TESTING_PHASE_2.md`](./TESTING_PHASE_2.md)
    - `fetch` を mock し、Gemini/OpenAI の non-streaming request/response を固定する。
-3. **streaming / retry test**
+3. **Phase 3: streaming / retry test**
+   - 手順: [`TESTING_PHASE_3.md`](./TESTING_PHASE_3.md)
    - OpenAI SSE と Gemini streaming JSON の chunk 境界、`[DONE]`、malformed input を扱う。
    - 503 retry、429/503 による model fallback、成功後の終了を検証する。
-4. **XSS と静的整合性**
+4. **Phase 4: XSS と静的整合性**
+   - 手順: [`TESTING_PHASE_4.md`](./TESTING_PHASE_4.md)
    - Markdown sanitize の代表 payload、manifest、locale を検証する。
    - 必要ならこの段階で `jsdom` を導入する。
-5. **最小 Chromium E2E**
+5. **Phase 4a: Markdown URL protocol hardening**
+   - 手順: [`TESTING_PHASE_4a.md`](./TESTING_PHASE_4a.md)
+   - Phase 4 の characterization で確認した Markdown image の `data:` URL を安全化する。
+   - safe URL、`javascript:`、`data:` の link / image 属性を回帰 test で検証する。
+6. **Phase 5: 最小 Chromium E2E**
+   - 手順書: 未作成（最小 Chromium E2E の計画作成後に `TESTING_PHASE_5.md` を追加する）。
    - unpacked extension とローカル mock server を使う 1 シナリオだけ追加する。
 
 テストの追加に必要な抽出は、純粋関数化または `fetch` / `sleep` の小さな依存注入に
@@ -86,7 +104,7 @@ retry/fallback を最優先で保護する。
 | OpenAI 互換 | Base URL、Bearer request、message 変換、正常・異常 finish reason |
 | streaming | 任意の chunk 分割、途中の JSON/SSE、完了、末尾 error |
 | retry/fallback | 503 retry、非 503 では retry しない、次 model への移行、成功時停止 |
-| Markdown | script、event handler、`javascript:` URL、リンクの `rel` 属性、code block |
+| Markdown | script、event handler、`javascript:` / `data:` URL、リンクの `rel` 属性、code block |
 | static | manifest version、参照先ファイル、英語 locale と各 locale の key |
 | E2E | 要約実行、結果表示、follow-up、会話の表示 |
 
