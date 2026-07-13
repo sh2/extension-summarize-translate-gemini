@@ -28,6 +28,11 @@ const getLiveEventHandlerAttributes = (container) => {
   });
 };
 
+const expectMissingUrlAttribute = (element, attributeName) => {
+  expect(element).not.toBeNull();
+  expect(element.hasAttribute(attributeName)).toBe(false);
+};
+
 describe("convertMarkdownToHtml", () => {
   it("renders standard markdown and preserves code text", () => {
     const markdown = [
@@ -92,7 +97,7 @@ describe("convertMarkdownToHtml", () => {
     expect(anchors[1].getAttribute("rel")).toBe("noopener noreferrer");
   });
 
-  it("does not materialize raw SVG payloads and reflects current data-url handling", () => {
+  it("does not materialize raw SVG payloads and removes unsafe markdown URL protocols", () => {
     const { container } = renderMarkdown("<svg onload=\"alert(1)\"></svg> [bad](data:text/html,alert) ![img](data:text/html,alert)");
     const anchors = container.querySelectorAll("a");
     const images = container.querySelectorAll("img");
@@ -100,9 +105,77 @@ describe("convertMarkdownToHtml", () => {
     expect(container.querySelector("svg")).toBeNull();
     expect(getLiveEventHandlerAttributes(container)).toEqual([]);
     expect(anchors).toHaveLength(1);
-    expect(anchors[0].hasAttribute("href")).toBe(false);
+    expectMissingUrlAttribute(anchors[0], "href");
+    expect(anchors[0].textContent).toBe("bad");
     expect(images).toHaveLength(1);
-    expect(images[0].getAttribute("src")).toBe("data:text/html,alert");
+    expectMissingUrlAttribute(images[0], "src");
+    expect(images[0].getAttribute("alt")).toBe("img");
+  });
+
+  it("keeps safe http and https markdown URLs", () => {
+    const { container } = renderMarkdown("[https-link](https://example.test/path) [http-link](http://example.test/path) ![https-image](https://example.test/image.png) ![http-image](http://example.test/image.png)");
+    const anchors = container.querySelectorAll("a");
+    const images = container.querySelectorAll("img");
+
+    expect(anchors).toHaveLength(2);
+    expect(anchors[0].getAttribute("href")).toBe("https://example.test/path");
+    expect(anchors[0].getAttribute("target")).toBe("_blank");
+    expect(anchors[0].getAttribute("rel")).toBe("noopener noreferrer");
+    expect(anchors[1].getAttribute("href")).toBe("http://example.test/path");
+    expect(anchors[1].getAttribute("target")).toBe("_blank");
+    expect(anchors[1].getAttribute("rel")).toBe("noopener noreferrer");
+    expect(images).toHaveLength(2);
+    expect(images[0].getAttribute("src")).toBe("https://example.test/image.png");
+    expect(images[1].getAttribute("src")).toBe("http://example.test/image.png");
+  });
+
+  it("removes non-http protocols and invalid markdown URL values", () => {
+    const markdown = [
+      "[data-link](data:text/html,alert)",
+      "[relative-link](/path)",
+      "[protocol-relative-link](//example.test/path)",
+      "[blob-link](blob:example)",
+      "[mailto-link](mailto:user@example.test)",
+      "[tel-link](tel:+12025550123)",
+      "![javascript-image](javascript:alert(1))",
+      "![relative-image](/image.png)",
+      "![protocol-relative-image](//example.test/image.png)",
+      "![invalid-image](https://)"
+    ].join("\n\n");
+
+    const { container } = renderMarkdown(markdown);
+    const anchors = container.querySelectorAll("a");
+    const images = container.querySelectorAll("img");
+
+    expect(anchors).toHaveLength(6);
+
+    anchors.forEach((anchor) => {
+      expectMissingUrlAttribute(anchor, "href");
+      expect(anchor.getAttribute("target")).toBeNull();
+      expect(anchor.getAttribute("rel")).toBeNull();
+    });
+
+    expect(Array.from(anchors, (anchor) => anchor.textContent)).toEqual([
+      "data-link",
+      "relative-link",
+      "protocol-relative-link",
+      "blob-link",
+      "mailto-link",
+      "tel-link"
+    ]);
+
+    expect(images).toHaveLength(4);
+
+    images.forEach((image) => {
+      expectMissingUrlAttribute(image, "src");
+    });
+
+    expect(Array.from(images, (image) => image.getAttribute("alt"))).toEqual([
+      "javascript-image",
+      "relative-image",
+      "protocol-relative-image",
+      "invalid-image"
+    ]);
   });
 
   it("keeps only link text when links are disabled", () => {

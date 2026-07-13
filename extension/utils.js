@@ -77,6 +77,38 @@ export const getRetryLoadingMessage = (retryStatus, defaultMessage) => {
   return defaultMessage;
 };
 
+const allowedMarkdownUrlProtocols = new Set(["http:", "https:"]);
+
+const isAllowedMarkdownUrl = (value) => {
+  if (typeof value !== "string") {
+    return false;
+  }
+
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
+    return false;
+  }
+
+  try {
+    const url = new URL(trimmedValue);
+    return allowedMarkdownUrlProtocols.has(url.protocol);
+  } catch {
+    return false;
+  }
+};
+
+const removeUnsafeMarkdownUrls = (container) => {
+  container.querySelectorAll("a[href], img[src]").forEach((element) => {
+    const attributeName = element.tagName === "A" ? "href" : "src";
+    const attributeValue = element.getAttribute(attributeName);
+
+    if (!isAllowedMarkdownUrl(attributeValue)) {
+      element.removeAttribute(attributeName);
+    }
+  });
+};
+
 export const convertMarkdownToHtml = (content, breaks, links) => {
   const renderer = new marked.Renderer();
 
@@ -88,6 +120,8 @@ export const convertMarkdownToHtml = (content, breaks, links) => {
   markdownDiv.textContent = content;
   const htmlDiv = document.createElement("div");
   htmlDiv.innerHTML = DOMPurify.sanitize(marked.parse(markdownDiv.innerHTML, { breaks: breaks, renderer: renderer }));
+
+  removeUnsafeMarkdownUrls(htmlDiv);
 
   // Set links to open in a new tab with security attributes
   htmlDiv.querySelectorAll("a[href]").forEach(anchor => {
