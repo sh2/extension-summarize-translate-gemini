@@ -40,7 +40,7 @@ retry/fallback を最優先で保護する。
    - Phase 4 の characterization で確認した Markdown image の `data:` URL を、別変更で安全化する。
    - `a[href]` / `img[src]` の protocol allowlist と safe URL の回帰 test を追加する。
 6. **Phase 5: Chromium の最小 E2E**
-   - 手順書: 未作成（最小 Chromium E2E の計画作成後に `TESTING_PHASE_5.md` を追加する）。
+   - 手順: [`TESTING_PHASE_5.md`](./TESTING_PHASE_5.md)
    - ローカル mock API を使い、要約、結果表示、follow-up を 1 本の主要経路として
      確認する。
 7. **リリース前の手動 smoke**
@@ -90,7 +90,7 @@ retry/fallback を最優先で保護する。
    - Phase 4 の characterization で確認した Markdown image の `data:` URL を安全化する。
    - safe URL、`javascript:`、`data:` の link / image 属性を回帰 test で検証する。
 6. **Phase 5: 最小 Chromium E2E**
-   - 手順書: 未作成（最小 Chromium E2E の計画作成後に `TESTING_PHASE_5.md` を追加する）。
+   - 手順: [`TESTING_PHASE_5.md`](./TESTING_PHASE_5.md)
    - unpacked extension とローカル mock server を使う 1 シナリオだけ追加する。
 
 テストの追加に必要な抽出は、純粋関数化または `fetch` / `sleep` の小さな依存注入に
