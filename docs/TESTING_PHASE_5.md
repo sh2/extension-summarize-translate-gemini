@@ -70,7 +70,7 @@ flowchart TD
 
 | 地点 | 確認に使うもの |
 | --- | --- |
-| popup 結果表示 | `#content` の text、popup が `chrome.runtime.sendMessage({ message: "generate" })` を送ること |
+| popup 結果表示 | `#content` の text。`chrome.runtime.sendMessage({ message: "generate" })` 自体は直接計測せず、mock server が 1 件の request を受けることで等価に観測する |
 | mock request | mock server が記録する method、path、header、JSON body |
 | results 結果表示 | `#content`、`#page-source-title`（fixture ページの `<title>`） |
 | follow-up | `#text`、`#send`、`#conversation`、mock の 2 件目 request の `messages` |
@@ -78,6 +78,11 @@ flowchart TD
 
 `resultIndex` は新規 profile では 0 から始まるが、テストは index 値に依存せず、
 `#results` click 後に開かれる tab を `waitForEvent("page")` で捕捉する。
+
+popup から service worker への `runtime.sendMessage` は本物の API を通す。
+sendMessage の発生を直接 listen すると本番コードの内部構造に依存してしまうため、
+mock server の request 有無・内容で「popup → service worker → fetch」まで繋がった
+ことだけを検証する。`runtime.sendMessage` 自体を stub しないことにも注意する。
 
 ## 3. E2E 環境の設計
 
@@ -114,7 +119,10 @@ optional host permissions を持ち、localhost への host permission は既定
 別 Phase で権限設計から検討し直すまで E2E 対象外とする。
 
 permission dialog は Playwright から操作できないため、実ユーザーによる許可経路は
-この Phase の自動化対象外とする。代わりに、global setup で次を行う。
+この Phase の自動化対象外とする。代わりに、テスト本体内の前段で次を行う。
+Playwright の `globalSetup` は使わない。これは extension コピーと user data
+directory をテストごとに新規作成・破棄し、テスト間で global state を共有しない
+ことを優先するためである。
 
 1. `extension/` を一時 directory へ再帰コピーする。
 2. コピーした `manifest.json` にだけ `"host_permissions": ["http://127.0.0.1/*"]` を追加する。

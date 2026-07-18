@@ -16,6 +16,14 @@ export default [
     }
   },
   {
+    files: ["e2e/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.node
+      }
+    }
+  },
+  {
     files: ["test/**/*.js"],
     languageOptions: {
       globals: {

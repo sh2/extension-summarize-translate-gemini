@@ -58,6 +58,7 @@ Reuse the existing section names rather than inventing new ones. The canonical s
 - After code changes, run `npm run lint` and `npm test`, and fix relevant errors or test failures before finishing.
 - When modifying provider logic, verify both `apiProvider: "gemini"` and `apiProvider: "openai"` paths still work.
 - When updating the extension version, update both `extension/manifest.json` and `firefox/manifest.json`.
+- `npm run test:e2e` runs the minimal Chromium E2E under `e2e/` (Playwright, local mock API). It is not part of `npm test` and is not a PR-required check; run it on `main` and before releases. See [`docs/TESTING_PHASE_5.md`](docs/TESTING_PHASE_5.md).
 
 ## Logging policy
 

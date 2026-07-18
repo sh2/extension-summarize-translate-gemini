@@ -1,4 +1,5 @@
 .antigravitycli/
 .vscode/
 node_modules/
+test-results/
 utils/translation/output/
