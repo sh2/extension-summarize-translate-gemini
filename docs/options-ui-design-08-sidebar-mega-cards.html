@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design H: Sidebar + Merged Mega-Cards</title>
+  <link rel="stylesheet" href="../extension/css/new.min.css">
+  <link rel="stylesheet" href="../extension/css/common.css">
+  <style>
+    body { width: 900px; max-width: 100%; scroll-behavior: smooth; }
+    .layout { display: grid; grid-template-columns: 170px 1fr; gap: 2rem; align-items: start; }
+    .sidebar { position: sticky; top: 1rem; }
+    .sidebar .nav-title { font-size: .78em; text-transform: uppercase; letter-spacing: .05em; color: var(--nc-tx-2); opacity: .7; margin: .75rem 0 .25rem; }
+    .sidebar .nav-title:first-child { margin-top: 0; }
+    .sidebar a {
+      display: block; padding: .3rem .6rem; border-radius: 4px;
+      color: var(--nc-tx-2); text-decoration: none; font-size: .9em;
+      border-left: 3px solid transparent;
+    }
+    .sidebar a:hover { background: var(--nc-bg-2); color: var(--nc-tx-1); }
+    .sidebar a.active { border-left-color: var(--nc-lk-1); color: var(--nc-tx-1); font-weight: 600; background: var(--nc-bg-2); }
+    .card {
+      background: var(--nc-bg-2); border: 1px solid var(--nc-bg-3);
+      border-radius: 8px; padding: 1.25rem; margin-bottom: 1.25rem;
+      scroll-margin-top: 1rem;
+    }
+    .card > h2 { margin-top: 0; font-size: 1.05rem; margin-bottom: 1rem; }
+    .sub { margin-bottom: 1.25rem; }
+    .sub:last-child { margin-bottom: 0; }
+    .sub > h3 {
+      font-size: .9rem; margin: 0 0 .6rem; color: var(--nc-tx-2);
+      padding-bottom: .3rem; border-bottom: 1px dashed var(--nc-bg-3);
+    }
+    .form-group { margin-bottom: .85rem; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-group label { display: block; margin-bottom: .25rem; font-weight: 500; }
+    .form-group input[type="text"], .form-group input:not([type]), .form-group input[type="password"],
+    .form-group select, .form-group textarea { width: 100%; box-sizing: border-box; }
+    .radio-group label, .checkbox-group label { display: block; margin: .25rem 0; font-weight: normal; }
+    .radio-group input, .checkbox-group input { margin-right: .5rem; }
+    small { display: block; margin-top: .25rem; color: var(--nc-tx-2); opacity: .8; }
+    hr { display: none; }
+    @media (max-width: 720px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; border-bottom: 1px solid var(--nc-bg-3); padding-bottom: .75rem; margin-bottom: 1rem; }
+      .sidebar .nav-title { display: none; }
+      .sidebar a { display: inline-block; border-left: none; border-bottom: 2px solid transparent; padding: .3rem .5rem; }
+      .sidebar a.active { border-bottom-color: var(--nc-lk-1); }
+    }
+  </style>
+</head>
+
+<body>
+  <header style="padding-top: 1rem; padding-bottom: 0rem;">
+    <h1 style="display: flex; align-items: center;">
+      <img src="../extension/img/icon-128.png" alt="" width="48" height="48" style="margin-right: .5rem;">
+      <span>Options</span>
+    </h1>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar">
+      <div class="nav-title">Connection</div>
+      <a href="#sec-connection" class="active">Provider &amp; API</a>
+      <div class="nav-title">Output</div>
+      <a href="#sec-language">Language</a>
+      <a href="#sec-actions">Actions</a>
+      <a href="#sec-custom">Custom Actions</a>
+      <div class="nav-title">General</div>
+      <a href="#sec-display">Behavior &amp; Display</a>
+      <a href="#sec-backup">Backup</a>
+    </nav>
+
+    <main>
+      <section class="card" id="sec-connection">
+        <h2>Provider &amp; API</h2>
+
+        <div class="sub">
+          <h3>API Provider</h3>
+          <div class="radio-group">
+            <label><input type="radio" name="apiProvider" value="gemini" checked> Gemini API</label>
+            <label><input type="radio" name="apiProvider" value="openai"> OpenAI-compatible API</label>
+          </div>
+        </div>
+
+        <div class="sub">
+          <h3>Gemini API</h3>
+          <div class="form-group">
+            <label>API Key</label>
+            <input type="password" placeholder="Enter your Gemini API key">
+            <small>Obtain a key from <a href="https://aistudio.google.com" target="_blank">Google AI Studio</a>.</small>
+          </div>
+          <div class="form-group">
+            <label>Language model</label>
+            <select><option>Gemini 3 Flash (Auto-fallback)</option></select>
+            <small>For Auto-fallback details, see <a href="#">Extension FAQ</a>.</small>
+          </div>
+          <div class="form-group">
+            <label>User-specified model ID</label>
+            <input placeholder="e.g., gemini-3.0-flash">
+          </div>
+        </div>
+
+        <div class="sub">
+          <h3>OpenAI-compatible API</h3>
+          <div class="form-group">
+            <label>API Key</label>
+            <input type="password">
+          </div>
+          <div class="form-group">
+            <label>Base URL</label>
+            <input placeholder="https://api.example.com/v1">
+            <small>For Base URL setup, see <a href="#">Extension FAQ</a>.</small>
+          </div>
+          <div class="form-group">
+            <label>User-specified model ID</label>
+            <input placeholder="e.g., gpt-4o">
+          </div>
+          <div class="form-group">
+            <label>Reasoning effort</label>
+            <select>
+              <option value="">Unspecified</option>
+              <option value="xhigh">xhigh</option>
+              <option value="high">high</option>
+              <option value="medium">medium</option>
+              <option value="low">low</option>
+              <option value="none">none</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Thinking type</label>
+            <select>
+              <option value="">Unspecified</option>
+              <option value="enabled">enabled</option>
+              <option value="disabled">disabled</option>
+            </select>
+            <small>For reasoning controls, see <a href="#">Extension FAQ</a>.</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec-language">
+        <h2>Language</h2>
+        <div class="form-group">
+          <label>Language for Summarization and Translation</label>
+          <select><option>English</option><option>Japanese</option></select>
+        </div>
+        <div class="form-group">
+          <label>User-specified language</label>
+          <input placeholder="e.g., Turkish">
+          <small>Note: This does not affect custom actions.</small>
+        </div>
+      </section>
+
+      <section class="card" id="sec-actions">
+        <h2>Actions</h2>
+        <div class="sub">
+          <h3>When no text is selected</h3>
+          <div class="radio-group">
+            <label><input type="radio" name="noTextAction" checked> Summarize (default)</label>
+            <label><input type="radio" name="noTextAction"> Translate</label>
+            <label><input type="radio" name="noTextAction"> Custom action 1</label>
+            <label><input type="radio" name="noTextAction"> Custom action 2</label>
+            <label><input type="radio" name="noTextAction"> Custom action 3</label>
+          </div>
+        </div>
+        <div class="sub">
+          <h3>When text is selected</h3>
+          <div class="radio-group">
+            <label><input type="radio" name="textAction"> Summarize</label>
+            <label><input type="radio" name="textAction" checked> Translate (default)</label>
+            <label><input type="radio" name="textAction"> Custom action 1</label>
+            <label><input type="radio" name="textAction"> Custom action 2</label>
+            <label><input type="radio" name="textAction"> Custom action 3</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec-custom">
+        <h2>Custom Actions</h2>
+        <div class="sub">
+          <h3>No selection — 1</h3>
+          <div class="form-group">
+            <input placeholder="Label (Optional)" style="margin-bottom:.5rem">
+            <textarea rows="4" placeholder="Enter prompt..."></textarea>
+          </div>
+        </div>
+        <div class="sub">
+          <h3>No selection — 2</h3>
+          <div class="form-group">
+            <input placeholder="Label (Optional)" style="margin-bottom:.5rem">
+            <textarea rows="2" placeholder="Enter prompt..."></textarea>
+          </div>
+        </div>
+        <div class="sub">
+          <h3>No selection — 3</h3>
+          <div class="form-group">
+            <input placeholder="Label (Optional)" style="margin-bottom:.5rem">
+            <textarea rows="2" placeholder="Enter prompt..."></textarea>
+          </div>
+        </div>
+        <div class="sub">
+          <h3>Selection — 1</h3>
+          <div class="form-group">
+            <input placeholder="Label (Optional)" style="margin-bottom:.5rem">
+            <textarea rows="4" placeholder="Enter prompt..."></textarea>
+          </div>
+        </div>
+        <div class="sub">
+          <h3>Selection — 2</h3>
+          <div class="form-group">
+            <input placeholder="Label (Optional)" style="margin-bottom:.5rem">
+            <textarea rows="2" placeholder="Enter prompt..."></textarea>
+          </div>
+        </div>
+        <div class="sub">
+          <h3>Selection — 3</h3>
+          <div class="form-group">
+            <input placeholder="Label (Optional)" style="margin-bottom:.5rem">
+            <textarea rows="2" placeholder="Enter prompt..."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec-display">
+        <h2>Behavior &amp; Display</h2>
+        <div class="sub">
+          <h3>Behavior</h3>
+          <div class="checkbox-group">
+            <label><input type="checkbox"> Add to context menu</label>
+            <label><input type="checkbox"> Enable streaming output</label>
+            <label><input type="checkbox"> Display URLs as hyperlinks</label>
+            <label><input type="checkbox"> Automatically save results</label>
+            <label><input type="checkbox"> Always open results in a new tab</label>
+          </div>
+        </div>
+        <div class="sub">
+          <h3>Appearance</h3>
+          <div class="form-group">
+            <label>Theme</label>
+            <select>
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Font size</label>
+            <select>
+              <option value="large">Large</option>
+              <option value="medium">Medium</option>
+              <option value="small">Small</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec-backup">
+        <h2>Backup &amp; Sync</h2>
+        <p style="margin-top:0">
+          <button>Save options</button>
+          <span style="color: gray; margin-left: .5rem;">Options saved.</span>
+        </p>
+        <p style="margin-bottom:0">
+          <a href="#">Export options to file</a>
+          <label style="display:inline; margin-left:1rem;"><input type="checkbox"> Include API key</label>
+          <br>
+          <a href="#">Import options from file</a>
+          <br>
+          <a href="#">Sync options to cloud</a>
+          <br>
+          <a href="#">Restore options from cloud</a>
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const links = Array.from(document.querySelectorAll('#sidebar a'));
+    const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+    function onScroll() {
+      let current = 0;
+      sections.forEach((sec, i) => {
+        if (sec && sec.getBoundingClientRect().top <= 120) { current = i; }
+      });
+      links.forEach((a, i) => a.classList.toggle('active', i === current));
+    }
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+
+</html>
