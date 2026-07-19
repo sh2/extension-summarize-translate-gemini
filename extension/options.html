@@ -38,7 +38,6 @@
       <section class="card" id="sec-provider">
         <h2><span data-i18n="options_provider">API Provider</span></h2>
         <fieldset>
-          <legend><span data-i18n="options_provider">API Provider</span></legend>
           <div class="choice-list">
             <div class="radio-item">
               <input id="providerGemini" type="radio" name="apiProvider" value="gemini" checked>
@@ -152,7 +151,6 @@
         <h2><span data-i18n="options_section_default_action_no_selection">Default Actions (No Selection)</span></h2>
         <p class="section-description" data-i18n="options_action_description_no_selection">When no text is selected, perform the following action</p>
         <fieldset>
-          <legend><span data-i18n="options_section_default_action_no_selection">Default Actions (No Selection)</span></legend>
           <div class="choice-list">
             <div class="radio-item">
               <input id="noTextSummarize" type="radio" name="noTextAction" value="summarize" checked>
@@ -182,7 +180,6 @@
         <h2><span data-i18n="options_section_default_action_selection">Default Actions (Selection)</span></h2>
         <p class="section-description" data-i18n="options_action_description_selection">When text is selected, perform the following action</p>
         <fieldset>
-          <legend><span data-i18n="options_section_default_action_selection">Default Actions (Selection)</span></legend>
           <div class="choice-list">
             <div class="radio-item">
               <input id="textSummarize" type="radio" name="textAction" value="summarize">
@@ -287,7 +284,6 @@
       <section class="card" id="sec-behavior">
         <h2><span data-i18n="options_section_behavior">Behavior</span></h2>
         <fieldset>
-          <legend><span data-i18n="options_section_behavior">Behavior</span></legend>
           <div class="checkbox-list">
             <div class="checkbox-item">
               <input id="contextMenus" type="checkbox" aria-describedby="contextMenusHint">
@@ -357,15 +353,15 @@
         <h2><span data-i18n="options_section_backup">Backup &amp; Sync</span></h2>
         <div class="backup-actions">
           <button id="exportFile" type="button" data-i18n="options_export" disabled>Export options to file</button>
+          <div class="checkbox-item export-api-key-option">
+            <input id="exportApiKey" type="checkbox">
+            <div>
+              <label for="exportApiKey" data-i18n="options_export_api_key">Include API key</label>
+            </div>
+          </div>
           <button id="importFile" type="button" data-i18n="options_import" disabled>Import options from file</button>
           <button id="syncCloud" type="button" data-i18n="options_sync_cloud" disabled>Sync options to cloud</button>
           <button id="restoreCloud" type="button" data-i18n="options_restore_cloud" disabled>Restore options from cloud</button>
-        </div>
-        <div class="checkbox-item export-api-key-option">
-          <input id="exportApiKey" type="checkbox">
-          <div>
-            <label for="exportApiKey" data-i18n="options_export_api_key">Include API key</label>
-          </div>
         </div>
       </section>
     </main>

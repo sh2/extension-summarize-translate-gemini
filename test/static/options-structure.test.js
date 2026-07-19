@@ -151,8 +151,13 @@ describe("options page structure", () => {
         const fieldset = optionsDocument.querySelector(`#${sectionId} fieldset`);
 
         expect(fieldset).not.toBeNull();
-        expect(fieldset?.querySelector("legend")).not.toBeNull();
       });
+
+      const exportFileButton = optionsDocument.getElementById("exportFile");
+      const exportApiKeyGroup = exportFileButton?.nextElementSibling;
+
+      expect(exportApiKeyGroup).not.toBeNull();
+      expect(exportApiKeyGroup?.querySelector("#exportApiKey")).not.toBeNull();
 
       Array.from(optionsDocument.querySelectorAll('a[target="_blank"]')).forEach((anchor) => {
         const relParts = new Set((anchor.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
