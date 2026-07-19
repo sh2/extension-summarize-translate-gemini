@@ -131,6 +131,33 @@
     "options_provider_openai": {
         "message": "OpenAI-compatible API"
     },
+    "options_section_language": {
+        "message": "Language"
+    },
+    "options_section_default_action_no_selection": {
+        "message": "Default Actions (No Selection)"
+    },
+    "options_section_default_action_selection": {
+        "message": "Default Actions (Selection)"
+    },
+    "options_section_custom_no_selection": {
+        "message": "Custom Actions (No Selection)"
+    },
+    "options_section_custom_selection": {
+        "message": "Custom Actions (Selection)"
+    },
+    "options_section_behavior": {
+        "message": "Behavior"
+    },
+    "options_section_appearance": {
+        "message": "Appearance"
+    },
+    "options_section_backup": {
+        "message": "Backup & Sync"
+    },
+    "options_provider_selected": {
+        "message": "Current provider"
+    },
     "options_apikey": {
         "message": "Gemini API key"
     },
@@ -257,6 +284,30 @@
     "options_font_size": {
         "message": "Font size"
     },
+    "options_value_system": {
+        "message": "System"
+    },
+    "options_value_light": {
+        "message": "Light"
+    },
+    "options_value_dark": {
+        "message": "Dark"
+    },
+    "options_value_large": {
+        "message": "Large"
+    },
+    "options_value_medium": {
+        "message": "Medium"
+    },
+    "options_value_small": {
+        "message": "Small"
+    },
+    "options_value_unspecified": {
+        "message": "Unspecified"
+    },
+    "options_placeholder_label_optional": {
+        "message": "Label (Optional)"
+    },
     "options_button_save": {
         "message": "Save options"
     },
@@ -292,6 +343,12 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Restore succeeded."
+    },
+    "options_initialization_failed": {
+        "message": "Failed to initialize the options page. Please reload this page."
+    },
+    "options_host_permission_request_failed": {
+        "message": "Unable to request host access. Please try again."
     },
     "options_save_required_for_host_permission": {
         "message": "Click Save to apply settings and grant host access."

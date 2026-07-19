@@ -211,7 +211,7 @@ export const ensureHostPermission = async (baseUrl) => {
   const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
 
   if (!normalizedBaseUrl) {
-    return true;
+    return { status: "granted" };
   }
 
   try {
@@ -219,12 +219,21 @@ export const ensureHostPermission = async (baseUrl) => {
     const hasPermission = await chrome.permissions.contains({ origins: [origin] });
 
     if (hasPermission) {
-      return true;
+      return { status: "granted" };
     }
 
-    return await chrome.permissions.request({ origins: [origin] });
-  } catch {
-    return false;
+    const permissionGranted = await chrome.permissions.request({ origins: [origin] });
+
+    if (permissionGranted) {
+      return { status: "granted" };
+    }
+
+    return { status: "denied" };
+  } catch (error) {
+    return {
+      status: "error",
+      error
+    };
   }
 };
 

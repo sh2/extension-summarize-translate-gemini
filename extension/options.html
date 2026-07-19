@@ -7,303 +7,377 @@
   <title data-i18n="options_title">Options - Summarize and Translate with Gemini</title>
   <link rel="stylesheet" href="css/new.min.css">
   <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/options.css">
 </head>
 
 <body>
-  <header style="padding-top: 1rem; padding-bottom: 0rem;">
-    <h1 id="header" style="display: flex; align-items: center;">
-      <img src="img/icon-128.png" alt="" width="48" height="48" style="margin-right: .5rem;">
-      <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" data-i18n="options_title">
+  <header>
+    <h1 id="header">
+      <img src="img/icon-128.png" alt="" width="48" height="48">
+      <span data-i18n="options_title">
         Options - Summarize and Translate with Gemini
       </span>
     </h1>
   </header>
+  <div class="layout">
+    <nav class="sidebar" aria-labelledby="header">
+      <a href="#sec-provider"><span data-i18n="options_provider">API Provider</span></a>
+      <a href="#sec-gemini"><span data-i18n="options_provider_gemini">Gemini API</span></a>
+      <a href="#sec-openai"><span data-i18n="options_provider_openai">OpenAI-compatible API</span></a>
+      <a href="#sec-language"><span data-i18n="options_section_language">Language</span></a>
+      <a href="#sec-default-no-selection"><span data-i18n="options_section_default_action_no_selection">Default Actions (No Selection)</span></a>
+      <a href="#sec-default-selection"><span data-i18n="options_section_default_action_selection">Default Actions (Selection)</span></a>
+      <a href="#sec-custom-no-selection"><span data-i18n="options_section_custom_no_selection">Custom Actions (No Selection)</span></a>
+      <a href="#sec-custom-selection"><span data-i18n="options_section_custom_selection">Custom Actions (Selection)</span></a>
+      <a href="#sec-behavior"><span data-i18n="options_section_behavior">Behavior</span></a>
+      <a href="#sec-appearance"><span data-i18n="options_section_appearance">Appearance</span></a>
+      <a href="#sec-backup"><span data-i18n="options_section_backup">Backup &amp; Sync</span></a>
+    </nav>
 
-  <hr>
+    <main>
+      <section class="card" id="sec-provider">
+        <h2><span data-i18n="options_provider">API Provider</span></h2>
+        <fieldset>
+          <legend><span data-i18n="options_provider">API Provider</span></legend>
+          <div class="choice-list">
+            <div class="radio-item">
+              <input id="providerGemini" type="radio" name="apiProvider" value="gemini" checked>
+              <label for="providerGemini" data-i18n="options_provider_gemini">Gemini API</label>
+            </div>
+            <div class="radio-item">
+              <input id="providerOpenai" type="radio" name="apiProvider" value="openai">
+              <label for="providerOpenai" data-i18n="options_provider_openai">OpenAI-compatible API</label>
+            </div>
+          </div>
+        </fieldset>
+      </section>
 
-  <p>
-    <span data-i18n="options_provider">API Provider</span>
-    <br>
-    <input id="providerGemini" type="radio" name="apiProvider" value="gemini" checked>
-    <label for="providerGemini" data-i18n="options_provider_gemini">Gemini API</label>
-    <br>
-    <input id="providerOpenai" type="radio" name="apiProvider" value="openai">
-    <label for="providerOpenai" data-i18n="options_provider_openai">OpenAI-compatible API</label>
-  </p>
+      <section class="card provider-card" id="sec-gemini">
+        <div id="geminiSection" class="provider-card-content">
+          <h2><span data-i18n="options_provider_gemini">Gemini API</span><span class="provider-status"></span></h2>
+          <div class="form-group">
+            <label for="apiKey" data-i18n="options_apikey">Gemini API key</label>
+            <input type="password" id="apiKey" aria-describedby="apiKeyHint">
+            <small id="apiKeyHint" class="field-hint">
+              <span data-i18n="options_apikey_hint">You can obtain a Gemini API key from the following page.</span>
+              <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer">Google AI Studio</a>
+            </small>
+          </div>
 
-  <hr>
+          <div class="form-group">
+            <label for="languageModel" data-i18n="options_model">Language model</label>
+            <span id="languageModelContainer"></span>
+            <small id="languageModelHint" class="field-hint">
+              <span data-i18n="options_model_hint">For information about Auto-fallback, please see the following page.</span>
+              <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki#what-is-auto-fallback" target="_blank" rel="noopener noreferrer">Extension FAQ</a>
+            </small>
+          </div>
 
-  <div id="geminiSection">
-    <p>
-      <span data-i18n="options_apikey">Gemini API key</span>
-      <br>
-      <input type="password" id="apiKey" size="39">
-      <br>
-      <small>
-        <span data-i18n="options_apikey_hint">You can obtain a Gemini API key from the following page.</span>
-        <a href="https://aistudio.google.com" target="_blank">Google AI Studio</a>
-      </small>
-      <br>
-      <span data-i18n="options_model">Language model</span>
-      <br>
-      <span id="languageModelContainer"></span>
-      <br>
-      <small>
-        <span data-i18n="options_model_hint">For information about Auto-fallback, please see the following page.</span>
-        <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki#what-is-auto-fallback"
-          target="_blank">Extension FAQ</a>
-      </small>
-      <br>
-      <span data-i18n="options_model_user">User-specified model ID</span>
-      <br>
-      <input id="userModelId" size="39">
-    </p>
+          <div class="form-group">
+            <label for="userModelId" data-i18n="options_model_user">User-specified model ID</label>
+            <input id="userModelId">
+          </div>
+        </div>
+      </section>
+
+      <section class="card provider-card" id="sec-openai">
+        <div id="openaiSection" class="provider-card-content">
+          <h2><span data-i18n="options_provider_openai">OpenAI-compatible API</span><span class="provider-status"></span></h2>
+          <div class="form-group">
+            <label for="openaiApiKey" data-i18n="options_openai_apikey">OpenAI-compatible API key</label>
+            <input type="password" id="openaiApiKey">
+          </div>
+
+          <div class="form-group">
+            <label for="openaiBaseUrl" data-i18n="options_openai_base_url">Base URL</label>
+            <input id="openaiBaseUrl" aria-describedby="openaiBaseUrlHint">
+            <small id="openaiBaseUrlHint" class="field-hint">
+              <span data-i18n="options_openai_base_url_hint">For Base URL setup, please see the following page.</span>
+              <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki#how-do-i-set-up-an-openai-compatible-base-url" target="_blank" rel="noopener noreferrer">Extension FAQ</a>
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="openaiModelId" data-i18n="options_model_openai">User-specified model ID</label>
+            <input id="openaiModelId">
+          </div>
+
+          <div class="form-group">
+            <label for="openaiReasoningEffort" data-i18n="options_reasoning_effort">Reasoning effort (reasoning_effort)</label>
+            <select id="openaiReasoningEffort" aria-describedby="openaiReasoningHint">
+              <option value="" data-i18n="options_value_unspecified">Unspecified</option>
+              <optgroup label="Specified">
+                <option value="xhigh">xhigh</option>
+                <option value="high">high</option>
+                <option value="medium">medium</option>
+                <option value="low">low</option>
+                <option value="none">none</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="openaiThinkingType" data-i18n="options_thinking_type">Thinking type (thinking.type)</label>
+            <select id="openaiThinkingType" aria-describedby="openaiReasoningHint">
+              <option value="" data-i18n="options_value_unspecified">Unspecified</option>
+              <optgroup label="Specified">
+                <option value="enabled">enabled</option>
+                <option value="disabled">disabled</option>
+              </optgroup>
+            </select>
+            <small id="openaiReasoningHint" class="field-hint">
+              <span data-i18n="options_reasoning_hint">For information about reasoning controls, please see the following page.</span>
+              <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki#what-are-reasoning-effort-and-thinking-type" target="_blank" rel="noopener noreferrer">Extension FAQ</a>
+            </small>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec-language">
+        <h2><span data-i18n="options_section_language">Language</span></h2>
+        <div class="form-group">
+          <label for="languageCode" data-i18n="options_language">Language for Summarization and Translation</label>
+          <span id="languageCodeContainer"></span>
+        </div>
+        <div class="form-group">
+          <label for="userLanguage" data-i18n="options_language_user">User-specified language</label>
+          <input id="userLanguage" placeholder="Turkish" aria-describedby="languageNotes">
+          <small id="languageNotes" class="field-hint">
+            <span data-i18n="options_language_notes">Note: This language setting does not affect custom actions.</span>
+          </small>
+        </div>
+      </section>
+
+      <section class="card" id="sec-default-no-selection">
+        <h2><span data-i18n="options_section_default_action_no_selection">Default Actions (No Selection)</span></h2>
+        <p class="section-description" data-i18n="options_action_description_no_selection">When no text is selected, perform the following action</p>
+        <fieldset>
+          <legend><span data-i18n="options_section_default_action_no_selection">Default Actions (No Selection)</span></legend>
+          <div class="choice-list">
+            <div class="radio-item">
+              <input id="noTextSummarize" type="radio" name="noTextAction" value="summarize" checked>
+              <label for="noTextSummarize" data-i18n="options_action_summarize_no_selection">Summarize (default)</label>
+            </div>
+            <div class="radio-item">
+              <input id="noTextTranslate" type="radio" name="noTextAction" value="translate">
+              <label for="noTextTranslate" data-i18n="options_action_translate_no_selection">Translate</label>
+            </div>
+            <div class="radio-item">
+              <input id="noTextCustom1" type="radio" name="noTextAction" value="noTextCustom1">
+              <label for="noTextCustom1" data-i18n="options_action_custom_1_no_selection">Custom action 1 (No selection)</label>
+            </div>
+            <div class="radio-item">
+              <input id="noTextCustom2" type="radio" name="noTextAction" value="noTextCustom2">
+              <label for="noTextCustom2" data-i18n="options_action_custom_2_no_selection">Custom action 2 (No selection)</label>
+            </div>
+            <div class="radio-item">
+              <input id="noTextCustom3" type="radio" name="noTextAction" value="noTextCustom3">
+              <label for="noTextCustom3" data-i18n="options_action_custom_3_no_selection">Custom action 3 (No selection)</label>
+            </div>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="card" id="sec-default-selection">
+        <h2><span data-i18n="options_section_default_action_selection">Default Actions (Selection)</span></h2>
+        <p class="section-description" data-i18n="options_action_description_selection">When text is selected, perform the following action</p>
+        <fieldset>
+          <legend><span data-i18n="options_section_default_action_selection">Default Actions (Selection)</span></legend>
+          <div class="choice-list">
+            <div class="radio-item">
+              <input id="textSummarize" type="radio" name="textAction" value="summarize">
+              <label for="textSummarize" data-i18n="options_action_summarize_selection">Summarize</label>
+            </div>
+            <div class="radio-item">
+              <input id="textTranslate" type="radio" name="textAction" value="translate" checked>
+              <label for="textTranslate" data-i18n="options_action_translate_selection">Translate (default)</label>
+            </div>
+            <div class="radio-item">
+              <input id="textCustom1" type="radio" name="textAction" value="textCustom1">
+              <label for="textCustom1" data-i18n="options_action_custom_1_selection">Custom action 1 (Selection)</label>
+            </div>
+            <div class="radio-item">
+              <input id="textCustom2" type="radio" name="textAction" value="textCustom2">
+              <label for="textCustom2" data-i18n="options_action_custom_2_selection">Custom action 2 (Selection)</label>
+            </div>
+            <div class="radio-item">
+              <input id="textCustom3" type="radio" name="textAction" value="textCustom3">
+              <label for="textCustom3" data-i18n="options_action_custom_3_selection">Custom action 3 (Selection)</label>
+            </div>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="card" id="sec-custom-no-selection">
+        <h2><span data-i18n="options_section_custom_no_selection">Custom Actions (No Selection)</span></h2>
+        <div class="custom-action-grid">
+          <div>
+            <div class="form-group">
+              <label for="contextMenuLabel1" data-i18n="options_contextmenu_label_1">Label for custom action 1 (No selection)</label>
+              <input id="contextMenuLabel1" data-i18n-placeholder="options_placeholder_label_optional">
+            </div>
+            <div class="form-group">
+              <label for="noTextCustomPrompt1" data-i18n="options_action_custom_1_no_selection">Custom action 1 (No selection)</label>
+              <textarea id="noTextCustomPrompt1" rows="8" placeholder="(Example)&#10;Summarize the entire text as up to 3-item Markdown numbered list in English and reply only with the list.&#10;Format:&#10;1. First point.&#10;2. Second point.&#10;3. Third point."></textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label for="contextMenuLabel2" data-i18n="options_contextmenu_label_2">Label for custom action 2 (No selection)</label>
+              <input id="contextMenuLabel2" data-i18n-placeholder="options_placeholder_label_optional">
+            </div>
+            <div class="form-group">
+              <label for="noTextCustomPrompt2" data-i18n="options_action_custom_2_no_selection">Custom action 2 (No selection)</label>
+              <textarea id="noTextCustomPrompt2" rows="2"></textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label for="contextMenuLabel3" data-i18n="options_contextmenu_label_3">Label for custom action 3 (No selection)</label>
+              <input id="contextMenuLabel3" data-i18n-placeholder="options_placeholder_label_optional">
+            </div>
+            <div class="form-group">
+              <label for="noTextCustomPrompt3" data-i18n="options_action_custom_3_no_selection">Custom action 3 (No selection)</label>
+              <textarea id="noTextCustomPrompt3" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec-custom-selection">
+        <h2><span data-i18n="options_section_custom_selection">Custom Actions (Selection)</span></h2>
+        <div class="custom-action-grid">
+          <div>
+            <div class="form-group">
+              <label for="contextMenuLabel1Text" data-i18n="options_contextmenu_label_1_text">Label for custom action 1 (Selection)</label>
+              <input id="contextMenuLabel1Text" data-i18n-placeholder="options_placeholder_label_optional">
+            </div>
+            <div class="form-group">
+              <label for="textCustomPrompt1" data-i18n="options_action_custom_1_selection">Custom action 1 (Selection)</label>
+              <textarea id="textCustomPrompt1" rows="8" placeholder="(Example)&#10;Translate the entire text into English and reply only with the translated result."></textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label for="contextMenuLabel2Text" data-i18n="options_contextmenu_label_2_text">Label for custom action 2 (Selection)</label>
+              <input id="contextMenuLabel2Text" data-i18n-placeholder="options_placeholder_label_optional">
+            </div>
+            <div class="form-group">
+              <label for="textCustomPrompt2" data-i18n="options_action_custom_2_selection">Custom action 2 (Selection)</label>
+              <textarea id="textCustomPrompt2" rows="2"></textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label for="contextMenuLabel3Text" data-i18n="options_contextmenu_label_3_text">Label for custom action 3 (Selection)</label>
+              <input id="contextMenuLabel3Text" data-i18n-placeholder="options_placeholder_label_optional">
+            </div>
+            <div class="form-group">
+              <label for="textCustomPrompt3" data-i18n="options_action_custom_3_selection">Custom action 3 (Selection)</label>
+              <textarea id="textCustomPrompt3" rows="2"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="sec-behavior">
+        <h2><span data-i18n="options_section_behavior">Behavior</span></h2>
+        <fieldset>
+          <legend><span data-i18n="options_section_behavior">Behavior</span></legend>
+          <div class="checkbox-list">
+            <div class="checkbox-item">
+              <input id="contextMenus" type="checkbox" aria-describedby="contextMenusHint">
+              <div>
+                <label for="contextMenus" data-i18n="options_contextmenus_add">Add to context menu</label>
+                <small id="contextMenusHint" class="field-hint">
+                  <span data-i18n="options_contextmenus_notes">Custom actions are also accessible via the context menu (desktop only).</span>
+                </small>
+              </div>
+            </div>
+
+            <div class="checkbox-item">
+              <input id="streaming" type="checkbox">
+              <div>
+                <label for="streaming" data-i18n="options_streaming">Enable streaming output from the language model</label>
+              </div>
+            </div>
+
+            <div class="checkbox-item">
+              <input id="renderLinks" type="checkbox" aria-describedby="renderLinksHint">
+              <div>
+                <label for="renderLinks" data-i18n="options_render_links">Display URLs in the output as hyperlinks</label>
+                <small id="renderLinksHint" class="field-hint">
+                  <span data-i18n="options_render_links_notes">AI-generated URLs may be incorrect or dangerous. Always check before opening.</span>
+                </small>
+              </div>
+            </div>
+
+            <div class="checkbox-item">
+              <input id="autoSave" type="checkbox">
+              <div>
+                <label for="autoSave" data-i18n="options_auto_save">Automatically save results after generation</label>
+              </div>
+            </div>
+
+            <div class="checkbox-item">
+              <input id="openResultsInTab" type="checkbox">
+              <div>
+                <label for="openResultsInTab" data-i18n="options_open_results_in_tab">Always open results in a new tab</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="card" id="sec-appearance">
+        <h2><span data-i18n="options_section_appearance">Appearance</span></h2>
+        <div class="form-group">
+          <label for="theme" data-i18n="options_theme">Theme</label>
+          <select id="theme">
+            <option value="system" data-i18n="options_value_system">System</option>
+            <option value="light" data-i18n="options_value_light">Light</option>
+            <option value="dark" data-i18n="options_value_dark">Dark</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fontSize" data-i18n="options_font_size">Font size</label>
+          <select id="fontSize">
+            <option value="large" data-i18n="options_value_large">Large</option>
+            <option value="medium" data-i18n="options_value_medium">Medium</option>
+            <option value="small" data-i18n="options_value_small">Small</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="card" id="sec-backup">
+        <h2><span data-i18n="options_section_backup">Backup &amp; Sync</span></h2>
+        <div class="backup-actions">
+          <button id="exportFile" type="button" data-i18n="options_export" disabled>Export options to file</button>
+          <button id="importFile" type="button" data-i18n="options_import" disabled>Import options from file</button>
+          <button id="syncCloud" type="button" data-i18n="options_sync_cloud" disabled>Sync options to cloud</button>
+          <button id="restoreCloud" type="button" data-i18n="options_restore_cloud" disabled>Restore options from cloud</button>
+        </div>
+        <div class="checkbox-item export-api-key-option">
+          <input id="exportApiKey" type="checkbox">
+          <div>
+            <label for="exportApiKey" data-i18n="options_export_api_key">Include API key</label>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <div id="openaiSection" style="display:none">
-    <p>
-      <span data-i18n="options_openai_apikey">OpenAI-compatible API key</span>
-      <br>
-      <input type="password" id="openaiApiKey" size="39">
-      <br>
-      <span data-i18n="options_openai_base_url">Base URL</span>
-      <br>
-      <input id="openaiBaseUrl" size="39">
-      <br>
-      <small>
-        <span data-i18n="options_openai_base_url_hint">For Base URL setup, please see the following page.</span>
-        <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki#how-do-i-set-up-an-openai-compatible-base-url"
-          target="_blank">Extension FAQ</a>
-      </small>
-      <br>
-      <span data-i18n="options_model_openai">User-specified model ID</span>
-      <br>
-      <input id="openaiModelId" size="39">
-      <br>
-      <span data-i18n="options_reasoning_effort">Reasoning effort (reasoning_effort)</span>
-      <br>
-      <select id="openaiReasoningEffort">
-        <option value="">Unspecified</option>
-        <optgroup label="Specified">
-          <option value="xhigh">xhigh</option>
-          <option value="high">high</option>
-          <option value="medium">medium</option>
-          <option value="low">low</option>
-          <option value="none">none</option>
-        </optgroup>
-      </select>
-      <br>
-      <span data-i18n="options_thinking_type">Thinking type (thinking.type)</span>
-      <br>
-      <select id="openaiThinkingType">
-        <option value="">Unspecified</option>
-        <optgroup label="Specified">
-          <option value="enabled">enabled</option>
-          <option value="disabled">disabled</option>
-        </optgroup>
-      </select>
-      <br>
-      <small>
-        <span data-i18n="options_reasoning_hint">For information about reasoning controls, please see the following
-          page.</span>
-        <a href="https://github.com/sh2/extension-summarize-translate-gemini/wiki#what-are-reasoning-effort-and-thinking-type"
-          target="_blank">Extension FAQ</a>
-      </small>
-    </p>
+  <div class="save-bar">
+    <div class="save-bar-inner">
+      <button id="save" type="button" data-i18n="options_button_save" disabled>Save options</button>
+      <span id="status" class="save-status" aria-live="polite"></span>
+      <span id="persistentStatus" class="save-status" role="status" hidden></span>
+    </div>
   </div>
-
-  <hr>
-
-  <p>
-    <span data-i18n="options_language">Language for Summarization and Translation</span>
-    <br>
-    <span id="languageCodeContainer"></span>
-    <br>
-    <span data-i18n="options_language_user">User-specified language</span>
-    <br>
-    <input id="userLanguage" size="39" placeholder="Turkish">
-    <br>
-    <small>
-      <span data-i18n="options_language_notes">Note: This language setting does not affect custom actions.</span>
-    </small>
-  </p>
-
-  <hr>
-
-  <p>
-    <span data-i18n="options_action_description_no_selection">When no text is selected, perform the following
-      action</span>
-    <br>
-    <input id="noTextSummarize" type="radio" name="noTextAction" value="summarize" checked>
-    <label for="noTextSummarize" data-i18n="options_action_summarize_no_selection">Summarize (default)</label>
-    <br>
-    <input id="noTextTranslate" type="radio" name="noTextAction" value="translate">
-    <label for="noTextTranslate" data-i18n="options_action_translate_no_selection">Translate</label>
-    <br>
-    <input id="noTextCustom1" type="radio" name="noTextAction" value="noTextCustom1">
-    <label for="noTextCustom1" data-i18n="options_action_custom_1_no_selection">Custom action 1 (No selection)</label>
-    <br>
-    <input id="noTextCustom2" type="radio" name="noTextAction" value="noTextCustom2">
-    <label for="noTextCustom2" data-i18n="options_action_custom_2_no_selection">Custom action 2 (No selection)</label>
-    <br>
-    <input id="noTextCustom3" type="radio" name="noTextAction" value="noTextCustom3">
-    <label for="noTextCustom3" data-i18n="options_action_custom_3_no_selection">Custom action 3 (No selection)</label>
-  </p>
-
-  <hr>
-
-  <p>
-    <span data-i18n="options_action_description_selection">When text is selected, perform the following action</span>
-    <br>
-    <input id="textSummarize" type="radio" name="textAction" value="summarize">
-    <label for="textSummarize" data-i18n="options_action_summarize_selection">Summarize</label>
-    <br>
-    <input id="textTranslate" type="radio" name="textAction" value="translate" checked>
-    <label for="textTranslate" data-i18n="options_action_translate_selection">Translate (default)</label>
-    <br>
-    <input id="textCustom1" type="radio" name="textAction" value="textCustom1">
-    <label for="textCustom1" data-i18n="options_action_custom_1_selection">Custom action 1 (Selection)</label>
-    <br>
-    <input id="textCustom2" type="radio" name="textAction" value="textCustom2">
-    <label for="textCustom2" data-i18n="options_action_custom_2_selection">Custom action 2 (Selection)</label>
-    <br>
-    <input id="textCustom3" type="radio" name="textAction" value="textCustom3">
-    <label for="textCustom3" data-i18n="options_action_custom_3_selection">Custom action 3 (Selection)</label>
-  </p>
-
-  <hr>
-
-  <p>
-    <span data-i18n="options_action_custom_1_no_selection">Custom action 1 (No selection)</span>
-    <br>
-    <input id="contextMenuLabel1" size="39" placeholder="Label (Optional)">
-    <br>
-    <textarea id="noTextCustomPrompt1" rows="8" cols="80"
-      placeholder="(Example)&#10;Summarize the entire text as up to 3-item Markdown numbered list in English and reply only with the list.&#10;Format:&#10;1. First point.&#10;2. Second point.&#10;3. Third point."></textarea>
-    <br>
-    <span data-i18n="options_action_custom_2_no_selection">Custom action 2 (No selection)</span>
-    <br>
-    <input id="contextMenuLabel2" size="39" placeholder="Label (Optional)">
-    <br>
-    <textarea id="noTextCustomPrompt2" rows="2" cols="80"></textarea>
-    <br>
-    <span data-i18n="options_action_custom_3_no_selection">Custom action 3 (No selection)</span>
-    <br>
-    <input id="contextMenuLabel3" size="39" placeholder="Label (Optional)">
-    <br>
-    <textarea id="noTextCustomPrompt3" rows="2" cols="80"></textarea>
-  </p>
-
-  <hr>
-
-  <p>
-    <span data-i18n="options_action_custom_1_selection">Custom action 1 (Selection)</span>
-    <br>
-    <input id="contextMenuLabel1Text" size="39" placeholder="Label (Optional)">
-    <br>
-    <textarea id="textCustomPrompt1" rows="8" cols="80"
-      placeholder="(Example)&#10;Translate the entire text into English and reply only with the translated result."></textarea>
-    <br>
-    <span data-i18n="options_action_custom_2_selection">Custom action 2 (Selection)</span>
-    <br>
-    <input id="contextMenuLabel2Text" size="39" placeholder="Label (Optional)">
-    <br>
-    <textarea id="textCustomPrompt2" rows="2" cols="80"></textarea>
-    <br>
-    <span data-i18n="options_action_custom_3_selection">Custom action 3 (Selection)</span>
-    <br>
-    <input id="contextMenuLabel3Text" size="39" placeholder="Label (Optional)">
-    <br>
-    <textarea id="textCustomPrompt3" rows="2" cols="80"></textarea>
-  </p>
-
-  <hr>
-
-  <p>
-    <input id="contextMenus" type="checkbox">
-    <label for="contextMenus" data-i18n="options_contextmenus_add">Add to context menu</label>
-    <br>
-    <small>
-      <span data-i18n="options_contextmenus_notes">
-        Custom actions are also accessible via the context menu (desktop only).</span>
-    </small>
-  </p>
-
-  <hr>
-
-  <p>
-    <input id="streaming" type="checkbox">
-    <label for="streaming" data-i18n="options_streaming">Enable streaming output from the language model</label>
-  </p>
-
-  <hr>
-
-  <p>
-    <input id="renderLinks" type="checkbox">
-    <label for="renderLinks" data-i18n="options_render_links">Display URLs in the output as hyperlinks</label>
-    <br>
-    <small>
-      <span data-i18n="options_render_links_notes">
-        AI-generated URLs may be incorrect or dangerous. Always check before opening.
-      </span>
-    </small>
-  </p>
-
-  <hr>
-
-  <p>
-    <input id="autoSave" type="checkbox">
-    <label for="autoSave" data-i18n="options_auto_save">Automatically save results after generation</label>
-  </p>
-
-  <hr>
-
-  <p>
-    <input id="openResultsInTab" type="checkbox">
-    <label for="openResultsInTab" data-i18n="options_open_results_in_tab">Always open results in a new tab</label>
-  </p>
-
-  <hr>
-
-  <p>
-    <span data-i18n="options_theme">Theme</span>
-    <br>
-    <select id="theme">
-      <option value="system">System</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
-  </p>
-
-  <hr>
-
-  <p>
-    <span data-i18n="options_font_size">Font size</span>
-    <br>
-    <select id="fontSize">
-      <option value="large">Large</option>
-      <option value="medium">Medium</option>
-      <option value="small">Small</option>
-    </select>
-  </p>
-
-  <p id="persistentStatus" hidden style="color: gray;">
-  </p>
-
-  <p>
-    <button id="save" data-i18n="options_button_save">Save options</button>
-    <span id="status" style="color: gray;"></span>
-    <br>
-    <a href="#" id="exportFile" data-i18n="options_export">Export options to file</a>
-    <input id="exportApiKey" type="checkbox">
-    <label for="exportApiKey" data-i18n="options_export_api_key">Include API key</label>
-    <br>
-    <a href="#" id="importFile" data-i18n="options_import">Import options from file</a>
-    <br>
-    <a href="#" id="syncCloud" data-i18n="options_sync_cloud">Sync options to cloud</a>
-    <br>
-    <a href="#" id="restoreCloud" data-i18n="options_restore_cloud">Restore options from cloud</a>
-  </p>
 
   <script type="module" src="options.js"></script>
 </body>

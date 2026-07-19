@@ -46,27 +46,382 @@ const INITIAL_OPTIONS = {
   fontSize: "medium"
 };
 
+const SAVE_ACTION_BUTTON_IDS = ["save", "exportFile", "importFile", "syncCloud", "restoreCloud"];
+const PROVIDER_SELECTED_MESSAGE_KEY = "options_provider_selected";
+const SHORT_STATUS_DURATION = 1000;
+const LONG_STATUS_DURATION = 3000;
+
+const createLocalDateString = () => {
+  const currentDate = new Date();
+  const adjustedDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
+
+  return adjustedDate.toISOString().split("T")[0];
+};
+
+const hasOpenaiBaseUrl = (options) => {
+  return options.apiProvider === "openai" && Boolean(options.openaiBaseUrl?.trim());
+};
+
 // ── UI helpers ──────────────────────────────────────────────────────────────
 
-const persistentStatus = document.getElementById("persistentStatus");
+export const updateProviderCards = (documentRef, isGemini, selectedLabel) => {
+  const geminiSection = documentRef.getElementById("geminiSection");
+  const openaiSection = documentRef.getElementById("openaiSection");
 
-const showStatusMessage = (message, duration) => {
-  const status = document.getElementById("status");
-  status.textContent = message;
+  if (!geminiSection || !openaiSection) {
+    return;
+  }
+
+  const geminiCard = geminiSection.closest(".card");
+  const openaiCard = openaiSection.closest(".card");
+  const geminiStatus = geminiSection.querySelector(".provider-status");
+  const openaiStatus = openaiSection.querySelector(".provider-status");
+
+  geminiSection.classList.toggle("is-inactive-provider", !isGemini);
+  openaiSection.classList.toggle("is-inactive-provider", isGemini);
+
+  if (geminiCard) {
+    geminiCard.classList.toggle("is-inactive-provider", !isGemini);
+  }
+
+  if (openaiCard) {
+    openaiCard.classList.toggle("is-inactive-provider", isGemini);
+  }
+
+  if (geminiStatus) {
+    geminiStatus.textContent = isGemini ? selectedLabel : "";
+  }
+
+  if (openaiStatus) {
+    openaiStatus.textContent = isGemini ? "" : selectedLabel;
+  }
+};
+
+export const createPersistentStatusUpdater = (persistentStatusElement, syncHeight, requestFrame, cancelFrame) => {
+  let pendingFrameId = null;
+
+  const cancelPendingFrame = () => {
+    if (pendingFrameId !== null) {
+      cancelFrame(pendingFrameId);
+      pendingFrameId = null;
+    }
+  };
+
+  return {
+    setPersistentStatus(message) {
+      cancelPendingFrame();
+      persistentStatusElement.hidden = false;
+      persistentStatusElement.textContent = "";
+
+      pendingFrameId = requestFrame(() => {
+        pendingFrameId = null;
+        persistentStatusElement.textContent = message;
+        syncHeight();
+      });
+    },
+    clearPersistentStatus() {
+      cancelPendingFrame();
+      persistentStatusElement.textContent = "";
+      persistentStatusElement.hidden = true;
+      syncHeight();
+    }
+  };
+};
+
+const showStatusMessage = (statusElement, message, duration) => {
+  if (!statusElement) {
+    return;
+  }
+
+  statusElement.textContent = message;
 
   setTimeout(() => {
-    if (status.textContent === message) {
-      status.textContent = "";
+    if (statusElement.textContent === message) {
+      statusElement.textContent = "";
     }
   }, duration);
 };
 
-const updateProviderUI = () => {
-  const isGemini = document.querySelector('input[name="apiProvider"]:checked').value === "gemini";
+const setActionButtonsDisabled = (documentRef, disabled) => {
+  SAVE_ACTION_BUTTON_IDS.forEach((elementId) => {
+    const element = documentRef.getElementById(elementId);
 
-  document.getElementById("geminiSection").style.display = isGemini ? "" : "none";
-  document.getElementById("openaiSection").style.display = isGemini ? "none" : "";
+    if (element) {
+      element.disabled = disabled;
+    }
+  });
 };
+
+const applyLocalizedText = (documentRef) => {
+  documentRef.querySelectorAll("[data-i18n]").forEach((element) => {
+    element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
+  });
+
+  documentRef.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+    element.setAttribute("placeholder", chrome.i18n.getMessage(element.getAttribute("data-i18n-placeholder")));
+  });
+};
+
+const setDynamicControlDescriptions = (documentRef) => {
+  const languageModel = documentRef.getElementById("languageModel");
+
+  if (languageModel) {
+    languageModel.setAttribute("aria-describedby", "languageModelHint");
+  }
+};
+
+const syncSaveBarHeight = (documentRef) => {
+  const saveBar = documentRef.querySelector(".save-bar");
+
+  if (!saveBar) {
+    return;
+  }
+
+  documentRef.documentElement.style.setProperty(
+    "--save-bar-height",
+    `${Math.ceil(saveBar.getBoundingClientRect().height)}px`
+  );
+};
+
+const initSaveBarHeight = (documentRef, windowRef) => {
+  const saveBar = documentRef.querySelector(".save-bar");
+
+  if (!saveBar) {
+    return;
+  }
+
+  const syncHeight = () => {
+    syncSaveBarHeight(documentRef);
+  };
+
+  syncHeight();
+
+  if (typeof windowRef.ResizeObserver === "function") {
+    const resizeObserver = new windowRef.ResizeObserver(() => {
+      syncHeight();
+    });
+
+    resizeObserver.observe(saveBar);
+    return;
+  }
+
+  windowRef.addEventListener("resize", () => {
+    syncHeight();
+  });
+
+  if (typeof windowRef.MutationObserver === "function") {
+    const mutationObserver = new windowRef.MutationObserver(() => {
+      syncHeight();
+    });
+
+    mutationObserver.observe(saveBar, {
+      childList: true,
+      characterData: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["hidden"]
+    });
+  }
+};
+
+const updateProviderUI = () => {
+  const selectedProvider = document.querySelector('input[name="apiProvider"]:checked');
+
+  if (!selectedProvider) {
+    return;
+  }
+
+  updateProviderCards(
+    document,
+    selectedProvider.value === "gemini",
+    chrome.i18n.getMessage(PROVIDER_SELECTED_MESSAGE_KEY)
+  );
+};
+
+const updateScrollSpy = () => {
+  const links = Array.from(document.querySelectorAll(".sidebar a"));
+
+  if (links.length === 0) {
+    return;
+  }
+
+  const sections = links.map((link) => {
+    return document.querySelector(link.getAttribute("href"));
+  });
+
+  const header = document.querySelector("header");
+  const threshold = (header ? header.getBoundingClientRect().height : 0) + 16;
+  let currentIndex = 0;
+
+  sections.forEach((section, index) => {
+    if (section && section.getBoundingClientRect().top <= threshold) {
+      currentIndex = index;
+    }
+  });
+
+  links.forEach((link, index) => {
+    const isCurrent = index === currentIndex;
+
+    link.classList.toggle("active", isCurrent);
+
+    if (isCurrent) {
+      link.setAttribute("aria-current", "location");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+};
+
+const downloadOptionsToFile = (options) => {
+  const blob = new Blob([JSON.stringify(options, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+
+  anchor.href = url;
+  anchor.download = `summarize-translate-gemini_${createLocalDateString()}.json`;
+  anchor.click();
+  URL.revokeObjectURL(url);
+};
+
+// ── Button action handlers ─────────────────────────────────────────────────
+
+export const createOptionsActionHandlers = ({
+  getIsInitialized,
+  saveWithHostPermission,
+  clearPersistentStatus,
+  setPersistentStatus,
+  showStatus,
+  getMessage,
+  getOptions,
+  isExportApiKeyEnabled,
+  downloadOptions,
+  syncOptions,
+  getCloudOptions,
+  createImportInput,
+  applyOptions,
+  needsPermissionPromptForOptions,
+  logError,
+  logInfo
+}) => {
+  const saveIfInitialized = async () => {
+    if (!getIsInitialized()) {
+      return { status: "blocked" };
+    }
+
+    return saveWithHostPermission();
+  };
+
+  const handleSaveClick = async () => {
+    const saveResult = await saveIfInitialized();
+
+    if (saveResult.status !== "granted") {
+      return;
+    }
+
+    clearPersistentStatus();
+    showStatus(getMessage("options_saved"), SHORT_STATUS_DURATION);
+  };
+
+  const handleExportClick = async () => {
+    const saveResult = await saveIfInitialized();
+
+    if (saveResult.status !== "granted") {
+      return;
+    }
+
+    clearPersistentStatus();
+    showStatus(getMessage("options_saved"), SHORT_STATUS_DURATION);
+    downloadOptions(getOptions(isExportApiKeyEnabled()));
+  };
+
+  const handleSyncClick = async () => {
+    const saveResult = await saveIfInitialized();
+
+    if (saveResult.status !== "granted") {
+      return;
+    }
+
+    clearPersistentStatus();
+
+    try {
+      await syncOptions(getOptions(true));
+      showStatus(getMessage("options_sync_cloud_started"), SHORT_STATUS_DURATION);
+    } catch (error) {
+      showStatus(getMessage("options_sync_cloud_failed"), LONG_STATUS_DURATION);
+      logError("Failed to sync options to cloud:", error);
+    }
+  };
+
+  const saveImportedOrRestoredOptions = async (successMessageKey) => {
+    const currentOptions = getOptions(true);
+
+    if (await needsPermissionPromptForOptions(currentOptions)) {
+      setPersistentStatus(getMessage("options_save_required_for_host_permission"));
+      return;
+    }
+
+    const saveResult = await saveIfInitialized();
+
+    if (saveResult.status !== "granted") {
+      return;
+    }
+
+    clearPersistentStatus();
+    showStatus(getMessage(successMessageKey), SHORT_STATUS_DURATION);
+  };
+
+  const handleImportClick = () => {
+    if (!getIsInitialized()) {
+      return;
+    }
+
+    const input = createImportInput();
+    input.type = "file";
+    input.accept = ".json";
+
+    input.addEventListener("change", async () => {
+      const file = input.files?.[0];
+
+      if (!file) {
+        return;
+      }
+
+      try {
+        const text = await file.text();
+        const options = JSON.parse(text);
+
+        applyOptions(options);
+        await saveImportedOrRestoredOptions("options_import_succeeded");
+      } catch (error) {
+        showStatus(getMessage("options_import_failed"), LONG_STATUS_DURATION);
+        logInfo(error);
+      }
+    });
+
+    input.click();
+  };
+
+  const handleRestoreClick = async () => {
+    if (!getIsInitialized()) {
+      return;
+    }
+
+    const options = await getCloudOptions();
+
+    applyOptions(options);
+    await saveImportedOrRestoredOptions("options_restore_cloud_succeeded");
+  };
+
+  return {
+    handleSaveClick,
+    handleExportClick,
+    handleImportClick,
+    handleSyncClick,
+    handleRestoreClick
+  };
+};
+
+// ── Core async logic ────────────────────────────────────────────────────────
 
 const getOptionsFromForm = (includeApiKey) => {
   const options = {
@@ -147,7 +502,6 @@ const setOptionsToForm = async () => {
   document.getElementById("theme").value = options.theme;
   document.getElementById("fontSize").value = options.fontSize;
 
-  // Set the default language model if the language model is not set
   if (!document.getElementById("languageModel").value) {
     document.getElementById("languageModel").value = DEFAULT_LANGUAGE_MODEL;
   }
@@ -164,7 +518,6 @@ const applyOptionsToForm = (options) => {
     }
   }
 
-  // Do not apply to the form when it is an empty string
   if (options.apiKey) {
     document.getElementById("apiKey").value = options.apiKey;
   }
@@ -173,32 +526,26 @@ const applyOptionsToForm = (options) => {
     document.getElementById("languageModel").value = options.languageModel;
   }
 
-  // userModelId allows an empty string
   if (options.userModelId !== undefined) {
     document.getElementById("userModelId").value = options.userModelId;
   }
 
-  // Do not apply to the form when it is an empty string
   if (options.openaiApiKey) {
     document.getElementById("openaiApiKey").value = options.openaiApiKey;
   }
 
-  // openaiBaseUrl allows an empty string
   if (options.openaiBaseUrl !== undefined) {
     document.getElementById("openaiBaseUrl").value = options.openaiBaseUrl;
   }
 
-  // openaiModelId allows an empty string
   if (options.openaiModelId !== undefined) {
     document.getElementById("openaiModelId").value = options.openaiModelId;
   }
 
-  // openaiReasoningEffort allows an empty string
   if (options.openaiReasoningEffort !== undefined) {
     document.getElementById("openaiReasoningEffort").value = options.openaiReasoningEffort;
   }
 
-  // openaiThinkingType allows an empty string
   if (options.openaiThinkingType !== undefined) {
     document.getElementById("openaiThinkingType").value = options.openaiThinkingType;
   }
@@ -207,7 +554,6 @@ const applyOptionsToForm = (options) => {
     document.getElementById("languageCode").value = options.languageCode;
   }
 
-  // userLanguage allows an empty string
   if (options.userLanguage !== undefined) {
     document.getElementById("userLanguage").value = options.userLanguage;
   }
@@ -220,17 +566,14 @@ const applyOptionsToForm = (options) => {
     }
   }
 
-  // noTextCustomPrompt1 allows an empty string
   if (options.noTextCustomPrompt1 !== undefined) {
     document.getElementById("noTextCustomPrompt1").value = options.noTextCustomPrompt1;
   }
 
-  // noTextCustomPrompt2 allows an empty string
   if (options.noTextCustomPrompt2 !== undefined) {
     document.getElementById("noTextCustomPrompt2").value = options.noTextCustomPrompt2;
   }
 
-  // noTextCustomPrompt3 allows an empty string
   if (options.noTextCustomPrompt3 !== undefined) {
     document.getElementById("noTextCustomPrompt3").value = options.noTextCustomPrompt3;
   }
@@ -243,17 +586,14 @@ const applyOptionsToForm = (options) => {
     }
   }
 
-  // textCustomPrompt1 allows an empty string
   if (options.textCustomPrompt1 !== undefined) {
     document.getElementById("textCustomPrompt1").value = options.textCustomPrompt1;
   }
 
-  // textCustomPrompt2 allows an empty string
   if (options.textCustomPrompt2 !== undefined) {
     document.getElementById("textCustomPrompt2").value = options.textCustomPrompt2;
   }
 
-  // textCustomPrompt3 allows an empty string
   if (options.textCustomPrompt3 !== undefined) {
     document.getElementById("textCustomPrompt3").value = options.textCustomPrompt3;
   }
@@ -262,32 +602,26 @@ const applyOptionsToForm = (options) => {
     document.getElementById("contextMenus").checked = options.contextMenus;
   }
 
-  // contextMenuLabel1 allows an empty string
   if (options.contextMenuLabel1 !== undefined) {
     document.getElementById("contextMenuLabel1").value = options.contextMenuLabel1;
   }
 
-  // contextMenuLabel2 allows an empty string
   if (options.contextMenuLabel2 !== undefined) {
     document.getElementById("contextMenuLabel2").value = options.contextMenuLabel2;
   }
 
-  // contextMenuLabel3 allows an empty string
   if (options.contextMenuLabel3 !== undefined) {
     document.getElementById("contextMenuLabel3").value = options.contextMenuLabel3;
   }
 
-  // contextMenuLabel1Text allows an empty string
   if (options.contextMenuLabel1Text !== undefined) {
     document.getElementById("contextMenuLabel1Text").value = options.contextMenuLabel1Text;
   }
 
-  // contextMenuLabel2Text allows an empty string
   if (options.contextMenuLabel2Text !== undefined) {
     document.getElementById("contextMenuLabel2Text").value = options.contextMenuLabel2Text;
   }
 
-  // contextMenuLabel3Text allows an empty string
   if (options.contextMenuLabel3Text !== undefined) {
     document.getElementById("contextMenuLabel3Text").value = options.contextMenuLabel3Text;
   }
@@ -316,7 +650,6 @@ const applyOptionsToForm = (options) => {
     document.getElementById("fontSize").value = options.fontSize;
   }
 
-  // Set the default language model if the language model is not set
   if (!document.getElementById("languageModel").value) {
     document.getElementById("languageModel").value = DEFAULT_LANGUAGE_MODEL;
   }
@@ -324,12 +657,8 @@ const applyOptionsToForm = (options) => {
   updateProviderUI();
 };
 
-// ── Core async logic ────────────────────────────────────────────────────────
-
-const saveOptions = async () => {
-  const options = getOptionsFromForm(true);
-
-  if (options.apiProvider === "openai" && options.openaiBaseUrl) {
+const saveOptions = async (options = getOptionsFromForm(true)) => {
+  if (hasOpenaiBaseUrl(options)) {
     try {
       options.openaiBaseUrl = normalizeBaseUrl(options.openaiBaseUrl);
       document.getElementById("openaiBaseUrl").value = options.openaiBaseUrl;
@@ -351,164 +680,172 @@ const saveOptions = async () => {
     options.contextMenuLabel3Text
   );
 
-  applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
-  applyFontSize((await chrome.storage.local.get({ fontSize: "medium" })).fontSize);
+  applyTheme(options.theme || "system");
+  applyFontSize(options.fontSize || "medium");
+  syncSaveBarHeight(document);
 };
 
-const exportOptionsToFile = async () => {
-  await saveOptions();
-  showStatusMessage(chrome.i18n.getMessage("options_saved"), 1000);
+export const createHostPermissionSaveGuard = ({
+  getOptions,
+  ensurePermission,
+  save,
+  setPersistentStatus,
+  getMessage,
+  logError
+}) => {
+  return {
+    async saveWithHostPermission() {
+      const options = getOptions(true);
 
-  const options = getOptionsFromForm(document.getElementById("exportApiKey").checked);
-  const currentDate = new Date();
-  const adjustedDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000);
-  const localDateString = adjustedDate.toISOString().split("T")[0];
-  const blob = new Blob([JSON.stringify(options, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `summarize-translate-gemini_${localDateString}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-};
+      if (hasOpenaiBaseUrl(options)) {
+        const permissionResult = await ensurePermission(options.openaiBaseUrl);
 
-const syncOptionsToCloud = async () => {
-  await saveOptions();
+        if (permissionResult.status === "denied") {
+          setPersistentStatus(getMessage("options_save_required_for_host_permission"));
+          return permissionResult;
+        }
 
-  const options = getOptionsFromForm(true);
-
-  try {
-    await chrome.storage.sync.set(options);
-    showStatusMessage(chrome.i18n.getMessage("options_sync_cloud_started"), 1000);
-  } catch (error) {
-    showStatusMessage(chrome.i18n.getMessage("options_sync_cloud_failed"), 3000);
-    console.error("Failed to sync options to cloud:", error);
-  }
-};
-
-const importOptionsFromFile = async () => {
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = ".json";
-
-  input.addEventListener("change", async () => {
-    const file = input.files[0];
-    const text = await file.text();
-    let options;
-
-    try {
-      options = JSON.parse(text);
-      applyOptionsToForm(options);
-
-      const currentOptions = getOptionsFromForm(true);
-
-      const needsPrompt = currentOptions.apiProvider === "openai"
-        && await needsHostPermissionPrompt(currentOptions.openaiBaseUrl);
-
-      if (needsPrompt) {
-        persistentStatus.textContent = chrome.i18n.getMessage("options_save_required_for_host_permission");
-        persistentStatus.hidden = false;
-        return;
+        if (permissionResult.status === "error") {
+          setPersistentStatus(getMessage("options_host_permission_request_failed"));
+          logError("Failed to request host permission:", permissionResult.error);
+          return permissionResult;
+        }
       }
 
-      await saveOptions();
-      persistentStatus.textContent = "";
-      persistentStatus.hidden = true;
-      showStatusMessage(chrome.i18n.getMessage("options_import_succeeded"), 1000);
-    } catch (error) {
-      showStatusMessage(chrome.i18n.getMessage("options_import_failed"), 3000);
-      console.log(error);
+      await save(options);
+      return { status: "granted" };
     }
-  });
-
-  input.click();
+  };
 };
 
-const restoreOptionsFromCloud = async () => {
-  const options = await chrome.storage.sync.get();
-
-  applyOptionsToForm(options);
-
-  const currentOptions = getOptionsFromForm(true);
-
-  const needsPrompt = currentOptions.apiProvider === "openai"
-    && await needsHostPermissionPrompt(currentOptions.openaiBaseUrl);
-
-  if (needsPrompt) {
-    persistentStatus.textContent = chrome.i18n.getMessage("options_save_required_for_host_permission");
-    persistentStatus.hidden = false;
-    return;
-  }
-
-  await saveOptions();
-  persistentStatus.textContent = "";
-  persistentStatus.hidden = true;
-  showStatusMessage(chrome.i18n.getMessage("options_restore_cloud_succeeded"), 1000);
+const needsPermissionPromptForOptions = async (options) => {
+  return hasOpenaiBaseUrl(options) && await needsHostPermissionPrompt(options.openaiBaseUrl);
 };
 
-const initialize = async () => {
-  // Apply the theme
+const initialize = async (setPersistentStatus) => {
   applyTheme((await chrome.storage.local.get({ theme: "system" })).theme);
-
-  // Apply font size
   applyFontSize((await chrome.storage.local.get({ fontSize: "medium" })).fontSize);
-
-  // Load the language model template
-  const languageModelTemplate = await loadTemplate("languageModelTemplate");
-  document.getElementById("languageModelContainer").appendChild(languageModelTemplate);
-
-  // Load the language code template
-  const languageCodeTemplate = await loadTemplate("languageCodeTemplate");
-  document.getElementById("languageCodeContainer").appendChild(languageCodeTemplate);
-
-  // Set the text direction of the body
   document.body.setAttribute("dir", chrome.i18n.getMessage("@@bidi_dir"));
 
-  // Set the text of elements with the data-i18n attribute
-  document.querySelectorAll("[data-i18n]").forEach(element => {
-    element.textContent = chrome.i18n.getMessage(element.getAttribute("data-i18n"));
-  });
+  const languageModelTemplate = await loadTemplate("languageModelTemplate");
+  const languageCodeTemplate = await loadTemplate("languageCodeTemplate");
 
-  setOptionsToForm();
+  if (!languageModelTemplate || !languageCodeTemplate) {
+    setPersistentStatus(chrome.i18n.getMessage("options_initialization_failed"));
+    return false;
+  }
+
+  document.getElementById("languageModelContainer").appendChild(languageModelTemplate);
+  document.getElementById("languageCodeContainer").appendChild(languageCodeTemplate);
+  setDynamicControlDescriptions(document);
+  applyLocalizedText(document);
+  await setOptionsToForm();
+  initSaveBarHeight(document, window);
+  syncSaveBarHeight(document);
+
+  return true;
 };
 
 // ── Event listeners ─────────────────────────────────────────────────────────
 
-document.addEventListener("DOMContentLoaded", initialize);
+let isOptionsPageInitialized = false;
+let isScrollSpyInitialized = false;
 
-document.querySelectorAll('input[name="apiProvider"]').forEach(radio => {
-  radio.addEventListener("change", updateProviderUI);
-});
+const handleDomContentLoaded = async () => {
+  const statusElement = document.getElementById("status");
+  const persistentStatusElement = document.getElementById("persistentStatus");
 
-document.getElementById("save").addEventListener("click", async () => {
-  const options = getOptionsFromForm(true);
+  const requestFrame = typeof window.requestAnimationFrame === "function"
+    ? window.requestAnimationFrame.bind(window)
+    : (callback) => window.setTimeout(callback, 0);
 
-  if (options.apiProvider === "openai" && options.openaiBaseUrl) {
-    await ensureHostPermission(options.openaiBaseUrl);
+  const cancelFrame = typeof window.cancelAnimationFrame === "function"
+    ? window.cancelAnimationFrame.bind(window)
+    : (frameId) => window.clearTimeout(frameId);
+
+  const { setPersistentStatus, clearPersistentStatus } = createPersistentStatusUpdater(
+    persistentStatusElement,
+    () => {
+      syncSaveBarHeight(document);
+    },
+    requestFrame,
+    cancelFrame
+  );
+
+  setActionButtonsDisabled(document, true);
+
+  const initialized = await initialize(setPersistentStatus);
+
+  if (!initialized) {
+    return;
   }
 
-  await saveOptions();
-  persistentStatus.textContent = "";
-  persistentStatus.hidden = true;
-  showStatusMessage(chrome.i18n.getMessage("options_saved"), 1000);
-});
+  const { saveWithHostPermission } = createHostPermissionSaveGuard({
+    getOptions: getOptionsFromForm,
+    ensurePermission: ensureHostPermission,
+    save: saveOptions,
+    setPersistentStatus,
+    getMessage: (key) => chrome.i18n.getMessage(key),
+    logError: console.error
+  });
 
-document.getElementById("exportFile").addEventListener("click", (event) => {
-  event.preventDefault();
-  exportOptionsToFile();
-});
+  const {
+    handleSaveClick,
+    handleExportClick,
+    handleImportClick,
+    handleSyncClick,
+    handleRestoreClick
+  } = createOptionsActionHandlers({
+    getIsInitialized: () => isOptionsPageInitialized,
+    saveWithHostPermission,
+    clearPersistentStatus,
+    setPersistentStatus,
+    showStatus: (message, duration) => {
+      showStatusMessage(statusElement, message, duration);
+    },
+    getMessage: (key) => chrome.i18n.getMessage(key),
+    getOptions: getOptionsFromForm,
+    isExportApiKeyEnabled: () => document.getElementById("exportApiKey").checked,
+    downloadOptions: downloadOptionsToFile,
+    syncOptions: (options) => chrome.storage.sync.set(options),
+    getCloudOptions: () => chrome.storage.sync.get(),
+    createImportInput: () => document.createElement("input"),
+    applyOptions: applyOptionsToForm,
+    needsPermissionPromptForOptions,
+    logError: console.error,
+    logInfo: console.log
+  });
 
-document.getElementById("importFile").addEventListener("click", (event) => {
-  event.preventDefault();
-  importOptionsFromFile();
-});
+  document.querySelectorAll('input[name="apiProvider"]').forEach((radio) => {
+    radio.addEventListener("change", updateProviderUI);
+  });
 
-document.getElementById("syncCloud").addEventListener("click", (event) => {
-  event.preventDefault();
-  syncOptionsToCloud();
-});
+  document.getElementById("save").addEventListener("click", handleSaveClick);
+  document.getElementById("exportFile").addEventListener("click", handleExportClick);
+  document.getElementById("importFile").addEventListener("click", handleImportClick);
+  document.getElementById("syncCloud").addEventListener("click", handleSyncClick);
+  document.getElementById("restoreCloud").addEventListener("click", handleRestoreClick);
 
-document.getElementById("restoreCloud").addEventListener("click", (event) => {
-  event.preventDefault();
-  restoreOptionsFromCloud();
-});
+  if (!isScrollSpyInitialized) {
+    window.addEventListener("scroll", updateScrollSpy, { passive: true });
+    window.addEventListener("resize", updateScrollSpy);
+
+    document.querySelectorAll(".sidebar a").forEach((link) => {
+      link.addEventListener("click", () => {
+        requestFrame(() => {
+          updateScrollSpy();
+        });
+      });
+    });
+
+    isScrollSpyInitialized = true;
+  }
+
+  isOptionsPageInitialized = true;
+  setActionButtonsDisabled(document, false);
+  updateScrollSpy();
+};
+
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", handleDomContentLoaded);
+}

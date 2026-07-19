@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { normalizeBaseUrl, getModelConfigs, getResponseContent } from "../../extension/utils.js";
+import { ensureHostPermission, normalizeBaseUrl, getModelConfigs, getResponseContent } from "../../extension/utils.js";
 
 // Minimal chrome.i18n stub for functions that call chrome.i18n.getMessage().
 // Returns a deterministic "message:<key>" string so assertions stay stable
@@ -7,6 +7,10 @@ import { normalizeBaseUrl, getModelConfigs, getResponseContent } from "../../ext
 globalThis.chrome = {
   i18n: {
     getMessage: (key) => `message:${key}`
+  },
+  permissions: {
+    contains: async () => false,
+    request: async () => false
   }
 };
 
@@ -33,6 +37,49 @@ describe("normalizeBaseUrl", () => {
 
   it("throws a TypeError for an invalid URL", () => {
     expect(() => normalizeBaseUrl("not a URL")).toThrow(TypeError);
+  });
+});
+
+describe("ensureHostPermission", () => {
+  it("returns granted when the base URL is invalid or empty", async () => {
+    expect(await ensureHostPermission("")).toEqual({ status: "granted" });
+    expect(await ensureHostPermission("not a URL")).toEqual({ status: "granted" });
+  });
+
+  it("returns granted when the origin is already permitted", async () => {
+    chrome.permissions.contains = async () => true;
+
+    chrome.permissions.request = async () => {
+      throw new Error("request should not be called");
+    };
+
+    await expect(ensureHostPermission("https://example.com/api")).resolves.toEqual({ status: "granted" });
+  });
+
+  it("returns denied when the permission prompt is rejected", async () => {
+    chrome.permissions.contains = async () => false;
+    chrome.permissions.request = async () => false;
+
+    await expect(ensureHostPermission("https://example.com/api")).resolves.toEqual({ status: "denied" });
+  });
+
+  it("returns granted when the permission prompt is accepted", async () => {
+    chrome.permissions.contains = async () => false;
+    chrome.permissions.request = async () => true;
+
+    await expect(ensureHostPermission("https://example.com/api")).resolves.toEqual({ status: "granted" });
+  });
+
+  it("returns error when the permissions API throws", async () => {
+    chrome.permissions.contains = async () => {
+      throw new Error("permissions unavailable");
+    };
+
+    const result = await ensureHostPermission("https://example.com/api");
+
+    expect(result.status).toBe("error");
+    expect(result.error).toBeInstanceOf(Error);
+    expect(result.error.message).toBe("permissions unavailable");
   });
 });
 
