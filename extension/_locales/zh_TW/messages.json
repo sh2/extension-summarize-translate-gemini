@@ -207,19 +207,19 @@
         "message": "未選取文字時，執行以下動作"
     },
     "options_action_summarize_no_selection": {
-        "message": "摘要 (預設)"
+        "message": "摘要（預設）"
     },
     "options_action_translate_no_selection": {
         "message": "翻譯"
     },
     "options_action_custom_1_no_selection": {
-        "message": "自訂動作 1 (未選取)"
+        "message": "自訂動作 1（未選取）"
     },
     "options_action_custom_2_no_selection": {
-        "message": "自訂動作 2 (未選取)"
+        "message": "自訂動作 2（未選取）"
     },
     "options_action_custom_3_no_selection": {
-        "message": "自訂動作 3 (未選取)"
+        "message": "自訂動作 3（未選取）"
     },
     "options_action_description_selection": {
         "message": "選取文字時，執行以下動作"
@@ -228,40 +228,40 @@
         "message": "摘要"
     },
     "options_action_translate_selection": {
-        "message": "翻譯 (預設)"
+        "message": "翻譯（預設）"
     },
     "options_action_custom_1_selection": {
-        "message": "自訂動作 1 (已選取)"
+        "message": "自訂動作 1（已選取）"
     },
     "options_action_custom_2_selection": {
-        "message": "自訂動作 2 (已選取)"
+        "message": "自訂動作 2（已選取）"
     },
     "options_action_custom_3_selection": {
-        "message": "自訂動作 3 (已選取)"
+        "message": "自訂動作 3（已選取）"
     },
     "options_contextmenu_label_1": {
-        "message": "自訂動作 1 的標籤 (未選取)"
+        "message": "自訂動作 1 的標籤（未選取）"
     },
     "options_contextmenu_label_2": {
-        "message": "自訂動作 2 的標籤 (未選取)"
+        "message": "自訂動作 2 的標籤（未選取）"
     },
     "options_contextmenu_label_3": {
-        "message": "自訂動作 3 的標籤 (未選取)"
+        "message": "自訂動作 3 的標籤（未選取）"
     },
     "options_contextmenu_label_1_text": {
-        "message": "自訂動作 1 的標籤 (已選取)"
+        "message": "自訂動作 1 的標籤（已選取）"
     },
     "options_contextmenu_label_2_text": {
-        "message": "自訂動作 2 的標籤 (已選取)"
+        "message": "自訂動作 2 的標籤（已選取）"
     },
     "options_contextmenu_label_3_text": {
-        "message": "自訂動作 3 的標籤 (已選取)"
+        "message": "自訂動作 3 的標籤（已選取）"
     },
     "options_contextmenus_add": {
         "message": "新增至右鍵選單"
     },
     "options_contextmenus_notes": {
-        "message": "自訂動作也可透過右鍵選單存取 (僅限桌面版)。"
+        "message": "自訂動作也可透過右鍵選單存取（僅限桌面版）。"
     },
     "options_streaming": {
         "message": "啟用語言模型的串流輸出"

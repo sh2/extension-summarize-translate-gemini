@@ -156,7 +156,7 @@
         "message": "バックアップと同期"
     },
     "options_provider_selected": {
-        "message": "現在のプロバイダ"
+        "message": "現在のプロバイダー"
     },
     "options_apikey": {
         "message": "Gemini APIキー"
@@ -207,19 +207,19 @@
         "message": "テキストが選択されなかったときは、以下のアクションを実行する"
     },
     "options_action_summarize_no_selection": {
-        "message": "要約 (デフォルト)"
+        "message": "要約（デフォルト）"
     },
     "options_action_translate_no_selection": {
         "message": "翻訳"
     },
     "options_action_custom_1_no_selection": {
-        "message": "カスタムアクション1 (選択なし)"
+        "message": "カスタムアクション1（選択なし）"
     },
     "options_action_custom_2_no_selection": {
-        "message": "カスタムアクション2 (選択なし)"
+        "message": "カスタムアクション2（選択なし）"
     },
     "options_action_custom_3_no_selection": {
-        "message": "カスタムアクション3 (選択なし)"
+        "message": "カスタムアクション3（選択なし）"
     },
     "options_action_description_selection": {
         "message": "テキストが選択されたときは、以下のアクションを実行する"
@@ -228,40 +228,40 @@
         "message": "要約"
     },
     "options_action_translate_selection": {
-        "message": "翻訳 (デフォルト)"
+        "message": "翻訳（デフォルト）"
     },
     "options_action_custom_1_selection": {
-        "message": "カスタムアクション1 (選択あり)"
+        "message": "カスタムアクション1（選択あり）"
     },
     "options_action_custom_2_selection": {
-        "message": "カスタムアクション2 (選択あり)"
+        "message": "カスタムアクション2（選択あり）"
     },
     "options_action_custom_3_selection": {
-        "message": "カスタムアクション3 (選択あり)"
+        "message": "カスタムアクション3（選択あり）"
     },
     "options_contextmenu_label_1": {
-        "message": "カスタムアクション1のラベル (選択なし)"
+        "message": "カスタムアクション1のラベル（選択なし）"
     },
     "options_contextmenu_label_2": {
-        "message": "カスタムアクション2のラベル (選択なし)"
+        "message": "カスタムアクション2のラベル（選択なし）"
     },
     "options_contextmenu_label_3": {
-        "message": "カスタムアクション3のラベル (選択なし)"
+        "message": "カスタムアクション3のラベル（選択なし）"
     },
     "options_contextmenu_label_1_text": {
-        "message": "カスタムアクション1のラベル (選択あり)"
+        "message": "カスタムアクション1のラベル（選択あり）"
     },
     "options_contextmenu_label_2_text": {
-        "message": "カスタムアクション2のラベル (選択あり)"
+        "message": "カスタムアクション2のラベル（選択あり）"
     },
     "options_contextmenu_label_3_text": {
-        "message": "カスタムアクション3のラベル (選択あり)"
+        "message": "カスタムアクション3のラベル（選択あり）"
     },
     "options_contextmenus_add": {
         "message": "コンテキストメニューに登録する"
     },
     "options_contextmenus_notes": {
-        "message": "カスタムアクションはコンテキストメニューからも利用可能です (デスクトップのみ)。"
+        "message": "カスタムアクションはコンテキストメニューからも利用可能です（デスクトップのみ）。"
     },
     "options_streaming": {
         "message": "言語モデルからのストリーミング出力を有効にする"
