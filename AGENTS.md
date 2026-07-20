@@ -13,8 +13,8 @@ Cross-browser extension (Chrome, Firefox, Edge) that uses Google Gemini API and 
 
 - Conversation content is stored in a provider-agnostic format using Gemini-style `parts` arrays with `role` fields (`"system"`, `"user"`, `"model"`).
 - `generateContent()` and `streamGenerateContent()` in `extension/utils.js` are the only entry points for LLM calls.
-- Keep changes inside `extension/` unless the task is specifically about `firefox/` manifests or the translation helper scripts in `utils/`.
-- Do not edit files in `extension/lib/`.
+- Keep production-source changes inside `extension/` unless the task is specifically about `firefox/` manifests or the translation helper scripts in `utils/`. Update `test/`, `docs/`, root configuration files, and `AGENTS.md` when required by the task.
+- Do not edit files in `extension/lib/` except when updating a vendored library according to the procedure below.
 - Always use block braces `{}` for control statements such as `if`, `else`, `for`, and `while` (brace-less single-line statements like `if (cond) return;` are strictly prohibited).
 
 ## Task routing
@@ -59,6 +59,18 @@ Reuse the existing section names rather than inventing new ones. The canonical s
 - When modifying provider logic, verify both `apiProvider: "gemini"` and `apiProvider: "openai"` paths still work.
 - When updating the extension version, update both `extension/manifest.json` and `firefox/manifest.json`.
 - `npm run test:e2e` runs the minimal Chromium E2E under `e2e/` (Playwright, local mock API). It is not part of `npm test` and is not a PR-required check; run it on `main` and before releases. See [`docs/TESTING_PHASE_5.md`](docs/TESTING_PHASE_5.md).
+
+## Localization guidelines
+
+Style rules for edits to `extension/_locales/*/messages.json`:
+
+- Use consistent long vowel marks (`ー`) in Japanese katakana terms, for example, 「プロバイダー」, 「サーバー」, and 「ユーザー」.
+- Choose parentheses based on the writing system:
+  - CJK locales (`ja`, `zh_CN`, `zh_TW`): Use full-width `（...）` when the parenthetical text contains Japanese or Chinese.
+  - All other locales, including `ko`: Use half-width `(...)`.
+  - Keep technical identifiers such as `(reasoning_effort)` and `(thinking.type)` half-width in every locale.
+- `extension-integrity.test.js` verifies that every locale has exactly the same keys as `en`. Add new keys to all 15 locales, including `en`, in the same commit.
+- After changing locale files, run `npm test` to verify locale-key integrity.
 
 ## Logging policy
 
