@@ -131,6 +131,33 @@
     "options_provider_openai": {
         "message": "OpenAI 호환 API"
     },
+    "options_section_language": {
+        "message": "언어"
+    },
+    "options_section_default_action_no_selection": {
+        "message": "기본 작업 (선택 없음)"
+    },
+    "options_section_default_action_selection": {
+        "message": "기본 작업 (선택 있음)"
+    },
+    "options_section_custom_no_selection": {
+        "message": "사용자 지정 작업 (선택 없음)"
+    },
+    "options_section_custom_selection": {
+        "message": "사용자 지정 작업 (선택 있음)"
+    },
+    "options_section_behavior": {
+        "message": "동작"
+    },
+    "options_section_appearance": {
+        "message": "모양"
+    },
+    "options_section_backup": {
+        "message": "백업 및 동기화"
+    },
+    "options_provider_selected": {
+        "message": "현재 제공자"
+    },
     "options_apikey": {
         "message": "Gemini API 키"
     },
@@ -292,6 +319,12 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "복원 성공."
+    },
+    "options_initialization_failed": {
+        "message": "옵션 페이지를 초기화하지 못했습니다. 페이지를 새로고침하세요."
+    },
+    "options_host_permission_request_failed": {
+        "message": "호스트 액세스를 요청하지 못했습니다. 다시 시도하세요."
     },
     "options_save_required_for_host_permission": {
         "message": "저장을 클릭하여 설정을 적용하고 호스트 액세스 권한을 부여하세요."

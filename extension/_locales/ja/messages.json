@@ -131,6 +131,33 @@
     "options_provider_openai": {
         "message": "OpenAI互換API"
     },
+    "options_section_language": {
+        "message": "言語"
+    },
+    "options_section_default_action_no_selection": {
+        "message": "デフォルトのアクション（選択なし）"
+    },
+    "options_section_default_action_selection": {
+        "message": "デフォルトのアクション（選択あり）"
+    },
+    "options_section_custom_no_selection": {
+        "message": "カスタムアクション（選択なし）"
+    },
+    "options_section_custom_selection": {
+        "message": "カスタムアクション（選択あり）"
+    },
+    "options_section_behavior": {
+        "message": "動作"
+    },
+    "options_section_appearance": {
+        "message": "外観"
+    },
+    "options_section_backup": {
+        "message": "バックアップと同期"
+    },
+    "options_provider_selected": {
+        "message": "現在のプロバイダ"
+    },
     "options_apikey": {
         "message": "Gemini APIキー"
     },
@@ -292,6 +319,12 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "復元に成功しました。"
+    },
+    "options_initialization_failed": {
+        "message": "オプションページを初期化できませんでした。ページを再読み込みしてください。"
+    },
+    "options_host_permission_request_failed": {
+        "message": "ホストへのアクセスを要求できませんでした。もう一度お試しください。"
     },
     "options_save_required_for_host_permission": {
         "message": "保存するをクリックして設定を適用し、ホストアクセスを許可します。"

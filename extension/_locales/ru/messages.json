@@ -131,6 +131,33 @@
     "options_provider_openai": {
         "message": "OpenAI-совместимый API"
     },
+    "options_section_language": {
+        "message": "Язык"
+    },
+    "options_section_default_action_no_selection": {
+        "message": "Действия по умолчанию (без выделения)"
+    },
+    "options_section_default_action_selection": {
+        "message": "Действия по умолчанию (с выделением)"
+    },
+    "options_section_custom_no_selection": {
+        "message": "Пользовательские действия (без выделения)"
+    },
+    "options_section_custom_selection": {
+        "message": "Пользовательские действия (с выделением)"
+    },
+    "options_section_behavior": {
+        "message": "Поведение"
+    },
+    "options_section_appearance": {
+        "message": "Внешний вид"
+    },
+    "options_section_backup": {
+        "message": "Резервное копирование и синхронизация"
+    },
+    "options_provider_selected": {
+        "message": "Текущий провайдер"
+    },
     "options_apikey": {
         "message": "Ключ API Gemini"
     },
@@ -292,6 +319,12 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Восстановление выполнено успешно."
+    },
+    "options_initialization_failed": {
+        "message": "Не удалось инициализировать страницу настроек. Перезагрузите страницу."
+    },
+    "options_host_permission_request_failed": {
+        "message": "Не удалось запросить доступ к хосту. Повторите попытку."
     },
     "options_save_required_for_host_permission": {
         "message": "Нажмите «Сохранить», чтобы применить настройки и предоставить доступ к хосту."

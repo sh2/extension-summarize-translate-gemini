@@ -131,6 +131,33 @@
     "options_provider_openai": {
         "message": "OpenAI-সামঞ্জস্যপূর্ণ API"
     },
+    "options_section_language": {
+        "message": "ভাষা"
+    },
+    "options_section_default_action_no_selection": {
+        "message": "ডিফল্ট অ্যাকশন (কোনো নির্বাচন নেই)"
+    },
+    "options_section_default_action_selection": {
+        "message": "ডিফল্ট অ্যাকশন (নির্বাচন)"
+    },
+    "options_section_custom_no_selection": {
+        "message": "কাস্টম অ্যাকশন (কোনো নির্বাচন নেই)"
+    },
+    "options_section_custom_selection": {
+        "message": "কাস্টম অ্যাকশন (নির্বাচন)"
+    },
+    "options_section_behavior": {
+        "message": "আচরণ"
+    },
+    "options_section_appearance": {
+        "message": "চেহারা"
+    },
+    "options_section_backup": {
+        "message": "ব্যাকআপ ও সিঙ্ক"
+    },
+    "options_provider_selected": {
+        "message": "বর্তমান প্রদানকারী"
+    },
     "options_apikey": {
         "message": "Gemini API কী"
     },
@@ -292,6 +319,12 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "পুনরুদ্ধার সফল হয়েছে।"
+    },
+    "options_initialization_failed": {
+        "message": "বিকল্প পৃষ্ঠা শুরু করা যায়নি। অনুগ্রহ করে পৃষ্ঠাটি পুনরায় লোড করুন।"
+    },
+    "options_host_permission_request_failed": {
+        "message": "হোস্ট অ্যাক্সেসের অনুরোধ করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।"
     },
     "options_save_required_for_host_permission": {
         "message": "সেটিংস প্রয়োগ করতে এবং হোস্ট অ্যাক্সেস মঞ্জুর করতে সংরক্ষণ করুন-এ ক্লিক করুন।"

@@ -284,30 +284,6 @@
     "options_font_size": {
         "message": "Font size"
     },
-    "options_value_system": {
-        "message": "System"
-    },
-    "options_value_light": {
-        "message": "Light"
-    },
-    "options_value_dark": {
-        "message": "Dark"
-    },
-    "options_value_large": {
-        "message": "Large"
-    },
-    "options_value_medium": {
-        "message": "Medium"
-    },
-    "options_value_small": {
-        "message": "Small"
-    },
-    "options_value_unspecified": {
-        "message": "Unspecified"
-    },
-    "options_placeholder_label_optional": {
-        "message": "Label (Optional)"
-    },
     "options_button_save": {
         "message": "Save options"
     },

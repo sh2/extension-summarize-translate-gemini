@@ -131,6 +131,33 @@
     "options_provider_openai": {
         "message": "API compatible con OpenAI"
     },
+    "options_section_language": {
+        "message": "Idioma"
+    },
+    "options_section_default_action_no_selection": {
+        "message": "Acciones predeterminadas (sin selección)"
+    },
+    "options_section_default_action_selection": {
+        "message": "Acciones predeterminadas (con selección)"
+    },
+    "options_section_custom_no_selection": {
+        "message": "Acciones personalizadas (sin selección)"
+    },
+    "options_section_custom_selection": {
+        "message": "Acciones personalizadas (con selección)"
+    },
+    "options_section_behavior": {
+        "message": "Comportamiento"
+    },
+    "options_section_appearance": {
+        "message": "Apariencia"
+    },
+    "options_section_backup": {
+        "message": "Copia de seguridad y sincronización"
+    },
+    "options_provider_selected": {
+        "message": "Proveedor actual"
+    },
     "options_apikey": {
         "message": "Clave API de Gemini"
     },
@@ -292,6 +319,12 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "Restauración exitosa."
+    },
+    "options_initialization_failed": {
+        "message": "No se pudo inicializar la página de opciones. Vuelva a cargar esta página."
+    },
+    "options_host_permission_request_failed": {
+        "message": "No se pudo solicitar acceso al host. Inténtelo de nuevo."
     },
     "options_save_required_for_host_permission": {
         "message": "Haz clic en Guardar para aplicar la configuración y conceder acceso al host."

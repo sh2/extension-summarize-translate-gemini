@@ -131,6 +131,33 @@
     "options_provider_openai": {
         "message": "OpenAI 兼容 API"
     },
+    "options_section_language": {
+        "message": "语言"
+    },
+    "options_section_default_action_no_selection": {
+        "message": "默认操作（未选择文本）"
+    },
+    "options_section_default_action_selection": {
+        "message": "默认操作（已选择文本）"
+    },
+    "options_section_custom_no_selection": {
+        "message": "自定义操作（未选择文本）"
+    },
+    "options_section_custom_selection": {
+        "message": "自定义操作（已选择文本）"
+    },
+    "options_section_behavior": {
+        "message": "行为"
+    },
+    "options_section_appearance": {
+        "message": "外观"
+    },
+    "options_section_backup": {
+        "message": "备份与同步"
+    },
+    "options_provider_selected": {
+        "message": "当前提供商"
+    },
     "options_apikey": {
         "message": "Gemini API 密钥"
     },
@@ -292,6 +319,12 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "恢复成功。"
+    },
+    "options_initialization_failed": {
+        "message": "无法初始化选项页面。请重新加载此页面。"
+    },
+    "options_host_permission_request_failed": {
+        "message": "无法请求主机访问权限。请重试。"
     },
     "options_save_required_for_host_permission": {
         "message": "点击保存以应用设置并授予主机访问权限。"

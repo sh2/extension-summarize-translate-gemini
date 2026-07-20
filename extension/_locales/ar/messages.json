@@ -131,6 +131,33 @@
     "options_provider_openai": {
         "message": "API متوافق مع OpenAI"
     },
+    "options_section_language": {
+        "message": "اللغة"
+    },
+    "options_section_default_action_no_selection": {
+        "message": "الإجراءات الافتراضية (دون تحديد)"
+    },
+    "options_section_default_action_selection": {
+        "message": "الإجراءات الافتراضية (مع تحديد)"
+    },
+    "options_section_custom_no_selection": {
+        "message": "إجراءات مخصصة (دون تحديد)"
+    },
+    "options_section_custom_selection": {
+        "message": "إجراءات مخصصة (مع تحديد)"
+    },
+    "options_section_behavior": {
+        "message": "السلوك"
+    },
+    "options_section_appearance": {
+        "message": "المظهر"
+    },
+    "options_section_backup": {
+        "message": "النسخ الاحتياطي والمزامنة"
+    },
+    "options_provider_selected": {
+        "message": "الموفر الحالي"
+    },
     "options_apikey": {
         "message": "مفتاح Gemini API"
     },
@@ -292,6 +319,12 @@
     },
     "options_restore_cloud_succeeded": {
         "message": "تمت الاستعادة بنجاح."
+    },
+    "options_initialization_failed": {
+        "message": "تعذر تهيئة صفحة الخيارات. يرجى إعادة تحميل الصفحة."
+    },
+    "options_host_permission_request_failed": {
+        "message": "تعذر طلب الوصول إلى المضيف. يرجى المحاولة مرة أخرى."
     },
     "options_save_required_for_host_permission": {
         "message": "انقر فوق حفظ لتطبيق الإعدادات ومنح الوصول إلى المضيف."
