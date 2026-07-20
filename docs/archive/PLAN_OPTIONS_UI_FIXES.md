@@ -2,7 +2,7 @@
 
 ## 目的
 
-`docs/PLAN_OPTIONS_UI_IMPROVEMENT.md` に基づいて導入した options 画面について、実装後レビューで指摘された以下 4 点を修正する。
+`docs/archive/PLAN_OPTIONS_UI_IMPROVEMENT.md` に基づいて導入した options 画面について、実装後レビューで指摘された以下 4 点を修正する。
 
 1. `API Provider` / `Default Actions (No Selection)` / `Default Actions (Selection)` / `Behavior` が右ペインに 2 回ずつ表示されて冗長
 2. `Backup & Sync` のボタンがデスクトップでも 2 列配置で、文言が収まっていない
@@ -342,7 +342,7 @@ provider カードの選択／非選択は **`.provider-status`（`Current provi
 
 ## 再実行時の注意
 
-本書は `docs/PLAN_OPTIONS_UI_FIXES.md を再度実装してください` という指示で壊れず再適用できる構造になっている。再実行時は以下を守ること:
+本書は `docs/archive/PLAN_OPTIONS_UI_FIXES.md を再度実装してください` という指示で壊れず再適用できる構造になっている。再実行時は以下を守ること:
 
 1. 「修正の状態」表を先に確認し、**「適用済」の修正は再度適用しない**。手順を再実行すると、意図しない二重適用や、既に存在しない要素への編集試行で失敗する
 2. 未適用の修正だけを原本順序で適用する。各修正は「前提ファイル」欄に書かれたファイルだけを触る

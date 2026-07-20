@@ -33,7 +33,7 @@
 
 ### 参考プロトタイプ
 
-最終方針の判断根拠として、以下の 3 案のみ `docs/` 直下に保存する。`docs/` 直下に置くことで、プロトタイプ内の `../extension/...` 相対参照（CSS / 画像）を変更せずに維持できる。
+最終方針の判断根拠として、以下の 3 案のみ `docs/archive/` 配下に保存する。`docs/archive/` 配下に置くことで、プロトタイプ内の `../../extension/...` 相対参照（CSS / 画像）でリポジトリ内の資産を参照できる。
 
 - [デザイン案 06: Sticky Sidebar + Scrollspy](./options-ui-design-06-sidebar-scrollspy.html)
 - [デザイン案 08: Sidebar + Merged Mega-Cards](./options-ui-design-08-sidebar-mega-cards.html)
