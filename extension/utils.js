@@ -157,7 +157,10 @@ export const exportTextToFile = (text) => {
 
 const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
   const url = new URL(normalizedBaseUrl);
-  return `${url.protocol}//${url.host}/*`;
+
+  // Use hostname (without port) because Firefox does not support port numbers
+  // in WebExtension match patterns. The actual API request URL retains the port.
+  return `${url.protocol}//${url.hostname}/*`;
 };
 
 const tryNormalizeBaseUrl = (baseUrl) => {
@@ -216,12 +219,9 @@ export const ensureHostPermission = async (baseUrl) => {
 
   try {
     const origin = getOriginPatternFromNormalizedBaseUrl(normalizedBaseUrl);
-    const hasPermission = await chrome.permissions.contains({ origins: [origin] });
 
-    if (hasPermission) {
-      return { status: "granted" };
-    }
-
+    // Firefox requires permissions.request() to be called within the synchronous
+    // stack of a user input handler. Do not await anything before this call.
     const permissionGranted = await chrome.permissions.request({ origins: [origin] });
 
     if (permissionGranted) {

@@ -9,7 +9,6 @@ globalThis.chrome = {
     getMessage: (key) => `message:${key}`
   },
   permissions: {
-    contains: async () => false,
     request: async () => false
   }
 };
@@ -46,32 +45,28 @@ describe("ensureHostPermission", () => {
     expect(await ensureHostPermission("not a URL")).toEqual({ status: "granted" });
   });
 
-  it("returns granted when the origin is already permitted", async () => {
-    chrome.permissions.contains = async () => true;
-
-    chrome.permissions.request = async () => {
-      throw new Error("request should not be called");
-    };
+  it("returns granted when the permission prompt is accepted (already permitted)", async () => {
+    // Issue #47 — contains() を省略し request() を直接呼ぶ設計のため、
+    // 既に権限がある場合も request() が呼ばれる（ブラウザ側が静かに許可する）。
+    chrome.permissions.request = async () => true;
 
     await expect(ensureHostPermission("https://example.com/api")).resolves.toEqual({ status: "granted" });
   });
 
   it("returns denied when the permission prompt is rejected", async () => {
-    chrome.permissions.contains = async () => false;
     chrome.permissions.request = async () => false;
 
     await expect(ensureHostPermission("https://example.com/api")).resolves.toEqual({ status: "denied" });
   });
 
   it("returns granted when the permission prompt is accepted", async () => {
-    chrome.permissions.contains = async () => false;
     chrome.permissions.request = async () => true;
 
     await expect(ensureHostPermission("https://example.com/api")).resolves.toEqual({ status: "granted" });
   });
 
   it("returns error when the permissions API throws", async () => {
-    chrome.permissions.contains = async () => {
+    chrome.permissions.request = async () => {
       throw new Error("permissions unavailable");
     };
 
@@ -80,6 +75,19 @@ describe("ensureHostPermission", () => {
     expect(result.status).toBe("error");
     expect(result.error).toBeInstanceOf(Error);
     expect(result.error.message).toBe("permissions unavailable");
+  });
+
+  it("generates a port-free origin pattern for Firefox compatibility", async () => {
+    let requestedPattern;
+
+    chrome.permissions.request = async ({ origins }) => {
+      requestedPattern = origins[0];
+      return true;
+    };
+
+    await ensureHostPermission("http://127.0.0.1:8081/v1");
+
+    expect(requestedPattern).toBe("http://127.0.0.1/*");
   });
 });
 
