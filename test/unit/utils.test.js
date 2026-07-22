@@ -46,8 +46,9 @@ describe("ensureHostPermission", () => {
   });
 
   it("returns granted when the permission prompt is accepted (already permitted)", async () => {
-    // Issue #47 — contains() を省略し request() を直接呼ぶ設計のため、
-    // 既に権限がある場合も request() が呼ばれる（ブラウザ側が静かに許可する）。
+    // Issue #47 — contains() is omitted and request() is called directly, so
+    // request() is invoked even when the permission is already granted (the
+    // browser approves it silently).
     chrome.permissions.request = async () => true;
 
     await expect(ensureHostPermission("https://example.com/api")).resolves.toEqual({ status: "granted" });
