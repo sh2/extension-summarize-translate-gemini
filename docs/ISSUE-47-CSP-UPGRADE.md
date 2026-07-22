@@ -20,7 +20,7 @@
 
 `fetch()` 直前にデバッグログを仕込み、実際に渡される URL を確認した（調査用の一時コードで既に削除済み）。
 
-```
+```text
 [Issue47][stream] baseUrl= http://vermeer:11434/v1  requestUrl= http://vermeer:11434/v1/chat/completions  protocol= http:  host= vermeer:11434
 ```
 
@@ -28,7 +28,7 @@
 
 しかしその直後に Firefox が CSP によってアップグレードしていた:
 
-```
+```text
 ⚠ Content-Security-Policy: 安全でない要求 'http://vermeer:11434/v1/chat/completions' をアップグレードして 'https://' を使用します
 ```
 
@@ -67,7 +67,7 @@ Firefox 用マニフェスト（`firefox/manifest.json`）の**み**に明示的
 ### デフォルトとの差分（Firefox）
 
 | ディレクティブ | Firefox MV3 デフォルト | 今回の設定 | 差分 |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `script-src` | `'self'` | `'self'` | なし |
 | `object-src` | `'self'` | `'self'` | なし |
 | `upgrade-insecure-requests` | 付与される | **含めない** | ここだけ意図的に除外 |

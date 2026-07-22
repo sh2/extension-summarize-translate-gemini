@@ -14,7 +14,7 @@
 
 **現象:** ポートなしの Base URL でも以下のエラーが発生し、保存に失敗する。以前は Firefox で同一設定が保存できていたため、最近の変更によるリグレッション。
 
-```
+```text
 Failed to request host permission: Error: permissions.request may only be called from a user input handler
     ensureHostPermission moz-extension://.../utils.js:225
     saveWithHostPermission moz-extension://.../options.js:701
@@ -49,7 +49,7 @@ Failed to request host permission: Error: permissions.request may only be called
 ## 履歴調査
 
 | コミット | 内容 | 影響 |
-|---|---|---|
+| --- | --- | --- |
 | `419d2bd` | 初期実装。`ensureHostPermission` 内で `await chrome.permissions.contains()` の後に `chrome.permissions.request()` を呼ぶ。 | 当時は Firefox で動作していた（報告ベース）。 |
 | `f1ee855` | リファクタで `createHostPermissionSaveGuard` / `saveWithHostPermission` / `saveIfInitialized` を導入。 | 呼び出し構造は変わったが、根本原因は `contains()` の `await` であることが検証で判明。 |
 
@@ -58,7 +58,7 @@ Failed to request host permission: Error: permissions.request may only be called
 `ensureHostPermission()` 内の `await chrome.permissions.contains()` が、
 `chrome.permissions.request()` を呼ぶ前に user input handler のコンテキストを切断していた。
 
-```
+```text
 handleSaveClick (click ハンドラ)
   → ... → ensureHostPermission()
     → await chrome.permissions.contains()  ← ここで user input handler 切れ
@@ -83,7 +83,7 @@ const permissionGranted = await chrome.permissions.request({ origins: [origin] }
 #### 検討した代替案
 
 | 案 | 内容 | 評価 |
-|---|---|---|
+| --- | --- | --- |
 | **採用** | `contains()` を除去し `request()` を直接呼ぶ | 最小変更。Firefox 実機で検証済み |
 | A | `ensureHostPermission` を click ハンドラ内で直接呼ぶ | `contains()` の `await` が残るため根本解決にならない |
 | C | `contains()` の後にラッパー経由で `request()` する | `contains` と `request` の間に `await` が入るため不可 |

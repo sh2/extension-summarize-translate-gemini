@@ -11,6 +11,7 @@
 **現象:** ポート付きの OpenAI 互換 Base URL（例: `http://127.0.0.1:8081/v1`）をオプションページで保存しようとすると、「Unable to request host access. Please try again.」と表示され保存に失敗する。
 
 > **関連ファイル（Issue #47 の3原因層）:**
+>
 > - 本ファイル — 権限パターンにポートが含まれる問題
 > - [`ISSUE-47-USER-INPUT-HANDLER.md`](ISSUE-47-USER-INPUT-HANDLER.md) — `permissions.request` の呼び出しタイミング問題
 > - [`ISSUE-47-CSP-UPGRADE.md`](ISSUE-47-CSP-UPGRADE.md) — CSP による `http://` → `https://` アップグレード問題
@@ -30,7 +31,7 @@ const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
 
 `http://127.0.0.1:8081/v1` に対して生成されるパターン:
 
-```
+```text
 http://127.0.0.1:8081/*
 ```
 
@@ -53,7 +54,7 @@ MDN の例にも明記:
 `getOriginPatternFromNormalizedBaseUrl` の呼び出し箇所（`extension/utils.js`）:
 
 | 関数 | 行 | 用途 |
-|---|---|---|
+| --- | --- | --- |
 | `needsHostPermissionPrompt()` | 203 | 保存前に権限プロンプトが必要か判定 |
 | `ensureHostPermission()` | 218 | 保存時に権限をリクエスト |
 
@@ -80,7 +81,7 @@ MDN の例にも明記:
 ### 代替案の検討
 
 | 案 | 内容 | 評価 |
-|---|---|---|
+| --- | --- | --- |
 | A（採用） | `url.hostname` を使用 | シンプル。Firefox/Chrome 両方で一貫動作 |
 | B | Firefox のみ `url.hostname`、Chrome は `url.host` | ブラウザ分岐が必要で複雑化。保守コストが高い |
 | C | ポート付きパターンを試し、失敗したらフォールバック | `permissions.request` の失敗理由が不透明で実装が困難 |
@@ -92,7 +93,7 @@ MDN の例にも明記:
 ### 権限スコープの変更
 
 | ブラウザ | 修正前 | 修正後 |
-|---|---|---|
+| --- | --- | --- |
 | Firefox | ❌ 権限リクエスト失敗（無効なパターン） | ✅ 権限付与（全ポート） |
 | Chrome | ✅ 権限付与（ポート限定） | ✅ 権限付与（全ポート） |
 
