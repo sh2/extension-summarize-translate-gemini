@@ -18,8 +18,8 @@ The Gemini API Free Tier has strict [rate limits](https://ai.google.dev/gemini-a
 
 When you select **"Gemini Flash with Gemma Fallback"** in the options, the extension will try models in this priority order:
 
-1. Gemini 3.5 Flash (Thinking Minimal)
-2. Gemini 3.1 Flash-Lite (Thinking Minimal)
+1. Gemini 3.6 Flash (Thinking Minimal)
+2. Gemini 3.5 Flash-Lite (Thinking Minimal)
 3. Gemma 4 31B (Thinking Minimal)
 
 Gemma models have more relaxed rate limits, so they serve as the final fallback option to ensure the extension remains functional even under heavy usage.
@@ -99,7 +99,7 @@ The following are instructions for manual installation, for development purposes
 4. Open the Options page, register your Gemini API key, and select a language.
 
 You can obtain a Gemini API key from [Google AI Studio](https://aistudio.google.com).
-This extension uses Gemini 3.1 Flash-Lite Preview by default.
+This extension uses Gemini 3.5 Flash-Lite by default.
 
 ## Usage
 

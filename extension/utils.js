@@ -1,6 +1,6 @@
 /* globals DOMPurify, marked */
 
-export const DEFAULT_LANGUAGE_MODEL = "3.1-flash-lite:minimal";
+export const DEFAULT_LANGUAGE_MODEL = "3.5-flash-lite:minimal";
 
 // ── UI helpers ───────────────────────────────────────────────────────────
 
@@ -494,7 +494,7 @@ const reportRetryStatus = async (retryStatusKey, status) => {
 };
 
 export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini", extraConfig = {}) => {
-  // languageModel: "3.5-flash:minimal/3.1-flash-lite:0/gemma-4-31b-it/zz"
+  // languageModel: "3.6-flash:minimal/3.5-flash-lite:0/gemma-4-31b-it/zz"
 
   if (apiProvider === "openai") {
     return [{
@@ -507,7 +507,9 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
   }
 
   const modelMappings = {
+    "3.6-flash": "gemini-3.6-flash",
     "3.5-flash": "gemini-3.5-flash",
+    "3.5-flash-lite": "gemini-3.5-flash-lite",
     "3.1-flash-lite": "gemini-3.1-flash-lite",
     "2.5-pro": "gemini-2.5-pro",
     "2.5-flash": "gemini-2.5-flash",
