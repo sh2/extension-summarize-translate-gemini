@@ -128,18 +128,47 @@ export const createPersistentStatusUpdater = (persistentStatusElement, syncHeigh
   };
 };
 
-const showStatusMessage = (statusElement, message, duration) => {
-  if (!statusElement) {
-    return;
-  }
+export const createTransientStatusUpdater = (statusElement, requestFrame, cancelFrame) => {
+  let pendingFrameId = null;
+  let timeoutId = null;
 
-  statusElement.textContent = message;
-
-  setTimeout(() => {
-    if (statusElement.textContent === message) {
-      statusElement.textContent = "";
+  const cancelPending = () => {
+    if (pendingFrameId !== null) {
+      cancelFrame(pendingFrameId);
+      pendingFrameId = null;
     }
-  }, duration);
+
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+  };
+
+  return {
+    showStatus(message, duration) {
+      if (!statusElement) {
+        return;
+      }
+
+      cancelPending();
+      statusElement.hidden = false;
+      statusElement.textContent = "";
+
+      pendingFrameId = requestFrame(() => {
+        pendingFrameId = null;
+        statusElement.textContent = message;
+
+        timeoutId = setTimeout(() => {
+          timeoutId = null;
+
+          if (statusElement.textContent === message) {
+            statusElement.textContent = "";
+            statusElement.hidden = true;
+          }
+        }, duration);
+      });
+    }
+  };
 };
 
 const setActionButtonsDisabled = (documentRef, disabled) => {
@@ -772,6 +801,8 @@ const handleDomContentLoaded = async () => {
     cancelFrame
   );
 
+  const { showStatus } = createTransientStatusUpdater(statusElement, requestFrame, cancelFrame);
+
   setActionButtonsDisabled(document, true);
 
   const initialized = await initialize(setPersistentStatus);
@@ -800,9 +831,7 @@ const handleDomContentLoaded = async () => {
     saveWithHostPermission,
     clearPersistentStatus,
     setPersistentStatus,
-    showStatus: (message, duration) => {
-      showStatusMessage(statusElement, message, duration);
-    },
+    showStatus,
     getMessage: (key) => chrome.i18n.getMessage(key),
     getOptions: getOptionsFromForm,
     isExportApiKeyEnabled: () => document.getElementById("exportApiKey").checked,

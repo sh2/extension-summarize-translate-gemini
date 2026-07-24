@@ -124,6 +124,15 @@ describe("options page structure", () => {
         expect(button?.hasAttribute("disabled")).toBe(true);
       });
 
+      const statusElement = optionsDocument.getElementById("status");
+      const persistentStatusElement = optionsDocument.getElementById("persistentStatus");
+
+      expect(statusElement?.getAttribute("role")).toBe("status");
+      expect(statusElement?.hasAttribute("hidden")).toBe(true);
+      expect(statusElement?.hasAttribute("aria-live")).toBe(false);
+      expect(persistentStatusElement?.getAttribute("role")).toBe("status");
+      expect(persistentStatusElement?.hasAttribute("hidden")).toBe(true);
+
       ["geminiSection", "openaiSection"].forEach((elementId) => {
         const heading = optionsDocument.querySelector(`#${elementId} h2`);
         const headingSpans = heading ? Array.from(heading.children) : [];

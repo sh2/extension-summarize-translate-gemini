@@ -26,6 +26,7 @@ const optionsDomHtml = `<!doctype html>
     <button id="importFile" disabled></button>
     <button id="syncCloud" disabled></button>
     <button id="restoreCloud" disabled></button>
+    <span id="status" role="status" hidden></span>
     <span id="persistentStatus" role="status" hidden></span>
   </body>
 </html>`;
@@ -38,6 +39,9 @@ export const createOptionsTestEnvironment = () => {
     document: dom.window.document,
     getProviderSection(sectionId) {
       return dom.window.document.getElementById(sectionId);
+    },
+    getStatusElement() {
+      return dom.window.document.getElementById("status");
     },
     getPersistentStatusElement() {
       return dom.window.document.getElementById("persistentStatus");
