@@ -60,7 +60,7 @@ Firefox 用マニフェスト（`firefox/manifest.json`）の**み**に明示的
 
 ```json
 "content_security_policy": {
-  "extension_pages": "script-src 'self'; object-src 'self'"
+  "extension_pages": "script-src 'self'"
 }
 ```
 
@@ -69,10 +69,11 @@ Firefox 用マニフェスト（`firefox/manifest.json`）の**み**に明示的
 | ディレクティブ | Firefox MV3 デフォルト | 今回の設定 | 差分 |
 | --- | --- | --- | --- |
 | `script-src` | `'self'` | `'self'` | なし |
-| `object-src` | `'self'` | `'self'` | なし |
 | `upgrade-insecure-requests` | 付与される | **含めない** | ここだけ意図的に除外 |
 
-ベースの CSP はデフォルトと**同一**で、外したのは `http://` を `https://` に書き換えていた `upgrade-insecure-requests` のみ。`unsafe-eval` / `unsafe-inline` / リモートスクリプト許可といった**緩和は一切行っていない**。
+ベースの CSP はデフォルトと**同一**で、外したのは `http://` を `https://` に書き換えていた `upgrade-insecure-requests` のみ。`object-src` も MV3 デフォルト同様に含めていない。`unsafe-eval` / `unsafe-inline` / リモートスクリプト許可といった**緩和は一切行っていない**。
+
+> 補足: `object-src` は MV3 デフォルトに含まれない（Firefox 106 以降は任意）。Firefox 106 未満では `object-src` 不在だと CSP 全体が無視される挙動があったが、106 は 2022年10月リリースであり、現実的に存在しないため切り捨てる。
 
 ### 適用範囲
 
@@ -98,7 +99,7 @@ Firefox 用マニフェスト（`firefox/manifest.json`）の**み**に明示的
 
 心配を完全に潰すなら、審査提出時に備考欄へ一言添えると安全:
 
-> Self-hosted / local OpenAI-compatible endpoints over `http://` をサポートするため、デフォルト CSP から `upgrade-insecure-requests` のみを除外しています。`script-src` / `object-src` はデフォルトと同一で、緩和は行っていません。
+> Self-hosted / local OpenAI-compatible endpoints over `http://` をサポートするため、デフォルト CSP から `upgrade-insecure-requests` のみを除外しています。`script-src` はデフォルトと同一、`object-src` は MV3 デフォルト同様に含めておらず、緩和は行っていません。
 
 ---
 
