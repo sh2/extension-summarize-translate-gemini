@@ -215,7 +215,10 @@ const rememberResultTab = async (index, tabId) => {
 };
 
 const closePopupWithNotice = () => {
-  document.getElementById("status").textContent = chrome.i18n.getMessage("popup_opening_in_tab");
+  const openingMessage = chrome.i18n.getMessage("popup_opening_in_tab");
+
+  document.getElementById("status").textContent = openingMessage;
+  document.getElementById("status-live").textContent = openingMessage;
 
   setTimeout(() => {
     window.close();
@@ -358,7 +361,11 @@ const extractTaskInformation = async (triggerAction) => {
       // If the page is a YouTube video, get the captions instead of the whole text
       mediaType = "captions";
 
-      const displayIntervalId = setInterval(displayLoadingMessage, 500, "status", chrome.i18n.getMessage("popup_retrieving_captions"));
+      const captionsMessage = chrome.i18n.getMessage("popup_retrieving_captions");
+
+      document.getElementById("status-live").textContent = captionsMessage;
+
+      const displayIntervalId = setInterval(displayLoadingMessage, 500, "status", captionsMessage);
 
       try {
         taskInput = (await chrome.scripting.executeScript({
@@ -372,6 +379,8 @@ const extractTaskInformation = async (triggerAction) => {
           // Stop displaying the loading message
           clearInterval(displayIntervalId);
         }
+
+        document.getElementById("status-live").textContent = "";
       }
     }
 
@@ -415,6 +424,7 @@ const main = async (useCache) => {
   let responseContent;
   let modelVersion = "";
   let didGenerate = false;
+  let hasError = false;
   let openedInTab = false;
 
   // Clear the content and source metadata
@@ -460,6 +470,9 @@ const main = async (useCache) => {
     pageTitle = title;
 
     await startRetryStatusListener(resultIndex);
+
+    document.getElementById("status-live").textContent =
+      getRetryLoadingMessage(currentRetryStatus, getLoadingMessage(actionType, mediaType));
 
     // Display a loading message
     displayIntervalId = setInterval(() => {
@@ -612,7 +625,9 @@ const main = async (useCache) => {
 
     content = responseContent;
   } catch (error) {
+    hasError = true;
     content = chrome.i18n.getMessage("popup_miscellaneous_error");
+    document.getElementById("status-live").textContent = content;
     console.error(error);
   } finally {
     // Stop displaying the loading message
@@ -634,6 +649,11 @@ const main = async (useCache) => {
 
       // Enable the buttons and input fields
       document.getElementById("status").textContent = modelVersion;
+
+      if (!hasError) {
+        document.getElementById("status-live").textContent = "";
+      }
+
       setPopupControlsEnabled(true);
     }
   }

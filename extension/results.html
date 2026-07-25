@@ -100,7 +100,7 @@
     <button id="clear" data-i18n="results_button_clear">Clear conversation</button>
     <button id="copy" data-i18n="results_button_copy">Copy</button>
     <button id="save" data-i18n="results_button_save">Save</button>
-    <span id="operation-status" style="color: gray;"></span>
+    <span id="operation-status" class="status-text" role="status"></span>
   </div>
 
   <div>
@@ -115,7 +115,8 @@
     </div>
     <span id="languageModelContainer"></span>
     <button id="send" type="button" data-i18n="results_button_send">Send</button>
-    <span id="send-status" style="color: gray;"></span>
+      <span id="send-status" class="status-text"></span>
+      <span id="send-status-live" class="visually-hidden" role="status"></span>
   </div>
 
   <script src="lib/marked.umd.min.js"></script>

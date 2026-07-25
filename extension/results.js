@@ -257,6 +257,7 @@ const clearSendStatusMessage = () => {
   clearTimeout(sendStatusTimeoutId);
   sendStatusTimeoutId = null;
   document.getElementById("send-status").textContent = "";
+  document.getElementById("send-status-live").textContent = "";
 };
 
 const startRetryStatusListener = async (index) => {
@@ -291,10 +292,14 @@ const stopRetryStatusListener = () => {
 const showTransientSendStatusMessage = (message) => {
   clearSendStatusMessage();
   document.getElementById("send-status").textContent = message;
+  document.getElementById("send-status-live").textContent = message;
 
   sendStatusTimeoutId = setTimeout(() => {
-    if (document.getElementById("send-status").textContent === message) {
-      document.getElementById("send-status").textContent = "";
+    if (
+      document.getElementById("send-status").textContent === message &&
+      document.getElementById("send-status-live").textContent === message
+    ) {
+      clearSendStatusMessage();
     }
   }, 3000);
 };
@@ -578,6 +583,9 @@ const askQuestion = async () => {
   // Display a loading message
   const responseWaitingMessage = chrome.i18n.getMessage("results_waiting_response");
 
+  document.getElementById("send-status-live").textContent =
+    getRetryLoadingMessage(currentRetryStatus, responseWaitingMessage);
+
   const displayIntervalId = setInterval(() => {
     displayLoadingMessage("send-status", getRetryLoadingMessage(currentRetryStatus, responseWaitingMessage));
   }, 500);
@@ -595,6 +603,7 @@ const askQuestion = async () => {
   window.scrollTo(0, document.body.scrollHeight);
 
   let answer;
+  let hasError = false;
   let streamIntervalId = null;
 
   try {
@@ -731,16 +740,24 @@ const askQuestion = async () => {
     }
 
     // Display a friendly error message on the answer div
-    formattedAnswerDiv.textContent = chrome.i18n.getMessage("response_unexpected_response");
+    hasError = true;
+    const errorMessage = chrome.i18n.getMessage("response_unexpected_response");
+    formattedAnswerDiv.textContent = errorMessage;
     document.getElementById("send-status").textContent = "";
+    document.getElementById("send-status-live").textContent = errorMessage;
   } finally {
     // Stop displaying the loading message
     clearInterval(displayIntervalId);
     stopRetryStatusListener();
-    setResultControlsEnabled(true);
+
+    if (!hasError) {
+      document.getElementById("send-status-live").textContent = "";
+    }
 
     // Scroll to the bottom of the page
     window.scrollTo(0, document.body.scrollHeight);
+
+    setResultControlsEnabled(true);
   }
 };
 
@@ -861,6 +878,9 @@ const initialize = async () => {
     // Display a loading message while waiting for the result
     const waitingForResultMessage = chrome.i18n.getMessage("results_waiting_for_result");
 
+    document.getElementById("send-status-live").textContent =
+      getRetryLoadingMessage(currentRetryStatus, waitingForResultMessage);
+
     const displayIntervalId = setInterval(() => {
       displayLoadingMessage("send-status", getRetryLoadingMessage(currentRetryStatus, waitingForResultMessage));
     }, 500);
@@ -872,6 +892,7 @@ const initialize = async () => {
     // Stop displaying the loading message
     clearInterval(displayIntervalId);
     document.getElementById("send-status").textContent = "";
+    document.getElementById("send-status-live").textContent = "";
 
     // Re-enable the buttons and input fields
     setResultControlsEnabled(true);

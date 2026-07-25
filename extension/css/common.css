@@ -12,6 +12,23 @@ button {
   margin-bottom: .5rem;
 }
 
+.status-text {
+  color: var(--nc-tx-2);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 body[data-theme="light"] {
   --nc-tx-1: #000000;
   --nc-tx-2: #1A1A1A;
