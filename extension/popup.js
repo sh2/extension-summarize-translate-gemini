@@ -636,7 +636,7 @@ const main = async (useCache) => {
 
     if (!openedInTab) {
       // Convert the content from Markdown to HTML
-      document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks);
+      document.getElementById("content").innerHTML = convertMarkdownToHtml(content, false, renderLinks, true);
 
       // If auto-save is enabled and content was generated, save the content
       if (autoSave && didGenerate) {

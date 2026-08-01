@@ -109,7 +109,42 @@ const removeUnsafeMarkdownUrls = (container) => {
   });
 };
 
-export const convertMarkdownToHtml = (content, breaks, links) => {
+// CJK emphasis fix: CommonMark flanking rules prevent emphasis delimiters `**`
+// from parsing when they are adjacent to CJK characters and opening/closing
+// brackets (e.g. `「」（）`), leaving them as literal text or mispaired.
+const CJK_EMPHASIS_OPENER_PATTERN = /([^\s\p{P}\p{S}])(\*+)(?=[\p{Ps}\p{Pi}])/gu;
+const CJK_EMPHASIS_CLOSER_PATTERN = /(?<=[\p{Pe}\p{Pf}])(\*+)([^\s\p{P}\p{S}])/gu;
+const MARKDOWN_CODE_SEGMENT_PATTERN = /(```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`\n]*`)/g;
+
+const fixCjkEmphasisDelimiters = (text) => {
+  return text
+    .replace(CJK_EMPHASIS_OPENER_PATTERN, "$1 $2")
+    .replace(CJK_EMPHASIS_CLOSER_PATTERN, "$1 $2");
+};
+
+const fixCjkEmphasisOutsideCodeSegments = (text) => {
+  return text
+    .split(MARKDOWN_CODE_SEGMENT_PATTERN)
+    .map((segment, index) => (index % 2 === 1 ? segment : fixCjkEmphasisDelimiters(segment)))
+    .join("");
+};
+
+const hasUnmatchedEmphasisMarkers = (container) => {
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  let node = walker.nextNode();
+
+  while (node) {
+    if (!node.parentElement.closest("code, pre") && node.textContent.includes("**")) {
+      return true;
+    }
+
+    node = walker.nextNode();
+  }
+
+  return false;
+};
+
+export const convertMarkdownToHtml = (content, breaks, links, fixEmphasis = false) => {
   const renderer = new marked.Renderer();
 
   if (!links) {
@@ -120,6 +155,15 @@ export const convertMarkdownToHtml = (content, breaks, links) => {
   markdownDiv.textContent = content;
   const htmlDiv = document.createElement("div");
   htmlDiv.innerHTML = DOMPurify.sanitize(marked.parse(markdownDiv.innerHTML, { breaks: breaks, renderer: renderer }));
+
+  if (fixEmphasis && hasUnmatchedEmphasisMarkers(htmlDiv)) {
+    // Re-parse from the fixed source (markdownDiv.innerHTML is HTML-escaped text).
+    // CJK characters, brackets, and asterisks are not HTML-escaped, so the regexes
+    // operate on the original text as-is.
+    htmlDiv.innerHTML = DOMPurify.sanitize(
+      marked.parse(fixCjkEmphasisOutsideCodeSegments(markdownDiv.innerHTML), { breaks, renderer })
+    );
+  }
 
   removeUnsafeMarkdownUrls(htmlDiv);
 

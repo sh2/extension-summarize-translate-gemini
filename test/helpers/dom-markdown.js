@@ -7,7 +7,7 @@ const helperDirectory = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(helperDirectory, "..", "..");
 const markedSourcePath = resolve(repoRoot, "extension", "lib", "marked.umd.min.js");
 const domPurifySourcePath = resolve(repoRoot, "extension", "lib", "purify.min.js");
-const globalKeys = ["window", "document", "marked", "DOMPurify"];
+const globalKeys = ["window", "document", "marked", "DOMPurify", "NodeFilter"];
 
 let vendoredLibrarySourcesPromise;
 
@@ -55,6 +55,7 @@ export const createMarkdownTestEnvironment = async () => {
   globalThis.document = dom.window.document;
   globalThis.marked = dom.window.marked;
   globalThis.DOMPurify = dom.window.DOMPurify;
+  globalThis.NodeFilter = dom.window.NodeFilter;
 
   return {
     window: dom.window,

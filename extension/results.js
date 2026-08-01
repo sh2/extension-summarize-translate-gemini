@@ -700,7 +700,7 @@ const askQuestion = async () => {
     answer = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);
 
     // Update the formatted answer in the conversation
-    formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false, renderLinks);
+    formattedAnswerDiv.innerHTML = convertMarkdownToHtml(answer, false, renderLinks, true);
 
     // Display the model version for user-specified models
     if (languageModel.includes("/")) {
@@ -905,7 +905,7 @@ const initialize = async () => {
 
   // Convert the content from Markdown to HTML
   const { renderLinks } = await chrome.storage.local.get({ renderLinks: false });
-  document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false, renderLinks);
+  document.getElementById("content").innerHTML = convertMarkdownToHtml(result.responseContent, false, renderLinks, true);
   renderAttachedImagePreview();
   document.getElementById("send-status").textContent = result.modelVersion ?? "";
 
@@ -943,7 +943,7 @@ const initialize = async () => {
 
       if (answerText) {
         const answerPlaceholder = appendAnswerPlaceholderToUi();
-        answerPlaceholder.innerHTML = convertMarkdownToHtml(answerText, false, renderLinks);
+        answerPlaceholder.innerHTML = convertMarkdownToHtml(answerText, false, renderLinks, true);
       }
     }
   }

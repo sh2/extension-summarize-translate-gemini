@@ -4,8 +4,8 @@ import { createMarkdownTestEnvironment } from "../helpers/dom-markdown.js";
 
 let environment;
 
-const renderMarkdown = (content, breaks = false, links = true) => {
-  const html = convertMarkdownToHtml(content, breaks, links);
+const renderMarkdown = (content, breaks = false, links = true, fixEmphasis = false) => {
+  const html = convertMarkdownToHtml(content, breaks, links, fixEmphasis);
   const container = environment.parseHtmlFragment(html);
 
   return { html, container };
@@ -203,5 +203,108 @@ describe("convertMarkdownToHtml", () => {
     expect(codeBlocks[1].textContent).toBe("<tag>&value\n");
     expect(codeBlocks[1].querySelector("tag")).toBeNull();
     expect(container.querySelector("p")?.innerHTML).toContain("&amp;value");
+  });
+
+  describe("CJK emphasis fix", () => {
+    it("fixes an unmatched opener before a Japanese opening bracket", () => {
+      const { container } = renderMarkdown("となる**「Kimi K3」の公開**を控え", false, true, true);
+      const strong = container.querySelector("strong");
+
+      expect(strong?.textContent).toBe("「Kimi K3」の公開");
+    });
+
+    it("fixes all emphasis pairs in the reported original text", () => {
+      const markdown = "**Moonshot AI**は、世界初のオープンな3兆パラメータ級モデルとなる" +
+        "**「Kimi K3」のオープンウェイト公開**を控え、その**優れたコーディング性能と新アーキテクチャ**" +
+        "が注目を集めている。";
+
+      const { container } = renderMarkdown(markdown, false, true, true);
+      const strongTexts = Array.from(container.querySelectorAll("strong"), (strong) => strong.textContent);
+
+      expect(strongTexts).toEqual([
+        "Moonshot AI",
+        "「Kimi K3」のオープンウェイト公開",
+        "優れたコーディング性能と新アーキテクチャ"
+      ]);
+    });
+
+    it("fixes an unmatched closer after a Japanese closing bracket", () => {
+      const { container } = renderMarkdown("**「text」**を", false, true, true);
+
+      expect(container.querySelector("strong")?.textContent).toBe("「text」");
+    });
+
+    it("fixes a broken closer even when the content itself ends with a closing bracket", () => {
+      const { container } = renderMarkdown("**text」**を", false, true, true);
+
+      expect(container.querySelector("strong")?.textContent).toBe("text」");
+    });
+
+    it("leaves already-valid emphasis before a bracket untouched", () => {
+      const markdown = "**太字**「引用」です";
+      const withFix = renderMarkdown(markdown, false, true, true);
+      const withoutFix = renderMarkdown(markdown);
+
+      expect(withFix.html).toBe(withoutFix.html);
+      expect(withoutFix.html).toContain("<strong>太字</strong>「引用」です");
+    });
+
+    it("leaves already-valid emphasis after a bracket untouched", () => {
+      const markdown = "「引用」**太字**です";
+      const withFix = renderMarkdown(markdown, false, true, true);
+      const withoutFix = renderMarkdown(markdown);
+
+      expect(withFix.html).toBe(withoutFix.html);
+      expect(withoutFix.html).toContain("<strong>太字</strong>");
+    });
+
+    it("keeps normal emphasis between CJK characters working as before", () => {
+      const markdown = "る**text**を";
+      const withFix = renderMarkdown(markdown, false, true, true);
+
+      expect(withFix.container.querySelector("strong")?.textContent).toBe("text");
+    });
+
+    it("keeps normal emphasis followed by a CJK comma working as before", () => {
+      const markdown = "**text**、次";
+      const withFix = renderMarkdown(markdown, false, true, true);
+
+      expect(withFix.container.querySelector("strong")?.textContent).toBe("text");
+    });
+
+    it("does not modify literal asterisks inside inline code", () => {
+      const markdown = "本文です `a ** b` と続きます";
+      const withFix = renderMarkdown(markdown, false, true, true);
+      const withoutFix = renderMarkdown(markdown);
+
+      expect(withFix.html).toBe(withoutFix.html);
+      expect(withFix.container.querySelector("code")?.textContent).toBe("a ** b");
+    });
+
+    it("fixes broken body text while preserving fenced code content", () => {
+      const markdown = [
+        "となる**「Kimi K3」の公開**を控え",
+        "",
+        "```",
+        "る**「x」**を",
+        "```"
+      ].join("\n");
+
+      const { container } = renderMarkdown(markdown, false, true, true);
+      const strong = container.querySelector("strong");
+      const codeBlock = container.querySelector("pre code");
+
+      expect(strong?.textContent).toBe("「Kimi K3」の公開");
+      expect(codeBlock?.textContent.trim()).toBe("る**「x」**を");
+    });
+
+    it("keeps the previous output when the fourth argument is omitted or false", () => {
+      const broken = "となる**「Kimi K3」の公開**を控え";
+      const defaultOutput = renderMarkdown(broken);
+      const falseOutput = renderMarkdown(broken, false, true, false);
+
+      expect(defaultOutput.html).toBe(falseOutput.html);
+      expect(defaultOutput.html).toContain("**");
+    });
   });
 });
