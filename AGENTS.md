@@ -73,6 +73,11 @@ Style rules for edits to `extension/_locales/*/messages.json`:
 - `extension-integrity.test.js` verifies that every locale has exactly the same keys as `en`. Add new keys to all 15 locales, including `en`, in the same commit.
 - After changing locale files, run `npm test` to verify locale-key integrity.
 
+## Comment language
+
+- All code comments in production source under `extension/` must be written in English. Japanese (or other non-English) comments are prohibited.
+- Keep test files under `test/` and scripts under `utils/` in English as well, so the codebase stays consistent.
+
 ## Logging policy
 
 `console.*` levels are used to separate "expected during normal use" from "extension internals went wrong". Keep the distinction consistent across `popup.js`, `results.js`, `options.js`, `service-worker.js`, and `utils.js`.
