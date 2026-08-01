@@ -229,7 +229,7 @@ fieldset {
 }
 
 .save-status {
-  flex: 1 1 16rem;
+  flex: 1 1 10rem;
   min-width: 0;
   color: var(--nc-tx-2);
   font-size: .9em;
