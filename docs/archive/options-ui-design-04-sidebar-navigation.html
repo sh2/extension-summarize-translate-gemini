@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design D: Sidebar Navigation</title>
+  <link rel="stylesheet" href="../../extension/css/new.min.css">
+  <link rel="stylesheet" href="../../extension/css/common.css">
+  <style>
+    body { width: 860px; max-width: 100%; }
+    .layout { display: grid; grid-template-columns: 180px 1fr; gap: 1.5rem; }
+    .sidebar { border-right: 1px solid var(--nc-bg-3); padding-right: 1rem; }
+    .sidebar a { display: block; padding: .4rem .5rem; border-radius: 4px; color: var(--nc-tx-2); text-decoration: none; margin-bottom: .2rem; }
+    .sidebar a:hover, .sidebar a.active { background: var(--nc-bg-2); color: var(--nc-tx-1); }
+    .main { min-height: 400px; }
+    .card { background: var(--nc-bg-2); border: 1px solid var(--nc-bg-3); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .card h2 { margin-top: 0; font-size: .95rem; color: var(--nc-tx-2); border-bottom: 1px solid var(--nc-bg-3); padding-bottom: .4rem; margin-bottom: .75rem; }
+    .form-group { margin-bottom: .75rem; }
+    .form-group label { display: block; margin-bottom: .2rem; font-weight: 500; font-size: .9em; }
+    .form-group input[type="text"], .form-group input[type="password"], .form-group select, .form-group textarea { width: 100%; box-sizing: border-box; }
+    .radio-group label { display: block; margin: .2rem 0; font-weight: normal; }
+    .radio-group input { margin-right: .5rem; }
+    small { display: block; margin-top: .2rem; color: var(--nc-tx-2); opacity: .8; font-size: .85em; }
+    hr { display: none; }
+    .page { display: none; }
+    .page.active { display: block; }
+    @media (max-width: 720px) { .layout { grid-template-columns: 1fr; } .sidebar { border-right: none; border-bottom: 1px solid var(--nc-bg-3); padding-bottom: 1rem; } }
+  </style>
+</head>
+
+<body>
+  <header style="padding-top: 1rem; padding-bottom: 0rem;">
+    <h1 style="display: flex; align-items: center;">
+      <img src="../../extension/img/icon-128.png" alt="" width="48" height="48" style="margin-right: .5rem;">
+      <span>Options</span>
+    </h1>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#" class="active" data-page="general">General</a>
+      <a href="#" data-page="gemini">Gemini API</a>
+      <a href="#" data-page="openai">OpenAI API</a>
+      <a href="#" data-page="actions">Actions</a>
+      <a href="#" data-page="custom">Custom Prompts</a>
+      <a href="#" data-page="appearance">Appearance</a>
+      <a href="#" data-page="backup">Backup</a>
+    </nav>
+
+    <main class="main">
+      <div class="page active" id="page-general">
+        <div class="card">
+          <h2>API Provider</h2>
+          <div class="form-group radio-group">
+            <label><input type="radio" name="apiProvider" value="gemini" checked> Gemini API</label>
+            <label><input type="radio" name="apiProvider" value="openai"> OpenAI-compatible API</label>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Language</h2>
+          <div class="form-group">
+            <label>Language</label>
+            <select style="width:100%"><option>English</option><option>Japanese</option></select>
+          </div>
+          <div class="form-group">
+            <label>User-specified</label>
+            <input placeholder="e.g., Turkish">
+          </div>
+        </div>
+        <div class="card">
+          <h2>Behavior</h2>
+          <div class="form-group radio-group">
+            <label><input type="checkbox"> Add to context menu</label>
+            <label><input type="checkbox"> Enable streaming</label>
+            <label><input type="checkbox"> URLs as hyperlinks</label>
+            <label><input type="checkbox"> Auto-save results</label>
+            <label><input type="checkbox"> Open in new tab</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-gemini">
+        <div class="card">
+          <h2>Gemini API</h2>
+          <div class="form-group">
+            <label>API Key</label>
+            <input type="password" placeholder="Enter key">
+            <small><a href="https://aistudio.google.com" target="_blank">Google AI Studio</a></small>
+          </div>
+          <div class="form-group">
+            <label>Model</label>
+            <select style="width:100%"><option>Gemini 3 Flash (Auto-fallback)</option></select>
+            <small><a href="#">Extension FAQ</a></small>
+          </div>
+          <div class="form-group">
+            <label>User model ID</label>
+            <input placeholder="e.g., gemini-3.0-flash">
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-openai">
+        <div class="card">
+          <h2>OpenAI-compatible API</h2>
+          <div class="form-group">
+            <label>API Key</label>
+            <input type="password">
+          </div>
+          <div class="form-group">
+            <label>Base URL</label>
+            <input placeholder="https://api.example.com/v1">
+            <small><a href="#">Extension FAQ</a></small>
+          </div>
+          <div class="form-group">
+            <label>User model ID</label>
+            <input placeholder="e.g., gpt-4o">
+          </div>
+          <div class="form-group">
+            <label>Reasoning effort</label>
+            <select>
+              <option value="">Unspecified</option>
+              <option value="xhigh">xhigh</option>
+              <option value="high">high</option>
+              <option value="medium">medium</option>
+              <option value="low">low</option>
+              <option value="none">none</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Thinking type</label>
+            <select>
+              <option value="">Unspecified</option>
+              <option value="enabled">enabled</option>
+              <option value="disabled">disabled</option>
+            </select>
+            <small><a href="#">Extension FAQ</a></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-actions">
+        <div class="card">
+          <h2>Default Actions</h2>
+          <div class="form-group">
+            <label>No text selected</label>
+            <div class="radio-group">
+              <label><input type="radio" name="noTextAction" value="summarize" checked> Summarize</label>
+              <label><input type="radio" name="noTextAction" value="translate"> Translate</label>
+              <label><input type="radio" name="noTextAction" value="noTextCustom1"> Custom 1</label>
+              <label><input type="radio" name="noTextAction" value="noTextCustom2"> Custom 2</label>
+              <label><input type="radio" name="noTextAction" value="noTextCustom3"> Custom 3</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Text selected</label>
+            <div class="radio-group">
+              <label><input type="radio" name="textAction" value="summarize"> Summarize</label>
+              <label><input type="radio" name="textAction" value="translate" checked> Translate</label>
+              <label><input type="radio" name="textAction" value="textCustom1"> Custom 1</label>
+              <label><input type="radio" name="textAction" value="textCustom2"> Custom 2</label>
+              <label><input type="radio" name="textAction" value="textCustom3"> Custom 3</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-custom">
+        <div class="card">
+          <h2>Custom Actions (No Selection)</h2>
+          <div class="form-group">
+            <label>Custom 1</label>
+            <input placeholder="Label" style="margin-bottom:.4rem">
+            <textarea rows="3" placeholder="Prompt..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Custom 2</label>
+            <input placeholder="Label" style="margin-bottom:.4rem">
+            <textarea rows="3" placeholder="Prompt..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Custom 3</label>
+            <input placeholder="Label" style="margin-bottom:.4rem">
+            <textarea rows="3" placeholder="Prompt..."></textarea>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Custom Actions (Selection)</h2>
+          <div class="form-group">
+            <label>Custom 1</label>
+            <input placeholder="Label" style="margin-bottom:.4rem">
+            <textarea rows="3" placeholder="Prompt..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Custom 2</label>
+            <input placeholder="Label" style="margin-bottom:.4rem">
+            <textarea rows="3" placeholder="Prompt..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Custom 3</label>
+            <input placeholder="Label" style="margin-bottom:.4rem">
+            <textarea rows="3" placeholder="Prompt..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-appearance">
+        <div class="card">
+          <h2>Appearance</h2>
+          <div class="form-group">
+            <label>Theme</label>
+            <select>
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Font size</label>
+            <select>
+              <option value="large">Large</option>
+              <option value="medium">Medium</option>
+              <option value="small">Small</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="page" id="page-backup">
+        <div class="card">
+          <h2>Backup & Sync</h2>
+          <p style="margin-top:0">
+            <button>Save options</button>
+            <span style="color: gray; margin-left: .5rem;">Saved.</span>
+          </p>
+          <p style="margin-bottom:0">
+            <a href="#">Export options to file</a>
+            <label style="display:inline; margin-left:.5rem;"><input type="checkbox"> Include API key</label><br>
+            <a href="#">Import options from file</a><br>
+            <a href="#">Sync options to cloud</a><br>
+            <a href="#">Restore options from cloud</a>
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.querySelectorAll('.sidebar a').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelectorAll('.sidebar a').forEach(x => x.classList.remove('active'));
+        document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+        a.classList.add('active');
+        document.getElementById('page-' + a.dataset.page).classList.add('active');
+      });
+    });
+  </script>
+</body>
+
+</html>
