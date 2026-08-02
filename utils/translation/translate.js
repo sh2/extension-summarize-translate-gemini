@@ -2,7 +2,7 @@ import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { setTimeout } from "node:timers/promises";
 
 const API_URL = "https://api.openai.com/v1/chat/completions";
-const MODEL = "gpt-5.4-mini";
+const MODEL = "gpt-5.6-luna";
 const MAX_RETRIES = 3;
 const DELAY_MS = 1000;
 

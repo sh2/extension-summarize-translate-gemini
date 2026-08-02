@@ -18,7 +18,7 @@ const INITIAL_OPTIONS = {
   userModelId: "gemini-3.6-flash",
   openaiApiKey: "",
   openaiBaseUrl: "",
-  openaiModelId: "gpt-5.4-nano",
+  openaiModelId: "gpt-5.6-luna",
   openaiReasoningEffort: "",
   openaiThinkingType: "",
   languageCode: "en",
