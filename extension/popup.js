@@ -289,7 +289,7 @@ const extractTaskInformation = async (triggerAction) => {
     console.log(error);
   }
 
-  if (taskInput) {
+  if (taskInput?.trim()) {
     actionType = (await chrome.storage.local.get({ textAction: "translate" })).textAction;
 
     switch (triggerAction) {
@@ -384,7 +384,7 @@ const extractTaskInformation = async (triggerAction) => {
       }
     }
 
-    if (!taskInput) {
+    if (!taskInput?.trim()) {
       // Get the main text of the page using Readability.js
       mediaType = "text";
 
@@ -403,7 +403,7 @@ const extractTaskInformation = async (triggerAction) => {
       }
     }
 
-    if (!taskInput) {
+    if (!taskInput?.trim()) {
       // If the whole text is empty, get the visible tab as an image
       mediaType = "image";
       taskInput = await (chrome.tabs.captureVisibleTab(tab.windowId, { format: "jpeg" }));
