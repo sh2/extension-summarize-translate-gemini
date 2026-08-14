@@ -15,7 +15,7 @@ const INITIAL_OPTIONS = {
   apiProvider: "gemini",
   apiKey: "",
   languageModel: DEFAULT_LANGUAGE_MODEL,
-  userModelId: "gemini-3.6-flash",
+  userModelId: "gemini-3.7-flash",
   openaiApiKey: "",
   openaiBaseUrl: "",
   openaiModelId: "gpt-5.6-luna",

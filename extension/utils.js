@@ -538,7 +538,7 @@ const reportRetryStatus = async (retryStatusKey, status) => {
 };
 
 export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini", extraConfig = {}) => {
-  // languageModel: "3.6-flash:minimal/3.5-flash-lite:0/gemma-4-31b-it/zz"
+  // languageModel: "3.7-flash:low/3.5-flash-lite:0/gemma-4-31b-it/zz"
 
   if (apiProvider === "openai") {
     return [{
@@ -551,6 +551,7 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
   }
 
   const modelMappings = {
+    "3.7-flash": "gemini-3.7-flash",
     "3.6-flash": "gemini-3.6-flash",
     "3.5-flash": "gemini-3.5-flash",
     "3.5-flash-lite": "gemini-3.5-flash-lite",

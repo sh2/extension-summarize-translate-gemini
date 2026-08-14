@@ -18,7 +18,7 @@ The Gemini API Free Tier has strict [rate limits](https://ai.google.dev/gemini-a
 
 When you select **"Gemini Flash with Gemma Fallback"** in the options, the extension will try models in this priority order:
 
-1. Gemini 3.6 Flash (Thinking Minimal)
+1. Gemini 3.7 Flash (Thinking Low)
 2. Gemini 3.5 Flash-Lite (Thinking Minimal)
 3. Gemma 4 31B (Thinking Minimal)
 

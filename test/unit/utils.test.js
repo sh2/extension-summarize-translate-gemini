@@ -107,6 +107,13 @@ describe("getModelConfigs", () => {
     expect(config.generationConfig.thinkingConfig.thinkingLevel).toBe("minimal");
   });
 
+  it("maps gemini-3.7-flash with a thinking level", () => {
+    const [config] = getModelConfigs("3.7-flash:low");
+
+    expect(config.modelId).toBe("gemini-3.7-flash");
+    expect(config.generationConfig.thinkingConfig.thinkingLevel).toBe("low");
+  });
+
   it("maps gemini-3.5-flash-lite with a numeric thinking budget of 0", () => {
     const [config] = getModelConfigs("3.5-flash-lite:0");
 
