@@ -1,11 +1,8 @@
 body {
-  width: 640px;
-}
-
-@media (max-width: 639px) {
-  body {
-    width: 84%;
-  }
+  /* 640px content + 2rem (64px) horizontal padding = 704px total (border-box) */
+  width: 704px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 button {
