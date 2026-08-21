@@ -67,10 +67,6 @@
     }
 
     @media (max-width: 639px) {
-      body {
-        /* border-box: 84% content + 4rem horizontal padding = total width */
-        width: calc(84% + 4rem);
-      }
 
       body select,
       body #clear,
@@ -119,8 +115,8 @@
     </div>
     <span id="languageModelContainer"></span>
     <button id="send" type="button" data-i18n="results_button_send">Send</button>
-      <span id="send-status" class="status-text"></span>
-      <span id="send-status-live" class="visually-hidden" role="status"></span>
+    <span id="send-status" class="status-text"></span>
+    <span id="send-status-live" class="visually-hidden" role="status"></span>
   </div>
 
   <script src="lib/marked.umd.min.js"></script>
