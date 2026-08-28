@@ -59,16 +59,23 @@ const getSelectedText = () => {
 };
 
 const getWholeText = () => {
-  // Return the whole text
+  // Readability can return only a short fragment on comment-heavy pages
+  // (e.g. Reddit). If the extracted text is too short (< 500 chars,
+  // Readability's DEFAULT_CHAR_THRESHOLD), fall back to document.body.innerText
+  // to avoid losing content.
   const documentClone = document.cloneNode(true);
   const article = new Readability(documentClone).parse();
+  const extractedText = article?.textContent || "";
 
-  if (article) {
-    return article.textContent;
-  } else {
-    console.log("Failed to parse the article. Using document.body.innerText instead.");
-    return document.body.innerText;
+  // Use whitespace-collapsed length to match Readability's counting.
+  const normalizedLength = extractedText.replace(/\s+/g, " ").trim().length;
+
+  if (normalizedLength >= 500) {
+    return extractedText;
   }
+
+  console.log(`Failed to extract enough text (${normalizedLength} chars). Using document.body.innerText instead.`);
+  return document.body?.innerText || "";
 };
 
 const getTranscript = async () => {
