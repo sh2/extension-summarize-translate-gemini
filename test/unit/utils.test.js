@@ -107,6 +107,13 @@ describe("getModelConfigs", () => {
     expect(config.generationConfig.thinkingConfig.thinkingLevel).toBe("minimal");
   });
 
+  it("maps gemini-3.8-flash with a thinking level", () => {
+    const [config] = getModelConfigs("3.8-flash:medium");
+
+    expect(config.modelId).toBe("gemini-3.8-flash");
+    expect(config.generationConfig.thinkingConfig.thinkingLevel).toBe("medium");
+  });
+
   it("maps gemini-3.7-flash with a thinking level", () => {
     const [config] = getModelConfigs("3.7-flash:low");
 
@@ -141,6 +148,16 @@ describe("getModelConfigs", () => {
     expect(configs).toHaveLength(2);
     expect(configs[0].modelId).toBe("gemini-3.5-flash");
     expect(configs[1].modelId).toBe("gemini-3.1-flash-lite");
+  });
+
+  it("preserves the Auto-fallback order starting with gemini-3.8-flash", () => {
+    const configs = getModelConfigs("3.8-flash:low/3.5-flash-lite:minimal/gemma-4-31b-it:minimal");
+
+    expect(configs).toHaveLength(3);
+    expect(configs[0].modelId).toBe("gemini-3.8-flash");
+    expect(configs[0].generationConfig.thinkingConfig.thinkingLevel).toBe("low");
+    expect(configs[1].modelId).toBe("gemini-3.5-flash-lite");
+    expect(configs[2].modelId).toBe("gemma-4-31b-it");
   });
 
   it("resolves the zz placeholder to the user-specified model id with a thinking level", () => {

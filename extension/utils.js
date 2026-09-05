@@ -551,6 +551,7 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
   }
 
   const modelMappings = {
+    "3.8-flash": "gemini-3.8-flash",
     "3.7-flash": "gemini-3.7-flash",
     "3.6-flash": "gemini-3.6-flash",
     "3.5-flash": "gemini-3.5-flash",
