@@ -43,13 +43,20 @@ Xvfb + headed Chromium に実際の MV3 拡張をロードし、
 jsdom と Chromium 149（実ブラウザ）の両方で確認した。
 
 - `<p id="content">` に `innerHTML` でブロック要素を入れると、子として `H1` / `P` /
-  `UL` / `PRE` が保持される。`#content.innerHTML` はそのまま断片として使える
-  （`<p>` ラッパーは文字列に含まれないため、貼り付け先で不正な入れ子にならない）。
+  `UL` / `PRE` が保持される。`cloneNode(true)` した子ノードをラッパーへ移せば、
+  `<p>` ラッパーを含まない断片になる（貼り付け先で不正な入れ子にならない）。
 - 断片は `dir="auto"` の `div` に子ノードとして格納し、`innerHTML` ではなく**要素
   自体**を返す。`container.innerHTML` を返すと `dir` 属性が失われるため（実測で確認）、
   `outerHTML` を `text/html` に渡す。ライブ DOM は変更されないことも確認済み。
 - `img[src^="data:"]` は `src` プロパティへの代入でもマッチし、`https:` の画像は
-  マッチしないことを確認した。添付プレビューだけを狙い撃ちで除去できる（決定 5）。
+  マッチしないことを確認した。添付プレビューの `img` だけを選択できる（決定 5）。
+- 添付プレビューは `<div class="results-image-preview conversation-image-preview">`
+  が `<img>` を包む構造（`results.js` の `createImagePreviewElement`）のため、`img`
+  だけを除去すると空の `div` が残る。ラッパーごと除去する。
+- なお Markdown の `data:` 画像は `removeUnsafeMarkdownUrls` で `src` が削除される
+  （`![b](data:...)` → `<img alt="b">`）ため、このセレクタにマッチするのは添付
+  プレビューだけである。コードの `else` 側（ラッパーが見つからない場合）は現状
+  到達しないが、別経路で data URL 画像が入った場合の防御として残す。
 - `dir="auto"` / `dir="rtl"` はクリップボード書き込み時のサニタイズ後も保持される
   ことを確認した（決定 6 の根拠）。
 - 相対リンクと非 http(s) リンクは `convertMarkdownToHtml` の `removeUnsafeMarkdownUrls`
@@ -89,7 +96,17 @@ const buildClipboardHtml = (...roots) => {
     }
   }
 
-  container.querySelectorAll('img[src^="data:"]').forEach((image) => image.remove());
+  // Attachment previews are wrapped in a container div. Remove the wrapper as well so
+  // that no empty block element is left behind in the copied HTML.
+  container.querySelectorAll('img[src^="data:"]').forEach((image) => {
+    const previewWrapper = image.closest(".results-image-preview");
+
+    if (previewWrapper) {
+      previewWrapper.remove();
+    } else {
+      image.remove();
+    }
+  });
 
   // Return the element itself: container.innerHTML would drop the dir attribute.
   return container;
@@ -121,7 +138,10 @@ export const copyContentToClipboard = async (text, ...roots) => {
 ```
 
 `new ClipboardItem(...)` は `try` の内側で評価するため、コンストラクタ自体が未対応の
-環境で例外を投げる場合も `writeText` にフォールバックする。
+環境で例外を投げる場合も `writeText` にフォールバックする。また `ClipboardItem` の
+キーと Blob の MIME タイプは一致させる必要がある（Chromium は不一致を
+`NotAllowedError: Type ... does not match the blob's type ...` で拒否する）。キーを
+変更する場合は、対応する Blob の `type` も合わせて変更すること。
 
 ### 4.2 呼び出し側
 
@@ -151,7 +171,7 @@ await copyContentToClipboard(
 | 2 | `text/html` は表示済み DOM から生成 | 表示と一致し、`renderLinks` / CJK emphasis 修正などの描画設定の二重管理を避ける |
 | 3 | マニフェストの権限は変更しない | 3.1 のとおり不要。権限警告の増加を避ける |
 | 4 | i18n キーを追加しない | 既存の `popup_copied` / `results_copied` をそのまま使う。15 ロケール更新が不要 |
-| 5 | `img` は `data:` URL のものだけ除外 | 除外したいのは添付画像のプレビュー（`results.js` の `getImageDataUrl` が生成する data URL）だけで、これがコピー内容を大きく肥大させる。Markdown 画像記法（`![alt](https://...)`）に由来する画像は表示どおり保持し、UI との不整合を避ける |
+| 5 | `img` は `data:` URL のものだけ除外 | 除外したいのは添付画像のプレビュー（`results.js` の `getImageDataUrl` が生成する data URL）だけで、これがコピー内容を大きく肥大させる。`<img>` だけでなく `.results-image-preview` のラッパー `div` ごと除去し、空要素を貼り付け先に残さない。Markdown 画像記法（`![alt](https://...)`）に由来する画像は表示どおり保持し、UI との不一致を避ける |
 | 6 | `dir="auto"` ラッパーで包む | 複数ルートを 1 断片にまとめつつ、RTL 言語（ar）の貼り付け方向を保つ |
 | 7 | HTML が空なら `writeText` のみ | 描画完了前に Copy が押され得るため（後述）。空 HTML を書かずに現状挙動へ縮退する |
 | 8 | 配置は `UI helpers` セクション | `exportTextToFile` と同じ「ブラウザへ成果物を渡す」ヘルパーのため。調査ドキュメントの「Extension helpers」案から変更（`Pure utilities` は DOM 非依存が条件のため不可） |
@@ -205,19 +225,20 @@ including Markdown syntax" と指示している）と、フォローアップ�
   `text/html` / `text/plain` の Blob は `await blob.text()` で中身を検証する。
 
 `navigator` は Node 24 でも `configurable: true` のため `vi.stubGlobal` で差し替え
-可能（確認済み）。未定義ケース（ケース 7・9）はスタブを外した状態で検証する。
+可能（確認済み）。未定義ケース（ケース 7・9）は、該当するスタブを外した状態で
+検証する。
 
 | # | ケース | 期待 |
 | --- | --- | --- |
 | 1 | 複数ルート（`#content` 相当 + `#conversation` 相当）を渡す | `write` が 1 回呼ばれ、`text/html` と `text/plain` の両方が含まれる |
 | 2 | `text/html` の構造 | `<div dir="auto">` で始まり、`<strong>` / `<h1>` / `<ul>` / `<pre>` を含む |
-| 3 | 画像の扱い | `data:` URL の `img` は除去され、`https:` の `img` は残る |
+| 3 | 画像の扱い | 添付プレビューは `.results-image-preview` ラッパーごと除去され（空の `div` が残らない）、`https:` の `img` は残る |
 | 4 | ライブ DOM | 呼び出し前後で元の `innerHTML` が変化しない |
 | 5 | `text/plain` | 渡した文字列と完全一致（Markdown 原文がそのまま入る） |
 | 6 | ルートが `null` / 空、または HTML が空 | `write` を呼ばず `writeText` のみ呼ばれる（`buildClipboardHtml` の返値の `innerHTML` が空文字になることで判定） |
 | 7 | `ClipboardItem` 未定義 | `writeText` のみ呼ばれる |
 | 8 | `write` が reject | 例外を投げず `writeText` にフォールバックする |
-| 9 | `navigator.clipboard` 未定義 | 例外が呼び出し側へ伝播する（呼び出し側の `catch` が処理する）。`navigator` 自体が未定義の場合は `ReferenceError` になるため、`vi.stubGlobal("navigator", undefined)` で検証する |
+| 9 | `navigator.clipboard` 未定義 | `clipboard.writeText` で `TypeError` が送出され、呼び出し側の `catch` へ伝播する（Node の組み込み `navigator` には `clipboard` が無いため、スタブを外せばそのまま再現できる）。`navigator` を `undefined` にした場合も `TypeError` になり、`ReferenceError` になるのはグローバル自体を削除した場合のみ |
 
 ### 6.2 既存テストへの影響
 
@@ -260,8 +281,9 @@ including Markdown syntax" と指示している）と、フォローアップ�
 ## 9. スコープ外・将来の検討
 
 - `.md` / `.html` 形式での保存（保存ボタンの増設と 15 ロケール分のキー追加が必要）。
-- 添付画像を HTML に含める（`data:` URL による肥大のため見送り。決定 5 で `data:` URL
-  の `img` のみ除去している）。
+- `.md` / `.html` 形式での保存（保存ボタンの増設と 15 ロケール分のキー追加が必要）。
+- 添付画像を HTML に含める（`data:` URL による肥大のため見送り。決定 5 で `data:`
+  URL の画像に限り、`.results-image-preview` のラッパーごと除去している）。
 - `document.execCommand("copy")` による Firefox 旧版向けの書式付きフォールバック
   （計算済みスタイルが大量にインライン化されるため見送り）。
 - E2E への組み込み（headless では検証不能。headed 実行時のみの任意検証として追加可能）。
