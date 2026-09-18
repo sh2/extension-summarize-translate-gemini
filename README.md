@@ -1,6 +1,6 @@
 # extension-summarize-translate-gemini
 
-Chrome extension to summarize and translate web pages. Uses Gemini or an OpenAI-compatible API as the backend.
+Cross-browser extension (Chrome, Edge, Firefox) to summarize and translate web pages. Uses Gemini or an OpenAI-compatible API as the backend.
 
 ## FAQ
 
@@ -14,15 +14,17 @@ This issue was tracked as Firefox [Bug 1799344](https://bugzilla.mozilla.org/sho
 
 ### What is Auto-fallback?
 
-The Gemini API Free Tier has strict [rate limits](https://ai.google.dev/gemini-api/docs/rate-limits). The Auto-fallback feature automatically tries alternative models when the current model hits its rate limit (HTTP 429 error).
+The Gemini API Free Tier has strict [rate limits](https://ai.google.dev/gemini-api/docs/rate-limits), and the Gemini API occasionally returns HTTP 503 while a model is experiencing a temporary demand spike. The Auto-fallback feature automatically handles these responses without asking you to run the action again.
 
-When you select **"Gemini Flash with Gemma Fallback"** in the options, the extension will try models in this priority order:
+When you select **"Gemini Flash with Gemma Fallback"** in the options, the extension switches to the next model when the current model returns HTTP 429 (rate limit) or HTTP 503 (high demand). It tries models in this priority order:
 
 1. Gemini 3.8 Flash (Thinking Low)
 2. Gemini 3.5 Flash-Lite (Thinking Minimal)
 3. Gemma 4 31B (Thinking Minimal)
 
 Gemma models have more relaxed rate limits, so they serve as the final fallback option to ensure the extension remains functional even under heavy usage.
+
+If you select a single model instead, there is no other model to switch to, so the extension retries the same model twice on HTTP 503, waiting 5 seconds and then 10 seconds. If the retries fail, the error is reported as usual.
 
 ### How do I set up an OpenAI-compatible Base URL?
 
@@ -75,7 +77,7 @@ Support depends on the model.
 | Model | `reasoning_effort` | `thinking.type` | Notes |
 | --- | --- | --- | --- |
 | OpenAI GPT‑5.6 | Supported | Not supported — returns an error | — |
-| DeepSeek V4 Pro / Flash | Supported (except `none`) | Supported | If `thinking.type` is set to `disabled`, `reasoning_effort` must remain `Unspecified`. |
+| DeepSeek V4.1 Flash | Supported (except `none`) | Supported | If `thinking.type` is set to `disabled`, `reasoning_effort` must remain `Unspecified`. |
 
 If you choose an unsupported combination, the API may return an error. In that case, set the unsupported option back to `Unspecified` and save again.
 
@@ -86,7 +88,7 @@ Lightweight models with minimal reasoning give good quality for summarization an
 | Provider | Model ID | `reasoning_effort` | `thinking.type` |
 | --- | --- | --- | --- |
 | OpenAI | `gpt-5.6-luna` | `none` | Unspecified |
-| DeepSeek | `deepseek-v4-flash` | Unspecified | `disabled` |
+| DeepSeek | `deepseek-v4.1-flash` | Unspecified | `disabled` |
 
 ## Setup
 
