@@ -9,6 +9,12 @@ Cross-browser extension (Chrome, Firefox, Edge) that uses Google Gemini API and 
 - **API backend:** Google Gemini API + OpenAI-compatible APIs
 - **Version source:** `extension/manifest.json` and `firefox/manifest.json`
 
+## Response language
+
+- Reply in the same language the user is using for the current request (English, Japanese, and so on).
+- This applies to every kind of message: explanations, plans, status reports, questions asked back, and final summaries.
+- It does not change the language of the code and documentation rules below: code, code comments, commit messages, and this file stay in English.
+
 ## Core rules
 
 - Conversation content is stored in a provider-agnostic format using Gemini-style `parts` arrays with `role` fields (`"system"`, `"user"`, `"model"`).
@@ -60,6 +66,15 @@ Reuse the existing section names rather than inventing new ones. The canonical s
 - When updating the extension version, update both `extension/manifest.json` and `firefox/manifest.json`.
 - `npm run test:e2e` runs the minimal Chromium E2E under `e2e/` (Playwright, local mock API). It is not part of `npm test` and is not a PR-required check; run it on `main` and before releases. See [`docs/TESTING_PHASE_5.md`](docs/TESTING_PHASE_5.md).
 - When creating or editing Markdown files, check and fix relevant Markdownlint diagnostics in VS Code before finishing, when the extension diagnostics are available.
+
+## Git commits
+
+- Never run `git commit` unless the user explicitly asks for a commit in the current task.
+- Do not commit automatically after finishing a task, a plan step, or a validation run.
+- Commit steps described in a plan document (for example "commit in two parts: `feat(...)` then `chore(...)`") are guidance for the user, not an authorization to commit.
+- `git commit --amend`, `git rebase`, `git revert`, and `git push` follow the same rule: only on explicit instruction.
+- When a task is complete, stop after the file changes and validation, then report what changed and leave the changes uncommitted.
+- The user decides the commit granularity, message, and timing.
 
 ## Localization guidelines
 
