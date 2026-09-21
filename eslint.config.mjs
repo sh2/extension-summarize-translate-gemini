@@ -70,7 +70,8 @@ export default [
           allowArrayStart: true,
           allowClassStart: true
         }
-      ]
+      ],
+      "curly": ["error", "all"]
     }
   }
 ];

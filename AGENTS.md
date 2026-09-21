@@ -18,10 +18,12 @@ Cross-browser extension (Chrome, Firefox, Edge) that uses Google Gemini API and 
 ## Core rules
 
 - Conversation content is stored in a provider-agnostic format using Gemini-style `parts` arrays with `role` fields (`"system"`, `"user"`, `"model"`).
-- `generateContent()` and `streamGenerateContent()` in `extension/utils.js` are the only entry points for LLM calls.
-- Keep production-source changes inside `extension/` unless the task is specifically about `firefox/` manifests or the translation helper scripts in `utils/`. Update `test/`, `docs/`, root configuration files, and `AGENTS.md` when required by the task.
+- Within `extension/`, `generateContent()` and `streamGenerateContent()` in `extension/utils.js` are the only entry points for LLM calls.
+- Keep production-source changes inside `extension/` unless the task is specifically about `firefox/` manifests or the translation helper scripts in `utils/`, which call their API directly instead of going through `extension/utils.js`. Update `test/`, `docs/`, root configuration files, and `AGENTS.md` when required by the task.
 - Do not edit files in `extension/lib/` except when updating a vendored library according to the procedure below.
+- Do not add runtime dependencies. The extension has no bundler and no build step, and `node_modules/` is not part of `extension/`, so third-party code must be vendored into `extension/lib/` as a browser-ready file and recorded in the vendored-libraries table below.
 - Always use block braces `{}` for control statements such as `if`, `else`, `for`, and `while` (brace-less single-line statements like `if (cond) return;` are strictly prohibited).
+- Keep UI presentation in CSS, not in JavaScript. The results page DOM (`#content`, `#conversation`) is copied to the clipboard as-is, so an inline `style` set from JavaScript is carried into the pasted HTML, where the extension stylesheet and root font size do not exist. Use the classes defined in the page's `<style>` block instead (see `docs/archive/RESEARCH_WORD_HTML_PASTE.md`).
 
 ## Task routing
 
@@ -33,6 +35,10 @@ Cross-browser extension (Chrome, Firefox, Edge) that uses Google Gemini API and 
 - Dropdown templates: `extension/templates.html`
 - Localized strings: `extension/_locales/*/messages.json`
 - Firefox-specific changes: `firefox/manifest.json`
+- Translation helper scripts, which are separate from the extension: `utils/translation/`
+- Tests (unit / DOM / contract / static): `test/`
+- Chromium end-to-end tests: `e2e/`
+- Documentation: active documents in `docs/`, completed ones in `docs/archive/`
 
 ## Source file organization
 
@@ -49,7 +55,7 @@ Reuse the existing section names rather than inventing new ones. The canonical s
 5. `Core async logic` — orchestration functions (`main`, `askQuestion`, `waitForResult`, `saveOptions`, etc.). `initialize` is the last function in this section.
 6. `Event listeners` — always the last section in the file; contains only listener registration and the initial call to `initialize()`.
 
-`extension/utils.js` uses a library-oriented vocabulary instead: `UI helpers`, `Extension helpers`, `LLM APIs`. Within each section, place internal helpers before the exported entry point they support (bottom-up ordering, plan A).
+`extension/utils.js` uses a library-oriented vocabulary instead: `UI helpers`, `Extension helpers`, `LLM APIs`. Within each section, place internal helpers before the exported entry point they support.
 
 ### Ordering rules
 
@@ -59,13 +65,23 @@ Reuse the existing section names rather than inventing new ones. The canonical s
 - Do not place DOM-touching or side-effectful functions in `Pure utilities`. Move them to `UI helpers` or a specialized helper section.
 - When adding a function, choose the section by what the function does, not by where it happens to be called from.
 
+## Test layout
+
+Group test files by what they exercise, so that a new test has one obvious destination:
+
+- `test/unit/` — pure logic and helper behavior, imported from `extension/*.js` with minimal global stubs and no DOM.
+- `test/dom/` — code that touches the DOM, run against the jsdom environments built by `test/helpers/dom-markdown.js` and `test/helpers/options-dom.js`.
+- `test/contract/` — HTTP contract tests for `generateContent()` and `streamGenerateContent()`, observed through the public API with fetch mocks.
+- `test/static/` — structural checks that read manifests, HTML, and locale files from disk without executing extension code.
+- `test/helpers/` and `test/fixtures/` — shared mocks, DOM environments, and fixture data used by the suites above.
+
 ## Validation
 
-- After code changes, run `npm run lint` and `npm test`, and fix relevant errors or test failures before finishing.
+- After code changes, run `npm run lint` and `npm test`, and fix relevant errors or test failures before finishing. While iterating, run only the affected file (for example `npx vitest run test/dom/markdown.test.js`); `npm run test:watch` exists for interactive use but blocks the terminal.
 - When modifying provider logic, verify both `apiProvider: "gemini"` and `apiProvider: "openai"` paths still work.
 - When updating the extension version, update both `extension/manifest.json` and `firefox/manifest.json`.
-- `npm run test:e2e` runs the minimal Chromium E2E under `e2e/` (Playwright, local mock API). It is not part of `npm test` and is not a PR-required check; run it on `main` and before releases. See [`docs/TESTING_PHASE_5.md`](docs/TESTING_PHASE_5.md).
-- When creating or editing Markdown files, check and fix relevant Markdownlint diagnostics in VS Code before finishing, when the extension diagnostics are available.
+- `npm run test:e2e` runs the minimal Chromium E2E under `e2e/` (Playwright, local mock API). Run `npx playwright install chromium` once before the first run. It is not part of `npm test` and is not a PR-required check; run it on `main` and before releases. See [`docs/archive/TESTING_PHASE_5.md`](docs/archive/TESTING_PHASE_5.md).
+- When creating or editing Markdown files, check and fix relevant Markdownlint diagnostics in VS Code before finishing. The repository ships no Markdownlint configuration or dependency, so the rule is not enforced by the project tooling (`npm run lint` covers ESLint only).
 
 ## Git commits
 
@@ -85,7 +101,7 @@ Style rules for edits to `extension/_locales/*/messages.json`:
   - CJK locales (`ja`, `zh_CN`, `zh_TW`): Use full-width `（...）` when the parenthetical text contains Japanese or Chinese.
   - All other locales, including `ko`: Use half-width `(...)`.
   - Keep technical identifiers such as `(reasoning_effort)` and `(thinking.type)` half-width in every locale.
-- `extension-integrity.test.js` verifies that every locale has exactly the same keys as `en`. Add new keys to all 15 locales, including `en`, in the same commit.
+- `test/static/extension-integrity.test.js` verifies that every locale has exactly the same keys as `en`. Add new keys to every locale, including `en`, in the same commit.
 - After changing locale files, run `npm test` to verify locale-key integrity.
 
 ## Comment language
@@ -103,7 +119,7 @@ Style rules for edits to `extension/_locales/*/messages.json`:
 | --- | --- | --- |
 | `console.error` | Extension-internal failures that should not happen during normal use. Bugs, broken invariants, infrastructure failures (storage, tabs, sendResponse, template loading). | `Failed to update cache`, `Failed to send response`, `Failed to find the template` |
 | `console.warn` | Reserved for cases that are abnormal but recoverable and worth surfacing without implying a bug. Avoid using it for ordinary API failures. | (currently none — prefer `log` for API outcomes) |
-| `console.log` | Expected or environment-dependent outcomes that users may hit during normal use, including LLM API errors, retry/fallback progress, permission denials, and fallback paths. | `503 retrying: ...`, `Failed to parse the article. Using document.body.innerText instead.`, clipboard permission denied |
+| `console.log` | Expected or environment-dependent outcomes that users may hit during normal use, including LLM API errors, retry/fallback progress, permission denials, and fallback paths. | `503 retrying: ...`, `Failed to extract enough text (N chars). Using document.body.innerText instead.`, clipboard permission denied |
 | `console.debug` | Noise that is only useful when tracing a specific issue. | `Stale results tab was already closed` |
 
 ### Rules
@@ -113,17 +129,20 @@ Style rules for edits to `extension/_locales/*/messages.json`:
 - Do not log raw API keys, request headers, or `Authorization` values. The existing `"Request:"` / `"Response:"` debug logs in `popup.js` and `results.js` are acceptable because they only include request bodies and response payloads.
 - Storage / tab / messaging / template infrastructure failures stay at `console.error`.
 - User-environment failures (clipboard permission, unsupported image format, Readability fallback, missing YouTube transcript, `chrome://` page extraction) use `console.log` (or `console.debug` when truly noise-only).
-- When a failure is already surfaced to the user via UI (toast, status text), prefer `console.log` over `console.error` unless it represents an internal bug.
+- When a failure is already surfaced to the user via the UI (status text), prefer `console.log` over `console.error` unless it represents an internal bug.
 - Do not introduce `console.info`. Use `console.log` for general informational output.
 
 ## Notes
 
 - `firefox/` only contains a manifest override; the extension source lives under `extension/`.
-- `extension/manifest.json` defines the unpacked extension structure, permissions, and content scripts.
+- `extension/manifest.json` defines the unpacked extension structure and permissions. It declares no content scripts; page access happens at runtime through `chrome.scripting.executeScript()` from `extension/popup.js`.
+- Put new plan and research documents directly under `docs/`. Move them to `docs/archive/` once the work is complete, and update the references to them (`AGENTS.md` and other documents) in the same change.
 
-## Custom error codes (1000+)
+## Reference
 
-Defined in `extension/utils.js`. Used internally when API calls fail before receiving an HTTP status.
+### Custom error codes (1000+)
+
+Used internally when API calls fail before receiving an HTTP status. Codes 1000-1003 are returned from `extension/utils.js`; code 1004 is returned from `extension/service-worker.js`.
 
 | Code | Meaning |
 | --- | --- |
@@ -133,7 +152,7 @@ Defined in `extension/utils.js`. Used internally when API calls fail before rece
 | 1003 | OpenAI-compatible Base URL is invalid |
 | 1004 | Unexpected internal error |
 
-## Updating vendored libraries
+### Updating vendored libraries
 
 The files under `extension/lib/` are third-party libraries. Do not edit them in place. When updating, replace them with the latest minified builds downloaded from jsDelivr.
 
