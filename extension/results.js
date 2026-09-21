@@ -10,7 +10,8 @@ import {
   generateContent,
   streamGenerateContent,
   getResponseContent,
-  exportTextToFile
+  exportTextToFile,
+  copyContentToClipboard
 } from "./utils.js";
 
 const RESULT_VIEW_STATUS = Object.freeze({
@@ -428,10 +429,11 @@ const appendQuestionToUi = (parts) => {
   }
 
   const formattedQuestionDiv = document.createElement("div");
-  formattedQuestionDiv.style.backgroundColor = "var(--nc-bg-3)";
-  formattedQuestionDiv.style.borderRadius = "1rem";
-  formattedQuestionDiv.style.margin = "1.5rem";
-  formattedQuestionDiv.style.padding = "1rem 1rem .1rem";
+
+  // Presentation belongs to results.html: the conversation DOM is copied to the
+  // clipboard as-is, and the paste target has neither the extension stylesheet nor its
+  // root font size. See docs/RESEARCH_WORD_HTML_PASTE.md.
+  formattedQuestionDiv.className = "conversation-question";
   formattedQuestionDiv.setAttribute("dir", "auto");
 
   if (questionText) {
@@ -509,7 +511,11 @@ const copyContent = async () => {
     }
 
     // Copy the content to the clipboard
-    await navigator.clipboard.writeText(clipboardContent);
+    await copyContentToClipboard(
+      clipboardContent,
+      document.getElementById("content"),
+      document.getElementById("conversation")
+    );
 
     // Display a message indicating that the content was copied
     operationStatus.textContent = chrome.i18n.getMessage("results_copied");

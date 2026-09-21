@@ -197,6 +197,65 @@ export const exportTextToFile = (text) => {
   URL.revokeObjectURL(url);
 };
 
+// Collects the rendered fragment so that the copied HTML matches what is displayed.
+// Attachment previews (inline data URLs) are dropped so that the copied payload stays
+// text only, matching the plain text copy. Images referenced by a URL are kept.
+// Returns the wrapper element itself so that the dir attribute is preserved.
+const buildClipboardHtml = (...roots) => {
+  const container = document.createElement("div");
+  container.setAttribute("dir", "auto");
+
+  for (const root of roots) {
+    if (!root) {
+      continue;
+    }
+
+    // Move nodes out of a clone so that the live DOM is left untouched.
+    for (const node of Array.from(root.cloneNode(true).childNodes)) {
+      container.appendChild(node);
+    }
+  }
+
+  // Attachment previews are wrapped in a container div. Remove the wrapper as well so
+  // that no empty block element is left behind in the copied HTML.
+  container.querySelectorAll('img[src^="data:"]').forEach((image) => {
+    const previewWrapper = image.closest(".results-image-preview");
+
+    if (previewWrapper) {
+      previewWrapper.remove();
+    } else {
+      image.remove();
+    }
+  });
+
+  // Return the element itself: container.innerHTML would drop the dir attribute.
+  return container;
+};
+
+// Writes plain text and rich HTML in one clipboard item. The text is always
+// written so that pasting into a plain text editor keeps the current behavior.
+export const copyContentToClipboard = async (text, ...roots) => {
+  const clipboard = navigator.clipboard;
+  const wrapper = buildClipboardHtml(...roots);
+  const canWriteHtml = wrapper.innerHTML !== "" && typeof ClipboardItem !== "undefined" && typeof clipboard?.write === "function";
+
+  if (!canWriteHtml) {
+    await clipboard.writeText(text);
+    return;
+  }
+
+  try {
+    await clipboard.write([new ClipboardItem({
+      "text/html": new Blob([wrapper.outerHTML], { type: "text/html" }),
+      "text/plain": new Blob([text], { type: "text/plain" })
+    })]);
+  } catch (error) {
+    // Expected on browsers without HTML clipboard support: fall back to text.
+    console.log("Failed to copy HTML content. Falling back to plain text:", error);
+    await clipboard.writeText(text);
+  }
+};
+
 // ── Extension helpers ────────────────────────────────────────────────────
 
 const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {

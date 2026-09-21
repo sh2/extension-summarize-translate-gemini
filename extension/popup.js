@@ -9,7 +9,8 @@ import {
   getRetryLoadingMessage,
   convertMarkdownToHtml,
   getResponseContent,
-  exportTextToFile
+  exportTextToFile,
+  copyContentToClipboard
 } from "./utils.js";
 
 let resultIndex = 0;
@@ -240,7 +241,7 @@ const copyContent = async () => {
     let clipboardContent = `${content.replace(/\n+$/, "")}\n\n`;
 
     // Copy the content to the clipboard
-    await navigator.clipboard.writeText(clipboardContent);
+    await copyContentToClipboard(clipboardContent, document.getElementById("content"));
 
     // Display a message indicating that the content was copied
     operationStatus.textContent = chrome.i18n.getMessage("popup_copied");

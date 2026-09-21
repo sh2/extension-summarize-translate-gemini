@@ -8,6 +8,7 @@ const testDirectory = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(testDirectory, "..", "..");
 const popupHtmlPath = resolve(repoRoot, "extension", "popup.html");
 const resultsHtmlPath = resolve(repoRoot, "extension", "results.html");
+const resultsJsPath = resolve(repoRoot, "extension", "results.js");
 
 const parseHtmlDocument = async (absolutePath) => {
   const html = await readFile(absolutePath, "utf8");
@@ -69,6 +70,29 @@ describe("popup and results structure", () => {
       expect(operationStatusElement?.hasAttribute("style")).toBe(false);
 
       expect(resultsDocument.querySelector('[style="color: gray;"]')).toBeNull();
+    } finally {
+      resultsDom.close();
+    }
+  });
+
+  it("keeps the conversation question styling in the stylesheet, not inline", async () => {
+    const resultsSource = await readFile(resultsJsPath, "utf8");
+    const resultsDom = await parseHtmlDocument(resultsHtmlPath);
+    const resultsDocument = resultsDom.document;
+
+    try {
+      const styleText = Array.from(resultsDocument.querySelectorAll("style"))
+        .map((element) => element.textContent)
+        .join("\n");
+
+      expect(styleText).toContain(".conversation-question");
+      expect(resultsSource).toContain("conversation-question");
+
+      // The conversation DOM is copied to the clipboard as-is, so presentation set
+      // through element.style would ride along into the pasted HTML, where the
+      // extension stylesheet does not exist.
+      // See docs/RESEARCH_WORD_HTML_PASTE.md.
+      expect(resultsSource).not.toMatch(/\.style\.(backgroundColor|borderRadius|margin|padding)\s*=/);
     } finally {
       resultsDom.close();
     }
