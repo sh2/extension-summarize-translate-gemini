@@ -77,9 +77,9 @@ export const getRetryLoadingMessage = (retryStatus, defaultMessage) => {
   return defaultMessage;
 };
 
-const allowedMarkdownUrlProtocols = new Set(["http:", "https:"]);
+const allowedUrlProtocols = new Set(["http:", "https:"]);
 
-const isAllowedMarkdownUrl = (value) => {
+const isAllowedUrlProtocol = (value) => {
   if (typeof value !== "string") {
     return false;
   }
@@ -92,7 +92,7 @@ const isAllowedMarkdownUrl = (value) => {
 
   try {
     const url = new URL(trimmedValue);
-    return allowedMarkdownUrlProtocols.has(url.protocol);
+    return allowedUrlProtocols.has(url.protocol);
   } catch {
     return false;
   }
@@ -103,7 +103,7 @@ const removeUnsafeMarkdownUrls = (container) => {
     const attributeName = element.tagName === "A" ? "href" : "src";
     const attributeValue = element.getAttribute(attributeName);
 
-    if (!isAllowedMarkdownUrl(attributeValue)) {
+    if (!isAllowedUrlProtocol(attributeValue)) {
       element.removeAttribute(attributeName);
     }
   });
@@ -197,13 +197,82 @@ export const exportTextToFile = (text) => {
   URL.revokeObjectURL(url);
 };
 
+// Builds the source attribution (page title and URL) that the Copy and Save actions
+// share. Returning the plain text and the HTML fragment together keeps the two payloads
+// from drifting apart, which is what made the copied text and the saved file differ.
+// The text already ends with a blank line, and the fragment is null when there is
+// nothing to attribute.
+export const buildSourceHeader = (title, url) => {
+  const lines = [];
+
+  if (title) {
+    lines.push(title);
+  }
+
+  if (url) {
+    lines.push(url);
+  }
+
+  const text = lines.length > 0 ? `${lines.join("\n")}\n\n` : "";
+
+  if (lines.length === 0) {
+    return { text, fragment: null };
+  }
+
+  // The pasted HTML is rendered where the extension stylesheet does not exist, so the
+  // markup carries semantics only: no class, no inline style, and the title is set
+  // through textContent so that Markdown or HTML inside a page title stays literal.
+  // See docs/archive/RESEARCH_WORD_HTML_PASTE.md.
+  //
+  // Both header elements carry dir="auto" so that the dir="auto" wrapper added by
+  // copyContentToClipboard() skips them (auto directionality resolution ignores an
+  // element that has a dir attribute) and keeps resolving the pasted block from the
+  // body. Without it, a title that starts with a Latin character would turn an RTL body
+  // into a left-aligned block.
+  const fragment = document.createDocumentFragment();
+
+  if (title) {
+    // A bold paragraph instead of a heading: Word and Gmail render a heading far larger
+    // than the surrounding text, which reads as oversized for a line of attribution.
+    const titleElement = document.createElement("p");
+    const titleText = document.createElement("strong");
+
+    titleElement.setAttribute("dir", "auto");
+    titleText.textContent = title;
+    titleElement.appendChild(titleText);
+    fragment.appendChild(titleElement);
+  }
+
+  if (url) {
+    const urlElement = document.createElement("p");
+
+    urlElement.setAttribute("dir", "auto");
+
+    // Only http(s) becomes a link, matching the policy of removeUnsafeMarkdownUrls.
+    // Other schemes (file:, view-source:, chrome-extension:) would leave a link that
+    // only works on the sender's machine, so the URL stays plain text.
+    if (isAllowedUrlProtocol(url)) {
+      const anchor = document.createElement("a");
+      anchor.setAttribute("href", url);
+      anchor.setAttribute("target", "_blank");
+      anchor.setAttribute("rel", "noopener noreferrer");
+      anchor.textContent = url;
+      urlElement.appendChild(anchor);
+    } else {
+      urlElement.textContent = url;
+    }
+
+    fragment.appendChild(urlElement);
+  }
+
+  return { text, fragment };
+};
+
 // Collects the rendered fragment so that the copied HTML matches what is displayed.
 // Attachment previews (inline data URLs) are dropped so that the copied payload stays
 // text only, matching the plain text copy. Images referenced by a URL are kept.
-// Returns the wrapper element itself so that the dir attribute is preserved.
-const buildClipboardHtml = (...roots) => {
+const buildClipboardFragment = (...roots) => {
   const container = document.createElement("div");
-  container.setAttribute("dir", "auto");
 
   for (const root of roots) {
     if (!root) {
@@ -228,25 +297,41 @@ const buildClipboardHtml = (...roots) => {
     }
   });
 
-  // Return the element itself: container.innerHTML would drop the dir attribute.
   return container;
 };
 
-// Writes plain text and rich HTML in one clipboard item. The text is always
-// written so that pasting into a plain text editor keeps the current behavior.
-export const copyContentToClipboard = async (text, ...roots) => {
+// Writes plain text and rich HTML in one clipboard item. The plain text is always written
+// so that the copy still succeeds when HTML is unavailable or unsupported. `sourceFragment`
+// is the fragment returned by buildSourceHeader() and is dropped when the rendered body is
+// empty, so that a copy made before the result is displayed never pastes an
+// attribution-only fragment.
+export const copyContentToClipboard = async (text, sourceFragment, ...roots) => {
   const clipboard = navigator.clipboard;
-  const wrapper = buildClipboardHtml(...roots);
-  const canWriteHtml = wrapper.innerHTML !== "" && typeof ClipboardItem !== "undefined" && typeof clipboard?.write === "function";
+  const body = buildClipboardFragment(...roots);
+  const canWriteHtml = body.innerHTML !== "" && typeof ClipboardItem !== "undefined" && typeof clipboard?.write === "function";
 
   if (!canWriteHtml) {
     await clipboard.writeText(text);
     return;
   }
 
+  // A single dir="auto" wrapper keeps the direction of RTL content in the pasted HTML.
+  const container = document.createElement("div");
+  container.setAttribute("dir", "auto");
+
+  // Clone the fragment: appendChild moves a fragment's children out, and the caller may
+  // still hold the fragment after the call.
+  if (sourceFragment) {
+    container.appendChild(sourceFragment.cloneNode(true));
+  }
+
+  for (const node of Array.from(body.childNodes)) {
+    container.appendChild(node);
+  }
+
   try {
     await clipboard.write([new ClipboardItem({
-      "text/html": new Blob([wrapper.outerHTML], { type: "text/html" }),
+      "text/html": new Blob([container.outerHTML], { type: "text/html" }),
       "text/plain": new Blob([text], { type: "text/plain" })
     })]);
   } catch (error) {

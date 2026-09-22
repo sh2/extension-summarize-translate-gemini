@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { copyContentToClipboard } from "../../extension/utils.js";
+import { buildSourceHeader, copyContentToClipboard } from "../../extension/utils.js";
 import { createMarkdownTestEnvironment } from "../helpers/dom-markdown.js";
 
 let environment;
@@ -65,7 +65,7 @@ describe("copyContentToClipboard", () => {
     const contentRoot = createRoot("p", "<h1>Title</h1><p><strong>bold</strong> text</p>");
     const conversationRoot = createRoot("div", "<ul><li>first</li></ul>");
 
-    await copyContentToClipboard("plain body\n\n", contentRoot, conversationRoot);
+    await copyContentToClipboard("plain body\n\n", null, contentRoot, conversationRoot);
 
     expect(clipboardWrite).toHaveBeenCalledTimes(1);
     expect(clipboardWriteText).not.toHaveBeenCalled();
@@ -86,7 +86,7 @@ describe("copyContentToClipboard", () => {
       "<pre><code>const value = 1;</code></pre>"
     ].join(""));
 
-    await copyContentToClipboard("plain body\n\n", contentRoot);
+    await copyContentToClipboard("plain body\n\n", null, contentRoot);
 
     const html = await getCopiedHtml();
 
@@ -107,7 +107,7 @@ describe("copyContentToClipboard", () => {
       '<p><img src="https://example.com/image.png" alt="remote"></p>'
     ].join(""));
 
-    await copyContentToClipboard("plain body\n\n", contentRoot);
+    await copyContentToClipboard("plain body\n\n", null, contentRoot);
 
     const container = environment.parseHtmlFragment(await getCopiedHtml());
 
@@ -129,7 +129,7 @@ describe("copyContentToClipboard", () => {
       "<div><p>Answer</p></div>"
     ].join(""));
 
-    await copyContentToClipboard("plain body\n\n", conversationRoot);
+    await copyContentToClipboard("plain body\n\n", null, conversationRoot);
 
     const html = await getCopiedHtml();
 
@@ -147,7 +147,7 @@ describe("copyContentToClipboard", () => {
     const contentRoot = createRoot("p", contentHtml);
     const conversationRoot = createRoot("div", "<ul><li>first</li></ul>");
 
-    await copyContentToClipboard("plain body\n\n", contentRoot, conversationRoot);
+    await copyContentToClipboard("plain body\n\n", null, contentRoot, conversationRoot);
 
     expect(contentRoot.innerHTML).toBe(contentHtml);
     expect(conversationRoot.innerHTML).toBe("<ul><li>first</li></ul>");
@@ -157,7 +157,7 @@ describe("copyContentToClipboard", () => {
     const contentRoot = createRoot("p", "<p><strong>bold</strong> text</p>");
     const clipboardContent = "**bold** text\n\nfollow-up question\n\n";
 
-    await copyContentToClipboard(clipboardContent, contentRoot);
+    await copyContentToClipboard(clipboardContent, null, contentRoot);
 
     expect(await getCopiedText()).toBe(clipboardContent);
   });
@@ -165,7 +165,7 @@ describe("copyContentToClipboard", () => {
   it("falls back to text only when there are no usable roots", async () => {
     const emptyRoot = createRoot("div", "");
 
-    await copyContentToClipboard("plain body\n\n", null, undefined, emptyRoot);
+    await copyContentToClipboard("plain body\n\n", null, null, undefined, emptyRoot);
 
     expect(clipboardWrite).not.toHaveBeenCalled();
     expect(clipboardWriteText).toHaveBeenCalledTimes(1);
@@ -178,7 +178,7 @@ describe("copyContentToClipboard", () => {
 
     const contentRoot = createRoot("p", "<h1>Title</h1>");
 
-    await copyContentToClipboard("plain body\n\n", contentRoot);
+    await copyContentToClipboard("plain body\n\n", null, contentRoot);
 
     expect(clipboardWrite).not.toHaveBeenCalled();
     expect(clipboardWriteText).toHaveBeenCalledWith("plain body\n\n");
@@ -190,7 +190,7 @@ describe("copyContentToClipboard", () => {
 
     const contentRoot = createRoot("p", "<h1>Title</h1>");
 
-    await expect(copyContentToClipboard("plain body\n\n", contentRoot)).resolves.toBeUndefined();
+    await expect(copyContentToClipboard("plain body\n\n", null, contentRoot)).resolves.toBeUndefined();
 
     expect(clipboardWrite).toHaveBeenCalledTimes(1);
     expect(clipboardWriteText).toHaveBeenCalledTimes(1);
@@ -202,6 +202,73 @@ describe("copyContentToClipboard", () => {
 
     const contentRoot = createRoot("p", "<h1>Title</h1>");
 
-    await expect(copyContentToClipboard("plain body\n\n", contentRoot)).rejects.toThrow(TypeError);
+    await expect(copyContentToClipboard("plain body\n\n", null, contentRoot)).rejects.toThrow(TypeError);
+  });
+
+  it("places the source header before the body inside a single dir wrapper", async () => {
+    const { fragment, text } = buildSourceHeader("Title", "https://example.com/");
+    const contentRoot = createRoot("div", "<p><strong>bold</strong> text</p>");
+
+    await copyContentToClipboard(`${text}bold text\n\n`, fragment, contentRoot);
+
+    const html = await getCopiedHtml();
+
+    expect(html.startsWith('<div dir="auto">')).toBe(true);
+
+    const container = environment.parseHtmlFragment(html);
+
+    // The wrapper plus the two header elements: the header carries dir="auto" so that
+    // the wrapper reads past it and resolves direction from the body.
+    expect(container.querySelectorAll('[dir="auto"]')).toHaveLength(3);
+
+    const wrapper = container.querySelector('[dir="auto"]');
+
+    expect(Array.from(wrapper.children).map((element) => element.tagName)).toEqual(["P", "P", "P"]);
+    expect(wrapper.querySelector("p strong")?.textContent).toBe("Title");
+    expect(wrapper.querySelector("a")?.getAttribute("href")).toBe("https://example.com/");
+    expect(wrapper.children[2].querySelector("strong")?.textContent).toBe("bold");
+  });
+
+  it("writes text only when a header is given but the body is empty", async () => {
+    const { fragment, text } = buildSourceHeader("Title", "https://example.com/");
+
+    await copyContentToClipboard(text, fragment, null);
+
+    expect(clipboardWrite).not.toHaveBeenCalled();
+    expect(clipboardWriteText).toHaveBeenCalledTimes(1);
+    expect(clipboardWriteText).toHaveBeenCalledWith(text);
+    expect(clipboardItems).toHaveLength(0);
+  });
+
+  it("keeps the body markup unchanged when there is no source header", async () => {
+    const contentRoot = createRoot("div", "<p>Text</p>");
+
+    await copyContentToClipboard("Text\n\n", null, contentRoot);
+
+    const container = environment.parseHtmlFragment(await getCopiedHtml());
+
+    expect(container.querySelector("strong")).toBeNull();
+    expect(container.querySelector("a")).toBeNull();
+    expect(container.querySelector("p")?.textContent).toBe("Text");
+  });
+
+  it("leaves the source DOM untouched when a source header is given", async () => {
+    const { fragment, text } = buildSourceHeader("Title", "https://example.com/");
+    const contentHtml = "<p>Text</p>";
+    const contentRoot = createRoot("div", contentHtml);
+
+    await copyContentToClipboard(`${text}Text\n\n`, fragment, contentRoot);
+
+    expect(contentRoot.innerHTML).toBe(contentHtml);
+  });
+
+  it("does not consume the caller's source fragment", async () => {
+    const { fragment, text } = buildSourceHeader("Title", "https://example.com/");
+    const contentRoot = createRoot("div", "<p>Text</p>");
+
+    await copyContentToClipboard(`${text}Text\n\n`, fragment, contentRoot);
+
+    // appendChild moves a fragment's children out, so the wrapper clones instead.
+    expect(Array.from(fragment.childNodes).map((node) => node.tagName)).toEqual(["P", "P"]);
   });
 });
