@@ -76,7 +76,7 @@ Support depends on the model.
 
 | Model | `reasoning_effort` | `thinking.type` | Notes |
 | --- | --- | --- | --- |
-| OpenAI GPT‑5.6 | Supported | Not supported — returns an error | — |
+| OpenAI GPT‑6 | Supported | Not supported — returns an error | — |
 | DeepSeek V4.1 Flash | Supported (except `none`) | Supported | If `thinking.type` is set to `disabled`, `reasoning_effort` must remain `Unspecified`. |
 
 If you choose an unsupported combination, the API may return an error. In that case, set the unsupported option back to `Unspecified` and save again.
@@ -87,7 +87,7 @@ Lightweight models with minimal reasoning give good quality for summarization an
 
 | Provider | Model ID | `reasoning_effort` | `thinking.type` |
 | --- | --- | --- | --- |
-| OpenAI | `gpt-5.6-luna` | `none` | Unspecified |
+| OpenAI | `gpt-6-luna` | `none` | Unspecified |
 | DeepSeek | `deepseek-v4.1-flash` | Unspecified | `disabled` |
 
 ## Setup
