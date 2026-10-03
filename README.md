@@ -65,7 +65,7 @@ When the API provider is set to OpenAI-compatible, the options page shows two ad
 
 | Setting | API parameter | Values |
 | --- | --- | --- |
-| Reasoning effort | `reasoning_effort` | `xhigh`, `high`, `medium`, `low`, `none` |
+| Reasoning effort | `reasoning_effort` | `max`, `xhigh`, `high`, `medium`, `low`, `minimal`, `none` |
 | Thinking type | `thinking.type` | `enabled`, `disabled` |
 
 `thinking.type` is sent as a nested object: `"thinking": { "type": "..." }`.
@@ -76,7 +76,7 @@ Support depends on the model.
 
 | Model | `reasoning_effort` | `thinking.type` | Notes |
 | --- | --- | --- | --- |
-| OpenAI GPT‑6 | Supported | Not supported — returns an error | — |
+| OpenAI GPT‑6 | Supported | Not supported — returns an error | `max` is supported only on GPT‑6 and GPT‑5.6 models; `none` is not supported on GPT‑6 Astra and GPT‑6.1 Sol. |
 | DeepSeek V4.1 Flash | Supported (except `none`) | Supported | If `thinking.type` is set to `disabled`, `reasoning_effort` must remain `Unspecified`. |
 
 If you choose an unsupported combination, the API may return an error. In that case, set the unsupported option back to `Unspecified` and save again.
