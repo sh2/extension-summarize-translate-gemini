@@ -682,7 +682,7 @@ const reportRetryStatus = async (retryStatusKey, status) => {
 };
 
 export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemini", extraConfig = {}) => {
-  // languageModel: "3.7-flash:low/3.5-flash-lite:0/gemma-4-31b-it/zz"
+  // languageModel: "3.8-flash:low/2.5-flash-lite:0/gemma-4-31b-it/zz"
 
   if (apiProvider === "openai") {
     return [{
@@ -700,16 +700,14 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
     "3.6-flash": "gemini-3.6-flash",
     "3.5-flash": "gemini-3.5-flash",
     "3.5-flash-lite": "gemini-3.5-flash-lite",
-    "3.1-flash-lite": "gemini-3.1-flash-lite",
     "2.5-pro": "gemini-2.5-pro",
     "2.5-flash": "gemini-2.5-flash",
     "2.5-flash-lite": "gemini-2.5-flash-lite",
     "3.1-pro-preview": "gemini-3.1-pro-preview",
-    "3-flash-preview": "gemini-3-flash-preview",
     "gemma-4-31b-it": "gemma-4-31b-it"
   };
 
-  // modelSegments: ["3.5-flash:minimal", "3.1-flash-lite:0", "gemma-4-31b-it", "zz"]
+  // modelSegments: ["3.8-flash:low", "2.5-flash:0", "gemma-4-31b-it", "zz"]
   const modelSegments = languageModel.split("/");
 
   const modelConfigs = modelSegments.map(segment => {
@@ -735,7 +733,7 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
     return { modelId, generationConfig };
   });
 
-  // [{ "gemini-3.5-flash", { thinkingConfig: { thinkingLevel: "minimal" }}}, ...]
+  // [{ "gemini-3.8-flash", { thinkingConfig: { thinkingLevel: "low" }}}, ...]
   return modelConfigs;
 };
 

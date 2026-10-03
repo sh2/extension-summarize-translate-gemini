@@ -129,25 +129,25 @@ describe("getModelConfigs", () => {
   });
 
   it("maps a Gemini model with a numeric thinking budget of 0", () => {
-    const [config] = getModelConfigs("3.1-flash-lite:0");
+    const [config] = getModelConfigs("2.5-flash:0");
 
-    expect(config.modelId).toBe("gemini-3.1-flash-lite");
+    expect(config.modelId).toBe("gemini-2.5-flash");
     expect(config.generationConfig.thinkingConfig.thinkingBudget).toBe(0);
   });
 
   it("maps a Gemini model with a negative thinking budget", () => {
-    const [config] = getModelConfigs("3.1-flash-lite:-1");
+    const [config] = getModelConfigs("2.5-flash-lite:-1");
 
-    expect(config.modelId).toBe("gemini-3.1-flash-lite");
+    expect(config.modelId).toBe("gemini-2.5-flash-lite");
     expect(config.generationConfig.thinkingConfig.thinkingBudget).toBe(-1);
   });
 
   it("preserves the input order for multiple Gemini models", () => {
-    const configs = getModelConfigs("3.5-flash:minimal/3.1-flash-lite:0");
+    const configs = getModelConfigs("3.5-flash:minimal/2.5-flash:0");
 
     expect(configs).toHaveLength(2);
     expect(configs[0].modelId).toBe("gemini-3.5-flash");
-    expect(configs[1].modelId).toBe("gemini-3.1-flash-lite");
+    expect(configs[1].modelId).toBe("gemini-2.5-flash");
   });
 
   it("preserves the Auto-fallback order starting with gemini-3.8-flash", () => {
