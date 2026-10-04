@@ -9,6 +9,22 @@ tagged release, 1.0.0. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.21] - 2026-10-04
+
+### Added
+
+- `max` and `minimal` options for the OpenAI-compatible reasoning effort
+  setting.
+
+### Changed
+
+- The default OpenAI-compatible model is now `gpt-6-luna`.
+- The translation helper script uses `gpt-6-luna` as well.
+
+### Removed
+
+- Gemini 3.1 Flash-Lite and Gemini 3 Flash from the model selector.
+
 ## [1.8.20] - 2026-09-23
 
 ### Added
@@ -924,6 +940,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Popup UI, an options page for the API key, and UI localization for
   English and Japanese.
 
+[1.8.21]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.21
 [1.8.20]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.20
 [1.8.19]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.19
 [1.8.18]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.18
