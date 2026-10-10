@@ -12,7 +12,8 @@ import {
   getResponseContent,
   exportTextToFile,
   buildSourceHeader,
-  copyContentToClipboard
+  copyContentToClipboard,
+  getOrCreateOpenCodeSessionId
 } from "./utils.js";
 
 const RESULT_VIEW_STATUS = Object.freeze({
@@ -654,6 +655,7 @@ const askQuestion = async () => {
 
     let response;
     const retryStatusKey = `retryStatus_${resultIndex}`;
+    const sessionId = await getOrCreateOpenCodeSessionId(resultIndex);
 
     if (streaming) {
       const streamKey = `streamContent_${resultIndex}`;
@@ -665,7 +667,8 @@ const askQuestion = async () => {
         streamKey,
         apiProvider,
         baseUrl,
-        retryStatusKey
+        retryStatusKey,
+        sessionId
       );
 
       console.log("Request:", {
@@ -690,7 +693,7 @@ const askQuestion = async () => {
       clearInterval(streamIntervalId);
       streamIntervalId = null;
     } else {
-      response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl, retryStatusKey);
+      response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl, retryStatusKey, sessionId);
     }
 
     console.log("Response:", response);

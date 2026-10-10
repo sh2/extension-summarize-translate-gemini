@@ -3,6 +3,7 @@ import {
   generateContent,
   streamGenerateContent,
   getResponseContent,
+  getOrCreateOpenCodeSessionId,
   createContextMenus
 } from "./utils.js";
 
@@ -238,10 +239,12 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
           ];
         }
 
+        const sessionId = await getOrCreateOpenCodeSessionId(resultIndex);
+
         if (streaming) {
-          response = await streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl, retryStatusKey);
+          response = await streamGenerateContent(effectiveApiKey, apiContents, modelConfigs, streamKey, apiProvider, baseUrl, retryStatusKey, sessionId);
         } else {
-          response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl, retryStatusKey);
+          response = await generateContent(effectiveApiKey, apiContents, modelConfigs, apiProvider, baseUrl, retryStatusKey, sessionId);
         }
 
         responseContent = getResponseContent(response, Boolean(effectiveApiKey), apiProvider);

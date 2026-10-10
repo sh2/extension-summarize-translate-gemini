@@ -195,6 +195,141 @@ describe("OpenAI-compatible streaming contract", () => {
   });
 });
 
+describe("OpenCode Go session header contract (streaming)", () => {
+  const SESSION_ID = "ses_0123456789abABCDEFGHIJKLMN";
+
+  const enqueueStopStream = () => {
+    mock.enqueue(() => {
+      return createStreamResponse(
+        200,
+        [
+          "data: {\"choices\":[{\"delta\":{\"content\":\"ok\"},\"finish_reason\":null}]}\n\n",
+          "data: {\"choices\":[{\"delta\":{},\"finish_reason\":\"stop\"}]}\n\n",
+          "data: [DONE]\n"
+        ],
+        { "Content-Type": "text/event-stream" }
+      );
+    });
+  };
+
+  it("S-O-S-01: sends x-opencode-session for the OpenCode Go host", async () => {
+    const modelConfigs = [{ modelId: "deepseek-v4.1-flash", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "question" }] }];
+    enqueueStopStream();
+
+    await streamGenerateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      STREAM_KEY,
+      "openai",
+      "https://opencode.ai/zen/go/v1",
+      undefined,
+      SESSION_ID
+    );
+
+    const { init } = mock.calls[0];
+    expect(init.headers["x-opencode-session"]).toBe(SESSION_ID);
+  });
+
+  it("S-O-S-02: does not send the header for other OpenAI-compatible hosts", async () => {
+    const modelConfigs = [{ modelId: "gpt-test", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "question" }] }];
+    enqueueStopStream();
+
+    await streamGenerateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      STREAM_KEY,
+      "openai",
+      "https://example.com/v1/",
+      undefined,
+      SESSION_ID
+    );
+
+    const { init } = mock.calls[0];
+    expect(init.headers).not.toHaveProperty("x-opencode-session");
+  });
+
+  it("S-O-S-03: generates a throwaway session ID when none is provided", async () => {
+    const modelConfigs = [{ modelId: "deepseek-v4.1-flash", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "question" }] }];
+    enqueueStopStream();
+
+    await streamGenerateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      STREAM_KEY,
+      "openai",
+      "https://opencode.ai/zen/go/v1",
+      undefined
+    );
+
+    const { init } = mock.calls[0];
+    expect(init.headers["x-opencode-session"]).toMatch(/^ses_[0-9a-f]{12}[0-9A-Za-z]{14}$/);
+  });
+
+  it("S-O-S-04: does not send the header on the Gemini path", async () => {
+    const modelConfigs = [{ modelId: "gemini-test", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "question" }] }];
+
+    const items = [createGeminiCandidate([{ text: "ok" }])];
+    const firstSerialized = JSON.stringify(items[0]);
+    const chunks = createGeminiStreamChunks(items, firstSerialized.indexOf("ok") + 1);
+
+    mock.enqueue(() => createStreamResponse(200, chunks, { "Content-Type": "application/json" }));
+
+    await streamGenerateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      STREAM_KEY,
+      "gemini",
+      undefined,
+      undefined,
+      SESSION_ID
+    );
+
+    const { init } = mock.calls[0];
+    expect(init.headers).not.toHaveProperty("x-opencode-session");
+  });
+
+  it("S-O-S-05: keeps the existing error responses for missing or invalid Base URLs", async () => {
+    const modelConfigs = [{ modelId: "gpt-test", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "question" }] }];
+
+    const missing = await streamGenerateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      STREAM_KEY,
+      "openai",
+      "",
+      undefined,
+      SESSION_ID
+    );
+
+    expect(missing.status).toBe(1002);
+
+    const invalid = await streamGenerateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      STREAM_KEY,
+      "openai",
+      "not a URL",
+      undefined,
+      SESSION_ID
+    );
+
+    expect(invalid.status).toBe(1003);
+
+    expect(mock.calls).toHaveLength(0);
+  });
+});
+
 describe("Gemini streaming contract", () => {
   it("S-G-01: reconstructs a split JSON array, stores intermediate text, and normalizes the last candidate", async () => {
     const modelConfigs = [{

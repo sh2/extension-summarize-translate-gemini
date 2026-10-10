@@ -7,6 +7,7 @@ import { describe, expect, it } from "vitest";
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(testDirectory, "..", "..");
 const popupHtmlPath = resolve(repoRoot, "extension", "popup.html");
+const popupJsPath = resolve(repoRoot, "extension", "popup.js");
 const resultsHtmlPath = resolve(repoRoot, "extension", "results.html");
 const resultsJsPath = resolve(repoRoot, "extension", "results.js");
 
@@ -96,5 +97,27 @@ describe("popup and results structure", () => {
     } finally {
       resultsDom.close();
     }
+  });
+
+  it("clears the OpenCode session key when reusing a result slot", async () => {
+    const popupSource = await readFile(popupJsPath, "utf8");
+
+    const slotCleanup = popupSource.match(
+      /resultIndex = \(resultIndex \+ 1\) % 20;[\s\S]*?opencodeSession_\$\{resultIndex\}`\);/
+    );
+
+    expect(slotCleanup).not.toBeNull();
+    expect(slotCleanup[0]).toContain("result_${resultIndex}");
+    expect(slotCleanup[0]).toContain("conversation_${resultIndex}");
+    expect(slotCleanup[0]).toContain("retryStatus_${resultIndex}");
+  });
+
+  it("keeps the OpenCode session key when clearing the conversation", async () => {
+    const resultsSource = await readFile(resultsJsPath, "utf8");
+    const clearConversation = resultsSource.match(/const clearConversation = async \(\) => \{[\s\S]*?\n\};/);
+
+    expect(clearConversation).not.toBeNull();
+    expect(clearConversation[0]).toContain("conversation_${resultIndex}");
+    expect(clearConversation[0]).not.toContain("opencodeSession_");
   });
 });

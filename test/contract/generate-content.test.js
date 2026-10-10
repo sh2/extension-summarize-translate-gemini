@@ -338,6 +338,87 @@ describe("OpenAI-compatible request contract", () => {
   });
 });
 
+// ── OpenCode Go session header contract ───────────────────────────────────
+
+describe("OpenCode Go session header contract", () => {
+  const OPENCODE_BASE_URL = "https://opencode.ai/zen/go/v1";
+  const SESSION_ID = "ses_0123456789abABCDEFGHIJKLMN";
+
+  it("O-S-01: sends x-opencode-session for the OpenCode Go host", async () => {
+    const modelConfigs = [{ modelId: "deepseek-v4.1-flash", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+    mock.enqueueJson(200, { choices: [{ message: { content: "ok" }, finish_reason: "stop" }] });
+
+    await generateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      "openai",
+      OPENCODE_BASE_URL,
+      undefined,
+      SESSION_ID
+    );
+
+    const { init } = mock.calls[0];
+    expect(init.headers["x-opencode-session"]).toBe(SESSION_ID);
+  });
+
+  it("O-S-02: generates a throwaway session ID when none is provided", async () => {
+    const modelConfigs = [{ modelId: "deepseek-v4.1-flash", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+    mock.enqueueJson(200, { choices: [{ message: { content: "ok" }, finish_reason: "stop" }] });
+
+    await generateContent(DUMMY_API_KEY, apiContents, modelConfigs, "openai", OPENCODE_BASE_URL, undefined);
+
+    const { init } = mock.calls[0];
+    expect(init.headers["x-opencode-session"]).toMatch(/^ses_[0-9a-f]{12}[0-9A-Za-z]{14}$/);
+  });
+
+  it("O-S-03: does not send the header for other OpenAI-compatible hosts", async () => {
+    const modelConfigs = [{ modelId: "gpt-test", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+    mock.enqueueJson(200, { choices: [{ message: { content: "ok" }, finish_reason: "stop" }] });
+
+    await generateContent(
+      DUMMY_API_KEY,
+      apiContents,
+      modelConfigs,
+      "openai",
+      "https://example.com/v1/",
+      undefined,
+      SESSION_ID
+    );
+
+    const { init } = mock.calls[0];
+    expect(init.headers).not.toHaveProperty("x-opencode-session");
+    expect(init.headers["Authorization"]).toBe(`Bearer ${DUMMY_API_KEY}`);
+  });
+
+  it("O-S-04: does not send the header on the Gemini path", async () => {
+    const modelConfigs = [{ modelId: "gemini-test-model", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+    mock.enqueueJson(200, { candidates: [{ content: { parts: [{ text: "ok" }] } }] });
+
+    await generateContent(DUMMY_API_KEY, apiContents, modelConfigs, "gemini", undefined, undefined, SESSION_ID);
+
+    const { init } = mock.calls[0];
+    expect(init.headers).not.toHaveProperty("x-opencode-session");
+  });
+
+  it("O-S-05: keeps the existing error responses for missing or invalid Base URLs", async () => {
+    const modelConfigs = [{ modelId: "gpt-test", generationConfig: {} }];
+    const apiContents = [{ role: "user", parts: [{ text: "hi" }] }];
+
+    const missing = await generateContent(DUMMY_API_KEY, apiContents, modelConfigs, "openai", "", undefined, SESSION_ID);
+    expect(missing.status).toBe(1002);
+
+    const invalid = await generateContent(DUMMY_API_KEY, apiContents, modelConfigs, "openai", "not a URL", undefined, SESSION_ID);
+    expect(invalid.status).toBe(1003);
+
+    expect(mock.calls).toHaveLength(0);
+  });
+});
+
 // ── OpenAI-compatible: response / error contract ──────────────────────────
 
 describe("OpenAI-compatible response and error contract", () => {

@@ -441,6 +441,7 @@ const main = async (useCache) => {
   await chrome.storage.session.remove(`streamContent_${resultIndex}`);
   await chrome.storage.session.remove(`autoSavePending_${resultIndex}`);
   await chrome.storage.session.remove(`retryStatus_${resultIndex}`);
+  await chrome.storage.session.remove(`opencodeSession_${resultIndex}`);
 
   const resultsPageUrl = getResultsPageUrl(resultIndex);
 

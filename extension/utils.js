@@ -425,6 +425,65 @@ export const ensureHostPermission = async (baseUrl) => {
   }
 };
 
+// Mirrors the official OpenCode client's session IDs: "ses_" followed by 6 bytes
+// of a bitwise-inverted timestamp and 14 base62 random characters. The
+// millisecond counter the official client uses is omitted because this
+// extension creates at most one ID per conversation.
+const SESSION_ID_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+export const createOpenCodeSessionId = () => {
+  const timeByteCount = 6;
+  const randomByteCount = 14;
+  const value = ~(BigInt(Date.now()) * 0x1000n);
+
+  const time = Array.from({ length: timeByteCount }, (_, index) =>
+    Number((value >> BigInt(40 - 8 * index)) & 0xffn).toString(16).padStart(2, "0")
+  ).join("");
+
+  const bytes = crypto.getRandomValues(new Uint8Array(randomByteCount));
+
+  return `ses_${time}${Array.from(bytes, (byte) => SESSION_ID_CHARS[byte % 62]).join("")}`;
+};
+
+export const isOpenCodeGoUrl = (baseUrl) => {
+  const normalizedBaseUrl = tryNormalizeBaseUrl(baseUrl);
+
+  if (!normalizedBaseUrl) {
+    return false;
+  }
+
+  try {
+    const url = new URL(normalizedBaseUrl);
+    return url.protocol === "https:" && url.hostname === "opencode.ai";
+  } catch {
+    return false;
+  }
+};
+
+export const getOrCreateOpenCodeSessionId = async (resultIndex) => {
+  const sessionKey = `opencodeSession_${resultIndex}`;
+
+  try {
+    const stored = (await chrome.storage.session.get({ [sessionKey]: "" }))[sessionKey];
+
+    if (stored) {
+      return stored;
+    }
+  } catch (error) {
+    console.error("Failed to read the OpenCode session ID:", error);
+  }
+
+  const sessionId = createOpenCodeSessionId();
+
+  try {
+    await chrome.storage.session.set({ [sessionKey]: sessionId });
+  } catch (error) {
+    console.error("Failed to save the OpenCode session ID:", error);
+  }
+
+  return sessionId;
+};
+
 export const createContextMenus = async (useContextMenus, label1, label2, label3, label1Text, label2Text, label3Text) => {
   if (!chrome.contextMenus) {
     // Firefox for Android does not support chrome.contextMenus
@@ -737,7 +796,22 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
   return modelConfigs;
 };
 
-const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) => {
+const buildOpenAIHeaders = (apiKey, baseUrl, sessionId) => {
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${apiKey}`
+  };
+
+  if (isOpenCodeGoUrl(baseUrl)) {
+    // OpenCode Go requires a per-conversation session ID. Fall back to a
+    // throwaway ID when the caller did not provide one.
+    headers["x-opencode-session"] = sessionId || createOpenCodeSessionId();
+  }
+
+  return headers;
+};
+
+const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig, sessionId) => {
   const { modelId, generationConfig } = modelConfig;
 
   if (!baseUrl) {
@@ -761,10 +835,7 @@ const generateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig) 
 
     const response = await fetch(buildOpenAIApiUrl(baseUrl, "/chat/completions"), {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      },
+      headers: buildOpenAIHeaders(apiKey, baseUrl, sessionId),
       body: JSON.stringify(requestBody)
     });
 
@@ -841,10 +912,10 @@ const generateContentWithFallback = async (apiKey, apiContents, modelConfigs, sy
   return response;
 };
 
-export const generateContent = async (apiKey, apiContents, modelConfigs, apiProvider, openaiBaseUrl, retryStatusKey) => {
+export const generateContent = async (apiKey, apiContents, modelConfigs, apiProvider, openaiBaseUrl, retryStatusKey, sessionId) => {
   if (apiProvider === "openai") {
     const openaiContents = convertToOpenAI(apiContents);
-    return await generateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0]);
+    return await generateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0], sessionId);
   }
 
   const { systemInstruction, contents } = extractSystemInstruction(apiContents);
@@ -968,7 +1039,7 @@ const streamGenerateContentGemini = async (apiKey, apiContents, modelConfig, str
   }
 };
 
-const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig, streamKey) => {
+const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelConfig, streamKey, sessionId) => {
   const { modelId, generationConfig } = modelConfig;
 
   if (!baseUrl) {
@@ -994,10 +1065,7 @@ const streamGenerateContentOpenAI = async (apiKey, baseUrl, apiContents, modelCo
 
     const response = await fetch(buildOpenAIApiUrl(baseUrl, "/chat/completions"), {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
-      },
+      headers: buildOpenAIHeaders(apiKey, baseUrl, sessionId),
       body: JSON.stringify(requestBody)
     });
 
@@ -1135,10 +1203,10 @@ const streamGenerateContentWithFallback = async (apiKey, apiContents, modelConfi
   return response;
 };
 
-export const streamGenerateContent = async (apiKey, apiContents, modelConfigs, streamKey, apiProvider, openaiBaseUrl, retryStatusKey) => {
+export const streamGenerateContent = async (apiKey, apiContents, modelConfigs, streamKey, apiProvider, openaiBaseUrl, retryStatusKey, sessionId) => {
   if (apiProvider === "openai") {
     const openaiContents = convertToOpenAI(apiContents);
-    return await streamGenerateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0], streamKey);
+    return await streamGenerateContentOpenAI(apiKey, openaiBaseUrl, openaiContents, modelConfigs[0], streamKey, sessionId);
   }
 
   const { systemInstruction, contents } = extractSystemInstruction(apiContents);
