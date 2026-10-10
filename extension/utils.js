@@ -343,6 +343,14 @@ export const copyContentToClipboard = async (text, sourceFragment, ...roots) => 
 
 // ── Extension helpers ────────────────────────────────────────────────────
 
+// Resolve a select value against the options actually offered by the UI.
+// Stored values can outlive a model option (for example a model that was
+// deprecated), so fall back to the provided default when the value is not
+// among the allowed options.
+export const resolveSelectValue = (value, allowedValues, fallbackValue) => {
+  return allowedValues.includes(value) ? value : fallbackValue;
+};
+
 const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
   const url = new URL(normalizedBaseUrl);
 
@@ -755,9 +763,7 @@ export const getModelConfigs = (languageModel, userModelId, apiProvider = "gemin
 
   const modelMappings = {
     "3.8-flash": "gemini-3.8-flash",
-    "3.7-flash": "gemini-3.7-flash",
     "3.6-flash": "gemini-3.6-flash",
-    "3.5-flash": "gemini-3.5-flash",
     "3.5-flash-lite": "gemini-3.5-flash-lite",
     "2.5-pro": "gemini-2.5-pro",
     "2.5-flash": "gemini-2.5-flash",

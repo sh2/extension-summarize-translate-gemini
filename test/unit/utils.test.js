@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { ensureHostPermission, normalizeBaseUrl, getModelConfigs, getResponseContent } from "../../extension/utils.js";
+import { DEFAULT_LANGUAGE_MODEL, ensureHostPermission, normalizeBaseUrl, getModelConfigs, getResponseContent, resolveSelectValue } from "../../extension/utils.js";
 
 // Minimal chrome.i18n stub for functions that call chrome.i18n.getMessage().
 // Returns a deterministic "message:<key>" string so assertions stay stable
@@ -93,13 +93,6 @@ describe("ensureHostPermission", () => {
 });
 
 describe("getModelConfigs", () => {
-  it("maps a Gemini model with a thinking level", () => {
-    const [config] = getModelConfigs("3.5-flash:minimal");
-
-    expect(config.modelId).toBe("gemini-3.5-flash");
-    expect(config.generationConfig.thinkingConfig.thinkingLevel).toBe("minimal");
-  });
-
   it("maps gemini-3.6-flash with a thinking level", () => {
     const [config] = getModelConfigs("3.6-flash:minimal");
 
@@ -112,13 +105,6 @@ describe("getModelConfigs", () => {
 
     expect(config.modelId).toBe("gemini-3.8-flash");
     expect(config.generationConfig.thinkingConfig.thinkingLevel).toBe("medium");
-  });
-
-  it("maps gemini-3.7-flash with a thinking level", () => {
-    const [config] = getModelConfigs("3.7-flash:low");
-
-    expect(config.modelId).toBe("gemini-3.7-flash");
-    expect(config.generationConfig.thinkingConfig.thinkingLevel).toBe("low");
   });
 
   it("maps gemini-3.5-flash-lite with a numeric thinking budget of 0", () => {
@@ -143,10 +129,10 @@ describe("getModelConfigs", () => {
   });
 
   it("preserves the input order for multiple Gemini models", () => {
-    const configs = getModelConfigs("3.5-flash:minimal/2.5-flash:0");
+    const configs = getModelConfigs("3.6-flash:minimal/2.5-flash:0");
 
     expect(configs).toHaveLength(2);
-    expect(configs[0].modelId).toBe("gemini-3.5-flash");
+    expect(configs[0].modelId).toBe("gemini-3.6-flash");
     expect(configs[1].modelId).toBe("gemini-2.5-flash");
   });
 
@@ -173,6 +159,30 @@ describe("getModelConfigs", () => {
     expect(config.modelId).toBe("gpt-test");
     expect(config.generationConfig.reasoningEffort).toBe("low");
     expect(config.generationConfig.thinkingType).toBe("enabled");
+  });
+});
+
+describe("resolveSelectValue", () => {
+  const allowedValues = ["3.8-flash:low", "3.6-flash:medium", "3.5-flash-lite:minimal", "zz"];
+
+  it("keeps a value that is offered by the UI", () => {
+    expect(resolveSelectValue("3.6-flash:medium", allowedValues, DEFAULT_LANGUAGE_MODEL)).toBe("3.6-flash:medium");
+  });
+
+  it("falls back to the default for a removed Gemini 3.5 Flash value", () => {
+    expect(resolveSelectValue("3.5-flash:low", allowedValues, DEFAULT_LANGUAGE_MODEL)).toBe(DEFAULT_LANGUAGE_MODEL);
+  });
+
+  it("falls back to the default for a removed Gemini 3.7 Flash value", () => {
+    expect(resolveSelectValue("3.7-flash:high", allowedValues, DEFAULT_LANGUAGE_MODEL)).toBe(DEFAULT_LANGUAGE_MODEL);
+  });
+
+  it("falls back to the default for an unset value", () => {
+    expect(resolveSelectValue("", allowedValues, DEFAULT_LANGUAGE_MODEL)).toBe(DEFAULT_LANGUAGE_MODEL);
+  });
+
+  it("keeps the user-specified value when it is offered", () => {
+    expect(resolveSelectValue("zz", allowedValues, DEFAULT_LANGUAGE_MODEL)).toBe("zz");
   });
 });
 

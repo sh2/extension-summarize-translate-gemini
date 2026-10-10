@@ -1,5 +1,6 @@
 import {
   DEFAULT_LANGUAGE_MODEL,
+  resolveSelectValue,
   applyTheme,
   applyFontSize,
   loadTemplate,
@@ -15,7 +16,7 @@ const INITIAL_OPTIONS = {
   apiProvider: "gemini",
   apiKey: "",
   languageModel: DEFAULT_LANGUAGE_MODEL,
-  userModelId: "gemini-3.7-flash",
+  userModelId: "gemini-3.8-flash",
   openaiApiKey: "",
   openaiBaseUrl: "",
   openaiModelId: "gpt-6-luna",
@@ -531,9 +532,10 @@ const setOptionsToForm = async () => {
   document.getElementById("theme").value = options.theme;
   document.getElementById("fontSize").value = options.fontSize;
 
-  if (!document.getElementById("languageModel").value) {
-    document.getElementById("languageModel").value = DEFAULT_LANGUAGE_MODEL;
-  }
+  const languageModelSelect = document.getElementById("languageModel");
+  const allowedModelValues = Array.from(languageModelSelect.options, (option) => option.value);
+
+  languageModelSelect.value = resolveSelectValue(languageModelSelect.value, allowedModelValues, DEFAULT_LANGUAGE_MODEL);
 
   updateProviderUI();
 };

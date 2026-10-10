@@ -2,6 +2,7 @@
 
 import {
   DEFAULT_LANGUAGE_MODEL,
+  resolveSelectValue,
   applyTheme,
   applyFontSize,
   loadTemplate,
@@ -703,12 +704,9 @@ const initialize = async () => {
 
     languageModelSelect.value = "zz";
   } else {
-    languageModelSelect.value = languageModel;
+    const allowedValues = Array.from(languageModelSelect.options, (option) => option.value);
 
-    // Set the default language model if the language model is not set
-    if (!languageModelSelect.value) {
-      languageModelSelect.value = DEFAULT_LANGUAGE_MODEL;
-    }
+    languageModelSelect.value = resolveSelectValue(languageModel, allowedValues, DEFAULT_LANGUAGE_MODEL);
   }
 
   document.getElementById("languageCode").value = languageCode;
