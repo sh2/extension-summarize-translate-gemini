@@ -9,6 +9,15 @@ tagged release, 1.0.0. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.22] - 2026-10-10
+
+### Fixed
+
+- Summarizing or asking follow-up questions with OpenCode Go through the
+  OpenAI-compatible setting failed with HTTP 400 because the service now
+  requires an `x-opencode-session` header. Requests to OpenCode Go endpoints
+  now include a stable session ID per conversation.
+
 ## [1.8.21] - 2026-10-04
 
 ### Added
@@ -940,6 +949,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Popup UI, an options page for the API key, and UI localization for
   English and Japanese.
 
+[1.8.22]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.22
 [1.8.21]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.21
 [1.8.20]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.20
 [1.8.19]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.19
