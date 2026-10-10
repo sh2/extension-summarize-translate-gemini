@@ -9,6 +9,18 @@ tagged release, 1.0.0. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.23] - 2026-10-11
+
+### Changed
+
+- The default user-specified Gemini model ID is now `gemini-3.8-flash`.
+
+### Removed
+
+- Gemini 3.5 Flash and Gemini 3.7 Flash from the model selector. Google
+  deprecated Gemini 3.5 Flash (now served by Gemini 3.6 Flash) and shut down
+  Gemini 3.7 Flash (now served by Gemini 3.8 Flash).
+
 ## [1.8.22] - 2026-10-10
 
 ### Fixed
@@ -949,6 +961,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Popup UI, an options page for the API key, and UI localization for
   English and Japanese.
 
+[1.8.23]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.23
 [1.8.22]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.22
 [1.8.21]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.21
 [1.8.20]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.20
