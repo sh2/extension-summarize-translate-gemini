@@ -76,8 +76,8 @@ Support depends on the model.
 
 | Model | `reasoning_effort` | `thinking.type` | Notes |
 | --- | --- | --- | --- |
-| OpenAI GPT‑6 | Supported | Not supported — returns an error | `max` is supported only on GPT‑6 and GPT‑5.6 models; `none` is not supported on GPT‑6 Astra and GPT‑6.1 Sol. |
-| DeepSeek V4.1 Flash | Supported (except `none`) | Supported | If `thinking.type` is set to `disabled`, `reasoning_effort` must remain `Unspecified`. |
+| OpenAI GPT‑6 | Supported | Not supported — returns an error | Accepted: `low`, `medium`, `high`, `xhigh`, plus `none` except on GPT‑6 Astra and GPT‑6.1 Sol. |
+| DeepSeek V4.1 Flash | Supported | Supported | If `thinking.type` is set to `disabled`, thinking stays disabled even when `reasoning_effort` is also set. |
 
 If you choose an unsupported combination, the API may return an error. In that case, set the unsupported option back to `Unspecified` and save again.
 
@@ -88,7 +88,7 @@ Lightweight models with minimal reasoning give good quality for summarization an
 | Provider | Model ID | `reasoning_effort` | `thinking.type` |
 | --- | --- | --- | --- |
 | OpenAI | `gpt-6-luna` | `none` | Unspecified |
-| DeepSeek | `deepseek-v4.1-flash` | Unspecified | `disabled` |
+| DeepSeek | `deepseek-flash` | Unspecified | `disabled` |
 
 ## Setup
 
