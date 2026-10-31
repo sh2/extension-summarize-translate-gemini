@@ -9,6 +9,20 @@ tagged release, 1.0.0. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.24] - 2026-10-31
+
+### Added
+
+- Custom action prompts now support the `{{languageName}}` placeholder. It is
+  replaced with the language currently selected in the popup's Language menu,
+  which defaults to the saved Language setting. The placeholder is sent
+  unchanged when no usable language name is available.
+
+### Changed
+
+- The options page note about the language setting now explains how to apply
+  it to custom actions, and links to the FAQ entry for the placeholder.
+
 ## [1.8.23] - 2026-10-11
 
 ### Changed
@@ -961,6 +975,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Popup UI, an options page for the API key, and UI localization for
   English and Japanese.
 
+[1.8.24]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.24
 [1.8.23]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.23
 [1.8.22]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.22
 [1.8.21]: https://github.com/sh2/extension-summarize-translate-gemini/releases/tag/v1.8.21

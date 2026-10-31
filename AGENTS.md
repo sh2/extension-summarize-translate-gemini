@@ -97,21 +97,22 @@ Group test files by what they exercise, so that a new test has one obvious desti
 `CHANGELOG.md` in the repository root records notable changes per released version, not per commit. It is written in English.
 
 - **Source of truth:** the annotated `vX.Y.Z` tags. One entry per tag, covering the commits from the previous tag up to that tag.
+- **Release commit:** the version bump in both manifests and the new version's CHANGELOG entry are committed together, and the `vX.Y.Z` tag is placed on that commit so that the tagged tree documents its own release.
 - **Format:** [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - **Sections:** use `Added`, `Changed`, and `Fixed`; add `Deprecated`, `Removed`, or `Security` only when the release needs them, and omit empty sections.
-- **Scope:** include user-visible changes from `feat`, `fix`, and `style` commits. Exclude `chore:` version bumps (they only touch the manifests) and `docs:` commits (plans and research documents).
+- **Scope:** include user-visible changes from `feat`, `fix`, and `style` commits. Exclude `chore:` release commits (the version bump and the new CHANGELOG entry) and `docs:` commits (plans and research documents).
 - **Verify against the diff:** confirm each entry in the actual code diff rather than repeating the commit subject verbatim. Describe what changed for the user.
 - **Per-version header:** `## [X.Y.Z] - YYYY-MM-DD` using the tag's date, plus a matching link reference so the heading points to the GitHub release.
 - **Coverage:** if the file only covers recent versions, say so in the introduction instead of leaving the range implicit.
 - **Markdownlint:** repeating section names across versions triggers `MD024`. The repository ships no Markdownlint configuration, so add `<!-- markdownlint-disable MD024 -->` once near the top of the file.
 
-To collect the entries for a new version, run:
+To collect the entries for a new version, run these before creating the release commit. `vPREV` is the last tag, and `HEAD` holds everything that will ship:
 
-1. `git --no-pager log --oneline --no-merges vPREV..vNEW`
-2. `git --no-pager log --no-merges --format='%h | %s%n%b' vPREV..vNEW`
-3. `git --no-pager diff --stat vPREV..vNEW`
-4. `git --no-pager diff vPREV..vNEW -- extension/` (inspect the user-visible changes)
-5. `git --no-pager log -1 --format='%ad' --date=short vNEW` (release date)
+1. `git --no-pager log --oneline --no-merges vPREV..HEAD`
+2. `git --no-pager log --no-merges --format='%h | %s%n%b' vPREV..HEAD`
+3. `git --no-pager diff --stat vPREV..HEAD`
+4. `git --no-pager diff vPREV..HEAD -- extension/` (inspect the user-visible changes)
+5. `date +%F` (release date for the version header and the tag)
 
 ## Localization guidelines
 
