@@ -201,7 +201,7 @@
         "message": "Benutzerdefinierte Sprache"
     },
     "options_language_notes": {
-        "message": "Hinweis: Diese Spracheinstellung beeinflusst keine benutzerdefinierten Aktionen."
+        "message": "Um diese Spracheinstellung auf benutzerdefinierte Aktionen anzuwenden, schreiben Sie {{languageName}} in den benutzerdefinierten Prompt."
     },
     "options_action_description_no_selection": {
         "message": "Wenn kein Text ausgewählt ist, folgende Aktion ausführen"

@@ -351,6 +351,21 @@ export const resolveSelectValue = (value, allowedValues, fallbackValue) => {
   return allowedValues.includes(value) ? value : fallbackValue;
 };
 
+// Replace every "{{languageName}}" occurrence in a custom prompt with the
+// resolved language name. Leave the placeholder untouched when no usable
+// language name is available so that neither "undefined" nor an empty string
+// is sent to the API. The replacement uses a function to keep "$&", "$$", and
+// similar sequences in user-specified language names literal.
+export const applyLanguagePlaceholder = (prompt, languageName) => {
+  const name = typeof languageName === "string" ? languageName.trim() : "";
+
+  if (!name) {
+    return prompt;
+  }
+
+  return prompt.replaceAll("{{languageName}}", () => name);
+};
+
 const getOriginPatternFromNormalizedBaseUrl = (normalizedBaseUrl) => {
   const url = new URL(normalizedBaseUrl);
 

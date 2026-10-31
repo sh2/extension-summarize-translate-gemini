@@ -201,7 +201,7 @@
         "message": "사용자 지정 언어"
     },
     "options_language_notes": {
-        "message": "참고: 이 언어 설정은 사용자 지정 작업에 영향을 주지 않습니다."
+        "message": "이 언어 설정을 사용자 지정 작업에 적용하려면 사용자 지정 프롬프트에 {{languageName}}을(를) 입력하세요."
     },
     "options_action_description_no_selection": {
         "message": "텍스트가 선택되지 않았을 때 다음 작업 수행"

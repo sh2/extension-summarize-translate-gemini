@@ -201,7 +201,7 @@
         "message": "لغة محددة من قبل المستخدم"
     },
     "options_language_notes": {
-        "message": "ملاحظة: إعداد اللغة هذا لا يؤثر على الإجراءات المخصصة."
+        "message": "لتطبيق إعداد اللغة هذا على الإجراءات المخصصة، اكتب {{languageName}} في الطلب المخصص."
     },
     "options_action_description_no_selection": {
         "message": "عند عدم تحديد نص، قم بالإجراء التالي"

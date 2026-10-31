@@ -201,7 +201,7 @@
         "message": "Ngôn ngữ do người dùng chỉ định"
     },
     "options_language_notes": {
-        "message": "Lưu ý: Cài đặt ngôn ngữ này không ảnh hưởng đến các hành động tùy chỉnh."
+        "message": "Để áp dụng cài đặt ngôn ngữ này cho các hành động tùy chỉnh, hãy viết {{languageName}} trong lời nhắc tùy chỉnh."
     },
     "options_action_description_no_selection": {
         "message": "Khi không có văn bản nào được chọn, thực hiện hành động sau"

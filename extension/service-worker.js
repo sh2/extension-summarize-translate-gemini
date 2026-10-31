@@ -4,10 +4,11 @@ import {
   streamGenerateContent,
   getResponseContent,
   getOrCreateOpenCodeSessionId,
-  createContextMenus
+  createContextMenus,
+  applyLanguagePlaceholder
 } from "./utils.js";
 
-// ── Pure utilities (no DOM access, no side effects) ────────────────────────
+// ── Core async logic ────────────────────────────────────────────────────────
 
 const getSystemPrompt = async (actionType, mediaType, languageCode) => {
   const languageNames = {
@@ -140,12 +141,14 @@ Note: If the user asks a follow-up question, do not translate the original input
   if (!systemPrompt) {
     systemPrompt = `Respond to the user in ${languageNames[languageCode]} that no custom action is set. ` +
       "Do not process any data after this.";
+  } else if (actionType.includes("Custom")) {
+    // Expand the placeholder only in saved custom prompts, and only after the
+    // empty-prompt fallback is ruled out.
+    systemPrompt = applyLanguagePlaceholder(systemPrompt, languageNames[languageCode]);
   }
 
   return systemPrompt;
 };
-
-// ── Core async logic ────────────────────────────────────────────────────────
 
 const initContextMenus = async () => {
   const options = await chrome.storage.local.get({

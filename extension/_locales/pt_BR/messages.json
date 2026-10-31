@@ -201,7 +201,7 @@
         "message": "Idioma especificado pelo usuário"
     },
     "options_language_notes": {
-        "message": "Nota: Esta configuração de idioma não afeta ações personalizadas."
+        "message": "Para aplicar esta configuração de idioma às ações personalizadas, escreva {{languageName}} no prompt personalizado."
     },
     "options_action_description_no_selection": {
         "message": "Quando nenhum texto for selecionado, execute a seguinte ação"

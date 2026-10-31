@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { DEFAULT_LANGUAGE_MODEL, ensureHostPermission, normalizeBaseUrl, getModelConfigs, getResponseContent, resolveSelectValue } from "../../extension/utils.js";
+import { DEFAULT_LANGUAGE_MODEL, applyLanguagePlaceholder, ensureHostPermission, normalizeBaseUrl, getModelConfigs, getResponseContent, resolveSelectValue } from "../../extension/utils.js";
 
 // Minimal chrome.i18n stub for functions that call chrome.i18n.getMessage().
 // Returns a deterministic "message:<key>" string so assertions stay stable
@@ -262,5 +262,66 @@ describe("getResponseContent", () => {
         "Error: 1002\n\nOpenAI-compatible Base URL is not set.\n\nmessage:response_no_base_url\n\nmessage:response_no_apikey_openai"
       );
     });
+  });
+});
+
+describe("applyLanguagePlaceholder", () => {
+  it("replaces a single placeholder with the language name", () => {
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", "Japanese"))
+      .toBe("Reply in Japanese.");
+  });
+
+  it("replaces every placeholder occurrence", () => {
+    expect(applyLanguagePlaceholder("{{languageName}}/{{languageName}}", "German"))
+      .toBe("German/German");
+  });
+
+  it("returns the prompt unchanged when no placeholder exists", () => {
+    expect(applyLanguagePlaceholder("Reply in English.", "Japanese"))
+      .toBe("Reply in English.");
+  });
+
+  it("does not match a placeholder with different casing", () => {
+    expect(applyLanguagePlaceholder("Reply in {{LanguageName}}.", "Japanese"))
+      .toBe("Reply in {{LanguageName}}.");
+  });
+
+  it("does not match a placeholder containing spaces", () => {
+    expect(applyLanguagePlaceholder("Reply in {{ languageName }}.", "Japanese"))
+      .toBe("Reply in {{ languageName }}.");
+  });
+
+  it("leaves unknown placeholders untouched", () => {
+    expect(applyLanguagePlaceholder("{{foo}} in {{languageName}}.", "Japanese"))
+      .toBe("{{foo}} in Japanese.");
+  });
+
+  it("inserts a language name containing replacement patterns literally", () => {
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", "$& and $$")).toBe("Reply in $& and $$.");
+  });
+
+  it("does not re-expand a placeholder contained in the language name", () => {
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", "{{languageName}}"))
+      .toBe("Reply in {{languageName}}.");
+  });
+
+  it("trims surrounding whitespace from the language name", () => {
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", "  Korean  "))
+      .toBe("Reply in Korean.");
+  });
+
+  it("returns the prompt unchanged for an empty or blank language name", () => {
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", "")).toBe("Reply in {{languageName}}.");
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", "   ")).toBe("Reply in {{languageName}}.");
+  });
+
+  it("returns the prompt unchanged when the language name is undefined or not a string", () => {
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", undefined)).toBe("Reply in {{languageName}}.");
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", null)).toBe("Reply in {{languageName}}.");
+    expect(applyLanguagePlaceholder("Reply in {{languageName}}.", 42)).toBe("Reply in {{languageName}}.");
+  });
+
+  it("returns an empty prompt as is", () => {
+    expect(applyLanguagePlaceholder("", "Japanese")).toBe("");
   });
 });

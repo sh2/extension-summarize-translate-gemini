@@ -201,7 +201,7 @@
         "message": "使用者指定語言"
     },
     "options_language_notes": {
-        "message": "注意：此語言設定不影響自訂動作。"
+        "message": "要將此語言設定套用至自訂操作，請在自訂提示中寫入 {{languageName}}。"
     },
     "options_action_description_no_selection": {
         "message": "未選取文字時，執行以下動作"

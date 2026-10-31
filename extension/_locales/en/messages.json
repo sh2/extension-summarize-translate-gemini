@@ -201,7 +201,7 @@
         "message": "User-specified language"
     },
     "options_language_notes": {
-        "message": "Note: This language setting does not affect custom actions."
+        "message": "To apply this language setting to custom actions, write {{languageName}} in the custom prompt."
     },
     "options_action_description_no_selection": {
         "message": "When no text is selected, perform the following action"

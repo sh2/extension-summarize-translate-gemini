@@ -201,7 +201,7 @@
         "message": "Langue spécifiée par l'utilisateur"
     },
     "options_language_notes": {
-        "message": "Remarque : Ce paramètre de langue n'affecte pas les actions personnalisées."
+        "message": "Pour appliquer ce paramètre de langue aux actions personnalisées, écrivez {{languageName}} dans le prompt personnalisé."
     },
     "options_action_description_no_selection": {
         "message": "Lorsqu'aucun texte n'est sélectionné, effectuer l'action suivante"

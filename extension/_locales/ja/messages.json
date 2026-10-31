@@ -201,7 +201,7 @@
         "message": "ユーザー指定言語"
     },
     "options_language_notes": {
-        "message": "注意: この言語設定はカスタムアクションには影響しません。"
+        "message": "この言語設定をカスタムアクションに適用するには、カスタムプロンプトに {{languageName}} と記述します。"
     },
     "options_action_description_no_selection": {
         "message": "テキストが選択されなかったときは、以下のアクションを実行する"
