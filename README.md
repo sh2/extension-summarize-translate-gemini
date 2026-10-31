@@ -2,15 +2,45 @@
 
 Cross-browser extension (Chrome, Edge, Firefox) to summarize and translate web pages. Uses Gemini or an OpenAI-compatible API as the backend.
 
+## Setup
+
+This extension is available on the [Chrome Web Store](https://chromewebstore.google.com/detail/hmdcbbbdmfapkpdaganadiihfmdnpngi), [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/ljmmilamifhanifgbfliknbicfjllheb), and [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/summarize-translate-gemini/).
+The following are instructions for manual installation, for development purposes.
+
+1. Open the Manage Extensions page in Google Chrome.
+2. Enable Developer mode.
+3. Click Load unpacked and select the `extension` directory.
+4. Open the Options page, register your Gemini API key, and select a language.
+
+You can obtain a Gemini API key from [Google AI Studio](https://aistudio.google.com).
+This extension uses Gemini 3.5 Flash-Lite by default.
+
+## Usage
+
+### Summarize
+
+Simply open a web page and click the extension icon to summarize its content.
+
+![Summarize](img/screenshot_summarize.png)
+
+If a YouTube video has captions, this extension will summarize the captions.
+When you open an image file or a PDF, the extension summarizes the currently displayed image.
+
+![Summarize - YouTube/Image](img/screenshot_youtube_image.png)
+
+### Translate
+
+Select the text you want to translate and click the extension icon.
+
+![Translate](img/screenshot_translate.png)
+
+### Results
+
+You can ask follow-up questions on the results page.
+
+![Results](img/screenshot_results.png)
+
 ## FAQ
-
-### Pop-up windows are not appearing from the context menus in Firefox
-
-To open a popup from the context menu in Firefox, set `extensions.openPopupWithoutUserGesture.enabled` to true in `about:config`.
-
-![Firefox Preferences](img/firefox_preferences.png)
-
-This issue was tracked as Firefox [Bug 1799344](https://bugzilla.mozilla.org/show_bug.cgi?id=1799344) and was fixed in Firefox 149.
 
 ### What is Auto-fallback?
 
@@ -90,43 +120,28 @@ Lightweight models with minimal reasoning give good quality for summarization an
 | OpenAI | `gpt-6-luna` | `none` | Unspecified |
 | DeepSeek | `deepseek-flash` | Unspecified | `disabled` |
 
-## Setup
+### How do I set the output language for Custom actions?
 
-This extension is available on the [Chrome Web Store](https://chromewebstore.google.com/detail/hmdcbbbdmfapkpdaganadiihfmdnpngi), [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/ljmmilamifhanifgbfliknbicfjllheb), and [Firefox Add-ons](https://addons.mozilla.org/firefox/addon/summarize-translate-gemini/).
-The following are instructions for manual installation, for development purposes.
+Write `{{languageName}}` in a custom prompt. When the action runs, the placeholder is replaced with the language currently selected in the popup's **Language** menu, which defaults to your saved **Language for Summarization and Translation** setting.
 
-1. Open the Manage Extensions page in Google Chrome.
-2. Enable Developer mode.
-3. Click Load unpacked and select the `extension` directory.
-4. Open the Options page, register your Gemini API key, and select a language.
+For example, the custom prompt `Explain the text and reply in {{languageName}}.` is sent as `Explain the text and reply in Japanese.` when Japanese is selected.
 
-You can obtain a Gemini API key from [Google AI Studio](https://aistudio.google.com).
-This extension uses Gemini 3.5 Flash-Lite by default.
+- The placeholder is case-sensitive and must be written exactly as `{{languageName}}`. `{{LanguageName}}` and `{{ languageName }}` (with spaces) are left as they are.
+- Every occurrence is replaced.
+- Unknown placeholders such as `{{foo}}` are left as they are.
+- Escaping is not supported. To send `{{languageName}}` as literal text, use the full-width form `｛｛languageName｝｝` instead.
+- Only saved custom prompts are expanded. The page content, the selected text, and API responses are never modified.
+- If **User-specified language** is selected and left empty, no language name is available, so `{{languageName}}` is sent unchanged.
 
-## Usage
+Custom prompts without the placeholder work exactly as before.
 
-### Summarize
+### Why don't pop-up windows appear from the context menus in Firefox?
 
-Simply open a web page and click the extension icon to summarize its content.
+To open a popup from the context menu in Firefox, set `extensions.openPopupWithoutUserGesture.enabled` to true in `about:config`.
 
-![Summarize](img/screenshot_summarize.png)
+![Firefox Preferences](img/firefox_preferences.png)
 
-If a YouTube video has captions, this extension will summarize the captions.
-When you open an image file or a PDF, the extension summarizes the currently displayed image.
-
-![Summarize - YouTube/Image](img/screenshot_youtube_image.png)
-
-### Translate
-
-Select the text you want to translate and click the extension icon.
-
-![Translate](img/screenshot_translate.png)
-
-### Results
-
-You can ask follow-up questions on the results page.
-
-![Results](img/screenshot_results.png)
+This issue was tracked as Firefox [Bug 1799344](https://bugzilla.mozilla.org/show_bug.cgi?id=1799344) and was fixed in Firefox 149.
 
 ## License
 

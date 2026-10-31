@@ -1,4 +1,4 @@
-# 実装計画：カスタムプロンプトでの出力言語指定 `{{languageName}}` プレースホルダ（第5版）
+# 実装計画：カスタムプロンプトでの出力言語指定 `{{languageName}}` プレースホルダ（第6版）
 
 対象リポジトリ：[sh2/extension-summarize-translate-gemini](https://github.com/sh2/extension-summarize-translate-gemini)
 
@@ -8,7 +8,8 @@
 - 第3版：同日、再レビュー指摘（`translate.js` の用途の訂正、文案の微修正）を反映
 - 第4版：2026-10-25、レビュー指摘（空・不正な言語設定、言語の取得元、テスト範囲）を反映
 - 第5版：2026-10-25、再レビュー指摘（worker テストのモック方式と完了待ち、`summarize` 非展開テストの検出力）を反映
-- ステータス：計画（未着手）
+- 第6版：2026-10-31、実装後のレビュー指摘で `options_language_notes` の文案を短文化した
+- ステータス：T1・T2・T4、§5 の自動テスト、§11.3 の Wiki 更新、手動 QA（Chrome ＋ OpenAI 互換 API、ja / en / de）を完了（2026-10-31）。未確認は zz と空欄ケース、Gemini 経路、Firefox（§5 の表を参照）。残作業は §8 のリリース手順（バージョン更新、提出、タグ後の CHANGELOG、レビュー返信）
 
 注：本ドキュメントはプロジェクト公式の計画文書である。AGENTS.md の規約に従い `docs/` 直下に置き、完了後に `docs/archive/` へ移すこと。
 
@@ -41,6 +42,12 @@
 - R14：worker 境界テストの方式を具体化した。`vi.mock` は **部分モック**（`importOriginal` を展開して対象 API だけを差し替え）とし、`applyLanguagePlaceholder` は実装本体を残す。完了待ちは `sendResponse` の Promise 化で行い、テストごとにモジュールキャッシュ・捕捉ハンドラ・`chrome` スタブをリセットする
 - R15：`summarize` の非展開テストに検出可能な入力（`languageCode: "zz"` ＋ `userLanguage: "Test {{languageName}}"`）を指定した。既定値のままでは記法が埋め込まれず、全アクションへ置換を適用する回帰を検出できないため
 - R16：T1 の空判定先行の根拠を「未設定判定と展開処理の責務分離」に修正した（現仕様ではヘルパーが空の言語名を置換しないため、置換の結果として空になる事象は発生しない）
+
+第6版の改訂点：
+
+- R17：T2 の文案が冗長（「効かない＋ただし書き」の二文）との指摘を受け、**目的 → 手段の一文**に短文化した。接頭辞「注意:（Note:）」は `options_language_notes` 以外のメッセージで使われておらず、プロジェクト共通の慣習ではないため外した。旧文案が持っていた「既定ではカスタムアクションに効かない」という情報は、目的を示す一文（“To apply … to custom actions”）で代替する
+- R18：README の構成を利用者導線に合わせて組み替えた（H2 を Setup → Usage → FAQ → License、FAQ 内を Auto-fallback → Base URL → Reasoning → 出力言語 → Firefox の順に統一、Firefox の見出しを疑問文へ改名）。Wiki は README の写しでアンカーを見出しから生成するため、アンカーへの影響確認と Wiki の手動更新タスクを §11 に記録した
+- R19：実装後の再レビューで 3 点を反映した。（1）README の空言語条件を「**User-specified language** is selected and left empty」に修正し、他言語選択時に空欄でも置換される事実と矛盾しない文にした。（2）§11.2 のリンク件数を「従来は 3 件、今回の追加で 4 件」に修正。（3）worker 境界テストが既定の Gemini・非ストリーミング経路のみを対象とすることを §5 に明記（`openai` とストリーミングの確認は手動 QA に委ねる）
 
 ## 1. 背景と目的
 
@@ -131,7 +138,7 @@ if (!systemPrompt) {
 
 - 既存キー `options_language_notes` の文言を、全15ロケール（`extension/_locales/`）で同時に変更する（キー自体は流用し、新規キーを増やさない）
 - 変更前：「Note: This language setting does not affect custom actions.」
-- 変更後（案）：「Note: This language setting does not affect custom actions, unless the custom prompt contains {{languageName}}, which is replaced by the selected language.」／ 日本語：「注意: この言語設定はカスタムアクションには影響しません。ただし、カスタムプロンプトに {{languageName}} と書くと、選択中の言語名に置き換わります。」
+- 変更後（第6版・確定）：「To apply this language setting to custom actions, write {{languageName}} in the custom prompt.」／ 日本語：「この言語設定をカスタムアクションに適用するには、カスタムプロンプトに {{languageName}} と記述します。」（接頭辞なし。R17）
 - 手順：en の新文言を確定 → 他14言語分を手作業／LLM 支援で作成する（流用できる既存スクリプトはない。`translate.js` はストア説明文専用） → ja は手元で確認・調整 → 全ロケールで旧文言の意味が残っていないかキー単位で横断確認 → `npm test` で整合性テストを通す
 - ~~まず en / ja を更新し、他言語はフォールバックに任せる~~（第1版の案。キーが存在する限りフォールバックは発動せず、古い＝虚偽の注記が残るため廃止）
 
@@ -147,6 +154,7 @@ if (!systemPrompt) {
 - 記載内容：記法、Language 選択に追従すること、例文（「〇〇をして、結果を {{languageName}} で返信してください」相当の英語例）、エスケープ未対応と全角での代替、未知のプレースホルダはそのまま残ること
 - 言語の取得元は「保存済み設定」ではなく **実行時のポップアップの Language 選択** だと分かる文言にする（例：「the language currently selected in the popup's Language menu, which defaults to your saved Language setting」）。保存設定だけが反映されると読める表現にしない（R11）
 - ユーザー指定言語（`zz`）が空のままの場合は置換されず、`{{languageName}}` がそのまま送られることを明記する（R10）
+- 配置は、FAQ の末尾側（出力言語の項目を Reasoning の後、Firefox の項目の前）とし、H2 は Setup → Usage → FAQ → License の順にする（R18・§11.1）
 
 （第1版の T5「CHANGELOG に Unreleased で追記」は廃止し、§8 のリリース手順へ移した。）
 
@@ -211,6 +219,7 @@ expect(response.ok).toBe(true);
   - `actionType: "summarize"` ではプレースホルダが展開されないこと（R15）。組み込みプロンプトには既定では記法が現れないため、`languageCode: "zz"` と `userLanguage: "Test {{languageName}}"` を組み合わせる。組み込みプロンプトには `in Test {{languageName}}.` が埋め込まれるので、誤って全アクションへ置換を適用すると `in Test Test {{languageName}}.` となり検出できる。`Test {{languageName}}` がそのまま残り、`Test Test` を含まないことを検証する
   - `languageCode: "zz"` かつ保存済み `userLanguage` が空文字列のとき、`{{languageName}}` が残り、未設定フォールバックの文言へ分岐しないこと（R10）
 - 後始末（R14）：各テストの前に `vi.resetModules()` でモジュールキャッシュを破棄し、`vi.clearAllMocks()` と `globalThis.chrome` スタブの再構築を行う。捕捉したハンドラは import ごとに作り直し、前のテストのリスナーが残らないようにする
+- **経路カバレッジの限界（R19）**：このテストが通すのは既定の Gemini・非ストリーミング経路のみ。`apiProvider: "openai"` とストリーミング経路は §11.5 のとおり手動 QA で確認する。置換はプロバイダ分岐より前段の単一呼び出し箇所にあるため、経路差による回帰リスクは低いと判断する
 
 ### 静的テスト・Lint
 
@@ -221,16 +230,22 @@ expect(response.ok).toBe(true);
 
 ### 手動 QA マトリクス（実機確認）
 
-- [ ] プロバイダ2種（Gemini / OpenAI 互換 API）× カスタムアクション（選択なし1〜3 / 選択あり1〜3）で置換が効く
-- [ ] Language を ja / en / ユーザー指定言語（zz）に切り替えて、それぞれ追従する
-- [ ] 保存設定とは異なる言語をポップアップで選択して実行し、その選択値が反映される（再起動して保存値に戻ることも確認。R11）
-- [ ] ユーザー指定言語（zz）を空にして実行し、`{{languageName}}` が残り、「カスタムアクションが設定されていません」が出ない（R10）
-- [ ] `{{LanguageName}}` や `{{ languageName }}` は置換されない
-- [ ] プレースホルダなしの既存プロンプトで従来通り動作する（回帰なし）
-- [ ] 空のカスタムプロンプトで「カスタムアクションが設定されていません」相当のフォールバック文言が出る
-- [ ] 結果ページからの追質問でも、初回と同じ言語で応答が返る
-- [ ] 要約・翻訳（組み込みアクション）に影響がない
-- [ ] Chrome / Firefox の両方で確認する
+2026-10-31 に **Chrome ＋ OpenAI 互換 API**、Language は **ja / en / de** で確認し、期待どおり動作することを確認した。ユーザー指定言語（zz）とその空欄ケース、Gemini 経路、Firefox は未確認。
+
+| 確認項目 | 結果 |
+| --- | --- |
+| カスタムアクションで置換が効く（アクション種別の内訳は記録なし） | 確認（OpenAI 互換 API） |
+| Language の切り替えに追従する | 確認（ja / en / de） |
+| Gemini 経路でも置換が効く | 未確認 |
+| ユーザー指定言語（zz）に切り替えて追従する | 未確認 |
+| 保存設定とは異なる言語をポップアップで選択したとき、その選択値が反映される（再起動で保存値に戻ることを含む。R11） | 未確認 |
+| ユーザー指定言語（zz）を空にして実行し、`{{languageName}}` が残り、「カスタムアクションが設定されていません」が出ない（R10） | 未確認 |
+| `{{LanguageName}}` や `{{ languageName }}` は置換されない | 未確認（単体テストで担保） |
+| プレースホルダなしの既存プロンプトで従来通り動作する（回帰なし） | 未確認 |
+| 空のカスタムプロンプトで「カスタムアクションが設定されていません」相当のフォールバック文言が出る | 未確認 |
+| 結果ページからの追質問でも、初回と同じ言語で応答が返る | 未確認 |
+| 要約・翻訳（組み込みアクション）に影響がない | 未確認（`summarize` の非展開は worker 境界テストで担保） |
+| Firefox で動作する | 未確認 |
 
 E2E（Playwright）は PR 必須チェックではなく、main およびリリース前に実行する位置づけ（AGENTS.md）。本機能では手動 QA を正とし、必要ならモック応答での spec を追加する。
 
@@ -253,7 +268,7 @@ E2E（Playwright）は PR 必須チェックではなく、main およびリリ�
 
 ## 8. リリース手順（CHANGELOG を含む）とレビュー返信
 
-1. T1・T2・T4 を実装し、§5 のテストを完了する
+1. T1・T2・T4 を実装し、§5 のテストを完了する（実施済み）。README の構成変更と Wiki 更新の要否は §11 を参照
 2. バージョンを更新する：`extension/manifest.json` と `firefox/manifest.json` の両方（現行 1.8.23 の次、1.8.24 想定）
 3. Chrome Web Store / Edge Add-ons / Firefox Add-ons へ提出する
 4. **タグ後に** CHANGELOG を作成する（実装中には編集しない）。手順は AGENTS.md の Changelog 節に従う：
@@ -286,6 +301,72 @@ E2E（Playwright）は PR 必須チェックではなく、main およびリリ�
 | 手動 QA（2ブラウザ × マトリクス。空設定・実行時選択の確認を含む） | 1.5時間 |
 | **合計（フェーズ1）** | **約5.5〜6.5時間** |
 | T3 ヒント追加（フェーズ2・別途。新規キーの15ロケール対応を含む） | 約1〜1.5時間 |
+| 実装後の追加作業（README 構成変更、注記の短文化、アンカー確認。Wiki 更新は別途） | 約0.5〜1時間 |
+
+## 11. 実装後の追加作業（2026-10-31）
+
+T1・T2・T4 と §5 の自動テストを実装した後、レビューを経て次の作業を追加で行った。計画当初のタスクではないため、ここに記録する。
+
+### 11.1 README の構成変更（R18）
+
+利用者導線に合わせて H2 と FAQ 内の順序を組み替えた。本文・画像リンク・コード記法は無変更で、移動と 1 見出しの改名のみ。
+
+| 位置 | 変更前 | 変更後 |
+| --- | --- | --- |
+| H2 の順 | FAQ → Setup → Usage → License | Setup → Usage → FAQ → License |
+| FAQ 1 | Pop-up windows are not appearing …（Firefox） | What is Auto-fallback? |
+| FAQ 2 | What is Auto-fallback? | How do I set up an OpenAI-compatible Base URL? |
+| FAQ 3 | How do I set up an OpenAI-compatible Base URL? | What are Reasoning effort and Thinking type? |
+| FAQ 4 | What are Reasoning effort and Thinking type? | How do I set the output language for Custom actions? |
+| FAQ 5 | （今回の追加時点で末尾）How do I set the output language … | Why don't pop-up windows appear from the context menus in Firefox? |
+
+- 根拠：Setup の手順 4（API キー登録）が Usage の前提であること。加えて FAQ の項目はどれもオプションページの設定説明なので、Setup の直後に置く方が文脈が揃う。Firefox の項目は「問い合わせが散見された時期に先頭へ置いたもの」であり、現在は常時先頭に置く必要がない
+- 見出しの統一：Firefox の項目だけ叙述文だったため、疑問文（`Why don't pop-up windows appear …?`）に変更し、FAQ 全体を疑問文で揃えた
+
+### 11.2 アンカーリンクへの影響確認
+
+`extension/options.html` は Wiki のアンカーへリンクしている（従来は 3 件、今回 `options_language_notes` への追加で 4 件）。Wiki は README の写しで、アンカーは見出し文言から生成される。
+
+| リンク元 | アンカー | 対象見出しの変更 | 結果 |
+| --- | --- | --- | --- |
+| `options.html:71` | `#what-is-auto-fallback` | なし | 有効 |
+| `options.html:95` | `#how-do-i-set-up-an-openai-compatible-base-url` | なし | 有効 |
+| `options.html:131` | `#what-are-reasoning-effort-and-thinking-type` | なし | 有効 |
+| `options.html:148`（今回追加） | `#how-do-i-set-the-output-language-for-custom-actions` | 新規（今回の FAQ 項目） | 有効（2026-10-31 の Wiki 更新で解決） |
+
+- 並び順の変更はアンカーの値を変えない（見出し文言が同じため）
+- Firefox 見出しの改名により、Wiki 側のアンカーは `#pop-up-windows-are-not-appearing-from-the-context-menus-in-firefox` から `#why-dont-pop-up-windows-appear-from-the-context-menus-in-firefox` へ変わる。リポジトリ内に旧アンカーへの参照はないが、外部から旧アンカーへリンクしている場合は切れる
+- 今回 `options_language_notes` にも「Extension FAQ」リンク（4 件目）を追加した。他の 3 件と同じ `field-hint` パターン（`<span data-i18n>` ＋ `<a>`）で、リンク文言は既存と同じハードコード英語。リンク先の見出しは §11.3 の Wiki 更新で追加済みで、アンカーは解決する
+
+### 11.3 Wiki（リポジトリ外）の手動更新タスク — 完了（2026-10-31）
+
+Wiki `Home` は README の写しのため、リポジトリの変更だけでは追従しない。プッシュ前に手動で反映した。
+
+1. FAQ 内の並びを README と同じ順に並べ替えた（Wiki は FAQ のみの構成で、H2 の Setup / Usage は存在しないため対象外）
+2. 新規項目「How do I set the output language for Custom actions?」を追加した。`options.html:148` のリンク先アンカー `#how-do-i-set-the-output-language-for-custom-actions` はこれにより有効になった
+3. Firefox 見出しの改名と、それに伴うアンカーの変化を反映した
+4. 既存のズレを解消した（DeepSeek のモデル ID と Reasoning の対応表）
+
+確認内容（公開済みページの取得結果）:
+
+- Raw `Home.md`（105 行）の見出し順が README と一致
+- README の FAQ 部分との本文差分は**画像 URL のみ**（`img/…` → `user-attachments`）。モデル ID のズレも解消済み
+- 公開 HTML の見出し id に `how-do-i-set-the-output-language-for-custom-actions` / `why-dont-pop-up-windows-appear-from-the-context-menus-in-firefox` が存在し、`options.html` のリンクが解決する
+- R19 の README 修正（空言語条件の追記）後に再同期し、README の FAQ 部分との**非画像差分が 0** であることを確認した（2026-10-31）
+
+### 11.4 オプションページ注記の短文化（R17）
+
+T2 で入れた文案は「効かない＋ただし書き」の二文で冗長との指摘を受け、目的 → 手段の一文へ変更した。併せて接頭辞「注意:（Note:）」を全 15 ロケールで外し、`options.html` の i18n フォールバック文言も同じ英文へ揃えた。文案は R17 と T2 を参照。
+
+### 11.5 追加作業後の検証
+
+| 項目 | 結果 |
+| --- | --- |
+| `npm run lint` | エラーなし |
+| `npm test` | 17 ファイル / 178 テスト成功（`extension-integrity` のロケールキー整合を含む） |
+| `README.md` の Markdown 診断 | エラーなし |
+| §5 の手動 QA マトリクス | 完了（2026-10-31。Chrome ＋ OpenAI 互換 API、ja / en / de で確認。zz と空欄、Gemini 経路、Firefox は未確認） |
+| §11.3 の Wiki 更新 | 完了（2026-10-31。公開ページの見出し id でアンカー解決を確認） |
 
 ## 受け入れ基準
 
@@ -299,5 +380,9 @@ E2E（Playwright）は PR 必須チェックではなく、main およびリリ�
 - [ ] プレースホルダなしの既存利用に回帰がない
 - [ ] README・オプションページ注記の説明が矛盾していない（CHANGELOG はリリース時に作成される）
 - [ ] README が「保存済み設定だけが反映される」と読める表現になっていない
+- [ ] README の H2 が Setup → Usage → FAQ → License の順で、FAQ 内の並びが §11.1 のとおりになっている
+- [ ] `options.html` が参照する 3 アンカーの対象見出し文言が変わっていない（§11.2）
+- [ ] `options.html` の `options_language_notes` から FAQ へのリンクが表示され、Wiki 側の同名見出しへ遷移する
+- [ ] Wiki の手動更新（§11.3）をリリース前に完了している
 - [ ] 追加したコードのコメントがすべて英語で、制御文にブロック `{}` がある
 - [ ] 対象外とした「アクションごとのモデル設定」を実装していない
